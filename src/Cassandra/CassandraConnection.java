@@ -1,7 +1,7 @@
 package Cassandra;
 
 //package CIG_ETL; //works on November 15, 2017
-
+//Updated on November 23, 2017
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.sql.Timestamp;
