@@ -1,7 +1,8 @@
 package Cassandra;
 
-//It works on November 24, 2017
+//It works on November 25, 2017
 //Updated on November 23, 2017
+//It works on November 25, 2017
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.sql.Timestamp;
