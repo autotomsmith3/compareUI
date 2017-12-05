@@ -25,7 +25,7 @@ public class CassandraConnection {
 			out2.write(ScratchText);
 			out2.newLine();
 			out2.close();
-		} catch (Exception e) {// Catch  exception if any
+		} catch (Exception e) {// Catch exception if any
 			System.err.println("Error: " + e.getMessage());
 		}
 	}
@@ -73,14 +73,14 @@ public class CassandraConnection {
 			type = row.getString("type");
 			angle = row.getString("angle");
 			background = row.getString("background");
-			size = row.getString("size");
+			size = Integer.toString(row.getInt("size"));
 			year = Integer.toString(row.getInt("year"));
 			division = row.getString("division");
 			model = row.getString("model");
 			body = row.getString("body");
 			carryover = row.getString("carryover");
-			// exactmatch = row.getString("exactmatch");
-			// OEMTemp = row.getString("OEMTemp");
+			 exactmatch = row.getString("exactmatch");
+			 OEMTemp = row.getString("OEMTemp");
 			country = row.getString("country");
 			lastmodified = row.getTimestamp("lastmodified");
 			rowString = id + "," + styleid + "," + imageid + "," + filename + "," + ext1mfrfullcode + ","
@@ -128,14 +128,14 @@ public class CassandraConnection {
 			filename = row.getString("filename");
 			type = row.getString("type");
 			background = row.getString("background");
-			size = row.getString("size");
+			size = Integer.toString(row.getInt("size"));
 			carryover = row.getString("carryover");
 			year = Integer.toString(row.getInt("year"));
 			division = row.getString("division");
 			model = row.getString("model");
 			body = row.getString("body");
-//			exactmatch = row.getString("exactmatch");
-//			OEMTemp = row.getString("OEMTemp");
+			 exactmatch = row.getString("exactmatch");
+			 OEMTemp = row.getString("OEMTemp");
 			country = row.getString("country");
 			lastmodified = row.getTimestamp("lastmodified");
 			rowString = id + "," + styleid + "," + imageid + "," + filename + "," + type + "," + background + "," + size
@@ -151,24 +151,27 @@ public class CassandraConnection {
 
 	public static void main(String[] args) {
 		String serverIp = "10.120.10.99";
-		String keyspace = "cigmapping";
+		String keyspace = "cigmapping_Lucas";
 		CassandraConnection connection;
 		Cluster cluster = Cluster.builder().addContactPoints(serverIp).build();
 		Session session = cluster.connect(keyspace);
-		String[] style = {"389544", "387896" };// { "389544", "387896","389544" };
-		String datestring = "20171116";
+		//cigmapping_color_Lucas total=13: "381489","381490","381491","381492","381493","381494","381495","381496","389796","389798","396984","396985","396986"
+		//cigmapping_vehicle_Lucas=13: "383791","389160","388039","388050","388074","388085","385061","389934","388877","388035","385389","385655","385663"
+		//cigmapping_Lucas total=26: "381489","381490","381491","381492","381493","381494","381495","381496","389796","389798","396984","396985","396986","383791","389160","388039","388050","388074","388085","385061","389934","388877","388035","385389","385655","385663"
+		String[] style = {"381489","381490","381491","381492","381493","381494","381495","381496","389796","389798","396984","396985","396986","383791","389160","388039","388050","388074","388085","385061","389934","388877","388035","385389","385655","385663"};// { "389544", "387896","389544" };
+		String datestring = "20171205";
 		int styleLength = style.length;
-		String colorpathfile = "C:\\chrome\\loader\\cigETLImport\\Test Results\\test\\JavaResults\\colormapping_"
-				+ datestring + "_" + styleLength + ".txt";
-		String vehiclepathfile = "C:\\chrome\\loader\\cigETLImport\\Test Results\\test\\JavaResults\\vehiclemapping_"
-				+ datestring + "_" + styleLength + ".txt";
-		//// ***************************Colormappings**************************
-		// for (int i = 0; i < styleLength; i++) {
-		// String cqlStatement = "select * from colormappings where styleid=" + style[i];
-		// ResultSet results = session.execute(cqlStatement);
-		// getColormappings(i + 1, results, styleLength, colorpathfile);
-		// }
-		//// ***************************Colormappings**************************
+		String colorpathfile = "C:\\chrome\\loader\\CIG-MAPPING-IMPORT\\Test Results\\test\\JavaResults\\colormapping_"
+				+ datestring + "_" + styleLength+"_Fr_" + keyspace+".txt";
+		String vehiclepathfile = "C:\\chrome\\loader\\CIG-MAPPING-IMPORT\\Test Results\\test\\JavaResults\\vehiclemapping_"
+				+ datestring + "_" + styleLength+"_Fr_" + keyspace+".txt";
+		// ***************************Colormappings**************************
+		for (int i = 0; i < styleLength; i++) {
+			String cqlStatement = "select * from colormappings where styleid=" + style[i];
+			ResultSet results = session.execute(cqlStatement);
+			getColormappings(i + 1, results, styleLength, colorpathfile);
+		}
+		// ***************************Colormappings**************************
 
 		// ***************************Vehiclemappings**************************
 		for (int i = 0; i < styleLength; i++) {
