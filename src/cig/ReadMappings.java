@@ -1,6 +1,7 @@
 package cig;
 
-//Reading and writing Work well on Dec 28, 2017. Submitted on Dec 28, 2017?
+//Reading and writing Work well on Dec 28, 2017. Submitted on Dec 28, 2017.
+//Description: It can retrieve all rows by styleids, modify the code elephantList.get(17) to get all OEM="~Y~"
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -153,6 +154,8 @@ public class ReadMappings {
 	}
 
 	public static void main(String[] args) {
+		
+//		//US mapping *****************************************************
 		String inputFileName_color = "C:\\chrome\\loader\\CIG-MAPPING-IMPORT\\zipfiles\\US\\unzipped\\US_ImageGalleryMapping_2017_Color.txt";
 		String inputFileName_vehicle = "C:\\chrome\\loader\\CIG-MAPPING-IMPORT\\zipfiles\\US\\unzipped\\US_ImageGalleryMapping_2017_Vehicle.txt";
 
@@ -160,9 +163,20 @@ public class ReadMappings {
 		String outputFileName_vehicle = "C:\\chrome\\loader\\CIG-MAPPING-IMPORT\\zipfiles\\US\\unzipped\\StyleID_US_ImageGalleryMapping_2017_Vehcile.txt";
 
 		String[] styleIDs = { "387896", "381489" };// "387896","374391","389544"
-
-		ReadColor(inputFileName_color, outputFileName_color, styleIDs);
-		// ReadVehicle(inputFileName_vehicle, outputFileName_vehicle, styleIDs);
+//		//US mapping *****************************************************
+		
+//		//CA mapping *****************************************************
+//		String inputFileName_color = "C:\\chrome\\loader\\CIG-MAPPING-IMPORT\\zipfiles\\CA\\unzipped\\CA_ImageGalleryMapping_2017_Color.txt";
+//		String inputFileName_vehicle = "C:\\chrome\\loader\\CIG-MAPPING-IMPORT\\zipfiles\\CA\\unzipped\\CA_ImageGalleryMapping_2017_Vehicle.txt";
+//
+//		String outputFileName_color = "C:\\chrome\\loader\\CIG-MAPPING-IMPORT\\zipfiles\\CA\\unzipped\\StyleID_CA_ImageGalleryMapping_2017_Color.txt";
+//		String outputFileName_vehicle = "C:\\chrome\\loader\\CIG-MAPPING-IMPORT\\zipfiles\\CA\\unzipped\\StyleID_CA_ImageGalleryMapping_2017_Vehcile.txt";
+//
+//		String[] styleIDs = { "389544" };// "387896","374391","389544"
+//		//CA mapping *****************************************************		
+		
+//		ReadColor(inputFileName_color, outputFileName_color, styleIDs);
+		 ReadVehicle(inputFileName_vehicle, outputFileName_vehicle, styleIDs);
 		System.out.println("Done!");
 	}
 
