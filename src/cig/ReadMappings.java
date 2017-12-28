@@ -159,12 +159,10 @@ public class ReadMappings {
 		String outputFileName_color = "C:\\chrome\\loader\\CIG-MAPPING-IMPORT\\zipfiles\\US\\unzipped\\StyleID_US_ImageGalleryMapping_2017_Color.txt";
 		String outputFileName_vehicle = "C:\\chrome\\loader\\CIG-MAPPING-IMPORT\\zipfiles\\US\\unzipped\\StyleID_US_ImageGalleryMapping_2017_Vehcile.txt";
 
-		// String styleID = "387896";
-
 		String[] styleIDs = { "387896", "381489" };// "387896","374391","389544"
 
-		 ReadColor(inputFileName_color, outputFileName_color, styleIDs);
-//		ReadVehicle(inputFileName_vehicle, outputFileName_vehicle, styleIDs);
+		ReadColor(inputFileName_color, outputFileName_color, styleIDs);
+		// ReadVehicle(inputFileName_vehicle, outputFileName_vehicle, styleIDs);
 		System.out.println("Done!");
 	}
 
