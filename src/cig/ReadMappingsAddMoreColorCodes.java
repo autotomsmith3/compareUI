@@ -51,11 +51,11 @@ public class ReadMappingsAddMoreColorCodes {
 			try (BufferedReader br = new BufferedReader(new FileReader(inputfile))) {
 				String line;
 				String lineAdded1, lineAdded2, lineAdded3, lineAdded4;
-				String oldColorCode = "~SI~";
-				String newColorCode1 = "~GY~";
-				String newColorCode2 = "~GV~";
-				String newColorCode3 = "~GX~";
-				String newColorCode4 = "~GZ~";
+				String oldColorCode = "SI"; //used to be "~SI~"
+				String newColorCode1 = "GY";
+				String newColorCode2 = "GV";
+				String newColorCode3 = "GX";
+				String newColorCode4 = "GZ";
 				while ((line = br.readLine()) != null) {
 					// process the line.
 					List<String> elephantList = Arrays.asList(line.split(","));
@@ -65,8 +65,8 @@ public class ReadMappingsAddMoreColorCodes {
 					Ext1RGBHex_5 = elephantList.get(5);
 					if (StyleID_0.equalsIgnoreCase(styleid)) {
 						// if (StyleID_0.equalsIgnoreCase("~Y~")) {
-
-						if (Ext1MfrFullCode_3.equalsIgnoreCase(oldColorCode)) {
+						// if (Ext1MfrFullCode_3.equalsIgnoreCase(oldColorCode)) {
+						if (Ext1MfrFullCode_3.equalsIgnoreCase("~" + oldColorCode + "~")) {
 							// Add more colorCode behand current one
 							if (!Ext1RGBHex_5.isEmpty()) {
 								String lineFake = line.replace(Ext1RGBHex_5, "~FAKE~");
@@ -210,7 +210,7 @@ public class ReadMappingsAddMoreColorCodes {
 		// All 44 styleids for 2017 US Ford F150 Trucker
 		// String[] styleIDs = { "387896","387897","387898","387899","387900","387901","387902","387903","387904","387905","387906","387907","387908","387909","387910","387911","387912","387913","387914","387915","387916","387917","387918","387919","387920","387921","387922","387923","387924","387925","387926","387927","387928","387929","387930","387931","387932","387933","387934","387935","387936","387937","388260","388261"};
 		// All 8 styleids for 2016 Acura SUV MDX
-		String[] styleIDs = { "374380", "374391", "374381", "374392", "374382", "374388", "374389", "374390" };
+		String[] styleIDs ={ "374380", "374391", "374381", "374392", "374382", "374388", "374389", "374390" };// { "374391" };// { "374380", "374391", "374381", "374392", "374382", "374388", "374389", "374390" };
 
 		// //US mapping *****************************************************
 
