@@ -242,7 +242,7 @@ public class CpsXmlMediaListParse {
 		// Test data below
 		// 1***********************************************
 		// 3 Styleids only for testing in Spira
-		String[] styleid = { "385655" };// { "387896", "374391", "389544" };
+		String[] styleid = {"387896"} ;//{ "385655" };// { "387896", "374391", "389544" };
 //		 //2***********************************************
 //		 // USC70FOT11 - 2017 Ford F-150 - All Stylids:
 //		 String[] styleid = { "387896", "387897", "387898", "387899", "387900", "387901", "387902", "387903", "387904",
@@ -263,7 +263,7 @@ public class CpsXmlMediaListParse {
 				"Styleid,bodyfield,category,fileName,groupUID,isActive,isPrimary,mediaID,mediaID,oemTemp,optionCode,paintCode,rangeName,shotUID ");
 		for (int i = 0; i < styleidLength; i++) {
 			String inputFile = "http://cps.london.autodata.net/api-ws/customvehicle/CMS/IOF_ETL/CDS/" + styleid[i];
-//			String inputFile = "http://cps-versioned-for-qa.autodatacorp.org/cps-1.28/customvehicle/CMS/IOF_ETL/" + styleid[i]; //This comes from Allen
+//			String inputFile = "http://cps-versioned-for-qa.autodatacorp.org/cps-1.28/customvehicle/CMS/IOF_ETL/CDS/" + styleid[i]; //This comes from Allen. The result is the same as above. January 15, 2018
 			
 			String tagName = "";
 			String element = "";
