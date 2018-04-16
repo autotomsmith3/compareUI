@@ -4,6 +4,11 @@ package cPP;
 // This is regression test for combined-vehicle BS: http://lnoc-q2cp-xws1.autodatacorp.org:8080/combined-vehicle/rest/vehicle/token. 
 //It is only endpoint changed. Request body and others do not change as per Osmo dated on March 23, 2018 after 1:1 with Siddhi
 //It used to be CPP-1928 endpoint: http://lnoc-q1cp-xws1:8080/vehicle-token/rest/vehicle/token
+
+
+//This is regression test for combined-vehicle BS: http://lnoc-q2cp-xws1.autodatacorp.org:8080/combined-vehicle/rest/vehicle/token. 
+//It is only endpoint changed. Request body and others do not change as per Osmo dated on March 23, 2018 after 1:1 with Siddhi
+//It used to be CPP-1928 endpoint: http://lnoc-q1cp-xws1:8080/vehicle-token/rest/vehicle/token
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -37,9 +42,9 @@ public class CombinedVehicleBS {
 		int vintotal = 2;
 		int startToRun = 1;// Default=1;
 		int endToRun = 1;// Default =vintotal
-		String dateFolder = "20180409";
+		String dateFolder = "201804xx";
 		String[] SpiraID = { "0. TC 202427", "1. TC 185573", "2. TC 185574", "3. TC 185575", "4. TC 185576",
-				"5. TC 185577", "6. TC 185578", "7. TC 185579", "8. TC 185580", "9. TC 185621", "10. TC 185622",
+				"5. TC 185577", "6. TC 185578", "7. TC 185579", "8. TC 185580", "9. TC 222161", "10. TC 185622",
 				"11. TC 185603", "12. TC 185604", "12.1 TC 185604", "12.2 TC 185604", "12.3 TC 185604",
 				"12.4 TC 185604", "13. TC 185605", "13.1 TC 185605", "13.2 TC 185605", "13.3 TC 185605",
 				"13.4 TC 185605", "13.5 TC 185605", "14. TC 185606", "14.1 TC 185606", "14.2 TC 185606",
@@ -71,7 +76,8 @@ public class CombinedVehicleBS {
 				"43.1 TC 185589", "43.2 TC 185589", "43.3 TC 185589", "43.4 TC 185589", "43.5 TC 185589",
 				"44. TC 185590", "44.1 TC 185590", "44.2 TC 185590", "44.3 TC 185590", "44.4 TC 185590",
 				"44.5 TC 185590", "45. TC 185590", "45.1 TC 185590", "45.2 TC 185590", "45.3 TC 185590",
-				"45.4 TC 185590", "45.5 TC 185590", "CPP-1928_05 - build data", "CPP-1928_06 - added sourceProviders" };// Total 172
+				"45.4 TC 185590", "45.5 TC 185590", "TC 222185_CPP-1928_05 - build data", "TC 222186_CPP-1928_06 - added sourceProviders",
+				"46. TC 222162", "47. TC 222163", "48. TC 222164", "49. TC 222165" };// Total 176
 
 		// ******************************************************
 		// ******************************************************
