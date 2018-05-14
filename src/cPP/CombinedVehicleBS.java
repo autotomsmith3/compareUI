@@ -1,11 +1,5 @@
 package cPP;
 
-// This is a backup from cPP from AUTOpix project
-// This is regression test for combined-vehicle BS: http://lnoc-q2cp-xws1.autodatacorp.org:8080/combined-vehicle/rest/vehicle/token. 
-//It is only endpoint changed. Request body and others do not change as per Osmo dated on March 23, 2018 after 1:1 with Siddhi
-//It used to be CPP-1928 endpoint: http://lnoc-q1cp-xws1:8080/vehicle-token/rest/vehicle/token
-
-
 //This is regression test for combined-vehicle BS: http://lnoc-q2cp-xws1.autodatacorp.org:8080/combined-vehicle/rest/vehicle/token. 
 //It is only endpoint changed. Request body and others do not change as per Osmo dated on March 23, 2018 after 1:1 with Siddhi
 //It used to be CPP-1928 endpoint: http://lnoc-q1cp-xws1:8080/vehicle-token/rest/vehicle/token
@@ -42,7 +36,7 @@ public class CombinedVehicleBS {
 		int vintotal = 2;
 		int startToRun = 1;// Default=1;
 		int endToRun = 1;// Default =vintotal
-		String dateFolder = "201804xx";
+		String dateFolder = "20180514";
 		String[] SpiraID = { "0. TC 202427", "1. TC 185573", "2. TC 185574", "3. TC 185575", "4. TC 185576",
 				"5. TC 185577", "6. TC 185578", "7. TC 185579", "8. TC 185580", "9. TC 222161", "10. TC 185622",
 				"11. TC 185603", "12. TC 185604", "12.1 TC 185604", "12.2 TC 185604", "12.3 TC 185604",
@@ -76,8 +70,9 @@ public class CombinedVehicleBS {
 				"43.1 TC 185589", "43.2 TC 185589", "43.3 TC 185589", "43.4 TC 185589", "43.5 TC 185589",
 				"44. TC 185590", "44.1 TC 185590", "44.2 TC 185590", "44.3 TC 185590", "44.4 TC 185590",
 				"44.5 TC 185590", "45. TC 185590", "45.1 TC 185590", "45.2 TC 185590", "45.3 TC 185590",
-				"45.4 TC 185590", "45.5 TC 185590", "TC 222185_CPP-1928_05 - build data", "TC 222186_CPP-1928_06 - added sourceProviders",
-				"46. TC 222162", "47. TC 222163", "48. TC 222164", "49. TC 222165" };// Total 176
+				"45.4 TC 185590", "45.5 TC 185590", "TC 222185_CPP-1928_05 - build data",
+				"TC 222186_CPP-1928_06 - added sourceProviders", "46. TC 222162", "47. TC 222163", "48. TC 222164",
+				"49. TC 222165" };// Total 176
 
 		// ******************************************************
 		// ******************************************************
@@ -427,10 +422,7 @@ public class CombinedVehicleBS {
 
 	public static void SaveScratch(String pathfilename, String ScratchText) {
 		try {
-			// BufferedWriter out2 = new BufferedWriter(new FileWriter(dataDir+ "Acodes.txt", true)); //original OK
 			BufferedWriter out2 = new BufferedWriter(new FileWriter(pathfilename, true));
-			// out2.write("("+i+"): "+Acode+": ");
-			// out2.write(i + ". " + Acode + ": "); //Original OK
 			out2.newLine();
 			out2.write(ScratchText);
 			out2.newLine();
@@ -442,17 +434,11 @@ public class CombinedVehicleBS {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		// // From what I can read on json.org, all JSON strings should start with { (curly brace - object), and [ characters (square brackets - array) represent an array element in JSON.
-		// // ******************************************************curly brace - object*********************************************************
+		// // // ******************************************************curly brace - object*********************************************************
 		System.out.println("Started...");
 		getCombinedVehicleBS();
 		// jSonObjec_CPP_BuildDataExtractOrchestrationWS();
 		// // ******************************************************End of curly brace - object*********************************************************
-
-		// //// ******************************************************start with [ characters (square brackets - array*********************************************************
-		//
-		// jSonArry_UnityInventory(); //On Tuesday Auguest 30, 2016: API returns { "message": "An error has occurred." } from https://data.dealervideos.com/v1.0/vehicles/2FHFIYI
-		// // //******************************************************End of start with [ characters (square brackets - array*********************************************************
 
 		System.out.println("Complete!!!");
 	}

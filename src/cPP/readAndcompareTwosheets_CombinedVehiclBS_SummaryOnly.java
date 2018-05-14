@@ -75,7 +75,7 @@ public class readAndcompareTwosheets_CombinedVehiclBS_SummaryOnly {
 		Cell cell = row.getCell(1);
 
 		// String[][] expectArray = new String[n + 10][c + 15];
-//		for (int i = rowStart; i <= rowEnd; i++) {
+		// for (int i = rowStart; i <= rowEnd; i++) {
 		for (int i = rowStart; i <= n; i++) {
 			row = s.getRow(i);
 			for (int j = colStart; j < colTotal + colStart; j++) {
@@ -105,7 +105,7 @@ public class readAndcompareTwosheets_CombinedVehiclBS_SummaryOnly {
 
 		}
 
-//		for (int i = rowStart; i <= rowEnd; i++) {
+		// for (int i = rowStart; i <= rowEnd; i++) {
 		for (int i = rowStart; i <= n; i++) {
 
 			for (int j = colStart; j < colTotal + colStart; j++) {
@@ -204,7 +204,7 @@ public class readAndcompareTwosheets_CombinedVehiclBS_SummaryOnly {
 		String expectedSheetFolder = "20180418"; //
 		String realSheetFolder = "20180426";
 		String compareSheetFolder = realSheetFolder;
-		int sheetrows[] = {206, 499,354, 288, 167,172,288,354 };//
+		int sheetrows[] = { 206, 499, 354, 288, 167, 172, 288, 354 };//
 		int totalVins = sheetrows.length;
 		// From vin# to vin#
 		int startToRun = 1;// default=1
@@ -238,8 +238,8 @@ public class readAndcompareTwosheets_CombinedVehiclBS_SummaryOnly {
 			// String filePath1 = "C:\\1\\Eclipse\\Test Results\\Colorized360\\stock360\\" + expectedSheetFolder
 			// + "\\getStock360_Vin_" + kStr + ".xls";
 
-			String filePath1 = "C:\\1\\Eclipse\\Test Results\\CombinedVehicleBS\\"
-					+ expectedSheetFolder + "\\Combined-Vehicle_" + kStr + ".xls";
+			String filePath1 = "C:\\1\\Eclipse\\Test Results\\CombinedVehicleBS\\" + expectedSheetFolder
+					+ "\\Combined-Vehicle_" + kStr + ".xls";
 			// C:\1\Eclipse\Test Results\CompareMS\ImageBy_modelYearIds_CPP-950\20170505
 			// "C:\\1\\Eclipse\\Test Results\\CompareMS\\ImageMS\\" + dateFolder
 			// + "\\image_" + kStr + ".xls";
@@ -250,19 +250,19 @@ public class readAndcompareTwosheets_CombinedVehiclBS_SummaryOnly {
 			// String filePath2 = "C:\\1\\Eclipse\\Test Results\\Colorized360\\stock360\\" + realSheetFolder
 			// + "\\getStock360_Vin_" + kStr + ".xls";
 
-			String filePath2 = "C:\\1\\Eclipse\\Test Results\\CombinedVehicleBS\\"
-					+ realSheetFolder + "\\Combined-Vehicle_" + kStr + ".xls";
+			String filePath2 = "C:\\1\\Eclipse\\Test Results\\CombinedVehicleBS\\" + realSheetFolder
+					+ "\\Combined-Vehicle_" + kStr + ".xls";
 
 			String sheetname2 = "Sheet0";// "Expected";//
 
 			// After comparing: Save filePaht************************
 			// String finalResultfile = "F:\\Quality Assurance\\AUTOpx\\CPP\\Stock360\\20170315\\Compare_getStock360_Vin_1.xls";
-			String SummaryfinalResultfile = "C:\\1\\Eclipse\\Test Results\\CombinedVehicleBS\\"
-					+ compareSheetFolder + "\\Summary_Compare_Combined-Vehicle_" + expectedSheetFolder + "_"
-					+ realSheetFolder + "_Vin_" + kStr + ".xls";
-			String finalResultfile = "C:\\1\\Eclipse\\Test Results\\CombinedVehicleBS\\"
-					+ compareSheetFolder + "\\Compare_Combined-Vehicle_" + expectedSheetFolder + "_vs_" + realSheetFolder
-					+ "_" + kStr + ".xls";
+			String SummaryfinalResultfile = "C:\\1\\Eclipse\\Test Results\\CombinedVehicleBS\\" + compareSheetFolder
+					+ "\\Summary_Compare_Combined-Vehicle_" + expectedSheetFolder + "_" + realSheetFolder + "_Vin_"
+					+ kStr + ".xls";
+			String finalResultfile = "C:\\1\\Eclipse\\Test Results\\CombinedVehicleBS\\" + compareSheetFolder
+					+ "\\Compare_Combined-Vehicle_" + expectedSheetFolder + "_vs_" + realSheetFolder + "_" + kStr
+					+ ".xls";
 			String[][] expectedResoult = new String[ROWS][50];
 			String[][] realResoult = new String[ROWS][50];
 			String[][] tempResult = new String[ROWS][50];

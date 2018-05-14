@@ -57,7 +57,6 @@ public class readAndcompareTwosheets_CombinedVehicleBS {
 			sName = s.getSheetName();
 			if (sName.equalsIgnoreCase(sheetName)) {
 				break;
-				// s=workbook.getSheetAt(i);
 			}
 		}
 
@@ -74,29 +73,19 @@ public class readAndcompareTwosheets_CombinedVehicleBS {
 		int gap = keyStart - colStart - 1;// original =2
 		Cell cell = row.getCell(1);
 
-		// String[][] expectArray = new String[n + 10][c + 15];
 		for (int i = rowStart; i <= rowEnd; i++) {
 			row = s.getRow(i);
 			for (int j = colStart; j < colTotal + colStart; j++) {
 				cell = row.getCell(j);
-
-				// System.out.println(cell.getNumericCellValue());
 				try {
 					System.out.println(cell.getStringCellValue());
 					expectArray[i - rowStart][j + gap] = cell.getStringCellValue();
-					// if (j==keyStart){
-					// expectArray[i - rowStart][1] = cell.getStringCellValue();
-					// }
 				} catch (Exception ex) {
 					try {
 						System.out.println("number=" + cell.getNumericCellValue());
 						expectArray[i - rowStart][j + gap] = String.valueOf(cell.getNumericCellValue());
-						// if (j==keyStart){
-						// expectArray[i - rowStart][1] = cell.getStringCellValue();
-						// }
 					} catch (Exception ex2) {
 						expectArray[i - rowStart][j + gap] = "null";
-
 					}
 				}
 
@@ -152,7 +141,6 @@ public class readAndcompareTwosheets_CombinedVehicleBS {
 						C[i][j] = "Expected=" + A[i][j] + " Real=" + B[i][j];
 					}
 				} else {
-					// vinPosition not matching
 					C[i][keyPosition] = "Expected =" + A[i][keyPosition] + " Real=" + B[i][keyPosition];
 				}
 				;
@@ -192,21 +180,21 @@ public class readAndcompareTwosheets_CombinedVehicleBS {
 		// StartCompareColumn
 		int startCompCol = 4;// 1;//4;
 		int endCompCol = 23 + 3;// there are 3 header columns. Change this only when having diff columns.
-		// ***********************************************VIN1******************************************************************
+		// ***********************************************Basic******************************************************************
 
 		System.out.println("Start...");
 		final int ROWS = 12000;
 		// ***********************************************VINs******************************************************************
-		// **********************************************VINs DATA Info*********************************************************
+		// ********************************************** DATA Info*********************************************************
 		// *********************************************************************************************************************
-		String expectedSheetFolder = "20180418";
-		String realSheetFolder = "20180426";
+		String expectedSheetFolder = "20180501";
+		String realSheetFolder = "20180514";
 		String compareSheetFolder = realSheetFolder;
-		int sheetrows[] = {300,290,300 };// The last line number (EXCEL number).
+		int sheetrows[] = { 300, 290, 300 };// The last line number (EXCEL number).
 		int totalVins = sheetrows.length;
 		// From vin# to vin#
-		int startToRun = 1;// default=1
-		int endToRun = 1;// =15, or default=totalVins;
+		int startToRun = 1;
+		int endToRun = 1;
 		// ***********************************************VINs DATA Info********************************************************
 		// *********************************************************************************************************************
 		// *********************************************************************************************************************
@@ -214,11 +202,11 @@ public class readAndcompareTwosheets_CombinedVehicleBS {
 
 			// ************************Expected sheet************************
 
-			rowEnd1 = sheetrows[k - 1];// 3537;// 74;//
+			rowEnd1 = sheetrows[k - 1];
 
 			// ************************Real tested sheet************************
 
-			rowEnd2 = rowEnd1;// 3537;// 71;//
+			rowEnd2 = rowEnd1;
 
 			// ************************Compared sheet************************
 			endCompRow = rowEnd2 - rowStart2 + 1;
@@ -228,36 +216,24 @@ public class readAndcompareTwosheets_CombinedVehicleBS {
 			String kStr = Integer.toString(k);
 
 			System.out.println("Start...");
-			// final int ROWS = 12000;
 			// ***********************************************VIN1***********************************************************************
 			// **********************************************************************************************************************
 
 			// ************************Expected sheet************************
-			// String filePath1 = "C:\\1\\Eclipse\\Test Results\\Colorized360\\stock360\\" + expectedSheetFolder
-			// + "\\getStock360_Vin_" + kStr + ".xls";
-
-			String filePath1 = "C:\\1\\Eclipse\\Test Results\\CombinedVehicleBS\\"
-					+ expectedSheetFolder + "\\Combined-Vehicle_" + kStr + ".xls";
-			// C:\1\Eclipse\Test Results\CompareMS\ImageBy_modelYearIds_CPP-950\20170505
-			// "C:\\1\\Eclipse\\Test Results\\CompareMS\\ImageMS\\" + dateFolder
-			// + "\\image_" + kStr + ".xls";
-
+			String filePath1 = "C:\\1\\Eclipse\\Test Results\\CombinedVehicleBS\\" + expectedSheetFolder
+					+ "\\Combined-Vehicle_" + kStr + ".xls";
 			String sheetname1 = "Sheet0";// "Expected";//
 
 			// ************************Real tested sheet************************
-			// String filePath2 = "C:\\1\\Eclipse\\Test Results\\Colorized360\\stock360\\" + realSheetFolder
-			// + "\\getStock360_Vin_" + kStr + ".xls";
-
-			String filePath2 = "C:\\1\\Eclipse\\Test Results\\CombinedVehicleBS\\"
-					+ realSheetFolder + "\\Combined-Vehicle_" + kStr + ".xls";
+			String filePath2 = "C:\\1\\Eclipse\\Test Results\\CombinedVehicleBS\\" + realSheetFolder
+					+ "\\Combined-Vehicle_" + kStr + ".xls";
 
 			String sheetname2 = "Sheet0";// "Expected";//
 
 			// After comparing: Save filePaht************************
-			// String finalResultfile = "F:\\Quality Assurance\\AUTOpx\\CPP\\Stock360\\20170315\\Compare_getStock360_Vin_1.xls";
-			String finalResultfile = "C:\\1\\Eclipse\\Test Results\\CombinedVehicleBS\\"
-					+ compareSheetFolder + "\\Compare_Combined-Vehicle_" + expectedSheetFolder + "_vs_" + realSheetFolder
-					+ "_" + kStr + ".xls";
+			String finalResultfile = "C:\\1\\Eclipse\\Test Results\\CombinedVehicleBS\\" + compareSheetFolder
+					+ "\\Compare_Combined-Vehicle_" + expectedSheetFolder + "_vs_" + realSheetFolder + "_" + kStr
+					+ ".xls";
 
 			String[][] expectedResoult = new String[ROWS][50];
 			String[][] realResoult = new String[ROWS][50];
@@ -270,11 +246,10 @@ public class readAndcompareTwosheets_CombinedVehicleBS {
 			finalResoult = compareSheetCell(expectedResoult, realResoult, startCompRow - 1, endCompRow - 1,
 					startCompCol - 1, endCompCol - 1, keyColumnStart - 1);
 			// Save to Excel sheet.xls
-			// String [] tString=new String[35];
-			String[] tString = { "Num", "Date Time", "Position S/N", "S/N", "URL_parameter", "RequestBody", "id", "serverTime",
-					"error ", "executionTimeMS", "copyright", "resultObj", "tokensObj", "token", "primaryGVUIDObj",
-					"primaryGVUID", "gvuid", "typeId", "typeIdValue", "add_GVUIDSObj", "add_gvuid", "add_typeId",
-					"add_typeIdValue", "buildData", "buildDataSource", "vehicleOptions" };
+			String[] tString = { "Num", "Date Time", "Position S/N", "S/N", "URL_parameter", "RequestBody", "id",
+					"serverTime", "error ", "executionTimeMS", "copyright", "resultObj", "tokensObj", "token",
+					"primaryGVUIDObj", "primaryGVUID", "gvuid", "typeId", "typeIdValue", "add_GVUIDSObj", "add_gvuid",
+					"add_typeId", "add_typeIdValue", "buildData", "buildDataSource", "vehicleOptions" };
 			System.out.println("Writing to Excel for Vin# = " + kStr + ". Waiting ...");
 			cPP.com_libs.writeTitle(finalResultfile, tString);
 			for (int i = 0; i <= endCompRow + 1; i++) {
