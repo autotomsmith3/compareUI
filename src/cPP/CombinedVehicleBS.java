@@ -291,16 +291,10 @@ public class CombinedVehicleBS {
 										jsonValue[8] = resultObj;
 										jsonValue[9] = tokensObj;
 										jsonValue[10] = token;
-										// jsonValue[11] = primaryGVUIDObj;
-										// jsonValue[12] = primaryGVUID;
-										// jsonValue[13] = gvuid;
-										// jsonValue[14] = typeId;
-										// jsonValue[15] = typeIdValue;
 										jsonValue[16] = additionalGVUIDSObj;
 										jsonValue[17] = additional_gvuid;
 										jsonValue[18] = additional_typeId;
 										jsonValue[19] = additional_typeIdValue;
-
 										jsonValue[20] = buildData;
 										jsonValue[21] = buildDataSource;
 										jsonValue[22] = vehicleOptions;
@@ -335,11 +329,6 @@ public class CombinedVehicleBS {
 								jsonValue[13] = gvuid;
 								jsonValue[14] = typeId;
 								jsonValue[15] = typeIdValue;
-								// jsonValue[16] = additionalGVUIDSObj;
-								// jsonValue[17] = additional_gvuid;
-								// jsonValue[18] = additional_typeId;
-								// jsonValue[19] = additional_typeIdValue;
-
 								jsonValue[20] = buildData;
 								jsonValue[21] = buildDataSource;
 								jsonValue[22] = vehicleOptions;
@@ -437,7 +426,6 @@ public class CombinedVehicleBS {
 		// // // ******************************************************curly brace - object*********************************************************
 		System.out.println("Started...");
 		getCombinedVehicleBS();
-		// jSonObjec_CPP_BuildDataExtractOrchestrationWS();
 		// // ******************************************************End of curly brace - object*********************************************************
 
 		System.out.println("Complete!!!");
