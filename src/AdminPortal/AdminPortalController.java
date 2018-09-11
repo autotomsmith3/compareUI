@@ -1,5 +1,5 @@
 package AdminPortal;
-//20180911_01
+
 /**
 * @author Zhoul
 * Initial date: 
@@ -301,7 +301,7 @@ public class AdminPortalController extends Comlibs {
 		String DealershipID = prop.getProperty(env + ".DealershipID");
 		String DealershipName = prop.getProperty(env + ".DealershipName");
 		String[] Products = fetchOneDemArrayFromPropFile(env + ".Products", prop);
-		String MetadataValues = prop.getProperty(env + ".MetadataValuesz");
+		String MetadataValues = prop.getProperty(env + ".MetadataValues");
 		String Addrss = prop.getProperty(env + ".Addrss");
 		String AddressLine2 = prop.getProperty(env + ".AddressLine2");
 		String City = prop.getProperty(env + ".City");
@@ -315,8 +315,8 @@ public class AdminPortalController extends Comlibs {
 		String TagLineMarkingMsg = prop.getProperty(env + ".TagLineMarkingMsg");
 		String Website = prop.getProperty(env + ".Website");
 		String DealershipPhoneNumber = prop.getProperty(env + ".DealershipPhoneNumber");
-		String TemplateSettings = prop.getProperty(env + ".TemplateSettings");
-		String SelectBackgroundSet = prop.getProperty(env + ".SelectBackgroundSet");
+		int TemplateSettings = Integer.parseInt(prop.getProperty(env + ".TemplateSettings"));
+		int SelectBackgroundSet = Integer.parseInt(prop.getProperty(env + ".SelectBackgroundSet"));
 
 		// Initial
 		// final int wt_Secs = 6;
@@ -367,15 +367,14 @@ public class AdminPortalController extends Comlibs {
 		DealerProfieP.selectOEMBrands(driver, 3); // check Chevrolet
 		DealerProfieP.selectOEMBrands(driver, 4); // check GMC
 		DealerProfieP.selectOEMBrands(driver, 5); // check Hummer
-		DealerProfieP.inputDealersipID(driver, "123456");
+		DealerProfieP.inputDealersipID(driver, DealershipID);
 		DealerProfieP.selectVINpxProd(driver);
 		DealerProfieP.selectSTOCKpxProd(driver);
 		// DealerProfieP.selectLOTpxProd(driver);
-		DealerProfieP.inputMetadata(driver, "inventoryplus.altid;193975\r\n" + "email.inventory;no\r\n"
-				+ "unityworks.altid;H5O4M8B\r\n" + "auction123.altid;H5O4M8B\r\n" + "norandompics;yes\r\n");
+		DealerProfieP.inputMetadata(driver, MetadataValues);
 
-		DealerProfieP.selectTemplateSetting(driver, 3);// DEFAULT=1; replace=2;overlay=3;
-		DealerProfieP.selectBackGroundSet(driver, 7);// Generic Dealership=7; White Gradient=0
+		DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
+		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
 
 		// Stop here!!!
 		// Enter Dealership ID and all fields
@@ -532,11 +531,11 @@ public class AdminPortalController extends Comlibs {
 			// verifyRerender(driver, tBrowser);
 
 			////// 1.RetriveValuesFrDealerSettingsPage:
-			bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-			RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
+//			bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+//			RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 			////// 1.ManageDealerShips:
-			// bc.rwExcel("", "-----ManageDealerShips Testing started-----" + (i + 1), "");
-			// ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+			 bc.rwExcel("", "-----ManageDealerShips Testing started-----" + (i + 1), "");
+			 ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
 
 			// bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			// driver.close();
