@@ -4,7 +4,7 @@ package Cassandra;
 //Updated on November 23, 2017
 //It works on November 25, 2017
 //20180504_Copied from test.java. need to work....not finished.
-//20180911_ test...
+//20180911_ test...dd
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.sql.Timestamp;
