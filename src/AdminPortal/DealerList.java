@@ -50,11 +50,15 @@ public class DealerList extends Comlibs {
 	By thirdAgreementLocator = By.xpath("//*[@id=\"tabs\"]/li[3]/a");
 	By pdfURLLocator = By.xpath("//*[@id=\"stockpx\"]/iframe");
 //	By displayDropDownLocator=By.xpath("//*[@id=\"dealerTable_length\"]/label/select/option[3]");
+	By addDealerShipBtnLocator=By.xpath("//*[@id=\"addDealershipBtn\"]");
 	// By Locator=
 	// By Locator=
 	// By Locator=
 	// By Locator=
 	// By Locator=
+	// By Locator=
+	// By Locator=
+	// By Locator=	
 
 	public ImageGallery clickAcceptBtn(WebDriver driver) throws IOException {
 		driver.findElement(acceptBtnLocator).click();
@@ -352,6 +356,13 @@ public class DealerList extends Comlibs {
 
 	public int getLineNum() {
 		return lineNum;
+	}
+	public DealerProfile clickAddDealerShipBtn(WebDriver driver) throws IOException {
+		driver.findElement(addDealerShipBtnLocator).click();
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+		}
+		return new DealerProfile(driver);
 	}
 
 }

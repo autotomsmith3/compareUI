@@ -185,32 +185,29 @@ public class AdminPortalController extends Comlibs {
 		ac.rwExcel("", "*********Retrive Values From Dealership Settings page**********", "");
 
 		int count = 0;
-		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_"
-				+ env + ".xls";
-		String[] titleString = { "Env.","S/N", "Dealership_ID", "Dealership_Name", "Account_Email",
-				"Dealership_Email", "ProductVINpx", "ProductSTOCKpx", "ProductLOTpx", "Metadata", "dlrGuid" };
-//=================================================
+		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
+		String[] titleString = { "Env.", "S/N", "Dealership_ID", "Dealership_Name", "Account_Email", "Dealership_Email",
+				"ProductVINpx", "ProductSTOCKpx", "ProductLOTpx", "Metadata", "dlrGuid" };
+		// =================================================
 		ac.writeTitle(getMetadataSavePathFile, titleString);
 		int dataLength = 54;
 		String[] metadataValues = new String[dataLength + 1];
 		int datasize = metadataValues.length;
-		
 
-		
-//=================================================		
+		// =================================================
 		VDVILogin loginP = new VDVILogin(driver);
 		int dealerN = 0;
 		String dealerSN = "";
-		loginP.login(driver, accountEmail, accountPS,"");
+		loginP.login(driver, accountEmail, accountPS, "");
 		String parentHandle = driver.getWindowHandle(); // get the current window handle
 		DealerList DealerListP = new DealerList(driver);
 		DealerListP.clickDisplayDropDownBtn(driver, "3");
-		DealerListP.scrollUp(driver, -3000, "ddd");  //QA -2000   Prod -3000
+		DealerListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000
 
 		for (int i = 0; i < 150; i++) {
 			if (i >= 10) {
 				ac.Wait(2);
-				DealerListP.scrollUp(driver, 55, "ddd"); //60 should be in Prod. 55 can run 150 records in QA. 120 - get almost 2 lines. 80 can run until 28 records, 60 can run until 110-120
+				DealerListP.scrollUp(driver, 55, "ddd"); // 60 should be in Prod. 55 can run 150 records in QA. 120 - get almost 2 lines. 80 can run until 28 records, 60 can run until 110-120
 				ac.Wait(2);
 			}
 			dealerN = dealerN + 1;
@@ -243,22 +240,196 @@ public class AdminPortalController extends Comlibs {
 			DealerSettingsArray[4] = Account_Email;
 			DealerSettingsArray[5] = Dealership_Email;
 			DealerSettingsArray[6] = ProductVINpx;
-			DealerSettingsArray[7] = ProductSTOCKpx ;
+			DealerSettingsArray[7] = ProductSTOCKpx;
 			DealerSettingsArray[8] = ProductLOTpx;
 			DealerSettingsArray[9] = Metadata;
-			DealerSettingsArray[10] =dlrGuid;
+			DealerSettingsArray[10] = dlrGuid;
 			ac.writeToSheet(getMetadataSavePathFile, DealerSettingsArray);
-			
-			
-			// =========================================			
-			
-			
+
+			// =========================================
+
 			System.out.println("Dealer number=" + dealerN);
 			System.out.println(
 					"VINpx=" + ProductVINpx + "\n" + "STOCKpx= " + ProductSTOCKpx + "\n" + "LOTpx= " + ProductLOTpx);
 			System.out.println("Dealership_ID: " + Dealership_ID + "\n" + "Dealership_Name: " + Dealership_Name + "\n"
 					+ "Dealership_Email: " + Dealership_Email + "\n" + "Account_Email: " + Account_Email + "\n"
-					+ "Metadata: " + Metadata + "\n" + "dlrGuid:"+dlrGuid+"\n");
+					+ "Metadata: " + Metadata + "\n" + "dlrGuid:" + dlrGuid + "\n");
+
+			DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, "TC_num");
+
+		}
+		driver.close();
+	}
+
+	public static void ManageDealerShips(WebDriver driver, String brw, String versionNum, String envment,
+			String checkEmail) throws IOException, InterruptedException, ClassNotFoundException, SQLException {
+
+		// Load environment parameters
+		Properties prop = new Properties();
+		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		try {
+			prop.load(AdminPortalController.class.getClassLoader()
+					.getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String env = prop.getProperty("AUTOpx.environment");
+		String envBrowser = prop.getProperty("AUTOpx.browser");
+		String render = prop.getProperty("AUTOpx.render");
+		String addNewVIN = prop.getProperty("AUTOpx.addNewVIN");
+		String accountEmail = prop.getProperty(env + ".VINpxEmail");
+		String accountPS = prop.getProperty(env + ".VINpxPassword");
+		// String baseURL = prop.getProperty(env + ".VINpxDealerPortalBaseURL");
+		String dealershipName = prop.getProperty(env + ".VINpxDealershipname");
+		String dealerCode = prop.getProperty(env + ".VINpxDealerCode");
+		String vin01 = prop.getProperty(env + ".VINpxVin01");
+		String vin02 = prop.getProperty(env + ".VINpxVin02");
+		String vehGUID01 = prop.getProperty(env + ".VINpxVin01GUID");
+		String vehGUID02 = prop.getProperty(env + ".VINpxVin02GUID");
+		// String vinpxnewVin01 = prop.getProperty(env + ".VINpxNewVIN01");
+		String[] VINpxNewVINs = fetchOneDemArrayFromPropFile(env + ".VINpxNewVINs", prop);
+		String serverName = prop.getProperty(env + ".serverName");
+		String dbName = prop.getProperty(env + ".dbName");
+		String userName = prop.getProperty(env + ".userName");
+		String password = prop.getProperty(env + ".password");
+		String MaxVins = prop.getProperty(env + ".MaxVinsForPreview");
+		int MaxVinsForPreview = Integer.parseInt(MaxVins);
+		// dealership profile:
+		String OEM = prop.getProperty(env + ".OEM");
+		String[] Brands = fetchOneDemArrayFromPropFile(env + ".Brands", prop);
+		String DealershipID = prop.getProperty(env + ".DealershipID");
+		String DealershipName = prop.getProperty(env + ".DealershipName");
+		String[] Products = fetchOneDemArrayFromPropFile(env + ".Products", prop);
+		String MetadataValues = prop.getProperty(env + ".MetadataValuesz");
+		String Addrss = prop.getProperty(env + ".Addrss");
+		String AddressLine2 = prop.getProperty(env + ".AddressLine2");
+		String City = prop.getProperty(env + ".City");
+		String StateProvince = prop.getProperty(env + ".StateProvince");
+		String Country = prop.getProperty(env + ".Country");
+		String ZipPostalCode = prop.getProperty(env + ".ZipPostalCode");
+		String DealershipEmail = prop.getProperty(env + ".DealershipEmail");
+		String AccountEmail = prop.getProperty(env + ".AccountEmail");
+		String FirstName = prop.getProperty(env + ".FirstName");
+		String LastName = prop.getProperty(env + ".LastName");
+		String TagLineMarkingMsg = prop.getProperty(env + ".TagLineMarkingMsg");
+		String Website = prop.getProperty(env + ".Website");
+		String DealershipPhoneNumber = prop.getProperty(env + ".DealershipPhoneNumber");
+		String TemplateSettings = prop.getProperty(env + ".TemplateSettings");
+		String SelectBackgroundSet = prop.getProperty(env + ".SelectBackgroundSet");
+
+		// Initial
+		// final int wt_Secs = 6;
+		String TCnum;
+		// ====================
+		String tempVIN = "";
+		String tempVehGUID = "";
+		String ProductVINpx = "";
+		String ProductSTOCKpx = "";
+		String ProductLOTpx = "";
+		String Dealership_ID = "";
+		String Dealership_Name = "";
+		String Dealership_Email = "";
+		String Account_Email = "";
+		String Metadata = "";
+		String dlrGuid = "";
+		// ====================
+		Comlibs ac = new Comlibs();
+		ac.rwExcel("", "*********ManageDealerShips**********", "");
+
+		int count = 0;
+		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
+		String[] titleString = { "Env.", "S/N", "Dealership_ID", "Dealership_Name", "Account_Email", "Dealership_Email",
+				"ProductVINpx", "ProductSTOCKpx", "ProductLOTpx", "Metadata", "dlrGuid" };
+		// =================================================
+		ac.writeTitle(getMetadataSavePathFile, titleString);
+		int dataLength = 54;
+		String[] metadataValues = new String[dataLength + 1];
+		int datasize = metadataValues.length;
+
+		// =================================================
+		VDVILogin loginP = new VDVILogin(driver);
+		int dealerN = 0;
+		String dealerSN = "";
+		loginP.login(driver, accountEmail, accountPS, "");
+		String parentHandle = driver.getWindowHandle(); // get the current window handle
+		DealerList DealerListP = new DealerList(driver);
+		DealerListP.clickDisplayDropDownBtn(driver, "3");
+		DealerListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000
+		// click Add Dealership btn
+		DealerListP.clickAddDealerShipBtn(driver);
+
+		DealerProfile DealerProfieP = new DealerProfile(driver);
+		DealerProfieP.selectOEM(driver, 13);
+		// check Buick and Cadillac and Chevrolet and GMC
+		DealerProfieP.selectOEMBrands(driver, 1); // check Buick
+		DealerProfieP.selectOEMBrands(driver, 2); // check Cadillac
+		DealerProfieP.selectOEMBrands(driver, 3); // check Chevrolet
+		DealerProfieP.selectOEMBrands(driver, 4); // check GMC
+		DealerProfieP.selectOEMBrands(driver, 5); // check Hummer
+		DealerProfieP.inputDealersipID(driver, "123456");
+		DealerProfieP.selectVINpxProd(driver);
+		DealerProfieP.selectSTOCKpxProd(driver);
+		// DealerProfieP.selectLOTpxProd(driver);
+		DealerProfieP.inputMetadata(driver, "inventoryplus.altid;193975\r\n" + "email.inventory;no\r\n"
+				+ "unityworks.altid;H5O4M8B\r\n" + "auction123.altid;H5O4M8B\r\n" + "norandompics;yes\r\n");
+
+		DealerProfieP.selectTemplateSetting(driver, 3);// DEFAULT=1; replace=2;overlay=3;
+		DealerProfieP.selectBackGroundSet(driver, 7);// Generic Dealership=7; White Gradient=0
+
+		// Stop here!!!
+		// Enter Dealership ID and all fields
+
+		for (int i = 0; i < 150; i++) {
+			if (i >= 10) {
+				ac.Wait(2);
+				DealerListP.scrollUp(driver, 55, "ddd"); // 60 should be in Prod. 55 can run 150 records in QA. 120 - get almost 2 lines. 80 can run until 28 records, 60 can run until 110-120
+				ac.Wait(2);
+			}
+			dealerN = dealerN + 1;
+			dealerSN = String.valueOf(dealerN);
+			DealerListP.clickEditBtn(driver, dealerSN);
+			for (String winHandle : driver.getWindowHandles()) {
+				driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+			}
+			// DealerProfile DealerProfieP = new DealerProfile(driver);
+			// =========================================
+			ProductVINpx = DealerProfieP.getVINpxProduct(driver, "");
+			ProductSTOCKpx = DealerProfieP.getSTOCKpxProduct(driver, "");
+			ProductLOTpx = DealerProfieP.getLOTpxProduct(driver, "");
+			Dealership_ID = DealerProfieP.getDealershipID(driver);
+			Dealership_Name = DealerProfieP.getDealershipName(driver);
+			Dealership_Email = DealerProfieP.getDealershipEmail(driver);
+			Account_Email = DealerProfieP.getAccountEmail(driver);
+			Metadata = DealerProfieP.getMetadata(driver);
+			dlrGuid = DealerProfieP.getDlrGuid(driver);
+			dlrGuid = DealerProfieP.trimURL(dlrGuid);
+			// =========================================
+
+			int wSize = titleString.length;
+			String[] DealerSettingsArray = new String[wSize];
+
+			DealerSettingsArray[0] = env;
+			DealerSettingsArray[1] = Integer.toString(i);
+			DealerSettingsArray[2] = Dealership_ID;
+			DealerSettingsArray[3] = Dealership_Name;
+			DealerSettingsArray[4] = Account_Email;
+			DealerSettingsArray[5] = Dealership_Email;
+			DealerSettingsArray[6] = ProductVINpx;
+			DealerSettingsArray[7] = ProductSTOCKpx;
+			DealerSettingsArray[8] = ProductLOTpx;
+			DealerSettingsArray[9] = Metadata;
+			DealerSettingsArray[10] = dlrGuid;
+			ac.writeToSheet(getMetadataSavePathFile, DealerSettingsArray);
+
+			// =========================================
+
+			System.out.println("Dealer number=" + dealerN);
+			System.out.println(
+					"VINpx=" + ProductVINpx + "\n" + "STOCKpx= " + ProductSTOCKpx + "\n" + "LOTpx= " + ProductLOTpx);
+			System.out.println("Dealership_ID: " + Dealership_ID + "\n" + "Dealership_Name: " + Dealership_Name + "\n"
+					+ "Dealership_Email: " + Dealership_Email + "\n" + "Account_Email: " + Account_Email + "\n"
+					+ "Metadata: " + Metadata + "\n" + "dlrGuid:" + dlrGuid + "\n");
 
 			DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, "TC_num");
 		}
@@ -360,9 +531,12 @@ public class AdminPortalController extends Comlibs {
 			// vehicleGallery(driver, tBrowser, env);
 			// verifyRerender(driver, tBrowser);
 
-			////// 1.VINpx:
+			////// 1.RetriveValuesFrDealerSettingsPage:
 			bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
+			////// 1.ManageDealerShips:
+			// bc.rwExcel("", "-----ManageDealerShips Testing started-----" + (i + 1), "");
+			// ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
 
 			// bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			// driver.close();
