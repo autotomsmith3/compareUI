@@ -15,6 +15,8 @@ import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import com.datastax.driver.core.utils.UUIDs;
 
+import cig.CassandraConnection;
+
 public class Test {
 	public static void SaveScratch(String pathfilename, String ScratchText) {
 		try {
@@ -167,9 +169,9 @@ public class Test {
 		String[] style = {"389544", "387896" };// { "389544", "387896","389544" };
 		String datestring = "20171124";
 		int styleLength = style.length;
-		String colorpathfile = "C:\\chrome\\loader\\cigETLImport\\Test Results\\test\\JavaResults\\batchrequest_"
+		String colorpathfile = "C:\\chrome\\loader\\CIG-MAPPING-IMPORT\\Test Results\\test\\JavaResults\\batchrequest_"
 				+ datestring + "_" + styleLength + ".txt";
-		String vehiclepathfile = "C:\\chrome\\loader\\cigETLImport\\Test Results\\test\\JavaResults\\vehiclemapping_"
+		String vehiclepathfile = "C:\\chrome\\loader\\CIG-MAPPING-IMPORT\\Test Results\\test\\JavaResults\\vehiclemapping_"
 				+ datestring + "_" + styleLength + ".txt";
 		// ***************************Colormappings**************************
 		 for (int i = 0; i < styleLength; i++) {
