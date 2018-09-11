@@ -379,6 +379,8 @@ public class AdminPortalController extends Comlibs {
 		// Stop here!!!
 		// Enter Dealership ID and all fields
 
+		driver.close();
+
 		for (int i = 0; i < 150; i++) {
 			if (i >= 10) {
 				ac.Wait(2);
@@ -531,11 +533,11 @@ public class AdminPortalController extends Comlibs {
 			// verifyRerender(driver, tBrowser);
 
 			////// 1.RetriveValuesFrDealerSettingsPage:
-//			bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-//			RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
+			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 			////// 1.ManageDealerShips:
-			 bc.rwExcel("", "-----ManageDealerShips Testing started-----" + (i + 1), "");
-			 ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+			bc.rwExcel("", "-----ManageDealerShips Testing started-----" + (i + 1), "");
+			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
 
 			// bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			// driver.close();
