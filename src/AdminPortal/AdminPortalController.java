@@ -130,6 +130,48 @@ public class AdminPortalController extends Comlibs {
 			throws IOException, InterruptedException {
 	}
 
+	private static String[] fetchOneDemArrayFromPropFile(String propertyName, Properties propFile)
+			throws IOException, InterruptedException {
+		// get array split up by the colin
+		String a[] = propFile.getProperty(propertyName).split(",");
+		return a;
+	}
+
+	public static String getVehGUIDfromDealerCodeAndVIN(String dlrCode, String sVin)
+			throws ClassNotFoundException, SQLException {
+		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		Connection conn = DriverManager.getConnection(
+				"jdbc:sqlserver://LNOC-Q13V-MSQ1.autodata.org;user=VDVIWebServicesUserQA;password=HDuMy873JRFpkkU9;database=VDVI_Master");
+
+		System.out.println("test");
+
+		Statement sta = conn.createStatement();
+		String Sql = "select dt01.DlrCode,vt01.VIN, vt01.VehGUID from DT01_Dealer as dt01 inner join VT01_DealerVehicles as vt01 on DT01.DlrGUID=VT01.DlrGUID where vt01.VIN=\'"
+				+ sVin + "\' and dt01.DlrCode=\'" + dlrCode + "\'";
+		String vGUID = "";
+		ResultSet rs = sta.executeQuery(Sql);
+		int icolumn = rs.getRow();
+		while (rs.next()) {
+			icolumn = rs.getRow();
+			vGUID = rs.getString("VehGUID");
+			System.out.println("Row =" + icolumn);
+			System.out.println("Dealer Code = " + rs.getString("DlrCode") + "  VIN = " + rs.getString("VIN")
+					+ "  VehGUID = " + rs.getString("VehGUID"));
+		}
+		if (icolumn == 1) {
+			System.out.println("One VehGUID\n");
+			// rs.getString("VehGUID");
+			// String vGUID = rs.getString("VehGUID");
+		} else {
+			System.out.println("No any VehGUID or more than one\n");
+			vGUID = "error!";
+		}
+		rs.close();
+		sta.close();
+		conn.close();
+		return vGUID;
+	}
+
 	public static void RetriveValuesFrDealerSettingsPage(WebDriver driver, String brw, String versionNum,
 			String envment, String checkEmail)
 			throws IOException, InterruptedException, ClassNotFoundException, SQLException {
@@ -362,11 +404,15 @@ public class AdminPortalController extends Comlibs {
 		DealerProfile DealerProfieP = new DealerProfile(driver);
 		DealerProfieP.selectOEM(driver, 13);
 		// check Buick and Cadillac and Chevrolet and GMC
-		DealerProfieP.selectOEMBrands(driver, 1); // check Buick
-		DealerProfieP.selectOEMBrands(driver, 2); // check Cadillac
-		DealerProfieP.selectOEMBrands(driver, 3); // check Chevrolet
-		DealerProfieP.selectOEMBrands(driver, 4); // check GMC
-		DealerProfieP.selectOEMBrands(driver, 5); // check Hummer
+		// DealerProfieP.selectOEMBrands(driver, 1); // check Buick
+		// DealerProfieP.selectOEMBrands(driver, 2); // check Cadillac
+		// DealerProfieP.selectOEMBrands(driver, 3); // check Chevrolet
+		// DealerProfieP.selectOEMBrands(driver, 4); // check GMC
+		// DealerProfieP.selectOEMBrands(driver, 5); // check Hummer
+		for (String brand : Brands) {
+			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand));
+		}
+
 		DealerProfieP.inputDealersipID(driver, DealershipID);
 		DealerProfieP.selectVINpxProd(driver);
 		DealerProfieP.selectSTOCKpxProd(driver);
@@ -435,49 +481,6 @@ public class AdminPortalController extends Comlibs {
 			DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, "TC_num");
 		}
 		driver.close();
-	}
-
-	private static String[] fetchOneDemArrayFromPropFile(String propertyName, Properties propFile) {
-
-		// get array split up by the colin
-		String a[] = propFile.getProperty(propertyName).split(",");
-
-		return a;
-	}
-
-	public static String getVehGUIDfromDealerCodeAndVIN(String dlrCode, String sVin)
-			throws ClassNotFoundException, SQLException {
-		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		Connection conn = DriverManager.getConnection(
-				"jdbc:sqlserver://LNOC-Q13V-MSQ1.autodata.org;user=VDVIWebServicesUserQA;password=HDuMy873JRFpkkU9;database=VDVI_Master");
-
-		System.out.println("test");
-
-		Statement sta = conn.createStatement();
-		String Sql = "select dt01.DlrCode,vt01.VIN, vt01.VehGUID from DT01_Dealer as dt01 inner join VT01_DealerVehicles as vt01 on DT01.DlrGUID=VT01.DlrGUID where vt01.VIN=\'"
-				+ sVin + "\' and dt01.DlrCode=\'" + dlrCode + "\'";
-		String vGUID = "";
-		ResultSet rs = sta.executeQuery(Sql);
-		int icolumn = rs.getRow();
-		while (rs.next()) {
-			icolumn = rs.getRow();
-			vGUID = rs.getString("VehGUID");
-			System.out.println("Row =" + icolumn);
-			System.out.println("Dealer Code = " + rs.getString("DlrCode") + "  VIN = " + rs.getString("VIN")
-					+ "  VehGUID = " + rs.getString("VehGUID"));
-		}
-		if (icolumn == 1) {
-			System.out.println("One VehGUID\n");
-			// rs.getString("VehGUID");
-			// String vGUID = rs.getString("VehGUID");
-		} else {
-			System.out.println("No any VehGUID or more than one\n");
-			vGUID = "error!";
-		}
-		rs.close();
-		sta.close();
-		conn.close();
-		return vGUID;
 	}
 
 	public static void main(String[] args)
