@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="src" output="target/classes" path="src">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/1/Eclipse/RefLibraris/cassandra-driver-core-3.0.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/1/Eclipse/RefLibraris/poi-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="C:/1/Eclipse/RefLibraris/selenium-server-standalone-3.13.0.jar"/>
+	<classpathentry kind="lib" path="C:/1/Eclipse/RefLibraris/javamail.jar"/>
+	<classpathentry kind="lib" path="C:/1/Eclipse/RefLibraris/pdfbox-app-1.8.12.jar"/>
+	<classpathentry kind="lib" path="C:/1/Eclipse/RefLibraris/json-20160212.jar" sourcepath="C:/Users/zhoul/.m2/repository/org/json/json/20160212/json-20160212-sources.jar"/>
+	<classpathentry kind="lib" path="C:/1/Eclipse/RefLibraris/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="C:/1/Eclipse/RefLibraris/bson-3.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/1/Eclipse/RefLibraris/mongodb-driver-3.3.0.jar" sourcepath="C:/Users/zhoul/.m2/repository/org/mongodb/mongodb-driver/3.3.0/mongodb-driver-3.3.0-sources.jar"/>
+	<classpathentry kind="lib" path="C:/1/Eclipse/RefLibraris/mongodb-driver-core-3.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/1/Eclipse/RefLibraris/cassandra-driver-extras-3.3.1.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

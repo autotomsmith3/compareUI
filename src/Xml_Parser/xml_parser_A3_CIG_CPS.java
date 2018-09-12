@@ -1,7 +1,8 @@
 package Xml_Parser;
 
-//This is based on xml_parser_A3.java. this works for CPS return. "MediaList" - OK. 
-//How to write console to a file. Run -> Run Configurations... -> Java Application -> Your Application -> Common tab -> File, Check Append for append mode.
+//This is based on xml_parser_A3.java. this works for CPS return. "MediaList"  - OK. Moved to cig package on January 15, 2018
+//How to write console to a file. Run -> Run Configurations... -> Java Application -> Your Application -> Common tab -> File, Check Append for append mode. 
+//Used to save here: H:\My Documents\CIG\QA\BodyFieldAlgorithm\xml_parser_A3_CIG_CPS_Console_TestOutput.txt
 //This output can be got from console or write console to a file. See above.
 import java.io.BufferedReader;
 import java.io.File;
@@ -240,14 +241,14 @@ public class xml_parser_A3_CIG_CPS {
 		// Test data below
 		// 1***********************************************
 		// 3 Styleids only for testing in Spira
-		String[] styleid = { "387896", "374391", "389544" };// { "387896", "374391", "389544" };
-		// 2***********************************************
-		// // USC70FOT11 - 2017 Ford F-150 - All Stylids:
-		// String[] styleid = { "387896", "387897", "387898", "387899", "387900", "387901", "387902", "387903", "387904",
-		// "387905", "387906", "387907", "387908", "387909", "387910", "387911", "387912", "387913", "387914",
-		// "387915", "387916", "387917", "387918", "387919", "387920", "387921", "387922", "387923", "387924",
-		// "387925", "387926", "387927", "387928", "387929", "387930", "387931", "387932", "387933", "387934",
-		// "387935", "387936", "387937", "388260", "388261" };
+		String[] styleid = { "385655" };// { "387896", "374391", "389544" };
+//		 //2***********************************************
+//		 // USC70FOT11 - 2017 Ford F-150 - All Stylids:
+//		 String[] styleid = { "387896", "387897", "387898", "387899", "387900", "387901", "387902", "387903", "387904",
+//		 "387905", "387906", "387907", "387908", "387909", "387910", "387911", "387912", "387913", "387914",
+//		 "387915", "387916", "387917", "387918", "387919", "387920", "387921", "387922", "387923", "387924",
+//		 "387925", "387926", "387927", "387928", "387929", "387930", "387931", "387932", "387933", "387934",
+//		 "387935", "387936", "387937", "388260", "388261" };
 		// 3***********************************************
 		// USC60ACS11 - 2016 Acura MDX - All styleids, total=16
 		// String[] styleid = { "374377", "374383", "374378", "374384", "374379", "374385", "374386", "374387", "374380",

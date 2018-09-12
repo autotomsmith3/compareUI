@@ -1,5 +1,5 @@
 package cig;
-
+//The original was in Cassandra package.
 //package CIG_ETL; //works on November 15, 2017
 //Updated on November 23, 2017
 import java.io.BufferedWriter;
@@ -162,7 +162,7 @@ public class CassandraConnection {
 //		USC70FOT11 styleids
 		String[] style ={"387896","387897","387898","387899","387900","387901","387902","387903","387904","387905","387906","387907","387908","387909","387910","387911","387912","387913","387914","387915","387916","387917","387918","387919","387920","387921","387922","387923","387924","387925","387926","387927","387928","387929","387930","387931","387932","387933","387934","387935","387936","387937","388260","388261"};
 		
-		String datestring = "20171207";
+		String datestring = "20180116";
 		int styleLength = style.length;
 		String colorpathfile = "C:\\chrome\\loader\\CIG-MAPPING-IMPORT\\Test Results\\test\\JavaResults\\colormapping_"
 				+ datestring + "_" + styleLength+"_Fr_" + keyspace+".txt";

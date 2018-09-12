@@ -201,8 +201,8 @@ public class readAndcompareTwosheets_CombinedVehiclBS_SummaryOnly {
 		// ***********************************************VINs******************************************************************
 		// **********************************************VINs DATA Info*********************************************************
 		// *********************************************************************************************************************
-		String expectedSheetFolder = "20180418"; //
-		String realSheetFolder = "20180426";
+		String expectedSheetFolder = "20180412"; //
+		String realSheetFolder = "20180517";
 		String compareSheetFolder = realSheetFolder;
 		int sheetrows[] = { 206, 499, 354, 288, 167, 172, 288, 354 };//
 		int totalVins = sheetrows.length;

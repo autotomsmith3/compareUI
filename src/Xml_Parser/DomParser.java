@@ -35,7 +35,7 @@ public class DomParser {
         	
         	String schemaSource = "C:\\1\\Eclipse\\XML_fr_David\\Vic XML Project 2017-10\\src\\xml\\student.xsd";
         	
-//        	String xmlString = new String ( content );
+        	String xmlString = new String ( content );
         	
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             

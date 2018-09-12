@@ -36,7 +36,7 @@ public class CombinedVehicleBS {
 		int vintotal = 2;
 		int startToRun = 1;// Default=1;
 		int endToRun = 1;// Default =vintotal
-		String dateFolder = "20180514";
+		String dateFolder = "20180517";
 		String[] SpiraID = { "0. TC 202427", "1. TC 185573", "2. TC 185574", "3. TC 185575", "4. TC 185576",
 				"5. TC 185577", "6. TC 185578", "7. TC 185579", "8. TC 185580", "9. TC 222161", "10. TC 185622",
 				"11. TC 185603", "12. TC 185604", "12.1 TC 185604", "12.2 TC 185604", "12.3 TC 185604",

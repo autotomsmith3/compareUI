@@ -3,7 +3,7 @@ package cig;
 //The original code is from package Xml_Parser, xml_parser_A3_CIG_CPS.java;
 //This is based on xml_parser_A3.java. this works for CPS return. "MediaList"  - OK. 
 //How to write console to a file. Run -> Run Configurations... -> Java Application -> Your Application -> Common tab -> File, Check Append for append mode. 
-//Used to save here: H:\My Documents\CIG\QA\BodyFieldAlgorithm\xml_parser_A3_CIG_CPS_Console_TestOutput.txt
+//Used to save here: H:\My Documents\CIG\QA\BodyFieldAlgorithm\CpsXmlMediaListParse_Console_TestOutput.txt
 //This output can be got from console or write console to a file. See above.
 import java.io.BufferedReader;
 import java.io.File;
@@ -242,9 +242,9 @@ public class CpsXmlMediaListParse {
 		// Test data below
 		// 1***********************************************
 		// 3 Styleids only for testing in Spira
-		String[] styleid = {"387896"} ;//{ "385655" };// { "387896", "374391", "389544" };
+//		String[] styleid = {"387896"} ;//{ "385655" };// { "387896", "374391", "389544" };
 //		 //2***********************************************
-//		 // USC70FOT11 - 2017 Ford F-150 - All Stylids:
+//		 // USC70FOT11 - 2017 Ford F-150 - All 44 Stylids:
 //		 String[] styleid = { "387896", "387897", "387898", "387899", "387900", "387901", "387902", "387903", "387904",
 //		 "387905", "387906", "387907", "387908", "387909", "387910", "387911", "387912", "387913", "387914",
 //		 "387915", "387916", "387917", "387918", "387919", "387920", "387921", "387922", "387923", "387924",
@@ -255,9 +255,14 @@ public class CpsXmlMediaListParse {
 		// String[] styleid = { "374377", "374383", "374378", "374384", "374379", "374385", "374386", "374387", "374380",
 		// "374391", "374381", "374392", "374382", "374388", "374389", "374390" };
 		// 4***********************************************
-		// CAC70CRC131 - 2017 Chrysler 300
-		// String[] styleid = { "374380", "374391", "374381", "374392", "374382", "374388", "374389", "374390" };// { "387896", "374391", "389544" };
+		// CAC70CRC131 - 2017 Chrysler 300 All 10 styleids
+//		 String[] styleid ={ "389544", "389545","389552","389548","389549","389546","389547","389553","389550","389551"};
 
+		//Multi-tone image CIG-137 - USC40FOT124C0 - 2014 Ford F-250 styleid
+		 String[] styleid ={ "380333"};//380333, 361502
+	 
+		 
+		 
 		int styleidLength = styleid.length;
 		System.out.println(
 				"Styleid,bodyfield,category,fileName,groupUID,isActive,isPrimary,mediaID,mediaID,oemTemp,optionCode,paintCode,rangeName,shotUID ");

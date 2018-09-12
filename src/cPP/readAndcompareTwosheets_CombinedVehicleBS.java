@@ -187,10 +187,10 @@ public class readAndcompareTwosheets_CombinedVehicleBS {
 		// ***********************************************VINs******************************************************************
 		// ********************************************** DATA Info*********************************************************
 		// *********************************************************************************************************************
-		String expectedSheetFolder = "20180501";
-		String realSheetFolder = "20180514";
+		String expectedSheetFolder = "20180412";
+		String realSheetFolder = "20180517";
 		String compareSheetFolder = realSheetFolder;
-		int sheetrows[] = { 300, 290, 300 };// The last line number (EXCEL number).
+		int sheetrows[] = { 290, 290, 300 };// The last line number (EXCEL number).
 		int totalVins = sheetrows.length;
 		// From vin# to vin#
 		int startToRun = 1;
