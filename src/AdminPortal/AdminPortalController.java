@@ -409,6 +409,7 @@ public class AdminPortalController extends Comlibs {
 		String dealerSN = "";
 		loginP.login(driver, accountEmail, accountPS, "");
 		String parentHandle = driver.getWindowHandle(); // get the current window handle
+
 		DealerList DealerListP = new DealerList(driver);
 		DealerListP.clickDisplayDropDownBtn(driver, "3");
 		DealerListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000
@@ -453,6 +454,7 @@ public class AdminPortalController extends Comlibs {
 		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
+
 		// tc="AddDealerInvalid_withMissingMUSTField";
 		// boolean MessageExist=DealerProfieP.checkMessageDisplayedHead(driver,"Check required fields");
 		// if (MessageExist) {
@@ -469,14 +471,59 @@ public class AdminPortalController extends Comlibs {
 		} else {
 			ac.rwExcel(tc, false, "Add a dealership ", "With missing a MUST field");
 		}
+
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
 
-		// Stop here!!!
-		// Enter Dealership ID and all fields
+		// *******************************************************************************
+		// click Add Dealership btn
+		DealerListP.clickAddDealerShipBtn(driver);
+		DealerProfieP.selectOEM(driver, 13);
+		for (String brand : Brands) {
+			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand));
+		}
 
+		DealerProfieP.inputDealersipID(driver, DealershipID);
+		DealerProfieP.selectVINpxProd(driver);
+		DealerProfieP.selectSTOCKpxProd(driver);
+		// DealerProfieP.selectLOTpxProd(driver);
+		DealerProfieP.inputMetadata(driver, MetadataValues);
+
+		DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
+		DealerProfieP.selectTemplateSetting(driver, 1);
+		DealerProfieP.inputDealersipName(driver, DealershipName);
+		DealerProfieP.inputAddress(driver, Address);
+		DealerProfieP.inputAddressLine2(driver, AddressLine2);
+		DealerProfieP.inputCity(driver, City);
+		DealerProfieP.inputDealersipEmail(driver, DealershipEmail);
+		DealerProfieP.inputZipCode(driver, ZipPostalCode);
+		DealerProfieP.inputAccountEmail(driver, AccountEmail);
+		// DealerProfieP.inputFirstName(driver, FirstName);//Missing First Name here!
+		DealerProfieP.inputLastName(driver, LastName);
+		DealerProfieP.inputCountry(driver, Country);// USA=1
+		DealerProfieP.inputState(driver, StateProvince);// NY=33
+		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg);
+		DealerProfieP.inputWebsite(driver, Website);
+		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber);
+
+		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
+		DealerProfieP.scrollUp(driver, -3000, tc);
+		DealerProfieP.clickSaveBtn(driver, tc);
+
+		tc = "AddDealerInvalid_withMissingMUSTField";
+		MessageExist = DealerProfieP.checkMessageDisplayedHead(driver, "Check required fields");
+		if (MessageExist) {
+			ac.rwExcel("AddDealerInvalid", true, "Add a dealership ", "With missing a MUST field");
+		} else {
+			ac.rwExcel("AddDealerInvalid", false, "Add a dealership ", "With missing a MUST field");
+		}
+
+		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
 		driver.close();
 		// switchToWindow(driver, parentHandle);
 		// driver.close();
+
+		// Stop here!!!
+		// Enter Dealership ID and all fields
 	}
 
 	public static void main(String[] args)
