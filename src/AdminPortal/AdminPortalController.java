@@ -49,8 +49,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AdminPortalController extends Comlibs {
-	private final WebDriver driver;
-	final int wt_Secs = 0;
 	static String[] vinpxConent = new String[200];
 	static String[] stockpxConent = new String[200];
 	static String[] lotpxConent = new String[200];
@@ -58,7 +56,7 @@ public class AdminPortalController extends Comlibs {
 	final static int ALL_VINS_RENDER_MAX_WT = 20;
 
 	public AdminPortalController(WebDriver driver, String myId) throws IOException {
-		this.driver = driver;
+		this.data.driver = driver;
 		// String wh1=driver.getWindowHandle();
 
 		String sPageTitle = "AUTOpx Login";
@@ -82,35 +80,10 @@ public class AdminPortalController extends Comlibs {
 		}
 	}
 
-	/*
-	 * ------------------------------ Home Page Object Repositories: ------------------------------
-	 */
-	By dealershipNameField = By.id("dealerName");
-	By webSite = By.id("dealerSite");
-	By tagLineMarkingMsg = By.id("dealerTag");
-	By dealershipEmail = By.id("dealerEmail");
-	By dealershipPhoneNumber = By.id("dealerPhone");
-	By accountEmail = By.id("accEmail");
-	By firstName = By.id("userFirstName");
-	By lastName = By.id("userLastName");
-	By receiveDailyInventoryEmailCheckBox = By.id("emailOptIn");
-	By address1 = By.id("dealerAddr1");
-	By address2 = By.id("dealerAddr2");
-	By city = By.id("dealerCity");
-	By country = By.id("dealerCountry");
-	By stateProvince = By.id("dealerState");
-	By zipPostalCode = By.id("dealerZip");
-	By passwordLocator = By.id("userPassword");
-	By confirmPasswordLocator = By.id("userConfirm");
-	By saveLocator = By.id("saveBtn");
-	By dealershipLogo = By.id("//img[@alt='Dealership Image']");
-	By upLoadNewPicture = By.id("uploadLogo");
-	By removeLogo = By.id("removeLogo");
-	By VINpxCheckBox = By.id("vinpx");
-	By LOTpxCheckBox = By.id("lotpx");
-	By STOCKpxCheckBox = By.id("stockpx");
-	By backGround7 = By.id("//div[@id='bg-7']/div/img");
-
+	AdminPortalControllerData data = new AdminPortalControllerData(0, By.id("dealerName"), By.id("dealerSite"), By.id("dealerTag"), By.id("dealerEmail"),
+			By.id("dealerPhone"), By.id("accEmail"), By.id("userFirstName"), By.id("userLastName"), By.id("emailOptIn"), By.id("dealerAddr1"), By.id("dealerAddr2"), By.id("dealerCity"), By.id("dealerCountry"),
+			By.id("dealerState"), By.id("dealerZip"), By.id("userPassword"), By.id("userConfirm"), By.id("saveBtn"), By.id("//img[@alt='Dealership Image']"), By.id("uploadLogo"), By.id("removeLogo"), By.id("vinpx"),
+			By.id("lotpx"), By.id("stockpx"), By.id("//div[@id='bg-7']/div/img"));
 	static String strHelpEmail = "contact@unityworksmedia.com"; // Prod:contact@unityworksmedia.com QA: tdautoaa@gmail.com
 	static String strHelpTel = "1-800-293-2056";
 	static int allVinNums = 0;
@@ -578,11 +551,11 @@ public class AdminPortalController extends Comlibs {
 			// verifyRerender(driver, tBrowser);
 
 			////// 1.RetriveValuesFrDealerSettingsPage:
-			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
+			 bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			 RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 			////// 2.ManageDealerShips:
-			bc.rwExcel("", "-----ManageDealerShips Testing started-----" + (i + 1), "");
-			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+//			bc.rwExcel("", "-----ManageDealerShips Testing started-----" + (i + 1), "");
+//			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
 
 			// bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			// driver.close();
