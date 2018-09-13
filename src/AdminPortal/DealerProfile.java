@@ -60,8 +60,8 @@ public class DealerProfile extends Comlibs {
 	By SaveBtn = By.xpath("//*[@id=\"saveBtn\"]/span");
 	// By backGroundLocator=By.xpath("//*[@id=\"bg-7\"]/div[1]/img");//Generic Dealership=7; White Gradient=0
 	// By backGroundLocator=By.xpath("//*[@id=\"bg-0\"]/div[1]/img");
-
 	// *[@id="dealerListBtn"]/span
+	By MessageDisplayedOnHead = By.xpath("//*[@id=\"header\"]/div/div[2]/span");
 
 	public String getDealershipID(WebDriver driver) throws IOException {
 		String dealershipip = driver.findElement(DealershipIDLocator).getAttribute("value");
@@ -135,9 +135,27 @@ public class DealerProfile extends Comlibs {
 		System.out.println("Original WindowHandle=" + windowHandle);
 		System.out.println("WindowHandles=" + windowHandles);
 
+		for (String NewWindowHandle : windowHandles) {
+			windowHandle = NewWindowHandle;
+		}
+
 		driver.switchTo().window(windowHandle);
 
 		return new DealerList(driver);
+	}
+
+	public DealerProfile clickSaveBtn(WebDriver driver, String tc) {
+		driver.findElement(SaveBtn).click();
+		return this;
+	}
+
+	public boolean checkMessageDisplayedHead(WebDriver driver, String message) {
+		String msg = driver.findElement(MessageDisplayedOnHead).getText();// .getAttribute("messageBox");
+		boolean messageExist = false;
+		if (msg.equalsIgnoreCase(message)) {
+			messageExist = true;
+		}
+		return messageExist;
 	}
 
 	public String getDlrGuid(WebDriver driver) throws IOException {
@@ -257,7 +275,7 @@ public class DealerProfile extends Comlibs {
 	}
 
 	public DealerProfile inputLastName(WebDriver driver, String lastName) {
-		driver.findElement(FirstNameLocator).sendKeys(lastName);
+		driver.findElement(LastNameLocator).sendKeys(lastName);
 		return this;
 	}
 
@@ -271,7 +289,7 @@ public class DealerProfile extends Comlibs {
 		return this;
 	}
 
-	public DealerProfile inputDealershipPhoneWebsite(WebDriver driver, String num) {
+	public DealerProfile inputDealershipPhone(WebDriver driver, String num) {
 		driver.findElement(DealershipPhoneNumberLocator).sendKeys(num);
 		return this;
 	}
@@ -282,14 +300,20 @@ public class DealerProfile extends Comlibs {
 		return this;
 	}
 
+	public DealerProfile clickUploadBtn(WebDriver driver, int num) {
+		driver.findElement(UploadBtn).click();
+		return this;
+	}
+
 	public DealerProfile selectBackGroundSet(WebDriver driver, int num) {
 		By backGroundSetLocator = By.xpath("//*[@id=\"bg-" + num + "\"]/div[1]/img");// Generic Dealership=7; White Gradient=0
-//		By backGroundSetLocator=By.xpath("//*[@id=\"bg-7\"]/div[1]/img");
+		// By backGroundSetLocator=By.xpath("//*[@id=\"bg-7\"]/div[1]/img");
 		// By backGroundLocator=By.xpath("//*[@id=\"bg-0\"]/div[1]/img");
 		scrollUp(driver, 1000, "ddd"); // QA -2000 Prod -3000
 		driver.findElement(backGroundSetLocator).click();
 		return this;
 	}
+
 	public void scrollUp(WebDriver driver, int scrollNum, String tc) {
 
 		// Window scroll down to make the custom image visible.
