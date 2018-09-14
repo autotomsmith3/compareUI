@@ -51,6 +51,12 @@ public class DealerList extends Comlibs {
 	By pdfURLLocator = By.xpath("//*[@id=\"stockpx\"]/iframe");
 //	By displayDropDownLocator=By.xpath("//*[@id=\"dealerTable_length\"]/label/select/option[3]");
 	By addDealerShipBtnLocator=By.xpath("//*[@id=\"addDealershipBtn\"]");
+	By 	ManageDealerShipsLocator=By.xpath("//*[@id=\"dealershipMenu\"]");
+	By ManageBGSetsLocator=By.xpath("//*[@id=\"backgroundMenu\"]");
+	By ManageImageTypesLocator=By.xpath("//*[@id=\"imagetypeMenu\"]");
+	By ManageAngleMappingsLocator=By.xpath("//*[@id=\"importanglemappingMenu\"]");
+	By ManageExportTemplatesLocator=By.xpath("//*[@id=\"exportTemplateMenu\"]");
+	By ManageGlobalConfigLocator=By.xpath("//*[@id=\"configMenu\"]");
 	// By Locator=
 	// By Locator=
 	// By Locator=
@@ -60,10 +66,6 @@ public class DealerList extends Comlibs {
 	// By Locator=
 	// By Locator=	
 
-	public ImageGallery clickAcceptBtn(WebDriver driver) throws IOException {
-		driver.findElement(acceptBtnLocator).click();
-		return new ImageGallery(driver);
-	}
 
 	public DealerProfile clickEditBtn(WebDriver driver, String num) throws IOException {
 //		By editBtnLocator = By.xpath("//*[@id=\"listViewBtn\"]/span");   //   //*[@id="listViewBtn"]/span  or  xpath=(//button[@id='listViewBtn'])[3]
@@ -357,12 +359,35 @@ public class DealerList extends Comlibs {
 	public int getLineNum() {
 		return lineNum;
 	}
-	public DealerProfile clickAddDealerShipBtn(WebDriver driver) throws IOException {
+	public DealerProfile clickAddDealerShip(WebDriver driver) throws IOException {
 		driver.findElement(addDealerShipBtnLocator).click();
 		for (String winHandle : driver.getWindowHandles()) {
 			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
 		}
 		return new DealerProfile(driver);
 	}
-
+	public DealerList clickManageDealerShips(WebDriver driver) throws IOException {
+		driver.findElement(ManageDealerShipsLocator).click();
+		return this;
+	}
+	public BackgroundSets clickManageBGSets(WebDriver driver) throws IOException {
+		driver.findElement(ManageBGSetsLocator).click();
+		return new BackgroundSets(driver);
+	}
+	public ImageTypeList clickManageImageType(WebDriver driver) throws IOException {
+		driver.findElement(ManageImageTypesLocator).click();
+		return new ImageTypeList(driver);
+	}
+	public AngleMappingList clickManageAngleMappings(WebDriver driver) throws IOException {
+		driver.findElement(ManageAngleMappingsLocator).click();
+		return new AngleMappingList(driver);
+	}
+	public ExportTemplateList clickManageExportTemplates(WebDriver driver) throws IOException {
+		driver.findElement(ManageExportTemplatesLocator).click();
+		return new ExportTemplateList(driver);
+	}
+	public GlobalConfig clickManageGlobalConfig(WebDriver driver) throws IOException {
+		driver.findElement(ManageGlobalConfigLocator).click();
+		return new GlobalConfig(driver);
+	}
 }

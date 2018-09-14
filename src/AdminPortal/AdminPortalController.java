@@ -384,10 +384,12 @@ public class AdminPortalController extends Comlibs {
 		String parentHandle = driver.getWindowHandle(); // get the current window handle
 
 		DealerList DealerListP = new DealerList(driver);
+//		*************************DealerListP******************************************************		
+//		*************************DealerListP******************************************************			
 		DealerListP.clickDisplayDropDownBtn(driver, "3");
 		DealerListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000
 		// click Add Dealership btn
-		DealerListP.clickAddDealerShipBtn(driver);
+		DealerListP.clickAddDealerShip(driver);
 
 		DealerProfile DealerProfieP = new DealerProfile(driver);
 		DealerProfieP.selectOEM(driver, 13);
@@ -449,7 +451,7 @@ public class AdminPortalController extends Comlibs {
 
 		// *******************************************************************************
 		// click Add Dealership btn
-		DealerListP.clickAddDealerShipBtn(driver);
+		DealerListP.clickAddDealerShip(driver);
 		DealerProfieP.selectOEM(driver, 13);
 		for (String brand : Brands) {
 			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand));
@@ -491,12 +493,31 @@ public class AdminPortalController extends Comlibs {
 		}
 
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
+//		**************************************************************************************
+//
+////		*************************DealerListP******************************************************		
+////		*************************DealerListP******************************************************			
+		// Stop here!!!
+////	*************************clickManageBGSetsBtn******************************************************		
+////	*************************clickManageBGSetsBtn******************************************************		
+		DealerListP.clickManageBGSets(driver);
+		BackgroundSets BackgroundSetsP = new BackgroundSets(driver);
+		BackgroundSetsP.clickMapBackGrounds(driver, 3);
+		
+		DealerListP.clickManageImageType(driver);
+		DealerListP.clickManageAngleMappings(driver);
+		DealerListP.clickManageExportTemplates(driver);
+		DealerListP.clickManageGlobalConfig(driver);
+		DealerListP.clickManageDealerShips(driver);
+		
+		
+////	*************************clickManageBGSetsBtn******************************************************		
+////	*************************clickManageBGSetsBtn******************************************************				
 		driver.close();
 		// switchToWindow(driver, parentHandle);
 		// driver.close();
 
-		// Stop here!!!
-		// Enter Dealership ID and all fields
+
 	}
 
 	public static void main(String[] args)
@@ -551,11 +572,11 @@ public class AdminPortalController extends Comlibs {
 			// verifyRerender(driver, tBrowser);
 
 			////// 1.RetriveValuesFrDealerSettingsPage:
-			 bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-			 RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
+//			 bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+//			 RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 			////// 2.ManageDealerShips:
-//			bc.rwExcel("", "-----ManageDealerShips Testing started-----" + (i + 1), "");
-//			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+			bc.rwExcel("", "-----ManageDealerShips Testing started-----" + (i + 1), "");
+			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
 
 			// bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			// driver.close();
