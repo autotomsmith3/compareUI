@@ -49,20 +49,22 @@ public class DealerList extends Comlibs {
 	By secondAgreementLocator = By.xpath("//*[@id=\"tabs\"]/li[2]/a");
 	By thirdAgreementLocator = By.xpath("//*[@id=\"tabs\"]/li[3]/a");
 	By pdfURLLocator = By.xpath("//*[@id=\"stockpx\"]/iframe");
-//	By displayDropDownLocator=By.xpath("//*[@id=\"dealerTable_length\"]/label/select/option[3]");
 	By addDealerShipBtnLocator=By.xpath("//*[@id=\"addDealershipBtn\"]");
+	By searchLocator=By.xpath("//input[@type='search']");
 	By 	ManageDealerShipsLocator=By.xpath("//*[@id=\"dealershipMenu\"]");
 	By ManageBGSetsLocator=By.xpath("//*[@id=\"backgroundMenu\"]");
 	By ManageImageTypesLocator=By.xpath("//*[@id=\"imagetypeMenu\"]");
 	By ManageAngleMappingsLocator=By.xpath("//*[@id=\"importanglemappingMenu\"]");
 	By ManageExportTemplatesLocator=By.xpath("//*[@id=\"exportTemplateMenu\"]");
 	By ManageGlobalConfigLocator=By.xpath("//*[@id=\"configMenu\"]");
-	// By Locator=
-	// By Locator=
-	// By Locator=
-	// By Locator=
-	// By Locator=
-	// By Locator=
+//	 By Locator=By.xpath("");
+//	 By Locator=By.xpath("");
+//	 By Locator=By.xpath("");
+//	 By Locator=By.xpath("");
+//	 By Locator=By.xpath("");
+//	 By Locator=By.xpath("");
+//	 By Locator=By.xpath("");
+//	 By Locator=By.xpath("");
 	// By Locator=
 	// By Locator=	
 
@@ -366,6 +368,10 @@ public class DealerList extends Comlibs {
 		}
 		return new DealerProfile(driver);
 	}
+	public DealerList inputSearch(WebDriver driver,String dlrID) throws IOException {
+		driver.findElement(searchLocator).sendKeys(dlrID);
+		return this;
+	}
 	public DealerList clickManageDealerShips(WebDriver driver) throws IOException {
 		driver.findElement(ManageDealerShipsLocator).click();
 		return this;
@@ -390,4 +396,13 @@ public class DealerList extends Comlibs {
 		driver.findElement(ManageGlobalConfigLocator).click();
 		return new GlobalConfig(driver);
 	}
+	public DealerPortal.ImageGallery clickDealerViewBtn(WebDriver driver,int sn) throws IOException {
+		 By dealerViewBtnLocator=By.xpath("(//button[@id='dealerViewBtn'])["+sn+"]");//1,2,3...
+		driver.findElement(dealerViewBtnLocator).click();
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+		}
+		return new DealerPortal.ImageGallery(driver);
+	}
+
 }
