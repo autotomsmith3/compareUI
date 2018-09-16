@@ -27,30 +27,106 @@ public class AngleMappingList extends Comlibs {
 		}
 	}
 
-	By dealerShipName = By.cssSelector("span");
+	By addAngleMappingLocator = By.xpath("//*[@id=\"addImportAngleMappingBtn\"]/span");
+	By angleMappingErrorsLocator = By.xpath("//*[@id=\"angleMappingErrorModalBtn\"]");
+	By searchLocator = By.xpath("//*[@id=\"importAngleMappingTable_filter\"]/label/input");
+	// By editLocator=By.xpath("(//button[@id='listViewBtn'])["+num+"]");//1,2,3....
+	// By deleteLocator=By.xpath("(//button[@id='dealerViewBtn'])["+num+"]");//1,2,3....
+	By cancelBtnLocator = By.xpath("//*[@id=\"newImportAngleMappingModal\"]/div/div/div[3]/button[2]");
+	By submitBtnLocator = By.xpath("//*[@id=\"newImportAngleMappingModalBtn\"]");
+	By instanceLocator = By.xpath("//*[@id=\"instance\"]");
+	By OEMLocator = By.xpath("//*[@id=\"oem\"]");
+	By sequenceLocator = By.xpath("//*[@id=\"sequence\"]");
+	By NoteLocator = By.xpath("//*[@id=\"note\"]");
+	By patternLocator = By.xpath("//*[@id=\"pattern\"]");
 
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
+	By angleMappingErrorsTabLocator = By.xpath("//*[@id=\"angleMappingErrorModal\"]/div/div/div[2]/ul/li[2]/a");
+	By flikVehiclesErrorsTabLocator = By.xpath("//*[@id=\"angleMappingErrorModal\"]/div/div/div[2]/ul/li[1]/a");
+	By closeBtnLocator = By.xpath("//*[@id=\"angleMappingErrorModal\"]/div/div/div[3]/button");
 
-	public AngleMappingList clickCreateNewSet(WebDriver driver) throws IOException {
-			driver.findElement(dealerShipName).click();
-			return this;
-		}
-	public AngleMappingList clickMapBackGrounds(WebDriver driver, int num) {
-//		By mapBackGroundsLocator=By.xpath("(//button[@id='listViewBtn'])[1]");
-		num=num*4-3;
-		By mapBackGroundsLocator=By.xpath("(//button[@id='listViewBtn'])["+num+"]");	
-		driver.findElement(mapBackGroundsLocator).click();
-		return this;
-
-	}
-	public AngleMappingList clickEditSet(WebDriver driver) throws IOException {
-		driver.findElement(dealerShipName).click();
+	public AngleMappingList clickAddAngleMappingBtn(WebDriver driver) throws IOException {
+		driver.findElement(addAngleMappingLocator).click();
 		return this;
 	}
 
+	public AngleMappingList clickAngleMappingErrorsBtn(WebDriver driver) throws IOException {
+		driver.findElement(angleMappingErrorsLocator).click();
+		return this;
+	}
+
+	public AngleMappingList clickAngleMappingErrorsTab(WebDriver driver) throws IOException {
+		driver.findElement(angleMappingErrorsTabLocator).click();
+		return this;
+	}
+
+	public AngleMappingList clickFlikVehiclesErrorsTab(WebDriver driver) throws IOException {
+		driver.findElement(flikVehiclesErrorsTabLocator).click();
+		return this;
+	}
+
+	public AngleMappingList clickCloseBtn(WebDriver driver) throws IOException {
+		driver.findElement(closeBtnLocator).click();
+		return this;
+	}
+
+	public AngleMappingList inputSearch(WebDriver driver, String sequence) throws IOException {
+		driver.findElement(searchLocator).sendKeys(sequence);
+		return this;
+	}
+
+	public AngleMappingList clickEditBtn(WebDriver driver, int num) throws IOException {
+		By editLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");// 1,2,3....
+		driver.findElement(editLocator).click();
+		return this;
+	}
+
+	public AngleMappingList clickDeleteBtn(WebDriver driver, int num) throws IOException {
+		By deleteLocator = By.xpath("(//button[@id='dealerViewBtn'])[" + num + "]");// 1,2,3....
+		driver.findElement(deleteLocator).click();
+		return this;
+	}
+
+	public AngleMappingList clickCancel(WebDriver driver) throws IOException {
+		driver.findElement(cancelBtnLocator).click();
+		return this;
+	}
+
+	public AngleMappingList clickSubmit(WebDriver driver) throws IOException {
+		driver.findElement(submitBtnLocator).click();
+		return this;
+	}
+
+	public AngleMappingList inputShortIdentifier(WebDriver driver, String instance) throws IOException {
+		driver.findElement(instanceLocator).sendKeys(instance);
+		return this;
+	}
+
+	public AngleMappingList inputOEM(WebDriver driver, String OEM) throws IOException {
+		driver.findElement(OEMLocator).sendKeys(OEM);
+		return this;
+	}
+
+	public AngleMappingList inputSequence(WebDriver driver, String sequence) throws IOException {
+		driver.findElement(sequenceLocator).sendKeys(sequence);
+		return this;
+	}
+
+	public AngleMappingList inputNote(WebDriver driver, String note) throws IOException {
+		driver.findElement(NoteLocator).sendKeys(note);
+		return this;
+	}
+
+	public AngleMappingList inputPattern(WebDriver driver, String pattern) throws IOException {
+		driver.findElement(patternLocator).sendKeys(pattern);
+		return this;
+	}
+
+	public AngleMappingList selectImageType(WebDriver driver, String shot, int typeNum) throws IOException {
+		By selectImageTypeLocator = By.xpath("//*[@id='imgtype_" + shot + "']/option[" + typeNum + "]");// 1,2,3
+		// //*[@id="imgtype_10019"]/option[2]
+		// //*[@id="imgtype_1002"]/option[2]
+		driver.findElement(selectImageTypeLocator).click();
+		return this;
+
+	}
 }

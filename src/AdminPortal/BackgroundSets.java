@@ -143,27 +143,27 @@ public class BackgroundSets extends Comlibs {
 		return new Backgrounds(driver);
 	}
 
-	public BackgroundSets clickRefleshF5Btn(WebDriver driver, String tc) throws IOException {
-		// driver.findElement(addInventoryBtn).sendKeys(Keys.F5);
-		driver.navigate().to(driver.getCurrentUrl());
-		return this;
-	}
+//	public BackgroundSets clickRefleshF5Btn(WebDriver driver, String tc) throws IOException {
+//		// driver.findElement(addInventoryBtn).sendKeys(Keys.F5);
+//		driver.navigate().to(driver.getCurrentUrl());
+//		return this;
+//	}
 
-	public void acceptAlert(String tc, String alertType) throws IOException {
-		boolean alertPass = false;
-		Wait(1);
-		try {
-			driver.switchTo().alert().accept();// on the “Ok” button as soon as the pop up window appears.
-			// driver.switchTo().alert().dismiss();// clicks on the “Cancel” button as soon as the pop up window appears.
-			driver.switchTo().defaultContent();//
-			alertPass = true;
-			System.out.println("1. Accept the alert.");
-			// rwExcel(tc, true, "Alert showing, Accept the alert =" + alertType, "Accetped successfully.");
-		} catch (Throwable e) {
-			alertPass = false;
-			System.out.println("1. Failed to Accept the alert.");
-			rwExcel(tc, false, "Alert showing, Accept the alert =" + alertType, "failed to accetp.");
-		}
-		// return alertPass;
-	}
+//	public void acceptAlert(String tc, String alertType) throws IOException {
+//		boolean alertPass = false;
+//		Wait(1);
+//		try {
+//			driver.switchTo().alert().accept();// on the “Ok” button as soon as the pop up window appears.
+//			// driver.switchTo().alert().dismiss();// clicks on the “Cancel” button as soon as the pop up window appears.
+//			driver.switchTo().defaultContent();//
+//			alertPass = true;
+//			System.out.println("1. Accept the alert.");
+//			// rwExcel(tc, true, "Alert showing, Accept the alert =" + alertType, "Accetped successfully.");
+//		} catch (Throwable e) {
+//			alertPass = false;
+//			System.out.println("1. Failed to Accept the alert.");
+//			rwExcel(tc, false, "Alert showing, Accept the alert =" + alertType, "failed to accetp.");
+//		}
+//		// return alertPass;
+//	}
 }
