@@ -73,26 +73,38 @@ public class ImageTypeList extends Comlibs {
 	}
 	
 	public ImageTypeList inputShortIdentifier(WebDriver driver, String shortIdentifier) throws IOException {
+		Wait(1);
+		driver.findElement(shotIdentifierLocator).clear();
 		driver.findElement(shotIdentifierLocator).sendKeys(shortIdentifier);
 		return this;
 	}
 	public ImageTypeList inputImageGroup(WebDriver driver, String imageGroup) throws IOException {
+		Wait(1);
+		driver.findElement(imageGroupLocator).clear();
 		driver.findElement(imageGroupLocator).sendKeys(imageGroup);
 		return this;
 	}
 	public ImageTypeList inputImageDefinition(WebDriver driver, String imageDefinition) throws IOException {
+		Wait(1);
+		driver.findElement(imageDefinitionLocator).clear();
 		driver.findElement(imageDefinitionLocator).sendKeys(imageDefinition);
 		return this;
 	}
 	public ImageTypeList inputImageDescription(WebDriver driver, String imageDescription) throws IOException {
+		Wait(1);
+		driver.findElement(imageDescriptionLocator).clear();
 		driver.findElement(imageDescriptionLocator).sendKeys(imageDescription);
 		return this;
 	}
 	public ImageTypeList inputDefaultSequence(WebDriver driver, String defaultSequence) throws IOException {
+		Wait(1);
+		driver.findElement(defaultSequenceLocator).clear();
 		driver.findElement(defaultSequenceLocator).sendKeys(defaultSequence);
 		return this;
 	}
 	public ImageTypeList inputBackGroundType(WebDriver driver, String backGroundType) throws IOException {
+		Wait(1);
+		driver.findElement(backGroundTypeLocator).clear();
 		driver.findElement(backGroundTypeLocator).sendKeys(backGroundType);
 		return this;
 	}

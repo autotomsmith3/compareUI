@@ -195,6 +195,7 @@ public class AdminPortalController extends Comlibs {
 		String password = prop.getProperty(env + ".password");
 		String MaxVins = prop.getProperty(env + ".MaxVinsForPreview");
 		int MaxVinsForPreview = Integer.parseInt(MaxVins);
+		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
 		// Initial
 		// final int wt_Secs = 6;
 		String TCnum;
@@ -236,9 +237,9 @@ public class AdminPortalController extends Comlibs {
 
 		for (int i = 0; i < 150; i++) {
 			if (i >= 10) {
-				ac.Wait(2);
+				ac.Wait(wt);
 				DealerListP.scrollUp(driver, 55, "ddd"); // 60 should be in Prod. 55 can run 150 records in QA. 120 - get almost 2 lines. 80 can run until 28 records, 60 can run until 110-120
-				ac.Wait(2);
+				ac.Wait(wt);
 			}
 			dealerN = dealerN + 1;
 			dealerSN = String.valueOf(dealerN);
@@ -350,7 +351,7 @@ public class AdminPortalController extends Comlibs {
 		String DealershipPhoneNumber = prop.getProperty(env + ".DealershipPhoneNumber");
 		int TemplateSettings = Integer.parseInt(prop.getProperty(env + ".TemplateSettings"));
 		int SelectBackgroundSet = Integer.parseInt(prop.getProperty(env + ".SelectBackgroundSet"));
-
+		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
 		// Initial
 		// final int wt_Secs = 6;
 		String TCnum;
@@ -388,286 +389,401 @@ public class AdminPortalController extends Comlibs {
 		String parentHandle = driver.getWindowHandle(); // get the current window handle
 
 		DealerList DealerListP = new DealerList(driver);
-		 // *************************DealerListP******************************************************
-		 // *************************DealerListP******************************************************
-		 DealerListP.clickDisplayDropDownBtn(driver, "3");
-		 DealerListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000
-		 // click Add Dealership btn
-		 DealerListP.clickAddDealerShip(driver);
-		
-		 DealerProfile DealerProfieP = new DealerProfile(driver);
-		 DealerProfieP.selectOEM(driver, 13);
-		 // check Buick and Cadillac and Chevrolet and GMC
-		 // DealerProfieP.selectOEMBrands(driver, 1); // check Buick
-		 // DealerProfieP.selectOEMBrands(driver, 2); // check Cadillac
-		 // DealerProfieP.selectOEMBrands(driver, 3); // check Chevrolet
-		 // DealerProfieP.selectOEMBrands(driver, 4); // check GMC
-		 // DealerProfieP.selectOEMBrands(driver, 5); // check Hummer
-		 for (String brand : Brands) {
-		 DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand));
-		 }
-		
-		 DealerProfieP.inputDealersipID(driver, DealershipID);
-		 DealerProfieP.selectVINpxProd(driver);
-		 DealerProfieP.selectSTOCKpxProd(driver);
-		 // DealerProfieP.selectLOTpxProd(driver);
-		 DealerProfieP.inputMetadata(driver, MetadataValues);
-		
-		 DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
-		 DealerProfieP.selectTemplateSetting(driver, 1);
-		 DealerProfieP.inputDealersipName(driver, DealershipName);
-		 DealerProfieP.inputAddress(driver, Address);
-		 DealerProfieP.inputAddressLine2(driver, AddressLine2);
-		 DealerProfieP.inputCity(driver, City);
-		 DealerProfieP.inputDealersipEmail(driver, DealershipEmail);
-		 DealerProfieP.inputZipCode(driver, ZipPostalCode);
-		 DealerProfieP.inputAccountEmail(driver, AccountEmail);
-		 DealerProfieP.inputFirstName(driver, FirstName);
-		 DealerProfieP.inputLastName(driver, LastName);
-		 DealerProfieP.inputCountry(driver, Country);// USA=1
-		 DealerProfieP.inputState(driver, StateProvince);// NY=33
-		 DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg);
-		 DealerProfieP.inputWebsite(driver, Website);
-		 DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber);
-		
-		 DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
-		 DealerProfieP.scrollUp(driver, -3000, tc);
-		 DealerProfieP.clickSaveBtn(driver, tc);
-		
-		 // tc="AddDealerInvalid_withMissingMUSTField";
-		 // boolean MessageExist=DealerProfieP.checkMessageDisplayedHead(driver,"Check required fields");
-		 // if (MessageExist) {
-		 // ac.rwExcel("AddDealerInvalid",true, "Add a dealership ", "With missing a MUST field");
-		 // }else {
-		 // ac.rwExcel("AddDealerInvalid",false, "Add a dealership ", "With missing a MUST field");
-		 // }
-		 //
-		 tc = "AddDealerInvalid_withExistDealershipID";
-		 boolean MessageExist = DealerProfieP.checkMessageDisplayedHead(driver,
-		 "There is already a user record with this Login");
-		 if (MessageExist) {
-		 ac.rwExcel(tc, true, "Add a dealership ", "With missing a MUST field");
-		 } else {
-		 ac.rwExcel(tc, false, "Add a dealership ", "With missing a MUST field");
-		 }
-		
-		 DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
-		
-		 // *******************************************************************************
-		 // click Add Dealership btn
-		 DealerListP.clickAddDealerShip(driver);
-		 DealerProfieP.selectOEM(driver, 13);
-		 for (String brand : Brands) {
-		 DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand));
-		 }
-		
-		 DealerProfieP.inputDealersipID(driver, DealershipID);
-		 DealerProfieP.selectVINpxProd(driver);
-		 DealerProfieP.selectSTOCKpxProd(driver);
-		 // DealerProfieP.selectLOTpxProd(driver);
-		 DealerProfieP.inputMetadata(driver, MetadataValues);
-		
-		 DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
-		 DealerProfieP.selectTemplateSetting(driver, 1);
-		 DealerProfieP.inputDealersipName(driver, DealershipName);
-		 DealerProfieP.inputAddress(driver, Address);
-		 DealerProfieP.inputAddressLine2(driver, AddressLine2);
-		 DealerProfieP.inputCity(driver, City);
-		 DealerProfieP.inputDealersipEmail(driver, DealershipEmail);
-		 DealerProfieP.inputZipCode(driver, ZipPostalCode);
-		 DealerProfieP.inputAccountEmail(driver, AccountEmail);
-		 // DealerProfieP.inputFirstName(driver, FirstName);//Missing First Name here!
-		 DealerProfieP.inputLastName(driver, LastName);
-		 DealerProfieP.inputCountry(driver, Country);// USA=1
-		 DealerProfieP.inputState(driver, StateProvince);// NY=33
-		 DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg);
-		 DealerProfieP.inputWebsite(driver, Website);
-		 DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber);
-		
-		 DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
-		 DealerProfieP.scrollUp(driver, -3000, tc);
-		 DealerProfieP.clickSaveBtn(driver, tc);
-		
-		 tc = "AddDealerInvalid_withMissingMUSTField";
-		 MessageExist = DealerProfieP.checkMessageDisplayedHead(driver, "Check required fields");
-		 if (MessageExist) {
-		 ac.rwExcel("AddDealerInvalid", true, "Add a dealership ", "With missing a MUST field");
-		 } else {
-		 ac.rwExcel("AddDealerInvalid", false, "Add a dealership ", "With missing a MUST field");
-		 }
-		
-		 DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
-		 // **************************************************************************************
-		 //
-		 DealerListP.clickManageDealerShips(driver);
-		 DealerListP.inputSearch(driver, AllProdDealerCode);
-		 DealerListP.clickEditBtn(driver, "1");
-		 driver.close();
-		 ac.switchToWindow(driver);
-		 DealerListP.clickDealerViewBtn(driver, 1);
-		 driver.close();
-		 ac.switchToWindow(driver);
-		 //// *************************DealerListP******************************************************
-		 ////// *************************DealerListP******************************************************
-
-		 //// *************************clickManageBGSetsBtn******************************************************
-		 //// *************************clickManageBGSetsBtn******************************************************
-		 ac.rwExcel("", "*********ManageBackGroundSets**********", "");
-		 DealerListP.clickManageBGSets(driver);
-		 BackgroundSets BackgroundSetsP = new BackgroundSets(driver);
-		 // BackgroundSetsP.clickMapBackGrounds(driver, 3);
-		 BackgroundSetsP.inputSearch(driver, AllProdDealerCode);
-		 BackgroundSetsP.clickEditSetBtn(driver, 1);
-		 ac.Wait(2);
-		 BackgroundSetsP.clickAllDealershipsCheckBox(driver);// check
-		 BackgroundSetsP.clickAllDealershipsCheckBox(driver);// uncheck
-		 BackgroundSetsP.clickCancel(driver);
-		 ac.Wait(2);
-		 BackgroundSetsP.clickManageBGImageBtn(driver, 1);
-		 ManageBackgrounds ManageBackgroundsP = new ManageBackgrounds(driver);
-		 ManageBackgroundsP.clickBackToManageSets(driver);
-		 BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1);
-		 ac.Wait(2);
-		 BackgroundSetsP.clickClose(driver);
-		 ac.Wait(2);
-		 BackgroundSetsP.clickCreateNewSet(driver);
-		 BackgroundSetsP.inputSetName(driver, "a");
-		 BackgroundSetsP.clickCancel(driver);
-		 ac.Wait(3);
-		 BackgroundSetsP.clickCreateNewSet(driver);
-		 BackgroundSetsP.inputSetName(driver, "a");
-		 System.out.println("\nPlease wait at least 2 minutes untill Backgrounds page showing...");
-		 ac.Wait(1);
-		 BackgroundSetsP.clickSubmit(driver);
-		 DealerListP.clickManageBGSets(driver);
-		 ac.clickRefleshF5Btn(driver, tc);
-		 BackgroundSetsP.clickDeleteBGSetBtn(driver, 1);
-		 ac.acceptAlert(driver,tc, "OK");
-		 ac.clickRefleshF5Btn(driver, tc);
-		 // Stop here!!!
-		 //// *************************clickManageBGSetsBtn******************************************************
-		 //// *************************clickManageBGSetsBtn******************************************************
-
-		//// *************************clickManageBGSetsBtn******************************************************
-		//// *************************clickManageBGSetsBtn******************************************************
-
-		//// *************************clickManageImageTypeBtn******************************************************
-		//// *************************clickManageImageTypeBtn******************************************************
-		ac.rwExcel("", "*********ManageImageType**********", "");
-		ac.Wait(2);
-		DealerListP.clickManageImageType(driver);
-		ImageTypeList ImageTypeListP = new ImageTypeList(driver);
-		// Add an Image Type
-		ImageTypeListP.clickAddImageTypeBtn(driver);
-		ImageTypeListP.inputShortIdentifier(driver, "999");
-		ImageTypeListP.inputImageGroup(driver, "CUSTOM");
-		ImageTypeListP.inputImageDefinition(driver, "DEALER IMAGE");
-		ImageTypeListP.inputImageDescription(driver, "VEHICLE BENEFITS");
-		ImageTypeListP.inputDefaultSequence(driver, "10100");
-		ImageTypeListP.inputBackGroundType(driver, "n");
-		ImageTypeListP.clickCancel(driver);
-		ac.Wait(2);
-		DealerListP.clickManageImageType(driver);
-		ImageTypeListP.clickAddImageTypeBtn(driver);
-		ImageTypeListP.inputShortIdentifier(driver, "999");
-		ImageTypeListP.inputImageGroup(driver, "CUSTOM");
-		ImageTypeListP.inputImageDefinition(driver, "DEALER IMAGE");
-		ImageTypeListP.inputImageDescription(driver, "VEHICLE BENEFITS");
-		ImageTypeListP.inputDefaultSequence(driver, "10100");
-		ImageTypeListP.inputBackGroundType(driver, "n");
-		ImageTypeListP.clickSubmit(driver);
-		ac.acceptAlert(driver, tc, "OK");
-		// failed to open page here.
-		System.out.println("Failed to submit for adding an image type here ...");
-		ImageTypeListP.clickCancel(driver);
-
-		//// *************************clickManageImageTypeBtn******************************************************
-		//// *************************clickManageImageTypeBtn******************************************************
-
-		//// *************************clickManageAngleMappingsBtn******************************************************
-		//// *************************clickManageAngleMappingsBtn******************************************************
-		ac.rwExcel("", "*********ManageAngleMappings**********", "");
-		ac.Wait(2);
-		DealerListP.clickManageAngleMappings(driver);
-		AngleMappingList AngleMappingListP = new AngleMappingList(driver);
-		// Input all fields and click the Cancel
-		AngleMappingListP.clickAddAngleMappingBtn(driver);
-		AngleMappingListP.inputShortIdentifier(driver, "vdvi_interior");
-		ac.Wait(2);
-		AngleMappingListP.inputOEM(driver, "gm");
-		AngleMappingListP.inputSequence(driver, "1");
-		AngleMappingListP.inputNote(driver, "19 Cadi Int XT5");
-		// Note for Pattern:
-		// 2019-GM-6N[A-Z]26-...-6N[A-Z]26-...
-		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadi Int XT5, or only vdvi_interior is must.
-		AngleMappingListP.inputPattern(driver, "2019-GM-6N[A-Z]26-...-6N[A-Z]26-...");
-		ac.Wait(2);
-		AngleMappingListP.selectImageType(driver, "1001", 2);
-		AngleMappingListP.clickCancel(driver);
-		ac.Wait(2);
-		// Input all fields and click the Submit
-		AngleMappingListP.clickAddAngleMappingBtn(driver);
-		ac.Wait(3);
-		AngleMappingListP.inputShortIdentifier(driver, "vdvi_interior");
-		ac.Wait(3);
-		AngleMappingListP.inputOEM(driver, "gm");
-		AngleMappingListP.inputSequence(driver, "1");
-		AngleMappingListP.inputNote(driver, "19 Cadi Int XT5");
-		// Note for Pattern:
-		// 2019-GM-6N[A-Z]26-...-6N[A-Z]26-...
-		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadi Int XT5, or only vdvi_interior is must.
-		AngleMappingListP.inputPattern(driver, "2019-GM-6N[A-Z]26-...-6N[A-Z]26-...");
-		ac.Wait(2);
-		AngleMappingListP.selectImageType(driver, "1001", 2);
-		AngleMappingListP.selectImageType(driver, "10019", 3);
-		AngleMappingListP.selectImageType(driver, "1002", 4);
-		AngleMappingListP.selectImageType(driver, "10029", 5);
-		AngleMappingListP.selectImageType(driver, "1003", 6);
-		AngleMappingListP.selectImageType(driver, "10039", 7);
-		AngleMappingListP.selectImageType(driver, "1004", 8);
-		AngleMappingListP.selectImageType(driver, "10049", 9);
-		AngleMappingListP.clickSubmit(driver);
-		ac.acceptAlert(driver, tc, "OK");
-		ac.Wait(2);
-		// click Search and Edit
-		AngleMappingListP.inputSearch(driver, "1");
-		AngleMappingListP.clickEditBtn(driver, 2);
-		AngleMappingListP.selectImageType(driver, "1001", 9);
-		AngleMappingListP.selectImageType(driver, "10019", 8);
-		AngleMappingListP.selectImageType(driver, "1002", 7);
-		AngleMappingListP.selectImageType(driver, "10029", 6);
-		AngleMappingListP.selectImageType(driver, "1003", 5);
-		AngleMappingListP.selectImageType(driver, "10039", 4);
-		AngleMappingListP.selectImageType(driver, "1004", 3);
-		AngleMappingListP.selectImageType(driver, "10049", 2);
-		AngleMappingListP.clickSubmit(driver);
-		ac.acceptAlert(driver, tc, "OK");
-		// Delete the Image Type just added one
-		AngleMappingListP.clickDeleteBtn(driver, 2);
-		ac.acceptAlert(driver, tc, "OK");
-
-		AngleMappingListP.clickAngleMappingErrorsBtn(driver);
-		ac.Wait(2);
-		AngleMappingListP.clickAngleMappingErrorsTab(driver);
-		ac.Wait(2);
-		AngleMappingListP.clickFlikVehiclesErrorsTab(driver);
-		ac.Wait(2);
-		AngleMappingListP.clickCloseBtn(driver);
-		ac.Wait(2);
-		//// *************************clickManageAngleMappingsBtn******************************************************
-		//// *************************clickManageAngleMappingsBtn******************************************************
+//		// *************************DealerListP******************************************************
+//		// *************************DealerListP******************************************************
+//		DealerListP.clickDisplayDropDownBtn(driver, "3");
+//		DealerListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000
+//		// click Add Dealership btn
+//		DealerListP.clickAddDealerShip(driver);
+//
+//		DealerProfile DealerProfieP = new DealerProfile(driver);
+//		DealerProfieP.selectOEM(driver, 13);
+//		// check Buick and Cadillac and Chevrolet and GMC
+//		// DealerProfieP.selectOEMBrands(driver, 1); // check Buick
+//		// DealerProfieP.selectOEMBrands(driver, 2); // check Cadillac
+//		// DealerProfieP.selectOEMBrands(driver, 3); // check Chevrolet
+//		// DealerProfieP.selectOEMBrands(driver, 4); // check GMC
+//		// DealerProfieP.selectOEMBrands(driver, 5); // check Hummer
+//		for (String brand : Brands) {
+//			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand));
+//		}
+//
+//		DealerProfieP.inputDealersipID(driver, DealershipID);
+//		DealerProfieP.selectVINpxProd(driver);
+//		DealerProfieP.selectSTOCKpxProd(driver);
+//		// DealerProfieP.selectLOTpxProd(driver);
+//		DealerProfieP.inputMetadata(driver, MetadataValues);
+//
+//		DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
+//		DealerProfieP.selectTemplateSetting(driver, 1);
+//		DealerProfieP.inputDealersipName(driver, DealershipName);
+//		DealerProfieP.inputAddress(driver, Address);
+//		DealerProfieP.inputAddressLine2(driver, AddressLine2);
+//		DealerProfieP.inputCity(driver, City);
+//		DealerProfieP.inputDealersipEmail(driver, DealershipEmail);
+//		DealerProfieP.inputZipCode(driver, ZipPostalCode);
+//		DealerProfieP.inputAccountEmail(driver, AccountEmail);
+//		DealerProfieP.inputFirstName(driver, FirstName);
+//		DealerProfieP.inputLastName(driver, LastName);
+//		DealerProfieP.inputCountry(driver, Country);// USA=1
+//		DealerProfieP.inputState(driver, StateProvince);// NY=33
+//		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg);
+//		DealerProfieP.inputWebsite(driver, Website);
+//		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber);
+//
+//		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
+//		DealerProfieP.scrollUp(driver, -3000, tc);
+//		DealerProfieP.clickSaveBtn(driver, tc);
+//
+//		// tc="AddDealerInvalid_withMissingMUSTField";
+//		// boolean MessageExist=DealerProfieP.checkMessageDisplayedHead(driver,"Check required fields");
+//		// if (MessageExist) {
+//		// ac.rwExcel("AddDealerInvalid",true, "Add a dealership ", "With missing a MUST field");
+//		// }else {
+//		// ac.rwExcel("AddDealerInvalid",false, "Add a dealership ", "With missing a MUST field");
+//		// }
+//		//
+//		tc = "AddDealerInvalid_withExistDealershipID";
+//		boolean MessageExist = DealerProfieP.checkMessageDisplayedHead(driver,
+//				"There is already a user record with this Login");
+//		if (MessageExist) {
+//			ac.rwExcel(tc, true, "Add a dealership ", "With missing a MUST field");
+//		} else {
+//			ac.rwExcel(tc, false, "Add a dealership ", "With missing a MUST field");
+//		}
+//
+//		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
+//
+//		// *******************************************************************************
+//		// click Add Dealership btn
+//		DealerListP.clickAddDealerShip(driver);
+//		DealerProfieP.selectOEM(driver, 13);
+//		for (String brand : Brands) {
+//			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand));
+//		}
+//
+//		DealerProfieP.inputDealersipID(driver, DealershipID);
+//		DealerProfieP.selectVINpxProd(driver);
+//		DealerProfieP.selectSTOCKpxProd(driver);
+//		// DealerProfieP.selectLOTpxProd(driver);
+//		DealerProfieP.inputMetadata(driver, MetadataValues);
+//
+//		DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
+//		DealerProfieP.selectTemplateSetting(driver, 1);
+//		DealerProfieP.inputDealersipName(driver, DealershipName);
+//		DealerProfieP.inputAddress(driver, Address);
+//		DealerProfieP.inputAddressLine2(driver, AddressLine2);
+//		DealerProfieP.inputCity(driver, City);
+//		DealerProfieP.inputDealersipEmail(driver, DealershipEmail);
+//		DealerProfieP.inputZipCode(driver, ZipPostalCode);
+//		DealerProfieP.inputAccountEmail(driver, AccountEmail);
+//		// DealerProfieP.inputFirstName(driver, FirstName);//Missing First Name here!
+//		DealerProfieP.inputLastName(driver, LastName);
+//		DealerProfieP.inputCountry(driver, Country);// USA=1
+//		DealerProfieP.inputState(driver, StateProvince);// NY=33
+//		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg);
+//		DealerProfieP.inputWebsite(driver, Website);
+//		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber);
+//
+//		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
+//		DealerProfieP.scrollUp(driver, -3000, tc);
+//		DealerProfieP.clickSaveBtn(driver, tc);
+//
+//		tc = "AddDealerInvalid_withMissingMUSTField";
+//		MessageExist = DealerProfieP.checkMessageDisplayedHead(driver, "Check required fields");
+//		if (MessageExist) {
+//			ac.rwExcel("AddDealerInvalid", true, "Add a dealership ", "With missing a MUST field");
+//		} else {
+//			ac.rwExcel("AddDealerInvalid", false, "Add a dealership ", "With missing a MUST field");
+//		}
+//
+//		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
+//		// **************************************************************************************
+//		//
+//		DealerListP.clickManageDealerShips(driver);
+//		DealerListP.inputSearch(driver, AllProdDealerCode);
+//		DealerListP.clickEditBtn(driver, "1");
+//		driver.close();
+//		ac.switchToWindow(driver);
+//		DealerListP.clickDealerViewBtn(driver, 1);
+//		driver.close();
+//		ac.switchToWindow(driver);
+//		//// *************************DealerListP******************************************************
+//		////// *************************DealerListP******************************************************
+//
+//		//// *************************clickManageBGSetsBtn******************************************************
+//		//// *************************clickManageBGSetsBtn******************************************************
+//		ac.rwExcel("", "*********ManageBackGroundSets**********", "");
+//		DealerListP.clickManageBGSets(driver);
+//		BackgroundSets BackgroundSetsP = new BackgroundSets(driver);
+//		// BackgroundSetsP.clickMapBackGrounds(driver, 3);
+//		BackgroundSetsP.inputSearch(driver, AllProdDealerCode);
+//		BackgroundSetsP.clickEditSetBtn(driver, 1);
+//		ac.Wait(wt);
+//		BackgroundSetsP.clickAllDealershipsCheckBox(driver);// check
+//		ac.Wait(wt);
+//		BackgroundSetsP.clickAllDealershipsCheckBox(driver);// uncheck
+//		ac.Wait(wt);
+//		BackgroundSetsP.clickCancel(driver);
+//		ac.Wait(wt);
+//		BackgroundSetsP.clickManageBGImageBtn(driver, 1);
+//		ManageBackgrounds ManageBackgroundsP = new ManageBackgrounds(driver);
+//		ManageBackgroundsP.clickBackToManageSets(driver);
+//		BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1);
+//		ac.Wait(wt);
+//		BackgroundSetsP.clickClose(driver);
+//		ac.Wait(wt);
+//		BackgroundSetsP.clickCreateNewSet(driver);
+//		BackgroundSetsP.inputSetName(driver, "a");
+//		BackgroundSetsP.clickCancel(driver);
+//		ac.Wait(3);
+//		BackgroundSetsP.clickCreateNewSet(driver);
+//		BackgroundSetsP.inputSetName(driver, "a");
+//		System.out.println("\nPlease wait at least 2 minutes untill Backgrounds page showing...");
+//		ac.Wait(wt);
+//		BackgroundSetsP.clickSubmit(driver);
+//		DealerListP.clickManageBGSets(driver);
+//		ac.clickRefleshF5Btn(driver, tc);
+//		BackgroundSetsP.clickDeleteBGSetBtn(driver, 1);
+//		ac.acceptAlert(driver, tc, "OK");
+//		ac.clickRefleshF5Btn(driver, tc);
+//
+//		//// *************************clickManageBGSetsBtn******************************************************
+//		//// *************************clickManageBGSetsBtn******************************************************
+//
+//		//// *************************clickManageBGSetsBtn******************************************************
+//		//// *************************clickManageBGSetsBtn******************************************************
+//
+//		//// *************************clickManageImageTypeBtn******************************************************
+//		//// *************************clickManageImageTypeBtn******************************************************
+//		ac.rwExcel("", "*********ManageImageType**********", "");
+//		ac.Wait(wt);
+//		DealerListP.clickManageImageType(driver);
+//		ImageTypeList ImageTypeListP = new ImageTypeList(driver);
+//		// Add an Image Type
+//		ImageTypeListP.clickAddImageTypeBtn(driver);
+//		ImageTypeListP.inputShortIdentifier(driver, "999");
+//		ImageTypeListP.inputImageGroup(driver, "CUSTOM");
+//		ImageTypeListP.inputImageDefinition(driver, "DEALER IMAGE");
+//		ImageTypeListP.inputImageDescription(driver, "VEHICLE BENEFITS");
+//		ImageTypeListP.inputDefaultSequence(driver, "10100");
+//		ImageTypeListP.inputBackGroundType(driver, "n");
+//		ImageTypeListP.clickCancel(driver);
+//		ac.Wait(wt);
+//		DealerListP.clickManageImageType(driver);
+//		ImageTypeListP.clickAddImageTypeBtn(driver);
+//		ImageTypeListP.inputShortIdentifier(driver, "999");
+//		ImageTypeListP.inputImageGroup(driver, "CUSTOM");
+//		ImageTypeListP.inputImageDefinition(driver, "DEALER IMAGE");
+//		ImageTypeListP.inputImageDescription(driver, "VEHICLE BENEFITS");
+//		ImageTypeListP.inputDefaultSequence(driver, "10100");
+//		ImageTypeListP.inputBackGroundType(driver, "n");
+//		ImageTypeListP.clickSubmit(driver);
+//		ac.acceptAlert(driver, tc, "OK");
+//		// failed to open page here.
+//		System.out.println("Failed to submit for adding an image type here ...");
+//		ac.Wait(wt);
+//		ImageTypeListP.clickCancel(driver);
+//
+//		//// *************************clickManageImageTypeBtn******************************************************
+//		//// *************************clickManageImageTypeBtn******************************************************
+//
+//		//// *************************clickManageAngleMappingsBtn******************************************************
+//		//// *************************clickManageAngleMappingsBtn******************************************************
+//		ac.rwExcel("", "*********ManageAngleMappings**********", "");
+//		ac.Wait(wt);
+//		DealerListP.clickManageAngleMappings(driver);
+//		AngleMappingList AngleMappingListP = new AngleMappingList(driver);
+//		// Input all fields and click the Cancel
+//		AngleMappingListP.clickAddAngleMappingBtn(driver);
+//		AngleMappingListP.inputInstance(driver, "vdvi_interior");
+//		ac.Wait(wt);
+//		AngleMappingListP.inputOEM(driver, "gm");
+//		AngleMappingListP.inputSequence(driver, "1");
+//		AngleMappingListP.inputNote(driver, "19 Cadi Int XT5");
+//		// Note for Pattern:
+//		// 2019-GM-6N[A-Z]26-...-6N[A-Z]26-...
+//		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadi Int XT5, or only vdvi_interior is must.
+//		AngleMappingListP.inputPattern(driver, "2019-GM-6N[A-Z]26-...-6N[A-Z]26-...");
+//		ac.Wait(wt);
+//		AngleMappingListP.selectImageType(driver, "1001", 2);
+//		AngleMappingListP.clickCancel(driver);
+//		ac.Wait(wt);
+//		// Input all fields and click the Submit
+//		AngleMappingListP.clickAddAngleMappingBtn(driver);
+//		ac.Wait(3);
+//		AngleMappingListP.inputInstance(driver, "vdvi_interior");
+//		ac.Wait(3);
+//		AngleMappingListP.inputOEM(driver, "gm");
+//		AngleMappingListP.inputSequence(driver, "1");
+//		AngleMappingListP.inputNote(driver, "19 Cadi Int XT5");
+//		// Note for Pattern:
+//		// 2019-GM-6N[A-Z]26-...-6N[A-Z]26-...
+//		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadi Int XT5, or only vdvi_interior is must.
+//		AngleMappingListP.inputPattern(driver, "2019-GM-6N[A-Z]26-...-6N[A-Z]26-...");
+//		ac.Wait(wt);
+//		AngleMappingListP.selectImageType(driver, "1001", 2);
+//		AngleMappingListP.selectImageType(driver, "10019", 3);
+//		AngleMappingListP.selectImageType(driver, "1002", 4);
+//		AngleMappingListP.selectImageType(driver, "10029", 5);
+//		AngleMappingListP.selectImageType(driver, "1003", 6);
+//		AngleMappingListP.selectImageType(driver, "10039", 7);
+//		AngleMappingListP.selectImageType(driver, "1004", 8);
+//		AngleMappingListP.selectImageType(driver, "10049", 9);
+//		AngleMappingListP.clickSubmit(driver);
+//		ac.Wait(wt);
+//		ac.acceptAlert(driver, tc, "OK");
+//		ac.Wait(wt);
+//		// click Search and Edit
+//		AngleMappingListP.inputSearch(driver, "1");
+//		AngleMappingListP.clickEditBtn(driver, 2);
+//		ac.Wait(wt);
+//		AngleMappingListP.selectImageType(driver, "1001", 9);
+//		AngleMappingListP.selectImageType(driver, "10019", 8);
+//		AngleMappingListP.selectImageType(driver, "1002", 7);
+//		AngleMappingListP.selectImageType(driver, "10029", 6);
+//		AngleMappingListP.selectImageType(driver, "1003", 5);
+//		AngleMappingListP.selectImageType(driver, "10039", 4);
+//		AngleMappingListP.selectImageType(driver, "1004", 3);
+//		AngleMappingListP.selectImageType(driver, "10049", 2);
+//		AngleMappingListP.clickSubmit(driver);
+//		ac.acceptAlert(driver, tc, "OK");
+//		// Delete the Image Type just added one
+//		AngleMappingListP.clickDeleteBtn(driver, 2);
+//		ac.acceptAlert(driver, tc, "OK");
+//
+//		AngleMappingListP.clickAngleMappingErrorsBtn(driver);
+//		ac.Wait(wt);
+//		AngleMappingListP.clickAngleMappingErrorsTab(driver);
+//		ac.Wait(wt);
+//		AngleMappingListP.clickFlikVehiclesErrorsTab(driver);
+//		ac.Wait(wt);
+//		AngleMappingListP.clickCloseBtn(driver);
+//		ac.Wait(wt);
+//		//// *************************clickManageAngleMappingsBtn******************************************************
+//		// //// *************************clickManageAngleMappingsBtn******************************************************
 
 		//// *************************ManageExportTemplates******************************************************
 		//// *************************ManageExportTemplates******************************************************
 
 		DealerListP.clickManageExportTemplates(driver);
 		ac.rwExcel("", "*********ManageExportTemplates**********", "");
+		ac.Wait(wt);
+		String searchName = "cdk123456";
+		String editedName = "cdkxxxxxx";
+		ExportTemplateList ExportTemplateListP = new ExportTemplateList(driver);
+		// Add an Export Template and cancel
+		ExportTemplateListP.clickAddExportTemplateBtn(driver);
+		ExportTemplateListP.inputExportName(driver, searchName);
+		ExportTemplateListP.inputFileName(driver, "phone.txt");
+		ExportTemplateListP.inputUser(driver, "TEST@autodata.net");
+		ExportTemplateListP.inputPassword(driver, "5k2cGG1");
+		ExportTemplateListP.inputHost(driver, "LOCALHOST");
+		ExportTemplateListP.inputTemplate(driver,
+				"dealer_id Vin photo_updated photo_url\r\n{{#vehicles}}\r\n{{dealer.dlrCode}} {{vehicle.vin}} Y {{#imageUrls}}{{.}} {{/imageUrls}}\r\n{{/vehicles}}");
+		ExportTemplateListP.clickCombinedFileCheckBox(driver);
+		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		ExportTemplateListP.clickCancel(driver);
+		ac.Wait(wt);
+		// Add an Export Template and submit
+		ExportTemplateListP.clickAddExportTemplateBtn(driver);
+		ExportTemplateListP.inputExportName(driver, searchName);
+		ExportTemplateListP.inputFileName(driver, "phone.txt");
+		ExportTemplateListP.inputUser(driver, "TEST@autodata.net");
+		ExportTemplateListP.inputPassword(driver, "5k2cGG1");
+		ExportTemplateListP.inputHost(driver, "LOCALHOST");
+		ExportTemplateListP.inputTemplate(driver,
+				"dealer_id Vin photo_updated photo_url\r\n{{#vehicles}}\r\n{{dealer.dlrCode}} {{vehicle.vin}} Y {{#imageUrls}}{{.}} {{/imageUrls}}\r\n{{/vehicles}}");
+		ac.Wait(wt);
+		ExportTemplateListP.clickCombinedFileCheckBox(driver);
+		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		ac.Wait(wt);
+		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		ExportTemplateListP.clickSubmit(driver);
+		ac.acceptAlert(driver, tc, "OK");
+		// Edit Export Template
+		ExportTemplateListP.inputSearch(driver, searchName);
+		ExportTemplateListP.clickEditBtn(driver, 1);
+		ExportTemplateListP.inputExportName(driver, editedName);
+		ExportTemplateListP.inputFileName(driver, "Edited_phone.txt");
+		ExportTemplateListP.inputUser(driver, "Edited_TEST@autodata.net");
+		ExportTemplateListP.inputPassword(driver, "Edited_5k2cGG1");
+		ExportTemplateListP.inputHost(driver, "Edited_LOCALHOST");
+		ExportTemplateListP.inputTemplate(driver,
+				"Edited_dealer_id Vin photo_updated photo_url\r\n{{#vehicles}}\r\n{{dealer.dlrCode}} {{vehicle.vin}} Y {{#imageUrls}}{{.}} {{/imageUrls}}\r\n{{/vehicles}}");
+		ac.Wait(wt);
+		ExportTemplateListP.clickCombinedFileCheckBox(driver);
+		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		ac.Wait(wt);
+		ExportTemplateListP.clickCombinedFileCheckBox(driver);
+		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		ExportTemplateListP.clickSubmit(driver);
+		ac.acceptAlert(driver, tc, "OK");
+		ac.Wait(wt);
+		// Delete an Export Template
+		ExportTemplateListP.inputSearch(driver, editedName);
+		ExportTemplateListP.clickDeleteBtn(driver, 1);
+		ac.acceptAlert(driver, tc, "OK");
+		ac.Wait(wt);
+		ExportTemplateListP.inputSearch(driver, editedName);
+		String newName = ExportTemplateListP.getNameString(driver, 1);
+		if (newName.equalsIgnoreCase(editedName)) {
+			// Bug here. Failed to delete an Export Template...logged AUTOPXOPS-1171
+			System.out.println("\nFailed to delete an Export Template here......logged AUTOPXOPS-1171");
+		}
+		//// *************************ManageExportTemplates******************************************************
+		//// *************************ManageExportTemplates******************************************************
 
 		//// *************************ManageGlobalConfig******************************************************
 		//// *************************ManageGlobalConfig******************************************************
 
 		DealerListP.clickManageGlobalConfig(driver);
 		ac.rwExcel("", "*********ManageGlobalConfig**********", "");
+		String searchKey = "test_IMPORT_SITE";
+		String editedKey = "edited_test_IMPORT_SITE";
+		String valueS = "CC35943D,CC35953D,TC35903D,CK35943D,TC35943D,TK35903D,TK35953D,CC35903D,CK35953D,TC35953D,TK35943D,CK35903D";
+		// From Production 20180917:
+		// DRW_CODES CC35943D,CC35953D,TC35903D,CK35943D,TC35943D,TK35903D,TK35953D,CC35903D,CK35953D,TC35953D,TK35943D,CK35903D
+		// IMPORT_SITE FNOC-PR3V-XET2
+		GlobalConfig GlobalConfigP = new GlobalConfig(driver);
+		GlobalConfigP.clickAddGlobalConfigBtn(driver);
+		ac.Wait(wt);
+		GlobalConfigP.inputKey(driver, searchKey);
+		GlobalConfigP.inputValue(driver, valueS);
+		GlobalConfigP.clickCancel(driver);
+		ac.Wait(wt);
+		//// Add an Global Config and cancel
+		GlobalConfigP.clickAddGlobalConfigBtn(driver);
+		GlobalConfigP.inputKey(driver, searchKey);
+		GlobalConfigP.inputValue(driver, valueS);
+		GlobalConfigP.clickSubmit(driver);
+		ac.acceptAlert(driver, tc, "OK");
+		// Edit Global Config
+		GlobalConfigP.inputSearch(driver, searchKey);
+		GlobalConfigP.clickEditBtn(driver, 1);
+		if (GlobalConfigP.checkKeyFieldLocked(driver, tc)) {
+			// Key field now is enabled to input when it should be locked on Edit
+			System.out.println(
+					"\nFailed, the Key field now is enabled to input when it should be locked on Edit here......");
+		}
+		;
+		GlobalConfigP.inputValue(driver, "edited" + valueS);
+		ac.Wait(wt);
+		GlobalConfigP.clickSubmit(driver);
+		ac.acceptAlert(driver, tc, "OK");
+		ac.Wait(wt);
+		// Delete an Global Config
+		GlobalConfigP.inputSearch(driver, "edited");
+		GlobalConfigP.clickDeleteBtn(driver, 1);
+		ac.acceptAlert(driver, tc, "OK");
+		GlobalConfigP.inputSearch(driver, "edited");
+		String newKey = GlobalConfigP.getKeyString(driver, 1);
+		if (newKey.equalsIgnoreCase(editedKey)) {
+			// Failed to delete an Global Config...
+			System.out.println("\nFailed to delete an Global Config here......");
+		}
+		// Stop here!!!
 
 		//// *************************ManageGlobalConfig******************************************************
 		//// *************************ManageGlobalConfig******************************************************
@@ -698,6 +814,7 @@ public class AdminPortalController extends Comlibs {
 		// String accountPS = prop.getProperty(env + ".AllProdPassword");
 		String baseURL = prop.getProperty(env + ".AdminPortalBaseURL");
 		String chkEmail = prop.getProperty("AUTOpx.checkEmail");
+		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
 		// String dealershipName = prop.getProperty(env + ".Dealershipname");
 
 		// String[] VINpxNewVIN01

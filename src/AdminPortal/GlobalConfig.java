@@ -27,30 +27,71 @@ public class GlobalConfig extends Comlibs {
 		}
 	}
 
-	By dealerShipName = By.cssSelector("span");
+	By addGlobalConfigBtnLocator = By.xpath("//*[@id=\"addImageTypeBtn\"]/span");
+	By searchLocator = By.xpath("//*[@id=\"configTable_filter\"]/label/input");
+	// By editLocator =By.xpath("(//button[@id='editBtn'])[2]");//1,2,3...
+	// By deleteLocator =By.xpath("(//button[@id='dealerViewBtn'])[2]");//1,2,3...
+	By cancelBtnLocator = By.xpath("//*[@id=\"newImageTypeModal\"]/div/div/div[3]/button[2]");
+	By submitBtnLocator = By.xpath("//*[@id=\"newImageTypeModalBtn\"]");
+	By keyLocator = By.xpath("//*[@id=\"key\"]");
+	By valueLocator = By.xpath("//*[@id=\"value\"]");
+	By keyRowLocator = By.xpath("//tr[2]/td");// 1,2,3...
 
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-
-	public GlobalConfig clickCreateNewSet(WebDriver driver) throws IOException {
-			driver.findElement(dealerShipName).click();
-			return this;
-		}
-	public GlobalConfig clickMapBackGrounds(WebDriver driver, int num) {
-//		By mapBackGroundsLocator=By.xpath("(//button[@id='listViewBtn'])[1]");
-		num=num*4-3;
-		By mapBackGroundsLocator=By.xpath("(//button[@id='listViewBtn'])["+num+"]");	
-		driver.findElement(mapBackGroundsLocator).click();
+	public GlobalConfig clickAddGlobalConfigBtn(WebDriver driver) throws IOException {
+		driver.findElement(addGlobalConfigBtnLocator).click();
 		return this;
-
 	}
-	public GlobalConfig clickEditSet(WebDriver driver) throws IOException {
-		driver.findElement(dealerShipName).click();
+
+	public GlobalConfig inputSearch(WebDriver driver, String name) throws IOException {
+		Wait(1);
+		driver.findElement(searchLocator).sendKeys(name);
 		return this;
+	}
+
+	public GlobalConfig clickEditBtn(WebDriver driver, int num) throws IOException {
+		By editLocator = By.xpath("(//button[@id='editBtn'])[" + num + "]");// 1,2,3...
+		driver.findElement(editLocator).click();
+		return this;
+	}
+
+	public GlobalConfig clickDeleteBtn(WebDriver driver, int num) throws IOException {
+		By deleteLocator = By.xpath("(//button[@id='dealerViewBtn'])[" + num + "]");// 1,2,3...
+		driver.findElement(deleteLocator).click();
+		return this;
+	}
+
+	public GlobalConfig clickCancel(WebDriver driver) throws IOException {
+		driver.findElement(cancelBtnLocator).click();
+		return this;
+	}
+
+	public GlobalConfig clickSubmit(WebDriver driver) throws IOException {
+		driver.findElement(submitBtnLocator).click();
+		return this;
+	}
+
+	public GlobalConfig inputKey(WebDriver driver, String key) throws IOException {
+		Wait(1);
+		driver.findElement(keyLocator).clear();
+		driver.findElement(keyLocator).sendKeys(key);
+		return this;
+	}
+	public boolean checkKeyFieldLocked(WebDriver driver, String tc) throws IOException {
+		Wait(1);
+		boolean keyFieldEnable=driver.findElement(keyLocator).isEnabled();
+		return keyFieldEnable;
+	}
+
+	public GlobalConfig inputValue(WebDriver driver, String value) throws IOException {
+		driver.findElement(valueLocator).clear();
+		driver.findElement(valueLocator).sendKeys(value);
+		return this;
+	}
+
+	public String getKeyString(WebDriver driver, int num) throws IOException {
+		By keyRowLocator = By.xpath("//tr[" + num + "]/td"); // 1,2,3...
+		String keyString = driver.findElement(keyRowLocator).getText();
+		return keyString;
 	}
 
 }

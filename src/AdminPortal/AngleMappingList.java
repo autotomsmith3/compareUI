@@ -96,27 +96,37 @@ public class AngleMappingList extends Comlibs {
 		return this;
 	}
 
-	public AngleMappingList inputShortIdentifier(WebDriver driver, String instance) throws IOException {
+	public AngleMappingList inputInstance(WebDriver driver, String instance) throws IOException {
+		Wait(1);
+		driver.findElement(instanceLocator).clear();
 		driver.findElement(instanceLocator).sendKeys(instance);
 		return this;
 	}
 
 	public AngleMappingList inputOEM(WebDriver driver, String OEM) throws IOException {
+		Wait(1);
+		driver.findElement(OEMLocator).clear();
 		driver.findElement(OEMLocator).sendKeys(OEM);
 		return this;
 	}
 
 	public AngleMappingList inputSequence(WebDriver driver, String sequence) throws IOException {
+		Wait(1);
+		driver.findElement(sequenceLocator).clear();
 		driver.findElement(sequenceLocator).sendKeys(sequence);
 		return this;
 	}
 
 	public AngleMappingList inputNote(WebDriver driver, String note) throws IOException {
+		Wait(1);
+		driver.findElement(NoteLocator).clear();
 		driver.findElement(NoteLocator).sendKeys(note);
 		return this;
 	}
 
 	public AngleMappingList inputPattern(WebDriver driver, String pattern) throws IOException {
+		Wait(1);
+		driver.findElement(patternLocator).clear();
 		driver.findElement(patternLocator).sendKeys(pattern);
 		return this;
 	}

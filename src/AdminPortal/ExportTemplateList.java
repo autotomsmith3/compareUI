@@ -27,30 +27,104 @@ public class ExportTemplateList extends Comlibs {
 		}
 	}
 
-	By dealerShipName = By.cssSelector("span");
+	By addExportTemplateBtnLocator = By.xpath("//*[@id=\"addImageTypeBtn\"]");
+	By searchLocator = By.xpath("//*[@id=\"imageTypeTable_filter\"]/label/input");
+	// By editLocator =By.xpath("(//button[@id='listViewBtn'])[2]");//1,2,3....
+	// By deleteLocator =By.xpath("(//button[@id='dealerViewBtn'])[2]");//1,2,3....
+	By cancelBtnLocator = By.xpath("//*[@id=\"newImageTypeModal\"]/div/div/div[3]/button[2]");
+	By submitBtnLocator = By.xpath("//*[@id=\"newImageTypeModalBtn\"]");
+	By exportNameLocator = By.xpath("//*[@id=\"name\"]");
+	By fileNameLocator = By.xpath("//*[@id=\"filename\"]");
+	By userLocator = By.xpath("//*[@id=\"user\"]");
+	By passwordLocator = By.xpath("//*[@id=\"password\"]");
+	By hostLocator = By.xpath("//*[@id=\"host\"]");
+	By templateLocator = By.xpath("//*[@id=\"template\"]");
+	By combinedFileLocator = By.xpath("//*[@id=\"combineFile\"]");
+	By brandedImagesLocator = By.xpath("//*[@id=\"branded\"]");
+	// By nameLocator= By.xpath("//tr[2]/td"); //1,2,3...
 
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-
-	public ExportTemplateList clickCreateNewSet(WebDriver driver) throws IOException {
-			driver.findElement(dealerShipName).click();
-			return this;
-		}
-	public ExportTemplateList clickMapBackGrounds(WebDriver driver, int num) {
-//		By mapBackGroundsLocator=By.xpath("(//button[@id='listViewBtn'])[1]");
-		num=num*4-3;
-		By mapBackGroundsLocator=By.xpath("(//button[@id='listViewBtn'])["+num+"]");	
-		driver.findElement(mapBackGroundsLocator).click();
-		return this;
-
-	}
-	public ExportTemplateList clickEditSet(WebDriver driver) throws IOException {
-		driver.findElement(dealerShipName).click();
+	public ExportTemplateList clickAddExportTemplateBtn(WebDriver driver) throws IOException {
+		driver.findElement(addExportTemplateBtnLocator).click();
 		return this;
 	}
 
+	public ExportTemplateList inputSearch(WebDriver driver, String name) throws IOException {
+		driver.findElement(searchLocator).sendKeys(name);
+		return this;
+	}
+
+	public ExportTemplateList clickEditBtn(WebDriver driver, int num) throws IOException {
+		By editLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");// 1,2,3....
+		driver.findElement(editLocator).click();
+		return this;
+	}
+
+	public ExportTemplateList clickDeleteBtn(WebDriver driver, int num) throws IOException {
+		By deleteLocator = By.xpath("(//button[@id='dealerViewBtn'])[\"+num+\"]");// 1,2,3....
+		driver.findElement(deleteLocator).click();
+		return this;
+	}
+
+	public ExportTemplateList clickCancel(WebDriver driver) throws IOException {
+		driver.findElement(cancelBtnLocator).click();
+		return this;
+	}
+
+	public ExportTemplateList clickSubmit(WebDriver driver) throws IOException {
+		driver.findElement(submitBtnLocator).click();
+		return this;
+	}
+
+	public ExportTemplateList inputExportName(WebDriver driver, String exportName) throws IOException {
+		Wait(1);
+		driver.findElement(exportNameLocator).clear();
+		driver.findElement(exportNameLocator).sendKeys(exportName);
+		return this;
+	}
+
+	public ExportTemplateList inputFileName(WebDriver driver, String fileName) throws IOException {
+		driver.findElement(fileNameLocator).clear();
+		driver.findElement(fileNameLocator).sendKeys(fileName);
+		return this;
+	}
+
+	public ExportTemplateList inputUser(WebDriver driver, String user) throws IOException {
+		driver.findElement(userLocator).clear();
+		driver.findElement(userLocator).sendKeys(user);
+		return this;
+	}
+
+	public ExportTemplateList inputPassword(WebDriver driver, String password) throws IOException {
+		driver.findElement(passwordLocator).clear();
+		driver.findElement(passwordLocator).sendKeys(password);
+		return this;
+	}
+
+	public ExportTemplateList inputHost(WebDriver driver, String host) throws IOException {
+		driver.findElement(hostLocator).clear();
+		driver.findElement(hostLocator).sendKeys(host);
+		return this;
+	}
+
+	public ExportTemplateList inputTemplate(WebDriver driver, String template) throws IOException {
+		driver.findElement(templateLocator).clear();
+		driver.findElement(templateLocator).sendKeys(template);
+		return this;
+	}
+
+	public ExportTemplateList clickCombinedFileCheckBox(WebDriver driver) throws IOException {
+		driver.findElement(combinedFileLocator).click();
+		return this;
+	}
+
+	public ExportTemplateList clickBrandedImagesCheckBox(WebDriver driver) throws IOException {
+		driver.findElement(brandedImagesLocator).click();
+		return this;
+	}
+
+	public String getNameString(WebDriver driver, int num) throws IOException {
+		By nameLocator = By.xpath("//tr[" + num + "]/td"); // 1,2,3...
+		String nameS = driver.findElement(nameLocator).getText();
+		return nameS;
+	}
 }
