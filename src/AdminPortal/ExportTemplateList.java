@@ -123,8 +123,13 @@ public class ExportTemplateList extends Comlibs {
 	}
 
 	public String getNameString(WebDriver driver, int num) throws IOException {
-		By nameLocator = By.xpath("//tr[" + num + "]/td"); // 1,2,3...
-		String nameS = driver.findElement(nameLocator).getText();
+		String nameS = "";
+		try {
+			By nameLocator = By.xpath("//tr[" + num + "]/td"); // 1,2,3...
+			nameS = driver.findElement(nameLocator).getText();
+		} catch (Exception ex2) {
+			nameS = "null";
+		}
 		return nameS;
 	}
 }

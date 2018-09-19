@@ -544,9 +544,9 @@ public class Comlibs {
 		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension dim = new Dimension((int) screenSize.getWidth(), (int) screenSize.getHeight());
 		driver.manage().window().setSize(dim);
-//		 driver.manage().window().setPosition(new Point(-1200, 12)); //launch  Original -1100, 60. 2018-09-14
+		 driver.manage().window().setPosition(new Point(-1200, 12)); //launch  Original -1100, 60. 2018-09-14
 		// at left screen
-		driver.manage().window().setPosition(new Point(0, 0)); // launch at
+//		driver.manage().window().setPosition(new Point(0, 0)); // launch at
 																// rigth screen
 		// driver.manage().window().setSize(new Dimension(320, 640)); //iPhone
 		// 5: IE8, Chrome, FF work fine!

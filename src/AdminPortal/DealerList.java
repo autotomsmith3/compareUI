@@ -43,47 +43,66 @@ public class DealerList extends Comlibs {
 	}
 
 	By acceptBtnLocator = By.xpath("//button[@type='submit']");
-//	By editBtnLocator = By.xpath("//*[@id=\"listViewBtn\"]/span");   //   //*[@id="listViewBtn"]/span  or  xpath=(//button[@id='listViewBtn'])[3]
+	// By editBtnLocator = By.xpath("//*[@id=\"listViewBtn\"]/span"); // //*[@id="listViewBtn"]/span or xpath=(//button[@id='listViewBtn'])[3]
 	By agreementTitles = By.xpath("//*[@id=\"tabs\"]/li");
 	By firstAgreementLocator = By.xpath("//*[@id=\"tabs\"]/li[1]/a");
 	By secondAgreementLocator = By.xpath("//*[@id=\"tabs\"]/li[2]/a");
 	By thirdAgreementLocator = By.xpath("//*[@id=\"tabs\"]/li[3]/a");
 	By pdfURLLocator = By.xpath("//*[@id=\"stockpx\"]/iframe");
-	By addDealerShipBtnLocator=By.xpath("//*[@id=\"addDealershipBtn\"]");
-	By searchLocator=By.xpath("//input[@type='search']");
-	By 	ManageDealerShipsLocator=By.xpath("//*[@id=\"dealershipMenu\"]");
-	By ManageBGSetsLocator=By.xpath("//*[@id=\"backgroundMenu\"]");
-	By ManageImageTypesLocator=By.xpath("//*[@id=\"imagetypeMenu\"]");
-	By ManageAngleMappingsLocator=By.xpath("//*[@id=\"importanglemappingMenu\"]");
-	By ManageExportTemplatesLocator=By.xpath("//*[@id=\"exportTemplateMenu\"]");
-	By ManageGlobalConfigLocator=By.xpath("//*[@id=\"configMenu\"]");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
+	By addDealerShipBtnLocator = By.xpath("//*[@id=\"addDealershipBtn\"]");
+	By searchLocator = By.xpath("//input[@type='search']");
+	By ManageDealerShipsLocator = By.xpath("//*[@id=\"dealershipMenu\"]");
+	By ManageBGSetsLocator = By.xpath("//*[@id=\"backgroundMenu\"]");
+	By ManageImageTypesLocator = By.xpath("//*[@id=\"imagetypeMenu\"]");
+	By ManageAngleMappingsLocator = By.xpath("//*[@id=\"importanglemappingMenu\"]");
+	By ManageExportTemplatesLocator = By.xpath("//*[@id=\"exportTemplateMenu\"]");
+	By ManageGlobalConfigLocator = By.xpath("//*[@id=\"configMenu\"]");
+	// By Locator=By.xpath("");
+	// By Locator=By.xpath("");
+	// By Locator=By.xpath("");
+	// By Locator=By.xpath("");
+	// By Locator=By.xpath("");
+	// By Locator=By.xpath("");
+	// By Locator=By.xpath("");
+	// By Locator=By.xpath("");
 	// By Locator=
-	// By Locator=	
-
+	// By Locator=
 
 	public DealerProfile clickEditBtn(WebDriver driver, String num) throws IOException {
-//		By editBtnLocator = By.xpath("//*[@id=\"listViewBtn\"]/span");   //   //*[@id="listViewBtn"]/span  or  xpath=(//button[@id='listViewBtn'])[3]
-//		By editBtnLocator = By.xpath("(//button[@id='listViewBtn'])[3]");   //ok   //*[@id="listViewBtn"]/span  or  xpath=(//button[@id='listViewBtn'])[3]	
-		By editBtnLocator = By.xpath("(//button[@id='listViewBtn'])["+num+"]"); 
+		// By editBtnLocator = By.xpath("//*[@id=\"listViewBtn\"]/span"); // //*[@id="listViewBtn"]/span or xpath=(//button[@id='listViewBtn'])[3]
+		// By editBtnLocator = By.xpath("(//button[@id='listViewBtn'])[3]"); //ok //*[@id="listViewBtn"]/span or xpath=(//button[@id='listViewBtn'])[3]
+		By editBtnLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");
+		try {
 		driver.findElement(editBtnLocator).click();
+		}catch(Exception e) {
+			checkEditBtnLocationAndScroll(driver,num);
+			driver.findElement(editBtnLocator).click();
+		}
 		for (String winHandle : driver.getWindowHandles()) {
 			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
 		}
 		return new DealerProfile(driver);
 	}
-	public DealerList clickDisplayDropDownBtn(WebDriver driver,String num) throws IOException {
-		By displayDropDownLocator=By.xpath("//*[@id=\"dealerTable_length\"]/label/select/option["+num+"]");
+
+	public DealerList checkEditBtnLocationAndScroll(WebDriver driver, String num) throws IOException {
+		num = Integer.toString(Integer.parseInt(num) + 3);// Integer.parseInt(MaxVins)
+		By editBtnLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");
+//		boolean numShowInPage = elementExist(driver, editBtnLocator, true, "tc");
+		boolean numShowInPage = driver.findElement(editBtnLocator).isDisplayed();
+		if (numShowInPage) {
+			scrollUp(driver, 100, "ddd");
+		} else {
+			scrollUp(driver, 80, "ddd");
+		}
+		return this;
+	}
+
+	public DealerList clickDisplayDropDownBtn(WebDriver driver, String num) throws IOException {
+		By displayDropDownLocator = By.xpath("//*[@id=\"dealerTable_length\"]/label/select/option[" + num + "]");
 		driver.findElement(displayDropDownLocator).click();
 		return this;
 	}
+
 	public DealerProfile clickAcceptPSBtn(WebDriver driver) throws IOException {
 		driver.findElement(acceptBtnLocator).click();
 		return new DealerProfile(driver);
@@ -361,6 +380,7 @@ public class DealerList extends Comlibs {
 	public int getLineNum() {
 		return lineNum;
 	}
+
 	public DealerProfile clickAddDealerShip(WebDriver driver) throws IOException {
 		driver.findElement(addDealerShipBtnLocator).click();
 		for (String winHandle : driver.getWindowHandles()) {
@@ -368,36 +388,44 @@ public class DealerList extends Comlibs {
 		}
 		return new DealerProfile(driver);
 	}
-	public DealerList inputSearch(WebDriver driver,String dlrID) throws IOException {
+
+	public DealerList inputSearch(WebDriver driver, String dlrID) throws IOException {
 		driver.findElement(searchLocator).sendKeys(dlrID);
 		return this;
 	}
+
 	public DealerList clickManageDealerShips(WebDriver driver) throws IOException {
 		driver.findElement(ManageDealerShipsLocator).click();
 		return this;
 	}
+
 	public BackgroundSets clickManageBGSets(WebDriver driver) throws IOException {
 		driver.findElement(ManageBGSetsLocator).click();
 		return new BackgroundSets(driver);
 	}
+
 	public ImageTypeList clickManageImageType(WebDriver driver) throws IOException {
 		driver.findElement(ManageImageTypesLocator).click();
 		return new ImageTypeList(driver);
 	}
+
 	public AngleMappingList clickManageAngleMappings(WebDriver driver) throws IOException {
 		driver.findElement(ManageAngleMappingsLocator).click();
 		return new AngleMappingList(driver);
 	}
+
 	public ExportTemplateList clickManageExportTemplates(WebDriver driver) throws IOException {
 		driver.findElement(ManageExportTemplatesLocator).click();
 		return new ExportTemplateList(driver);
 	}
+
 	public GlobalConfig clickManageGlobalConfig(WebDriver driver) throws IOException {
 		driver.findElement(ManageGlobalConfigLocator).click();
 		return new GlobalConfig(driver);
 	}
-	public DealerPortal.ImageGallery clickDealerViewBtn(WebDriver driver,int sn) throws IOException {
-		 By dealerViewBtnLocator=By.xpath("(//button[@id='dealerViewBtn'])["+sn+"]");//1,2,3...
+
+	public DealerPortal.ImageGallery clickDealerViewBtn(WebDriver driver, int sn) throws IOException {
+		By dealerViewBtnLocator = By.xpath("(//button[@id='dealerViewBtn'])[" + sn + "]");// 1,2,3...
 		driver.findElement(dealerViewBtnLocator).click();
 		for (String winHandle : driver.getWindowHandles()) {
 			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)

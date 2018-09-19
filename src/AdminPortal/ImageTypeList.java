@@ -46,8 +46,8 @@ public class ImageTypeList extends Comlibs {
 		driver.findElement(addImageTypeBtnLocator).click();
 		return this;
 	}
-	public ImageTypeList inputSearch(WebDriver driver, String shotIdentifier) throws IOException {
-		driver.findElement(searchLocator).sendKeys(shotIdentifier);
+	public ImageTypeList inputSearch(WebDriver driver, String defaultSequence) throws IOException {
+		driver.findElement(searchLocator).sendKeys(defaultSequence);
 		return this;
 	}
 	public ImageTypeList clickEditBtn(WebDriver driver, int num) throws IOException {
@@ -107,6 +107,11 @@ public class ImageTypeList extends Comlibs {
 		driver.findElement(backGroundTypeLocator).clear();
 		driver.findElement(backGroundTypeLocator).sendKeys(backGroundType);
 		return this;
+	}
+	public String getDefaultSequenceRowString(WebDriver driver, int num) throws IOException {
+		By defaultSequenceRowLocator = By.xpath("//tr[" + num + "]/td"); // 1,2,3...
+		String nameS = driver.findElement(defaultSequenceRowLocator).getText();
+		return nameS;
 	}
 
 }

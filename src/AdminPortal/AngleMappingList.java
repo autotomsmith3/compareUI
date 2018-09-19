@@ -139,4 +139,17 @@ public class AngleMappingList extends Comlibs {
 		return this;
 
 	}
+
+	public String getNoteNameString(WebDriver driver, int num) throws IOException {
+		By noteRowLocator = By.xpath("//*[@id=\"importAngleMappingTable\"]/tbody/tr[" + num + "]/td[5]"); // 1,2,3...
+		// //*[@id="importAngleMappingTable"]/tbody/tr[3]/td[5]
+		String noteS = "";
+		try {
+			noteS = driver.findElement(noteRowLocator).getText();
+		} catch (Exception ex2) {
+			noteS = "null";
+		}
+		return noteS;
+	}
+
 }
