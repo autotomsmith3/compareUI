@@ -68,6 +68,11 @@ public class ImageGallery extends Comlibs {
 	// By.xpath("//button[@id='rerenderSelectedVehicles']");
 	By reRenderActiveBtn = By.xpath("//button[@id='rerenderSelectedVehicles']");// -----
 	By generateURLs = By.xpath("//button[@id='generateUrlBtn']");
+	
+	By newreRenderActiveBtn = By.xpath("//button[@id='rerenderSelectedVehicles']");
+	
+	
+	
 	By selectAll = By.id("selectAll");
 	By selectAll_xpath = By.xpath("//*[@id=\"selectAll\"]");
 	By selectNone = By.id("selectNone");
@@ -77,21 +82,21 @@ public class ImageGallery extends Comlibs {
 	By goodMsgLocator1 = By.cssSelector("span.messageBox"); // This good msg shows under My Inventory Gallery
 	// Fielters
 	By searchByVinFieldLocator = By.id("searchVinOrStockNo");
-	By filterTypeLocator = By.id("viewInventoryBtn");
-	By typeNew = By.xpath("//div[@id='newVehicleContentPanel']/div/div/div[2]");
+	By filterTypeLocator = By.xpath("//*[@id=\"viewTypeInventoryBtn\"]");
+	By typeNew = By.xpath("//*[@id='newVehicleContentPanel']/div[1]/div/div[2]");
 	By typeUsed = By.xpath("//div[@id='newVehicleContentPanel']/div[2]/div/div[2]/span");
 	By typeApply = By.xpath("//div[@id='filterNewVehicleModal']/div/div/div[3]/button");
 	By typeClearBtn = By.xpath("//div[@id='filterNewVehicleModal']/div/div/div[3]/button[2]");
 	By typeXBtn = By.xpath("//div[@id='filterNewVehicleModal']/div/div/div/button");
 
-	By filterYearLocator = By.xpath("(//button[@id='viewInventoryBtn'])[2]");
+	By filterYearLocator = By.xpath("//*[@id='viewYearInventoryBtn']");
 	By filterAllYears = By.xpath("//div[@id='yearContentPanel']/div/div");
 
-	By yearApply = By.xpath("//div[5]/div/div/div[3]/button");// By.xpath("(//button[@type='button'])[55]");
+	By yearApply = By.xpath("//div[5]/div/div/div[3]/button");
 	By yearClearBtn = By.xpath("//div[@id='filterYearModal']/div/div/div[3]/button[2]");
 	By yearXBtn = By.xpath("//div[@id='filterYearModal']/div/div/div/button");
 
-	By filterMakeLocator = By.xpath("(//button[@id='viewInventoryBtn'])[3]");
+	By filterMakeLocator = By.xpath("//*[@id=\"viewMakeInventoryBtn\"]"); 
 	By filterMakeBuickLocator = By.xpath("//div[@id='makeContentPanel']/div[1]/div/div[2]/span");
 	By filterMakeCadillacLocator = By.xpath("//div[@id='makeContentPanel']/div[2]/div/div[2]/span");
 	By filterMakeGMCLocator = By.xpath("//div[@id='makeContentPanel']/div[9]/div/div[2]/span");
@@ -100,7 +105,7 @@ public class ImageGallery extends Comlibs {
 	By makeClearBtn = By.xpath("//div[@id='filterBrandModal']/div/div/div[3]/button[2]");
 	By makeXBtn = By.xpath("//div[@id='filterBrandModal']/div/div/div/button");
 
-	By filterModelLocator = By.xpath("(//button[@id='viewInventoryBtn'])[4]");
+	By filterModelLocator = By.xpath("//*[@id=\"viewModelInventoryBtn\"]");//  //*[@id="viewModelInventoryBtn"]
 	By filterModelBuickLocator = By.xpath("//ul[@id='modelNavTab']/li[4]/a/span");
 	By filterModelBuickAllLocator = By.xpath("//div[@id='modelBuickTabPanel']/div/div/label/input");
 	By filterModelBuickEnclaveLocator = By.xpath("//div[@id='modelBuickTabPanel']/div[2]/div/label/input");
@@ -118,7 +123,7 @@ public class ImageGallery extends Comlibs {
 	By modelClearBtn = By.xpath("//div[@id='filterModelModal']/div/div/div[3]/button[2]");
 	By modelXBtn = By.xpath("//div[@id='filterModelModal']/div/div/div/button");
 
-	By filterColorsLocator = By.xpath("(//button[@id='viewInventoryBtn'])[5]");
+	By filterColorsLocator = By.xpath("//*[@id=\"viewColorInventoryBtn\"]");
 	// By
 	// filterAllColors=By.xpath("//div[@id='extColorTabPanel']/div");//By.xpath("//div[@id='extColorTabPanel']/div[10]/div/label");
 	By exteriorTab = By.xpath("//ul[@id='filterNavTab']/li/a/span");
@@ -180,6 +185,9 @@ public class ImageGallery extends Comlibs {
 	By ContactSupportEmailLine308 = By.xpath("//*[@id='reportIssueModal']/div/div/div[3]/div/span[2]/a");
 	By ContactSupportTelLine409 = By.xpath("//*[@id='reportIssueModal']/div/div/div[3]/div/span[3]");
 
+	By dealerShipInfoBtnLocator=By.xpath("//*[@id='navbarTabs']/li[2]/a");
+	By inventoryGalleryBtnLocator=By.xpath("//*[@id='navbarTabs']/li[1]/a");
+	
 	static int allVinNums = 0;
 	static int allImageNums = 0;
 
@@ -187,6 +195,14 @@ public class ImageGallery extends Comlibs {
 		driver.findElement(dealerNameDropDownLocator).click();
 		driver.findElement(myDealerShipLinkLocator).click();
 		return new DealerProfile(driver);
+	}
+	public DealerProfile clickDealerShipInfoBtn(WebDriver driver) throws IOException {
+		driver.findElement(dealerShipInfoBtnLocator).click();
+		return new DealerProfile(driver);
+	}
+	public ImageGallery clickInventoryGalleryBtn(WebDriver driver) throws IOException {
+		driver.findElement(inventoryGalleryBtnLocator).click();
+		return new ImageGallery(driver);
 	}
 
 	public AUTOpxLogin clickLogout(WebDriver driver) throws IOException {
@@ -1502,6 +1518,16 @@ public class ImageGallery extends Comlibs {
 		num = urlsTxt.length();
 		temp = urlsTxt.substring(14, num);
 		num = Integer.parseInt(temp);
+		return num;
+	}
+	public int getReRenderNum(WebDriver driver, String tc) {
+		int num;
+		String temp;
+		num = 0;
+		String renderNumTxt = driver.findElement(reRenderActiveBtn).getText();
+//		num = urlsTxt.length();
+//		temp = urlsTxt.substring(14, num);
+		num = Integer.parseInt(renderNumTxt);
 		return num;
 	}
 

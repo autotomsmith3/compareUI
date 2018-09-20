@@ -695,14 +695,14 @@ public class AUTOpxController extends Comlibs {
 		acceptLicenseP.clickAcceptBtn(driver);
 		ImageGallery igP = new ImageGallery(driver);
 
-		// Help section
+/**		// Help section
 		TCnum = "TC139675_7_InventoryG"; // Help - Contact Support. email and tel no.
 		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, TCnum);
 		TCnum = "TC139675_14_InventoryG";
 		igP.verifyHelpSystemHelp(driver, TCnum);// Help - System Help.
 		TCnum = "TC139675_17_InventoryG"; // Help - Report Issue. email and tel no.
 		igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, TCnum);
-
+**/
 		TCnum = "TC139691_5";
 		// Type
 		igP.clickTypeBtn(driver, TCnum);
@@ -796,7 +796,7 @@ public class AUTOpxController extends Comlibs {
 		igP.clickColorExteriorColorCheckBox(driver, "Black Raven (GBA)", TCnum);
 		igP.clickColorExteriorColorCheckBox(driver, "Black Raven (GBA)", TCnum);
 		igP.clickColorInteriorTab(driver, TCnum);
-		igP.clickColorInteriorColorCheckBox(driver, "Ebony w/Ebony accents (AFC)", TCnum);
+//		igP.clickColorInteriorColorCheckBox(driver, "Ebony w/Ebony accents (AFC)", TCnum);
 		igP.clickColorClearBtn(driver, TCnum);
 		igP.clickColorXBtn(driver, TCnum);
 		igP.clickClearAllFiltersBtn(driver, TCnum);
@@ -841,7 +841,7 @@ public class AUTOpxController extends Comlibs {
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
 		igP.clickSelectAllBtn(driver, TCnum);
 		// get the number of all vins here and adding to the below
-		allVinNums = igP.getGenerateURLsNum(driver, TCnum);
+		allVinNums=igP.getReRenderNum(driver, TCnum);// allVinNums = igP.getGenerateURLsNum(driver, TCnum);
 		igP.clickSelectNoneBtn(driver, TCnum);
 
 		TCnum = "TC141797_6";
@@ -856,8 +856,10 @@ public class AUTOpxController extends Comlibs {
 			igP.verifyLoadMoreVehicleBtnStatus(driver, false, TCnum);
 			igP.verifyShowAllBtnStatus(driver, false, TCnum);
 		}
-		igP.gotoMyDealerShip(driver);
-		igP.clickBackToInventoryBtn(driver);
+//		igP.gotoMyDealerShip(driver);
+		igP.clickDealerShipInfoBtn(driver);
+//		igP.clickBackToInventoryBtn(driver);
+		igP.clickInventoryGalleryBtn(driver);
 
 		// Verify Load More Vehicles button TC141795
 		TCnum = "TC141795_6";
@@ -877,7 +879,7 @@ public class AUTOpxController extends Comlibs {
 		// Need to do. Verify Toggle buttons TC139693
 		// Need to do. Verify Select and Sort Inventory [TC:139692
 
-		TCnum = "TC139661_5";
+/**			TCnum = "TC139661_5";
 		igP.enterTextInSearch(" ");
 		ac.Wait(2);
 		igP.enterTextInSearch(vin01);
@@ -892,8 +894,8 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139663_5";
 		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
-		ac.rwExcel("", "------ Single VIN re-rendering ------", "");
+//	removed on 2018-09-20	igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+	ac.rwExcel("", "------ Single VIN re-rendering ------", "");
 		igP.clickRerenderBtn(driver, render, TCnum);
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
@@ -902,14 +904,14 @@ public class AUTOpxController extends Comlibs {
 		VehicleGallery vgP = new VehicleGallery(driver);
 		vgP.verifyLoadPannelImage(driver, TCnum);
 		vgP.clickBackToInventoryBtn(driver);
-		// Need to do: click PREVIEW button, DELETE button, SELECT or DESELECT
+**/		// Need to do: click PREVIEW button, DELETE button, SELECT or DESELECT
 		//
 		// My Dealership Settings
 		// TC139666
 		TCnum = "TC139666_7";
-		igP.gotoMyDealerShip(driver);
+		igP.clickDealerShipInfoBtn(driver);
 		DealerProfile dpP = new DealerProfile(driver);
-		dpP.verifyDealershipIDBrands("GM123456_4 | ", "GMC | Cadillac | Buick | Chevrolet", TCnum);
+//		removed on 2018-09-20 dpP.verifyDealershipIDBrands("GM123456_4 | ", "GMC | Cadillac | Buick | Chevrolet", TCnum);
 		// TC139666_8 Verify Dealership Name
 		TCnum = "TC139666_8";
 		// stop here! verifyDealershipName
@@ -935,7 +937,7 @@ public class AUTOpxController extends Comlibs {
 		// TC139666_26 Click any Dealership Background
 		// TC139666_27 Verify Dealership Logo
 
-		dpP.clickViewInventoryBtn(driver, TCnum);
+		igP.clickInventoryGalleryBtn(driver);// dpP.clickViewInventoryBtn(driver, TCnum);
 
 		// Need to do:
 		// TC139668
@@ -1006,7 +1008,7 @@ public class AUTOpxController extends Comlibs {
 		acceptLicenseP.clickCancelBtn(driver);
 		// Verify Forgot Password process
 
-		if ((accountEmail.contains("gmail.com")) && (checkEmail.equalsIgnoreCase("Yes"))) {
+/**		if ((accountEmail.contains("gmail.com")) && (checkEmail.equalsIgnoreCase("Yes"))) {
 			// So far only accept gmail email
 			TCnum = "TC139686_02";
 			loginP.clickForgotPasswordLink(driver, TCnum);
@@ -1048,7 +1050,7 @@ public class AUTOpxController extends Comlibs {
 			ac.rwExcel(TCnum, false, "Cannot test Forgot Password test procedure",
 					"Since the account email is not gmail email. Account Email=" + accountEmail);
 		}
-		// End of Verify Forgot Password process
+**/		// End of Verify Forgot Password process
 
 		loginP.login(driver, accountEmail, accountPS);
 		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
@@ -1063,14 +1065,14 @@ public class AUTOpxController extends Comlibs {
 
 		acceptLicenseP.clickAcceptBtn(driver);
 		ImageGallery igP = new ImageGallery(driver);
-		// Help section
+/**		// Help section
 		TCnum = "TC139675_7_VINpx"; // Help - Contact Support. email and tel no.
 		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, TCnum);
 		TCnum = "TC139675_14_VINpx";
 		igP.verifyHelpSystemHelp(driver, TCnum);// Help - System Help.
 		TCnum = "TC139675_17_VINpx"; // Help - Report Issue. email and tel no.
 		igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, TCnum);
-
+**/
 		tempVIN = "6";
 		igP.enterTextInSearch(tempVIN);
 		igP.verifyDealershipname(dealershipName, TCnum);
@@ -1115,23 +1117,24 @@ public class AUTOpxController extends Comlibs {
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
 		igP.clickSelectAllBtn(driver, TCnum);
 		// get the number of all vins here and adding to the below
-		allVinNums = igP.getGenerateURLsNum(driver, TCnum);
+//		allVinNums = igP.getGenerateURLsNum(driver, TCnum);
+		allVinNums = igP.getReRenderNum(driver, TCnum);
 		igP.clickSelectNoneBtn(driver, TCnum);
 
 		// Verify Rerender Single Vehicle 01 for VINpx dealer
 		TCnum = "TC139706_8";
 		igP.enterTextInSearch(vin01);
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
-		igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
+//		igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		ac.rwExcel("", "------ Single VIN re-rendering ------", "");
 		igP.clickRerenderBtn(driver, render, TCnum);
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		TCnum = "TC139706_9";
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		VehicleGallery vgP = new VehicleGallery(driver);
@@ -1143,15 +1146,15 @@ public class AUTOpxController extends Comlibs {
 		ac.Wait(2);
 		igP.enterTextInSearch(vin02);
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
-		igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
+//		igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 		igP.clickSelectBtn(driver, vin02, vehGUID02, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		igP.clickRerenderBtn(driver, render, TCnum);
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin02, vehGUID02, 1, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		TCnum = "TC139706_9_vin02";
 		igP.clickViewDetailsBtn(driver, vin02, vehGUID02, TCnum);
 		// VehicleGallery vgP = new VehicleGallery(driver);
@@ -1166,7 +1169,7 @@ public class AUTOpxController extends Comlibs {
 		allVinNums = igP.getGenerateURLsNum(driver, TCnum);
 		igP.clickRerenderBtn(driver, render, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		ac.Wait(10);
 		igP.enterTextInSearch(vin01);
@@ -1175,7 +1178,7 @@ public class AUTOpxController extends Comlibs {
 		igP.enterTextInSearch(vin02);
 		igP.verifyLoadPreviewTileImage(driver, ALL_VINS_RENDER_MAX_WT, vin02, vehGUID02, allVinNums / 2, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		TCnum = "TC139709_06";
 		igP.clickViewDetailsBtn(driver, vin02, vehGUID02, TCnum);
 		// VehicleGallery vgP = new VehicleGallery(driver);
@@ -2431,11 +2434,11 @@ public class AUTOpxController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 //			 AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			// //// 0.General Inventory Gallery
-			// bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-			// inventoryGalleryTC(driver, tBrowser, env, versionNum);
-			// vehicleGallery(driver, tBrowser, env);
-			// verifyRerender(driver, tBrowser);
+			 //// 0.General Inventory Gallery
+			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
+//			 vehicleGallery(driver, tBrowser, env);
+//			 verifyRerender(driver, tBrowser);
 
 			////// 1.VINpx:
 			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
@@ -2443,9 +2446,9 @@ public class AUTOpxController extends Comlibs {
 
 			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
 
-			 ////// 2. STOCKpx
-			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			 STOCKpxInventoryTC(driver, tBrowser, env);
+//			 ////// 2. STOCKpx
+//			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+//			 STOCKpxInventoryTC(driver, tBrowser, env);
 			//
 			//////// bc.Wait(38*60);//wait 18 minutes;
 			////

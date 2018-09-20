@@ -60,6 +60,19 @@ public class DealerProfile extends Comlibs {
 	By lotpxprod = By.xpath("//*[@id=\"formDealerInfo\"]/div[1]/div[2]/div/div[1]/div[2]/label[4]/img");
 	By stockpxprod = By.xpath("//*[@id=\"formDealerInfo\"]/div[1]/div[2]/div/div[1]/div[2]/label[5]/img");
 
+//	By webSiteProviderDropDownLocator=By.xpath("//*[@id='websiteProvider']/option["+num+"]");//num=1,2,3...
+	By addWebSiteProviderBtnLocator=By.xpath("//*[@id='formDealerInfo']/div[2]/div[2]/div/div/div[2]/div/div/button");
+//	By brandDropDownLocator=By.xpath("//*[@id='dealerBrand']/option["+num+"]");//num=1,2,3...
+	By changeBtnLocator=By.xpath("//*[@id='uploadCaption']");
+	By xdeleteBtnLocator=By.xpath("//*[@id='removeLogo']");
+//	By Locator=By.xpath("");
+//	By Locator=By.xpath("");
+	
+	
+	
+	
+	
+	
 	public ImageGallery clickViewInventoryBtn(WebDriver driver, String tc) throws IOException {
 		boolean viewInventoryBtn = elementExist(driver, viewInventoryBtnLocator, true, tc);
 
@@ -76,7 +89,17 @@ public class DealerProfile extends Comlibs {
 		driver.findElement(logOutLinkLocator).click();
 		return new AUTOpxLogin(driver);
 	}
-
+	public DealerProfile clickWebsiteProviderAndSelectNum(WebDriver driver,int num) throws IOException {
+		By webSiteProviderDropDownLocator=By.xpath("//*[@id='websiteProvider']/option["+num+"]");//num=1,2,3...
+		driver.findElement(webSiteProviderDropDownLocator).click();
+		return this;
+	}
+	public DealerProfile clickBrandAndSelectNum(WebDriver driver,int num) throws IOException {
+		By brandDropDownLocator=By.xpath("//*[@id='dealerBrand']/option["+num+"]");//num=1,2,3...
+		driver.findElement(brandDropDownLocator).click();
+		return this;
+	}
+	
 	public void verifyDealershipIDBrands(String dealershipID, String brands, String tc) throws IOException {
 		// assertEquals("Lucas Zhou",
 		// driver.findElement(By.cssSelector("span")).getText());
