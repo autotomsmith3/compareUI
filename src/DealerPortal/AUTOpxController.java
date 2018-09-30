@@ -433,10 +433,10 @@ public class AUTOpxController extends Comlibs {
 
 		ImageGallery igP = new ImageGallery(driver);
 		igP.verifyDealershipname(dealershipName, TCnum);
-
+		igP.enterTextInSearch(vin01);
 		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		// Stop here!
 		// need to verify next vehicle hover image
 		TCnum = "TC139706_8";
@@ -447,11 +447,11 @@ public class AUTOpxController extends Comlibs {
 		igP.enterTextInSearch(vin01);
 		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		TCnum = "TC5123136";
 		igP.clickDeSelectBtn(driver, vin01, vehGUID01, TCnum);
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
-		igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
+//		igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 		TCnum = "TC5123137";
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		VehicleGallery vgP = new VehicleGallery(driver);
@@ -461,7 +461,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139709_08";
 		igP.clickSelectNoneBtn(driver, TCnum);
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
-		igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
+//		igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 		ac.Wait(1);
 		igP.clickSelectAllBtn(driver, TCnum);
 		//// igP.clickSelectNoneBtn(driver, TCnum);
@@ -474,7 +474,7 @@ public class AUTOpxController extends Comlibs {
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		// igP.verifyErrorMsgShowing(driver, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		igP.enterTextInSearch(vin01);
 		igP.verifyLoadPreviewTileImage(driver, ALL_VINS_RENDER_MAX_WT, vin01, vehGUID01, numbers, TCnum);
 
@@ -547,15 +547,15 @@ public class AUTOpxController extends Comlibs {
 		}
 
 		vgP.clickBackToInventoryBtn(driver);
-		igP.gotoMyDealerShip(driver);
+		igP.clickDealerShipInfoBtn(driver);
 		DealerProfile dpP = new DealerProfile(driver);
 
 		dpP.clickLogout(driver);
 
 		loginP.login(driver, accountEmail, accountPS);
 		acceptLicenseP.clickAcceptBtn(driver);
-		igP.gotoMyDealerShip(driver);
-		dpP.clickViewInventoryBtn(driver, TCnum);
+		igP.clickDealerShipInfoBtn(driver);
+		dpP.clickInventoryGalleryBtn(driver, TCnum);
 		// igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		// vgP.verifyLoadPannelImage(driver, "TC5123xxx");
 
@@ -573,9 +573,8 @@ public class AUTOpxController extends Comlibs {
 		if (allVinNums >= MaxVinsForPreview) {
 			allVinNums = MaxVinsForPreview;
 		}
-		// ac.Wait(2);
-		// igP.enterTextInSearch(vin01);
-
+		 ac.Wait(2);
+		 igP.enterTextInSearch(vin01);
 		allImageNums = igP.getTileImageNum(driver, vehGUID01, "");
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		vgP.verifyLoadPannelImage(driver, TCnum);
@@ -769,29 +768,31 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139691_19";
 		igP.clickColorsBtn(driver, TCnum);
 		igP.clickColorExteriorTab(driver, TCnum);
-		igP.clickColorExteriorColorCheckBox(driver, "Summit White (GAZ)", TCnum);
+		igP.clickColorExteriorColorCheckBox(driver, "Summit White(GAZ)", TCnum);
 		igP.clickColorInteriorTab(driver, TCnum);
-		igP.clickColorInteriorColorCheckBox(driver, "Jet Black (4AA)", TCnum);
+//		igP.clickColorInteriorColorCheckBox(driver, "Jet Black (4AA)", TCnum); //before 2018-09-30
+		igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); //afte 2018-09-30
 		igP.clickColorApplyBtn(driver, TCnum);
 		igP.clickClearAllFiltersBtn(driver, TCnum);
 		TCnum = "TC139691_19_exterior";
 		igP.clickColorsBtn(driver, TCnum);
 		igP.clickColorExteriorTab(driver, TCnum);
-		igP.clickColorExteriorColorCheckBox(driver, "Summit White (GAZ)", TCnum);
+		igP.clickColorExteriorColorCheckBox(driver, "Summit White(GAZ)", TCnum);
 		igP.clickColorInteriorTab(driver, TCnum);
-		igP.clickColorInteriorColorCheckBox(driver, "Jet Black (4AA)", TCnum);
+//		igP.clickColorInteriorColorCheckBox(driver, "Jet Black (4AA)", TCnum); //before 2018-09-30
+		igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); //afte 2018-09-30
 		igP.clickColorApplyBtn(driver, TCnum);
 		igP.clickColorsBtn(driver, TCnum);
 		igP.clickColorExteriorTab(driver, TCnum);
-		igP.clickColorExteriorColorCheckBox(driver, "Black Raven (GBA)", TCnum);
-		igP.clickColorExteriorColorCheckBox(driver, "Black Raven (GBA)", TCnum);
+		igP.clickColorExteriorColorCheckBox(driver, "Black Raven(GBA)", TCnum);
+		igP.clickColorExteriorColorCheckBox(driver, "Black Raven(GBA)", TCnum);
 		igP.clickColorApplyBtn(driver, TCnum);
 		TCnum = "TC139691_19_interior";
 		igP.clickClearAllFiltersBtn(driver, TCnum);
 		igP.clickColorsBtn(driver, TCnum);
 		igP.clickColorExteriorTab(driver, TCnum);
-		igP.clickColorExteriorColorCheckBox(driver, "Black Raven (GBA)", TCnum);
-		igP.clickColorExteriorColorCheckBox(driver, "Black Raven (GBA)", TCnum);
+		igP.clickColorExteriorColorCheckBox(driver, "Black Raven(GBA)", TCnum);
+		igP.clickColorExteriorColorCheckBox(driver, "Black Raven(GBA)", TCnum);
 		igP.clickColorInteriorTab(driver, TCnum);
 		// igP.clickColorInteriorColorCheckBox(driver, "Ebony w/Ebony accents (AFC)", TCnum);
 		igP.clickColorClearBtn(driver, TCnum);
@@ -824,7 +825,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139688_16";
 		igP.clickColorsBtn(driver, TCnum);
 		igP.clickColorExteriorTab(driver, TCnum);
-		igP.clickColorExteriorColorCheckBox(driver, "Graystone Metallic (GWH)", TCnum);
+		igP.clickColorExteriorColorCheckBox(driver, "Graphite Gray Metallic(GK2)", TCnum);
 		igP.clickColorInteriorTab(driver, TCnum);
 		// igP.clickColorInteriorColorCheckBox(driver, "Jet Black (4AA)", TCnum);
 		igP.clickColorApplyBtn(driver, TCnum);
@@ -1007,10 +1008,10 @@ public class AUTOpxController extends Comlibs {
 			// mailPassword = "Autodata1";
 			tempPS = gMail.getTemporaryPS(subject, psB4, psAfter, "Imap.gmail.com", accountEmail, accountPS);
 			TCnum = "TC139686_02_tempPS";
-//			loginP.login(driver, accountEmail, tempPS); //this should be correct one. Now issue here, see autopxops-1196
-			loginP.loginDealerProfile(driver, accountEmail, tempPS);//this is temp, it skips agreement page
-			// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
-//			acceptLicenseP.clickAcceptPSBtn(driver);
+			loginP.login(driver, accountEmail, tempPS); //this should be correct one. Now issue here, see autopxops-1196
+//			loginP.loginDealerProfile(driver, accountEmail, tempPS);//this is temp, it skips agreement page
+//			 AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+			acceptLicenseP.clickAcceptPSBtn(driver);
 			DealerProfile dpP = new DealerProfile(driver);
 			TCnum = "TC139674";
 			dpP.changePS(driver, accountPS, TCnum);
@@ -2411,21 +2412,21 @@ public class AUTOpxController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			// //// 0.General Inventory Gallery
-			// bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-			// inventoryGalleryTC(driver, tBrowser, env, versionNum);
-			// vehicleGallery(driver, tBrowser, env);
-			// verifyRerender(driver, tBrowser);
+//			 //// 0.General Inventory Gallery
+//			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+//			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
+//			 vehicleGallery(driver, tBrowser, env);
+//			 //verifyRerender(driver, tBrowser);
 
-//			////// 1.VINpx:
-//			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-//			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+			////// 1.VINpx:
+			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
 
 			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
 
-			 ////// 2. STOCKpx
-			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			 STOCKpxInventoryTC(driver, tBrowser, env);
+//			 ////// 2. STOCKpx
+//			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+//			 STOCKpxInventoryTC(driver, tBrowser, env);
 			
 			//////// bc.Wait(38*60);//wait 18 minutes;
 			////
