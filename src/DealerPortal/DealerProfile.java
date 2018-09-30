@@ -65,6 +65,7 @@ public class DealerProfile extends Comlibs {
 //	By brandDropDownLocator=By.xpath("//*[@id='dealerBrand']/option["+num+"]");//num=1,2,3...
 	By changeBtnLocator=By.xpath("//*[@id='uploadCaption']");
 	By xdeleteBtnLocator=By.xpath("//*[@id='removeLogo']");
+	By inventoryGalleryBtnLocator=By.xpath("//*[@id='navbarTabs']/li[1]/a");
 //	By Locator=By.xpath("");
 //	By Locator=By.xpath("");
 	
@@ -99,7 +100,10 @@ public class DealerProfile extends Comlibs {
 		driver.findElement(brandDropDownLocator).click();
 		return this;
 	}
-	
+	public ImageGallery clickInventoryGalleryBtn(WebDriver driver, String tc) throws IOException {
+		driver.findElement(inventoryGalleryBtnLocator).click();
+		return new ImageGallery(driver);
+	}
 	public void verifyDealershipIDBrands(String dealershipID, String brands, String tc) throws IOException {
 		// assertEquals("Lucas Zhou",
 		// driver.findElement(By.cssSelector("span")).getText());

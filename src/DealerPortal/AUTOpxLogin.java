@@ -80,6 +80,10 @@ public class AUTOpxLogin extends Comlibs {
 		driver.findElement(loginButtonLocator).click();
 		return new AcceptLicenseAgreementtoContinue(driver);
 	}
+	public DealerProfile clickLoginBtnDealerProfile(WebDriver driver) throws IOException {
+		driver.findElement(loginButtonLocator).click();
+		return new DealerProfile(driver);
+	}
 
 	public void clickLoginBtn(WebDriver driver, String tc) throws IOException {
 		driver.findElement(loginButtonLocator).click();
@@ -111,6 +115,12 @@ public class AUTOpxLogin extends Comlibs {
 		inputPassword(driver, ps);
 		clickLoginBtn(driver);
 		return new AcceptLicenseAgreementtoContinue(driver);
+	}
+	public DealerProfile loginDealerProfile(WebDriver driver, String usr, String ps) throws IOException {
+		inputUername(driver, usr);
+		inputPassword(driver, ps);
+		clickLoginBtnDealerProfile(driver);
+		return new DealerProfile(driver);
 	}
 
 	public void verifyHeaderFooter(String env, String versionNum, String tc) throws IOException {

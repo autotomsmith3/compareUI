@@ -984,12 +984,50 @@ public class AUTOpxController extends Comlibs {
 		acceptLicenseP.clickCancelBtn(driver);
 		// Verify Forgot Password process
 
-		/**
-		 * if ((accountEmail.contains("gmail.com")) && (checkEmail.equalsIgnoreCase("Yes"))) { // So far only accept gmail email TCnum = "TC139686_02"; loginP.clickForgotPasswordLink(driver, TCnum); VDVIPasswordReset vdviPasswordP = new VDVIPasswordReset(driver); vdviPasswordP.inputEmail(driver, accountEmail); TCnum = "TC139686_02_PSB"; vdviPasswordP.clickRestPSBtn(driver, TCnum); vdviPasswordP.verifyMessage(driver, TCnum); TCnum = "TC139686_02_LTYAL"; vdviPasswordP.clickLoginToYourAccountLink(driver, TCnum); MailReader gMail = new MailReader(); String tempPS = ""; String subject = "Reset Password for AUTOpx";
-		 * 
-		 * String content1 = "You have requested to have your password reset for your account at AUTOpx"; String psB4 = "Your Temporary password is "; String psAfter = "Goto"; // mailID = "Imap.gmail.com"; // email ="tdautof1@gmail.com"; // mailPassword = "Autodata1"; tempPS = gMail.getTemporaryPS(subject, psB4, psAfter, "Imap.gmail.com", accountEmail, accountPS); TCnum = "TC139686_02_tempPS"; loginP.login(driver, accountEmail, tempPS); // AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver); acceptLicenseP.clickAcceptPSBtn(driver); DealerProfile dpP = new DealerProfile(driver); TCnum = "TC139674"; dpP.changePS(driver, accountPS,
-		 * TCnum); TCnum = "TC139686_02_NoBtn"; ac.Wait(1); dpP.clickNOBtn(driver, TCnum); TCnum = "TC139686_02_Inv"; ac.Wait(1); dpP.clickViewInventoryBtn(driver, TCnum); ac.Wait(1); dpP.clickLogout(driver); } else { TCnum = "TC139686_02"; ac.rwExcel(TCnum, false, "Cannot test Forgot Password test procedure", "Since the account email is not gmail email. Account Email=" + accountEmail); }
-		 **/ // End of Verify Forgot Password process
+		if ((accountEmail.contains("gmail.com")) && (checkEmail.equalsIgnoreCase("Yes"))) {
+			// So far only accept gmail email
+			TCnum = "TC139686_02";
+			loginP.clickForgotPasswordLink(driver, TCnum);
+			VDVIPasswordReset vdviPasswordP = new VDVIPasswordReset(driver);
+			vdviPasswordP.inputEmail(driver, accountEmail);
+			TCnum = "TC139686_02_PSB";
+			vdviPasswordP.clickRestPSBtn(driver, TCnum);
+			vdviPasswordP.verifyMessage(driver, TCnum);
+			TCnum = "TC139686_02_LTYAL";
+			vdviPasswordP.clickLoginToYourAccountLink(driver, TCnum);
+			MailReader gMail = new MailReader();
+			String tempPS = "";
+			String subject = "Reset Password for AUTOpx";
+
+			String content1 = "You have requested to have your password reset for your account at AUTOpx";
+			String psB4 = "Your Temporary password is ";
+			String psAfter = "Goto";
+			// mailID = "Imap.gmail.com";
+			// email ="tdautof1@gmail.com";
+			// mailPassword = "Autodata1";
+			tempPS = gMail.getTemporaryPS(subject, psB4, psAfter, "Imap.gmail.com", accountEmail, accountPS);
+			TCnum = "TC139686_02_tempPS";
+//			loginP.login(driver, accountEmail, tempPS); //this should be correct one. Now issue here, see autopxops-1196
+			loginP.loginDealerProfile(driver, accountEmail, tempPS);//this is temp, it skips agreement page
+			// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+//			acceptLicenseP.clickAcceptPSBtn(driver);
+			DealerProfile dpP = new DealerProfile(driver);
+			TCnum = "TC139674";
+			dpP.changePS(driver, accountPS, TCnum);
+			TCnum = "TC139686_02_NoBtn";
+			ac.Wait(1);
+			dpP.clickNOBtn(driver, TCnum);
+			TCnum = "TC139686_02_Inv";
+			ac.Wait(1);
+			dpP.clickInventoryGalleryBtn(driver,TCnum);
+			ac.Wait(1);
+			dpP.clickLogout(driver);
+		} else {
+			TCnum = "TC139686_02";
+			ac.rwExcel(TCnum, false, "Cannot test Forgot Password test procedure",
+					"Since the account email is not gmail email. Account Email=" + accountEmail);
+		}
+		// End of Verify Forgot Password process
 
 		loginP.login(driver, accountEmail, accountPS);
 		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
@@ -2380,8 +2418,8 @@ public class AUTOpxController extends Comlibs {
 			// verifyRerender(driver, tBrowser);
 
 //			////// 1.VINpx:
-			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+//			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+//			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
 
 			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
 
