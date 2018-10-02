@@ -57,8 +57,7 @@ public class UserList extends Comlibs {
 	By ManageAngleMappingsLocator = By.xpath("//*[@id=\"importanglemappingMenu\"]");
 	By ManageExportTemplatesLocator = By.xpath("//*[@id=\"exportTemplateMenu\"]");
 	By ManageGlobalConfigLocator = By.xpath("//*[@id=\"configMenu\"]");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
+	By AddAccountBtnLocator = By.xpath("//*[@id=\"addAccountButton\"]/span");
 	// By Locator=By.xpath("");
 	// By Locator=By.xpath("");
 	// By Locator=By.xpath("");
@@ -68,14 +67,14 @@ public class UserList extends Comlibs {
 	// By Locator=
 	// By Locator=
 
-	public DealerProfile clickEditBtn(WebDriver driver, String num) throws IOException {
+	public DealerProfile clickEditBtnOld(WebDriver driver, String num) throws IOException {
 		// By editBtnLocator = By.xpath("//*[@id=\"listViewBtn\"]/span"); // //*[@id="listViewBtn"]/span or xpath=(//button[@id='listViewBtn'])[3]
 		// By editBtnLocator = By.xpath("(//button[@id='listViewBtn'])[3]"); //ok //*[@id="listViewBtn"]/span or xpath=(//button[@id='listViewBtn'])[3]
 		By editBtnLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");
 		try {
-		driver.findElement(editBtnLocator).click();
-		}catch(Exception e) {
-			checkEditBtnLocationAndScroll(driver,num);
+			driver.findElement(editBtnLocator).click();
+		} catch (Exception e) {
+			checkEditBtnLocationAndScroll(driver, num);
 			driver.findElement(editBtnLocator).click();
 		}
 		for (String winHandle : driver.getWindowHandles()) {
@@ -84,10 +83,23 @@ public class UserList extends Comlibs {
 		return new DealerProfile(driver);
 	}
 
+	public AccountProfile clickEditBtn(WebDriver driver, String num) throws IOException {
+		By editBtnLocator = By.xpath("(//button[@id='accountViewBtn'])[" + num + "]");// 1,2,3
+		try {
+			driver.findElement(editBtnLocator).click();
+		} catch (Exception e) {
+			driver.findElement(editBtnLocator).click();
+		}
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+		}
+		return new AccountProfile(driver);
+	}
+
 	public UserList checkEditBtnLocationAndScroll(WebDriver driver, String num) throws IOException {
 		num = Integer.toString(Integer.parseInt(num) + 3);// Integer.parseInt(MaxVins)
 		By editBtnLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");
-//		boolean numShowInPage = elementExist(driver, editBtnLocator, true, "tc");
+		// boolean numShowInPage = elementExist(driver, editBtnLocator, true, "tc");
 		boolean numShowInPage = driver.findElement(editBtnLocator).isDisplayed();
 		if (numShowInPage) {
 			scrollUp(driver, 100, "ddd");
@@ -433,4 +445,16 @@ public class UserList extends Comlibs {
 		return new DealerPortal.ImageGallery(driver);
 	}
 
+	public AccountProfile clickAddAccount(WebDriver driver) throws IOException {
+		driver.findElement(AddAccountBtnLocator).click();
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+		}
+		return new AccountProfile(driver);
+	}
+	public UserList clickExpandDealersArrow(WebDriver driver,int num) throws IOException {
+		By expandDealersArrowLocator = By.xpath("//*[@id='dealerTable']/tbody/tr/td["+num+"]");//1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
+		driver.findElement(expandDealersArrowLocator).click();
+		return this;
+	}
 }

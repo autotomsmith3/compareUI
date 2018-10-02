@@ -11,13 +11,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.json.*;
 
-public class DealerProfile extends Comlibs {
+public class AccountProfile extends Comlibs {
 	private final WebDriver driver;
 
-	public DealerProfile(WebDriver driver) throws IOException {
+	public AccountProfile(WebDriver driver) throws IOException {
 		this.driver = driver;
 		// String wh1=driver.getWindowHandle();
-		String sPageTitle = "Dealer Profile";
+		String sPageTitle = "Account Profile";
 		boolean existTitle = TitleDisplay(driver, sPageTitle);
 		if (existTitle) {
 			rwExcel("", true, "Page Title is displayed", sPageTitle);
@@ -49,6 +49,8 @@ public class DealerProfile extends Comlibs {
 	// By StateProvinceLocator=By.xpath("//*[@id=\"dealerState\"]/option[33]") ;//NY
 	// By CountryLocator=By.xpath("//*[@id=\"dealerCountry\"]/option[1]") ;//USA
 	By ZipPostalCodeLocator = By.xpath("//*[@id=\"dealerZip\"]");
+	By UserDealerNameLocator = By.xpath("//*[@id=\"userCommonName\"]");
+
 	By FirstNameLocator = By.xpath("//*[@id=\"userFirstName\"]");
 	By LastNameLocator = By.xpath("//*[@id=\"userLastName\"]");
 	By TagLineMarkingMsgLocator = By.xpath("//*[@id=\"dealerTag\"]");
@@ -62,7 +64,11 @@ public class DealerProfile extends Comlibs {
 	// By backGroundLocator=By.xpath("//*[@id=\"bg-0\"]/div[1]/img");
 	// *[@id="dealerListBtn"]/span
 	By MessageDisplayedOnHead = By.xpath("//*[@id=\"header\"]/div/div[2]/span");
-
+	// By AccountStatusLocator=By.xpath("//*[@id=\"userAccStatus\"]");
+	By AccountStatusLocator = By.xpath("//*[@id='userAccStatus']/option[1]"); // 1- Active, 2- Lock out, 3-Change Password, 4-Disabled
+	By SearchLocator = By.xpath("//*[@id=\"dealerTable_filter\"]/label/input");
+	By msgOnPage=By.xpath("//*[@id=\"header\"]/div/div[2]");//    //*[@id="header"]/div/div[2]/span
+	
 	public String getDealershipID(WebDriver driver) throws IOException {
 		String dealershipip = driver.findElement(DealershipIDLocator).getAttribute("value");
 		return dealershipip;
@@ -144,8 +150,19 @@ public class DealerProfile extends Comlibs {
 		return new DealerList(driver);
 	}
 
-	public DealerProfile clickSaveBtn(WebDriver driver, String tc) {
+	public AccountProfile clickSaveBtn(WebDriver driver, String tc) {
 		driver.findElement(SaveBtn).click();
+		return this;
+	}
+
+	public AccountProfile clickUploadBtn(WebDriver driver, int num) {
+		driver.findElement(UploadBtn).click();
+		return this;
+	}
+
+	public AccountProfile clickEditBtn(WebDriver driver, int num) {
+		By EditBtnLocator = By.xpath("(//button[@id='accountViewBtn'])[" + num + "]"); // xpath=(//button[@id='accountViewBtn'])[2] //1,2,3...
+		driver.findElement(EditBtnLocator).click();
 		return this;
 	}
 
@@ -173,144 +190,115 @@ public class DealerProfile extends Comlibs {
 		return dlrGuid;
 	}
 
-	public DealerProfile selectOEM(WebDriver driver, int oemNum) {
-		By OEMSelect = By.xpath("//*[@id=\"dealerOem\"]/option[" + oemNum + "]");// 13=GM
-		driver.findElement(OEMSelect).click();
+	public AccountProfile selectAccountStatus(WebDriver driver, int num) {
+		By AccountStatusLocator = By.xpath("//*[@id='userAccStatus']/option[" + num + "]"); // 1- Active, 2- Lock out, 3-Change Password, 4-Disabled
+		driver.findElement(AccountStatusLocator).click();
+		return this;
+	}
+	public AccountProfile selectDisplay(WebDriver driver, int num) {
+		By DisplayLocator = By.xpath("//*[@id='dealerTable_length']/label/select/option["+num+"]"); // 1- =50, 2- =100, 3- =150
+		driver.findElement(DisplayLocator).click();
 		return this;
 	}
 
-	public DealerProfile selectOEMBrands(WebDriver driver, int oemBrandNum) {
-		By OEMBrand = By.xpath("//*[@id=\"dealerInfoBody\"]/div/div/div[1]/div[2]/div[1]/div/div/div/div[13]/label["
-				+ oemBrandNum + "]/input");// 1=Buick, 2=Cadillac, 3=Chevrolet, 4=GMC
-		driver.findElement(OEMBrand).click();
+	public AccountProfile inputSearch(WebDriver driver, String searchForActEmail) {
+		driver.findElement(SearchLocator).sendKeys(searchForActEmail);
 		return this;
+
 	}
 
-	public DealerProfile inputDealersipID(WebDriver driver, String dlrID) {
+	public AccountProfile inputDealersipID(WebDriver driver, String dlrID) {
 		driver.findElement(DealershipIDLocator).sendKeys(dlrID);
 		;
 		return this;
 
 	}
 
-	public DealerProfile inputDealershipName(WebDriver driver, String dlrName) {
+	public AccountProfile inputDealershipName(WebDriver driver, String dlrName) {
 		driver.findElement(DealershipNameLocator).sendKeys(dlrName);
 		;
 		return this;
 	}
 
-	public DealerProfile inputDealersipEmail(WebDriver driver, String dlrEmail) {
+	public AccountProfile inputDealersipEmail(WebDriver driver, String dlrEmail) {
 		driver.findElement(DealershipEmailLocator).sendKeys(dlrEmail);
 		;
 		return this;
 	}
 
-	public DealerProfile inputAccountEmail(WebDriver driver, String acctEmail) {
+	public AccountProfile inputAccountEmail(WebDriver driver, String acctEmail) {
 		driver.findElement(AccountEmailLocator).sendKeys(acctEmail);
 		;
 		return this;
 	}
 
-	public DealerProfile inputMetadata(WebDriver driver, String metaData) {
+	public AccountProfile inputMetadata(WebDriver driver, String metaData) {
 		driver.findElement(MetadataLocator).sendKeys(metaData);
 		;
 		return this;
 	}
 
-	public DealerProfile selectVINpxProd(WebDriver driver) {
-		driver.findElement(ProductVINpxLocator).click();
-		;
-		return this;
-	}
-
-	public DealerProfile selectSTOCKpxProd(WebDriver driver) {
-		driver.findElement(ProductSTOCKpxLocator).click();
-		;
-		return this;
-	}
-
-	public DealerProfile selectLOTpxProd(WebDriver driver) {
-		driver.findElement(ProductLOTpxLocator).click();
-		;
-		return this;
-	}
-
-	public DealerProfile inputAddress(WebDriver driver, String address) {
+	public AccountProfile inputAddress(WebDriver driver, String address) {
 		driver.findElement(AddrssLocator).sendKeys(address);
 		return this;
 	}
 
-	public DealerProfile inputAddressLine2(WebDriver driver, String address2) {
+	public AccountProfile inputAddressLine2(WebDriver driver, String address2) {
 		driver.findElement(AddressLine2Locator).sendKeys(address2);
 		return this;
 	}
 
-	public DealerProfile inputCity(WebDriver driver, String city) {
+	public AccountProfile inputCity(WebDriver driver, String city) {
 		driver.findElement(CityLocator).sendKeys(city);
 		return this;
 	}
 
-	public DealerProfile inputState(WebDriver driver, int state) {
+	public AccountProfile inputState(WebDriver driver, int state) {
 		By StateProvinceLocator = By.xpath("//*[@id=\"dealerState\"]/option[" + state + "]");// NY=33
 		driver.findElement(StateProvinceLocator).click();
 		;
 		return this;
 	}
 
-	public DealerProfile inputCountry(WebDriver driver, int country) {
+	public AccountProfile inputCountry(WebDriver driver, int country) {
 		By CountryLocator = By.xpath("//*[@id=\"dealerCountry\"]/option[" + country + "]");// USA=1
 		driver.findElement(CountryLocator).click();
 		;
 		return this;
 	}
 
-	public DealerProfile inputZipCode(WebDriver driver, String zipCode) {
+	public AccountProfile inputZipCode(WebDriver driver, String zipCode) {
 		driver.findElement(ZipPostalCodeLocator).sendKeys(zipCode);
 		return this;
 	}
 
-	public DealerProfile inputFirstName(WebDriver driver, String firstName) {
+	public AccountProfile inputUserDealerName(WebDriver driver, String firstName) {
+		driver.findElement(UserDealerNameLocator).sendKeys(firstName);
+		return this;
+	}
+
+	public AccountProfile inputFirstName(WebDriver driver, String firstName) {
 		driver.findElement(FirstNameLocator).sendKeys(firstName);
 		return this;
 	}
 
-	public DealerProfile inputLastName(WebDriver driver, String lastName) {
+	public AccountProfile inputLastName(WebDriver driver, String lastName) {
 		driver.findElement(LastNameLocator).sendKeys(lastName);
 		return this;
 	}
 
-	public DealerProfile inputTagLineMarkingMsg(WebDriver driver, String msg) {
+	public AccountProfile inputTagLineMarkingMsg(WebDriver driver, String msg) {
 		driver.findElement(TagLineMarkingMsgLocator).sendKeys(msg);
 		return this;
 	}
 
-	public DealerProfile inputWebsite(WebDriver driver, String website) {
+	public AccountProfile inputWebsite(WebDriver driver, String website) {
 		driver.findElement(WebsiteLocator).sendKeys(website);
 		return this;
 	}
 
-	public DealerProfile inputDealershipPhone(WebDriver driver, String num) {
+	public AccountProfile inputDealershipPhone(WebDriver driver, String num) {
 		driver.findElement(DealershipPhoneNumberLocator).sendKeys(num);
-		return this;
-	}
-
-	public DealerProfile selectTemplateSetting(WebDriver driver, int num) {
-		By TemplateSettingsLocator = By.xpath("//*[@id=\"selectedBackground\"]/option[" + num + "]");// DEFAULT=1; replace=2;overlay=3;
-		driver.findElement(TemplateSettingsLocator).click();
-		return this;
-	}
-
-	public DealerProfile clickUploadBtn(WebDriver driver, int num) {
-		driver.findElement(UploadBtn).click();
-		return this;
-	}
-
-	public DealerProfile selectBackGroundSet(WebDriver driver, int num) {
-		By backGroundSetLocator = By.xpath("//*[@id=\"bg-" + num + "\"]/div[1]/img");// Generic Dealership=7; White Gradient=0
-		// By backGroundSetLocator=By.xpath("//*[@id=\"bg-7\"]/div[1]/img");
-		// By backGroundLocator=By.xpath("//*[@id=\"bg-0\"]/div[1]/img");
-		scrollUp(driver, 1000, "ddd"); // QA -2000 Prod -3000
-		driver.findElement(backGroundSetLocator).click();
 		return this;
 	}
 

@@ -29,7 +29,7 @@ public class DealerList extends Comlibs {
 	public DealerList(WebDriver driver) throws IOException {
 		this.driver = driver;
 		// String wh1=driver.getWindowHandle();
-		String sPageTitle = "Dealer List";
+		String sPageTitle = "User List";
 		boolean existTitle = TitleDisplay(driver, sPageTitle);
 		if (existTitle) {
 			rwExcel("", true, "Page Title is displayed", sPageTitle);

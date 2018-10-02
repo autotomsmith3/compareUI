@@ -2412,28 +2412,28 @@ public class AUTOpxController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-//			 //// 0.General Inventory Gallery
-//			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-//			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
-//			 vehicleGallery(driver, tBrowser, env);
-//			 //verifyRerender(driver, tBrowser);
-//
-//			////// 1.VINpx:
-//			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-//			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-//
-//			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-//
-//			 ////// 2. STOCKpx
-//			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-//			 STOCKpxInventoryTC(driver, tBrowser, env);
+			 //// 0.General Inventory Gallery
+			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
+			 vehicleGallery(driver, tBrowser, env);
+			 //verifyRerender(driver, tBrowser);
+
+			////// 1.VINpx:
+			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+
+			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+
+			 ////// 2. STOCKpx
+			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			 STOCKpxInventoryTC(driver, tBrowser, env);
 			
 			//////// bc.Wait(38*60);//wait 18 minutes;
 			////
-			// ////// 3. LOTpx
-			 bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
-			 LOTpxInventoryTC(driver, tBrowser, env);
-			 LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
+//			// ////// 3. LOTpx
+//			 bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
+//			 LOTpxInventoryTC(driver, tBrowser, env);
+//			 LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
 			System.out.println("Test is complete!!!");
