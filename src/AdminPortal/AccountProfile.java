@@ -1,10 +1,16 @@
 package AdminPortal;
 
+/*Example to find the number of sub of an object:
+      	By oneDealerLocator = By.xpath("//*[@id='allDealers']/option["+num+"]"); // 1,2,3...
+		By allDealerLocator = By.xpath("//*[@id='allDealers']/option"); // 1,2,3...
+		int allDealersNum=driver.findElements(allDealerLocator).size();
+*/
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -67,8 +73,10 @@ public class AccountProfile extends Comlibs {
 	// By AccountStatusLocator=By.xpath("//*[@id=\"userAccStatus\"]");
 	By AccountStatusLocator = By.xpath("//*[@id='userAccStatus']/option[1]"); // 1- Active, 2- Lock out, 3-Change Password, 4-Disabled
 	By SearchLocator = By.xpath("//*[@id=\"dealerTable_filter\"]/label/input");
-	By msgOnPage=By.xpath("//*[@id=\"header\"]/div/div[2]");//    //*[@id="header"]/div/div[2]/span
-	
+	By msgOnPage = By.xpath("//*[@id=\"header\"]/div/div[2]");// //*[@id="header"]/div/div[2]/span
+	By leftArrowDetachLocator = By.xpath("//*[@id='detachButton']");
+	By rightArrowAttachLocator = By.xpath("//*[@id='attachButton']");
+
 	public String getDealershipID(WebDriver driver) throws IOException {
 		String dealershipip = driver.findElement(DealershipIDLocator).getAttribute("value");
 		return dealershipip;
@@ -166,6 +174,18 @@ public class AccountProfile extends Comlibs {
 		return this;
 	}
 
+	public AccountProfile clickLeftArrowDetachBtn(WebDriver driver) {
+		driver.findElement(leftArrowDetachLocator).click();
+		Wait(1);
+		return this;
+	}
+
+	public AccountProfile clickRightArrowAttachBtn(WebDriver driver) {
+		driver.findElement(rightArrowAttachLocator).click();
+		Wait(1);
+		return this;
+	}
+
 	public boolean checkMessageDisplayedHead(WebDriver driver, String message) {
 		String msg = driver.findElement(MessageDisplayedOnHead).getText();// .getAttribute("messageBox");
 		boolean messageExist = false;
@@ -195,9 +215,49 @@ public class AccountProfile extends Comlibs {
 		driver.findElement(AccountStatusLocator).click();
 		return this;
 	}
+
 	public AccountProfile selectDisplay(WebDriver driver, int num) {
-		By DisplayLocator = By.xpath("//*[@id='dealerTable_length']/label/select/option["+num+"]"); // 1- =50, 2- =100, 3- =150
+		By DisplayLocator = By.xpath("//*[@id='dealerTable_length']/label/select/option[" + num + "]"); // 1- =50, 2- =100, 3- =150
 		driver.findElement(DisplayLocator).click();
+		return this;
+	}
+
+	public String selectOneDealerFrAllDealers(WebDriver driver, int num) {
+		By oneDealerLocator = By.xpath("//*[@id='allDealers']/option[" + num + "]"); // 1,2,3...
+		By allDealerLocator = By.xpath("//*[@id='allDealers']/option"); // 1,2,3...
+		int allDealersNum = driver.findElements(allDealerLocator).size();
+		for (int i = 1; i <= allDealersNum; i++) {
+			oneDealerLocator = By.xpath("//*[@id='allDealers']/option[" + i + "]");
+			driver.findElement(oneDealerLocator).click();
+
+		}
+		oneDealerLocator = By.xpath("//*[@id='allDealers']/option[" + num + "]"); // 1,2,3...
+		boolean selected = driver.findElement(oneDealerLocator).isSelected();
+		driver.findElement(oneDealerLocator).click();
+		selected = driver.findElement(oneDealerLocator).isSelected();
+		String attachedDealerIDnDealerNamex = driver.findElement(oneDealerLocator).getText();
+		return attachedDealerIDnDealerNamex;
+	}
+
+	public AccountProfile selectOneDealerFrAccountDealers(WebDriver driver, String selectedName) {
+		int num = 0;
+		By AccountDealersLocator = By.xpath("//*[@id='userAttachedDealers']/option");// //*[@id="userAttachedDealers"]
+		By AccountDealerLocator = By.xpath("//*[@id='userAttachedDealers']/option[" + num + "]");// 1,2,3...
+		num = driver.findElements(AccountDealersLocator).size();
+		for (int i = 1; i <= num; i++) {
+			AccountDealerLocator = By.xpath("//*[@id='userAttachedDealers']/option[" + i + "]");
+			driver.findElement(AccountDealerLocator).click();
+		}
+
+		for (int i = 1; i <= num; i++) {
+			AccountDealerLocator = By.xpath("//*[@id='userAttachedDealers']/option[" + i + "]");
+			String ActDealerName = driver.findElement(AccountDealerLocator).getText();
+			if (selectedName.equalsIgnoreCase(ActDealerName)) {
+				num = i;
+				driver.findElement(AccountDealerLocator).click();
+			}
+		}
+		// driver.findElement(AccountDealerLocator).click();
 		return this;
 	}
 
@@ -307,5 +367,89 @@ public class AccountProfile extends Comlibs {
 		// Window scroll down to make the custom image visible.
 		JavascriptExecutor jsx = (JavascriptExecutor) driver;
 		jsx.executeScript("window.scrollBy(0," + scrollNum + ")", "");
+	}
+
+	public boolean verifyOneDealerInAllDealersField(WebDriver driver, String attachedDealerName, boolean dealerExisting,
+			String tc) throws IOException {
+		boolean nameExist = false;
+		int num = 0;
+		String oneDealerName = "";
+		By oneDealerLocator = By.xpath("//*[@id='allDealers']/option[" + num + "]"); // 1,2,3...
+		By allDealerLocator = By.xpath("//*[@id='allDealers']/option"); // 1,2,3...
+		int allDealersNum = driver.findElements(allDealerLocator).size();
+		for (int i = 1; i <= allDealersNum; i++) {
+			oneDealerLocator = By.xpath("//*[@id='allDealers']/option[" + i + "]");
+			oneDealerName = driver.findElement(oneDealerLocator).getText();
+			if (attachedDealerName.equalsIgnoreCase(oneDealerName)) {
+				if (dealerExisting) {
+					rwExcel(tc, true, "Verify Atached Dealer in All Dealers field", "The dealership with name = ("
+							+ attachedDealerName + " ) still in the Account Dealers filed. ");
+					nameExist = true;
+					break;
+				} else {
+					rwExcel(tc, false, "Verify Atached Dealer in All Dealers field", "The dealership with name = ("
+							+ attachedDealerName + " ) still in the Account Dealers filed. ");
+					nameExist = true;
+				}
+
+			} else {
+				if (i == num) {
+					nameExist = false;
+					if (dealerExisting) {
+						rwExcel(tc, true, "Verify Atached Dealer in All Dealers field", "The dealership with name = ("
+								+ attachedDealerName + " ) does NOT exist in the Account Dealers filed. ");
+					} else {
+						rwExcel(tc, false, "Verify Atached Dealer in All Dealers field", "The dealership with name = ("
+								+ attachedDealerName + " ) does NOT exist in the Account Dealers filed. ");
+					}
+				}
+			}
+		}
+
+		return nameExist;
+	}
+
+	public boolean verifyOneDealerInAccountDealersField(WebDriver driver, String attachedDealerName,
+			boolean dealerExisting, String tc) throws IOException {
+		boolean nameExist = false;
+		int num = 0;
+		String ActDealerName = "";
+		By AccountDealerLocator = By.xpath("//*[@id='userAttachedDealers']/option[" + num + "]");
+		By allDealerLocator = By.xpath("//*[@id='userAttachedDealers']/option"); // 1,2,3...
+		num = driver.findElements(allDealerLocator).size();
+		for (int i = 1; i <= num; i++) {
+			AccountDealerLocator = By.xpath("//*[@id='userAttachedDealers']/option[" + i + "]");
+			ActDealerName = driver.findElement(AccountDealerLocator).getText();
+			if (attachedDealerName.equalsIgnoreCase(ActDealerName)) {
+				if (dealerExisting) {
+					rwExcel(tc, true, "The dealership with name = (" + attachedDealerName
+							+ " ) exist in the Account Dealers filed. ", "Detached from All Account dealers.");
+					nameExist = true;
+					break;
+				} else {
+					rwExcel(tc, false,
+							"The dealership with name = (" + attachedDealerName
+									+ " ) still exist in the Account Dealers filed when should not. ",
+							"Failed to detach from All Account dealers.");
+					nameExist = true;
+				}
+				nameExist = true;
+				break;
+			} else {
+				if (i == num) {
+					nameExist = false;
+
+					if (dealerExisting) {
+						rwExcel(tc, true, "The dealership with name = (" + attachedDealerName + ")",
+								"Sucessfully detached from All Account dealers. It cannot be found in the Account Dealers filed");
+					} else {
+						rwExcel(tc, true, "The dealership with name = (" + attachedDealerName + ")",
+								"Sucessfully detached from All Account dealers. It cannot be found in the Account Dealers filed");
+					}
+				}
+			}
+		}
+
+		return nameExist;
 	}
 }

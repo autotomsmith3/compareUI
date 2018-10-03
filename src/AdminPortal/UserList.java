@@ -457,4 +457,21 @@ public class UserList extends Comlibs {
 		driver.findElement(expandDealersArrowLocator).click();
 		return this;
 	}
+	public DealerProfile clickEditOnDealer(WebDriver driver,int num) throws IOException {
+		By editOnDealerLocator = By.xpath("(//button[@id='listViewBtn'])["+num+"]");//1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
+		driver.findElement(editOnDealerLocator).click();
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+		}
+		return new DealerProfile(driver);
+	}
+	public DealerPortal.DealerProfile clickViewDealerPortal(WebDriver driver,int num) throws IOException {
+		By viewDealerPortalLocator = By.xpath("(//button[@id='dealerViewBtn'])["+num+"]");//1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
+		driver.findElement(viewDealerPortalLocator).click();
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+		}
+		return new DealerPortal.DealerProfile(driver);
+	}
+	
 }
