@@ -2110,7 +2110,89 @@ public class AUTOpxController extends Comlibs {
 			driver.close();
 		}
 	}
+	public static void VINpxTemplatesTC(WebDriver driver, String brw, String versionNum, String envment,
+			String checkEmail) throws IOException, InterruptedException, ClassNotFoundException, SQLException {
 
+		// Load environment parameters
+		Properties prop = new Properties();
+		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		try {
+			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String env = prop.getProperty("AUTOpx.environment");
+		String envBrowser = prop.getProperty("AUTOpx.browser");
+		String render = prop.getProperty("AUTOpx.render");
+		String addNewVIN = prop.getProperty("AUTOpx.addNewVIN");
+		String accountEmail = prop.getProperty(env + ".VINpxEmail");
+		String accountPS = prop.getProperty(env + ".VINpxPassword");
+		// String baseURL = prop.getProperty(env + ".VINpxDealerPortalBaseURL");
+		String dealershipName = prop.getProperty(env + ".VINpxDealershipname");
+		String dealerCode = prop.getProperty(env + ".VINpxDealerCode");
+		String vin01 = prop.getProperty(env + ".VINpxVin01");
+		String vin02 = prop.getProperty(env + ".VINpxVin02");
+		String vehGUID01 = prop.getProperty(env + ".VINpxVin01GUID");
+		String vehGUID02 = prop.getProperty(env + ".VINpxVin02GUID");
+		// String vinpxnewVin01 = prop.getProperty(env + ".VINpxNewVIN01");
+		String[] VINpxNewVINs = fetchOneDemArrayFromPropFile(env + ".VINpxNewVINs", prop);
+		String serverName = prop.getProperty(env + ".serverName");
+		String dbName = prop.getProperty(env + ".dbName");
+		String userName = prop.getProperty(env + ".userName");
+		String password = prop.getProperty(env + ".password");
+		String MaxVins = prop.getProperty(env + ".MaxVinsForPreview");
+		int MaxVinsForPreview = Integer.parseInt(MaxVins);
+		// Initial
+		// final int wt_Secs = 6;
+		String TCnum;
+		// String ptitle;
+		String tempVIN = "";
+		String tempVehGUID = "";
+		Comlibs ac = new Comlibs();
+		ac.rwExcel("", "*********VINpx Inventory TCs**********", "");
+		AUTOpxLogin loginP = new AUTOpxLogin(driver);
+		TCnum = "TC139659_7_vinpx";
+		loginP.verifyHeaderFooter(env, versionNum, TCnum);
+		TCnum = "TC141679_6_vinpx";
+
+		loginP.login(driver, accountEmail, accountPS);
+		AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+		acceptLicenseP.clickCancelBtn(driver);
+
+		loginP.login(driver, accountEmail, accountPS);
+		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+
+		TCnum = "TC144867_vinpx";
+		acceptLicenseP.verifyAgreementTitle(driver, 1, "VINpx Agreement", true, TCnum); // VINpx Agreement, STOCKpx Agreement, LOTpx Agreement
+
+		vinpxConent = acceptLicenseP.getFile("data/vinpxAgreement.txt");
+		int vinpxAgreementTotalLines = acceptLicenseP.getLineNum();
+		TCnum = "TC144867_5_vinpx";
+		acceptLicenseP.verifyPDF(driver, 1, "vinpx", vinpxConent, vinpxAgreementTotalLines, TCnum, envment);
+
+		acceptLicenseP.clickAcceptBtn(driver);
+		ImageGallery igP = new ImageGallery(driver);
+	
+		VehicleGallery vgP = new VehicleGallery(driver);
+		vgP.clickBackToInventoryBtn(driver);
+
+		DealerProfile dpP = new DealerProfile(driver);
+		
+		Templates tpP = new Templates(driver);
+		
+		
+		
+		
+		
+		// Stop here!
+
+		// Need to do. Verify Account Status for VINpx dealer TC139969. There
+		// is a ticket for the issue.
+
+		TCnum = "TC139684_06";
+		igP.clickLogout(driver);
+	}
 	private static String[] fetchOneDemArrayFromPropFile(String propertyName, Properties propFile) {
 
 		// get array split up by the colin
@@ -2413,21 +2495,27 @@ public class AUTOpxController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			 //// 0.General Inventory Gallery
-			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+//			 //// 0.General Inventory Gallery
+//			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
 //			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
-			 vehicleGallery(driver, tBrowser, env);
-			 //verifyRerender(driver, tBrowser);
-
-			////// 1.VINpx:
-			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-
-			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-
-			 ////// 2. STOCKpx
-			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			 STOCKpxInventoryTC(driver, tBrowser, env);
+//			 vehicleGallery(driver, tBrowser, env);
+//			 //verifyRerender(driver, tBrowser);
+//
+//			////// 1.VINpx:
+//			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+//			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+//
+//			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+//
+//			 ////// 2. STOCKpx
+//			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+//			 STOCKpxInventoryTC(driver, tBrowser, env);
+			
+			////// 3. Templates
+			 bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
+			 VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail); 
+			
+			
 			
 			//////// bc.Wait(38*60);//wait 18 minutes;
 			////

@@ -146,6 +146,7 @@ public class ImageGallery extends Comlibs {
 	By addInventoryEnterVinField = By.id("vin");// By.xpath("//form[@id='addVinForm']/div/input");
 	// By searchVinOrStockNo = By.id("searchVinOrStockNo");
 	By searchVinOrStockNo = By.xpath("//*[@id=\"searchVinOrStockNo\"]");
+	By templatesBtnLocator=By.xpath("//*[@id=\"navbarTabs\"]/li[3]/a");
 	// By filterLocator=;
 
 	// By
@@ -869,7 +870,10 @@ public class ImageGallery extends Comlibs {
 		driver.findElement(addInventoryCancelBtn).click();
 		return new ImageGallery(driver);
 	}
-
+	public Templates clickTemplatesBtn(WebDriver driver) throws IOException {
+		driver.findElement(templatesBtnLocator).click();
+		return new Templates(driver);
+	}
 	public ImageGallery inputVinInAddInventoryField(WebDriver driver, String sVin, String tc) throws IOException {
 		elementExist(driver, addInventoryEnterVinField, true, tc);
 		driver.findElement(addInventoryEnterVinField).clear();
