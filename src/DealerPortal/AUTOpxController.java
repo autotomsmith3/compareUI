@@ -574,8 +574,9 @@ public class AUTOpxController extends Comlibs {
 			allVinNums = MaxVinsForPreview;
 		}
 		 ac.Wait(2);
-		 igP.enterTextInSearch(vin01);
-		allImageNums = igP.getTileImageNum(driver, vehGUID01, "");
+		 igP.enterTextInSearch(vin01.substring(1, 5));// igP.enterTextInSearch(vin01.substring(1, 6));igP.enterTextInSearch(vin01);
+		 ac.Wait(6);
+		 allImageNums = igP.getTileImageNum(driver, vehGUID01, "");
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		vgP.verifyLoadPannelImage(driver, TCnum);
 
@@ -2414,7 +2415,7 @@ public class AUTOpxController extends Comlibs {
 
 			 //// 0.General Inventory Gallery
 			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
+//			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
 			 vehicleGallery(driver, tBrowser, env);
 			 //verifyRerender(driver, tBrowser);
 

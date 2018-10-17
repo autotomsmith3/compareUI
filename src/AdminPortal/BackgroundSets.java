@@ -64,6 +64,7 @@ public class BackgroundSets extends Comlibs {
 	By subitBtnLocator = By.xpath("//*[@id=\"newSetModalBtn\"]");
 	By cancelBtnLocator = By.xpath("//*[@id=\"newSetModal\"]/div/div/div[3]/button[2]");
 	By chooseFilesBtnLocator = By.xpath("//*[@id=\"images\"]");
+	By ManageImageTypesLocator = By.xpath("//*[@id=\"imagetypeMenu\"]");// Firefox: //*[@id="imagetypeMenu"]
 	// By Locator=By.xpath("");
 	// By Locator=By.xpath("");
 	// By Locator=By.xpath("");
@@ -139,10 +140,22 @@ public class BackgroundSets extends Comlibs {
 	}
 
 	public Backgrounds clickSubmit(WebDriver driver) throws IOException {
+		Wait(2);
 		driver.findElement(subitBtnLocator).click();
+		Wait(30);
 		return new Backgrounds(driver);
 	}
-
+	public ImageTypeList clickManageImageType(WebDriver driver) throws IOException {
+		driver.findElement(ManageImageTypesLocator).click();
+		return new ImageTypeList(driver);
+	}
+	public BackgroundSets selectSetType(WebDriver driver,int num) throws IOException {
+		By SetTypeLocator = By.xpath("//*[@id='sequence']/option["+num+"]");
+		driver.findElement(SetTypeLocator).click();
+		return this;
+	}
+	//*[@id='sequence']/option[3]
+	
 //	public BackgroundSets clickRefleshF5Btn(WebDriver driver, String tc) throws IOException {
 //		// driver.findElement(addInventoryBtn).sendKeys(Keys.F5);
 //		driver.navigate().to(driver.getCurrentUrl());

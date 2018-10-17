@@ -395,6 +395,8 @@ public class AdminPortalController extends Comlibs {
 		UserList UserListP = new UserList(driver);
 		// *************************UserListP******************************************************
 		// *************************UserListP******************************************************
+		ac.Wait(wt);
+		UserListP.scrollUp(driver, 3000, "ddd"); // QA -2000 Prod -3000
 		UserListP.clickDisplayDropDownBtn(driver, "3");
 		UserListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000
 
@@ -456,8 +458,8 @@ public class AdminPortalController extends Comlibs {
 		// DealerProfieP.selectLOTpxProd(driver);
 		// DealerProfieP.inputMetadata(driver, MetadataValues);
 
-		DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
-		DealerProfieP.selectTemplateSetting(driver, 1);
+//		DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
+//		DealerProfieP.selectTemplateSetting(driver, 1);
 		DealerProfieP.inputDealershipName(driver, DealershipName);
 		DealerProfieP.inputAddress(driver, Address);
 		DealerProfieP.inputAddressLine2(driver, AddressLine2);
@@ -499,8 +501,8 @@ public class AdminPortalController extends Comlibs {
 		// DealerProfieP.selectLOTpxProd(driver);
 		DealerProfieP.inputMetadata(driver, MetadataValues);
 
-		DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
-		DealerProfieP.selectTemplateSetting(driver, 1);
+//		DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
+//		DealerProfieP.selectTemplateSetting(driver, 1);
 		DealerProfieP.inputDealershipName(driver, DealershipName);
 		DealerProfieP.inputAddress(driver, Address);
 		DealerProfieP.inputAddressLine2(driver, AddressLine2);
@@ -530,7 +532,7 @@ public class AdminPortalController extends Comlibs {
 					"Sucessful msg shows: Your settings have been saved");
 		} else {
 			ac.rwExcel("AddDealervalid", false, "Add a new dealership with all fields",
-					"Failed to shows msg: Your settings have been saved. Currently it shows: An error occurred. Please try again.");
+					"Failed to shows msg: Your settings have been saved. Currently it shows: An error occurred. Please try again. There is bug here, see AUTOPXOPS-1227");
 		}
 
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
@@ -561,6 +563,7 @@ public class AdminPortalController extends Comlibs {
 		dealerExistInAccountDealers = AccountProfileP.verifyOneDealerInAccountDealersField(driver, attachedDealerName,
 				true, tc);
 		AccountProfileP.selectOneDealerFrAccountDealers(driver, attachedDealerName);
+		ac.Wait(wt);
 		AccountProfileP.clickLeftArrowDetachBtn(driver);
 		tc = "TC_Verify detach a dealer from Account Dealers_01";
 		dealerExistInAccountDealers = AccountProfileP.verifyOneDealerInAccountDealersField(driver, attachedDealerName,
@@ -614,7 +617,7 @@ public class AdminPortalController extends Comlibs {
 			BackgroundSetsP.clickEditSetBtn(driver, 1);
 			ac.Wait(wt);
 			BackgroundSetsP.clickAllDealershipsCheckBox(driver);// check
-			System.out.println("\nFirt click it did not appear.Wait... ClickAllDealershipsCheckBox twice!!!!!");
+			System.out.println("\nFirst click it did not appear.Wait... ClickAllDealershipsCheckBox twice!!!!!");
 		}
 		ac.Wait(wt);
 		BackgroundSetsP.clickAllDealershipsCheckBox(driver);// uncheck
@@ -636,14 +639,16 @@ public class AdminPortalController extends Comlibs {
 		BackgroundSetsP.clickCreateNewSet(driver);
 		ac.Wait(wt);
 		BackgroundSetsP.inputSetName(driver, "a");
+		BackgroundSetsP.selectSetType(driver, 3);// 1-Old (Do Not User), 2-Flat on Flat on Flat, 3-Normal, 4-GM Only, 5-FCA Only
 		System.out.println("\nPlease wait at least 2 minutes untill Backgrounds page showing...");
 		ac.Wait(wt);
 		BackgroundSetsP.clickSubmit(driver);
+		ac.Wait(wt);
 		UserListP.clickManageBGSets(driver);
 		ac.clickRefleshF5Btn(driver, tc);
 		BackgroundSetsP.clickDeleteBGSetBtn(driver, 1);
 		ac.acceptAlert(driver, tc, "OK");
-		ac.clickRefleshF5Btn(driver, tc);
+//		ac.clickRefleshF5Btn(driver, tc);
 
 		//// *************************clickManageBGSetsBtn******************************************************
 		//// *************************clickManageBGSetsBtn******************************************************
@@ -654,10 +659,13 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		String searchDefaultSequence = "10100";
 		String editedDefaultSequence = "10101";
+		ac.clickRefleshF5Btn(driver, tc);
+//		UserListP.clickManageDealerShips(driver);
 		UserListP.clickManageImageType(driver);
 		ImageTypeList ImageTypeListP = new ImageTypeList(driver);
 		// Add an Image Type and cancel
 		ImageTypeListP.clickAddImageTypeBtn(driver);
+		ac.Wait(wt);
 		ImageTypeListP.inputShortIdentifier(driver, "996");
 		ImageTypeListP.inputImageGroup(driver, "CUSTOM");
 		ImageTypeListP.inputImageDefinition(driver, "DEALER IMAGE");
@@ -727,7 +735,7 @@ public class AdminPortalController extends Comlibs {
 		// 2019-GM-6N[A-Z]26-...-6N[A-Z]26-...
 		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadi Int XT5, or only vdvi_interior is must.
 		AngleMappingListP.inputPattern(driver, patternS);
-		ac.Wait(wt * 2);
+		ac.Wait(wt * 4);
 		AngleMappingListP.selectImageType(driver, "1001", 2);
 		AngleMappingListP.clickCancel(driver);
 		ac.Wait(wt);
@@ -773,6 +781,7 @@ public class AdminPortalController extends Comlibs {
 		AngleMappingListP.selectImageType(driver, "10049", 56);
 		AngleMappingListP.clickSubmit(driver);
 		ac.acceptAlert(driver, tc, "OK");
+		ac.Wait(wt);
 		// Delete the Image Type just added one
 		AngleMappingListP.inputSearch(driver, editedNotesS);
 		AngleMappingListP.clickDeleteBtn(driver, 1);
@@ -860,9 +869,12 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		ExportTemplateListP.inputSearch(driver, editedName);
 		String newName = ExportTemplateListP.getNameString(driver, 1);
+		tc = "Delate an Export Tempate";
 		if (newName.equalsIgnoreCase(editedName)) {
 			// Bug here. Failed to delete an Export Template...logged AUTOPXOPS-1171
 			System.out.println("\nFailed to delete an Export Template here......logged AUTOPXOPS-1171");
+			ac.rwExcel(tc, false, "Delete an Export Template",
+					"Failed to delete an Export Template here......logged AUTOPXOPS-1171");
 		}
 		//// *************************ManageExportTemplates******************************************************
 		//// *************************ManageExportTemplates******************************************************

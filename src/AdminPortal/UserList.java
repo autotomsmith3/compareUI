@@ -53,7 +53,7 @@ public class UserList extends Comlibs {
 	By searchLocator = By.xpath("//input[@type='search']");
 	By ManageDealerShipsLocator = By.xpath("//*[@id=\"dealershipMenu\"]");
 	By ManageBGSetsLocator = By.xpath("//*[@id=\"backgroundMenu\"]");
-	By ManageImageTypesLocator = By.xpath("//*[@id=\"imagetypeMenu\"]");
+	By ManageImageTypesLocator = By.xpath("//*[@id=\"imagetypeMenu\"]");// Firefox: //*[@id="imagetypeMenu"]
 	By ManageAngleMappingsLocator = By.xpath("//*[@id=\"importanglemappingMenu\"]");
 	By ManageExportTemplatesLocator = By.xpath("//*[@id=\"exportTemplateMenu\"]");
 	By ManageGlobalConfigLocator = By.xpath("//*[@id=\"configMenu\"]");
@@ -417,6 +417,11 @@ public class UserList extends Comlibs {
 	}
 
 	public ImageTypeList clickManageImageType(WebDriver driver) throws IOException {
+//		ManageImageTypesLocator=By.id("imagetypeMenu");
+//		WebElement we0 = driver.findElement(ManageImageTypesLocator);
+//		hoverOnWebElement(driver,we0);
+//		boolean existE=driver.findElement(ManageImageTypesLocator).isDisplayed();
+//		existE=elementExist(ManageImageTypesLocator);
 		driver.findElement(ManageImageTypesLocator).click();
 		return new ImageTypeList(driver);
 	}

@@ -246,7 +246,11 @@ public class AccountProfile extends Comlibs {
 		num = driver.findElements(AccountDealersLocator).size();
 		for (int i = 1; i <= num; i++) {
 			AccountDealerLocator = By.xpath("//*[@id='userAttachedDealers']/option[" + i + "]");
-			driver.findElement(AccountDealerLocator).click();
+			boolean enabled = driver.findElement(AccountDealerLocator).isSelected();
+			if (enabled) {
+				driver.findElement(AccountDealerLocator).click();
+			}
+
 		}
 
 		for (int i = 1; i <= num; i++) {
@@ -254,7 +258,10 @@ public class AccountProfile extends Comlibs {
 			String ActDealerName = driver.findElement(AccountDealerLocator).getText();
 			if (selectedName.equalsIgnoreCase(ActDealerName)) {
 				num = i;
-				driver.findElement(AccountDealerLocator).click();
+				boolean enabled = driver.findElement(AccountDealerLocator).isSelected();
+				if (!enabled) {
+					driver.findElement(AccountDealerLocator).click();
+				}
 			}
 		}
 		// driver.findElement(AccountDealerLocator).click();
