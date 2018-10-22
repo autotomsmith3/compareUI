@@ -67,7 +67,7 @@ public class DealerProfile extends Comlibs {
 	By xdeleteBtnLocator=By.xpath("//*[@id='removeLogo']");
 	By inventoryGalleryBtnLocator=By.xpath("//*[@id='navbarTabs']/li[1]/a");
 	By templatesBtnLocator=By.xpath("//*[@id=\"navbarTabs\"]/li[3]/a");
-//	By Locator=By.xpath("");
+//	By brandLocator=By.xpath("//*[@id='dealerBrand']/option[2]");
 //	By Locator=By.xpath("");
 	
 	
@@ -108,6 +108,28 @@ public class DealerProfile extends Comlibs {
 	public Templates clickTemplatesBtn(WebDriver driver) throws IOException {
 		driver.findElement(templatesBtnLocator).click();
 		return new Templates(driver);
+	}
+	public DealerProfile selectBand(WebDriver driver,String dealerName) throws IOException {
+		int num=0,b=0;		
+		By brandsLocator=By.xpath("//*[@id=\"dealerBrand\"]/option");  //*[@id="dealerBrand"]
+//		driver.findElement(brandsLocator).click();
+		By brandLocator=By.xpath("//*[@id='dealerBrand']/option["+b+"]");
+		num=driver.findElements(brandsLocator).size();
+//		driver.findElement(brandLocator).click();
+		for (int i=1;i<=num;i++) {
+			b=i;
+			brandLocator=By.xpath("//*[@id='dealerBrand']/option["+b+"]");
+			driver.findElement(brandLocator).click();
+			String Bname=driver.findElement(brandsLocator).findElement(brandLocator).getText();
+			if (Bname.equalsIgnoreCase(dealerName)) {
+				driver.findElement(brandLocator).click();
+				break;
+			}else if (i==num){
+				System.out.println("Dealer name: "+dealerName+" is Not found!");
+			}
+		}
+
+		return new DealerProfile(driver);
 	}
 	public void verifyDealershipIDBrands(String dealershipID, String brands, String tc) throws IOException {
 		// assertEquals("Lucas Zhou",

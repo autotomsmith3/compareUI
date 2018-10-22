@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -73,7 +74,7 @@ public class Templates extends Comlibs {
 	By templatesBtnLocator=By.xpath("//*[@id=\"navbarTabs\"]/li[3]/a");
 	By saveBtnLocator=By.xpath("//*[@id=\"saveBtn\"]/span");
 	
-	By headerCheckBoxLocator=By.xpath("//label[1]/span");
+	By headerCheckBoxLocator=By.xpath("//*[@id=\"templateBuilder\"]/div[3]/form/label[1]");////*[@id="templateBuilder"]/div[3]/form/label[1]/span     
 	By headerEditLocator=By.xpath("//*[@id=\"headerEditBtn\"]");
 	By headerContent_DealershipLogo_CheckBoxLocator=By.xpath("//*[@id='headerContent']/label[2]/span");
 	By headerContent_DealershipAddress_CheckBoxLocator=By.xpath("//*[@id='headerContent']/label[3]/span");
@@ -81,11 +82,15 @@ public class Templates extends Comlibs {
 	By headerContent_DealershipEmail_CheckBoxLocator=By.xpath("//*[@id='headerContent']/label[5]/span");	
 	By headerContent_DealershipWebsite_CheckBoxLocator=By.xpath("//*[@id='headerContent']/label[6]/span");
 	
-	By contentXBtnLocator=By.xpath("//*[@id=\"closeHeaderDiv\"]");//
-	By contentSAVEBtnLocator=By.xpath("//*[@id=\"saveHeaderContentBtn\"]");	
+	By contentHeaderXBtnLocator=By.xpath("//*[@id='closeHeaderDiv']");
+	By contentFooterXBtnLocator=By.xpath("//*[@id='closeFooterDiv']"); 
+	By contentOverlayXBtnLocator=By.xpath("//*[@id='closeOverlayDiv']");
 	
+	By contentHeaderSAVEBtnLocator=By.xpath("//*[@id=\"saveHeaderContentBtn\"]");	
+	By contentFooterSAVEBtnLocator=By.xpath("//*[@id=\"saveFooterContentBtn\"]");	
+	By contentOverlaySAVEBtnLocator=By.xpath("//*[@id=\"saveOverlayContentBtn\"]");	
 	
-	By footerCheckBoxLocator=By.xpath("//label[2]/span");
+	By footerCheckBoxLocator=By.xpath("//*[@id='templateBuilder']/div[3]/form/label[2]/span"); //     //*[@id="templateBuilder"]/div[3]/form/label[2]/span
 	By footerEditLocator=By.xpath("//*[@id=\"footerEditBtn\"]");
 	By footerContent_VehicleInfo_CheckBoxLocator=By.xpath("//*[@id=\"footerContent\"]/label[2]/span");
 	By footerContent_VIN_CheckBoxLocator=By.xpath("//*[@id=\"footerContent\"]/label[3]/span");
@@ -93,12 +98,22 @@ public class Templates extends Comlibs {
 	By footerContent_BrandLogo_CheckBoxLocator=By.xpath("//*[@id=\"footerContent\"]/label[5]/span");
 	
 	
-	
-	By overlayTopCheckBoxLocator=By.xpath("//label[3]/span");
+										   //*[@id="templateBuilder"]/div[3]/label[3]/span
+	By overlayTopCheckBoxLocator=By.xpath("//*[@id='templateBuilder']/div[3]/label[3]/span");//  //*[@id="templateBuilder"]/div[3]/form/label[3]/span
 	By overlayTopEditLocator=By.xpath("//*[@id=\"overlayTopEditBtn\"]");
 	By overlayTopContent_globleMSG_fieldLocator=By.xpath("//*[@id=\"overlayContent\"]/textarea");
 	
+	By replaceTemplateWithOwnCheckBoxLocator=By.xpath("//*[@id=\"templateBuilder\"]/div[3]/label[5]/span");
+	//*[@id="templateBuilder"]/div[3]/label[5]/span
 	
+	By uploadBtnLocator=By.xpath("//*[@id=\"dealerLogoContainer\"]/div[2]/div[1]/div");
+	//*[@id="dealerLogoContainer"]/div[2]/div[1]/div
+	
+	By featuresVDILocator=By.xpath("//*[@id='main-container']/div/div[4]/div[2]/label/span");
+								    //*[@id="main-container"]/div/div[4]/div[2]/label/span
+	By whatsCoolWCILocator=By.xpath("//*[@id='main-container']/div/div[4]/div[3]/label/span");
+	 								 //*[@id="main-container"]/div/div[4]/div[3]/label/span
+	By benefitsVBILocator=By.xpath("//*[@id='main-container']/div/div[4]/div[4]/label/span");	
 	
 	
 //	By Locator=By.xpath("");
@@ -139,13 +154,179 @@ public class Templates extends Comlibs {
 		driver.findElement(templatesBtnLocator).click();
 		return this;
 	}
-	
 	public Templates clickSaveBtn(WebDriver driver) throws IOException {
 		driver.findElement(saveBtnLocator).click();
 		return this;
 	}
+	public Templates clickContentHeaderSaveBtn(WebDriver driver) throws IOException {
+		driver.findElement(contentHeaderSAVEBtnLocator).click();
+		return this;
+	}
+	public Templates clickContentFooterSaveBtn(WebDriver driver) throws IOException {
+		driver.findElement(contentFooterSAVEBtnLocator).click();
+		return this;
+	}
+	public Templates clickContentOverlaySaveBtn(WebDriver driver) throws IOException {
+		driver.findElement(contentOverlaySAVEBtnLocator).click();
+		return this;
+	}
 	
+	public Templates clickHeaderXBtn(WebDriver driver) throws IOException {
+		driver.findElement(contentHeaderXBtnLocator).click();
+		return this;
+	}
+	public Templates clickFooterXBtn(WebDriver driver) throws IOException {
+		driver.findElement(contentFooterXBtnLocator).click();
+		return this;
+	}
+	public Templates clickOverlayXBtn(WebDriver driver) throws IOException {
+		driver.findElement(contentOverlayXBtnLocator).click();
+		return this;
+	}
 	
+	public Templates clickHeaderCheckBoxNotReadyYet(WebDriver driver, boolean checkbox, String tc) throws IOException {
+		By headerCheckBoxLocator=By.xpath("//*[@id=\"templateBuilder\"]/div[3]/label[1]/span");   //    //div[@id='templateBuilder']/div[3]/form/label/span 
+//	By	headerCheckBoxLocator=By.cssSelector("span.checkmark");// OK, css=form > .checkContain:nth-child(1) > .checkmark, css=span.checkmark
+//	By headerCheckBoxLocator=By.xpath("//span[contains(@class,'checkmark')]"); //Saturday ok size =17
+//	By headerCheckBoxLocator=By.xpath("//*[@id='templateBuilder']/div[3]/label[1]/span[contains(@class,'checkmark')]"); //Saturday ok size=1 	
+
+		headerEditLocator=By.xpath("//*[@id=\"headerEditBtn\"]");
+		footerCheckBoxLocator=By.xpath("//*[@id='templateBuilder']/div[3]/form/label[2]/span"); 
+		//*[@id="templateBuilder"]/div[3]/form/label[1]/span
+		//		String CheckBoxStatus=driver.findElement(headerCheckBoxLocator).getAttribute("checkmark");
+/**		How to use Java script to get content from Span ::after
+ * 		//from: https://stackoverflow.com/questions/28244911/selenium-webdriver-get-text-from-css-property-content-on-a-before-pseudo-ele/28265738#28265738
+ 
+		headerCheckBoxLocator=By.cssSelector("#templateBuilder > div:nth-child(3) > label:nth-child(1) > span");  
+		WebElement switchLabel = driver.findElement(headerCheckBoxLocator);
+//		WebElement switchLabel = driver.findElement(headerCheckBoxLocator);
+//		String colorRGB = ((JavascriptExecutor)driver).executeScript("return window.getComputedStyle(arguments[0], ':before').getPropertyValue('background-color');",switchLabel).toString();
+		String colorRGB = ((JavascriptExecutor)driver).executeScript("return window.getComputedStyle(arguments[0], ':after').getPropertyValue('background-color');",switchLabel).toString();
+
+		System.out.println("1st test: "+colorRGB);
+		headerCheckBoxLocator=By.cssSelector("#templateBuilder > div:nth-child(3) > label:nth-child(1) > span");  
+//		 switchLabel = driver.findElement(headerCheckBoxLocator);
+//		String colorRGB = ((JavascriptExecutor)driver).executeScript("return window.getComputedStyle(arguments[0], ':before').getPropertyValue('background-color');",switchLabel).toString();
+		 colorRGB = ((JavascriptExecutor)driver).executeScript("return window.getComputedStyle(arguments[0], ':after').getPropertyValue('background-color');",switchLabel).toString();
+
+		System.out.println("2nd test: "+colorRGB);
+		 * **/
+		try {
+			driver.findElement(headerEditLocator).click();
+			System.out.println("1st test: click OK!");
+		}catch (Exception e) {
+			System.out.println("Failed to click");
+			driver.findElement(headerCheckBoxLocator).click();
+			driver.findElement(headerEditLocator).click();
+		}
+		System.out.println("1st test:");
+		
+		
+		boolean element=driver.findElement(headerCheckBoxLocator).isDisplayed();
+//		pressAnyKeyToContinue();
+		 element=driver.findElement(headerCheckBoxLocator).isEnabled();
+		 element=driver.findElement(headerCheckBoxLocator).isSelected();
+		String ele=driver.findElement(headerCheckBoxLocator).getText();
+		ele=driver.findElement(headerCheckBoxLocator).getAttribute("after");
+		ele=driver.findElement(headerCheckBoxLocator).getText();
+		int ssize=driver.findElements(headerCheckBoxLocator).size();
+		
+		
+		String Status=driver.findElement(headerCheckBoxLocator).getText();
+		System.out.println(element+Status);
+		Status=driver.findElement(headerCheckBoxLocator).getTagName();//label
+		Status=driver.findElement(headerCheckBoxLocator).getText();//Header
+		
+		
+		
+		
+		boolean pageCheckBoxStatus=driver.findElement(headerCheckBoxLocator).isDisplayed();// when selected, it's true
+		pageCheckBoxStatus=driver.findElement(headerCheckBoxLocator).isSelected();// when selected, it's false
+		pageCheckBoxStatus=driver.findElement(headerCheckBoxLocator).isEnabled();// when selected, it's true
+		
+		pageCheckBoxStatus=driver.findElement(headerCheckBoxLocator).isDisplayed();// when selected, it's true
+		pageCheckBoxStatus=driver.findElement(headerCheckBoxLocator).isSelected();// when selected, it's false
+		pageCheckBoxStatus=driver.findElement(headerCheckBoxLocator).isEnabled();// when selected, it's true
+		
+		//Footer
+		pageCheckBoxStatus=driver.findElement(footerCheckBoxLocator).isDisplayed();// when unselected, it's true
+		pageCheckBoxStatus=driver.findElement(footerCheckBoxLocator).isSelected();// when unselected, it's false
+		pageCheckBoxStatus=driver.findElement(footerCheckBoxLocator).isEnabled();// when unselected, it's true
+		
+
+		
+		
+		if (pageCheckBoxStatus&&checkbox) {
+			driver.findElement(headerCheckBoxLocator).click();
+			driver.findElement(headerCheckBoxLocator).click();
+			pageCheckBoxStatus=driver.findElement(headerCheckBoxLocator).isSelected();
+			if (pageCheckBoxStatus) {
+				rwExcel(tc, true, "Click Header CheckBox","Header CheckBox is checked.");
+			}else {
+				rwExcel(tc, false, "Click Header CheckBox","Header CheckBox is checked.");
+			}
+		}else if ((!checkbox)||pageCheckBoxStatus){
+			driver.findElement(headerCheckBoxLocator).click();
+			pageCheckBoxStatus=driver.findElement(headerCheckBoxLocator).isSelected();
+			if (!pageCheckBoxStatus) {
+				rwExcel(tc, true, "Click Header to uncheck the CheckBox","Header CheckBox is unchecked.");
+			}else {
+				rwExcel(tc, false, "Click Header to uncheck the CheckBox","Header CheckBox is NOT unchecked.");
+			}
+		}else{
+			driver.findElement(headerCheckBoxLocator).click();
+			pageCheckBoxStatus=driver.findElement(headerCheckBoxLocator).isSelected();
+			if (pageCheckBoxStatus) {
+				rwExcel(tc, true, "Click Header CheckBox","Header CheckBox is checked.");
+			}else {
+				rwExcel(tc, false, "Click Header CheckBox","Header CheckBox is checked.");
+			}
+		}
+		
+		
+		
+		return this;
+	}
+	public Templates selectHeaderCheckBoxNotReadyYet(WebDriver driver, boolean checkbox1, boolean checkbox2, boolean checkbox3, boolean checkbox4, boolean checkbox5, String tc) throws IOException {
+/**  * 																	checkbox1-Logo, checkbox2-Address,	checkbox3-Phone,	checkbox4-Email,	checkbox5-Website
+ */
+		By headerContent_DealershipLogo_CheckBoxLocator=By.xpath("//*[@id='headerContent']/label[2]/span");
+		
+		boolean pageCheckBoxStatus=driver.findElement(headerContent_DealershipLogo_CheckBoxLocator).isDisplayed();// when selected, it's true
+		pageCheckBoxStatus=driver.findElement(headerContent_DealershipLogo_CheckBoxLocator).isSelected();// when selected, it's false
+		pageCheckBoxStatus=driver.findElement(headerContent_DealershipLogo_CheckBoxLocator).isEnabled();// when selected, it's true	
+		
+		if (pageCheckBoxStatus&&checkbox1) {
+			driver.findElement(headerCheckBoxLocator).click();
+			driver.findElement(headerCheckBoxLocator).click();
+			pageCheckBoxStatus=driver.findElement(headerCheckBoxLocator).isSelected();
+			if (pageCheckBoxStatus) {
+				rwExcel(tc, true, "Click Header CheckBox","Header CheckBox is checked.");
+			}else {
+				rwExcel(tc, false, "Click Header CheckBox","Header CheckBox is checked.");
+			}
+		}else if ((!checkbox1)||pageCheckBoxStatus){
+			driver.findElement(headerCheckBoxLocator).click();
+			pageCheckBoxStatus=driver.findElement(headerCheckBoxLocator).isSelected();
+			if (!pageCheckBoxStatus) {
+				rwExcel(tc, true, "Click Header to uncheck the CheckBox","Header CheckBox is unchecked.");
+			}else {
+				rwExcel(tc, false, "Click Header to uncheck the CheckBox","Header CheckBox is NOT unchecked.");
+			}
+		}else{
+			driver.findElement(headerCheckBoxLocator).click();
+			pageCheckBoxStatus=driver.findElement(headerCheckBoxLocator).isSelected();
+			if (pageCheckBoxStatus) {
+				rwExcel(tc, true, "Click Header CheckBox","Header CheckBox is checked.");
+			}else {
+				rwExcel(tc, false, "Click Header CheckBox","Header CheckBox is checked.");
+			}
+		}
+		
+		
+		
+		return this;
+	}
 	public Templates clickHeaderCheckBox(WebDriver driver) throws IOException {
 		driver.findElement(headerCheckBoxLocator).click();
 		return this;
@@ -158,7 +339,7 @@ public class Templates extends Comlibs {
 		driver.findElement(headerContent_DealershipLogo_CheckBoxLocator).click();
 		return this;
 	}
-	public Templates clickDealershipAddrressCheckBox(WebDriver driver) throws IOException {
+	public Templates clickDealershipAddressCheckBox(WebDriver driver) throws IOException {
 		driver.findElement(headerContent_DealershipAddress_CheckBoxLocator).click();
 		return this;
 	}
@@ -174,6 +355,13 @@ public class Templates extends Comlibs {
 		driver.findElement(headerContent_DealershipWebsite_CheckBoxLocator).click();
 		return this;
 	}	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -211,17 +399,32 @@ public class Templates extends Comlibs {
 		return this;
 	}
 	public Templates inputGlbMsgIntoOverlayContentField(WebDriver driver,String glbMsg) throws IOException {
-		driver.findElement(overlayTopContent_globleMSG_fieldLocator).click();
+		driver.findElement(overlayTopContent_globleMSG_fieldLocator).clear();
+		driver.findElement(overlayTopContent_globleMSG_fieldLocator).sendKeys(glbMsg);
 		return this;
 	}
 	
 	
+	public Templates clickFeaturesVDICheckBox(WebDriver driver) throws IOException {
+		driver.findElement(featuresVDILocator).click();
+		return this;
+	}	
+	public Templates clickWhatsCoolCheckBox(WebDriver driver) throws IOException {
+		driver.findElement(whatsCoolWCILocator).click();
+		return this;
+	}	
 	
+	public Templates clickBenefitsVBICheckBox(WebDriver driver) throws IOException {
+		driver.findElement(benefitsVBILocator).click();
+		return this;
+	}		
 	
-	
-	
-	
-	
+	public void scrollUp(WebDriver driver, int scrollNum, String tc) {
+
+		// Window scroll down to make the custom image visible.
+		JavascriptExecutor jsx = (JavascriptExecutor) driver;
+		jsx.executeScript("window.scrollBy(0," + scrollNum + ")", "");
+	}
 	
 	
 	
@@ -250,6 +453,33 @@ public class Templates extends Comlibs {
 	public ImageGallery clickInventoryGalleryBtn(WebDriver driver, String tc) throws IOException {
 		driver.findElement(inventoryGalleryBtnLocator).click();
 		return new ImageGallery(driver);
+	}
+	
+	public Templates clickReplaceTemplateWithOwnCheckBox(WebDriver driver, String tc) throws IOException {
+		driver.findElement(replaceTemplateWithOwnCheckBoxLocator).click();
+		return this;
+	}
+	
+	public Templates clickUploadBtn(WebDriver driver, String tc) throws IOException {
+		driver.findElement(uploadBtnLocator).click();
+		return this;
+	}
+	public void acceptAlert(String tc, String alertType) throws IOException {
+		boolean alertPass = false;
+		Wait(1);
+		try {
+			driver.switchTo().alert().accept();// on the “Ok” button as soon as the pop up window appears.
+			// driver.switchTo().alert().dismiss();// clicks on the “Cancel” button as soon as the pop up window appears.
+			driver.switchTo().defaultContent();//
+			alertPass = true;
+			System.out.println("1. Accept the alert in Template page.");
+			// rwExcel(tc, true, "Alert showing, Accept the alert =" + alertType, "Accetped successfully.");
+		} catch (Throwable e) {
+			alertPass = false;
+			System.out.println("1. Failed to Accept the alert in Template page.");
+			rwExcel(tc, false, "Alert showing, Accept the alert =" + alertType, "failed to accetp.");
+		}
+		// return alertPass;
 	}
 	public void verifyDealershipIDBrands(String dealershipID, String brands, String tc) throws IOException {
 		// assertEquals("Lucas Zhou",
@@ -292,7 +522,16 @@ public class Templates extends Comlibs {
 		}
 	}
 
-
+	public void pressAnyKeyToContinue()
+	 { 
+	        System.out.println("Press Enter key to continue...");
+	        try
+	        {
+	            System.in.read();
+	        }  
+	        catch(Exception e)
+	        {}  
+	 }
 
 	public void jSONParse() {
 		// String text = "{\"employees\":[{\"firstName\":\"John\",\"lastName\":\"Doe\" },{\"firstName\":\"Anna\",\"lastName\":\"Smith\" },{\"firstName\":\"Peter\",\"lastName\":\"Jones\" }]}";

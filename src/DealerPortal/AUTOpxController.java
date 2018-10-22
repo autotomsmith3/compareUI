@@ -286,7 +286,7 @@ public class AUTOpxController extends Comlibs {
 		vgP.clickBackToInventoryBtn(driver);
 		TCnum = "TC5123133";
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
 		TCnum = "TC139481_8";
@@ -379,11 +379,11 @@ public class AUTOpxController extends Comlibs {
 		igP.clickBackToInventoryBtn(driver);
 		TCnum = "TC5123150";
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
 		TCnum = "TC5123152";
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		igP.clickBackToInventoryBtn(driver);
 
@@ -436,7 +436,7 @@ public class AUTOpxController extends Comlibs {
 		igP.enterTextInSearch(vin01);
 		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		// Stop here!
 		// need to verify next vehicle hover image
 		TCnum = "TC139706_8";
@@ -447,11 +447,11 @@ public class AUTOpxController extends Comlibs {
 		igP.enterTextInSearch(vin01);
 		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		TCnum = "TC5123136";
 		igP.clickDeSelectBtn(driver, vin01, vehGUID01, TCnum);
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 		TCnum = "TC5123137";
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		VehicleGallery vgP = new VehicleGallery(driver);
@@ -461,7 +461,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139709_08";
 		igP.clickSelectNoneBtn(driver, TCnum);
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 		ac.Wait(1);
 		igP.clickSelectAllBtn(driver, TCnum);
 		//// igP.clickSelectNoneBtn(driver, TCnum);
@@ -474,7 +474,7 @@ public class AUTOpxController extends Comlibs {
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		// igP.verifyErrorMsgShowing(driver, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		igP.enterTextInSearch(vin01);
 		igP.verifyLoadPreviewTileImage(driver, ALL_VINS_RENDER_MAX_WT, vin01, vehGUID01, numbers, TCnum);
 
@@ -573,10 +573,10 @@ public class AUTOpxController extends Comlibs {
 		if (allVinNums >= MaxVinsForPreview) {
 			allVinNums = MaxVinsForPreview;
 		}
-		 ac.Wait(2);
-		 igP.enterTextInSearch(vin01.substring(1, 5));// igP.enterTextInSearch(vin01.substring(1, 6));igP.enterTextInSearch(vin01);
-		 ac.Wait(6);
-		 allImageNums = igP.getTileImageNum(driver, vehGUID01, "");
+		ac.Wait(2);
+		igP.enterTextInSearch(vin01.substring(1, 5));// igP.enterTextInSearch(vin01.substring(1, 6));igP.enterTextInSearch(vin01);
+		ac.Wait(6);
+		allImageNums = igP.getTileImageNum(driver, vehGUID01, "");
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		vgP.verifyLoadPannelImage(driver, TCnum);
 
@@ -771,8 +771,8 @@ public class AUTOpxController extends Comlibs {
 		igP.clickColorExteriorTab(driver, TCnum);
 		igP.clickColorExteriorColorCheckBox(driver, "Summit White(GAZ)", TCnum);
 		igP.clickColorInteriorTab(driver, TCnum);
-//		igP.clickColorInteriorColorCheckBox(driver, "Jet Black (4AA)", TCnum); //before 2018-09-30
-		igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); //afte 2018-09-30
+		// igP.clickColorInteriorColorCheckBox(driver, "Jet Black (4AA)", TCnum); //before 2018-09-30
+		igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); // afte 2018-09-30
 		igP.clickColorApplyBtn(driver, TCnum);
 		igP.clickClearAllFiltersBtn(driver, TCnum);
 		TCnum = "TC139691_19_exterior";
@@ -780,8 +780,8 @@ public class AUTOpxController extends Comlibs {
 		igP.clickColorExteriorTab(driver, TCnum);
 		igP.clickColorExteriorColorCheckBox(driver, "Summit White(GAZ)", TCnum);
 		igP.clickColorInteriorTab(driver, TCnum);
-//		igP.clickColorInteriorColorCheckBox(driver, "Jet Black (4AA)", TCnum); //before 2018-09-30
-		igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); //afte 2018-09-30
+		// igP.clickColorInteriorColorCheckBox(driver, "Jet Black (4AA)", TCnum); //before 2018-09-30
+		igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); // afte 2018-09-30
 		igP.clickColorApplyBtn(driver, TCnum);
 		igP.clickColorsBtn(driver, TCnum);
 		igP.clickColorExteriorTab(driver, TCnum);
@@ -1009,9 +1009,9 @@ public class AUTOpxController extends Comlibs {
 			// mailPassword = "Autodata1";
 			tempPS = gMail.getTemporaryPS(subject, psB4, psAfter, "Imap.gmail.com", accountEmail, accountPS);
 			TCnum = "TC139686_02_tempPS";
-			loginP.login(driver, accountEmail, tempPS); //this should be correct one. Now issue here, see autopxops-1196
-//			loginP.loginDealerProfile(driver, accountEmail, tempPS);//this is temp, it skips agreement page
-//			 AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+			loginP.login(driver, accountEmail, tempPS); // this should be correct one. Now issue here, see autopxops-1196
+			// loginP.loginDealerProfile(driver, accountEmail, tempPS);//this is temp, it skips agreement page
+			// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
 			acceptLicenseP.clickAcceptPSBtn(driver);
 			DealerProfile dpP = new DealerProfile(driver);
 			TCnum = "TC139674";
@@ -1021,7 +1021,7 @@ public class AUTOpxController extends Comlibs {
 			dpP.clickNOBtn(driver, TCnum);
 			TCnum = "TC139686_02_Inv";
 			ac.Wait(1);
-			dpP.clickInventoryGalleryBtn(driver,TCnum);
+			dpP.clickInventoryGalleryBtn(driver, TCnum);
 			ac.Wait(1);
 			dpP.clickLogout(driver);
 		} else {
@@ -1044,6 +1044,13 @@ public class AUTOpxController extends Comlibs {
 
 		acceptLicenseP.clickAcceptBtn(driver);
 		ImageGallery igP = new ImageGallery(driver);
+		igP.clickDealerShipInfoBtn(driver);
+		DealerProfile dpP = new DealerProfile(driver);
+		dpP.selectBand(driver, "LOEHMANN-BLASIUS CHEVROLET, INC.");
+		dpP.clickInventoryGalleryBtn(driver, TCnum);
+		
+		
+		
 		// Help section
 		TCnum = "TC139675_7_VINpx"; // Help - Contact Support. email and tel no.
 		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, TCnum);
@@ -1427,16 +1434,16 @@ public class AUTOpxController extends Comlibs {
 		// Verify Rerender Single Vehicle TC139707
 		TCnum = "TC139707_8";
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 		igP.enterTextInSearch(vin01);
 		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		igP.clickRerenderBtn(driver, render, TCnum);
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		TCnum = "TC139707_9";
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		VehicleGallery vgP = new VehicleGallery(driver);
@@ -1446,17 +1453,17 @@ public class AUTOpxController extends Comlibs {
 		// Verify Rerender Single Vehicle 02 for STOCpx dealer
 		TCnum = "TC139707_8_vin02";
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 		ac.Wait(2);
 		igP.enterTextInSearch(vin02);
 		igP.clickSelectBtn(driver, vin02, vehGUID02, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		igP.clickRerenderBtn(driver, render, TCnum);
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin02, vehGUID02, 1, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		TCnum = "TC139707_9_vin02";
 		igP.clickViewDetailsBtn(driver, vin02, vehGUID02, TCnum);
 		// VehicleGallery vgP = new VehicleGallery(driver);
@@ -1474,7 +1481,7 @@ public class AUTOpxController extends Comlibs {
 		igP.clickSelectAllBtn(driver, TCnum);
 		igP.clickRerenderBtn(driver, render, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		ac.Wait(10);
 		igP.enterTextInSearch(vin01);
@@ -1483,7 +1490,7 @@ public class AUTOpxController extends Comlibs {
 		igP.enterTextInSearch(vin02);
 		igP.verifyLoadPreviewTileImage(driver, ALL_VINS_RENDER_MAX_WT, vin02, vehGUID02, allVinNums / 2, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		TCnum = "TC139712_06_1";
 		igP.clickViewDetailsBtn(driver, vin02, vehGUID02, TCnum);
 		// VehicleGallery vgP = new VehicleGallery(driver);
@@ -1761,18 +1768,18 @@ public class AUTOpxController extends Comlibs {
 		// Verify Rerender Single Vehicle 01 TC147966
 		TCnum = "TC147966_8";
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 		ac.Wait(2);
 		igP.enterTextInSearch(vin01);
 		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		ac.rwExcel("", "------ Single VIN re-rendering ------", "");
 		igP.clickRerenderBtn(driver, render, TCnum);
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		TCnum = "TC147966_9";
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		VehicleGallery vgP = new VehicleGallery(driver);
@@ -1782,17 +1789,17 @@ public class AUTOpxController extends Comlibs {
 		// Verify Rerender Single Vehicle 02 for LOTpx dealer
 		TCnum = "TC147966_8_vin02";
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 		ac.Wait(2);
 		igP.enterTextInSearch(vin02);
 		igP.clickSelectBtn(driver, vin02, vehGUID02, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		igP.clickRerenderBtn(driver, render, TCnum);
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin02, vehGUID02, 1, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		TCnum = "TC147966_9_vin02";
 		igP.clickViewDetailsBtn(driver, vin02, vehGUID02, TCnum);
 		// VehicleGallery vgP = new VehicleGallery(driver);
@@ -1804,9 +1811,9 @@ public class AUTOpxController extends Comlibs {
 		igP.clickSelectAllBtn(driver, TCnum);
 		allVinNums = igP.getReRenderNum(driver, TCnum);
 		TCnum = "TC147967_07";
-//		igP.clickRerenderBtn(driver, render, TCnum);
+		// igP.clickRerenderBtn(driver, render, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		TCnum = "TC147967_10";
 		ac.Wait(10);
@@ -1816,7 +1823,7 @@ public class AUTOpxController extends Comlibs {
 		igP.enterTextInSearch(vin02);
 		igP.verifyLoadPreviewTileImage(driver, ALL_VINS_RENDER_MAX_WT, vin02, vehGUID02, allVinNums / 2, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-//		igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		TCnum = "TC147967_06_1";
 		igP.clickViewDetailsBtn(driver, vin02, vehGUID02, TCnum);
 		// VehicleGallery vgP = new VehicleGallery(driver);
@@ -2110,6 +2117,7 @@ public class AUTOpxController extends Comlibs {
 			driver.close();
 		}
 	}
+
 	public static void VINpxTemplatesTC(WebDriver driver, String brw, String versionNum, String envment,
 			String checkEmail) throws IOException, InterruptedException, ClassNotFoundException, SQLException {
 
@@ -2164,27 +2172,346 @@ public class AUTOpxController extends Comlibs {
 		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
 
 		TCnum = "TC144867_vinpx";
-		acceptLicenseP.verifyAgreementTitle(driver, 1, "VINpx Agreement", true, TCnum); // VINpx Agreement, STOCKpx Agreement, LOTpx Agreement
+		// acceptLicenseP.verifyAgreementTitle(driver, 1, "VINpx Agreement", true, TCnum); // VINpx Agreement, STOCKpx Agreement, LOTpx Agreement
 
 		vinpxConent = acceptLicenseP.getFile("data/vinpxAgreement.txt");
 		int vinpxAgreementTotalLines = acceptLicenseP.getLineNum();
 		TCnum = "TC144867_5_vinpx";
-		acceptLicenseP.verifyPDF(driver, 1, "vinpx", vinpxConent, vinpxAgreementTotalLines, TCnum, envment);
+		// acceptLicenseP.verifyPDF(driver, 1, "vinpx", vinpxConent, vinpxAgreementTotalLines, TCnum, envment);
 
 		acceptLicenseP.clickAcceptBtn(driver);
 		ImageGallery igP = new ImageGallery(driver);
-	
-		VehicleGallery vgP = new VehicleGallery(driver);
-		vgP.clickBackToInventoryBtn(driver);
-
+		igP.clickDealerShipInfoBtn(driver);
 		DealerProfile dpP = new DealerProfile(driver);
-		
+		dpP.selectBand(driver, "LOEHMANN-BLASIUS CHEVROLET, INC.");
+
+		igP.clickTemplatesBtn(driver);
 		Templates tpP = new Templates(driver);
+		// *************************1st**************************************************************************
+		// Header
+		try {
+			tpP.clickHeaderEditBtn(driver);
+		} catch (Exception e) {
+			System.out.println(" Header checkbox is not checked, click again to check it!  ");
+			tpP.clickHeaderCheckBox(driver);
+			tpP.clickSaveBtn(driver);
+			tpP.clickHeaderEditBtn(driver);
+		}
+		// tpP.clickHeaderCheckBoxNotReadyYet(driver, true,TCnum);
+
+		tpP.clickHeaderXBtn(driver);
+		tpP.clickHeaderEditBtn(driver);
+		tpP.clickDealershipLogoCheckBox(driver);
+		tpP.clickDealershipAddressCheckBox(driver);
+		tpP.clickDealershipPhoneCheckBox(driver);
+		tpP.clickDealershipEmailCheckBox(driver);
+		tpP.clickDealershipWebsiteCheckBox(driver);
+		tpP.clickContentHeaderSaveBtn(driver);
+		ac.Wait(1);
+		tpP.clickHeaderXBtn(driver);
+		ac.Wait(3);
+		// tpP.clickHeaderCheckBox(driver);
+
+		// Footer
+		try {
+			tpP.clickFooterEditBtn(driver);
+		} catch (Exception e) {
+			System.out.println(" Footer checkbox is not checked, click again to check it!  ");
+			tpP.clickFooterCheckBox(driver);
+			tpP.clickSaveBtn(driver);
+			tpP.clickFooterEditBtn(driver);
+		}
+		tpP.clickFooterXBtn(driver);
+		tpP.clickFooterEditBtn(driver);
+		tpP.clickVehicleInfoCheckBox(driver);
+		tpP.clickVINCheckBox(driver);
+		tpP.clickStockNumberCheckBox(driver);
+		tpP.clickBrandLogoCheckBox(driver);
+		tpP.clickContentFooterSaveBtn(driver);
+		ac.Wait(1);
+		tpP.clickFooterXBtn(driver);
+		ac.Wait(3);
+		// tpP.clickFooterCheckBox(driver);
+
+		// Overlay Top
+		try {
+			tpP.clickOverlayTopEditBtn(driver);
+		} catch (Exception e) {
+			System.out.println(" Overlay Top checkbox is not checked, click again to check it!  ");
+			tpP.clickOverlayTopCheckBox(driver);
+			tpP.clickSaveBtn(driver);
+			tpP.clickOverlayTopEditBtn(driver);
+		}
+		tpP.clickOverlayXBtn(driver);
+		tpP.clickOverlayTopEditBtn(driver);
+		tpP.inputGlbMsgIntoOverlayContentField(driver, "Global Message!");
+		tpP.clickContentOverlaySaveBtn(driver);
+		ac.Wait(1);
+		tpP.clickOverlayXBtn(driver);
+		ac.Wait(3);
+		// tpP.clickOverlayTopCheckBox(driver);
+
+		// Replace Template with Own
+		tpP.clickReplaceTemplateWithOwnCheckBox(driver, TCnum);
+		ac.Wait(3);
+//		tpP.clickUploadBtn(driver, TCnum);
+//		tpP.acceptAlert(TCnum, "Cancel");//Need to find the right one, not ready 
+//		tpP.clickUploadBtn(driver, TCnum);
+		tpP.clickReplaceTemplateWithOwnCheckBox(driver, TCnum);	
 		
+		// Select Text Images
+		tpP.scrollUp(driver, 3000, TCnum);
+		tpP.clickFeaturesVDICheckBox(driver);
+		tpP.clickWhatsCoolCheckBox(driver);
+		tpP.clickBenefitsVBICheckBox(driver);
+		ac.Wait(3);
+		tpP.scrollUp(driver, -3000, TCnum);
+		tpP.clickSaveBtn(driver);
+		ac.Wait(3);
+		tpP.clickInventoryGalleryBtn(driver);
+
+		// Verify Rerender Single Vehicle 01 for VINpx dealer
+		TCnum = "TC139706_8";
+		igP.enterTextInSearch(vin01);
+		ac.Wait(2);
+		igP.verifyRerenderBtnStatus(driver, false, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
+		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
+		igP.verifyRerenderBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		ac.rwExcel("", "------ Single VIN re-rendering ------", "");
+		igP.clickRerenderBtn(driver, render, TCnum);
+		System.out.println("\n\n 1st. Please check images once rendering is complete.....\n\n");
+		ac.Wait(2);
+		igP.verifyGoodMsgShowing(driver, TCnum);
+		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
+		igP.verifyRerenderBtnStatus(driver, true, TCnum);
+		TCnum = "TC139706_9_vin02";
+		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
+		 VehicleGallery vgP = new VehicleGallery(driver);
+		TCnum = "TC139706_10_vin02";
+		vgP.verifyLoadPannelImage(driver, TCnum);
+		System.out.println("1. Waiting for 60, check Templates settings");
+		ac.Wait(60);
+		vgP.clickBackToInventoryBtn(driver);
+		// *************************2nd**************************************************************************
+		igP.clickTemplatesBtn(driver);
+		// Header
+		try {
+			tpP.clickHeaderEditBtn(driver);
+		} catch (Exception e) {
+			System.out.println(" Header checkbox is not checked, click again to check it!  ");
+			tpP.clickHeaderCheckBox(driver);
+			tpP.clickSaveBtn(driver);
+			tpP.clickHeaderEditBtn(driver);
+		}
+		// tpP.clickHeaderCheckBoxNotReadyYet(driver, true,TCnum);
+
+		tpP.clickHeaderXBtn(driver);
+		tpP.clickHeaderEditBtn(driver);
+		tpP.clickDealershipLogoCheckBox(driver);
+		tpP.clickDealershipAddressCheckBox(driver);
+		tpP.clickDealershipPhoneCheckBox(driver);
+		tpP.clickDealershipEmailCheckBox(driver);
+		tpP.clickDealershipWebsiteCheckBox(driver);
+		tpP.clickContentHeaderSaveBtn(driver);
+		ac.Wait(1);
+		tpP.clickHeaderXBtn(driver);
+		ac.Wait(3);
+		// tpP.clickHeaderCheckBox(driver);
+
+		// Footer
+		try {
+			tpP.clickFooterEditBtn(driver);
+		} catch (Exception e) {
+			System.out.println(" Footer checkbox is not checked, click again to check it!  ");
+			tpP.clickFooterCheckBox(driver);
+			tpP.clickSaveBtn(driver);
+			tpP.clickFooterEditBtn(driver);
+		}
+		tpP.clickFooterXBtn(driver);
+		tpP.clickFooterEditBtn(driver);
+		tpP.clickVehicleInfoCheckBox(driver);
+		tpP.clickVINCheckBox(driver);
+		tpP.clickStockNumberCheckBox(driver);
+		tpP.clickBrandLogoCheckBox(driver);
+		tpP.clickContentFooterSaveBtn(driver);
+		ac.Wait(1);
+		tpP.clickFooterXBtn(driver);
+		ac.Wait(3);
+		// tpP.clickFooterCheckBox(driver);
+
+		// Overlay Top
+		try {
+			tpP.clickOverlayTopEditBtn(driver);
+		} catch (Exception e) {
+			System.out.println(" Overlay Top checkbox is not checked, click again to check it!  ");
+			tpP.clickOverlayTopCheckBox(driver);
+			tpP.clickSaveBtn(driver);
+			tpP.clickOverlayTopEditBtn(driver);
+		}
+		tpP.clickOverlayXBtn(driver);
+		tpP.clickOverlayTopEditBtn(driver);
+		tpP.inputGlbMsgIntoOverlayContentField(driver, "Global Message!");
+		tpP.clickContentOverlaySaveBtn(driver);
+		ac.Wait(1);
+		tpP.clickOverlayXBtn(driver);
+		ac.Wait(3);
+		// tpP.clickOverlayTopCheckBox(driver);
+
+		// Select Text Images
+		tpP.scrollUp(driver, 3000, TCnum);
+		tpP.clickFeaturesVDICheckBox(driver);
+		tpP.clickWhatsCoolCheckBox(driver);
+		tpP.clickBenefitsVBICheckBox(driver);
+		ac.Wait(3);
+		tpP.scrollUp(driver, -3000, TCnum);
+		tpP.clickSaveBtn(driver);
+		ac.Wait(3);
+		tpP.clickInventoryGalleryBtn(driver);
+
+		// Verify Rerender Single Vehicle 01 for VINpx dealer
+		TCnum = "TC139706_8";
+		igP.enterTextInSearch(vin01);
+		ac.Wait(2);
+		igP.verifyRerenderBtnStatus(driver, false, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
+		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
+		igP.verifyRerenderBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		ac.rwExcel("", "------ Single VIN re-rendering ------", "");
+		igP.clickRerenderBtn(driver, render, TCnum);
+		System.out.println("\n\n 2nt. Please check images once rendering is complete.....\n\n");
+		ac.Wait(2);
+		igP.verifyGoodMsgShowing(driver, TCnum);
+		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
+		igP.verifyRerenderBtnStatus(driver, true, TCnum);
+		TCnum = "TC139706_9_vin02";
+		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
+//		 VehicleGallery vgP = new VehicleGallery(driver);
+		TCnum = "TC139706_10_vin02";
+		vgP.verifyLoadPannelImage(driver, TCnum);
+		System.out.println("2. Waiting for 60, check Templates settings");
+		ac.Wait(60);
+		vgP.clickBackToInventoryBtn(driver);
+		// *************************3rd**************************************************************************
+		igP.clickTemplatesBtn(driver);
+		// Header
+		try {
+			tpP.clickHeaderEditBtn(driver);
+		} catch (Exception e) {
+			System.out.println(" Header checkbox is not checked, click again to check it!  ");
+			tpP.clickHeaderCheckBox(driver);
+			tpP.clickSaveBtn(driver);
+			tpP.clickHeaderEditBtn(driver);
+		}
+		// tpP.clickHeaderCheckBoxNotReadyYet(driver, true,TCnum);
+
+		tpP.clickHeaderXBtn(driver);
+		tpP.clickHeaderEditBtn(driver);
+		tpP.clickDealershipLogoCheckBox(driver);
+		tpP.clickDealershipAddressCheckBox(driver);
+		tpP.clickDealershipPhoneCheckBox(driver);
+		tpP.clickDealershipEmailCheckBox(driver);
+		tpP.clickDealershipWebsiteCheckBox(driver);
+		tpP.clickContentHeaderSaveBtn(driver);
+		ac.Wait(1);
+		tpP.clickHeaderXBtn(driver);
+		ac.Wait(3);
+		// tpP.clickHeaderCheckBox(driver);
+
+		// Footer
+		try {
+			tpP.clickFooterEditBtn(driver);
+		} catch (Exception e) {
+			System.out.println(" Footer checkbox is not checked, click again to check it!  ");
+			tpP.clickFooterCheckBox(driver);
+			tpP.clickSaveBtn(driver);
+			tpP.clickFooterEditBtn(driver);
+		}
+		tpP.clickFooterXBtn(driver);
+		tpP.clickFooterEditBtn(driver);
+		tpP.clickVehicleInfoCheckBox(driver);
+		tpP.clickVINCheckBox(driver);
+		tpP.clickStockNumberCheckBox(driver);
+		tpP.clickBrandLogoCheckBox(driver);
+		tpP.clickContentFooterSaveBtn(driver);
+		ac.Wait(1);
+		tpP.clickFooterXBtn(driver);
+		ac.Wait(3);
+		// tpP.clickFooterCheckBox(driver);
+
+		// Overlay Top
+		try {
+			tpP.clickOverlayTopEditBtn(driver);
+		} catch (Exception e) {
+			System.out.println(" Overlay Top checkbox is not checked, click again to check it!  ");
+			tpP.clickOverlayTopCheckBox(driver);
+			tpP.clickSaveBtn(driver);
+			tpP.clickOverlayTopEditBtn(driver);
+		}
+		tpP.clickOverlayXBtn(driver);
+		tpP.clickOverlayTopEditBtn(driver);
+		tpP.inputGlbMsgIntoOverlayContentField(driver, "Global Message!");
+		tpP.clickContentOverlaySaveBtn(driver);
+		ac.Wait(1);
+		tpP.clickOverlayXBtn(driver);
+		ac.Wait(3);
+		// tpP.clickOverlayTopCheckBox(driver);
+
+		// Select Text Images
+		tpP.scrollUp(driver, 3000, TCnum);
+		tpP.clickFeaturesVDICheckBox(driver);
+		tpP.clickWhatsCoolCheckBox(driver);
+		tpP.clickBenefitsVBICheckBox(driver);
+		ac.Wait(3);
+		tpP.scrollUp(driver, -3000, TCnum);
+		tpP.clickSaveBtn(driver);
+		ac.Wait(3);
+		tpP.clickInventoryGalleryBtn(driver);
+
+		// Verify Rerender Single Vehicle 01 for VINpx dealer
+		TCnum = "TC139706_8";
+		igP.enterTextInSearch(vin01);
+		ac.Wait(2);
+		igP.verifyRerenderBtnStatus(driver, false, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
+		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
+		igP.verifyRerenderBtnStatus(driver, true, TCnum);
+		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		ac.rwExcel("", "------ Single VIN re-rendering ------", "");
+		igP.clickRerenderBtn(driver, render, TCnum);
+		System.out.println("\n\n 3rdt. Please check images once rendering is complete.....\n\n");
+		ac.Wait(2);
+		igP.verifyGoodMsgShowing(driver, TCnum);
+		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
+		igP.verifyRerenderBtnStatus(driver, true, TCnum);
+		TCnum = "TC139706_9_vin02";
+		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
+//		 VehicleGallery vgP = new VehicleGallery(driver);
+		TCnum = "TC139706_10_vin02";
+		vgP.verifyLoadPannelImage(driver, TCnum);
+		System.out.println("3. Waiting for 60, check Templates settings");
+		ac.Wait(60);
+		vgP.clickBackToInventoryBtn(driver);
 		
-		
-		
-		
+		// igP.verifyGoodMsgShowing(driver, TCnum);
+		// igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
+		// igP.verifyRerenderBtnStatus(driver, true, TCnum);
+		// // igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		// TCnum = "TC139706_9";
+		// igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
+		// VehicleGallery vgP = new VehicleGallery(driver);
+		// TCnum = "TC139706_10";
+		// vgP.verifyLoadPannelImage(driver, TCnum);
+		// vgP.clickBackToInventoryBtn(driver);
+
+		// VehicleGallery vgP = new VehicleGallery(driver);
+		// vgP.clickBackToInventoryBtn(driver);
+		//
+		// DealerProfile dpP = new DealerProfile(driver);
+		//
+
 		// Stop here!
 
 		// Need to do. Verify Account Status for VINpx dealer TC139969. There
@@ -2193,6 +2520,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139684_06";
 		igP.clickLogout(driver);
 	}
+
 	private static String[] fetchOneDemArrayFromPropFile(String propertyName, Properties propFile) {
 
 		// get array split up by the colin
@@ -2495,34 +2823,32 @@ public class AUTOpxController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-//			 //// 0.General Inventory Gallery
-//			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-//			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
-//			 vehicleGallery(driver, tBrowser, env);
-//			 //verifyRerender(driver, tBrowser);
-//
-//			////// 1.VINpx:
-//			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-//			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-//
-//			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-//
-//			 ////// 2. STOCKpx
-//			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-//			 STOCKpxInventoryTC(driver, tBrowser, env);
+			 //// 0.General Inventory Gallery
+			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
+			 vehicleGallery(driver, tBrowser, env);
+			 //verifyRerender(driver, tBrowser);
 			
+			 ////// 1.VINpx:
+			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+			
+			// // bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			//
+			 ////// 2. STOCKpx
+			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			 STOCKpxInventoryTC(driver, tBrowser, env);
+
 			////// 3. Templates
-			 bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
-			 VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail); 
-			
-			
-			
+			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
+			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
+
 			//////// bc.Wait(38*60);//wait 18 minutes;
 			////
-//			// ////// 3. LOTpx
-//			 bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
-//			 LOTpxInventoryTC(driver, tBrowser, env);
-//			 LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
+			// // ////// 3. LOTpx
+			// bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
+			// LOTpxInventoryTC(driver, tBrowser, env);
+			// LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
 			System.out.println("Test is complete!!!");
