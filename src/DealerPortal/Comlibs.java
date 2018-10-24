@@ -204,7 +204,7 @@ public class Comlibs {
 		n = s.getLastRowNum();
 		Row r1 = s.getRow(n);
 		n = r1.getRowNum();
-		HSSFCellStyle style = workbook.createCellStyle(); // will crash when exceeded about 4213 lines of 														// sheet
+		HSSFCellStyle style = workbook.createCellStyle(); // will crash when exceeded about 4213 lines of // sheet
 		style.setFillBackgroundColor(IndexedColors.AQUA.getIndex());
 		style.setFillForegroundColor(HSSFColor.RED.index);
 
@@ -371,46 +371,43 @@ public class Comlibs {
 			final String firebugPath = "C:\\1\\Eclipse\\RefLibraris\\firebug-2.0.19.xpi";
 			final String firepathPath = "C:\\1\\Eclipse\\RefLibraris\\firepath-0.9.7.1-fx.xpi";
 			final String seleniumExpertIDE = "C:\\1\\Eclipse\\RefLibraris\\selenium_expert_selenium_ide-0.25-fx.xpi";
-			//added geckodriver.exe since selenium 3.0 on-wards.
-			System.setProperty("webdriver.gecko.driver","C:/1/Eclipse/RefLibraris/geckodriver.exe");
+			// added geckodriver.exe since selenium 3.0 on-wards.
+			System.setProperty("webdriver.gecko.driver", "C:/1/Eclipse/RefLibraris/geckodriver.exe");
 			FirefoxProfile profile = new FirefoxProfile();
 
-			
 			profile.addExtension(new File(firebugPath));
 			profile.addExtension(new File(firepathPath));
-//			profile.setAcceptUntrustedCertificates(true);   //doesn't work
-//			profile.setAssumeUntrustedCertificateIssuer(false); //doesn't work
-//			profile.setPreference("security.insecure_password.ui.enabled", false);   // works. 5/5/2017
-			profile.setPreference("security.insecure_field_warning.contextual.enabled", true);  //better works. Using false/true. 03/27/2018
-			
+			// profile.setAcceptUntrustedCertificates(true); //doesn't work
+			// profile.setAssumeUntrustedCertificateIssuer(false); //doesn't work
+			// profile.setPreference("security.insecure_password.ui.enabled", false); // works. 5/5/2017
+			profile.setPreference("security.insecure_field_warning.contextual.enabled", true); // better works. Using false/true. 03/27/2018
+
 			// profile.addExtension(new File(seleniumExpertIDE));
 			// Add more if needed
-//			WebDriver driver = new FirefoxDriver(profile); //adding profile invalid since 12/13/2017
+			// WebDriver driver = new FirefoxDriver(profile); //adding profile invalid since 12/13/2017
 			WebDriver driver = new FirefoxDriver();
 
-			//WebDriver driver = new FirefoxDriver();
+			// WebDriver driver = new FirefoxDriver();
 			return driver;
 		} else if (browserID.equalsIgnoreCase("Chrome")) {
 			System.setProperty("webdriver.chrome.driver",
 					"C:/1/Eclipse/RefLibraris/chromedriver_win32/chromedriver.exe");
 			// System.setProperty("webdriver.chrome.driver",
 			// "C:/Documents and Settings/zhoul/My Documents/eclipse/Chrome/chromedriver.exe");
-			
-			//Disable save password, below from https://sqa.stackexchange.com/questions/26275/how-to-disable-chrome-save-your-password-selenium-java
+
+			// Disable save password, below from https://sqa.stackexchange.com/questions/26275/how-to-disable-chrome-save-your-password-selenium-java
 			ChromeOptions cOpt = new ChromeOptions();
-		    ChromeOptions options = new ChromeOptions();
-		    options.addArguments("--start-maximized");
-		    options.addArguments("--disable-web-security");
-		    options.addArguments("--no-proxy-server");
-//		    // This is disalbe security for "Chrome is being controlled by automated test software" - 2018/03/27 OK
-//		    options.addArguments("disable-infobars");  //- 2018/03/27 OK
-		    Map<String, Object> prefs = new HashMap<String, Object>();
-		    prefs.put("credentials_enable_service", false); 
-		    prefs.put("profile.password_manager_enabled", false); 
-		    options.setExperimentalOption("prefs", prefs);
-			
-		    
-		    
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--start-maximized");
+			options.addArguments("--disable-web-security");
+			options.addArguments("--no-proxy-server");
+			// // This is disalbe security for "Chrome is being controlled by automated test software" - 2018/03/27 OK
+			// options.addArguments("disable-infobars"); //- 2018/03/27 OK
+			Map<String, Object> prefs = new HashMap<String, Object>();
+			prefs.put("credentials_enable_service", false);
+			prefs.put("profile.password_manager_enabled", false);
+			options.setExperimentalOption("prefs", prefs);
+
 			WebDriver driver = new ChromeDriver(options);
 			return driver;
 		}
@@ -420,7 +417,7 @@ public class Comlibs {
 		// return driver;
 		// }
 		else {
-			System.out.println("Browser is wrong! Your browser setting is :"+browserID);
+			System.out.println("Browser is wrong! Your browser setting is :" + browserID);
 			return null;
 		}
 	}
@@ -454,6 +451,20 @@ public class Comlibs {
 			Thread.sleep(i * 1000);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void Wait(int i, boolean printMSG, String msg) {
+
+		for (int c = 1; c < i; c++) {
+			try {
+				Thread.sleep(1 * 1000);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if (printMSG) {
+				System.out.println(msg + ".  " + (i - c) + " seconds left... ");
+			}
 		}
 	}
 
@@ -540,16 +551,16 @@ public class Comlibs {
 		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension dim = new Dimension((int) screenSize.getWidth(), (int) screenSize.getHeight());
 		driver.manage().window().setSize(dim);
-//		 driver.manage().window().setPosition(new Point(-1100, 60)); //launch
+		// driver.manage().window().setPosition(new Point(-1100, 60)); //launch
 		// at left screen
 		driver.manage().window().setPosition(new Point(0, 0)); // launch at
 																// rigth screen
 		// driver.manage().window().setSize(new Dimension(320, 640)); //iPhone
 		// 5: IE8, Chrome, FF work fine!
 		if (device.equalsIgnoreCase("PC")) {
-//			driver.manage().window().setSize(new Dimension(1080, 1040));  //Original one before Oct 17, 2018
-			driver.manage().window().setSize(new Dimension(1480, 1040));  //After Oct 17, 2018 (1480, 1040)
-//			driver.manage().window().setSize(new Dimension(1920, 1040));  // (width, high)
+			driver.manage().window().setSize(new Dimension(1080, 1040)); // Original one before Oct 17, 2018
+			// driver.manage().window().setSize(new Dimension(1480, 1040)); //After Oct 17, 2018 (1480, 1040)
+			// driver.manage().window().setSize(new Dimension(1920, 1040)); // (width, high)
 			dim = driver.manage().window().getSize();
 			rwExcel("", true, "Set up browser resolution for device = " + device, "  " + dim);
 		} else if (device.equalsIgnoreCase("Tablet")) {

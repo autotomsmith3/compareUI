@@ -2292,7 +2292,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139706_10_vin02";
 		vgP.verifyLoadPannelImage(driver, TCnum);
 		System.out.println("1. Waiting for 60, check Templates settings");
-		ac.Wait(60);
+		ac.Wait(60, true,"1. Waiting for 60 seconds, please check Templates settings for vin: "+vin01);
 		vgP.clickBackToInventoryBtn(driver);
 		// *************************2nd**************************************************************************
 		igP.clickTemplatesBtn(driver);
@@ -2392,7 +2392,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139706_10_vin02";
 		vgP.verifyLoadPannelImage(driver, TCnum);
 		System.out.println("2. Waiting for 60, check Templates settings");
-		ac.Wait(60);
+		ac.Wait(60, true,"2. Waiting for 60 seconds, please check Templates settings for vin: "+vin01);
 		vgP.clickBackToInventoryBtn(driver);
 		// *************************3rd**************************************************************************
 		igP.clickTemplatesBtn(driver);
@@ -2492,9 +2492,9 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139706_10_vin02";
 		vgP.verifyLoadPannelImage(driver, TCnum);
 		System.out.println("3. Waiting for 60, check Templates settings");
-		ac.Wait(60);
+		ac.Wait(60, true,"3. Waiting for 60 seconds, please check Templates settings for vin: "+vin01);
 		vgP.clickBackToInventoryBtn(driver);
-		
+		// *************************4th???**************************************************************************
 		// igP.verifyGoodMsgShowing(driver, TCnum);
 		// igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 		// igP.verifyRerenderBtnStatus(driver, true, TCnum);
