@@ -99,9 +99,9 @@ public class Templates extends Comlibs {
 	
 	
 										   //*[@id="templateBuilder"]/div[3]/label[3]/span
-	By overlayTopCheckBoxLocator=By.xpath("//*[@id='templateBuilder']/div[3]/label[3]/span");//  //*[@id="templateBuilder"]/div[3]/form/label[3]/span
-	By overlayTopEditLocator=By.xpath("//*[@id=\"overlayTopEditBtn\"]");
-	By overlayTopContent_globleMSG_fieldLocator=By.xpath("//*[@id=\"overlayContent\"]/textarea");
+	By MarketingMessageTopCheckBoxLocator=By.xpath("//*[@id='templateBuilder']/div[3]/label[3]/span");//  //*[@id="templateBuilder"]/div[3]/form/label[3]/span
+	By MarketingMessageTopEditLocator=By.xpath("//*[@id=\"overlayTopEditBtn\"]");//  //*[@id="overlayTopEditBtn"]
+	By MarketingMessageTopContent_globleMSG_fieldLocator=By.xpath("//*[@id=\"overlayContent\"]/textarea");
 	
 	By replaceTemplateWithOwnCheckBoxLocator=By.xpath("//*[@id=\"templateBuilder\"]/div[3]/label[5]/span");
 	//*[@id="templateBuilder"]/div[3]/label[5]/span
@@ -390,17 +390,17 @@ public class Templates extends Comlibs {
 		return this;
 	}
 		
-	public Templates clickOverlayTopCheckBox(WebDriver driver) throws IOException {
-		driver.findElement(overlayTopCheckBoxLocator).click();
+	public Templates clickMarketingMessageTopCheckBox(WebDriver driver) throws IOException {
+		driver.findElement(MarketingMessageTopCheckBoxLocator).click();
 		return this;
 	}
-	public Templates clickOverlayTopEditBtn(WebDriver driver) throws IOException {
-		driver.findElement(overlayTopEditLocator).click();
+	public Templates clickMarketingMessageTopEditBtn(WebDriver driver) throws IOException {
+		driver.findElement(MarketingMessageTopEditLocator).click();
 		return this;
 	}
 	public Templates inputGlbMsgIntoOverlayContentField(WebDriver driver,String glbMsg) throws IOException {
-		driver.findElement(overlayTopContent_globleMSG_fieldLocator).clear();
-		driver.findElement(overlayTopContent_globleMSG_fieldLocator).sendKeys(glbMsg);
+		driver.findElement(MarketingMessageTopContent_globleMSG_fieldLocator).clear();
+		driver.findElement(MarketingMessageTopContent_globleMSG_fieldLocator).sendKeys(glbMsg);
 		return this;
 	}
 	
