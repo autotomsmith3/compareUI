@@ -463,7 +463,7 @@ public class Comlibs {
 				e.printStackTrace();
 			}
 			if (printMSG) {
-				System.out.println(msg + ".  " + (i - c) + " seconds left... ");
+				System.out.println((i - c) + " seconds left...   "+msg);
 			}
 		}
 	}

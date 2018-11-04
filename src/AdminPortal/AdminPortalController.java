@@ -356,6 +356,8 @@ public class AdminPortalController extends Comlibs {
 		int TemplateSettings = Integer.parseInt(prop.getProperty(env + ".TemplateSettings"));
 		int SelectBackgroundSet = Integer.parseInt(prop.getProperty(env + ".SelectBackgroundSet"));
 		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
+		String AddNewAccountEmail=prop.getProperty(env + ".AddNewAccountEmail");
+		
 		// Initial
 		// final int wt_Secs = 6;
 		String TCnum;
