@@ -25,6 +25,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.security.Key;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -92,8 +93,15 @@ public class AdminPortalController extends Comlibs {
 	static int allImageNums = 0;
 	static String urlLink;
 
-	public static VDVILogin loadURL(WebDriver driver, String bURL) throws IOException {
+	public static VDVILogin loadURL(WebDriver driver, String bURL, String env) throws IOException {
 		driver.get(bURL);
+		// Below to accept authentication only works for Firefox, Chrome scripts are not ready yet. 2018-11-06
+		if (env.equalsIgnoreCase("Prod"))
+			;
+		{
+			driver.switchTo().alert().sendKeys("admin" + Keys.TAB + "g4TT73Xy!");
+			driver.switchTo().alert().accept();
+		}
 		return new VDVILogin(driver);
 	}
 
@@ -105,9 +113,7 @@ public class AdminPortalController extends Comlibs {
 		for (String NewWindowHandle : windowHandles) {
 			windowHandel = NewWindowHandle;
 		}
-
 		driver.switchTo().window(windowHandel);
-
 	}
 
 	public static void vehicleGallery(WebDriver driver, String brw, String envment)
@@ -232,65 +238,94 @@ public class AdminPortalController extends Comlibs {
 		loginP.login(driver, accountEmail, accountPS, "");
 		String parentHandle = driver.getWindowHandle(); // get the current window handle
 		UserList UserListP = new UserList(driver);
-		UserListP.clickDisplayDropDownBtn(driver, "3");
-		UserListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000
+		UserListP.clickDisplayDropDownBtn(driver, "1"); // no longer use since 2018-11-02
 
-		for (int i = 0; i < 150; i++) {
-			// if (i >= 10) {//10
-			//// UserListP.scrollUp(driver, 55, "ddd"); // 60 should be in Prod. 55 can run 150 records in QA. 120 - get almost 2 lines. 80 can run until 28 records, 60 can run until 110-120
-			// UserListP.checkEditBtnLocationAndScroll(driver, dealerSN);
-			// ac.Wait(wt);
-			// }
-			dealerN = dealerN + 1;
-			dealerSN = String.valueOf(dealerN);
-			ac.Wait(wt);
-			UserListP.clickEditBtn(driver, dealerSN);
-			ac.Wait(wt);
-			for (String winHandle : driver.getWindowHandles()) {
-				driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+		for (int next = 1; next <= 3; next++) {// prod=117, QA=86
+			int numAccts = UserListP.getNumOfAccounts(driver, 1, "account nums");
+			for (int i = 1; i <= numAccts; i++) {
+
+				accountEmail = UserListP.getAccountEmail(driver, i, "tc");
+				UserListP.clickViewDealerships(driver, i);
+				int dealers = 10;
+				for (int dealer = 1; dealer <= dealers; dealer++) {
+					// UserListP.getNumOfDealerships(driver,1,"tc"); //not ready yet 2018-11-06
+					try {
+						UserListP.clickEditOnDealership(driver, dealer);
+					} catch (Exception e) {
+						System.out.println("Account Email = " + accountEmail + ". Its Dealer number: " + dealer
+								+ " does not exist. Exit!");
+						UserListP.clickViewDealerships(driver, i);
+						break;
+						// ac.rwExcel("Dealer number: "+dealer+" does not exist", false, "", "");
+					}
+					// UserListP.checkStatus(driver,1);
+					// UserListP
+					// UserListP
+
+					UserListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000 - negative means scrolldown
+
+					// for (int i = 0; i < 150; i++) {
+					// if (i >= 10) {//10
+					//// UserListP.scrollUp(driver, 55, "ddd"); // 60 should be in Prod. 55 can run 150 records in QA. 120 - get almost 2 lines. 80 can run until 28 records, 60 can run until 110-120
+					// UserListP.checkEditBtnLocationAndScroll(driver, dealerSN);
+					// ac.Wait(wt);
+					// }
+					dealerN = dealerN + 1;
+					dealerSN = String.valueOf(dealerN);
+					// ac.Wait(wt);
+					// UserListP.clickEditBtn(driver, dealerSN);
+//					ac.Wait(wt);
+					for (String winHandle : driver.getWindowHandles()) {
+						driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+					}
+					DealerProfile DealerProfieP = new DealerProfile(driver);
+					// =========================================
+					ProductVINpx = DealerProfieP.getVINpxProduct(driver, "");
+					ProductSTOCKpx = DealerProfieP.getSTOCKpxProduct(driver, "");
+					ProductLOTpx = DealerProfieP.getLOTpxProduct(driver, "");
+					Dealership_ID = DealerProfieP.getDealershipID(driver);
+					Dealership_Name = DealerProfieP.getDealershipName(driver);
+					Dealership_Email = DealerProfieP.getDealershipEmail(driver);
+					// Account_Email = DealerProfieP.getAccountEmail(driver);
+					Metadata = DealerProfieP.getMetadata(driver);
+					dlrGuid = DealerProfieP.getDlrGuid(driver);
+					dlrGuid = DealerProfieP.trimURL(dlrGuid);
+					// =========================================
+
+					int wSize = titleString.length;
+					String[] DealerSettingsArray = new String[wSize];
+
+					DealerSettingsArray[0] = env;
+					DealerSettingsArray[1] = Integer.toString(i);
+					DealerSettingsArray[2] = Dealership_ID;
+					DealerSettingsArray[3] = Dealership_Name;
+					DealerSettingsArray[4] = accountEmail;
+					DealerSettingsArray[5] = Dealership_Email;
+					DealerSettingsArray[6] = ProductVINpx;
+					DealerSettingsArray[7] = ProductSTOCKpx;
+					DealerSettingsArray[8] = ProductLOTpx;
+					DealerSettingsArray[9] = Metadata;
+					DealerSettingsArray[10] = dlrGuid;
+					ac.writeToSheet(getMetadataSavePathFile, DealerSettingsArray);
+
+					// =========================================
+
+					System.out.println("Account number =" + i + ".  Dealer number=" + dealerN);
+
+					// System.out.println(i + 1 + ". - VINpx=" + ProductVINpx + "\n" + "STOCKpx= " + ProductSTOCKpx + "\n"
+					// + "LOTpx= " + ProductLOTpx);
+					// System.out.println("Dealership_ID: " + Dealership_ID + "\n" + "Dealership_Name: " + Dealership_Name
+					// + "\n" + "Dealership_Email: " + Dealership_Email + "\n" + "Account_Email: " + Account_Email
+					// + "\n" + "Metadata: " + Metadata + "\n" + "dlrGuid:" + dlrGuid + "\n "
+					// + "\nDealer number = " + (i + 1) + ", is complete\n");
+
+					DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, "TC_num");
+					if (i % 12 == 0) {
+						UserListP.scrollUp(driver, 1500, "ddd"); // QA -2000 Prod -3000 - negative means scrolldown
+					}
+				}
 			}
-			DealerProfile DealerProfieP = new DealerProfile(driver);
-			// =========================================
-			ProductVINpx = DealerProfieP.getVINpxProduct(driver, "");
-			ProductSTOCKpx = DealerProfieP.getSTOCKpxProduct(driver, "");
-			ProductLOTpx = DealerProfieP.getLOTpxProduct(driver, "");
-			Dealership_ID = DealerProfieP.getDealershipID(driver);
-			Dealership_Name = DealerProfieP.getDealershipName(driver);
-			Dealership_Email = DealerProfieP.getDealershipEmail(driver);
-			Account_Email = DealerProfieP.getAccountEmail(driver);
-			Metadata = DealerProfieP.getMetadata(driver);
-			dlrGuid = DealerProfieP.getDlrGuid(driver);
-			dlrGuid = DealerProfieP.trimURL(dlrGuid);
-			// =========================================
-
-			int wSize = titleString.length;
-			String[] DealerSettingsArray = new String[wSize];
-
-			DealerSettingsArray[0] = env;
-			DealerSettingsArray[1] = Integer.toString(i);
-			DealerSettingsArray[2] = Dealership_ID;
-			DealerSettingsArray[3] = Dealership_Name;
-			DealerSettingsArray[4] = Account_Email;
-			DealerSettingsArray[5] = Dealership_Email;
-			DealerSettingsArray[6] = ProductVINpx;
-			DealerSettingsArray[7] = ProductSTOCKpx;
-			DealerSettingsArray[8] = ProductLOTpx;
-			DealerSettingsArray[9] = Metadata;
-			DealerSettingsArray[10] = dlrGuid;
-			ac.writeToSheet(getMetadataSavePathFile, DealerSettingsArray);
-
-			// =========================================
-
-			System.out.println("Dealer number=" + dealerN);
-			System.out.println(i + 1 + ". - VINpx=" + ProductVINpx + "\n" + "STOCKpx= " + ProductSTOCKpx + "\n"
-					+ "LOTpx= " + ProductLOTpx);
-			System.out.println("Dealership_ID: " + Dealership_ID + "\n" + "Dealership_Name: " + Dealership_Name + "\n"
-					+ "Dealership_Email: " + Dealership_Email + "\n" + "Account_Email: " + Account_Email + "\n"
-					+ "Metadata: " + Metadata + "\n" + "dlrGuid:" + dlrGuid + "\n " + "\nDealer number = " + (i + 1)
-					+ ", is complete\n");
-
-			DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, "TC_num");
-
+			UserListP.clickNext(driver, next, "Next" + next);
 		}
 		driver.close();
 	}
@@ -356,8 +391,8 @@ public class AdminPortalController extends Comlibs {
 		int TemplateSettings = Integer.parseInt(prop.getProperty(env + ".TemplateSettings"));
 		int SelectBackgroundSet = Integer.parseInt(prop.getProperty(env + ".SelectBackgroundSet"));
 		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
-		String AddNewAccountEmail=prop.getProperty(env + ".AddNewAccountEmail");
-		
+		String AddNewAccountEmail = prop.getProperty(env + ".AddNewAccountEmail");
+
 		// Initial
 		// final int wt_Secs = 6;
 		String TCnum;
@@ -398,9 +433,9 @@ public class AdminPortalController extends Comlibs {
 		// *************************UserListP******************************************************
 		// *************************UserListP******************************************************
 		ac.Wait(wt);
-		UserListP.scrollUp(driver, 3000, "ddd"); // QA -2000 Prod -3000
+		UserListP.scrollUp(driver, 3000, "ddd"); // QA -2000 Prod -3000 - negative means scrolldown
 		UserListP.clickDisplayDropDownBtn(driver, "3");
-		UserListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000
+		UserListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000 - negative means scrolldown
 
 		// =========================== Add Account============================================================
 		tc = "TC_addNewAct_with_Existing_ActEamil";
@@ -460,8 +495,8 @@ public class AdminPortalController extends Comlibs {
 		// DealerProfieP.selectLOTpxProd(driver);
 		// DealerProfieP.inputMetadata(driver, MetadataValues);
 
-//		DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
-//		DealerProfieP.selectTemplateSetting(driver, 1);
+		// DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
+		// DealerProfieP.selectTemplateSetting(driver, 1);
 		DealerProfieP.inputDealershipName(driver, DealershipName);
 		DealerProfieP.inputAddress(driver, Address);
 		DealerProfieP.inputAddressLine2(driver, AddressLine2);
@@ -503,8 +538,8 @@ public class AdminPortalController extends Comlibs {
 		// DealerProfieP.selectLOTpxProd(driver);
 		DealerProfieP.inputMetadata(driver, MetadataValues);
 
-//		DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
-//		DealerProfieP.selectTemplateSetting(driver, 1);
+		// DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
+		// DealerProfieP.selectTemplateSetting(driver, 1);
 		DealerProfieP.inputDealershipName(driver, DealershipName);
 		DealerProfieP.inputAddress(driver, Address);
 		DealerProfieP.inputAddressLine2(driver, AddressLine2);
@@ -650,7 +685,7 @@ public class AdminPortalController extends Comlibs {
 		ac.clickRefleshF5Btn(driver, tc);
 		BackgroundSetsP.clickDeleteBGSetBtn(driver, 1);
 		ac.acceptAlert(driver, tc, "OK");
-//		ac.clickRefleshF5Btn(driver, tc);
+		// ac.clickRefleshF5Btn(driver, tc);
 
 		//// *************************clickManageBGSetsBtn******************************************************
 		//// *************************clickManageBGSetsBtn******************************************************
@@ -662,7 +697,7 @@ public class AdminPortalController extends Comlibs {
 		String searchDefaultSequence = "10100";
 		String editedDefaultSequence = "10101";
 		ac.clickRefleshF5Btn(driver, tc);
-//		UserListP.clickManageDealerShips(driver);
+		// UserListP.clickManageDealerShips(driver);
 		UserListP.clickManageImageType(driver);
 		ImageTypeList ImageTypeListP = new ImageTypeList(driver);
 		// Add an Image Type and cancel
@@ -1006,7 +1041,10 @@ public class AdminPortalController extends Comlibs {
 			bc.rwExcel("", "Test Browser", tBrowser);
 			bc.rwExcel("", "Test Environment", env);
 
-			loadURL(driver, baseURL);
+			loadURL(driver, baseURL, env);
+			// Alert alert =driver.switchTo().alert();
+			// alert.sendKeys("username"+Key.TAB+"password");
+			// alert.accept();
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
@@ -1016,9 +1054,9 @@ public class AdminPortalController extends Comlibs {
 			// vehicleGallery(driver, tBrowser, env);
 			// verifyRerender(driver, tBrowser);
 
-			// //// 1.RetriveValuesFrDealerSettingsPage:
-			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
+			//// 1.RetriveValuesFrDealerSettingsPage:
+			bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 			////// 2.ManageDealerShips:
 			bc.rwExcel("", "-----ManageDealerShips Testing started-----" + (i + 1), "");
 			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
