@@ -43,7 +43,7 @@ public class UserList extends Comlibs {
 	}
 
 	By acceptBtnLocator = By.xpath("//button[@type='submit']");
-	// By editBtnLocator = By.xpath("//*[@id=\"listViewBtn\"]/span"); // //*[@id="listViewBtn"]/span or xpath=(//button[@id='listViewBtn'])[3]
+	// By editBtnLocator = By.xpath("//*[@id=\"listViewBtn\"]/span"); // //*[@id="listViewBtn"]/span or xpath=(//button[@id='listViewBtn'])[3] 
 	By agreementTitles = By.xpath("//*[@id=\"tabs\"]/li");
 	By firstAgreementLocator = By.xpath("//*[@id=\"tabs\"]/li[1]/a");
 	By secondAgreementLocator = By.xpath("//*[@id=\"tabs\"]/li[2]/a");

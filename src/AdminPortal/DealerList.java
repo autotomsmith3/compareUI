@@ -31,7 +31,7 @@ public class DealerList extends Comlibs {
 		// String wh1=driver.getWindowHandle();
 		String sPageTitle = "User List";
 		boolean existTitle = TitleDisplay(driver, sPageTitle);
-		if (existTitle) {
+		if (existTitle) { 
 			rwExcel("", true, "Page Title is displayed", sPageTitle);
 		} else {
 			rwExcel("", false, "Page title is NOT showing properly. Exceed time limit!",

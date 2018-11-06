@@ -49,7 +49,7 @@ public class Comlibs {
 		prop.load(AdminPortalController.class.getClassLoader().getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
 		String resultfile = prop.getProperty("AUTOpx.resutlPathFile");
 
-		int n = 0;
+		int n = 0; 
 		String sName, passOrfail, dateStamp, timeStamp;
 		Calendar cal = Calendar.getInstance();
 		cal.getTime();

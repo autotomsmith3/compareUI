@@ -26,7 +26,7 @@ public class VDVILogin extends Comlibs {
 			System.out.println("Page title does not matche. Expected page title =" + sPageTitle);
 		}
 	}
-
+ 
 	By dealerShipName = By.cssSelector("span");
 	By logo_middleLocator = By.xpath("(//img[@alt='Autodata'])[2]");
 	By logo_rightButtomLocator = By.xpath("//li/a/img"); // By.xpath("(//img[@alt='Autodata'])[3]");
