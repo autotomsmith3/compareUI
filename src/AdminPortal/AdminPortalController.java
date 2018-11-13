@@ -238,15 +238,21 @@ public class AdminPortalController extends Comlibs {
 		loginP.login(driver, accountEmail, accountPS, "");
 		String parentHandle = driver.getWindowHandle(); // get the current window handle
 		UserList UserListP = new UserList(driver);
+		UserListP.clickFirstNameSort(driver, "TC number");
+		UserListP.clickFirstNameSort(driver, "TC number");	
 		UserListP.clickDisplayDropDownBtn(driver, "1"); // no longer use since 2018-11-02
 
-		for (int next = 1; next <= 3; next++) {// prod=117, QA=86
+		for (int next = 1; next <= 117; next++) {// prod=117, QA=86
 			int numAccts = UserListP.getNumOfAccounts(driver, 1, "account nums");
 			for (int i = 1; i <= numAccts; i++) {
 
 				accountEmail = UserListP.getAccountEmail(driver, i, "tc");
 				UserListP.clickViewDealerships(driver, i);
-				int dealers = 10;
+				if (i==numAccts) {
+					UserListP.scrollUp(driver, 600, "ddd");
+				}
+				UserListP.scrollUp(driver, 40, "ddd");
+				int dealers = 18;
 				for (int dealer = 1; dealer <= dealers; dealer++) {
 					// UserListP.getNumOfDealerships(driver,1,"tc"); //not ready yet 2018-11-06
 					try {
@@ -320,12 +326,14 @@ public class AdminPortalController extends Comlibs {
 					// + "\nDealer number = " + (i + 1) + ", is complete\n");
 
 					DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, "TC_num");
-					if (i % 12 == 0) {
-						UserListP.scrollUp(driver, 1500, "ddd"); // QA -2000 Prod -3000 - negative means scrolldown
-					}
+//					UserListP.scrollUp(driver, 40, "ddd");
+//					if (i % 12 == 0) {
+//						UserListP.scrollUp(driver, 550, "ddd"); // QA -2000 Prod -3000 - negative means scrolldown
+//					}
 				}
 			}
 			UserListP.clickNext(driver, next, "Next" + next);
+			UserListP.scrollUp(driver, -3550, "ddd"); // QA -2000 Prod -3000 - negative means scrolldown
 		}
 		driver.close();
 	}
@@ -1057,9 +1065,9 @@ public class AdminPortalController extends Comlibs {
 			//// 1.RetriveValuesFrDealerSettingsPage:
 			bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
-			////// 2.ManageDealerShips:
-			bc.rwExcel("", "-----ManageDealerShips Testing started-----" + (i + 1), "");
-			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+//			////// 2.ManageDealerShips:
+//			bc.rwExcel("", "-----ManageDealerShips Testing started-----" + (i + 1), "");
+//			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
 
 			// bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			// driver.close();
