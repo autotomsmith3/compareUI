@@ -999,11 +999,11 @@ public class AUTOpxController extends Comlibs {
 			vdviPasswordP.clickLoginToYourAccountLink(driver, TCnum);
 			MailReader gMail = new MailReader();
 			String tempPS = "";
-			String subject = "Reset Password for AUTOpx";
+			String subject = "Reset Password for VINpx";
 
-			String content1 = "You have requested to have your password reset for your account at AUTOpx";
-			String psB4 = "Your Temporary password is ";
-			String psAfter = "Goto";
+			String content1 = "You have requested to have your password reset for your VINpx account.";
+			String psB4 = "Your temporary password is ";
+			String psAfter = "Go to";
 			// mailID = "Imap.gmail.com";
 			// email ="tdautof1@gmail.com";
 			// mailPassword = "Autodata1";
@@ -2187,6 +2187,7 @@ public class AUTOpxController extends Comlibs {
 
 		igP.clickTemplatesBtn(driver);
 		Templates tpP = new Templates(driver);
+		
 		// *************************1st**************************************************************************
 		// Header
 		try {
@@ -2237,27 +2238,27 @@ public class AUTOpxController extends Comlibs {
 		try {
 			tpP.clickMarketingMessageTopEditBtn(driver);
 		} catch (Exception e) {
-			System.out.println(" Overlay Top checkbox is not checked, click again to check it!  ");
+			System.out.println(" Add Additional Overlay Top checkbox is not checked, click again to check it!  ");
 			tpP.clickMarketingMessageTopCheckBox(driver);
 			tpP.clickSaveBtn(driver);
 			tpP.clickMarketingMessageTopEditBtn(driver);
 		}
 		tpP.clickOverlayXBtn(driver);
 		tpP.clickMarketingMessageTopEditBtn(driver);
-		tpP.inputGlbMsgIntoOverlayContentField(driver, "Global Message!");
+		tpP.inputGlbMsgIntoMarketingMSGTopContentField(driver, "Top_Global Message!");
 		tpP.clickContentOverlaySaveBtn(driver);
 		ac.Wait(1);
 		tpP.clickOverlayXBtn(driver);
 		ac.Wait(3);
 		// tpP.clickOverlayTopCheckBox(driver);
-
-		// Replace Template with Own
-		tpP.clickReplaceTemplateWithOwnCheckBox(driver, TCnum);
+		
+		// Add Additional Overly
+		tpP.clickAddAdditionalOverlayCheckBox(driver, TCnum);
 		ac.Wait(3);
 //		tpP.clickUploadBtn(driver, TCnum);
 //		tpP.acceptAlert(TCnum, "Cancel");//Need to find the right one, not ready 
 //		tpP.clickUploadBtn(driver, TCnum);
-		tpP.clickReplaceTemplateWithOwnCheckBox(driver, TCnum);	
+		tpP.clickAddAdditionalOverlayCheckBox(driver, TCnum);	
 		
 		// Select Text Images
 		tpP.scrollUp(driver, 3000, TCnum);
@@ -2294,6 +2295,7 @@ public class AUTOpxController extends Comlibs {
 		System.out.println("1. Waiting for 60, check Templates settings");
 		ac.Wait(60, true,"1. Waiting for 60 seconds, please check Templates settings for vin: "+vin01);
 		vgP.clickBackToInventoryBtn(driver);
+		
 		// *************************2nd**************************************************************************
 		igP.clickTemplatesBtn(driver);
 		// Header
@@ -2341,24 +2343,42 @@ public class AUTOpxController extends Comlibs {
 		ac.Wait(3);
 		// tpP.clickFooterCheckBox(driver);
 
-		// Marketing Message Top
+//		// Marketing Message Top
+//		try {
+//			tpP.clickMarketingMessageTopEditBtn(driver);
+//		} catch (Exception e) {
+//			System.out.println(" Marketing Message Top checkbox is not checked, click again to check it!  ");
+//			tpP.clickMarketingMessageTopCheckBox(driver);
+//			tpP.clickSaveBtn(driver);
+//			tpP.clickMarketingMessageTopEditBtn(driver);
+//		}
+//		tpP.clickOverlayXBtn(driver);
+//		tpP.clickMarketingMessageTopEditBtn(driver);
+//		tpP.inputGlbMsgIntoMarketingMSGTopContentField(driver, "");
+//		tpP.clickContentOverlaySaveBtn(driver);
+//		ac.Wait(1);
+//		tpP.clickOverlayXBtn(driver);
+//		ac.Wait(3);
+//		// tpP.clickMarketingMessageTopCheckBox(driver);
+
+		// Marketing Message Bottom
 		try {
-			tpP.clickMarketingMessageTopEditBtn(driver);
+			tpP.clickMarketingMessageBottomEditBtn(driver);
 		} catch (Exception e) {
-			System.out.println(" Marketing Message Top checkbox is not checked, click again to check it!  ");
-			tpP.clickMarketingMessageTopCheckBox(driver);
+			System.out.println(" Add Additional Overlay Bottom checkbox is not checked, click again to check it!  ");
+			tpP.clickMarketingMessageBottomCheckBox(driver);
 			tpP.clickSaveBtn(driver);
-			tpP.clickMarketingMessageTopEditBtn(driver);
+			tpP.clickMarketingMessageBottomEditBtn(driver);
 		}
 		tpP.clickOverlayXBtn(driver);
-		tpP.clickMarketingMessageTopEditBtn(driver);
-		tpP.inputGlbMsgIntoOverlayContentField(driver, "");
+		tpP.clickMarketingMessageBottomEditBtn(driver);
+		tpP.inputGlbMsgIntoMarketingMSGTopContentField(driver, "Bottom_Global Message!");
 		tpP.clickContentOverlaySaveBtn(driver);
 		ac.Wait(1);
 		tpP.clickOverlayXBtn(driver);
 		ac.Wait(3);
-		// tpP.clickMarketingMessageTopCheckBox(driver);
-
+		// tpP.clickOverlayTopCheckBox(driver);
+		
 		// Select Text Images
 		tpP.scrollUp(driver, 3000, TCnum);
 		tpP.clickFeaturesVDICheckBox(driver);
@@ -2394,6 +2414,7 @@ public class AUTOpxController extends Comlibs {
 		System.out.println("2. Waiting for 60, check Templates settings");
 		ac.Wait(60, true,"2. Waiting for 60 seconds, please check Templates settings for vin: "+vin01);
 		vgP.clickBackToInventoryBtn(driver);
+		
 		// *************************3rd**************************************************************************
 		igP.clickTemplatesBtn(driver);
 		// Header
@@ -2452,7 +2473,7 @@ public class AUTOpxController extends Comlibs {
 		}
 		tpP.clickOverlayXBtn(driver);
 		tpP.clickMarketingMessageTopEditBtn(driver);
-		tpP.inputGlbMsgIntoOverlayContentField(driver, "Global Message!");
+		tpP.inputGlbMsgIntoMarketingMSGTopContentField(driver, "Global Message!");
 		tpP.clickContentOverlaySaveBtn(driver);
 		ac.Wait(1);
 		tpP.clickOverlayXBtn(driver);
@@ -2823,21 +2844,21 @@ public class AUTOpxController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-//			 //// 0.General Inventory Gallery
-//			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-//			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
-//			 vehicleGallery(driver, tBrowser, env);
-//			 //verifyRerender(driver, tBrowser);
-//			
-//			 ////// 1.VINpx:
-//			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-//			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-//			
-//			// // bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-//			//
-//			 ////// 2. STOCKpx
-//			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-//			 STOCKpxInventoryTC(driver, tBrowser, env);
+			 //// 0.General Inventory Gallery
+			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
+			 vehicleGallery(driver, tBrowser, env);
+			 //verifyRerender(driver, tBrowser);
+			
+			 ////// 1.VINpx:
+			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+			
+			 // bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			
+			 ////// 2. STOCKpx
+			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			 STOCKpxInventoryTC(driver, tBrowser, env);
 
 			////// 3. Templates
 			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");

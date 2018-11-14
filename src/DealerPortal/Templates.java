@@ -34,38 +34,9 @@ public class Templates extends Comlibs {
 	By dealerNameDropDownLocator = By.cssSelector("span.glyphicon.glyphicon-menu-down");
 	By logOutLinkLocator = By.linkText("Logout");
 	By dealerShipIDBrands = By.id("brands");
-//	By userPassword = By.id("userPassword");
-//	By userPasswordConfirm = By.id("userConfirm");
-//	By saveBtn = By.id("saveBtn");
-//	By reRenderNOBtn = By.xpath("//div[@id='rerenderPrompt']/div/div/div[3]/button[2]");
-//
-//	// SELECT LogoImageGUID FROM dbo.DT01_Dealer WHERE(DlrCode = '123456')
-//	By logoImageGUID = By.xpath("//*[@id=\"dealer-logo\"]");
-//	// By dealershipIDBrands = By.xpath("")
-//	By dealershipNamelocator = By.id("dealerName");
-//	By websitelocator = By.id("dealerSite");
-//	By tagLinelocator = By.id("dealerTag");
-//	By dealershipEmaillocator = By.id("dealerEmail");
-//	By dealershipPhonelocator = By.id("dealerPhone");
-//	By globalMarketingMsglocator = By.id("globalMarketingMessage");
-//	By fisrtNamelocator = By.id("userFirstName");
-//	By lastNamelocator = By.id("userLastName");
-//	By addresslocator = By.id("dealerAddr1");
-//	By citylocator = By.id("dealerCity");
-//	By countrylocator = By.id("dealerCountry");
-//	By stateProvincelocator = By.id("dealerState");
-//	By zipPostalCodelocator = By.id("dealerZip");
+
 	By receiveDailyInventoryEmaillocator = By.id("emailOptIn");
-//	By dealershipBackground = By.xpath("//*[@id='formDealerInfo']/div[2]/div[2]/div/div/div");
-//	By vinpxprod = By.xpath("//*[@id=\"formDealerInfo\"]/div[1]/div[2]/div/div[1]/div[2]/label[3]/img");
-//	By lotpxprod = By.xpath("//*[@id=\"formDealerInfo\"]/div[1]/div[2]/div/div[1]/div[2]/label[4]/img");
-//	By stockpxprod = By.xpath("//*[@id=\"formDealerInfo\"]/div[1]/div[2]/div/div[1]/div[2]/label[5]/img");
-//
-////	By webSiteProviderDropDownLocator=By.xpath("//*[@id='websiteProvider']/option["+num+"]");//num=1,2,3...
-//	By addWebSiteProviderBtnLocator=By.xpath("//*[@id='formDealerInfo']/div[2]/div[2]/div/div/div[2]/div/div/button");
-////	By brandDropDownLocator=By.xpath("//*[@id='dealerBrand']/option["+num+"]");//num=1,2,3...
-//	By changeBtnLocator=By.xpath("//*[@id='uploadCaption']");
-//	By xdeleteBtnLocator=By.xpath("//*[@id='removeLogo']");
+
 
 //	********************************************************************************************
 //	Templates:
@@ -96,12 +67,24 @@ public class Templates extends Comlibs {
 	By footerContent_VIN_CheckBoxLocator=By.xpath("//*[@id=\"footerContent\"]/label[3]/span");
 	By footerContent_StockNumber_CheckBoxLocator=By.xpath("//*[@id=\"footerContent\"]/label[4]/span");
 	By footerContent_BrandLogo_CheckBoxLocator=By.xpath("//*[@id=\"footerContent\"]/label[5]/span");
-	
-	
-										   //*[@id="templateBuilder"]/div[3]/label[3]/span
+									   //*[@id="templateBuilder"]/div[3]/label[3]/span
 	By MarketingMessageTopCheckBoxLocator=By.xpath("//*[@id='templateBuilder']/div[3]/label[3]/span");//  //*[@id="templateBuilder"]/div[3]/form/label[3]/span
 	By MarketingMessageTopEditLocator=By.xpath("//*[@id=\"overlayTopEditBtn\"]");//  //*[@id="overlayTopEditBtn"]
 	By MarketingMessageTopContent_globleMSG_fieldLocator=By.xpath("//*[@id=\"overlayContent\"]/textarea");
+	By MarketingMessageBottomCheckBoxLocator=By.xpath("//*[@id='templateBuilder']/div[3]/label[4]/span");//
+	By MarketingMessageBottomEditLocator=By.xpath("//*[@id=\"overlayBottomEditBtn\"]");//  
+	By MarketingMessageBottomContent_globleMSG_fieldLocator=By.xpath("//*[@id=\"gmm\"]");
+		
+	//*[@id="templateBuilder"]/div[3]/label[3]/span
+	//*[@id="overlayTopEditBtn"]
+	//*[@id="gmm"]
+	//*[@id="templateBuilder"]/div[3]/label[4]/span
+	//*[@id="overlayBottomEditBtn"]
+	//*[@id="gmm"]
+	
+	
+	//*[@id="saveOverlayContentBtn"]/span
+	
 	
 	By replaceTemplateWithOwnCheckBoxLocator=By.xpath("//*[@id=\"templateBuilder\"]/div[3]/label[5]/span");
 	//*[@id="templateBuilder"]/div[3]/label[5]/span
@@ -109,11 +92,11 @@ public class Templates extends Comlibs {
 	By uploadBtnLocator=By.xpath("//*[@id=\"dealerLogoContainer\"]/div[2]/div[1]/div");
 	//*[@id="dealerLogoContainer"]/div[2]/div[1]/div
 	
-	By featuresVDILocator=By.xpath("//*[@id='main-container']/div/div[4]/div[2]/label/span");
-								    //*[@id="main-container"]/div/div[4]/div[2]/label/span
-	By whatsCoolWCILocator=By.xpath("//*[@id='main-container']/div/div[4]/div[3]/label/span");
-	 								 //*[@id="main-container"]/div/div[4]/div[3]/label/span
-	By benefitsVBILocator=By.xpath("//*[@id='main-container']/div/div[4]/div[4]/label/span");	
+	By featuresVDILocator=By.xpath("//*[@id='main-container']/div/div[5]/div[2]/label/span");// //*[@id="main-container"]/div/div[5]/div[2]/label/span
+								    //*[@id="main-container"]/div/div[5]/div[2]/label/span
+	By whatsCoolWCILocator=By.xpath("//*[@id='main-container']/div/div[5]/div[3]/label/span");
+	 								 //*[@id="main-container"]/div/div[5]/div[3]/label/span
+	By benefitsVBILocator=By.xpath("//*[@id='main-container']/div/div[5]/div[4]/label/span");	
 	
 	
 //	By Locator=By.xpath("");
@@ -394,11 +377,19 @@ public class Templates extends Comlibs {
 		driver.findElement(MarketingMessageTopCheckBoxLocator).click();
 		return this;
 	}
+	public Templates clickMarketingMessageBottomCheckBox(WebDriver driver) throws IOException {
+		driver.findElement(MarketingMessageBottomCheckBoxLocator).click();
+		return this;
+	}
 	public Templates clickMarketingMessageTopEditBtn(WebDriver driver) throws IOException {
 		driver.findElement(MarketingMessageTopEditLocator).click();
 		return this;
 	}
-	public Templates inputGlbMsgIntoOverlayContentField(WebDriver driver,String glbMsg) throws IOException {
+	public Templates clickMarketingMessageBottomEditBtn(WebDriver driver) throws IOException {
+		driver.findElement(MarketingMessageBottomEditLocator).click();
+		return this;
+	}
+	public Templates inputGlbMsgIntoMarketingMSGTopContentField(WebDriver driver,String glbMsg) throws IOException {
 		driver.findElement(MarketingMessageTopContent_globleMSG_fieldLocator).clear();
 		driver.findElement(MarketingMessageTopContent_globleMSG_fieldLocator).sendKeys(glbMsg);
 		return this;
@@ -455,7 +446,7 @@ public class Templates extends Comlibs {
 		return new ImageGallery(driver);
 	}
 	
-	public Templates clickReplaceTemplateWithOwnCheckBox(WebDriver driver, String tc) throws IOException {
+	public Templates clickAddAdditionalOverlayCheckBox(WebDriver driver, String tc) throws IOException {
 		driver.findElement(replaceTemplateWithOwnCheckBoxLocator).click();
 		return this;
 	}

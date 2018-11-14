@@ -316,7 +316,7 @@ public class MailReader extends Comlibs {
 								rwExcel("", false, "Verify Email - " + emailSuj + " Content3", content3);
 							}
 							int beginIdx = emailText.indexOf(content2);
-							int endIdx = emailText.indexOf(content3);
+							int endIdx = emailText.indexOf(content3)+1;
 							wtdString = emailText.substring(beginIdx + content2.length(), endIdx - content3.length());
 							System.out.println("Your Temporary password is = " + wtdString);
 							try {
@@ -481,7 +481,7 @@ public class MailReader extends Comlibs {
 		MailReader emlink2 = new MailReader();//
 		ps = emlink2.getMailPSorURL(mailID, email, mailPassword, subject, b4Text, afterText);
 		if (ps.length() > 0) {
-			ps = ps.substring(0, ps.length() - 2);
+			ps = ps.substring(0, ps.length() - 0);
 		}
 		return ps;
 	}
@@ -519,9 +519,8 @@ public class MailReader extends Comlibs {
 		// getURL=emlink1.MailReaderURL(subject0, content1, content2,content3,content4,content5);
 		// System.out.print("URL:= "+getURL);
 
-		subject0 = "Reset Password for VDVI";
-
-		content1 = "You have requested to have your password reset for your account at VDVI";
+		subject0 = "Reset Password for VINpx";
+		content1 = "You have requested to have your password reset for your VINpx account.";
 		content2 = "Your Temporary password is ";
 		content3 = "Goto";
 		content4 = "to login again and";

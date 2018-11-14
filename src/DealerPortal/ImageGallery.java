@@ -1382,8 +1382,8 @@ public class ImageGallery extends Comlibs {
 		}
 		// driver.findElement(By.id("supportMessage")).clear(); //record
 		driver.findElement(ContactSupportMsgField04).clear();
-		// driver.findElement(By.id("supportMessage")).sendKeys("This is testing. Ignore please. ");//record
-		driver.findElement(ContactSupportMsgField04).sendKeys("This is testing. Ignore please. ");
+		// driver.findElement(By.id("supportMessage")).sendKeys("This is testing for Support/Contact US request. Ignore please. ");//record
+		driver.findElement(ContactSupportMsgField04).sendKeys("This is testing for Support/Contact US request. Ignore please. ");
 		driver.findElement(ContactSupportCancelBtn06).click();
 		Wait(2);
 		driver.findElement(helpMarkLocator).click();
@@ -1393,7 +1393,7 @@ public class ImageGallery extends Comlibs {
 		// driver.findElement(By.id("supportMessage")).clear(); //record
 		driver.findElement(ContactSupportMsgField04).clear();
 		// driver.findElement(By.id("supportMessage")).sendKeys("This is testing. Ignore please. ");//record
-		driver.findElement(ContactSupportMsgField04).sendKeys("This is testing. Ignore please. ");
+		driver.findElement(ContactSupportMsgField04).sendKeys("This is testing for Support/Contact US request. Ignore please. ");
 		// driver.findElement(By.cssSelector("button.btn.asc-secondary-btn")).click();//record
 		driver.findElement(ContactSupportSubmitBtn05).click();
 		Wait(2);
@@ -1481,7 +1481,7 @@ public class ImageGallery extends Comlibs {
 		// driver.findElement(By.id("supportMessage")).clear(); //record
 		driver.findElement(ContactSupportMsgField04).clear();
 		// driver.findElement(By.id("supportMessage")).sendKeys("This is testing. Ignore please. ");//record
-		driver.findElement(ContactSupportMsgField04).sendKeys("This is testing. Ignore please. ");
+		driver.findElement(ContactSupportMsgField04).sendKeys("This is testing for Report Issue. Ignore please. ");
 		driver.findElement(ContactSupportCancelBtn06).click();
 		Wait(2);
 		driver.findElement(helpMarkLocator).click();
@@ -1491,7 +1491,7 @@ public class ImageGallery extends Comlibs {
 		// driver.findElement(By.id("supportMessage")).clear(); //record
 		driver.findElement(ContactSupportMsgField04).clear();
 		// driver.findElement(By.id("supportMessage")).sendKeys("This is testing. Ignore please. ");//record
-		driver.findElement(ContactSupportMsgField04).sendKeys("This is testing. Ignore please. ");
+		driver.findElement(ContactSupportMsgField04).sendKeys("This is testing for Report Issue. Ignore please. ");
 		// driver.findElement(By.cssSelector("button.btn.asc-secondary-btn")).click();//record
 		driver.findElement(ContactSupportSubmitBtn05).click();
 		Wait(2);
