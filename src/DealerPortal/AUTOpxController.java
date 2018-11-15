@@ -2866,7 +2866,7 @@ public class AUTOpxController extends Comlibs {
 
 			//////// bc.Wait(38*60);//wait 18 minutes;
 			////
-			// // ////// 3. LOTpx
+			// // ////// 4. LOTpx
 			// bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
 			// LOTpxInventoryTC(driver, tBrowser, env);
 			// LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
