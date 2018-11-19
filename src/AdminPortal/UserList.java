@@ -60,7 +60,7 @@ public class UserList extends Comlibs {
 	By AddAccountBtnLocator = By.xpath("//*[@id=\"addAccountButton\"]/span");
 	 By accountsLocator=By.xpath("//table[@id='dealerTable']/tbody");//xpath=//table[@id='dealerTable']/tbody
 	 By nextLocator=By.xpath("//*[@id=\"dealerTable_next\"]");
-	// By Locator=By.xpath("");
+	 By firstNameSortLocator=By.xpath("//*[@id=\"dealerTable\"]/thead/tr/th[4]");
 	// By Locator=By.xpath("");
 	// By Locator=By.xpath("");
 	// By Locator=By.xpath("");
@@ -525,8 +525,15 @@ public class UserList extends Comlibs {
 		return new DealerProfile(driver);
 	}
 	public UserList clickNext(WebDriver driver, int num, String tc) throws IOException {
-		By expandDealersArrowLocator = By.xpath("//*[@id='dealerTable']/tbody/tr/td["+num+"]");//1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
+//		By expandDealersArrowLocator = By.xpath("//*[@id='dealerTable']/tbody/tr/td["+num+"]");//1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
+		By expandDealersArrowLocator = By.xpath("//*[@id=\"dealerTable_next\"]");
+
+		//*[@id="dealerTable_next"]
 		driver.findElement(expandDealersArrowLocator).click();
+		return this;
+	}
+	public UserList clickFirstNameSort(WebDriver driver, String tc) throws IOException {
+		driver.findElement(firstNameSortLocator).click();
 		return this;
 	}
 

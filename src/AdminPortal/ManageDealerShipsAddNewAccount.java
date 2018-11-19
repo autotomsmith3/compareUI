@@ -7,10 +7,15 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 
+import DealerPortal.AUTOpxLogin;
+import DealerPortal.AcceptLicenseAgreementtoContinue;
+import DealerPortal.DealerProfile;
+import DealerPortal.MailReader;
+import cPP.com_libs;
+
 public class ManageDealerShipsAddNewAccount extends Comlibs {
-	
-	public void AddNewAccount(WebDriver driver, String brw, String versionNum, String envment,
-			String checkEmail)
+
+	public void AddNewAccount(WebDriver driver, String brw, String versionNum, String envment, String checkEmail)
 			throws IOException, InterruptedException, ClassNotFoundException, SQLException, AWTException {
 
 		// Load environment parameters
@@ -23,8 +28,10 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String tc = "";
+		String tc = "ManageDealerShipBegin";
 		String env = prop.getProperty("AUTOpx.environment");
+		String baseURL = prop.getProperty(env + ".AdminPortalBaseURL");
+		String DealerPortalBaseURL = prop.getProperty(env + ".DealerPortalBaseURL");
 		String envBrowser = prop.getProperty("AUTOpx.browser");
 		String render = prop.getProperty("AUTOpx.render");
 		String addNewVIN = prop.getProperty("AUTOpx.addNewVIN");
@@ -64,6 +71,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		String AccountEmail = prop.getProperty(env + ".AccountEmail");
 		String FirstName = prop.getProperty(env + ".FirstName");
 		String LastName = prop.getProperty(env + ".LastName");
+		String UserDealerName = prop.getProperty(env + ".UserDealerName");
 		String TagLineMarkingMsg = prop.getProperty(env + ".TagLineMarkingMsg");
 		String Website = prop.getProperty(env + ".Website");
 		String DealershipPhoneNumber = prop.getProperty(env + ".DealershipPhoneNumber");
@@ -71,6 +79,8 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		int SelectBackgroundSet = Integer.parseInt(prop.getProperty(env + ".SelectBackgroundSet"));
 		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
 		String AddNewAccountEmail = prop.getProperty(env + ".AddNewAccountEmail");
+		String SelectedDealerNameToAttach = prop.getProperty(env + ".SelectedDealerNameToAttach");
+		String deleteUserPostWSURL = prop.getProperty(env + ".deleteUserPostWSURL");
 
 		// Initial
 		// final int wt_Secs = 6;
@@ -88,7 +98,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		String Metadata = "";
 		String dlrGuid = "";
 		// ====================
-//		Comlibs ac = new Comlibs();
+		// Comlibs ac = new Comlibs();
 		rwExcel("", "*********ManageDealerShips**********", "");
 
 		int count = 0;
@@ -105,12 +115,10 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		VDVILogin loginP = new VDVILogin(driver);
 		int dealerN = 0;
 		String dealerSN = "";
-		loginP.login(driver, accountEmail, accountPS, "");
+		loginP.login(driver, accountEmail, accountPS, tc);
 		String parentHandle = driver.getWindowHandle(); // get the current window handle
 
 		UserList UserListP = new UserList(driver);
-		// *************************UserListP******************************************************
-		// *************************UserListP******************************************************
 		Wait(wt);
 		UserListP.scrollUp(driver, 3000, "ddd"); // QA -2000 Prod -3000 - negative means scrolldown
 		UserListP.clickDisplayDropDownBtn(driver, "3");
@@ -118,14 +126,157 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		// =========================== Add New Account Process============================================================
 		tc = "TC_addNewAct_AttachDealer_DeleteIt";
 		UserListP.clickAddAccount(driver);
+
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+		}
+
 		AccountProfile AccountProfileP = new AccountProfile(driver);
 		AccountProfileP.inputAccountEmail(driver, AddNewAccountEmail);
+		AccountProfileP.inputUserDealerName(driver, UserDealerName);
 		AccountProfileP.inputFirstName(driver, FirstName);
 		AccountProfileP.inputLastName(driver, LastName);
 		AccountProfileP.selectAccountStatus(driver, 1);
-		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
+		tc = "Click SAVE button in Account Profile page 1";
+		AccountProfileP.clickSaveBtn(driver, tc);
+		Wait(wt);
+		tc = "Select a dealership name to attach to account.";
+		String selectedDealershipName = AccountProfileP.selectOneDealerFrAllDealers(driver, SelectedDealerNameToAttach,
+				tc);
+		AccountProfileP.clickRightArrowAttachBtn(driver);
+		tc = "scrollUP -132";
+		AccountProfileP.scrollUp(driver, -132, tc);
+		tc = "Click SAVE button in Account Profile page 2";
+		AccountProfileP.clickSaveBtn(driver, tc);
+		Wait(wt);
+		AccountProfileP.clickResetPasswordBtn(driver);
+		AccountProfileP.checkMSGDisplayedHead(driver,
+				"An email containing a temporary password has been sent to the dealer", tc);
+		// Close Account Profile page
+		driver.close();
+		// Open Dealer Porta
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+		}
+		DealerPortal.AUTOpxController.loadURL(driver, DealerPortalBaseURL);
+		AUTOpxLogin dealerPortalLoginP = new AUTOpxLogin(driver);
 
-		// =========================== Add Account============================================================
+		// Open sautotomsmith.jj@gmail.com to get temporary PS
+		DealerPortal.MailReader gMail = new MailReader();
+		String tempPS = "";
+		String subject = "Reset Password for VINpx";
+
+		String content1 = "You have requested to have your password reset for your VINpx account.";
+		String psB4 = "Your temporary password is ";
+		String psAfter = "Go to";
+		// mailID = "Imap.gmail.com";
+		// email ="tdautof1@gmail.com";
+		// mailPassword = "Autodata1";
+		tempPS = gMail.getTemporaryPS(subject, psB4, psAfter, "Imap.gmail.com", AddNewAccountEmail, accountPS);
+		TCnum = "TC139686_02_tempPS";
+		DealerPortal.AUTOpxLogin dealerPortalloginP = new AUTOpxLogin(driver);
+		dealerPortalloginP.login(driver, AddNewAccountEmail, tempPS); // this should be correct one. Now issue here, see autopxops-1196
+		// loginP.loginDealerProfile(driver, accountEmail, tempPS);//this is temp, it skips agreement page
+		DealerPortal.AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+		acceptLicenseP.clickAcceptPSBtn(driver);
+		DealerPortal.DealerProfile dpP = new DealerProfile(driver);
+		TCnum = "TC139674";
+		dpP.changePS(driver, accountPS, TCnum);
+		TCnum = "TC139686_02_NoBtn";
+		Wait(1);
+		dpP.clickNOBtn(driver, TCnum);
+		TCnum = "TC139686_02_Inv";
+		Wait(1);
+		dpP.clickInventoryGalleryBtn(driver, TCnum);
+		Wait(1);
+		dpP.clickLogout(driver);
+		// login dealer portal again and accept agreement and logout
+		DealerPortal.AUTOpxController.loadURL(driver, DealerPortalBaseURL);
+		dealerPortalloginP.login(driver, AddNewAccountEmail, accountPS);
+		acceptLicenseP.clickAcceptBtn(driver);
+		dpP.clickLogout(driver);
+		
+		
+		
+		
+		// Load Admin Portal URL
+		AdminPortalController.loadURL(driver, baseURL, env);
+		tc = "Login again into Admin Portal after changed PS";
+		loginP.login(driver, accountEmail, accountPS, tc);
+		UserListP.inputSearch(driver, AddNewAccountEmail);
+		UserListP.clickEditBtn(driver, "1");
+
+		AccountProfileP.selectOneDealerFrAccountDealers(driver, SelectedDealerNameToAttach, TCnum);
+		AccountProfileP.clickLeftArrowDetachBtn(driver);
+		tc = "Remove dealership. Click SAVE after clicking left arrow.";
+		AccountProfileP.clickSaveBtn(driver, tc);
+		Wait(wt);
+		String drlGuid = AccountProfileP.getDlrGuid(driver);		
+		drlGuid=AccountProfileP.trimURL_user(drlGuid);
+		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+		}
+		// Run Postman to delete the account using drlGuid
+//		String deleteUserPostWSURL=
+		String postBody="{}";
+		String jsonTextFrDeleteUserWS="";
+		tc = "Run jsonTextFrDeleteUserWS #";
+		try {
+			jsonTextFrDeleteUserWS=com_libs.getSourceCodeJson(postBody, deleteUserPostWSURL, drlGuid, "");
+			rwExcel(tc, true, "Add New Account ", "Run jsonTextFrDeleteUserWS");
+		}catch (Exception ex) {
+			jsonTextFrDeleteUserWS="Failed!";
+			System.out.println("DeleteuserWS failed! ");
+			rwExcel(tc, false, "Add New Account ", "Run jsonTextFrDeleteUserWS");
+		}
+		if (jsonTextFrDeleteUserWS.contains("User successfully deleted")) {
+			//success
+			System.out.println("DeleteuserWS ran successfully! User successfully deleted");
+			rwExcel(tc, true, "Add New Account ", "Run jsonTextFrDeleteUserWS to delete the account. User successfully deleted");
+		}else if (jsonTextFrDeleteUserWS.contains("User has dealers attached. Cannot delete user.")){
+			//Failed
+			System.out.println("DeleteuserWS failed! User has dealers attached. Cannot delete user. ");
+			rwExcel(tc, false, "Add New Account ", "Run jsonTextFrDeleteUserWS to delete the account. User has dealers attached. Cannot delete user.");
+		}else if (jsonTextFrDeleteUserWS.contains("Failed!")){
+			//unknown error
+			System.out.println("DeleteuserWS failed! Returned exception error! ");
+			rwExcel(tc, false, "Add New Account ", "Run jsonTextFrDeleteUserWS to delete the account failed. ");
+		}else if (jsonTextFrDeleteUserWS.contains("User does not exist")){
+			//unknown error
+			System.out.println("DeleteuserWS failed! User does not exist! ");
+			rwExcel(tc, false, "Add New Account ", "Run jsonTextFrDeleteUserWS to delete the account. User does not exist! ");
+		}else {
+			//unknown error
+			System.out.println("DeleteuserWS failed! Unknown error! DeleteUserWS returned=\""+jsonTextFrDeleteUserWS+"\"");
+			rwExcel(tc, false, "Add New Account ", "Run jsonTextFrDeleteUserWS to delete the account. Unknown error!");
+
+		}
+
+		// F5 to refresh page
+		tc = "F5 to fresh page after delete the account#";
+		clickRefleshF5Btn(driver, tc);
+		Wait(2);
+		UserListP.inputSearch(driver, AddNewAccountEmail);
+		tc = "After F5 to fresh page, search the account#";
+		try {
+			UserListP.clickEditBtn(driver, "1");
+			//Failed because account still exists in the system
+			System.out.println("Account Email =\""+AddNewAccountEmail+"\" still exists in system! ");
+			rwExcel(tc, false, "Add New Account and Run jsonTextFrDeleteUserWS to delete the account. ","After refleshed the page, Account Email =\""+AddNewAccountEmail+"\" still exists in system!");
+
+		}catch (Exception ex) {
+			//Passed. Add Account all processes Passed because account does not exist in the system
+			System.out.println("Account Email =\""+AddNewAccountEmail+"\" does NOT exist in system! Add Account all processes Passed!");
+			rwExcel(tc, true, "Add New Account and Run jsonTextFrDeleteUserWS to delete the account. ","After refleshed the page, Account Email =\""+AddNewAccountEmail+"\" does NOT exist in system!");
+		}
+
+		// check there is no account showing
+		// done!
+		
+//		Stop here!!!
+
+		// =========================== Add Account to check the error message============================================================
 		tc = "TC_addNewAct_with_Existing_ActEamil";
 		UserListP.clickAddAccount(driver);
 		// AccountProfile AccountProfileP = new AccountProfile(driver);
@@ -149,7 +300,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		}
 		AccountProfileP.clickSaveBtn(driver, tc);
 		tc = "TC_addNewAct_with_Existing_ActEamil_checkMSG";
-
+		Wait(2);
 		boolean MessageExistForAddExistAccountEmail = AccountProfileP.checkMessageDisplayedHead(driver,
 				"Check required fields");
 		if (MessageExistForAddExistAccountEmail) {
@@ -160,13 +311,13 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
 		// Stop here!!! All above work fine.
 
-		// =========================== Add Account============================================================
+		// =========================== Add Account to check the error message============================================================
 
-		// =========================== Add Dealership for existing account============================================================
+		// =========================== Add Dealership for existing account to check the message============================================================
 		tc = "TC139021_01";
 		UserListP.clickAddDealerShip(driver);
 
-		DealerProfile DealerProfieP = new DealerProfile(driver);
+		AdminPortal.DealerProfile DealerProfieP = new AdminPortal.DealerProfile(driver);
 		DealerProfieP.selectOEM(driver, 13);
 		// check Buick and Cadillac and Chevrolet and GMC
 		// DealerProfieP.selectOEMBrands(driver, 1); // check Buick
@@ -200,7 +351,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
-
+		Wait(2);
 		tc = "AddDealerInvalid_withExistDealershipID";
 		boolean MessageExist = DealerProfieP.checkMessageDisplayedHead(driver,
 				"There is already a record with this Manufacturer and Dealer Code.");// "There is already a user record with this Login");
@@ -212,7 +363,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
 
-		// **************************Add a new dealership for account*****************************************************
+		// **************************Add Dealership for existing account to check the message*****************************************************
 		// click Add Dealership btn
 		UserListP.clickAddDealerShip(driver);
 		DealerProfieP.selectOEM(driver, 13);
@@ -274,7 +425,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		// **************************************************************************************
 
 		UserListP.clickEditBtn(driver, "1");// 1,2,3...
-		String attachedDealerName = AccountProfileP.selectOneDealerFrAllDealers(driver, 7);
+		String attachedDealerName = AccountProfileP.selectOneDealerFrAllDealers(driver, 7, tc);
 		boolean dealerExistInAllDealers = false;
 		boolean dealerExistInAccountDealers = false;
 		tc = "Dealer should not exist in Account Dealer field_01";
@@ -287,7 +438,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		tc = "Dealer should exist in Account Dealer field_02";
 		dealerExistInAccountDealers = AccountProfileP.verifyOneDealerInAccountDealersField(driver, attachedDealerName,
 				true, tc);
-		AccountProfileP.selectOneDealerFrAccountDealers(driver, attachedDealerName);
+		AccountProfileP.selectOneDealerFrAccountDealers(driver, attachedDealerName, tc);
 		Wait(wt);
 		AccountProfileP.clickLeftArrowDetachBtn(driver);
 		tc = "TC_Verify detach a dealer from Account Dealers_01";
@@ -313,8 +464,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		// driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
 		// }
 		switchToWindow(driver);
-
-		System.out.println("Stop here 2018-10-03");
+		System.out.println("Stop here 2018-11-19");
 		// Stop here!!! 2018-10-01
 
 		// driver.close();
@@ -325,8 +475,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		// *************************UserListP******************************************************
 		//// *************************UserListP******************************************************
 
-
-		driver.close();
+//		driver.close();
 		// switchToWindow(driver, parentHandle);
 		// driver.close();
 

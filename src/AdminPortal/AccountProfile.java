@@ -73,10 +73,12 @@ public class AccountProfile extends Comlibs {
 	// By AccountStatusLocator=By.xpath("//*[@id=\"userAccStatus\"]");
 	By AccountStatusLocator = By.xpath("//*[@id='userAccStatus']/option[1]"); // 1- Active, 2- Lock out, 3-Change Password, 4-Disabled
 	By SearchLocator = By.xpath("//*[@id=\"dealerTable_filter\"]/label/input");
-	By msgOnPage = By.xpath("//*[@id=\"header\"]/div/div[2]");// //*[@id="header"]/div/div[2]/span
+	By msgOnPage = By.xpath("//*[@id=\"header\"]/div/div[1]");// //*[@id="header"]/div/div[1]/span
 	By leftArrowDetachLocator = By.xpath("//*[@id='detachButton']");
 	By rightArrowAttachLocator = By.xpath("//*[@id='attachButton']");
-
+	By resetPasswordLocator = By.xpath("//*[@id=\"resetPassBtn\"]");
+	
+	
 	public String getDealershipID(WebDriver driver) throws IOException {
 		String dealershipip = driver.findElement(DealershipIDLocator).getAttribute("value");
 		return dealershipip;
@@ -185,7 +187,11 @@ public class AccountProfile extends Comlibs {
 		Wait(1);
 		return this;
 	}
-
+	public AccountProfile clickResetPasswordBtn(WebDriver driver) {
+		driver.findElement(resetPasswordLocator).click();
+		Wait(1);
+		return this;
+	}
 	public boolean checkMessageDisplayedHead(WebDriver driver, String message) {
 		String msg = driver.findElement(MessageDisplayedOnHead).getText();// .getAttribute("messageBox");
 		boolean messageExist = false;
@@ -195,6 +201,17 @@ public class AccountProfile extends Comlibs {
 		return messageExist;
 	}
 
+	public boolean checkMSGDisplayedHead(WebDriver driver, String message, String tc) throws IOException {
+		String msg = driver.findElement(msgOnPage).getText();// .getAttribute("messageBox");
+		boolean messageExist = false;
+		if (msg.contains(message)) {
+			messageExist = true;
+			rwExcel(tc, true, "Verify msg =\"" + message, " shows on the page");
+		}else {
+			rwExcel(tc, false, "Verify msg =\"" + message, " does not show on the page"+". The showing MSG is \""+msg+"\"");
+		}
+		return messageExist;
+	}
 	public String getDlrGuid(WebDriver driver) throws IOException {
 		String dlrGuid = driver.getCurrentUrl();
 
@@ -202,6 +219,7 @@ public class AccountProfile extends Comlibs {
 	}
 
 	public String trimURL(String urlString) throws IOException {
+		// Get dealership dlrGuid
 		// urlString="//http://lnoc-q13v-xwa1.autodata.org/AdminPortal/dealersetting?dlrGuid=C9B47888-E227-4C53-8162-352CC650FA90";
 		int beginIdx = urlString.indexOf("dlrGuid=") + 8;
 
@@ -209,7 +227,15 @@ public class AccountProfile extends Comlibs {
 
 		return dlrGuid;
 	}
+	public String trimURL_user(String urlString) throws IOException {
+		// Get account userGUid
+		// urlString="https://admin-prod.vinpx.net/AdminPortal/accountsetting?userGuid=1B269054-7E1D-4818-8788-2A1D1990C77F";
+		int beginIdx = urlString.indexOf("userGuid=") + 9;
 
+		String dlrGuid = urlString.substring(beginIdx);
+
+		return dlrGuid;
+	}
 	public AccountProfile selectAccountStatus(WebDriver driver, int num) {
 		By AccountStatusLocator = By.xpath("//*[@id='userAccStatus']/option[" + num + "]"); // 1- Active, 2- Lock out, 3-Change Password, 4-Disabled
 		driver.findElement(AccountStatusLocator).click();
@@ -222,7 +248,7 @@ public class AccountProfile extends Comlibs {
 		return this;
 	}
 
-	public String selectOneDealerFrAllDealers(WebDriver driver, int num) {
+	public String selectOneDealerFrAllDealers(WebDriver driver, int num, String tc) {
 		By oneDealerLocator = By.xpath("//*[@id='allDealers']/option[" + num + "]"); // 1,2,3...
 		By allDealerLocator = By.xpath("//*[@id='allDealers']/option"); // 1,2,3...
 		int allDealersNum = driver.findElements(allDealerLocator).size();
@@ -239,7 +265,50 @@ public class AccountProfile extends Comlibs {
 		return attachedDealerIDnDealerNamex;
 	}
 
-	public AccountProfile selectOneDealerFrAccountDealers(WebDriver driver, String selectedName) {
+	public String selectOneDealerFrAllDealers(WebDriver driver, String selectedName, String tc) throws IOException {
+		int num = 0;
+		By allDealerLocator = By.xpath("//*[@id='allDealers']/option"); // 1,2,3...
+		By oneDealerLocator = By.xpath("//*[@id='allDealers']/option[" + num + "]"); // 1,2,3...
+		int allDealersNum = driver.findElements(allDealerLocator).size();
+
+		for (int i = 1; i <= allDealersNum; i++) {
+			oneDealerLocator = By.xpath("//*[@id='allDealers']/option[" + i + "]");
+			boolean enabled = driver.findElement(oneDealerLocator).isSelected();
+			if (enabled) {
+				driver.findElement(oneDealerLocator).click();
+			}
+		}
+
+		for (int i = 1; i <= allDealersNum; i++) {
+			oneDealerLocator = By.xpath("//*[@id='allDealers']/option[" + i + "]");
+			String ActDealerName = driver.findElement(oneDealerLocator).getText();
+			if (selectedName.equalsIgnoreCase(ActDealerName)) {
+				num = i;
+				boolean enabled = driver.findElement(oneDealerLocator).isSelected();
+				if (!enabled) {
+					driver.findElement(oneDealerLocator).click();
+				}
+			}
+		}
+
+		oneDealerLocator = By.xpath("//*[@id='allDealers']/option[" + num + "]"); // 1,2,3...
+		// boolean selected = driver.findElement(oneDealerLocator).isSelected();
+		// driver.findElement(oneDealerLocator).click();
+		// selected = driver.findElement(oneDealerLocator).isSelected();
+		String attachedDealerIDnDealerNamex = driver.findElement(oneDealerLocator).getText();
+		if (!(selectedName.equalsIgnoreCase(attachedDealerIDnDealerNamex))) {
+			attachedDealerIDnDealerNamex = "Dealer string name: \"" + selectedName
+					+ "\" Cannot Been Found in All Dealers field!";
+			rwExcel(tc, false, "Add an Account to selec a dealership ",
+					"Dealer string name: \"" + selectedName + "\" Cannot Been Found in All Dealers field!");
+		} else {
+			rwExcel(tc, true, "Add an Account to selec a dealership",
+					"Dealer string name: \"" + selectedName + "\" is found in All Dealers field!");
+		}
+		return attachedDealerIDnDealerNamex;
+	}
+
+	public AccountProfile selectOneDealerFrAccountDealers(WebDriver driver, String selectedName, String tc) {
 		int num = 0;
 		By AccountDealersLocator = By.xpath("//*[@id='userAttachedDealers']/option");// //*[@id="userAttachedDealers"]
 		By AccountDealerLocator = By.xpath("//*[@id='userAttachedDealers']/option[" + num + "]");// 1,2,3...
@@ -339,8 +408,8 @@ public class AccountProfile extends Comlibs {
 		return this;
 	}
 
-	public AccountProfile inputUserDealerName(WebDriver driver, String firstName) {
-		driver.findElement(UserDealerNameLocator).sendKeys(firstName);
+	public AccountProfile inputUserDealerName(WebDriver driver, String userDealerName) {
+		driver.findElement(UserDealerNameLocator).sendKeys(userDealerName);
 		return this;
 	}
 
