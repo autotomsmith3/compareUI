@@ -316,7 +316,7 @@ public class MailReader extends Comlibs {
 								rwExcel("", false, "Verify Email - " + emailSuj + " Content3", content3);
 							}
 							int beginIdx = emailText.indexOf(content2);
-							int endIdx = emailText.indexOf(content3)+1;
+							int endIdx = emailText.indexOf(content3) + 1;
 							wtdString = emailText.substring(beginIdx + content2.length(), endIdx - content3.length());
 							System.out.println("Your Temporary password is = " + wtdString);
 							try {
@@ -346,8 +346,8 @@ public class MailReader extends Comlibs {
 					Wait(secs);
 			} // End of while
 			if (countTime >= waitEmailTime) {
-				rwExcel("", false, "Email="+email+".  Verify Email Subject = " + emailSuj, "Email does not exist!");
-				wtdString="";
+				rwExcel("", false, "Email=" + email + ".  Verify Email Subject = " + emailSuj, "Email does not exist!");
+				wtdString = "";
 			}
 
 			try {
@@ -368,6 +368,116 @@ public class MailReader extends Comlibs {
 			return "";
 		}
 		return wtdString;
+	}
+
+	public void VerifyGetMailContentFrSubContain(String mainID, String email, String mailPassword, String emailSuj,
+			String content2, String content3, String tc) throws IOException {
+		/* Set the mail properties */
+		String wtdString = null;
+		Properties props = System.getProperties();
+		props.setProperty("mail.store.protocol", "imaps");
+		props.put("mail.imap.ssl.enable", "true");
+
+		// //Below 6 lines is from JavaMail 1.5.5 and later https://java.net/projects/javamail/pages/OAuth2
+		// Properties props = new Properties();
+		// props.put("mail.imap.ssl.enable", "true"); // required for Gmail
+		// props.put("mail.imap.auth.mechanisms", "XOAUTH2");
+		// Session session = Session.getInstance(props);
+		// Store store = session.getStore("imap");
+		// store.connect("imap.gmail.com", username, oauth2_access_token);
+
+		try {
+			/* Create the session and get the store for read the mail. */
+			Session session = Session.getDefaultInstance(props, null);
+			Store store = session.getStore("imaps");
+			boolean contd = store.isConnected();
+			// store.connect("imap.gmail.com","<mail ID> ", "<Password>");
+			// store.connect("imap.gmail.com", 993, "tdautof1@gmail.com", "Autodata1");
+
+			//// imap.googlemail.com
+			// mainID="imap.googlemail.com";
+			// email="tdautof1@gmail.com";
+			// mailPassword="Autodata1";
+			// store.connect(mainID, email, 993, mailPassword);
+			// store.connect("smtp.mail.yahoo.com",993, "todataoo@yahoo.ca", "Autodata1");
+
+			store.connect(mainID, email, mailPassword); // lucas.zhou@autodata.net not working
+
+			int countTime = 0;
+			while ((countTime < waitEmailTime) && (!delelted)) {
+				inbox = store.getFolder("Inbox");
+				System.out.println("No. of Unread Messages : " + inbox.getUnreadMessageCount());
+				inbox.open(Folder.READ_WRITE);
+				Message[] messages = inbox.search(new FlagTerm(new Flags(Flag.SEEN), false));
+				int msgslength = messages.length;
+				System.out.println("MESSAGE # = " + msgslength);
+				for (int i = 0; i < messages.length; i++) {
+					System.out.println("MESSAGE #" + (i + 1) + ":");
+					String msgSub = messages[i].getSubject();
+					if (msgSub.contains(emailSuj)) {
+						System.out.println("Msg Content = " + messages[i].toString());
+						System.out.println("SENT DATE:" + messages[i].getSentDate());
+						System.out.println("SUBJECT:" + messages[i].getSubject());
+						Object msgObj = messages[i].getContent();
+						String emailText = msgObj.toString();
+						System.out.println("Email Content =:" + emailText);
+						BodyPart clearTextPart = null;
+						String conType = messages[i].getContentType();
+						System.out.println("Email Content Type =:" + conType);
+						boolean typeExist = messages[i].isMimeType("text/plain");
+						if (typeExist) {
+							boolean cont2 = emailText.contains(content2);
+							boolean cont3 = emailText.contains(content3);
+							if (cont2 && cont3) {
+								rwExcel(tc, true, "Verify Email - " + emailSuj + " Contents",
+										"Selected Contents are correct!");
+							} else if (!cont2) {
+								rwExcel(tc, false, "Verify Email - " + emailSuj + " Content2", content2);
+							} else if (!cont3) {
+								rwExcel(tc, false, "Verify Email - " + emailSuj + " Content3", content3);
+							}
+
+							System.out.println("CONTENT: " + emailText);
+							System.out.println("CONTENT: ");
+						} else {
+							System.out.println("CONTENT: Not ==");
+							// rwExcel(false, "Verify Email Subject = "+emailSuj, "Email MimeType is NOT text/html!");
+						}
+
+						messages[i].setFlag(Flags.Flag.DELETED, true); // works 2016-07-23
+						// messages[i].setFlag(Flag.DELETED, true); //works
+						System.out.println(" i = " + i + ":  Subject = " + msgSub + "  is deleted!");
+						rwExcel(tc, true, "Verify Email Subject = " + emailSuj, "Email has been deleted!");
+						i = messages.length;
+						delelted = true;
+					}
+				}
+				countTime++;
+				System.out.println("waitEmailTime=" + countTime * secs + " seconds.");
+				if (!delelted)
+					Wait(secs);
+			} // End of while
+			if (countTime >= waitEmailTime) {
+				rwExcel(tc, false, "Email=" + email + ".  Verify Email Subject = " + emailSuj, "Email does not exist!");
+				wtdString = "";
+			}
+
+			try {
+				// printAllMessages(messages);
+				inbox.close(true);
+				store.close();
+			} catch (Exception ex) {
+				System.out.println("Exception arise at the time of read mail");
+				ex.printStackTrace();
+			}
+		} catch (NoSuchProviderException e) {
+			e.printStackTrace();
+			System.exit(1);
+		} catch (MessagingException e) {
+			// e.printStackTrace();
+			// System.exit(2);
+			rwExcel(tc, false, "Try to connect Email Service", "Connection fails");
+		}
 	}
 
 	public void printAllMessages(Message[] msgs) throws Exception {
@@ -472,12 +582,13 @@ public class MailReader extends Comlibs {
 	// getReferentie(mpMessage);
 	// }
 	// }
-	public static String getTemporaryPS(String subject, String b4Text, String afterText, String mailID,String email,String mailPassword) throws IOException {
+	public static String getTemporaryPS(String subject, String b4Text, String afterText, String mailID, String email,
+			String mailPassword) throws IOException {
 		String ps = "";
 		// "outlook.office365.com", "zhoul@autodatacorp.org", "password"
-//		 mailID = "Imap.gmail.com";
-//		 email ="tdautof1@gmail.com";
-//		 mailPassword = "Autodata1";
+		// mailID = "Imap.gmail.com";
+		// email ="tdautof1@gmail.com";
+		// mailPassword = "Autodata1";
 		MailReader emlink2 = new MailReader();//
 		ps = emlink2.getMailPSorURL(mailID, email, mailPassword, subject, b4Text, afterText);
 		if (ps.length() > 0) {
@@ -525,9 +636,9 @@ public class MailReader extends Comlibs {
 		content3 = "Goto";
 		content4 = "to login again and";
 		content5 = "If you received this email in error, you can safely ignore this email.";
-		 mailID = "Imap.gmail.com";
-		 email ="tdautof1@gmail.com";
-		 mailPassword = "Autodata1";
+		mailID = "Imap.gmail.com";
+		email = "tdautof1@gmail.com";
+		mailPassword = "Autodata1";
 		String temporaroyPassword = getTemporaryPS(subject0, content2, content3, mailID, email, mailPassword);
 		System.out.println("Temporary Password=" + temporaroyPassword);
 

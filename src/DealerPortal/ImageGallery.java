@@ -68,11 +68,9 @@ public class ImageGallery extends Comlibs {
 	// By.xpath("//button[@id='rerenderSelectedVehicles']");
 	By reRenderActiveBtn = By.xpath("//button[@id='rerenderSelectedVehicles']");// -----
 	By generateURLs = By.xpath("//button[@id='generateUrlBtn']");
-	
+
 	By newreRenderActiveBtn = By.xpath("//button[@id='rerenderSelectedVehicles']");
-	
-	
-	
+
 	By selectAll = By.id("selectAll");
 	By selectAll_xpath = By.xpath("//*[@id=\"selectAll\"]");
 	By selectNone = By.id("selectNone");
@@ -96,7 +94,7 @@ public class ImageGallery extends Comlibs {
 	By yearClearBtn = By.xpath("//div[@id='filterYearModal']/div/div/div[3]/button[2]");
 	By yearXBtn = By.xpath("//div[@id='filterYearModal']/div/div/div/button");
 
-	By filterMakeLocator = By.xpath("//*[@id=\"viewMakeInventoryBtn\"]"); 
+	By filterMakeLocator = By.xpath("//*[@id=\"viewMakeInventoryBtn\"]");
 	By filterMakeBuickLocator = By.xpath("//div[@id='makeContentPanel']/div[1]/div/div[2]/span");
 	By filterMakeCadillacLocator = By.xpath("//div[@id='makeContentPanel']/div[2]/div/div[2]/span");
 	By filterMakeGMCLocator = By.xpath("//div[@id='makeContentPanel']/div[9]/div/div[2]/span");
@@ -105,7 +103,7 @@ public class ImageGallery extends Comlibs {
 	By makeClearBtn = By.xpath("//div[@id='filterBrandModal']/div/div/div[3]/button[2]");
 	By makeXBtn = By.xpath("//div[@id='filterBrandModal']/div/div/div/button");
 
-	By filterModelLocator = By.xpath("//*[@id=\"viewModelInventoryBtn\"]");//  //*[@id="viewModelInventoryBtn"]
+	By filterModelLocator = By.xpath("//*[@id=\"viewModelInventoryBtn\"]");// //*[@id="viewModelInventoryBtn"]
 	By filterModelBuickLocator = By.xpath("//ul[@id='modelNavTab']/li[4]/a/span");
 	By filterModelBuickAllLocator = By.xpath("//div[@id='modelBuickTabPanel']/div/div/label/input");
 	By filterModelBuickEnclaveLocator = By.xpath("//div[@id='modelBuickTabPanel']/div[2]/div/label/input");
@@ -146,7 +144,7 @@ public class ImageGallery extends Comlibs {
 	By addInventoryEnterVinField = By.id("vin");// By.xpath("//form[@id='addVinForm']/div/input");
 	// By searchVinOrStockNo = By.id("searchVinOrStockNo");
 	By searchVinOrStockNo = By.xpath("//*[@id=\"searchVinOrStockNo\"]");
-	By templatesBtnLocator=By.xpath("//*[@id=\"navbarTabs\"]/li[3]/a");
+	By templatesBtnLocator = By.xpath("//*[@id=\"navbarTabs\"]/li[3]/a");
 	// By filterLocator=;
 
 	// By
@@ -186,9 +184,9 @@ public class ImageGallery extends Comlibs {
 	By ContactSupportEmailLine308 = By.xpath("//*[@id='reportIssueModal']/div/div/div[3]/div/span[2]/a");
 	By ContactSupportTelLine409 = By.xpath("//*[@id='reportIssueModal']/div/div/div[3]/div/span[3]");
 
-	By dealerShipInfoBtnLocator=By.xpath("//*[@id='navbarTabs']/li[2]/a");
-	By inventoryGalleryBtnLocator=By.xpath("//*[@id='navbarTabs']/li[1]/a");
-	
+	By dealerShipInfoBtnLocator = By.xpath("//*[@id='navbarTabs']/li[2]/a");
+	By inventoryGalleryBtnLocator = By.xpath("//*[@id='navbarTabs']/li[1]/a");
+
 	static int allVinNums = 0;
 	static int allImageNums = 0;
 
@@ -197,10 +195,12 @@ public class ImageGallery extends Comlibs {
 		driver.findElement(myDealerShipLinkLocator).click();
 		return new DealerProfile(driver);
 	}
+
 	public DealerProfile clickDealerShipInfoBtn(WebDriver driver) throws IOException {
 		driver.findElement(dealerShipInfoBtnLocator).click();
 		return new DealerProfile(driver);
 	}
+
 	public ImageGallery clickInventoryGalleryBtn(WebDriver driver) throws IOException {
 		driver.findElement(inventoryGalleryBtnLocator).click();
 		return new ImageGallery(driver);
@@ -226,8 +226,8 @@ public class ImageGallery extends Comlibs {
 	public ImageGallery clickSelectBtn(WebDriver driver, String sVIN, String vGUID, String tc) throws IOException {
 		// By allVINsLocator =
 		// By.xpath("//div[@id='renderedVehList']/div/div/div");
-//		By SelectBtn = By.xpath("//button[@id='selectImageBtn" + vGUID + "']"); // 6/13/2018 is ok in the new build
-		By SelectBtn = By.xpath("//*[@id='selectImageBtn"+vGUID+"']/span[1]"); // new?
+		// By SelectBtn = By.xpath("//button[@id='selectImageBtn" + vGUID + "']"); // 6/13/2018 is ok in the new build
+		By SelectBtn = By.xpath("//*[@id='selectImageBtn" + vGUID + "']/span[1]"); // new?
 		boolean selected = false;
 		int listText1;
 		List<WebElement> listItems = driver.findElements(allVINsLocator);
@@ -870,10 +870,12 @@ public class ImageGallery extends Comlibs {
 		driver.findElement(addInventoryCancelBtn).click();
 		return new ImageGallery(driver);
 	}
+
 	public Templates clickTemplatesBtn(WebDriver driver) throws IOException {
 		driver.findElement(templatesBtnLocator).click();
 		return new Templates(driver);
 	}
+
 	public ImageGallery inputVinInAddInventoryField(WebDriver driver, String sVin, String tc) throws IOException {
 		elementExist(driver, addInventoryEnterVinField, true, tc);
 		driver.findElement(addInventoryEnterVinField).clear();
@@ -1327,7 +1329,8 @@ public class ImageGallery extends Comlibs {
 
 	}
 
-	public void verifyHelpContactSupport(WebDriver driver, String email, String tel, String tc) throws IOException {
+	public void verifyHelpContactSupport(WebDriver driver, String email, String tel, String VINpxSupportEmail,
+			String VINpxSupportEmailPS, String tc) throws IOException {
 		String rs1, rs2, rs3, rs4, rs5, rs6;
 		driver.findElement(helpMarkLocator).click();
 		// Contact Support
@@ -1383,7 +1386,8 @@ public class ImageGallery extends Comlibs {
 		// driver.findElement(By.id("supportMessage")).clear(); //record
 		driver.findElement(ContactSupportMsgField04).clear();
 		// driver.findElement(By.id("supportMessage")).sendKeys("This is testing for Support/Contact US request. Ignore please. ");//record
-		driver.findElement(ContactSupportMsgField04).sendKeys("This is testing for Support/Contact US request. Ignore please. ");
+		String text2 = "This is testing for Support/Contact US request. Ignore please.";
+		driver.findElement(ContactSupportMsgField04).sendKeys(text2);
 		driver.findElement(ContactSupportCancelBtn06).click();
 		Wait(2);
 		driver.findElement(helpMarkLocator).click();
@@ -1393,10 +1397,24 @@ public class ImageGallery extends Comlibs {
 		// driver.findElement(By.id("supportMessage")).clear(); //record
 		driver.findElement(ContactSupportMsgField04).clear();
 		// driver.findElement(By.id("supportMessage")).sendKeys("This is testing. Ignore please. ");//record
-		driver.findElement(ContactSupportMsgField04).sendKeys("This is testing for Support/Contact US request. Ignore please. ");
+		driver.findElement(ContactSupportMsgField04)
+				.sendKeys("This is testing for Support/Contact US request. Ignore please. ");
 		// driver.findElement(By.cssSelector("button.btn.asc-secondary-btn")).click();//record
 		driver.findElement(ContactSupportSubmitBtn05).click();
 		Wait(2);
+
+		// Verify email sent out to tdautoaa@gmail.com in QA
+		tc = "TCxxSupportEmailxxx";
+		DealerPortal.MailReader gMail = new MailReader();
+
+		// String subject = "Support/Contact Us request from autotomsmith3@gmail.com";//This is from QA.
+		String subject = "Support/Contact Us request from";// This is from QA.
+		String text3 = "Additional Context";
+		// (String mainID, String email, String mailPassword, String emailSuj,String content2, String content3, String tc)
+		tc = "TC:139675";
+		gMail.VerifyGetMailContentFrSubContain("Imap.gmail.com", VINpxSupportEmail, VINpxSupportEmailPS, subject, text2,
+				text3, tc);
+
 	}
 
 	public void verifyHelpSystemHelp(WebDriver driver, String tc) throws IOException {
@@ -1426,7 +1444,8 @@ public class ImageGallery extends Comlibs {
 		Wait(1);
 	}
 
-	public void verifyHelpReportIssue(WebDriver driver, String email, String tel, String tc) throws IOException {
+	public void verifyHelpReportIssue(WebDriver driver, String email, String tel, String SupportEmail,
+			String SupportEmailPS, String tc) throws IOException {
 		String rs1, rs2, rs3, rs4, rs5, rs6;
 		driver.findElement(helpMarkLocator).click();
 		// Report Issue
@@ -1481,7 +1500,8 @@ public class ImageGallery extends Comlibs {
 		// driver.findElement(By.id("supportMessage")).clear(); //record
 		driver.findElement(ContactSupportMsgField04).clear();
 		// driver.findElement(By.id("supportMessage")).sendKeys("This is testing. Ignore please. ");//record
-		driver.findElement(ContactSupportMsgField04).sendKeys("This is testing for Report Issue. Ignore please. ");
+		String text2 = "This is testing for Report Issue. Ignore please.";
+		driver.findElement(ContactSupportMsgField04).sendKeys(text2);
 		driver.findElement(ContactSupportCancelBtn06).click();
 		Wait(2);
 		driver.findElement(helpMarkLocator).click();
@@ -1495,6 +1515,19 @@ public class ImageGallery extends Comlibs {
 		// driver.findElement(By.cssSelector("button.btn.asc-secondary-btn")).click();//record
 		driver.findElement(ContactSupportSubmitBtn05).click();
 		Wait(2);
+
+		// Verify email sent out to tdautoaa@gmail.com in QA
+		tc = "TCxxReportIssueEmailxxx";
+		DealerPortal.MailReader gMail = new MailReader();
+
+		// String subject = "Support/Contact Us request from autotomsmith3@gmail.com";//This is from QA.
+		String subject = "Support/Contact Us request from";// This is from QA.
+		String text3 = "Additional Context";
+		// (String mainID, String email, String mailPassword, String emailSuj,String content2, String content3, String tc)
+		tc = "TC:229325";
+		gMail.VerifyGetMailContentFrSubContain("Imap.gmail.com", SupportEmail, SupportEmailPS, subject, text2, text3,
+				tc);
+
 	}
 
 	public void enterTextInSearch(String sVIN) {
@@ -1524,13 +1557,14 @@ public class ImageGallery extends Comlibs {
 		num = Integer.parseInt(temp);
 		return num;
 	}
+
 	public int getReRenderNum(WebDriver driver, String tc) {
 		int num;
 		String temp;
 		num = 0;
 		String renderNumTxt = driver.findElement(reRenderActiveBtn).getText();
-//		num = urlsTxt.length();
-//		temp = urlsTxt.substring(14, num);
+		// num = urlsTxt.length();
+		// temp = urlsTxt.substring(14, num);
 		num = Integer.parseInt(renderNumTxt);
 		return num;
 	}
