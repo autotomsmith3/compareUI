@@ -51,6 +51,7 @@ public class UserList extends Comlibs {
 	By pdfURLLocator = By.xpath("//*[@id=\"stockpx\"]/iframe");
 	By addDealerShipBtnLocator = By.xpath("//*[@id=\"addDealershipBtn\"]");
 	By searchLocator = By.xpath("//input[@type='search']");
+	By ManageAccountsLocator = By.xpath("//*[@id=\"accountMenu\"]");
 	By ManageDealerShipsLocator = By.xpath("//*[@id=\"dealershipMenu\"]");
 	By ManageBGSetsLocator = By.xpath("//*[@id=\"backgroundMenu\"]");
 	By ManageImageTypesLocator = By.xpath("//*[@id=\"imagetypeMenu\"]");// Firefox: //*[@id="imagetypeMenu"]
@@ -438,7 +439,10 @@ public class UserList extends Comlibs {
 		driver.findElement(searchLocator).sendKeys(dlrID);
 		return this;
 	}
-
+	public UserList clickManageAccounts(WebDriver driver) throws IOException {
+		driver.findElement(ManageAccountsLocator).click();
+		return this;
+	}
 	public UserList clickManageDealerShips(WebDriver driver) throws IOException {
 		driver.findElement(ManageDealerShipsLocator).click();
 		return this;

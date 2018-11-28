@@ -121,7 +121,7 @@ public class DealerProfile extends Comlibs {
 		return getLOTpx;
 	}
 
-	public DealerList clickBackToDealerListBtn(WebDriver driver, String windowHandle, String tc) throws IOException {
+	public void clickBackToDealerListBtn(WebDriver driver, String windowHandle, String tc) throws IOException {
 		boolean elementExist = elementExist(driver, BackToDealerListLocator, true, tc);
 		if (elementExist) {
 			driver.findElement(BackToDealerListLocator).click();
@@ -141,7 +141,7 @@ public class DealerProfile extends Comlibs {
 
 		driver.switchTo().window(windowHandle);
 
-		return new DealerList(driver);
+//		return new DealerList(driver);
 	}
 
 	public DealerProfile clickSaveBtn(WebDriver driver, String tc) {
