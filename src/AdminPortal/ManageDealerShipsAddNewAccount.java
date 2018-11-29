@@ -374,7 +374,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand));
 		}
 
-		DealerProfieP.inputDealersipID(driver, DealershipID + "_New_Added_14");// New one show be 15
+		DealerProfieP.inputDealersipID(driver, DealershipID + "_New_Added_fr_act_1");// New one show be 2
 		DealerProfieP.selectVINpxProd(driver);
 		DealerProfieP.selectSTOCKpxProd(driver);
 		// DealerProfieP.selectLOTpxProd(driver);

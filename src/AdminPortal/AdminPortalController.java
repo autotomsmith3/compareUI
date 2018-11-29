@@ -1027,12 +1027,21 @@ public class AdminPortalController extends Comlibs {
 		String noteS = "19 Cadi Int XT5";
 		String editedNotesS = "Edited_19 Cadi Int XT5";
 		UserListP.clickManageAngleMappings(driver);
+		ac.Wait(wt*2);
 		AngleMappingList AngleMappingListP = new AngleMappingList(driver);
 		// Input all fields and click the Cancel
-		AngleMappingListP.clickAddAngleMappingBtn(driver);
-		ac.Wait(wt * 2);
-		AngleMappingListP.inputInstance(driver, "vdvi_interior");
-		ac.Wait(wt);
+		try {
+			AngleMappingListP.clickAddAngleMappingBtn(driver);
+			ac.Wait(wt);
+			AngleMappingListP.inputInstance(driver, "vdvi_interior");
+			ac.Wait(wt);
+		} catch (Exception e) {
+			AngleMappingListP.clickAddAngleMappingBtn(driver);
+			ac.Wait(wt);
+			AngleMappingListP.inputInstance(driver, "vdvi_interior");
+			System.out.println("Click on Add Angle Mapping button twice!!");
+			ac.Wait(wt);
+		}
 		AngleMappingListP.inputOEM(driver, "gm");
 		AngleMappingListP.inputSequence(driver, "1");
 		AngleMappingListP.inputNote(driver, "19 Cadi Int XT5");
@@ -2004,23 +2013,23 @@ public class AdminPortalController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			//// 0.RetriveValuesFrDealerSettingsPage:
-			bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-			RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
-
+			// //// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: back on 2018-11-29 - OK.
+			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			// RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
+			//
 			// //// 1.RetriveValuesFrDealerSettingsPage:
 			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 
-			// ////// 1.ManageDealerShipsAddNewAccount:
-			// bc.rwExcel("", "-----ManageDealerShips - Add An New Account Testing started-----" + (i + 1), "");
-			// ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-			// ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+			////// 1.ManageDealerShipsAddNewAccount:
+			bc.rwExcel("", "-----ManageDealerShips - Add An New Account Testing started-----" + (i + 1), "");
+			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
 
-			// //// 2.ManageDealerShips:
-			// loadURL(driver, baseURL, env);
-			// bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
-			// ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+			//// 2.ManageDealerShips:
+			loadURL(driver, baseURL, env);
+			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
+			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
 
 			// bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			// driver.close();
