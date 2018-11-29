@@ -165,6 +165,145 @@ public class AdminPortalController extends Comlibs {
 		return vGUID;
 	}
 
+	public static void RetriveValuesFrDealerSettingsPageFrNewDealerListPage(WebDriver driver, String brw,
+			String versionNum, String envment, String checkEmail)
+			throws IOException, InterruptedException, ClassNotFoundException, SQLException {
+
+		// Load environment parameters
+		Properties prop = new Properties();
+		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		try {
+			prop.load(AdminPortalController.class.getClassLoader()
+					.getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String env = prop.getProperty("AUTOpx.environment");
+		String envBrowser = prop.getProperty("AUTOpx.browser");
+		String render = prop.getProperty("AUTOpx.render");
+		String addNewVIN = prop.getProperty("AUTOpx.addNewVIN");
+		String accountEmail = prop.getProperty(env + ".VINpxEmail");
+		String accountPS = prop.getProperty(env + ".VINpxPassword");
+		// String baseURL = prop.getProperty(env + ".VINpxDealerPortalBaseURL");
+		String dealershipName = prop.getProperty(env + ".VINpxDealershipname");
+		String dealerCode = prop.getProperty(env + ".VINpxDealerCode");
+		String vin01 = prop.getProperty(env + ".VINpxVin01");
+		String vin02 = prop.getProperty(env + ".VINpxVin02");
+		String vehGUID01 = prop.getProperty(env + ".VINpxVin01GUID");
+		String vehGUID02 = prop.getProperty(env + ".VINpxVin02GUID");
+		// String vinpxnewVin01 = prop.getProperty(env + ".VINpxNewVIN01");
+		String[] VINpxNewVINs = fetchOneDemArrayFromPropFile(env + ".VINpxNewVINs", prop);
+		String serverName = prop.getProperty(env + ".serverName");
+		String dbName = prop.getProperty(env + ".dbName");
+		String userName = prop.getProperty(env + ".userName");
+		String password = prop.getProperty(env + ".password");
+		String MaxVins = prop.getProperty(env + ".MaxVinsForPreview");
+		int MaxVinsForPreview = Integer.parseInt(MaxVins);
+		// Initial
+		// final int wt_Secs = 6;
+		String TCnum;
+		// ====================
+		String tempVIN = "";
+		String tempVehGUID = "";
+		String ProductVINpx = "";
+		String ProductSTOCKpx = "";
+		String ProductLOTpx = "";
+		String Dealership_ID = "";
+		String Dealership_Name = "";
+		String Dealership_Email = "";
+		String Account_Email = "";
+		String Metadata = "";
+		String dlrGuid = "";
+		// ====================
+		Comlibs ac = new Comlibs();
+		ac.rwExcel("", "*********Retrive Values From Dealership Settings page**********", "");
+
+		int count = 0;
+		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
+		String[] titleString = { "Env.", "S/N", "Dealership_ID", "Dealership_Name", "Account_Email", "Dealership_Email",
+				"ProductVINpx", "ProductSTOCKpx", "ProductLOTpx", "Metadata", "dlrGuid" };
+		// =================================================
+		ac.writeTitle(getMetadataSavePathFile, titleString);
+		int dataLength = 54;
+		String[] metadataValues = new String[dataLength + 1];
+		int datasize = metadataValues.length;
+
+		// =================================================
+		VDVILogin loginP = new VDVILogin(driver);
+		int dealerN = 0;
+		String dealerSN = "";
+		loginP.login(driver, accountEmail, accountPS, "");
+		String parentHandle = driver.getWindowHandle(); // get the current window handle
+		UserList userListP = new UserList(driver);
+		userListP.clickManageDealerShips(driver);
+		ac.Wait(2);
+		DealerList2 DealerListP = new DealerList2(driver);
+		DealerListP.clickDisplayDropDownBtn(driver, "3");
+		DealerListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000
+
+		for (int i = 0; i < 150; i++) {
+			if (i >= 10) {
+				ac.Wait(2);
+				DealerListP.scrollUp(driver, 45, "ddd"); // 60 should be in Prod. 55 can run 150 records in QA. 120 - get almost 2 lines. 80 can run until 28 records, 60 can run until 110-120
+				ac.Wait(2);
+			}
+			dealerN = dealerN + 1;
+			dealerSN = String.valueOf(dealerN);
+			try {
+				DealerListP.clickEditBtn(driver, dealerSN);
+			} catch (Exception e) {
+				DealerListP.scrollUp(driver, 45, "ddd");
+				DealerListP.clickEditBtn(driver, dealerSN);
+			}
+			for (String winHandle : driver.getWindowHandles()) {
+				driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+			}
+			DealerProfile DealerProfieP = new DealerProfile(driver);
+			// =========================================
+			ProductVINpx = DealerProfieP.getVINpxProduct(driver, "");
+			ProductSTOCKpx = DealerProfieP.getSTOCKpxProduct(driver, "");
+			ProductLOTpx = DealerProfieP.getLOTpxProduct(driver, "");
+			Dealership_ID = DealerProfieP.getDealershipID(driver);
+			Dealership_Name = DealerProfieP.getDealershipName(driver);
+			Dealership_Email = DealerProfieP.getDealershipEmail(driver);
+			// Account_Email = DealerProfieP.getAccountEmail(driver);
+			Metadata = DealerProfieP.getMetadata(driver);
+			dlrGuid = DealerProfieP.getDlrGuid(driver);
+			dlrGuid = DealerProfieP.trimURL(dlrGuid);
+			// =========================================
+
+			int wSize = titleString.length;
+			String[] DealerSettingsArray = new String[wSize];
+
+			DealerSettingsArray[0] = env;
+			DealerSettingsArray[1] = Integer.toString(i);
+			DealerSettingsArray[2] = Dealership_ID;
+			DealerSettingsArray[3] = Dealership_Name;
+			DealerSettingsArray[4] = Account_Email;
+			DealerSettingsArray[5] = Dealership_Email;
+			DealerSettingsArray[6] = ProductVINpx;
+			DealerSettingsArray[7] = ProductSTOCKpx;
+			DealerSettingsArray[8] = ProductLOTpx;
+			DealerSettingsArray[9] = Metadata;
+			DealerSettingsArray[10] = dlrGuid;
+			ac.writeToSheet(getMetadataSavePathFile, DealerSettingsArray);
+
+			// =========================================
+
+			System.out.println("Dealer number=" + dealerN);
+			System.out.println(
+					"VINpx=" + ProductVINpx + "\n" + "STOCKpx= " + ProductSTOCKpx + "\n" + "LOTpx= " + ProductLOTpx);
+			System.out.println("Dealership_ID: " + Dealership_ID + "\n" + "Dealership_Name: " + Dealership_Name + "\n"
+					+ "Dealership_Email: " + Dealership_Email + "\n" + "Account_Email: " + Account_Email + "\n"
+					+ "Metadata: " + Metadata + "\n" + "dlrGuid:" + dlrGuid + "\n");
+
+			DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, "TC_num");
+
+		}
+		driver.close();
+	}
+
 	public static void RetriveValuesFrDealerSettingsPage(WebDriver driver, String brw, String versionNum,
 			String envment, String checkEmail)
 			throws IOException, InterruptedException, ClassNotFoundException, SQLException {
@@ -452,11 +591,11 @@ public class AdminPortalController extends Comlibs {
 		AccountProfileP.inputLastName(driver, LastName);
 		AccountProfileP.selectAccountStatus(driver, 1);
 		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
-		
+
 		// =========================== Add Account============================================================
 		tc = "TC_addNewAct_with_Existing_ActEamil";
 		UserListP.clickAddAccount(driver);
-//		AccountProfile AccountProfileP = new AccountProfile(driver);
+		// AccountProfile AccountProfileP = new AccountProfile(driver);
 		AccountProfileP.inputAccountEmail(driver, accountEmail);
 		AccountProfileP.inputFirstName(driver, FirstName);
 		AccountProfileP.inputLastName(driver, LastName);
@@ -547,8 +686,8 @@ public class AdminPortalController extends Comlibs {
 		for (String brand : Brands) {
 			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand));
 		}
-		String addNewDealerExtension="_New_Added_16";// New one should be 18
-		DealerProfieP.inputDealersipID(driver, DealershipID +addNewDealerExtension);
+		String addNewDealerExtension = "_New_Added_17";// ************************ New one should be 18 ****************************
+		DealerProfieP.inputDealersipID(driver, DealershipID + addNewDealerExtension);
 		DealerProfieP.selectVINpxProd(driver);
 		DealerProfieP.selectSTOCKpxProd(driver);
 		// DealerProfieP.selectLOTpxProd(driver);
@@ -567,12 +706,12 @@ public class AdminPortalController extends Comlibs {
 		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg);
 		DealerProfieP.inputWebsite(driver, Website);
 		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber);
-
+		ac.Wait(wt);
 		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
 		// Stop here for the time being since there is bug here AUTOPXOPS-1227
-
+		ac.Wait(wt);
 		tc = "AddDealerInvalid_withMissingMUSTField";
 		// The successful message "Your settings have been saved" will only show one second then disappear.
 		// So the successful message should be empty "" here;
@@ -596,7 +735,7 @@ public class AdminPortalController extends Comlibs {
 		UserListP.inputSearch(driver, AllProdEmail);
 
 		UserListP.clickEditBtn(driver, "1");// 1,2,3...
-		String attachedDealerName = AccountProfileP.selectOneDealerFrAllDealers(driver, 7,tc);
+		String attachedDealerName = AccountProfileP.selectOneDealerFrAllDealers(driver, 7, tc);
 		boolean dealerExistInAllDealers = false;
 		boolean dealerExistInAccountDealers = false;
 		tc = "Dealer should not exist in Account Dealer field_01";
@@ -609,7 +748,7 @@ public class AdminPortalController extends Comlibs {
 		tc = "Dealer should exist in Account Dealer field_02";
 		dealerExistInAccountDealers = AccountProfileP.verifyOneDealerInAccountDealersField(driver, attachedDealerName,
 				true, tc);
-		AccountProfileP.selectOneDealerFrAccountDealers(driver, attachedDealerName,tc);
+		AccountProfileP.selectOneDealerFrAccountDealers(driver, attachedDealerName, tc);
 		ac.Wait(wt);
 		AccountProfileP.clickLeftArrowDetachBtn(driver);
 		tc = "TC_Verify detach a dealer from Account Dealers_01";
@@ -648,13 +787,23 @@ public class AdminPortalController extends Comlibs {
 		//// *************************ManageAccounts - UserListP******************************************************
 
 		//// *************************ManageDealerships - DealerListP******************************************************
-		//// *************************ManageDealerships - DealerListP******************************************************		
+		//// *************************ManageDealerships - DealerListP******************************************************
+
 		// This part is the same of "Add Dealership for existing account" to end of "ManageAccounts - UserListP"
 		UserListP.clickManageDealerShips(driver);
-		ac.Wait(wt*2);
+		ac.Wait(wt * 2);
 		DealerList2 DealerListP2 = new DealerList2(driver);
+		// Checking View On Dealer Portal link
+		tc = "Checking View On Dealer Portal link";
+		DealerListP2.inputSearch(driver, "123456_New_Added_Cadillac");
+		DealerListP2.clickViewOnDealerPortalBtn(driver, 1, tc);
+		driver.close();
+		ac.switchToWindow(driver);
+		UserListP.clickManageDealerShips(driver);
+		ac.Wait(wt * 2);
+		//
 		DealerListP2.clickAddDealerShip(driver);
-		ac.Wait(wt*2);
+		ac.Wait(wt * 2);
 		DealerProfile DealerProfileP = new DealerProfile(driver);
 		DealerProfileP.selectOEM(driver, 13);
 		// check Buick and Cadillac and Chevrolet and GMC
@@ -685,11 +834,11 @@ public class AdminPortalController extends Comlibs {
 		DealerProfileP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg);
 		DealerProfileP.inputWebsite(driver, Website);
 		DealerProfileP.inputDealershipPhone(driver, DealershipPhoneNumber);
-
+		ac.Wait(wt);
 		DealerProfileP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
 		DealerProfileP.scrollUp(driver, -3000, tc);
 		DealerProfileP.clickSaveBtn(driver, tc);
-
+		ac.Wait(wt);
 		tc = "AddDealerInvalid_withExistDealershipID";
 		boolean MessageExistDealer = DealerProfileP.checkMessageDisplayedHead(driver,
 				"There is already a record with this Manufacturer and Dealer Code.");// "There is already a user record with this Login");
@@ -708,8 +857,8 @@ public class AdminPortalController extends Comlibs {
 		for (String brand : Brands) {
 			DealerProfileP.selectOEMBrands(driver, Integer.parseInt(brand));
 		}
-//		String addNewDealerExtension="_New_Added_16";// New one should be 18
-		DealerProfileP.inputDealersipID(driver, DealershipID + addNewDealerExtension+"_D");// New one should be 18
+		// String addNewDealerExtension="_New_Added_16";// *******************************New one should be 17********************
+		DealerProfileP.inputDealersipID(driver, DealershipID + addNewDealerExtension + "_D");//
 		DealerProfileP.selectVINpxProd(driver);
 		DealerProfileP.selectSTOCKpxProd(driver);
 		// DealerProfileP.selectLOTpxProd(driver);
@@ -728,12 +877,12 @@ public class AdminPortalController extends Comlibs {
 		DealerProfileP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg);
 		DealerProfileP.inputWebsite(driver, Website);
 		DealerProfileP.inputDealershipPhone(driver, DealershipPhoneNumber);
-
+		ac.Wait(wt);
 		DealerProfileP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
 		DealerProfileP.scrollUp(driver, -3000, tc);
 		DealerProfileP.clickSaveBtn(driver, tc);
 		// Stop here for the time being since there is bug here AUTOPXOPS-1227
-
+		ac.Wait(wt);
 		tc = "AddDealerInvalid_withMissingMUSTField";
 		// The successful message "Your settings have been saved" will only show one second then disappear.
 		// So the successful message should be empty "" here;
@@ -750,11 +899,10 @@ public class AdminPortalController extends Comlibs {
 		}
 
 		DealerProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
-	
+
 		//// *************************ManageDealerships - DealerListP******************************************************
-		//// *************************ManageDealerships - DealerListP******************************************************		
-				
-		
+		//// *************************ManageDealerships - DealerListP******************************************************
+
 		//// *************************clickManageBGSetsBtn******************************************************
 		//// *************************clickManageBGSetsBtn******************************************************
 		ac.rwExcel("", "*********ManageBackGroundSets**********", "");
@@ -819,9 +967,9 @@ public class AdminPortalController extends Comlibs {
 		UserListP.clickManageImageType(driver);
 		ImageTypeList ImageTypeListP = new ImageTypeList(driver);
 		// Add an Image Type and cancel
-		ac.Wait(wt*2);
+		ac.Wait(wt * 2);
 		ImageTypeListP.clickAddImageTypeBtn(driver);
-		ac.Wait(wt*2);
+		ac.Wait(wt * 2);
 		ImageTypeListP.inputShortIdentifier(driver, "996");
 		ImageTypeListP.inputImageGroup(driver, "CUSTOM");
 		ImageTypeListP.inputImageDefinition(driver, "DEALER IMAGE");
@@ -882,7 +1030,7 @@ public class AdminPortalController extends Comlibs {
 		AngleMappingList AngleMappingListP = new AngleMappingList(driver);
 		// Input all fields and click the Cancel
 		AngleMappingListP.clickAddAngleMappingBtn(driver);
-		ac.Wait(wt);
+		ac.Wait(wt * 2);
 		AngleMappingListP.inputInstance(driver, "vdvi_interior");
 		ac.Wait(wt);
 		AngleMappingListP.inputOEM(driver, "gm");
@@ -975,6 +1123,7 @@ public class AdminPortalController extends Comlibs {
 		// Add an Export Template and cancel
 		ExportTemplateListP.clickAddExportTemplateBtn(driver);
 		ExportTemplateListP.inputExportName(driver, searchName);
+		ExportTemplateListP.inputExportPrettyName(driver, searchName.toUpperCase());
 		ExportTemplateListP.inputFileName(driver, "phone.txt");
 		ExportTemplateListP.inputUser(driver, "TEST@autodata.net");
 		ExportTemplateListP.inputPassword(driver, "5k2cGG1");
@@ -987,6 +1136,7 @@ public class AdminPortalController extends Comlibs {
 		// Add an Export Template and submit
 		ExportTemplateListP.clickAddExportTemplateBtn(driver);
 		ExportTemplateListP.inputExportName(driver, searchName);
+		ExportTemplateListP.inputExportPrettyName(driver, searchName.toUpperCase());
 		ExportTemplateListP.inputFileName(driver, "phone.txt");
 		ExportTemplateListP.inputUser(driver, "TEST@autodata.net");
 		ExportTemplateListP.inputPassword(driver, "5k2cGG1");
@@ -1005,6 +1155,7 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		ExportTemplateListP.clickEditBtn(driver, 1);
 		ExportTemplateListP.inputExportName(driver, editedName);
+		ExportTemplateListP.inputExportPrettyName(driver, editedName.toUpperCase());
 		ExportTemplateListP.inputFileName(driver, "Edited_phone.txt");
 		ExportTemplateListP.inputUser(driver, "Edited_TEST@autodata.net");
 		ExportTemplateListP.inputPassword(driver, "Edited_5k2cGG1");
@@ -1032,9 +1183,8 @@ public class AdminPortalController extends Comlibs {
 			System.out.println("\nFailed to delete an Export Template here......logged AUTOPXOPS-1171");
 			ac.rwExcel(tc, false, "Delete an Export Template",
 					"Failed to delete an Export Template here......logged AUTOPXOPS-1171");
-		}else {
-			ac.rwExcel(tc, true, "Delete an Export Template",
-					"Edited name is not showing - Deleted.");
+		} else {
+			ac.rwExcel(tc, true, "Delete an Export Template", "Edited name is not showing - Deleted.");
 		}
 		//// *************************ManageExportTemplates******************************************************
 		//// *************************ManageExportTemplates******************************************************
@@ -1121,6 +1271,7 @@ public class AdminPortalController extends Comlibs {
 		// driver.close();
 
 	}
+
 	public static void ManageDealerShipsAddNewAccount(WebDriver driver, String brw, String versionNum, String envment,
 			String checkEmail)
 			throws IOException, InterruptedException, ClassNotFoundException, SQLException, AWTException {
@@ -1236,11 +1387,11 @@ public class AdminPortalController extends Comlibs {
 		AccountProfileP.inputLastName(driver, LastName);
 		AccountProfileP.selectAccountStatus(driver, 1);
 		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
-		
+
 		// =========================== Add Account============================================================
 		tc = "TC_addNewAct_with_Existing_ActEamil";
 		UserListP.clickAddAccount(driver);
-//		AccountProfile AccountProfileP = new AccountProfile(driver);
+		// AccountProfile AccountProfileP = new AccountProfile(driver);
 		AccountProfileP.inputAccountEmail(driver, accountEmail);
 		AccountProfileP.inputFirstName(driver, FirstName);
 		AccountProfileP.inputLastName(driver, LastName);
@@ -1378,6 +1529,7 @@ public class AdminPortalController extends Comlibs {
 		// **************************************************************************************
 		//
 		UserListP.clickManageAccounts(driver);
+		ac.Wait(wt);
 		UserListP.inputSearch(driver, AllProdEmail);
 		// **************************************************************************************
 		// **************************************************************************************
@@ -1386,7 +1538,7 @@ public class AdminPortalController extends Comlibs {
 		// **************************************************************************************
 
 		UserListP.clickEditBtn(driver, "1");// 1,2,3...
-		String attachedDealerName = AccountProfileP.selectOneDealerFrAllDealers(driver, 7,tc);
+		String attachedDealerName = AccountProfileP.selectOneDealerFrAllDealers(driver, 7, tc);
 		boolean dealerExistInAllDealers = false;
 		boolean dealerExistInAccountDealers = false;
 		tc = "Dealer should not exist in Account Dealer field_01";
@@ -1399,7 +1551,7 @@ public class AdminPortalController extends Comlibs {
 		tc = "Dealer should exist in Account Dealer field_02";
 		dealerExistInAccountDealers = AccountProfileP.verifyOneDealerInAccountDealersField(driver, attachedDealerName,
 				true, tc);
-		AccountProfileP.selectOneDealerFrAccountDealers(driver, attachedDealerName,tc);
+		AccountProfileP.selectOneDealerFrAccountDealers(driver, attachedDealerName, tc);
 		ac.Wait(wt);
 		AccountProfileP.clickLeftArrowDetachBtn(driver);
 		tc = "TC_Verify detach a dealer from Account Dealers_01";
@@ -1655,6 +1807,7 @@ public class AdminPortalController extends Comlibs {
 		// Add an Export Template and cancel
 		ExportTemplateListP.clickAddExportTemplateBtn(driver);
 		ExportTemplateListP.inputExportName(driver, searchName);
+		ExportTemplateListP.inputExportPrettyName(driver, searchName.toUpperCase());
 		ExportTemplateListP.inputFileName(driver, "phone.txt");
 		ExportTemplateListP.inputUser(driver, "TEST@autodata.net");
 		ExportTemplateListP.inputPassword(driver, "5k2cGG1");
@@ -1667,6 +1820,7 @@ public class AdminPortalController extends Comlibs {
 		// Add an Export Template and submit
 		ExportTemplateListP.clickAddExportTemplateBtn(driver);
 		ExportTemplateListP.inputExportName(driver, searchName);
+		ExportTemplateListP.inputExportPrettyName(driver, searchName.toUpperCase());
 		ExportTemplateListP.inputFileName(driver, "phone.txt");
 		ExportTemplateListP.inputUser(driver, "TEST@autodata.net");
 		ExportTemplateListP.inputPassword(driver, "5k2cGG1");
@@ -1685,6 +1839,7 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		ExportTemplateListP.clickEditBtn(driver, 1);
 		ExportTemplateListP.inputExportName(driver, editedName);
+		ExportTemplateListP.inputExportPrettyName(driver, editedName.toUpperCase());
 		ExportTemplateListP.inputFileName(driver, "Edited_phone.txt");
 		ExportTemplateListP.inputUser(driver, "Edited_TEST@autodata.net");
 		ExportTemplateListP.inputPassword(driver, "Edited_5k2cGG1");
@@ -1798,6 +1953,7 @@ public class AdminPortalController extends Comlibs {
 		// driver.close();
 
 	}
+
 	public static void main(String[] args)
 			throws IOException, InterruptedException, ClassNotFoundException, SQLException, AWTException {
 		// Load environment parameters
@@ -1848,19 +2004,23 @@ public class AdminPortalController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-//			 //// 1.RetriveValuesFrDealerSettingsPage:
-//			 bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-//			 RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
-			
-			////// 1.ManageDealerShipsAddNewAccount:
-			bc.rwExcel("", "-----ManageDealerShips - Add An New Account Testing started-----" + (i + 1), "");
-			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
-			
-			//// 2.ManageDealerShips:
-			loadURL(driver, baseURL, env);
-			 bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
-             ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+			//// 0.RetriveValuesFrDealerSettingsPage:
+			bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
+
+			// //// 1.RetriveValuesFrDealerSettingsPage:
+			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
+
+			// ////// 1.ManageDealerShipsAddNewAccount:
+			// bc.rwExcel("", "-----ManageDealerShips - Add An New Account Testing started-----" + (i + 1), "");
+			// ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+			// ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+
+			// //// 2.ManageDealerShips:
+			// loadURL(driver, baseURL, env);
+			// bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
+			// ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
 
 			// bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			// driver.close();

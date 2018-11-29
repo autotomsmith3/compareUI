@@ -34,6 +34,7 @@ public class ExportTemplateList extends Comlibs {
 	By cancelBtnLocator = By.xpath("//*[@id=\"newImageTypeModal\"]/div/div/div[3]/button[2]");
 	By submitBtnLocator = By.xpath("//*[@id=\"newImageTypeModalBtn\"]");
 	By exportNameLocator = By.xpath("//*[@id=\"name\"]");
+	By exportPrettyNameLocator=By.xpath("//*[@id=\"prettyName\"]");
 	By fileNameLocator = By.xpath("//*[@id=\"filename\"]");
 	By userLocator = By.xpath("//*[@id=\"user\"]");
 	By passwordLocator = By.xpath("//*[@id=\"password\"]");
@@ -82,12 +83,16 @@ public class ExportTemplateList extends Comlibs {
 		return this;
 	}
 
+	public ExportTemplateList inputExportPrettyName(WebDriver driver, String fileName) throws IOException {
+		driver.findElement(exportPrettyNameLocator).clear();
+		driver.findElement(exportPrettyNameLocator).sendKeys(fileName);
+		return this;
+	}
 	public ExportTemplateList inputFileName(WebDriver driver, String fileName) throws IOException {
 		driver.findElement(fileNameLocator).clear();
 		driver.findElement(fileNameLocator).sendKeys(fileName);
 		return this;
 	}
-
 	public ExportTemplateList inputUser(WebDriver driver, String user) throws IOException {
 		driver.findElement(userLocator).clear();
 		driver.findElement(userLocator).sendKeys(user);

@@ -29,9 +29,9 @@ public class DealerList2 extends Comlibs {
 	public DealerList2(WebDriver driver) throws IOException {
 		this.driver = driver;
 		// String wh1=driver.getWindowHandle();
-		String sPageTitle = "Dealer List";//"User List";"Dealer List";//
+		String sPageTitle = "Dealer List";// "User List";"Dealer List";//
 		boolean existTitle = TitleDisplay(driver, sPageTitle);
-		if (existTitle) { 
+		if (existTitle) {
 			rwExcel("", true, "Page Title is displayed", sPageTitle);
 		} else {
 			rwExcel("", false, "Page title is NOT showing properly. Exceed time limit!",
@@ -73,9 +73,9 @@ public class DealerList2 extends Comlibs {
 		// By editBtnLocator = By.xpath("(//button[@id='listViewBtn'])[3]"); //ok //*[@id="listViewBtn"]/span or xpath=(//button[@id='listViewBtn'])[3]
 		By editBtnLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");
 		try {
-		driver.findElement(editBtnLocator).click();
-		}catch(Exception e) {
-			checkEditBtnLocationAndScroll(driver,num);
+			driver.findElement(editBtnLocator).click();
+		} catch (Exception e) {
+			checkEditBtnLocationAndScroll(driver, num);
 			driver.findElement(editBtnLocator).click();
 		}
 		for (String winHandle : driver.getWindowHandles()) {
@@ -87,7 +87,7 @@ public class DealerList2 extends Comlibs {
 	public DealerList2 checkEditBtnLocationAndScroll(WebDriver driver, String num) throws IOException {
 		num = Integer.toString(Integer.parseInt(num) + 3);// Integer.parseInt(MaxVins)
 		By editBtnLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");
-//		boolean numShowInPage = elementExist(driver, editBtnLocator, true, "tc");
+		// boolean numShowInPage = elementExist(driver, editBtnLocator, true, "tc");
 		boolean numShowInPage = driver.findElement(editBtnLocator).isDisplayed();
 		if (numShowInPage) {
 			scrollUp(driver, 100, "ddd");
@@ -434,4 +434,18 @@ public class DealerList2 extends Comlibs {
 		return new DealerPortal.ImageGallery(driver);
 	}
 
+	public DealerPortal.DealerProfile clickViewOnDealerPortalBtn(WebDriver driver, int sn, String tc)
+			throws IOException {
+		By dealerViewBtnLocator = By.xpath("(//button[@id='dealerViewBtn'])[" + sn + "]");// 1,2,3...
+		try {
+			driver.findElement(dealerViewBtnLocator).click();
+			for (String winHandle : driver.getWindowHandles()) {
+				driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+			}
+			rwExcel(tc, true, "Dealer List page", "Click on View On Dealer Portal Btn");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Dealer List page", "Click on View On Dealer Portal Btn");
+		}
+		return new DealerPortal.DealerProfile(driver);
+	}
 }
