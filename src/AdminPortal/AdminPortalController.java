@@ -2013,16 +2013,16 @@ public class AdminPortalController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			// //// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: back on 2018-11-29 - OK.
+			 ////// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK.
 			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			// RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
 			//
-			// //// 1.RetriveValuesFrDealerSettingsPage:
+			// //// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page
 			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 
 			////// 1.ManageDealerShipsAddNewAccount:
-			bc.rwExcel("", "-----ManageDealerShips - Add An New Account Testing started-----" + (i + 1), "");
+			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
 			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
 			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
 

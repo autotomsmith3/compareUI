@@ -77,8 +77,8 @@ public class AccountProfile extends Comlibs {
 	By leftArrowDetachLocator = By.xpath("//*[@id='detachButton']");
 	By rightArrowAttachLocator = By.xpath("//*[@id='attachButton']");
 	By resetPasswordLocator = By.xpath("//*[@id=\"resetPassBtn\"]");
-	
-	
+	By searchForDealers = By.xpath("//*[@id=\"dealerSearchBox\"]");
+
 	public String getDealershipID(WebDriver driver) throws IOException {
 		String dealershipip = driver.findElement(DealershipIDLocator).getAttribute("value");
 		return dealershipip;
@@ -187,11 +187,13 @@ public class AccountProfile extends Comlibs {
 		Wait(1);
 		return this;
 	}
+
 	public AccountProfile clickResetPasswordBtn(WebDriver driver) {
 		driver.findElement(resetPasswordLocator).click();
 		Wait(1);
 		return this;
 	}
+
 	public boolean checkMessageDisplayedHead(WebDriver driver, String message) {
 		String msg = driver.findElement(MessageDisplayedOnHead).getText();// .getAttribute("messageBox");
 		boolean messageExist = false;
@@ -207,11 +209,13 @@ public class AccountProfile extends Comlibs {
 		if (msg.contains(message)) {
 			messageExist = true;
 			rwExcel(tc, true, "Verify msg =\"" + message, " shows on the page");
-		}else {
-			rwExcel(tc, false, "Verify msg =\"" + message, " does not show on the page"+". The showing MSG is \""+msg+"\"");
+		} else {
+			rwExcel(tc, false, "Verify msg =\"" + message,
+					" does not show on the page" + ". The showing MSG is \"" + msg + "\"");
 		}
 		return messageExist;
 	}
+
 	public String getDlrGuid(WebDriver driver) throws IOException {
 		String dlrGuid = driver.getCurrentUrl();
 
@@ -227,6 +231,7 @@ public class AccountProfile extends Comlibs {
 
 		return dlrGuid;
 	}
+
 	public String trimURL_user(String urlString) throws IOException {
 		// Get account userGUid
 		// urlString="https://admin-prod.vinpx.net/AdminPortal/accountsetting?userGuid=1B269054-7E1D-4818-8788-2A1D1990C77F";
@@ -236,6 +241,7 @@ public class AccountProfile extends Comlibs {
 
 		return dlrGuid;
 	}
+
 	public AccountProfile selectAccountStatus(WebDriver driver, int num) {
 		By AccountStatusLocator = By.xpath("//*[@id='userAccStatus']/option[" + num + "]"); // 1- Active, 2- Lock out, 3-Change Password, 4-Disabled
 		driver.findElement(AccountStatusLocator).click();
@@ -435,6 +441,16 @@ public class AccountProfile extends Comlibs {
 
 	public AccountProfile inputDealershipPhone(WebDriver driver, String num) {
 		driver.findElement(DealershipPhoneNumberLocator).sendKeys(num);
+		return this;
+	}
+
+	public AccountProfile inputSearchForDealers(WebDriver driver, String dealerName, String tc) throws IOException {
+		try {
+			driver.findElement(searchForDealers).sendKeys(dealerName);
+			rwExcel(tc, true, "Verify Search Box", "Input a dealership name");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Verify Search Box", "Input a dealership name");
+		}
 		return this;
 	}
 

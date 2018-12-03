@@ -140,6 +140,9 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		tc = "Click SAVE button in Account Profile page 1";
 		AccountProfileP.clickSaveBtn(driver, tc);
 		Wait(wt);
+		tc = "Search box tc.";
+		int hyphenLocation=SelectedDealerNameToAttach.indexOf(" - ");
+		AccountProfileP.inputSearchForDealers(driver, SelectedDealerNameToAttach.substring(1, hyphenLocation),tc);
 		tc = "Select a dealership name to attach to account.";
 		String selectedDealershipName = AccountProfileP.selectOneDealerFrAllDealers(driver, SelectedDealerNameToAttach,
 				tc);
