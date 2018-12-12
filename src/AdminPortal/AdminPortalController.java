@@ -538,6 +538,7 @@ public class AdminPortalController extends Comlibs {
 		int SelectBackgroundSet = Integer.parseInt(prop.getProperty(env + ".SelectBackgroundSet"));
 		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
 		String AddNewAccountEmail = prop.getProperty(env + ".AddNewAccountEmail");
+		String addNewDealerExtension=addNewDealerExtension=prop.getProperty(env + ".addNewDealerExtension");
 
 		// Initial
 		// final int wt_Secs = 6;
@@ -686,7 +687,7 @@ public class AdminPortalController extends Comlibs {
 		for (String brand : Brands) {
 			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand));
 		}
-		String addNewDealerExtension = "_New_Added_17";// ************************ New one should be 18 ****************************
+//		String addNewDealerExtension = "_New_Added_18";// ************************ New one should be 18 ****************************
 		DealerProfieP.inputDealersipID(driver, DealershipID + addNewDealerExtension);
 		DealerProfieP.selectVINpxProd(driver);
 		DealerProfieP.selectSTOCKpxProd(driver);
@@ -718,16 +719,16 @@ public class AdminPortalController extends Comlibs {
 		String successfulMsg = "";
 		MessageExist = DealerProfieP.checkMessageDisplayedHead(driver, "Your settings have been saved");
 		// Bug here since entered Metadata. See AUTOPXOPS-1227. Now it shows an error "An error occurred. Please try again."
-		// but the dealership has been created in our system.
+		// but the dealership has been created in our system. Issue fixed but "Your settings have been saved" message only shows a second and then disappears.
 		if (MessageExist) {
 			ac.rwExcel("AddDealervalid", true, "Add a new dealership with all fields",
 					"Sucessful msg shows: Your settings have been saved");
 		} else {
 			ac.rwExcel("AddDealervalid", false, "Add a new dealership with all fields",
-					"Failed to shows msg: Your settings have been saved. Currently it shows: An error occurred. Please try again. There is bug here, see AUTOPXOPS-1227");
+					"Failed to shows msg: Your settings have been saved. Currently it only shows a second and then disappears. Related to bug AUTOPXOPS-1227");
 		}
 
-		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
+		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc); //Stop here. Verify dealer added in system through Manage Dealership by input the dealerid and click the edit buttom then close Dealer Profile page
 		// =========================== Manage Account - Add Dealership============================================================
 		// **************************************************************************************
 		UserListP.clickManageAccounts(driver);
@@ -800,7 +801,7 @@ public class AdminPortalController extends Comlibs {
 		driver.close();
 		ac.switchToWindow(driver);
 		UserListP.clickManageDealerShips(driver);
-		ac.Wait(wt * 2);
+		ac.Wait(wt * 3);
 		//
 		DealerListP2.clickAddDealerShip(driver);
 		ac.Wait(wt * 2);
@@ -895,10 +896,10 @@ public class AdminPortalController extends Comlibs {
 					"Sucessful msg shows: Your settings have been saved");
 		} else {
 			ac.rwExcel("AddDealervalid", false, "Add a new dealership with all fields",
-					"Failed to shows msg: Your settings have been saved. Currently it shows: An error occurred. Please try again. There is bug here, see AUTOPXOPS-1227");
+					"Failed to shows msg: Your settings have been saved. Currently it only shows a second and then disappears. Related to bug AUTOPXOPS-1227");
 		}
 
-		DealerProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
+		DealerProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);//Stop here. Verify dealer added in system through Manage Dealership by input the dealerid and click the edit buttom then close Dealer Profile page
 
 		//// *************************ManageDealerships - DealerListP******************************************************
 		//// *************************ManageDealerships - DealerListP******************************************************

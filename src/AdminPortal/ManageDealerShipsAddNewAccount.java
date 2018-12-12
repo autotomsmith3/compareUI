@@ -81,6 +81,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		String AddNewAccountEmail = prop.getProperty(env + ".AddNewAccountEmail");
 		String SelectedDealerNameToAttach = prop.getProperty(env + ".SelectedDealerNameToAttach");
 		String deleteUserPostWSURL = prop.getProperty(env + ".deleteUserPostWSURL");
+		String addNewDealerExtension=addNewDealerExtension=prop.getProperty(env + ".addNewDealerExtension");
 
 		// Initial
 		// final int wt_Secs = 6;
@@ -141,8 +142,8 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		AccountProfileP.clickSaveBtn(driver, tc);
 		Wait(wt);
 		tc = "Search box tc.";
-		int hyphenLocation=SelectedDealerNameToAttach.indexOf(" - ");
-		AccountProfileP.inputSearchForDealers(driver, SelectedDealerNameToAttach.substring(1, hyphenLocation),tc);
+		int hyphenLocation = SelectedDealerNameToAttach.indexOf(" - ");
+		AccountProfileP.inputSearchForDealers(driver, SelectedDealerNameToAttach.substring(1, hyphenLocation), tc);
 		tc = "Select a dealership name to attach to account.";
 		String selectedDealershipName = AccountProfileP.selectOneDealerFrAllDealers(driver, SelectedDealerNameToAttach,
 				tc);
@@ -198,10 +199,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		dealerPortalloginP.login(driver, AddNewAccountEmail, accountPS);
 		acceptLicenseP.clickAcceptBtn(driver);
 		dpP.clickLogout(driver);
-		
-		
-		
-		
+
 		// Load Admin Portal URL
 		AdminPortalController.loadURL(driver, baseURL, env);
 		tc = "Login again into Admin Portal after changed PS";
@@ -215,44 +213,48 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		tc = "Remove dealership. Click SAVE after clicking left arrow.";
 		AccountProfileP.clickSaveBtn(driver, tc);
 		Wait(wt);
-		String drlGuid = AccountProfileP.getDlrGuid(driver);		
-		drlGuid=AccountProfileP.trimURL_user(drlGuid);
+		String drlGuid = AccountProfileP.getDlrGuid(driver);
+		drlGuid = AccountProfileP.trimURL_user(drlGuid);
 		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
 		for (String winHandle : driver.getWindowHandles()) {
 			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
 		}
 		// Run Postman to delete the account using drlGuid
-//		String deleteUserPostWSURL=
-		String postBody="{}";
-		String jsonTextFrDeleteUserWS="";
+		// String deleteUserPostWSURL=
+		String postBody = "{}";
+		String jsonTextFrDeleteUserWS = "";
 		tc = "Run jsonTextFrDeleteUserWS #";
 		try {
-			jsonTextFrDeleteUserWS=com_libs.getSourceCodeJson(postBody, deleteUserPostWSURL, drlGuid, "");
+			jsonTextFrDeleteUserWS = com_libs.getSourceCodeJson(postBody, deleteUserPostWSURL, drlGuid, "");
 			rwExcel(tc, true, "Add New Account ", "Run jsonTextFrDeleteUserWS");
-		}catch (Exception ex) {
-			jsonTextFrDeleteUserWS="Failed!";
+		} catch (Exception ex) {
+			jsonTextFrDeleteUserWS = "Failed!";
 			System.out.println("DeleteuserWS failed! ");
 			rwExcel(tc, false, "Add New Account ", "Run jsonTextFrDeleteUserWS");
 		}
 		if (jsonTextFrDeleteUserWS.contains("User successfully deleted")) {
-			//success
+			// success
 			System.out.println("DeleteuserWS ran successfully! User successfully deleted");
-			rwExcel(tc, true, "Add New Account ", "Run jsonTextFrDeleteUserWS to delete the account. User successfully deleted");
-		}else if (jsonTextFrDeleteUserWS.contains("User has dealers attached. Cannot delete user.")){
-			//Failed
+			rwExcel(tc, true, "Add New Account ",
+					"Run jsonTextFrDeleteUserWS to delete the account. User successfully deleted");
+		} else if (jsonTextFrDeleteUserWS.contains("User has dealers attached. Cannot delete user.")) {
+			// Failed
 			System.out.println("DeleteuserWS failed! User has dealers attached. Cannot delete user. ");
-			rwExcel(tc, false, "Add New Account ", "Run jsonTextFrDeleteUserWS to delete the account. User has dealers attached. Cannot delete user.");
-		}else if (jsonTextFrDeleteUserWS.contains("Failed!")){
-			//unknown error
+			rwExcel(tc, false, "Add New Account ",
+					"Run jsonTextFrDeleteUserWS to delete the account. User has dealers attached. Cannot delete user.");
+		} else if (jsonTextFrDeleteUserWS.contains("Failed!")) {
+			// unknown error
 			System.out.println("DeleteuserWS failed! Returned exception error! ");
 			rwExcel(tc, false, "Add New Account ", "Run jsonTextFrDeleteUserWS to delete the account failed. ");
-		}else if (jsonTextFrDeleteUserWS.contains("User does not exist")){
-			//unknown error
+		} else if (jsonTextFrDeleteUserWS.contains("User does not exist")) {
+			// unknown error
 			System.out.println("DeleteuserWS failed! User does not exist! ");
-			rwExcel(tc, false, "Add New Account ", "Run jsonTextFrDeleteUserWS to delete the account. User does not exist! ");
-		}else {
-			//unknown error
-			System.out.println("DeleteuserWS failed! Unknown error! DeleteUserWS returned=\""+jsonTextFrDeleteUserWS+"\"");
+			rwExcel(tc, false, "Add New Account ",
+					"Run jsonTextFrDeleteUserWS to delete the account. User does not exist! ");
+		} else {
+			// unknown error
+			System.out.println(
+					"DeleteuserWS failed! Unknown error! DeleteUserWS returned=\"" + jsonTextFrDeleteUserWS + "\"");
 			rwExcel(tc, false, "Add New Account ", "Run jsonTextFrDeleteUserWS to delete the account. Unknown error!");
 
 		}
@@ -265,20 +267,24 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		tc = "After F5 to fresh page, search the account#";
 		try {
 			UserListP.clickEditBtn(driver, "1");
-			//Failed because account still exists in the system
-			System.out.println("Account Email =\""+AddNewAccountEmail+"\" still exists in system! ");
-			rwExcel(tc, false, "Add New Account and Run jsonTextFrDeleteUserWS to delete the account. ","After refleshed the page, Account Email =\""+AddNewAccountEmail+"\" still exists in system!");
+			// Failed because account still exists in the system
+			System.out.println("Account Email =\"" + AddNewAccountEmail + "\" still exists in system! ");
+			rwExcel(tc, false, "Add New Account and Run jsonTextFrDeleteUserWS to delete the account. ",
+					"After refleshed the page, Account Email =\"" + AddNewAccountEmail + "\" still exists in system!");
 
-		}catch (Exception ex) {
-			//Passed. Add Account all processes Passed because account does not exist in the system
-			System.out.println("Account Email =\""+AddNewAccountEmail+"\" does NOT exist in system! Add Account all processes Passed!");
-			rwExcel(tc, true, "Add New Account and Run jsonTextFrDeleteUserWS to delete the account. ","After refleshed the page, Account Email =\""+AddNewAccountEmail+"\" does NOT exist in system!");
+		} catch (Exception ex) {
+			// Passed. Add Account all processes Passed because account does not exist in the system
+			System.out.println("Account Email =\"" + AddNewAccountEmail
+					+ "\" does NOT exist in system! Add Account all processes Passed!");
+			rwExcel(tc, true, "Add New Account and Run jsonTextFrDeleteUserWS to delete the account. ",
+					"After refleshed the page, Account Email =\"" + AddNewAccountEmail
+							+ "\" does NOT exist in system!");
 		}
 
 		// check there is no account showing
 		// done!
-		
-//		Stop here!!!
+
+		// Stop here!!!
 
 		// =========================== Add Account to check the error message============================================================
 		tc = "TC_addNewAct_with_Existing_ActEamil";
@@ -377,7 +383,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand));
 		}
 
-		DealerProfieP.inputDealersipID(driver, DealershipID + "_New_Added_fr_act_1");// New one show be 2
+		DealerProfieP.inputDealersipID(driver, DealershipID + "_Fr_Acct"+addNewDealerExtension);// New one show be 2
 		DealerProfieP.selectVINpxProd(driver);
 		DealerProfieP.selectSTOCKpxProd(driver);
 		// DealerProfieP.selectLOTpxProd(driver);
@@ -408,15 +414,15 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		String successfulMsg = "";
 		MessageExist = DealerProfieP.checkMessageDisplayedHead(driver, "Your settings have been saved");
 		// Bug here since entered Metadata. See AUTOPXOPS-1227. Now it shows an error "An error occurred. Please try again."
-		// but the dealership has been created in our system.
+		// but the dealership has been created in our system. Issue fixed but "Your settings have been saved" message only shows a second and then disappears. 
 		if (MessageExist) {
 			rwExcel("AddDealervalid", true, "Add a new dealership with all fields",
 					"Sucessful msg shows: Your settings have been saved");
 		} else {
 			rwExcel("AddDealervalid", false, "Add a new dealership with all fields",
-					"Failed to shows msg: Your settings have been saved. Currently it shows: An error occurred. Please try again. There is bug here, see AUTOPXOPS-1227");
+					"Failed to shows msg: Your settings have been saved. Currently it only shows a second and then disappears. Related to bug AUTOPXOPS-1227");
 		}
-		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
+		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);//Stop here. Verify dealer added in system through Manage Dealership by input the dealerid and click the edit buttom then close Dealer Profile page
 		Wait(wt);
 		// =========================== Add Dealership============================================================
 
@@ -479,7 +485,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		// *************************UserListP******************************************************
 		//// *************************UserListP******************************************************
 
-//		driver.close();
+		// driver.close();
 		// switchToWindow(driver, parentHandle);
 		// driver.close();
 

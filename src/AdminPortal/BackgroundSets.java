@@ -73,6 +73,16 @@ public class BackgroundSets extends Comlibs {
 	// By Locator=By.xpath("");
 	// By Locator=By.xpath("");
 
+	public BackgroundSets inputSearch(WebDriver driver, String dlrID) throws IOException {
+		driver.findElement(searchLocator).sendKeys(dlrID);
+		return this;
+	}
+
+	public BackgroundSets inputSetName(WebDriver driver, String setName) throws IOException {
+		driver.findElement(setnameLocator).sendKeys(setName);
+		return this;
+	}
+
 	public BackgroundSets clickCreateNewSet(WebDriver driver) throws IOException {
 		driver.findElement(creatNewSetBtnLocator).click();
 		return this;
@@ -114,11 +124,6 @@ public class BackgroundSets extends Comlibs {
 		return this;
 	}
 
-	public BackgroundSets inputSearch(WebDriver driver, String dlrID) throws IOException {
-		driver.findElement(searchLocator).sendKeys(dlrID);
-		return this;
-	}
-
 	public BackgroundSets clickAllDealershipsCheckBox(WebDriver driver) throws IOException {
 		driver.findElement(editSetPopUpAllDealerCheckBoxLocator).click();
 		return this;
@@ -134,15 +139,10 @@ public class BackgroundSets extends Comlibs {
 		return this;
 	}
 
-	public BackgroundSets inputSetName(WebDriver driver, String setName) throws IOException {
-		driver.findElement(setnameLocator).sendKeys(setName);
-		return this;
-	}
-
 	public Backgrounds clickSubmit(WebDriver driver) throws IOException {
 		Wait(2);
 		driver.findElement(subitBtnLocator).click();
-		Wait(30);
+		Wait(120);
 		return new Backgrounds(driver);
 	}
 	public ImageTypeList clickManageImageType(WebDriver driver) throws IOException {
