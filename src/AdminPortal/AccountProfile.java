@@ -137,7 +137,7 @@ public class AccountProfile extends Comlibs {
 		return getLOTpx;
 	}
 
-	public DealerList clickBackToDealerListBtn(WebDriver driver, String windowHandle, String tc) throws IOException {
+	public UserList clickBackToDealerListBtn(WebDriver driver, String windowHandle, String tc) throws IOException {
 		boolean elementExist = elementExist(driver, BackToDealerListLocator, true, tc);
 		if (elementExist) {
 			driver.findElement(BackToDealerListLocator).click();
@@ -157,11 +157,12 @@ public class AccountProfile extends Comlibs {
 
 		driver.switchTo().window(windowHandle);
 
-		return new DealerList(driver);
+		return new UserList(driver);
 	}
 
 	public AccountProfile clickSaveBtn(WebDriver driver, String tc) {
 		driver.findElement(SaveBtn).click();
+		Wait(2);
 		return this;
 	}
 

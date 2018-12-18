@@ -320,4 +320,38 @@ public class DealerProfile extends Comlibs {
 		JavascriptExecutor jsx = (JavascriptExecutor) driver;
 		jsx.executeScript("window.scrollBy(0," + scrollNum + ")", "");
 	}
+	public void uploadDealershipLogo(WebDriver driver, String imageLogPath,String msg, String tc) throws IOException {
+		By alertMsg=By.xpath("//*[@id=\"header\"]/div/div[2]/span");
+		try {
+			driver.findElement(By.id("uploadLogo")).sendKeys(imageLogPath);
+			//scrollup
+			scrollUp(driver, -2000, "ddd"); // QA -2000 Prod -3000
+			Wait(2);
+			String alertMsgExist=driver.findElement(alertMsg).getText();
+			if (alertMsgExist.equalsIgnoreCase(msg)) {
+				rwExcel(tc, true, "Upload a dealership Logo", "Verify alert message showing in Dealer Profile page");
+			}else {
+				rwExcel(tc, false, "Upload a dealership Logo", "Verify alert message showing in Dealer Profile page. Now the message is:\""+alertMsgExist+"\". ");
+			}
+			Wait(4);
+		}catch(Exception e) {
+			rwExcel("Upload Logo", false, "Upload a dealership Logo", "in Dealer Profile page");
+			Wait(4);
+		}
+
+	}
+	public void uploadDealershipLogo(WebDriver driver, String imageLogPath, String tc) throws IOException {
+//		driver.findElement(By.id("btnUploadPics")).sendKeys(vehicleImage);
+//		driver.findElement(By.xpath("//*[@id='uploadLogo']")).sendKeys(imageLogPath);
+		Wait(2);
+		try {
+			driver.findElement(By.id("uploadLogo")).sendKeys(imageLogPath);
+			rwExcel(tc, true, "Upload a dealership Logo", "in Dealer Profile page");
+			Wait(4);
+		}catch(Exception e) {
+			rwExcel("Upload Logo", false, "Upload a dealership Logo", "in Dealer Profile page");
+			Wait(4);
+		}
+
+	}
 }

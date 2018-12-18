@@ -29,7 +29,7 @@ public class DealerList extends Comlibs {
 	public DealerList(WebDriver driver) throws IOException {
 		this.driver = driver;
 		// String wh1=driver.getWindowHandle();
-		String sPageTitle = "User List";//"User List";"Dealer List";//
+		String sPageTitle = "Dealer List";//"User List";"Dealer List";//
 		boolean existTitle = TitleDisplay(driver, sPageTitle);
 		if (existTitle) { 
 			rwExcel("", true, "Page Title is displayed", sPageTitle);
@@ -71,7 +71,7 @@ public class DealerList extends Comlibs {
 	public DealerProfile clickEditBtn(WebDriver driver, String num) throws IOException {
 		// By editBtnLocator = By.xpath("//*[@id=\"listViewBtn\"]/span"); // //*[@id="listViewBtn"]/span or xpath=(//button[@id='listViewBtn'])[3]
 		// By editBtnLocator = By.xpath("(//button[@id='listViewBtn'])[3]"); //ok //*[@id="listViewBtn"]/span or xpath=(//button[@id='listViewBtn'])[3]
-		By editBtnLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");
+		By editBtnLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");//1,2,3...
 		try {
 		driver.findElement(editBtnLocator).click();
 		}catch(Exception e) {
@@ -81,6 +81,7 @@ public class DealerList extends Comlibs {
 		for (String winHandle : driver.getWindowHandles()) {
 			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
 		}
+		Wait(2);
 		return new DealerProfile(driver);
 	}
 

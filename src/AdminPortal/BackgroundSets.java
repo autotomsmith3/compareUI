@@ -142,7 +142,7 @@ public class BackgroundSets extends Comlibs {
 	public Backgrounds clickSubmit(WebDriver driver) throws IOException {
 		Wait(2);
 		driver.findElement(subitBtnLocator).click();
-		Wait(120);
+		Wait(90);
 		return new Backgrounds(driver);
 	}
 	public ImageTypeList clickManageImageType(WebDriver driver) throws IOException {

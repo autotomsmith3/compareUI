@@ -57,7 +57,7 @@ public class DealerList2 extends Comlibs {
 	By ManageAngleMappingsLocator = By.xpath("//*[@id=\"importanglemappingMenu\"]");
 	By ManageExportTemplatesLocator = By.xpath("//*[@id=\"exportTemplateMenu\"]");
 	By ManageGlobalConfigLocator = By.xpath("//*[@id=\"configMenu\"]");
-	// By Locator=By.xpath("");
+	 By nextLocator=By.xpath("//*[@id=\"dealerTable_next\"]");
 	// By Locator=By.xpath("");
 	// By Locator=By.xpath("");
 	// By Locator=By.xpath("");
@@ -447,5 +447,9 @@ public class DealerList2 extends Comlibs {
 			rwExcel(tc, false, "Dealer List page", "Click on View On Dealer Portal Btn");
 		}
 		return new DealerPortal.DealerProfile(driver);
+	}
+	public DealerList2 clickNext(WebDriver driver) throws IOException {
+		driver.findElement(nextLocator).click();
+		return this;
 	}
 }

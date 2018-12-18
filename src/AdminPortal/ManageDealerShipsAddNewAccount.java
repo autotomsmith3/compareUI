@@ -82,7 +82,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		String SelectedDealerNameToAttach = prop.getProperty(env + ".SelectedDealerNameToAttach");
 		String deleteUserPostWSURL = prop.getProperty(env + ".deleteUserPostWSURL");
 		String addNewDealerExtension=addNewDealerExtension=prop.getProperty(env + ".addNewDealerExtension");
-
+		String dealershipLogoPath=prop.getProperty("AUTOpx.dealershipLogoPath");
 		// Initial
 		// final int wt_Secs = 6;
 		String TCnum;
@@ -98,6 +98,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		String Account_Email = "";
 		String Metadata = "";
 		String dlrGuid = "";
+		String alertmessage="";
 		// ====================
 		// Comlibs ac = new Comlibs();
 		rwExcel("", "*********ManageDealerShips**********", "");
@@ -358,7 +359,6 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg);
 		DealerProfieP.inputWebsite(driver, Website);
 		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber);
-
 		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
@@ -374,7 +374,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
 
-		// **************************Add Dealership for existing account to check the message*****************************************************
+		// **************************Add a new Dealership to check the successful message*****************************************************
 		// click Add Dealership btn
 		UserListP.clickAddDealerShip(driver);
 		Wait(wt);
@@ -382,8 +382,8 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		for (String brand : Brands) {
 			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand));
 		}
-
-		DealerProfieP.inputDealersipID(driver, DealershipID + "_Fr_Acct"+addNewDealerExtension);// New one show be 2
+		String addNewDealership=DealershipID + "_Fr_Acct"+addNewDealerExtension;
+		DealerProfieP.inputDealersipID(driver, addNewDealership);// New one show be 2
 		DealerProfieP.selectVINpxProd(driver);
 		DealerProfieP.selectSTOCKpxProd(driver);
 		// DealerProfieP.selectLOTpxProd(driver);
@@ -402,7 +402,8 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg);
 		DealerProfieP.inputWebsite(driver, Website);
 		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber);
-
+		alertmessage="You must save the dealer information before you can take this action";
+		DealerProfieP.uploadDealershipLogo(driver, dealershipLogoPath,alertmessage,tc);
 		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
@@ -424,6 +425,21 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		}
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);//Stop here. Verify dealer added in system through Manage Dealership by input the dealerid and click the edit buttom then close Dealer Profile page
 		Wait(wt);
+		tc = "Upload dealership logo after creating the dealership";
+		UserListP.clickManageDealerShips(driver);
+		DealerList DealerListP = new DealerList(driver);
+		DealerListP.inputSearch(driver, addNewDealership);
+		DealerListP.clickEditBtn(driver, "1");
+		DealerProfieP.scrollUp(driver, 500, tc);
+		successfulMsg=""; 
+		DealerProfieP.uploadDealershipLogo(driver, dealershipLogoPath, successfulMsg, tc);
+		//Verify good message upload dealership logog successfully here.
+		DealerProfieP.scrollUp(driver, 500, tc);
+		Wait(wt);
+		DealerProfieP.scrollUp(driver, -1000, tc);
+		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
+		Wait(wt);
+		
 		// =========================== Add Dealership============================================================
 
 		// **************************************************************************************

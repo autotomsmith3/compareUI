@@ -432,6 +432,7 @@ public class UserList extends Comlibs {
 		for (String winHandle : driver.getWindowHandles()) {
 			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
 		}
+		Wait(2);
 		return new DealerProfile(driver);
 	}
 
@@ -443,11 +444,16 @@ public class UserList extends Comlibs {
 		driver.findElement(ManageAccountsLocator).click();
 		return this;
 	}
-	public UserList clickManageDealerShips(WebDriver driver) throws IOException {
+//	public UserList clickManageDealerShips(WebDriver driver) throws IOException {
+//		driver.findElement(ManageDealerShipsLocator).click();
+//		Wait(3);
+//		return this;
+//	}
+	public DealerList clickManageDealerShips(WebDriver driver) throws IOException {
 		driver.findElement(ManageDealerShipsLocator).click();
-		return this;
+		Wait(3);
+		return new DealerList(driver);
 	}
-
 	public BackgroundSets clickManageBGSets(WebDriver driver) throws IOException {
 		driver.findElement(ManageBGSetsLocator).click();
 		return new BackgroundSets(driver);
