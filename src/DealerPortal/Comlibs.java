@@ -535,26 +535,14 @@ public class Comlibs {
 		}
 		return true;
 	}
-
-	public boolean mobileSelectAccount(WebDriver driver, String act) {
-		By mobileActSelIdLocator = By.id("mobile-defaultAccountNumber");
-		try {
-			new Select(driver.findElement(mobileActSelIdLocator)).selectByVisibleText(act);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-
 	public void SelecBroswerResolution(WebDriver driver, String device) throws IOException {
 		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension dim = new Dimension((int) screenSize.getWidth(), (int) screenSize.getHeight());
 		driver.manage().window().setSize(dim);
-//		 driver.manage().window().setPosition(new Point(-1100, 60)); //launch
-//		 driver.manage().window().setPosition(new Point(-1300, 10)); //launch
+//		 driver.manage().window().setPosition(new Point(-1100, 60)); //launch old
+		 driver.manage().window().setPosition(new Point(-1300, 10)); //launch
 		// at left screen
-		driver.manage().window().setPosition(new Point(0, 0)); // launch at
+//		driver.manage().window().setPosition(new Point(0, 0)); // launch at
 																// rigth screen
 		// driver.manage().window().setSize(new Dimension(320, 640)); //iPhone
 		// 5: IE8, Chrome, FF work fine!
@@ -581,6 +569,16 @@ public class Comlibs {
 			rwExcel("", false, "Set up browser resolution for device = " + device + " is not available. ",
 					"Force to set to " + dim);
 		}
+	}
+	public boolean mobileSelectAccount(WebDriver driver, String act) {
+		By mobileActSelIdLocator = By.id("mobile-defaultAccountNumber");
+		try {
+			new Select(driver.findElement(mobileActSelIdLocator)).selectByVisibleText(act);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	public boolean TitleDisplay(WebDriver driver, String title) throws IOException {

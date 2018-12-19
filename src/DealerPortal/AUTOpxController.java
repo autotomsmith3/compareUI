@@ -139,6 +139,7 @@ public class AUTOpxController extends Comlibs {
 		String env = prop.getProperty("AUTOpx.environment");
 		String envDevice = prop.getProperty("AUTOpx.envDevice");
 		String render = prop.getProperty("AUTOpx.render");
+		String checkEmail = prop.getProperty("AUTOpx.checkEmail");
 		String accountEmail = prop.getProperty(env + ".AllProdEmail");
 		String accountPS = prop.getProperty(env + ".AllProdPassword");
 		String baseURL = prop.getProperty(env + ".DealerPortalBaseURL");
@@ -171,12 +172,12 @@ public class AUTOpxController extends Comlibs {
 		// Help section
 		TCnum = "TC139675_7_igP"; // Help - Contact Support. email and tel no.
 		// igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, TCnum);
-		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS, TCnum);
+		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,checkEmail ,TCnum);
 		TCnum = "TC139675_14_igP";
 		igP.verifyHelpSystemHelp(driver, TCnum);// Help - System Help.
 		TCnum = "TC139675_17_igP"; // Help - Report Issue. email and tel no.
 		// igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, TCnum);
-		igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS, TCnum);
+		igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,checkEmail ,TCnum);
 
 		// Type
 		igP.clickTypeBtn(driver, TCnum);
@@ -775,8 +776,8 @@ public class AUTOpxController extends Comlibs {
 		igP.clickColorExteriorTab(driver, TCnum);
 		igP.clickColorExteriorColorCheckBox(driver, "Summit White(GAZ)", TCnum);
 		igP.clickColorInteriorTab(driver, TCnum);
-		// igP.clickColorInteriorColorCheckBox(driver, "Jet Black (4AA)", TCnum); //before 2018-09-30
-		igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); // afte 2018-09-30
+		 igP.clickColorInteriorColorCheckBox(driver, "Ebony Black", TCnum); //on 2018-09-30
+//		igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); // afte 2018-09-30, works for Chrome but Firefox 2018-12-17
 		igP.clickColorApplyBtn(driver, TCnum);
 		igP.clickClearAllFiltersBtn(driver, TCnum);
 		TCnum = "TC139691_19_exterior";
@@ -784,8 +785,8 @@ public class AUTOpxController extends Comlibs {
 		igP.clickColorExteriorTab(driver, TCnum);
 		igP.clickColorExteriorColorCheckBox(driver, "Summit White(GAZ)", TCnum);
 		igP.clickColorInteriorTab(driver, TCnum);
-		// igP.clickColorInteriorColorCheckBox(driver, "Jet Black (4AA)", TCnum); //before 2018-09-30
-		igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); // afte 2018-09-30
+		 igP.clickColorInteriorColorCheckBox(driver, "Ebony Black", TCnum); //on 2018-09-30
+//			igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); // afte 2018-09-30, works for Chrome but Firefox 2018-12-17
 		igP.clickColorApplyBtn(driver, TCnum);
 		igP.clickColorsBtn(driver, TCnum);
 		igP.clickColorExteriorTab(driver, TCnum);
@@ -838,6 +839,25 @@ public class AUTOpxController extends Comlibs {
 		// Stop here
 		igP.clickClearAllFiltersBtn(driver, TCnum);
 
+//		click on gridViewBtn and listViewBtn  - 20181218
+		TCnum = "TC139693_01";
+		igP.clickGridViewBtn(driver, TCnum);
+		igP.clickTilesViewBtn(driver, TCnum);
+		igP.clickGridViewBtn(driver, TCnum);
+		igP.enterTextInSearch(vin01);
+		igP.clickGridRowOnlyOneRecordToCheck(driver, TCnum);
+		igP.clickGridRowOnlyOneRecord(driver, TCnum);
+		VehicleGallery vgP=new VehicleGallery(driver);
+		vgP.clickBackToInventoryBtn(driver);
+		TCnum = "TC139693_02";
+		igP.clickGridViewBtn(driver, TCnum);
+		igP.clickTilesViewBtn(driver, TCnum);
+		igP.clickGridViewBtn(driver, TCnum);
+		igP.enterTextInSearch("123");
+		igP.clickGridRowOneRecordWithNumToCheck(driver, "3", TCnum);
+		igP.clickGridRowOneRecordWithNum(driver, "3", TCnum);
+		vgP.clickBackToInventoryBtn(driver);
+		
 		// Verify Show All button TC141797
 
 		igP.clickSelectNoneBtn(driver, TCnum);
@@ -1063,11 +1083,11 @@ public class AUTOpxController extends Comlibs {
 		// Help section
 		TCnum = "TC139675_7_VINpx"; // Help - Contact Support. email and tel no.
 		// (WebDriver driver, String email, String tel,String VINpxSupportEmail, String VINpxSupportEmailPS, String tc
-		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS, TCnum);
+		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,checkEmail, TCnum);
 		TCnum = "TC139675_14_VINpx";
 		igP.verifyHelpSystemHelp(driver, TCnum);// Help - System Help.
 		TCnum = "TC139675_17_VINpx"; // Help - Report Issue. email and tel no.
-		igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS, TCnum);
+		igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,checkEmail, TCnum);
 
 		tempVIN = "6";
 		igP.enterTextInSearch(tempVIN);
@@ -1116,7 +1136,7 @@ public class AUTOpxController extends Comlibs {
 		// allVinNums = igP.getReRenderNum(driver, TCnum);
 		allVinNums = igP.getReRenderNum(driver, TCnum);
 		igP.clickSelectNoneBtn(driver, TCnum);
-
+		
 		// Verify Rerender Single Vehicle 01 for VINpx dealer
 		TCnum = "TC139706_8";
 		igP.enterTextInSearch(vin01);
@@ -1137,6 +1157,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139706_10";
 		vgP.verifyLoadPannelImage(driver, TCnum);
 		vgP.clickBackToInventoryBtn(driver);
+		
 		// Verify Rerender Single Vehicle 02 for VINpx dealer
 		TCnum = "TC139706_8_vin02";
 		ac.Wait(2);
@@ -1357,6 +1378,7 @@ public class AUTOpxController extends Comlibs {
 		String envBrowser = prop.getProperty("AUTOpx.browser");
 		String render = prop.getProperty("AUTOpx.render");
 		String addNewVIN = prop.getProperty("AUTOpx.addNewVIN");
+		String checkEmail = prop.getProperty("AUTOpx.checkEmail");
 		String accountEmail = prop.getProperty(env + ".STOCKpxEmail");
 		String accountPS = prop.getProperty(env + ".STOCKpxPassword");
 		// String baseURL = prop.getProperty(env + ".STOCKpxDealerPortalBaseURL");
@@ -1404,12 +1426,12 @@ public class AUTOpxController extends Comlibs {
 		// Help section
 		TCnum = "TC139675_7_STOCKpx"; // Help - Contact Support. email and tel no.
 		// igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, TCnum);
-		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS, TCnum);
+		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,checkEmail, TCnum);
 		TCnum = "TC139675_14_STOCKpx";
 		igP.verifyHelpSystemHelp(driver, TCnum);// Help - System Help.
 		TCnum = "TC139675_17_STOCKpx"; // Help - Report Issue. email and tel no.
 		// igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, TCnum);
-		igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS, TCnum);
+		igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,checkEmail, TCnum);
 		if (addNewVIN.equalsIgnoreCase("Yes") && render.equalsIgnoreCase("Yes")) {
 			//// *********************Add VIN for STOCKpx*******************************************************
 			// Add VIN
@@ -1683,6 +1705,7 @@ public class AUTOpxController extends Comlibs {
 		String render = prop.getProperty("AUTOpx.render");
 		String img = prop.getProperty("AUTOpx.customPicPathFile");
 		String addNewVIN = prop.getProperty("AUTOpx.addNewVIN");
+		String checkEmail = prop.getProperty("AUTOpx.checkEmail");
 		String accountEmail = prop.getProperty(env + ".LOTpxEmail");
 		String accountPS = prop.getProperty(env + ".LOTpxPassword");
 		// String baseURL = prop.getProperty(env + ".LOTpxDealerPortalBaseURL");
@@ -1729,12 +1752,12 @@ public class AUTOpxController extends Comlibs {
 		// Help section
 		TCnum = "TC139675_7_LOTpx"; // Help - Contact Support. email and tel no.
 		// igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, TCnum);
-		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS, TCnum);
+		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,checkEmail, TCnum);
 		TCnum = "TC139675_14_LOTpx";
 		igP.verifyHelpSystemHelp(driver, TCnum);// Help - System Help.
 		TCnum = "TC139675_17_LOTpx"; // Help - Report Issue. email and tel no.
 		// igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, TCnum);
-		igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS, TCnum);
+		igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,checkEmail, TCnum);
 		tempVIN = "6";
 		igP.enterTextInSearch(tempVIN);
 		igP.verifyDealershipname(dealershipName, TCnum);
@@ -2413,7 +2436,7 @@ public class AUTOpxController extends Comlibs {
 		// Verify Rerender Single Vehicle 01 for VINpx dealer
 		TCnum = "TC139706_8";
 		igP.enterTextInSearch(vin01);
-		ac.Wait(2);
+		ac.Wait(4);
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);

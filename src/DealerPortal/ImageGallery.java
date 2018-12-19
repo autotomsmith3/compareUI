@@ -145,8 +145,7 @@ public class ImageGallery extends Comlibs {
 	// By searchVinOrStockNo = By.id("searchVinOrStockNo");
 	By searchVinOrStockNo = By.xpath("//*[@id=\"searchVinOrStockNo\"]");
 	By templatesBtnLocator = By.xpath("//*[@id=\"navbarTabs\"]/li[3]/a");
-	// By filterLocator=;
-
+	 
 	// By
 	// hoverOn_01_Locator=By.xpath("//div[@id='vehicle_0CF51F3F-D51F-4CD4-B1AA-CD29AEAF3A5A']/div/div/div");
 	// //1. VIN= 1J8G6B8K77W628202
@@ -183,10 +182,10 @@ public class ImageGallery extends Comlibs {
 	By ContactSupportLine3to5_07 = By.xpath("//*[@id='reportIssueModal']/div/div/div[3]/div");
 	By ContactSupportEmailLine308 = By.xpath("//*[@id='reportIssueModal']/div/div/div[3]/div/span[2]/a");
 	By ContactSupportTelLine409 = By.xpath("//*[@id='reportIssueModal']/div/div/div[3]/div/span[3]");
-
 	By dealerShipInfoBtnLocator = By.xpath("//*[@id='navbarTabs']/li[2]/a");
 	By inventoryGalleryBtnLocator = By.xpath("//*[@id='navbarTabs']/li[1]/a");
-
+	By listViewBtnLocator=By.xpath("//*[@id=\"listViewBtn\"]/span");
+	By gridViewBtnLocator=By.xpath("//*[@id=\"gridViewBtn\"]/span");
 	static int allVinNums = 0;
 	static int allImageNums = 0;
 
@@ -792,6 +791,7 @@ public class ImageGallery extends Comlibs {
 
 				tempName = interColrCheckbox.getText();
 				if (tempName.equalsIgnoreCase(colorDes)) {
+//					scrollUp(driver, 500, tc);
 					interColrCheckbox.click();
 
 					rwExcel(tc, true, "Click the interior color " + colorDes + " check-box",
@@ -894,7 +894,47 @@ public class ImageGallery extends Comlibs {
 		driver.navigate().to(driver.getCurrentUrl());
 		return new ImageGallery(driver);
 	}
-
+	public ImageGallery clickLoadMoreVehicleBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, loadMoreVehicleBtnLocator, true, tc);
+		driver.findElement(loadMoreVehicleBtnLocator).click();
+		return new ImageGallery(driver);
+	}
+	public ImageGallery clickGridViewBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, listViewBtnLocator, true, tc);
+		driver.findElement(listViewBtnLocator).click();
+		return this;
+	}
+	public ImageGallery clickTilesViewBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, gridViewBtnLocator, true, tc);
+		driver.findElement(gridViewBtnLocator).click();
+		return this;
+	}
+	public void clickGridRowOnlyOneRecordToCheck(WebDriver driver, String tc) throws IOException {
+		By onlyOneRecord=By.xpath("//*[@id=\"vehicleTable\"]/tbody/tr/td[1]/input");
+		elementExist(driver, onlyOneRecord, true, tc);
+		driver.findElement(onlyOneRecord).click();
+	}
+	public VehicleGallery clickGridRowOnlyOneRecord(WebDriver driver,String tc) throws IOException {
+		By OneRecordVin=By.xpath("//*[@id=\"vehicleTable\"]/tbody/tr/td[6]");
+		elementExist(driver, OneRecordVin, true, tc);
+		driver.findElement(OneRecordVin).click();
+		return new VehicleGallery(driver);
+	}
+	public void clickGridRowOneRecordWithNumToCheck(WebDriver driver, String num,String tc) throws IOException {
+		By OneRecord=By.xpath("//*[@id=\"vehicleTable\"]/tbody/tr["+num+"]/td[1]/input");
+		elementExist(driver, OneRecord, true, tc);
+		driver.findElement(OneRecord).click();
+	}
+	public VehicleGallery clickGridRowOneRecordWithNum(WebDriver driver, String num,String tc) throws IOException {
+		By OneRecordVin=By.xpath("//*[@id=\"vehicleTable\"]/tbody/tr["+num+"]/td[6]");
+		elementExist(driver, OneRecordVin, true, tc);
+		driver.findElement(OneRecordVin).click();
+		return new VehicleGallery(driver);
+	}
+	
+	//*[@id="vehicleTable"]/tbody/tr/td[6]
+	
+	
 	public String getVehGUID(String dlrCode, String sVin, String serverName, String dbName, String userName,
 			String password) throws ClassNotFoundException, SQLException {
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -970,11 +1010,6 @@ public class ImageGallery extends Comlibs {
 
 	}
 
-	public ImageGallery clickLoadMoreVehicleBtn(WebDriver driver, String tc) throws IOException {
-		elementExist(driver, loadMoreVehicleBtnLocator, true, tc);
-		driver.findElement(loadMoreVehicleBtnLocator).click();
-		return new ImageGallery(driver);
-	}
 
 	public boolean verifyLoadMoreVehicleBtnStatus(WebDriver driver, boolean status, String tc) throws IOException {
 		boolean tempStatus, actualStatus = false;
@@ -1330,7 +1365,7 @@ public class ImageGallery extends Comlibs {
 	}
 
 	public void verifyHelpContactSupport(WebDriver driver, String email, String tel, String VINpxSupportEmail,
-			String VINpxSupportEmailPS, String tc) throws IOException {
+			String VINpxSupportEmailPS, String chkEmaiol, String tc) throws IOException {
 		String rs1, rs2, rs3, rs4, rs5, rs6;
 		driver.findElement(helpMarkLocator).click();
 		// Contact Support
@@ -1404,17 +1439,18 @@ public class ImageGallery extends Comlibs {
 		Wait(2);
 
 		// Verify email sent out to tdautoaa@gmail.com in QA
-		tc = "TCxxSupportEmailxxx";
-		DealerPortal.MailReader gMail = new MailReader();
+		if (chkEmaiol.equalsIgnoreCase("Yes")) {
+			tc = "TC139675";
+			DealerPortal.MailReader gMail = new MailReader();
 
-		// String subject = "Support/Contact Us request from autotomsmith3@gmail.com";//This is from QA.
-		String subject = "Support/Contact Us request from";// This is from QA.
-		String text3 = "Additional Context";
-		// (String mainID, String email, String mailPassword, String emailSuj,String content2, String content3, String tc)
-		tc = "TC:139675";
-		gMail.VerifyGetMailContentFrSubContain("Imap.gmail.com", VINpxSupportEmail, VINpxSupportEmailPS, subject, text2,
-				text3, tc);
-
+			// String subject = "Support/Contact Us request from autotomsmith3@gmail.com";//This is from QA.
+			String subject = "Support/Contact Us request from";// This is from QA.
+			String text3 = "Additional Context";
+			// (String mainID, String email, String mailPassword, String emailSuj,String content2, String content3, String tc)
+			tc = "TC139675";
+			gMail.VerifyGetMailContentFrSubContain("Imap.gmail.com", VINpxSupportEmail, VINpxSupportEmailPS, subject,
+					text2, text3, tc);
+		}
 	}
 
 	public void verifyHelpSystemHelp(WebDriver driver, String tc) throws IOException {
@@ -1445,7 +1481,7 @@ public class ImageGallery extends Comlibs {
 	}
 
 	public void verifyHelpReportIssue(WebDriver driver, String email, String tel, String SupportEmail,
-			String SupportEmailPS, String tc) throws IOException {
+			String SupportEmailPS, String chkEmail, String tc) throws IOException {
 		String rs1, rs2, rs3, rs4, rs5, rs6;
 		driver.findElement(helpMarkLocator).click();
 		// Report Issue
@@ -1517,17 +1553,18 @@ public class ImageGallery extends Comlibs {
 		Wait(2);
 
 		// Verify email sent out to tdautoaa@gmail.com in QA
-		tc = "TCxxReportIssueEmailxxx";
-		DealerPortal.MailReader gMail = new MailReader();
+		if (chkEmail.equalsIgnoreCase("Yes")) {
+			tc = "TC229325";
+			DealerPortal.MailReader gMail = new MailReader();
 
-		// String subject = "Support/Contact Us request from autotomsmith3@gmail.com";//This is from QA.
-		String subject = "Support/Contact Us request from";// This is from QA.
-		String text3 = "Additional Context";
-		// (String mainID, String email, String mailPassword, String emailSuj,String content2, String content3, String tc)
-		tc = "TC:229325";
-		gMail.VerifyGetMailContentFrSubContain("Imap.gmail.com", SupportEmail, SupportEmailPS, subject, text2, text3,
-				tc);
-
+			// String subject = "Support/Contact Us request from autotomsmith3@gmail.com";//This is from QA.
+			String subject = "Support/Contact Us request from";// This is from QA.
+			String text3 = "Additional Context";
+			// (String mainID, String email, String mailPassword, String emailSuj,String content2, String content3, String tc)
+			tc = "TC229325";
+			gMail.VerifyGetMailContentFrSubContain("Imap.gmail.com", SupportEmail, SupportEmailPS, subject, text2,
+					text3, tc);
+		}
 	}
 
 	public void enterTextInSearch(String sVIN) {

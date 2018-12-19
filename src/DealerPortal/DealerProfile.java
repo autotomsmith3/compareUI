@@ -368,7 +368,9 @@ public class DealerProfile extends Comlibs {
 					"It does not match. Expected State=" + state + ". The site shows=\"" + sts + "\"");
 		}
 	}
-
+	public void uploadDealershipLogo(WebDriver driver, String dealershipLogPath) throws IOException {
+		driver.findElement(By.id("uploadLogo")).sendKeys(dealershipLogPath);
+	}
 	public void jSONParse() {
 		// String text = "{\"employees\":[{\"firstName\":\"John\",\"lastName\":\"Doe\" },{\"firstName\":\"Anna\",\"lastName\":\"Smith\" },{\"firstName\":\"Peter\",\"lastName\":\"Jones\" }]}";
 		// String text="{\"posts\": [{\"post_id\": \"123456789012_123456789012\",\"actor_id\": \"1234567890\",\"picOfPersonWhoPosted\": \"http://example.com/photo.jpg\",\"nameOfPersonWhoPosted\": \"Jane Doe\",\"message\": \"Sounds cool. Can't wait to see it!\",\"likesCount\": \"2\",\"comments\": [],\"timeOfPost\": \"1234567890\"} ]}";

@@ -56,11 +56,13 @@ public class VehicleGallery extends Comlibs {
 	By backToInventoryBtnLocator = By.id("viewInventoryBtn");
 	By dealerNameDropDownLocator = By.cssSelector("span.glyphicon.glyphicon-menu-down");
 	By logOutLinkLocator = By.linkText("Logout");
-	By vinStringLocator = By.cssSelector("div.col-sm-9.padding-left-20 > span");  //ok for Chrome but not for FF
-//	By vinStringLocator =By.xpath("//*[@id='content']/div[2]/div[2]/div[2]/div[2]/div/div/div[1]/div[2]/span");  //still not working for FF
-	
+	By vinStringLocator = By.cssSelector("div.col-sm-9.padding-left-20 > span"); // ok for Chrome but not for FF
+	// By vinStringLocator =By.xpath("//*[@id='content']/div[2]/div[2]/div[2]/div[2]/div/div/div[1]/div[2]/span"); //still not working for FF
+
 	// By urlLocator = By.xpath("//input[@id='previewImageUrl']"); // this is old one - url field
-	By urlLocator = By.xpath("//*[@id=\"content\"]/div[2]/div[2]/div[2]/div[2]/div/div/div[11]/div[2]/span");
+	// By urlLocator = By.xpath("//*[@id=\"content\"]/div[2]/div[2]/div[2]/div[2]/div/div/div[11]/div[2]/span"); // failed on Dec. 04, 2018
+	By urlLocator_9 = By.xpath("/html/body/div/div[2]/div[2]/div[2]/div[2]/div/div/div[9]/div[2]/span");// New, OK on Dec. 04, 2018
+	By urlLocator_11 = By.xpath("/html/body/div/div[2]/div[2]/div[2]/div[2]/div/div/div[11]/div[2]/span");// New, OK on Dec. 04, 2018
 	By urlLocatorChrome = By.xpath("//*[@id=\"imagePreviewLink\"]");
 
 	By urImageLocator = By.xpath("//img");
@@ -159,16 +161,16 @@ public class VehicleGallery extends Comlibs {
 
 	public void verifyLoadURLImage(WebDriver driver, String tc) throws IOException {
 		rwExcel(tc, "Verify URL Copy Image", " ");
-		boolean loadImage=false;
+		boolean loadImage = false;
 		try {
 			loadImage = elementExist(driver, urImageLocator, true, tc);
 		} catch (Exception e) {
-			loadImage=false;
+			loadImage = false;
 		}
 
 		if (loadImage) {
 			VerifyImageLoaded(driver, urImageLocator, tc);
-		}else{
+		} else {
 			rwExcel(tc, false, "Verify URL Copy Image", "Image does not show");
 		}
 	}
@@ -226,21 +228,42 @@ public class VehicleGallery extends Comlibs {
 	}
 
 	public String getURLLink(WebDriver driver, String tc) throws IOException {
-		elementExist(driver, urlLocator, true, tc);
+		elementExist(driver, urlLocator_9, true, tc);
 		// String urlLink = driver.findElement(urlLocator).getAttribute("value");
 		// .getText("placeholder");
-		String urlLink = driver.findElement(urlLocator).getText();
+		String urlLink = driver.findElement(urlLocator_9).getText();
 		return urlLink;
 	}
 
 	public void clickURLLink(WebDriver driver, String envBrowser, String tc) throws IOException {
-		if (envBrowser.equalsIgnoreCase("Chrome")) {
-			elementExist(driver, urlLocatorChrome, true, tc);
-			driver.findElement(urlLocatorChrome).click();
-		} else {
-			elementExist(driver, urlLocator, true, tc);
-			driver.findElement(urlLocator).click();
+		Wait(2);
+		try {
+			if (envBrowser.equalsIgnoreCase("Chrome")) {
+				elementExist(driver, urlLocatorChrome, true, tc);
+				driver.findElement(urlLocatorChrome).click();
+			} else if (envBrowser.equalsIgnoreCase("FireFox")) {
+				elementExist(driver, urlLocator_9, true, tc);
+				driver.findElement(urlLocator_9).click();
+			} else {
+				elementExist(driver, urlLocatorChrome, true, tc);
+				driver.findElement(urlLocatorChrome).click();
+			}
+		} catch (Exception e) {
+			Wait(2);
+			tc = tc + "_11";
+			if (envBrowser.equalsIgnoreCase("Chrome")) {
+				elementExist(driver, urlLocatorChrome, true, tc);
+				driver.findElement(urlLocatorChrome).click();
+			} else if (envBrowser.equalsIgnoreCase("FireFox")) {
+				elementExist(driver, urlLocator_11, true, tc);
+				driver.findElement(urlLocator_11).click();
+			} else {
+				elementExist(driver, urlLocatorChrome, true, tc);
+				driver.findElement(urlLocatorChrome).click();
+			}
+			Wait(2);
 		}
+
 	}
 
 	public String retriveVIN(WebDriver driver) throws IOException {
