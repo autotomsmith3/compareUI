@@ -35,15 +35,19 @@ public class VDVILogin extends Comlibs {
 	By passwordLocator = By.id("password");
 	By loginButtonLocator = By.id("btnSubmit");
 
-	By foot_01_DisclaimerLocator = By.xpath("//div[@id='footer']/nav/div/div/ul/li/span");
-	By foot_02_VersionLocator = By.xpath("//div[@id='footer']/nav/div/div/ul/li/span[2]");
+//	By foot_01_DisclaimerLocator = By.xpath("//div[@id='footer']/nav/div/div/ul/li/span");
+//	By foot_02_VersionLocator = By.xpath("//div[@id='footer']/nav/div/div/ul/li/span[2]");
 	By pleaseLogLocator = By.xpath("//form[@id='loginForm']/div[2]/p");
 	By rememeberMeLocator = By.xpath("//form[@id='loginForm']/div[7]/div/div/label/span");
 	By rememeberMeCheckBoxLocator = By.id("rememberMe");
 	By forgotPSLocator = By.xpath("//a[contains(text(),'Forgot Password?')]");
 	By acceptAndContinueBtn = By.xpath("//button[@type='submit']");
 	By engboxesLocator = By.xpath("//ul[@id='engine-options']/li/div");// Engine only
-
+	
+	By foot_01_DisclaimerLocator = By.xpath("//*[@id=\"vdviFooter\"]/div/div/ul[1]/li/span[1]");
+	By foot_02_VersionLocator    = By.xpath("//*[@id=\"vdviFooter\"]/div/div/ul[1]/li/span[2]");	
+//	line 1: //*[@id="vdviFooter"]/div/div/ul[1]/li/span[1]
+//	line 2: //*[@id="vdviFooter"]/div/div/ul[1]/li/span[2]
 	// By Locator=
 	// By Locator=
 	// By Locator=
@@ -89,5 +93,38 @@ public class VDVILogin extends Comlibs {
 
 		return pagetitle;
 	}
-
+	public void verifyFooterVersionDisclaimer(String env, String versionNum, String tc) throws IOException {
+		String disclaimer, versionText;
+		String expectDisclaimer = "© 2018 Autodata Solutions, Inc. / Autodata Solutions Company | Legal Disclaimer";
+//		String expectVersionNum = "App version: " + versionNum + " Environment: " + env + "";
+		String expectVersionNum = "App version: " + versionNum + " Environment: " + env + "";
+		boolean footerL1, footerL2, footerL1Text, footerL2Text;
+		footerL1 = elementExist(driver, foot_01_DisclaimerLocator, true, tc);
+		footerL2 = elementExist(driver, foot_02_VersionLocator, true, tc);
+		disclaimer = driver.findElement(foot_01_DisclaimerLocator).getText();
+		versionText = driver.findElement(foot_02_VersionLocator).getText();
+		footerL1Text = disclaimer.equalsIgnoreCase(expectDisclaimer);
+		footerL2Text = versionText.equalsIgnoreCase(expectVersionNum);
+		if (footerL1 && footerL2 && footerL1Text && footerL2Text) {
+			rwExcel(tc, true, "Verify Footer and Version", "Footer and Version are displayed");
+		} else {
+			rwExcel(tc, false, "Verify Footer and Version", "Footer and Version are NOT displayed properly");
+			if (!footerL1) {
+				rwExcel(tc, false, "Verify Footer line 1 - Disclaimer",
+						"Expected is: " + expectDisclaimer + ". The website shows: " + disclaimer);
+			}
+			if (!footerL2) {
+				rwExcel(tc, false, "Verify Footer line 2 - App version",
+						"Expected is: " + expectVersionNum + ". The website shows: " + versionText);
+			}
+			if (!footerL1Text) {
+				rwExcel(tc, false, "Verify Footer line 1 - Disclaimer Text",
+						"Expected is: " + expectDisclaimer + ". The website shows: " + disclaimer);
+			}
+			if (!footerL2Text) {
+				rwExcel(tc, false, "Verify Footer line 2 - App version #",
+						"Expected is: " + expectVersionNum + ". The website shows: " + versionText);
+			}
+		}
+	}
 }

@@ -115,6 +115,8 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 
 		// =================================================
 		VDVILogin loginP = new VDVILogin(driver);
+		tc="Admin Portal Version";
+		loginP.verifyFooterVersionDisclaimer(env, versionNum, tc);
 		int dealerN = 0;
 		String dealerSN = "";
 		loginP.login(driver, accountEmail, accountPS, tc);
