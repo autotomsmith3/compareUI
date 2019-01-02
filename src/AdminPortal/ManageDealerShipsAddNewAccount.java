@@ -412,7 +412,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		tc = "TC139021_02";//"AddDealerInvalid_withMissingMUSTField";
 		// The successful message "Your settings have been saved" will only show one second then disappear.
 		// So the successful message should be empty "" here;
-		String successfulMsg = "";//"Your settings have been saved"
+		String successfulMsg = "";//"Your settings have been saved" - this msg shows only a second and then disappears.
 		MessageExist = DealerProfieP.checkMessageDisplayedHead(driver, successfulMsg,tc);
 		// Bug here since entered Metadata. See AUTOPXOPS-1227. Now it shows an error "An error occurred. Please try again."
 		// but the dealership has been created in our system. Issue fixed but "Your settings have been saved" message only shows a second and then disappears. 

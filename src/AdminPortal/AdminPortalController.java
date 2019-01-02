@@ -728,8 +728,8 @@ public class AdminPortalController extends Comlibs {
 		tc = "TC139021_m2";
 		// The successful message "Your settings have been saved" will only show one second then disappear.
 		// So the successful message should be empty "" here;
-		String successfulMsg = "";
-		MessageExist = DealerProfieP.checkMessageDisplayedHead(driver, "Your settings have been saved",tc);
+		String successfulMsg = "";// "Your settings have been saved"
+		MessageExist = DealerProfieP.checkMessageDisplayedHead(driver,successfulMsg,tc);
 		// Bug here since entered Metadata. See AUTOPXOPS-1227. Now it shows an error "An error occurred. Please try again."
 		// but the dealership has been created in our system. Issue fixed but "Your settings have been saved" message only shows a second and then disappears.
 		if (MessageExist) {
@@ -891,8 +891,8 @@ public class AdminPortalController extends Comlibs {
 		tc = "TC229370_d2";
 		// The successful message "Your settings have been saved" will only show less then one second than disappears.
 		// So the successful message should be empty "" here;
-		String successfulMsgDealer = "";
-		MessageExist = DealerProfileP.checkMessageDisplayedHead(driver, "Your settings have been saved",tc);
+		String successfulMsgDealer = "";//"Your settings have been saved" - this msg shows only a second and then disappears.
+		MessageExist = DealerProfileP.checkMessageDisplayedHead(driver, successfulMsgDealer,tc);
 		// Bug here since entered Metadata. See AUTOPXOPS-1227. Now it shows an error "An error occurred. Please try again."
 		// but the dealership has been created in our system.
 		if (MessageExist) {
