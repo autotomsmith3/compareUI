@@ -776,7 +776,9 @@ public class AUTOpxController extends Comlibs {
 		igP.clickColorExteriorTab(driver, TCnum);
 		igP.clickColorExteriorColorCheckBox(driver, "Summit White(GAZ)", TCnum);
 		igP.clickColorInteriorTab(driver, TCnum);
-		 igP.clickColorInteriorColorCheckBox(driver, "Ebony Black", TCnum); //on 2018-09-30
+		String selectedInterior="Dark Atmosphere/Medium Atmosphere w/Cloth Seat Trim(HHR)";
+		igP.clickColorInteriorColorCheckBox(driver, selectedInterior, TCnum); //on 2018-12-29
+//		 igP.clickColorInteriorColorCheckBox(driver, "Ebony Black", TCnum); //on 2018-09-30
 //		igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); // afte 2018-09-30, works for Chrome but Firefox 2018-12-17
 		igP.clickColorApplyBtn(driver, TCnum);
 		igP.clickClearAllFiltersBtn(driver, TCnum);
@@ -785,20 +787,21 @@ public class AUTOpxController extends Comlibs {
 		igP.clickColorExteriorTab(driver, TCnum);
 		igP.clickColorExteriorColorCheckBox(driver, "Summit White(GAZ)", TCnum);
 		igP.clickColorInteriorTab(driver, TCnum);
-		 igP.clickColorInteriorColorCheckBox(driver, "Ebony Black", TCnum); //on 2018-09-30
+		 igP.clickColorInteriorColorCheckBox(driver, selectedInterior, TCnum); //on 2018-09-30
 //			igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); // afte 2018-09-30, works for Chrome but Firefox 2018-12-17
 		igP.clickColorApplyBtn(driver, TCnum);
 		igP.clickColorsBtn(driver, TCnum);
 		igP.clickColorExteriorTab(driver, TCnum);
-		igP.clickColorExteriorColorCheckBox(driver, "Black Raven(GBA)", TCnum);
-		igP.clickColorExteriorColorCheckBox(driver, "Black Raven(GBA)", TCnum);
+		String selectedExterior="Black Raven(GBA)";
+		igP.clickColorExteriorColorCheckBox(driver, selectedExterior, TCnum);
+		igP.clickColorExteriorColorCheckBox(driver, selectedExterior, TCnum);
 		igP.clickColorApplyBtn(driver, TCnum);
 		TCnum = "TC139691_19_interior";
 		igP.clickClearAllFiltersBtn(driver, TCnum);
 		igP.clickColorsBtn(driver, TCnum);
 		igP.clickColorExteriorTab(driver, TCnum);
-		igP.clickColorExteriorColorCheckBox(driver, "Black Raven(GBA)", TCnum);
-		igP.clickColorExteriorColorCheckBox(driver, "Black Raven(GBA)", TCnum);
+		igP.clickColorExteriorColorCheckBox(driver, selectedExterior, TCnum);
+		igP.clickColorExteriorColorCheckBox(driver, selectedExterior, TCnum);
 		igP.clickColorInteriorTab(driver, TCnum);
 		// igP.clickColorInteriorColorCheckBox(driver, "Ebony w/Ebony accents (AFC)", TCnum);
 		igP.clickColorClearBtn(driver, TCnum);
@@ -1256,8 +1259,9 @@ public class AUTOpxController extends Comlibs {
 		if (allVinNums >= MaxVinsForPreview) {
 			allVinNums = MaxVinsForPreview;
 		}
-		// ac.Wait(2);
-		// igP.enterTextInSearch(vin01);
+		 ac.Wait(2);
+		 igP.enterTextInSearch(vin01);
+		 ac.Wait(2);
 		try {
 			allImageNums = igP.getTileImageNum(driver, vehGUID01, "");
 		} catch (Exception ex) {

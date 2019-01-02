@@ -539,9 +539,9 @@ public class Comlibs {
 		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension dim = new Dimension((int) screenSize.getWidth(), (int) screenSize.getHeight());
 		driver.manage().window().setSize(dim);
+//		driver.manage().window().setPosition(new Point(-1680, -200)); //launch at left screen at Nanxin's house 2018-12-28
 //		 driver.manage().window().setPosition(new Point(-1100, 60)); //launch old
-		 driver.manage().window().setPosition(new Point(-1300, 10)); //launch
-		// at left screen
+		 driver.manage().window().setPosition(new Point(-1300, 10)); //launch at left screen
 //		driver.manage().window().setPosition(new Point(0, 0)); // launch at
 																// rigth screen
 		// driver.manage().window().setSize(new Dimension(320, 640)); //iPhone
