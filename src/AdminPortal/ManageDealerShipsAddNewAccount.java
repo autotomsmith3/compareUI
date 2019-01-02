@@ -16,7 +16,7 @@ import cPP.com_libs;
 public class ManageDealerShipsAddNewAccount extends Comlibs {
 
 	public void AddNewAccount(WebDriver driver, String brw, String versionNum, String envment, String checkEmail)
-			throws IOException, InterruptedException, ClassNotFoundException, SQLException, AWTException {
+			throws Exception {
 
 		// Load environment parameters
 		Properties prop = new Properties();
@@ -115,7 +115,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 
 		// =================================================
 		VDVILogin loginP = new VDVILogin(driver);
-		tc="Admin Portal Version";
+		tc="TC_version";
 		loginP.verifyFooterVersionDisclaimer(env, versionNum, tc);
 		int dealerN = 0;
 		String dealerSN = "";
@@ -128,7 +128,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		UserListP.clickDisplayDropDownBtn(driver, "3");
 		UserListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000 - negative means scrolldown
 		// =========================== Add New Account Process============================================================
-		tc = "TC_addNewAct_AttachDealer_DeleteIt";
+		tc = "TC228721";
 		UserListP.clickAddAccount(driver);
 		Wait(wt);
 		for (String winHandle : driver.getWindowHandles()) {
@@ -141,27 +141,28 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		AccountProfileP.inputFirstName(driver, FirstName);
 		AccountProfileP.inputLastName(driver, LastName);
 		AccountProfileP.selectAccountStatus(driver, 1);
-		tc = "Click SAVE button in Account Profile page 1";
+		tc = "TC228721";
 		AccountProfileP.clickSaveBtn(driver, tc);
 		Wait(wt);
-		tc = "Search box tc.";
+		tc = "TC_Search box";
 		int hyphenLocation = SelectedDealerNameToAttach.indexOf(" - ");
 		AccountProfileP.inputSearchForDealers(driver, SelectedDealerNameToAttach.substring(1, hyphenLocation), tc);
-		tc = "Select a dealership name to attach to account.";
+		tc = "TC228723";
 		String selectedDealershipName = AccountProfileP.selectOneDealerFrAllDealers(driver, SelectedDealerNameToAttach,
 				tc);
 		AccountProfileP.clickRightArrowAttachBtn(driver);
-		tc = "scrollUP -132";
+		tc = "TC228723_scrollUP";
 		AccountProfileP.scrollUp(driver, -132, tc);
-		tc = "Click SAVE button in Account Profile page 2";
+		tc = "TC228721_SAVE";
 		AccountProfileP.clickSaveBtn(driver, tc);
 		Wait(wt);
+		tc = "TC228724";
 		AccountProfileP.clickResetPasswordBtn(driver);
 		AccountProfileP.checkMSGDisplayedHead(driver,
 				"An email containing a temporary password has been sent to the dealer", tc);
 		// Close Account Profile page
 		driver.close();
-		// Open Dealer Porta
+		// Open Dealer Portal
 		for (String winHandle : driver.getWindowHandles()) {
 			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
 		}
@@ -180,21 +181,21 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		// email ="tdautof1@gmail.com";
 		// mailPassword = "Autodata1";
 		tempPS = gMail.getTemporaryPS(subject, psB4, psAfter, "Imap.gmail.com", AddNewAccountEmail, accountPS);
-		TCnum = "TC139686_02_tempPS";
+		tc = "TC228725";
 		DealerPortal.AUTOpxLogin dealerPortalloginP = new AUTOpxLogin(driver);
 		dealerPortalloginP.login(driver, AddNewAccountEmail, tempPS); // this should be correct one. Now issue here, see autopxops-1196
 		// loginP.loginDealerProfile(driver, accountEmail, tempPS);//this is temp, it skips agreement page
 		DealerPortal.AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
 		acceptLicenseP.clickAcceptPSBtn(driver);
 		DealerPortal.DealerProfile dpP = new DealerProfile(driver);
-		TCnum = "TC139674";
-		dpP.changePS(driver, accountPS, TCnum);
-		TCnum = "TC139686_02_NoBtn";
+		tc = "TC139104-TC139105";
+		dpP.changePS(driver, accountPS, tc);
+		tc = "TC139105";
 		Wait(wt);
-		dpP.clickNOBtn(driver, TCnum);
-		TCnum = "TC139686_02_Inv";
+		dpP.clickNOBtn(driver, tc);
+		tc = "TC139106";
 		Wait(wt);
-		dpP.clickInventoryGalleryBtn(driver, TCnum);
+		dpP.clickInventoryGalleryBtn(driver, tc);
 		Wait(wt);
 		dpP.clickLogout(driver);
 		// login dealer portal again and accept agreement and logout
@@ -211,12 +212,14 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		UserListP.inputSearch(driver, AddNewAccountEmail);
 		UserListP.clickEditBtn(driver, "1");
 		Wait(wt);
-		AccountProfileP.selectOneDealerFrAccountDealers(driver, SelectedDealerNameToAttach, TCnum);
+		tc = "TC228727";
+		AccountProfileP.selectOneDealerFrAccountDealers(driver, SelectedDealerNameToAttach, tc);
 		AccountProfileP.clickLeftArrowDetachBtn(driver);
 		tc = "Remove dealership. Click SAVE after clicking left arrow.";
 		AccountProfileP.clickSaveBtn(driver, tc);
 		Wait(wt);
-		String drlGuid = AccountProfileP.getDlrGuid(driver);
+		tc = "TC228737";
+		String drlGuid = AccountProfileP.getDlrGuid(driver,tc);
 		drlGuid = AccountProfileP.trimURL_user(drlGuid);
 		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
 		for (String winHandle : driver.getWindowHandles()) {
@@ -226,7 +229,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		// String deleteUserPostWSURL=
 		String postBody = "{}";
 		String jsonTextFrDeleteUserWS = "";
-		tc = "Run jsonTextFrDeleteUserWS #";
+		tc = "TC139404";
 		try {
 			jsonTextFrDeleteUserWS = com_libs.getSourceCodeJson(postBody, deleteUserPostWSURL, drlGuid, "");
 			rwExcel(tc, true, "Add New Account ", "Run jsonTextFrDeleteUserWS");
@@ -263,11 +266,11 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		}
 
 		// F5 to refresh page
-		tc = "F5 to fresh page after delete the account#";
+		tc = "TC139404_01";
 		clickRefleshF5Btn(driver, tc);
 		Wait(2);
 		UserListP.inputSearch(driver, AddNewAccountEmail);
-		tc = "After F5 to fresh page, search the account#";
+		tc = "TC139404_02";
 		try {
 			UserListP.clickEditBtn(driver, "1");
 			// Failed because account still exists in the system
@@ -284,13 +287,8 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 							+ "\" does NOT exist in system!");
 		}
 
-		// check there is no account showing
-		// done!
-
-		// Stop here!!!
-
 		// =========================== Add Account to check the error message============================================================
-		tc = "TC_addNewAct_with_Existing_ActEamil";
+		tc ="TC228658";// "TC_addNewAct_with_Existing_ActEamil";
 		UserListP.clickAddAccount(driver);
 		Wait(wt);
 		// AccountProfile AccountProfileP = new AccountProfile(driver);
@@ -299,12 +297,12 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		AccountProfileP.inputLastName(driver, LastName);
 		AccountProfileP.selectAccountStatus(driver, 1);
 		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
-		tc = "TC_addNewAct_with_Existing_ActEamil_SAVE";
+		tc ="TC228658_01";//  "TC_addNewAct_with_Existing_ActEamil_SAVE";
 		UserListP.clickAddAccount(driver);
 		AccountProfileP.inputAccountEmail(driver, accountEmail);
 		AccountProfileP.inputFirstName(driver, FirstName);
 		AccountProfileP.inputLastName(driver, LastName);
-		tc = "TC_addNewAct_AccountStatusShouldNotBeChanged";
+		tc = "TC139104_e" ;//"TC_addNewAct_AccountStatusShouldNotBeChanged";
 		try {
 			AccountProfileP.selectAccountStatus(driver, 2);// 1- Active, 2- Lock out, 3-Change Password, 4-Disabled
 			rwExcel(tc, false, "Add Account - Account Status ", "Not Working - Can change status to 2 - Lock out");
@@ -313,7 +311,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 			AccountProfileP.selectAccountStatus(driver, 1);
 		}
 		AccountProfileP.clickSaveBtn(driver, tc);
-		tc = "TC_addNewAct_with_Existing_ActEamil_checkMSG";
+		tc = "TC228658_02";// "TC_addNewAct_with_Existing_ActEamil_checkMSG";
 		Wait(2);
 		boolean MessageExistForAddExistAccountEmail = AccountProfileP.checkMessageDisplayedHead(driver,
 				"Check required fields");
@@ -327,8 +325,8 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 
 		// =========================== Add Account to check the error message============================================================
 
-		// =========================== Add Dealership for existing account to check the message============================================================
-		tc = "TC139021_01";
+		// =========================== Add Dealership for existing DealerID to check the message============================================================
+		tc = "TC228656_01";
 		UserListP.clickAddDealerShip(driver);
 		Wait(wt);
 		AdminPortal.DealerProfile DealerProfieP = new AdminPortal.DealerProfile(driver);
@@ -365,9 +363,8 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
 		Wait(wt);
-		tc = "AddDealerInvalid_withExistDealershipID";
-		boolean MessageExist = DealerProfieP.checkMessageDisplayedHead(driver,
-				"There is already a record with this Manufacturer and Dealer Code.");// "There is already a user record with this Login");
+		tc ="TC228656_02";// "AddDealerInvalid_withExistDealershipID";
+		boolean MessageExist = DealerProfieP.checkMessageDisplayedHead(driver,"There is already a record with this Manufacturer and Dealer Code.",tc);// "There is already a user record with this Login");
 		if (MessageExist) {
 			rwExcel(tc, true, "Add a dealership ", "With Exist DealershipID");
 		} else {
@@ -378,6 +375,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 
 		// **************************Add a new Dealership to check the successful message*****************************************************
 		// click Add Dealership btn
+		tc ="TC139021_01";// "Add a new Dealership to check the successful message";
 		UserListP.clickAddDealerShip(driver);
 		Wait(wt);
 		DealerProfieP.selectOEM(driver, 13);
@@ -411,23 +409,21 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		DealerProfieP.clickSaveBtn(driver, tc);
 		Wait(wt);
 		// Stop here for the time being since there is bug here AUTOPXOPS-1227
-		tc = "AddDealerInvalid_withMissingMUSTField";
+		tc = "TC139021_02";//"AddDealerInvalid_withMissingMUSTField";
 		// The successful message "Your settings have been saved" will only show one second then disappear.
 		// So the successful message should be empty "" here;
-		String successfulMsg = "";
-		MessageExist = DealerProfieP.checkMessageDisplayedHead(driver, "Your settings have been saved");
+		String successfulMsg = "";//"Your settings have been saved"
+		MessageExist = DealerProfieP.checkMessageDisplayedHead(driver, successfulMsg,tc);
 		// Bug here since entered Metadata. See AUTOPXOPS-1227. Now it shows an error "An error occurred. Please try again."
 		// but the dealership has been created in our system. Issue fixed but "Your settings have been saved" message only shows a second and then disappears. 
 		if (MessageExist) {
-			rwExcel("AddDealervalid", true, "Add a new dealership with all fields",
-					"Sucessful msg shows: Your settings have been saved");
+			rwExcel(tc, true, "Add a new dealership with all fields","Sucessful msg shows: Your settings have been saved");
 		} else {
-			rwExcel("AddDealervalid", false, "Add a new dealership with all fields",
-					"Failed to shows msg: Your settings have been saved. Currently it only shows a second and then disappears. Related to bug AUTOPXOPS-1227");
+			rwExcel(tc, false, "Add a new dealership with all fields","Failed to shows msg: Your settings have been saved. Currently it only shows a second and then disappears. Related to bug AUTOPXOPS-1227");
 		}
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);//Stop here. Verify dealer added in system through Manage Dealership by input the dealerid and click the edit buttom then close Dealer Profile page
 		Wait(wt);
-		tc = "Upload dealership logo after creating the dealership";
+		tc = "TC144670";//"Upload dealership logo after creating the dealership";
 		UserListP.clickManageDealerShips(driver);
 		DealerList DealerListP = new DealerList(driver);
 		DealerListP.inputSearch(driver, addNewDealership);
@@ -453,17 +449,18 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		// **************************************************************************************
 		UserListP.clickEditBtn(driver, "1");// 1,2,3...
 		Wait(wt);
+		tc = "TC228752_01";//"Select one dealer from All Dealers";
 		String attachedDealerName = AccountProfileP.selectOneDealerFrAllDealers(driver, 7, tc);
 		boolean dealerExistInAllDealers = false;
 		boolean dealerExistInAccountDealers = false;
-		tc = "Dealer should not exist in Account Dealer field_01";
+		tc = "TC228752_02";//"Dealer should not exist in Account Dealer field_01";
 		dealerExistInAccountDealers = AccountProfileP.verifyOneDealerInAccountDealersField(driver, attachedDealerName,
 				false, tc);
 		AccountProfileP.clickRightArrowAttachBtn(driver);
-		tc = "TC_Verify atached dealer from All Dealers_01";
+		tc = "TC228752_03";//"TC_Verify atached dealer from All Dealers_01";
 		dealerExistInAllDealers = AccountProfileP.verifyOneDealerInAllDealersField(driver, attachedDealerName, true,
 				tc);
-		tc = "Dealer should exist in Account Dealer field_02";
+		tc = "TC228752_04";//"Dealer should exist in Account Dealer field_02";
 		dealerExistInAccountDealers = AccountProfileP.verifyOneDealerInAccountDealersField(driver, attachedDealerName,
 				true, tc);
 		AccountProfileP.selectOneDealerFrAccountDealers(driver, attachedDealerName, tc);
@@ -475,11 +472,11 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 
 		AccountProfileP.scrollUp(driver, -3000, tc);
 		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
-		tc = "TC_xxxx";
+		tc = "TC139406";// Verify Go to Dealer Portal from Admin Tool
 		UserListP.clickExpandDealersArrow(driver, 1);
 		UserListP.clickEditOnDealer(driver, 1);
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
-		UserListP.clickViewDealerPortal(driver, 1);
+		UserListP.clickViewDealerPortal(driver, 1,tc);
 
 		DealerPortal.DealerProfile DealerPortalDealerProfieP = new DealerPortal.DealerProfile(driver);
 		DealerPortalDealerProfieP.clickInventoryGalleryBtn(driver, tc);

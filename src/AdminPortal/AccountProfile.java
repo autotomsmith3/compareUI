@@ -217,9 +217,13 @@ public class AccountProfile extends Comlibs {
 		return messageExist;
 	}
 
-	public String getDlrGuid(WebDriver driver) throws IOException {
+	public String getDlrGuid(WebDriver driver, String tc) throws IOException {
 		String dlrGuid = driver.getCurrentUrl();
-
+		if (dlrGuid.isEmpty()) {
+			rwExcel(tc, false, "Get URL for userGuid","URL is empty!");
+		} else {
+			rwExcel(tc, true, "Get URL for userGuid", "URL is:\""+dlrGuid+"\"");
+		}
 		return dlrGuid;
 	}
 

@@ -149,11 +149,13 @@ public class DealerProfile extends Comlibs {
 		return this;
 	}
 
-	public boolean checkMessageDisplayedHead(WebDriver driver, String message) {
+	public boolean checkMessageDisplayedHead(WebDriver driver, String message,String tc) throws Exception {
 		String msg = driver.findElement(MessageDisplayedOnHead).getText();// .getAttribute("messageBox");
 		boolean messageExist = false;
 		if (msg.equalsIgnoreCase(message)) {
 			messageExist = true;
+		}else {
+			rwExcel(tc, false, "The message is displayed on head - Does NOT match","Expected msg is:\""+message+"\". The real message is displayed on head is:\""+msg+"\"");
 		}
 		return messageExist;
 	}

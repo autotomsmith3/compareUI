@@ -513,9 +513,14 @@ public class UserList extends Comlibs {
 		}
 		return new DealerProfile(driver);
 	}
-	public DealerPortal.DealerProfile clickViewDealerPortal(WebDriver driver,int num) throws IOException {
+	public DealerPortal.DealerProfile clickViewDealerPortal(WebDriver driver,int num, String tc) throws IOException {
 		By viewDealerPortalLocator = By.xpath("(//button[@id='dealerViewBtn'])["+num+"]");//1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
-		driver.findElement(viewDealerPortalLocator).click();
+		try {
+			driver.findElement(viewDealerPortalLocator).click();
+			rwExcel(tc, true, "Clicking on Go to Dealer Portal","Line goes to Dealer Portal.");
+		}catch (Exception e) {
+			rwExcel(tc, false, "Clicking on Go to Dealer Portal","Line goes to Dealer Portal.");
+		}
 		for (String winHandle : driver.getWindowHandles()) {
 			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
 		}

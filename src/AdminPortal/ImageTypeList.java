@@ -43,7 +43,12 @@ public class ImageTypeList extends Comlibs {
 
 //	 By Locator=By.xpath("");
 	public ImageTypeList clickAddImageTypeBtn(WebDriver driver) throws IOException {
-		driver.findElement(addImageTypeBtnLocator).click();
+		elementExist(driver, addImageTypeBtnLocator, true, "clickAddImageTypeBtn");
+		try{
+			driver.findElement(addImageTypeBtnLocator).click();
+		}catch (Exception e) {
+			driver.findElement(addImageTypeBtnLocator).click();
+		}
 		return this;
 	}
 	public ImageTypeList inputSearch(WebDriver driver, String defaultSequence) throws IOException {

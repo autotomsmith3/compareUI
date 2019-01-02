@@ -485,7 +485,7 @@ public class AdminPortalController extends Comlibs {
 
 	public static void ManageDealerShips(WebDriver driver, String brw, String versionNum, String envment,
 			String checkEmail)
-			throws IOException, InterruptedException, ClassNotFoundException, SQLException, AWTException {
+			throws Exception {
 
 		// Load environment parameters
 		Properties prop = new Properties();
@@ -603,7 +603,7 @@ public class AdminPortalController extends Comlibs {
 		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
 
 		// =========================== Add Account============================================================
-		tc = "TC_addNewAct_with_Existing_ActEamil";
+		tc = "TC228658_n";//"TC_addNewAct_with_Existing_ActEamil";
 		UserListP.clickAddAccount(driver);
 		// AccountProfile AccountProfileP = new AccountProfile(driver);
 		AccountProfileP.inputAccountEmail(driver, accountEmail);
@@ -611,12 +611,12 @@ public class AdminPortalController extends Comlibs {
 		AccountProfileP.inputLastName(driver, LastName);
 		AccountProfileP.selectAccountStatus(driver, 1);
 		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
-		tc = "TC_addNewAct_with_Existing_ActEamil_SAVE";
+		tc = "TC228658_s";//"TC_addNewAct_with_Existing_ActEamil_SAVE";
 		UserListP.clickAddAccount(driver);
 		AccountProfileP.inputAccountEmail(driver, accountEmail);
 		AccountProfileP.inputFirstName(driver, FirstName);
 		AccountProfileP.inputLastName(driver, LastName);
-		tc = "TC_addNewAct_AccountStatusShouldNotBeChanged";
+		tc = "TC139104_L";// "TC_addNewAct_AccountStatusShouldNotBeChanged";
 		try {
 			AccountProfileP.selectAccountStatus(driver, 2);// 1- Active, 2- Lock out, 3-Change Password, 4-Disabled
 			ac.rwExcel(tc, false, "Add Account - Account Status ", "Not Working - Can change status to 2 - Lock out");
@@ -625,7 +625,7 @@ public class AdminPortalController extends Comlibs {
 			AccountProfileP.selectAccountStatus(driver, 1);
 		}
 		AccountProfileP.clickSaveBtn(driver, tc);
-		tc = "TC_addNewAct_with_Existing_ActEamil_checkMSG";
+		tc ="TC228658_c";// "TC_addNewAct_with_Existing_ActEamil_checkMSG";
 
 		boolean MessageExistForAddExistAccountEmail = AccountProfileP.checkMessageDisplayedHead(driver,
 				"Check required fields");
@@ -639,8 +639,8 @@ public class AdminPortalController extends Comlibs {
 
 		// =========================== Add Account============================================================
 
-		// =========================== Manage Account - Add Dealership for existing account============================================================
-		tc = "TC139021_01";
+		// =========================== Manage Account - Add Dealership for existing DealerID============================================================
+		tc = "TC228656_m1";
 		UserListP.clickAddDealerShip(driver);
 
 		DealerProfile DealerProfieP = new DealerProfile(driver);
@@ -678,9 +678,9 @@ public class AdminPortalController extends Comlibs {
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
 
-		tc = "AddDealerInvalid_withExistDealershipID";
+		tc = "TC228656_m2";//"AddDealerInvalid_withExistDealershipID";
 		boolean MessageExist = DealerProfieP.checkMessageDisplayedHead(driver,
-				"There is already a record with this Manufacturer and Dealer Code.");// "There is already a user record with this Login");
+				"There is already a record with this Manufacturer and Dealer Code.",tc);// "There is already a user record with this Login");
 		if (MessageExist) {
 			ac.rwExcel(tc, true, "Add a dealership ", "With Exist DealershipID");
 		} else {
@@ -691,6 +691,7 @@ public class AdminPortalController extends Comlibs {
 
 		// **************************Manage Account - Add a new dealership for account*****************************************************
 		// click Add Dealership btn
+		tc = "TC139021_m1";//Add a new dealership for account
 		UserListP.clickAddDealerShip(driver);
 		DealerProfieP.selectOEM(driver, 13);
 		for (String brand : Brands) {
@@ -724,18 +725,18 @@ public class AdminPortalController extends Comlibs {
 		DealerProfieP.clickSaveBtn(driver, tc);
 		// Stop here for the time being since there is bug here AUTOPXOPS-1227
 		ac.Wait(wt);
-		tc = "AddDealerInvalid_withMissingMUSTField";
+		tc = "TC139021_m2";
 		// The successful message "Your settings have been saved" will only show one second then disappear.
 		// So the successful message should be empty "" here;
 		String successfulMsg = "";
-		MessageExist = DealerProfieP.checkMessageDisplayedHead(driver, "Your settings have been saved");
+		MessageExist = DealerProfieP.checkMessageDisplayedHead(driver, "Your settings have been saved",tc);
 		// Bug here since entered Metadata. See AUTOPXOPS-1227. Now it shows an error "An error occurred. Please try again."
 		// but the dealership has been created in our system. Issue fixed but "Your settings have been saved" message only shows a second and then disappears.
 		if (MessageExist) {
-			ac.rwExcel("AddDealervalid", true, "Add a new dealership with all fields",
+			ac.rwExcel(tc, true, "Add a new dealership with all fields",
 					"Sucessful msg shows: Your settings have been saved");
 		} else {
-			ac.rwExcel("AddDealervalid", false, "Add a new dealership with all fields",
+			ac.rwExcel(tc, false, "Add a new dealership with all fields",
 					"Failed to shows msg: Your settings have been saved. Currently it only shows a second and then disappears. Related to bug AUTOPXOPS-1227");
 		}
 
@@ -746,56 +747,43 @@ public class AdminPortalController extends Comlibs {
 		UserListP.clickManageAccounts(driver);
 		ac.Wait(wt);
 		UserListP.inputSearch(driver, AllProdEmail);
-
+		tc = "TC228723_m1";
 		UserListP.clickEditBtn(driver, "1");// 1,2,3...
 		String attachedDealerName = AccountProfileP.selectOneDealerFrAllDealers(driver, 7, tc);
 		boolean dealerExistInAllDealers = false;
 		boolean dealerExistInAccountDealers = false;
-		tc = "Dealer should not exist in Account Dealer field_01";
+		tc = "TC228723_m2";//"Dealer should not exist in Account Dealer field_01";
 		dealerExistInAccountDealers = AccountProfileP.verifyOneDealerInAccountDealersField(driver, attachedDealerName,
 				false, tc);
 		AccountProfileP.clickRightArrowAttachBtn(driver);
-		tc = "TC_Verify atached dealer from All Dealers_01";
+		tc = "TC228723_m3";//"TC_Verify atached dealer from All Dealers_01";
 		dealerExistInAllDealers = AccountProfileP.verifyOneDealerInAllDealersField(driver, attachedDealerName, true,
 				tc);
-		tc = "Dealer should exist in Account Dealer field_02";
+		tc = "TC228727_m1";//"Dealer should exist in Account Dealer field_02";
 		dealerExistInAccountDealers = AccountProfileP.verifyOneDealerInAccountDealersField(driver, attachedDealerName,
 				true, tc);
 		AccountProfileP.selectOneDealerFrAccountDealers(driver, attachedDealerName, tc);
 		ac.Wait(wt);
 		AccountProfileP.clickLeftArrowDetachBtn(driver);
-		tc = "TC_Verify detach a dealer from Account Dealers_01";
+		tc ="TC228727";// "TC_Verify detach a dealer from Account Dealers_01";
 		dealerExistInAccountDealers = AccountProfileP.verifyOneDealerInAccountDealersField(driver, attachedDealerName,
 				true, tc);
 
 		AccountProfileP.scrollUp(driver, -3000, tc);
 		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
-		tc = "TC_xxxx";
+		tc = "TC139406_m1";
 		UserListP.clickExpandDealersArrow(driver, 1);
 		UserListP.clickEditOnDealer(driver, 1);
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
-		UserListP.clickViewDealerPortal(driver, 1);
-
+		UserListP.clickViewDealerPortal(driver, 1,tc);
 		DealerPortal.DealerProfile DealerPortalDealerProfieP = new DealerPortal.DealerProfile(driver);
 		DealerPortalDealerProfieP.clickInventoryGalleryBtn(driver, tc);
 		DealerPortal.ImageGallery DealerPortalImageGalleryP = new DealerPortal.ImageGallery(driver);
 		DealerPortalImageGalleryP.clickDealerShipInfoBtn(driver);
-
 		driver.close();// Close Dealer Profile page
-		// goto parent page
-		// for (String winHandle : driver.getWindowHandles()) {
-		// driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
-		// }
 		ac.switchToWindow(driver);
+		System.out.println("Add a Dealership is done!");
 
-		System.out.println("Stop here 2018-10-03");
-		// Stop here!!! 2018-10-01
-
-		// driver.close();
-		// ac.switchToWindow(driver);
-		// UserListP.clickDealerViewBtn(driver, 1);
-		// driver.close();
-		// ac.switchToWindow(driver);
 		// *************************ManageAccounts - UserListP******************************************************
 		//// *************************ManageAccounts - UserListP******************************************************
 
@@ -807,14 +795,14 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt * 2);
 		DealerList2 DealerListP2 = new DealerList2(driver);
 		// Checking View On Dealer Portal link
-		tc = "Checking View On Dealer Portal link";
+		tc = "TC229379_d";//"Checking View On Dealer Portal link";
 		DealerListP2.inputSearch(driver, "123456_New_Added_Cadillac");
 		DealerListP2.clickViewOnDealerPortalBtn(driver, 1, tc);
 		driver.close();
 		ac.switchToWindow(driver);
 		UserListP.clickManageDealerShips(driver);
 		ac.Wait(wt * 3);
-		//
+		tc = "TC229371_d1";
 		DealerListP2.clickAddDealerShip(driver);
 		ac.Wait(wt * 2);
 		DealerProfile DealerProfileP = new DealerProfile(driver);
@@ -852,9 +840,9 @@ public class AdminPortalController extends Comlibs {
 		DealerProfileP.scrollUp(driver, -3000, tc);
 		DealerProfileP.clickSaveBtn(driver, tc);
 		ac.Wait(wt);
-		tc = "AddDealerInvalid_withExistDealershipID";
+		tc ="TC229371_d2";// "AddDealerInvalid_withExistDealershipID";
 		boolean MessageExistDealer = DealerProfileP.checkMessageDisplayedHead(driver,
-				"There is already a record with this Manufacturer and Dealer Code.");// "There is already a user record with this Login");
+				"There is already a record with this Manufacturer and Dealer Code.",tc);// "There is already a user record with this Login");
 		if (MessageExistDealer) {
 			ac.rwExcel(tc, true, "Add a dealership ", "With Exist DealershipID");
 		} else {
@@ -871,6 +859,7 @@ public class AdminPortalController extends Comlibs {
 			DealerProfileP.selectOEMBrands(driver, Integer.parseInt(brand));
 		}
 		// String addNewDealerExtension="_New_Added_16";// *******************************New one should be 17********************
+		tc ="TC229370_d1";
 		String addNewDealership = DealershipID + addNewDealerExtension + "_D";
 		DealerProfileP.inputDealersipID(driver, addNewDealership);//
 		DealerProfileP.selectVINpxProd(driver);
@@ -899,11 +888,11 @@ public class AdminPortalController extends Comlibs {
 		DealerProfileP.clickSaveBtn(driver, tc);
 		// Verify msg: "Your settings have been saved"
 		ac.Wait(wt);
-		tc = "AddDealerInvalid_withMissingMUSTField";
+		tc = "TC229370_d2";
 		// The successful message "Your settings have been saved" will only show less then one second than disappears.
 		// So the successful message should be empty "" here;
 		String successfulMsgDealer = "";
-		MessageExist = DealerProfileP.checkMessageDisplayedHead(driver, "Your settings have been saved");
+		MessageExist = DealerProfileP.checkMessageDisplayedHead(driver, "Your settings have been saved",tc);
 		// Bug here since entered Metadata. See AUTOPXOPS-1227. Now it shows an error "An error occurred. Please try again."
 		// but the dealership has been created in our system.
 		if (MessageExist) {
@@ -914,7 +903,7 @@ public class AdminPortalController extends Comlibs {
 					"Failed to shows msg: Your settings have been saved. Currently it only shows a second and then disappears. Related to bug AUTOPXOPS-1227");
 		}
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
-		tc = "Upload dealership logo after creating the dealership";
+		tc = "TC229395_d1";//"Upload dealership logo after creating the dealership";
 		UserListP.clickManageDealerShips(driver);
 		DealerList DealerListP = new DealerList(driver);
 		DealerListP.inputSearch(driver, addNewDealership);
@@ -937,6 +926,7 @@ public class AdminPortalController extends Comlibs {
 		//// *************************clickManageBGSetsBtn******************************************************
 		//// *************************clickManageBGSetsBtn******************************************************
 		ac.rwExcel("", "*********ManageBackGroundSets**********", "");
+		tc = "TC148055_b1";
 		UserListP.clickManageBGSets(driver);
 		BackgroundSets BackgroundSetsP = new BackgroundSets(driver);
 		// BackgroundSetsP.clickMapBackGrounds(driver, 3);
@@ -965,6 +955,7 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		BackgroundSetsP.clickClose(driver);
 		ac.Wait(wt);
+		tc = "TC139447";
 		BackgroundSetsP.clickCreateNewSet(driver);
 		ac.Wait(wt);
 		BackgroundSetsP.inputSetName(driver, "a");
@@ -980,7 +971,12 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		UserListP.clickManageBGSets(driver);
 		ac.clickRefleshF5Btn(driver, tc);
-		BackgroundSetsP.clickDeleteBGSetBtn(driver, 1);
+		//		tc = "TC139534"; //Edit "a" background set
+		
+		//		tc = "TC139457"; //Verify edited "a" background set
+		
+		tc = "TC139459_d";
+		BackgroundSetsP.clickDeleteBGSetBtn(driver, 1, tc);
 		ac.acceptAlert(driver, tc, "OK");
 		// ac.clickRefleshF5Btn(driver, tc);
 
@@ -991,6 +987,7 @@ public class AdminPortalController extends Comlibs {
 		//// *************************clickManageImageTypeBtn******************************************************
 		ac.rwExcel("", "*********ManageImageType**********", "");
 		ac.Wait(wt);
+		tc = "stop here";
 		String searchDefaultSequence = "10100";
 		String editedDefaultSequence = "10101";
 		ac.clickRefleshF5Btn(driver, tc);
@@ -1011,7 +1008,9 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		// Add an Image Type and submit
 		UserListP.clickManageImageType(driver);
+		ac.Wait(wt);
 		ImageTypeListP.clickAddImageTypeBtn(driver);
+		ac.Wait(wt);
 		ImageTypeListP.inputShortIdentifier(driver, "996");
 		ImageTypeListP.inputImageGroup(driver, "CUSTOM");
 		ImageTypeListP.inputImageDefinition(driver, "DEALER IMAGE");
@@ -1314,7 +1313,7 @@ public class AdminPortalController extends Comlibs {
 
 	public static void ManageDealerShipsAddNewAccount(WebDriver driver, String brw, String versionNum, String envment,
 			String checkEmail)
-			throws IOException, InterruptedException, ClassNotFoundException, SQLException, AWTException {
+			throws Exception {
 
 		// Load environment parameters
 		Properties prop = new Properties();
@@ -1506,7 +1505,7 @@ public class AdminPortalController extends Comlibs {
 
 		tc = "AddDealerInvalid_withExistDealershipID";
 		boolean MessageExist = DealerProfieP.checkMessageDisplayedHead(driver,
-				"There is already a record with this Manufacturer and Dealer Code.");// "There is already a user record with this Login");
+				"There is already a record with this Manufacturer and Dealer Code.",tc);// "There is already a user record with this Login");
 		if (MessageExist) {
 			ac.rwExcel(tc, true, "Add a dealership ", "With Exist DealershipID");
 		} else {
@@ -1552,7 +1551,7 @@ public class AdminPortalController extends Comlibs {
 		// The successful message "Your settings have been saved" will only show one second then disappear.
 		// So the successful message should be empty "" here;
 		String successfulMsg = "";
-		MessageExist = DealerProfieP.checkMessageDisplayedHead(driver, "Your settings have been saved");
+		MessageExist = DealerProfieP.checkMessageDisplayedHead(driver, "Your settings have been saved",tc);
 		// Bug here since entered Metadata. See AUTOPXOPS-1227. Now it shows an error "An error occurred. Please try again."
 		// but the dealership has been created in our system.
 		if (MessageExist) {
@@ -1600,11 +1599,11 @@ public class AdminPortalController extends Comlibs {
 
 		AccountProfileP.scrollUp(driver, -3000, tc);
 		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
-		tc = "TC_xxxx";
+		tc = "TC139406_n1";
 		UserListP.clickExpandDealersArrow(driver, 1);
 		UserListP.clickEditOnDealer(driver, 1);
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
-		UserListP.clickViewDealerPortal(driver, 1);
+		UserListP.clickViewDealerPortal(driver, 1,tc);
 
 		DealerPortal.DealerProfile DealerPortalDealerProfieP = new DealerPortal.DealerProfile(driver);
 		DealerPortalDealerProfieP.clickInventoryGalleryBtn(driver, tc);
@@ -1675,7 +1674,8 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		UserListP.clickManageBGSets(driver);
 		ac.clickRefleshF5Btn(driver, tc);
-		BackgroundSetsP.clickDeleteBGSetBtn(driver, 1);
+		tc="TC148169_n";
+		BackgroundSetsP.clickDeleteBGSetBtn(driver, 1,tc);
 		ac.acceptAlert(driver, tc, "OK");
 		// ac.clickRefleshF5Btn(driver, tc);
 
@@ -1995,7 +1995,7 @@ public class AdminPortalController extends Comlibs {
 	}
 
 	public static void main(String[] args)
-			throws IOException, InterruptedException, ClassNotFoundException, SQLException, AWTException {
+			throws Exception {
 		// Load environment parameters
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));

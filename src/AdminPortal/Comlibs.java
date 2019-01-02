@@ -533,10 +533,11 @@ public class Comlibs {
 		Dimension dim = new Dimension((int) screenSize.getWidth(), (int) screenSize.getHeight());
 		driver.manage().window().setSize(dim);
 //		// at left screen:
+//		driver.manage().window().setPosition(new Point(-1680, -200)); //launch at left screen at Nanxin's house 2018-12-25
 		driver.manage().window().setPosition(new Point(-1300, 12)); //launch at left screen Original -1100, 60. 2018-09-14
 //		driver.manage().window().setPosition(new Point(0, 0)); //launch at Original main screen
 
-		//		driver.manage().window().setPosition(new Point(0, 0)); // launch at
+//				driver.manage().window().setPosition(new Point(0, 0)); // launch at
 																// rigth screen
 		// driver.manage().window().setSize(new Dimension(320, 640)); //iPhone
 		// 5: IE8, Chrome, FF work fine!

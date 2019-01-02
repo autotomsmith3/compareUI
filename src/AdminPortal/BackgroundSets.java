@@ -118,9 +118,16 @@ public class BackgroundSets extends Comlibs {
 		return this;
 	}
 
-	public BackgroundSets clickDeleteBGSetBtn(WebDriver driver, int num) throws IOException {
+	public BackgroundSets clickDeleteBGSetBtn(WebDriver driver, int num, String tc) throws IOException {
 		By deleteBGsetLocator = By.xpath("(//button[@id='dealerViewBtn'])[" + num + "]");// 1,2,3,4....
-		driver.findElement(deleteBGsetLocator).click();
+		try {
+			driver.findElement(deleteBGsetLocator).click();
+			rwExcel(tc, true, "Click on Delete Background Set Button" , "Click on Delete Background Set Button - successful!");
+		}catch (Exception e) {
+			rwExcel(tc, false, "Click on Delete Background Set Button" , "Click on Delete Background Set Button - failed!");
+		}
+
+		
 		return this;
 	}
 
