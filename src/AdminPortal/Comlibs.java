@@ -882,7 +882,7 @@ public class Comlibs {
 	}
 	public void clickRefleshF5Btn(WebDriver driver, String tc) throws IOException {
 		// driver.findElement(addInventoryBtn).sendKeys(Keys.F5);
-		driver.navigate().to(driver.getCurrentUrl());
+		try {driver.navigate().to(driver.getCurrentUrl()); rwExcel(tc, true, "Click on F5 to fresh the page", "Working fine."); }catch (Exception e) {rwExcel(tc, false, "Click on F5 to fresh the page", "Not Working."); };
 	}
 	public static void writeToSheet(String resultfile, String[] jSONValues) throws IOException {
 		int n = 0;

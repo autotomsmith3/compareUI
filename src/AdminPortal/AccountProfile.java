@@ -144,7 +144,6 @@ public class AccountProfile extends Comlibs {
 		} else {
 			System.out.println("BackToDealerList button does not exist in the page!");
 		}
-
 		// get the current window handles before swithTo. This resolved the "driver.switchTo().window(windowHandle);" break sometimes.
 		Set<String> windowHandles = driver.getWindowHandles();
 
@@ -154,15 +153,18 @@ public class AccountProfile extends Comlibs {
 		for (String NewWindowHandle : windowHandles) {
 			windowHandle = NewWindowHandle;
 		}
-
 		driver.switchTo().window(windowHandle);
-
 		return new UserList(driver);
 	}
 
-	public AccountProfile clickSaveBtn(WebDriver driver, String tc) {
-		driver.findElement(SaveBtn).click();
-		Wait(2);
+	public AccountProfile clickSaveBtn(WebDriver driver, String tc) throws Exception {
+		try {
+			driver.findElement(SaveBtn).click();
+			Wait(2);
+			rwExcel(tc, true, "Click on SAVE on Account Profile page", "Working fine.");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Click on SAVE on Account Profile page", "Not Working.");
+		}
 		return this;
 	}
 
@@ -220,9 +222,9 @@ public class AccountProfile extends Comlibs {
 	public String getDlrGuid(WebDriver driver, String tc) throws IOException {
 		String dlrGuid = driver.getCurrentUrl();
 		if (dlrGuid.isEmpty()) {
-			rwExcel(tc, false, "Get URL for userGuid","URL is empty!");
+			rwExcel(tc, false, "Get URL for userGuid", "URL is empty!");
 		} else {
-			rwExcel(tc, true, "Get URL for userGuid", "URL is:\""+dlrGuid+"\"");
+			rwExcel(tc, true, "Get URL for userGuid", "URL is:\"" + dlrGuid + "\"");
 		}
 		return dlrGuid;
 	}
@@ -319,31 +321,39 @@ public class AccountProfile extends Comlibs {
 		return attachedDealerIDnDealerNamex;
 	}
 
-	public AccountProfile selectOneDealerFrAccountDealers(WebDriver driver, String selectedName, String tc) {
+	public AccountProfile selectOneDealerFrAccountDealers(WebDriver driver, String selectedName, String tc)
+			throws IOException {
 		int num = 0;
 		By AccountDealersLocator = By.xpath("//*[@id='userAttachedDealers']/option");// //*[@id="userAttachedDealers"]
 		By AccountDealerLocator = By.xpath("//*[@id='userAttachedDealers']/option[" + num + "]");// 1,2,3...
-		num = driver.findElements(AccountDealersLocator).size();
-		for (int i = 1; i <= num; i++) {
-			AccountDealerLocator = By.xpath("//*[@id='userAttachedDealers']/option[" + i + "]");
-			boolean enabled = driver.findElement(AccountDealerLocator).isSelected();
-			if (enabled) {
-				driver.findElement(AccountDealerLocator).click();
-			}
-
-		}
-
-		for (int i = 1; i <= num; i++) {
-			AccountDealerLocator = By.xpath("//*[@id='userAttachedDealers']/option[" + i + "]");
-			String ActDealerName = driver.findElement(AccountDealerLocator).getText();
-			if (selectedName.equalsIgnoreCase(ActDealerName)) {
-				num = i;
+		try {
+			num = driver.findElements(AccountDealersLocator).size();
+			for (int i = 1; i <= num; i++) {
+				AccountDealerLocator = By.xpath("//*[@id='userAttachedDealers']/option[" + i + "]");
 				boolean enabled = driver.findElement(AccountDealerLocator).isSelected();
-				if (!enabled) {
+				if (enabled) {
 					driver.findElement(AccountDealerLocator).click();
 				}
+
 			}
+
+			for (int i = 1; i <= num; i++) {
+				AccountDealerLocator = By.xpath("//*[@id='userAttachedDealers']/option[" + i + "]");
+				String ActDealerName = driver.findElement(AccountDealerLocator).getText();
+				if (selectedName.equalsIgnoreCase(ActDealerName)) {
+					num = i;
+					boolean enabled = driver.findElement(AccountDealerLocator).isSelected();
+					if (!enabled) {
+						driver.findElement(AccountDealerLocator).click();
+					}
+				}
+			}
+			;
+			rwExcel(tc, true, "Select One Dealer From Account Dealers", "Working fine.");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Select One Dealer From Account Dealers", "Not Working.");
 		}
+		;
 		// driver.findElement(AccountDealerLocator).click();
 		return this;
 	}

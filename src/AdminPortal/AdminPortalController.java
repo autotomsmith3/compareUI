@@ -241,12 +241,12 @@ public class AdminPortalController extends Comlibs {
 		DealerList2 DealerListP = new DealerList2(driver);
 		DealerListP.clickDisplayDropDownBtn(driver, "3");
 		DealerListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000
-		for (int next = 0; next < 2; next++) {
+		for (int next = 0; next < 50; next++) {
 			for (int i = 0; i < 150; i++) {
 				if (i >= 10) {
-					 ac.Wait(2);
+					ac.Wait(2);
 					DealerListP.scrollUp(driver, 45, "ddd"); // 60 should be in Prod. 55 can run 150 records in QA. 120 - get almost 2 lines. 80 can run until 28 records, 60 can run until 110-120
-					 ac.Wait(2);
+					ac.Wait(2);
 				}
 				dealerN = dealerN + 1;
 				dealerSN = String.valueOf(dealerN);
@@ -291,7 +291,7 @@ public class AdminPortalController extends Comlibs {
 
 				// =========================================
 
-				System.out.println("\nS/N=" + (i+1) + ". Dealer number=" + dealerN + "\n");
+				System.out.println("\nS/N=" + (i + 1) + " of page " + (next + 1) + ". Dealer number=" + dealerN + "\n");
 				System.out.println("VINpx=" + ProductVINpx + "\n" + "STOCKpx= " + ProductSTOCKpx + "\n" + "LOTpx= "
 						+ ProductLOTpx);
 				System.out.println("Dealership_ID: " + Dealership_ID + "\n" + "Dealership_Name: " + Dealership_Name
@@ -484,8 +484,7 @@ public class AdminPortalController extends Comlibs {
 	}
 
 	public static void ManageDealerShips(WebDriver driver, String brw, String versionNum, String envment,
-			String checkEmail)
-			throws Exception {
+			String checkEmail) throws Exception {
 
 		// Load environment parameters
 		Properties prop = new Properties();
@@ -603,7 +602,7 @@ public class AdminPortalController extends Comlibs {
 		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
 
 		// =========================== Add Account============================================================
-		tc = "TC228658_n";//"TC_addNewAct_with_Existing_ActEamil";
+		tc = "TC228658_n";// "TC_addNewAct_with_Existing_ActEamil";
 		UserListP.clickAddAccount(driver);
 		// AccountProfile AccountProfileP = new AccountProfile(driver);
 		AccountProfileP.inputAccountEmail(driver, accountEmail);
@@ -611,7 +610,7 @@ public class AdminPortalController extends Comlibs {
 		AccountProfileP.inputLastName(driver, LastName);
 		AccountProfileP.selectAccountStatus(driver, 1);
 		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
-		tc = "TC228658_s";//"TC_addNewAct_with_Existing_ActEamil_SAVE";
+		tc = "TC228658_s";// "TC_addNewAct_with_Existing_ActEamil_SAVE";
 		UserListP.clickAddAccount(driver);
 		AccountProfileP.inputAccountEmail(driver, accountEmail);
 		AccountProfileP.inputFirstName(driver, FirstName);
@@ -625,7 +624,7 @@ public class AdminPortalController extends Comlibs {
 			AccountProfileP.selectAccountStatus(driver, 1);
 		}
 		AccountProfileP.clickSaveBtn(driver, tc);
-		tc ="TC228658_c";// "TC_addNewAct_with_Existing_ActEamil_checkMSG";
+		tc = "TC228658_c";// "TC_addNewAct_with_Existing_ActEamil_checkMSG";
 
 		boolean MessageExistForAddExistAccountEmail = AccountProfileP.checkMessageDisplayedHead(driver,
 				"Check required fields");
@@ -678,9 +677,9 @@ public class AdminPortalController extends Comlibs {
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
 
-		tc = "TC228656_m2";//"AddDealerInvalid_withExistDealershipID";
+		tc = "TC228656_m2";// "AddDealerInvalid_withExistDealershipID";
 		boolean MessageExist = DealerProfieP.checkMessageDisplayedHead(driver,
-				"There is already a record with this Manufacturer and Dealer Code.",tc);// "There is already a user record with this Login");
+				"There is already a record with this Manufacturer and Dealer Code.", tc);// "There is already a user record with this Login");
 		if (MessageExist) {
 			ac.rwExcel(tc, true, "Add a dealership ", "With Exist DealershipID");
 		} else {
@@ -691,7 +690,7 @@ public class AdminPortalController extends Comlibs {
 
 		// **************************Manage Account - Add a new dealership for account*****************************************************
 		// click Add Dealership btn
-		tc = "TC139021_m1";//Add a new dealership for account
+		tc = "TC139021_m1";// Add a new dealership for account
 		UserListP.clickAddDealerShip(driver);
 		DealerProfieP.selectOEM(driver, 13);
 		for (String brand : Brands) {
@@ -729,7 +728,7 @@ public class AdminPortalController extends Comlibs {
 		// The successful message "Your settings have been saved" will only show one second then disappear.
 		// So the successful message should be empty "" here;
 		String successfulMsg = "";// "Your settings have been saved"
-		MessageExist = DealerProfieP.checkMessageDisplayedHead(driver,successfulMsg,tc);
+		MessageExist = DealerProfieP.checkMessageDisplayedHead(driver, successfulMsg, tc);
 		// Bug here since entered Metadata. See AUTOPXOPS-1227. Now it shows an error "An error occurred. Please try again."
 		// but the dealership has been created in our system. Issue fixed but "Your settings have been saved" message only shows a second and then disappears.
 		if (MessageExist) {
@@ -752,20 +751,20 @@ public class AdminPortalController extends Comlibs {
 		String attachedDealerName = AccountProfileP.selectOneDealerFrAllDealers(driver, 7, tc);
 		boolean dealerExistInAllDealers = false;
 		boolean dealerExistInAccountDealers = false;
-		tc = "TC228723_m2";//"Dealer should not exist in Account Dealer field_01";
+		tc = "TC228723_m2";// "Dealer should not exist in Account Dealer field_01";
 		dealerExistInAccountDealers = AccountProfileP.verifyOneDealerInAccountDealersField(driver, attachedDealerName,
 				false, tc);
 		AccountProfileP.clickRightArrowAttachBtn(driver);
-		tc = "TC228723_m3";//"TC_Verify atached dealer from All Dealers_01";
+		tc = "TC228723_m3";// "TC_Verify atached dealer from All Dealers_01";
 		dealerExistInAllDealers = AccountProfileP.verifyOneDealerInAllDealersField(driver, attachedDealerName, true,
 				tc);
-		tc = "TC228727_m1";//"Dealer should exist in Account Dealer field_02";
+		tc = "TC228727_m1";// "Dealer should exist in Account Dealer field_02";
 		dealerExistInAccountDealers = AccountProfileP.verifyOneDealerInAccountDealersField(driver, attachedDealerName,
 				true, tc);
 		AccountProfileP.selectOneDealerFrAccountDealers(driver, attachedDealerName, tc);
 		ac.Wait(wt);
 		AccountProfileP.clickLeftArrowDetachBtn(driver);
-		tc ="TC228727";// "TC_Verify detach a dealer from Account Dealers_01";
+		tc = "TC228727";// "TC_Verify detach a dealer from Account Dealers_01";
 		dealerExistInAccountDealers = AccountProfileP.verifyOneDealerInAccountDealersField(driver, attachedDealerName,
 				true, tc);
 
@@ -775,7 +774,7 @@ public class AdminPortalController extends Comlibs {
 		UserListP.clickExpandDealersArrow(driver, 1);
 		UserListP.clickEditOnDealer(driver, 1);
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
-		UserListP.clickViewDealerPortal(driver, 1,tc);
+		UserListP.clickViewDealerPortal(driver, 1, tc);
 		DealerPortal.DealerProfile DealerPortalDealerProfieP = new DealerPortal.DealerProfile(driver);
 		DealerPortalDealerProfieP.clickInventoryGalleryBtn(driver, tc);
 		DealerPortal.ImageGallery DealerPortalImageGalleryP = new DealerPortal.ImageGallery(driver);
@@ -795,7 +794,7 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt * 2);
 		DealerList2 DealerListP2 = new DealerList2(driver);
 		// Checking View On Dealer Portal link
-		tc = "TC229379_d";//"Checking View On Dealer Portal link";
+		tc = "TC229379_d";// "Checking View On Dealer Portal link";
 		DealerListP2.inputSearch(driver, "123456_New_Added_Cadillac");
 		DealerListP2.clickViewOnDealerPortalBtn(driver, 1, tc);
 		driver.close();
@@ -840,9 +839,9 @@ public class AdminPortalController extends Comlibs {
 		DealerProfileP.scrollUp(driver, -3000, tc);
 		DealerProfileP.clickSaveBtn(driver, tc);
 		ac.Wait(wt);
-		tc ="TC229371_d2";// "AddDealerInvalid_withExistDealershipID";
+		tc = "TC229371_d2";// "AddDealerInvalid_withExistDealershipID";
 		boolean MessageExistDealer = DealerProfileP.checkMessageDisplayedHead(driver,
-				"There is already a record with this Manufacturer and Dealer Code.",tc);// "There is already a user record with this Login");
+				"There is already a record with this Manufacturer and Dealer Code.", tc);// "There is already a user record with this Login");
 		if (MessageExistDealer) {
 			ac.rwExcel(tc, true, "Add a dealership ", "With Exist DealershipID");
 		} else {
@@ -859,7 +858,7 @@ public class AdminPortalController extends Comlibs {
 			DealerProfileP.selectOEMBrands(driver, Integer.parseInt(brand));
 		}
 		// String addNewDealerExtension="_New_Added_16";// *******************************New one should be 17********************
-		tc ="TC229370_d1";
+		tc = "TC229370_d1";
 		String addNewDealership = DealershipID + addNewDealerExtension + "_D";
 		DealerProfileP.inputDealersipID(driver, addNewDealership);//
 		DealerProfileP.selectVINpxProd(driver);
@@ -891,8 +890,8 @@ public class AdminPortalController extends Comlibs {
 		tc = "TC229370_d2";
 		// The successful message "Your settings have been saved" will only show less then one second than disappears.
 		// So the successful message should be empty "" here;
-		String successfulMsgDealer = "";//"Your settings have been saved" - this msg shows only a second and then disappears.
-		MessageExist = DealerProfileP.checkMessageDisplayedHead(driver, successfulMsgDealer,tc);
+		String successfulMsgDealer = "";// "Your settings have been saved" - this msg shows only a second and then disappears.
+		MessageExist = DealerProfileP.checkMessageDisplayedHead(driver, successfulMsgDealer, tc);
 		// Bug here since entered Metadata. See AUTOPXOPS-1227. Now it shows an error "An error occurred. Please try again."
 		// but the dealership has been created in our system.
 		if (MessageExist) {
@@ -903,7 +902,7 @@ public class AdminPortalController extends Comlibs {
 					"Failed to shows msg: Your settings have been saved. Currently it only shows a second and then disappears. Related to bug AUTOPXOPS-1227");
 		}
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
-		tc = "TC229395_d1";//"Upload dealership logo after creating the dealership";
+		tc = "TC229395_d1";// "Upload dealership logo after creating the dealership";
 		UserListP.clickManageDealerShips(driver);
 		DealerList DealerListP = new DealerList(driver);
 		DealerListP.inputSearch(driver, addNewDealership);
@@ -971,10 +970,10 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		UserListP.clickManageBGSets(driver);
 		ac.clickRefleshF5Btn(driver, tc);
-		//		tc = "TC139534"; //Edit "a" background set
-		
-		//		tc = "TC139457"; //Verify edited "a" background set
-		
+		// tc = "TC139534"; //Edit "a" background set
+
+		// tc = "TC139457"; //Verify edited "a" background set
+
 		tc = "TC139459_d";
 		BackgroundSetsP.clickDeleteBGSetBtn(driver, 1, tc);
 		ac.acceptAlert(driver, tc, "OK");
@@ -1312,8 +1311,7 @@ public class AdminPortalController extends Comlibs {
 	}
 
 	public static void ManageDealerShipsAddNewAccount(WebDriver driver, String brw, String versionNum, String envment,
-			String checkEmail)
-			throws Exception {
+			String checkEmail) throws Exception {
 
 		// Load environment parameters
 		Properties prop = new Properties();
@@ -1505,7 +1503,7 @@ public class AdminPortalController extends Comlibs {
 
 		tc = "AddDealerInvalid_withExistDealershipID";
 		boolean MessageExist = DealerProfieP.checkMessageDisplayedHead(driver,
-				"There is already a record with this Manufacturer and Dealer Code.",tc);// "There is already a user record with this Login");
+				"There is already a record with this Manufacturer and Dealer Code.", tc);// "There is already a user record with this Login");
 		if (MessageExist) {
 			ac.rwExcel(tc, true, "Add a dealership ", "With Exist DealershipID");
 		} else {
@@ -1551,7 +1549,7 @@ public class AdminPortalController extends Comlibs {
 		// The successful message "Your settings have been saved" will only show one second then disappear.
 		// So the successful message should be empty "" here;
 		String successfulMsg = "";
-		MessageExist = DealerProfieP.checkMessageDisplayedHead(driver, "Your settings have been saved",tc);
+		MessageExist = DealerProfieP.checkMessageDisplayedHead(driver, "Your settings have been saved", tc);
 		// Bug here since entered Metadata. See AUTOPXOPS-1227. Now it shows an error "An error occurred. Please try again."
 		// but the dealership has been created in our system.
 		if (MessageExist) {
@@ -1603,7 +1601,7 @@ public class AdminPortalController extends Comlibs {
 		UserListP.clickExpandDealersArrow(driver, 1);
 		UserListP.clickEditOnDealer(driver, 1);
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
-		UserListP.clickViewDealerPortal(driver, 1,tc);
+		UserListP.clickViewDealerPortal(driver, 1, tc);
 
 		DealerPortal.DealerProfile DealerPortalDealerProfieP = new DealerPortal.DealerProfile(driver);
 		DealerPortalDealerProfieP.clickInventoryGalleryBtn(driver, tc);
@@ -1674,8 +1672,8 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		UserListP.clickManageBGSets(driver);
 		ac.clickRefleshF5Btn(driver, tc);
-		tc="TC148169_n";
-		BackgroundSetsP.clickDeleteBGSetBtn(driver, 1,tc);
+		tc = "TC148169_n";
+		BackgroundSetsP.clickDeleteBGSetBtn(driver, 1, tc);
 		ac.acceptAlert(driver, tc, "OK");
 		// ac.clickRefleshF5Btn(driver, tc);
 
@@ -1994,8 +1992,7 @@ public class AdminPortalController extends Comlibs {
 
 	}
 
-	public static void main(String[] args)
-			throws Exception {
+	public static void main(String[] args) throws Exception {
 		// Load environment parameters
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
@@ -2044,9 +2041,9 @@ public class AdminPortalController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-//			//// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK for Prod on 2018-12-17 from ManageDealerships.
-//			bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-//			RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
+			// //// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK for Prod on 2018-12-17 from ManageDealerships.
+			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			// RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
 			//
 			// //// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page
 			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
