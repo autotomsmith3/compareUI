@@ -74,6 +74,7 @@ public class BackgroundSets extends Comlibs {
 	// By Locator=By.xpath("");
 
 	public BackgroundSets inputSearch(WebDriver driver, String dlrID) throws IOException {
+		driver.findElement(searchLocator).clear();
 		driver.findElement(searchLocator).sendKeys(dlrID);
 		return this;
 	}
@@ -111,10 +112,15 @@ public class BackgroundSets extends Comlibs {
 		return new ManageBackgrounds(driver);
 	}
 
-	public BackgroundSets clickDealersUseBackGroundBtn(WebDriver driver, int num) throws IOException {
+	public BackgroundSets clickDealersUseBackGroundBtn(WebDriver driver, int num, String tc) throws IOException {
 		num = (num - 1) * 4 + 4;
 		By dealersUseBGLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");// 4,8,12...
-		driver.findElement(dealersUseBGLocator).click();
+		try {
+			driver.findElement(dealersUseBGLocator).click();
+			rwExcel(tc, true, "Click on Dealer Use Background Button" , "Click on Button - successful!");
+		}catch (Exception e) {
+			rwExcel(tc, false, "Click on Dealer Use Background Button" , "Click on Button - failed!");
+		}
 		return this;
 	}
 
@@ -141,8 +147,13 @@ public class BackgroundSets extends Comlibs {
 		return this;
 	}
 
-	public BackgroundSets clickClose(WebDriver driver) throws IOException {
-		driver.findElement(dealerUsingBGLocator).click();
+	public BackgroundSets clickClose(WebDriver driver, String tc) throws IOException {
+		try {
+			driver.findElement(dealerUsingBGLocator).click();
+			rwExcel(tc, true, "Click on close button on pupup" , "Click on the Button - successful!");
+		}catch (Exception e) {
+			rwExcel(tc, false, "Click on close button on pupup" , "Click on the Button - failed");
+		}
 		return this;
 	}
 
@@ -151,6 +162,15 @@ public class BackgroundSets extends Comlibs {
 		driver.findElement(subitBtnLocator).click();
 		Wait(90);
 		return new Backgrounds(driver);
+	}
+	public BackgroundSets clickSubmitOnEdit(WebDriver driver,String tc) throws IOException {
+		Wait(2);
+		
+		driver.findElement(subitBtnLocator).click();
+		//click the popup
+		acceptAlert(driver,tc,"OK"); 
+
+		return this;
 	}
 	public ImageTypeList clickManageImageType(WebDriver driver) throws IOException {
 		driver.findElement(ManageImageTypesLocator).click();

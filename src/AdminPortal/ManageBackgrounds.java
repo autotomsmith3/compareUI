@@ -36,8 +36,13 @@ public class ManageBackgrounds extends Comlibs {
 //	 By Locator=By.xpath("");
 //	 By Locator=By.xpath("");
 
-	public BackgroundSets clickBackToManageSets(WebDriver driver) throws IOException {
+	public BackgroundSets clickBackToManageSets(WebDriver driver, String tc) throws IOException {
+		try {
 			driver.findElement(backToManageSetsBtnLocator).click();
+			rwExcel(tc, true, "Click on Back To Manage Sets button", "Working fine."); 
+		}catch (Exception e) {
+			rwExcel(tc, false, "Click on Back To Manage Sets button", "Not Working."); 
+		}
 			return new BackgroundSets(driver);
 		}
 //	public ManageBackgrounds clickMapBackGrounds(WebDriver driver, int num) {

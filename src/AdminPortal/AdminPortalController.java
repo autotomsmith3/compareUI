@@ -949,35 +949,82 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		BackgroundSetsP.clickManageBGImageBtn(driver, 1);
 		ManageBackgrounds ManageBackgroundsP = new ManageBackgrounds(driver);
-		ManageBackgroundsP.clickBackToManageSets(driver);
-		BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1);
+		ManageBackgroundsP.clickBackToManageSets(driver, tc);
+		BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1, tc);
 		ac.Wait(wt);
-		BackgroundSetsP.clickClose(driver);
+		BackgroundSetsP.clickClose(driver, tc);
 		ac.Wait(wt);
 		tc = "TC139447";
 		BackgroundSetsP.clickCreateNewSet(driver);
 		ac.Wait(wt);
-		BackgroundSetsP.inputSetName(driver, "a");
+		String tempSetName = "a";
+		BackgroundSetsP.inputSetName(driver, tempSetName);
 		BackgroundSetsP.clickCancel(driver);
 		ac.Wait(wt);
 		BackgroundSetsP.clickCreateNewSet(driver);
 		ac.Wait(wt);
-		BackgroundSetsP.inputSetName(driver, "a");
+		BackgroundSetsP.inputSetName(driver, tempSetName);
 		BackgroundSetsP.selectSetType(driver, 3);// 1-Old (Do Not User), 2-Flat on Flat on Flat, 3-Normal, 4-GM Only, 5-FCA Only
-		System.out.println("\nPlease wait at least 2 minutes untill Backgrounds page showing...");
+		System.out.println("\nPlease wait at least 2 minutes until Backgrounds page showing...");
 		ac.Wait(wt);
 		BackgroundSetsP.clickSubmit(driver);
 		ac.Wait(wt);
+		// check bg image
+
 		UserListP.clickManageBGSets(driver);
 		ac.clickRefleshF5Btn(driver, tc);
-		// tc = "TC139534"; //Edit "a" background set
+		tc = "TC139534"; // Edit "a" background set
+		ac.Wait(wt);
+		BackgroundSetsP.inputSearch(driver, tempSetName);
+		ac.Wait(wt);
+		BackgroundSetsP.clickEditSetBtn(driver, 1);
+		ac.Wait(wt);
+		String editString = "_Edited";
+		BackgroundSetsP.inputSetName(driver, editString);
+		BackgroundSetsP.selectSetType(driver, 4);// 4-GM
+		BackgroundSetsP.clickSubmitOnEdit(driver, tc);
+		ac.Wait(wt);
+		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+		ac.Wait(wt);
+		try {
+			BackgroundSetsP.clickEditSetBtn(driver, 1);
+			ac.rwExcel(tc, true, "Verify Edited background set", "Edited background set exists!");
+		} catch (Exception e) {
+			ac.rwExcel(tc, false, "Verify Edited background set", "Edited background set does NOT exist!");
+		}
+		ac.Wait(wt);
+		BackgroundSetsP.clickSubmitOnEdit(driver, tc);
+		tc = "TC139457"; // Verify Manage Backgrounds Images
+		ac.Wait(wt);
+		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+		ac.Wait(wt);
+		BackgroundSetsP.clickManageBGImageBtn(driver, 1);
+		ManageBackgroundsP.clickBackToManageSets(driver, tc);
+		tc = "TC226031"; // Verify Get List of Dealer button available
+		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+		ac.Wait(wt);
+		BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1, tc);
+		ac.Wait(wt);
+		tc = "TC226032"; // Verify Get List of Dealer on the background
+		BackgroundSetsP.clickClose(driver, tc);
 
-		// tc = "TC139457"; //Verify edited "a" background set
-
-		tc = "TC139459_d";
+		ac.Wait(wt);
+		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+		ac.Wait(wt);
+		tc = "TC139558";
 		BackgroundSetsP.clickDeleteBGSetBtn(driver, 1, tc);
 		ac.acceptAlert(driver, tc, "OK");
-		// ac.clickRefleshF5Btn(driver, tc);
+		ac.clickRefleshF5Btn(driver, tc);
+		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+		ac.Wait(wt);
+		tc = "TC139459_d";
+		try {
+			BackgroundSetsP.clickEditSetBtn(driver, 1);
+			ac.rwExcel(tc, false, "Try to click the Edit button which should not exist",
+					"Edit element exists! It should not happen!");
+		} catch (Exception e) {
+			ac.rwExcel(tc, true, "Try to click the Edit button which should not exist", "Edit element does not exist!");
+		}
 
 		//// *************************clickManageBGSetsBtn******************************************************
 		//// *************************clickManageBGSetsBtn******************************************************
@@ -1652,10 +1699,13 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		BackgroundSetsP.clickManageBGImageBtn(driver, 1);
 		ManageBackgrounds ManageBackgroundsP = new ManageBackgrounds(driver);
-		ManageBackgroundsP.clickBackToManageSets(driver);
-		BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1);
+		ManageBackgroundsP.clickBackToManageSets(driver, tc);
+		tc = "TC226031"; // Verify Get List of Dealer button available
 		ac.Wait(wt);
-		BackgroundSetsP.clickClose(driver);
+		BackgroundSetsP.inputSetName(driver, "588");
+		BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1, tc);
+		ac.Wait(wt);
+		BackgroundSetsP.clickClose(driver, tc);
 		ac.Wait(wt);
 		BackgroundSetsP.clickCreateNewSet(driver);
 		ac.Wait(wt);
@@ -2049,10 +2099,10 @@ public class AdminPortalController extends Comlibs {
 			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 
-			////// 1.ManageDealerShipsAddNewAccount:
-			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
-			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+			 ////// 1.ManageDealerShipsAddNewAccount:
+			 bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
+			 ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+			 ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
 
 			//// 2.ManageDealerShips:
 			loadURL(driver, baseURL, env);
