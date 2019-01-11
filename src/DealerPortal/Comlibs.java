@@ -457,13 +457,16 @@ public class Comlibs {
 	public void Wait(int i, boolean printMSG, String msg) {
 
 		for (int c = 1; c < i; c++) {
+			if ((c == 1)) {
+				System.out.println((i - c) + " seconds left...   "+msg);
+			}
+			if ((printMSG) && (c % 5 == 0)) {
+				System.out.println((i - c) + " seconds left...   "+msg);
+			}
 			try {
 				Thread.sleep(1 * 1000);
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
-			if (printMSG) {
-				System.out.println((i - c) + " seconds left...   "+msg);
 			}
 		}
 	}

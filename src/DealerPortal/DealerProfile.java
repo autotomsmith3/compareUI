@@ -24,7 +24,7 @@ public class DealerProfile extends Comlibs {
 					"The page title is NOT - " + sPageTitle);
 		}
 		if (!sPageTitle.equals(driver.getTitle())) {
-			String gettitleString=driver.getTitle();
+			String gettitleString = driver.getTitle();
 			System.out.println("Page title does not matche. Expected page title =" + sPageTitle);
 		}
 	}
@@ -60,21 +60,16 @@ public class DealerProfile extends Comlibs {
 	By lotpxprod = By.xpath("//*[@id=\"formDealerInfo\"]/div[1]/div[2]/div/div[1]/div[2]/label[4]/img");
 	By stockpxprod = By.xpath("//*[@id=\"formDealerInfo\"]/div[1]/div[2]/div/div[1]/div[2]/label[5]/img");
 
-//	By webSiteProviderDropDownLocator=By.xpath("//*[@id='websiteProvider']/option["+num+"]");//num=1,2,3...
-	By addWebSiteProviderBtnLocator=By.xpath("//*[@id='formDealerInfo']/div[2]/div[2]/div/div/div[2]/div/div/button");
-//	By brandDropDownLocator=By.xpath("//*[@id='dealerBrand']/option["+num+"]");//num=1,2,3...
-	By changeBtnLocator=By.xpath("//*[@id='uploadCaption']");
-	By xdeleteBtnLocator=By.xpath("//*[@id='removeLogo']");
-	By inventoryGalleryBtnLocator=By.xpath("//*[@id='navbarTabs']/li[1]/a");
-	By templatesBtnLocator=By.xpath("//*[@id=\"navbarTabs\"]/li[3]/a");
-//	By brandLocator=By.xpath("//*[@id='dealerBrand']/option[2]");
-//	By Locator=By.xpath("");
-	
-	
-	
-	
-	
-	
+	// By webSiteProviderDropDownLocator=By.xpath("//*[@id='websiteProvider']/option["+num+"]");//num=1,2,3...
+	By addWebSiteProviderBtnLocator = By.xpath("//*[@id='formDealerInfo']/div[2]/div[2]/div/div/div[2]/div/div/button");
+	// By brandDropDownLocator=By.xpath("//*[@id='dealerBrand']/option["+num+"]");//num=1,2,3...
+	By changeBtnLocator = By.xpath("//*[@id='uploadCaption']");
+	By xdeleteBtnLocator = By.xpath("//*[@id='removeLogo']");
+	By inventoryGalleryBtnLocator = By.xpath("//*[@id='navbarTabs']/li[1]/a");
+	By templatesBtnLocator = By.xpath("//*[@id=\"navbarTabs\"]/li[3]/a");
+	// By brandLocator=By.xpath("//*[@id='dealerBrand']/option[2]");
+	// By Locator=By.xpath("");
+
 	public ImageGallery clickViewInventoryBtn(WebDriver driver, String tc) throws IOException {
 		boolean viewInventoryBtn = elementExist(driver, viewInventoryBtnLocator, true, tc);
 
@@ -91,46 +86,58 @@ public class DealerProfile extends Comlibs {
 		driver.findElement(logOutLinkLocator).click();
 		return new AUTOpxLogin(driver);
 	}
-	public DealerProfile clickWebsiteProviderAndSelectNum(WebDriver driver,int num) throws IOException {
-		By webSiteProviderDropDownLocator=By.xpath("//*[@id='websiteProvider']/option["+num+"]");//num=1,2,3...
+
+	public DealerProfile clickWebsiteProviderAndSelectNum(WebDriver driver, int num) throws IOException {
+		By webSiteProviderDropDownLocator = By.xpath("//*[@id='websiteProvider']/option[" + num + "]");// num=1,2,3...
 		driver.findElement(webSiteProviderDropDownLocator).click();
 		return this;
 	}
-	public DealerProfile clickBrandAndSelectNum(WebDriver driver,int num) throws IOException {
-		By brandDropDownLocator=By.xpath("//*[@id='dealerBrand']/option["+num+"]");//num=1,2,3...
+
+	public DealerProfile clickBrandAndSelectNum(WebDriver driver, int num) throws IOException {
+		By brandDropDownLocator = By.xpath("//*[@id='dealerBrand']/option[" + num + "]");// num=1,2,3...
 		driver.findElement(brandDropDownLocator).click();
 		return this;
 	}
+
 	public ImageGallery clickInventoryGalleryBtn(WebDriver driver, String tc) throws IOException {
-		driver.findElement(inventoryGalleryBtnLocator).click();
+		try {
+			driver.findElement(inventoryGalleryBtnLocator).click();
+			rwExcel(tc, true, "Verify clickInventoryGalleryBtn", "Working fine.");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Verify clickInventoryGalleryBtn", "Element does not exist!");
+		}
+		;
 		return new ImageGallery(driver);
 	}
+
 	public Templates clickTemplatesBtn(WebDriver driver) throws IOException {
 		driver.findElement(templatesBtnLocator).click();
 		return new Templates(driver);
 	}
-	public DealerProfile selectBand(WebDriver driver,String dealerName) throws IOException {
-		int num=0,b=0;		
-		By brandsLocator=By.xpath("//*[@id=\"dealerBrand\"]/option");  //*[@id="dealerBrand"]
-//		driver.findElement(brandsLocator).click();
-		By brandLocator=By.xpath("//*[@id='dealerBrand']/option["+b+"]");
-		num=driver.findElements(brandsLocator).size();
-//		driver.findElement(brandLocator).click();
-		for (int i=1;i<=num;i++) {
-			b=i;
-			brandLocator=By.xpath("//*[@id='dealerBrand']/option["+b+"]");
+
+	public DealerProfile selectBand(WebDriver driver, String dealerName) throws IOException {
+		int num = 0, b = 0;
+		By brandsLocator = By.xpath("//*[@id=\"dealerBrand\"]/option"); // *[@id="dealerBrand"]
+		// driver.findElement(brandsLocator).click();
+		By brandLocator = By.xpath("//*[@id='dealerBrand']/option[" + b + "]");
+		num = driver.findElements(brandsLocator).size();
+		// driver.findElement(brandLocator).click();
+		for (int i = 1; i <= num; i++) {
+			b = i;
+			brandLocator = By.xpath("//*[@id='dealerBrand']/option[" + b + "]");
 			driver.findElement(brandLocator).click();
-			String Bname=driver.findElement(brandsLocator).findElement(brandLocator).getText();
+			String Bname = driver.findElement(brandsLocator).findElement(brandLocator).getText();
 			if (Bname.equalsIgnoreCase(dealerName)) {
 				driver.findElement(brandLocator).click();
 				break;
-			}else if (i==num){
-				System.out.println("Dealer name: "+dealerName+" is Not found!");
+			} else if (i == num) {
+				System.out.println("Dealer name: " + dealerName + " is Not found!");
 			}
 		}
 
 		return new DealerProfile(driver);
 	}
+
 	public void verifyDealershipIDBrands(String dealershipID, String brands, String tc) throws IOException {
 		// assertEquals("Lucas Zhou",
 		// driver.findElement(By.cssSelector("span")).getText());
@@ -148,16 +155,26 @@ public class DealerProfile extends Comlibs {
 	}
 
 	public DealerProfile changePS(WebDriver driver, String ps, String tc) throws IOException {
-		driver.findElement(userPassword).clear();
-		driver.findElement(userPassword).sendKeys(ps);
-		driver.findElement(userPasswordConfirm).clear();
-		driver.findElement(userPasswordConfirm).sendKeys(ps);
-		driver.findElement(saveBtn).click();
+		try {
+			driver.findElement(userPassword).clear();
+			driver.findElement(userPassword).sendKeys(ps);
+			driver.findElement(userPasswordConfirm).clear();
+			driver.findElement(userPasswordConfirm).sendKeys(ps);
+			driver.findElement(saveBtn).click();
+			rwExcel(tc, true, "Verify changing password", "Password changed");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Verify changing password", "Password changed");
+		}
 		return new DealerProfile(driver);
 	}
 
 	public DealerProfile clickNOBtn(WebDriver driver, String tc) throws IOException {
-		driver.findElement(reRenderNOBtn).click();
+		try {
+			driver.findElement(reRenderNOBtn).click();
+			rwExcel(tc, true, "Verify clicking on Render No button", "Working fine");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Verify clicking on Render No button", "Element does not exist!");
+		}
 		return new DealerProfile(driver);
 	}
 
@@ -368,13 +385,16 @@ public class DealerProfile extends Comlibs {
 					"It does not match. Expected State=" + state + ". The site shows=\"" + sts + "\"");
 		}
 	}
+
 	public void uploadDealershipLogo(WebDriver driver, String dealershipLogPath) throws IOException {
 		driver.findElement(By.id("uploadLogo")).sendKeys(dealershipLogPath);
 	}
+
 	public void jSONParse() {
 		// String text = "{\"employees\":[{\"firstName\":\"John\",\"lastName\":\"Doe\" },{\"firstName\":\"Anna\",\"lastName\":\"Smith\" },{\"firstName\":\"Peter\",\"lastName\":\"Jones\" }]}";
 		// String text="{\"posts\": [{\"post_id\": \"123456789012_123456789012\",\"actor_id\": \"1234567890\",\"picOfPersonWhoPosted\": \"http://example.com/photo.jpg\",\"nameOfPersonWhoPosted\": \"Jane Doe\",\"message\": \"Sounds cool. Can't wait to see it!\",\"likesCount\": \"2\",\"comments\": [],\"timeOfPost\": \"1234567890\"} ]}";
-		String text="{\"posts\": [{\"post_id\": \"123456789012_123456789012_1\",\"actor_id\": \"12345678901\",\"picOfPersonWhoPosted\": \"http://example.com/photo.jpg1\",\"nameOfPersonWhoPosted\": \"Jane Doe1\",\"message\": \"1Sounds cool. Can't wait to see it!\",\"likesCount\": \"1\",\"comments\": [],\"timeOfPost\": \"12345678901\"},{\"post_id\": \"123456789012_123456789012_2\",\"actor_id\": \"12345678902\",\"picOfPersonWhoPosted\": \"http://example.com/photo.jpg2\",\"nameOfPersonWhoPosted\": \"Jane Doe2\",\"message\": \"Sounds cool. Can't wait to see it!\",\"likesCount\": \"2\",\"comments\": [],\"timeOfPost\": \"12345678902\"},{\"post_id\": \"123456789012_123456789012_3\",\"actor_id\": \"12345678903\",\"picOfPersonWhoPosted\": \"http://example.com/photo.jpg3\",\"nameOfPersonWhoPosted\": \"Jane Doe3\",\"message\": \"Sounds cool. Can't wait to see it!\",\"likesCount\": \"3\",\"comments\": [],\"timeOfPost\": \"12345678903\"} ]}";		JSONObject obj = new JSONObject(text);
+		String text = "{\"posts\": [{\"post_id\": \"123456789012_123456789012_1\",\"actor_id\": \"12345678901\",\"picOfPersonWhoPosted\": \"http://example.com/photo.jpg1\",\"nameOfPersonWhoPosted\": \"Jane Doe1\",\"message\": \"1Sounds cool. Can't wait to see it!\",\"likesCount\": \"1\",\"comments\": [],\"timeOfPost\": \"12345678901\"},{\"post_id\": \"123456789012_123456789012_2\",\"actor_id\": \"12345678902\",\"picOfPersonWhoPosted\": \"http://example.com/photo.jpg2\",\"nameOfPersonWhoPosted\": \"Jane Doe2\",\"message\": \"Sounds cool. Can't wait to see it!\",\"likesCount\": \"2\",\"comments\": [],\"timeOfPost\": \"12345678902\"},{\"post_id\": \"123456789012_123456789012_3\",\"actor_id\": \"12345678903\",\"picOfPersonWhoPosted\": \"http://example.com/photo.jpg3\",\"nameOfPersonWhoPosted\": \"Jane Doe3\",\"message\": \"Sounds cool. Can't wait to see it!\",\"likesCount\": \"3\",\"comments\": [],\"timeOfPost\": \"12345678903\"} ]}";
+		JSONObject obj = new JSONObject(text);
 		// String pageName = obj.getJSONObject("posts").getString("pageName");
 
 		JSONArray arr = obj.getJSONArray("posts");
@@ -389,7 +409,7 @@ public class DealerProfile extends Comlibs {
 			String nameOfPersonWhoPosted = arr.getJSONObject(i).getString("nameOfPersonWhoPosted");
 			String message = arr.getJSONObject(i).getString("message");
 			String likesCount = arr.getJSONObject(i).getString("likesCount");
-//			String comments = arr.getJSONObject(i).getString("comments");
+			// String comments = arr.getJSONObject(i).getString("comments");
 			String timeOfPost = arr.getJSONObject(i).getString("timeOfPost");
 
 			System.out.println("post_id:" + post_id + ", actor_id:" + actor_id + ", picOfPersonWhoPosted:"
