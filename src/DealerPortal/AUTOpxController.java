@@ -1014,7 +1014,7 @@ public class AUTOpxController extends Comlibs {
 		loginP.login(driver, "invalid" + accountEmail, accountPS, TCnum, "Invalid Username or Password");
 		TCnum = "TC171253";
 		loginP.login(driver, accountEmail, accountPS + "invalid", TCnum, "Invalid Username or Password");
-
+		ac.Wait(20);// wait 20 secs here because we have a perfomance issue when login. Remove it once issue fixed. 2019-01-14
 		loginP.login(driver, accountEmail, accountPS);
 		AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
 		acceptLicenseP.clickCancelBtn(driver);
@@ -2341,14 +2341,14 @@ public class AUTOpxController extends Comlibs {
 		if (render.equalsIgnoreCase("Yes") ) {
 			System.out.println("\nVIN #1. Waiting for 60, check Templates settings");
 			ac.Wait(MaxTimeForTemplatesPreview, true,
-					"\nVIN #1. Waiting for 60 seconds, please check Templates settings:\n\nHeader:\nDealership Address+Dealership Email, \nFooter:\n+Brand Logo, Glb MSG Top, Text Images:WCI for vin: "
+					"\nVIN #1. Waiting for 60 seconds, please check Templates settings:\n\nHeader:\nDealership Logo, Dealership Phone, Dealership Website, \nFooter:\n+Vehicle Info (year, make, model, trim, Glb MSG Top, Text Images:WCI for vin: "
 							+ vin01+"\n");
 //			System.out.println("\n1. press Enter key to continue......");
 //			System.in.read();
 		}else {
 			System.out.println("\nVIN #1. Waiting for 0, check Templates settings");
 			ac.Wait(10, true,
-					"\nVIN #1. Waiting for 0 seconds, please check Templates settings:\n\nHeader:\nDealership Address+Dealership Email, \nFooter:\n+Brand Logo, Glb MSG Top, Text Images:WCI for vin: "
+					"\nVIN #1. Waiting for 60 seconds, please check Templates settings:\n\nHeader:\nDealership Logo, Dealership Phone, Dealership Website, \nFooter:\n+Vehicle Info (year, make, model, trim, Glb MSG Top, Text Images:WCI for vin: "
 							+ vin01+"\n");
 		}
 
@@ -2472,14 +2472,14 @@ public class AUTOpxController extends Comlibs {
 		if (render.equalsIgnoreCase("Yes") ) {
 			System.out.println("VIN #2. Waiting for 60, check Templates settings");
 			ac.Wait(MaxTimeForTemplatesPreview, true,
-					"\nVIN #2. Waiting for 60 seconds, please check Templates settings:\n\nHeader:\nDealership Address+Dealership Email, \nFooter:\n+Brand Logo, Glb MSG Top, Text Images:WCI for vin: "
+					"\nVIN #2. Waiting for 60 seconds, please check Templates settings:\n\nHeader:\nDealership Address+Dealership Email, \nFooter:\n+Brand Logo, Glb MSG Bottom, Text Images: VDI AND VBI for vin: "
 							+ vin01+"\n");
 //			System.out.println("\n1. press Enter key to continue......");
 //			System.in.read();
 		}else {
 			System.out.println("VIN #2. Waiting for 0, check Templates settings");
 			ac.Wait(10, true,
-					"\nVIN #2. Waiting for 0 seconds, please check Templates settings:\n\nHeader:\nDealership Address+Dealership Email, \nFooter:\n+Brand Logo, Glb MSG Top, Text Images:WCI for vin: "
+					"\nVIN #2. Waiting for 0 seconds, please check Templates settings:\n\nHeader:\nDealership Address+Dealership Email, \nFooter:\n+Brand Logo, Glb MSG Bottom, Text Images: VDI AND VBI for vin: "
 							+ vin01+"\n");
 		}
 		vgP.clickBackToInventoryBtn(driver);
@@ -2892,21 +2892,21 @@ public class AUTOpxController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-//			//// 0.General Inventory Gallery
-//			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-//			inventoryGalleryTC(driver, tBrowser, env, versionNum);
-//			vehicleGallery(driver, tBrowser, env);
-//			// verifyRerender(driver, tBrowser);
-//
-//			////// 1.VINpx:
-//			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-//			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-//
-//			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-//
-//			////// 2. STOCKpx
-//			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-//			STOCKpxInventoryTC(driver, tBrowser, env);
+			//// 0.General Inventory Gallery
+			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			inventoryGalleryTC(driver, tBrowser, env, versionNum);
+			vehicleGallery(driver, tBrowser, env);
+			// verifyRerender(driver, tBrowser);
+
+			////// 1.VINpx:
+			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+
+			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+
+			////// 2. STOCKpx
+			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			STOCKpxInventoryTC(driver, tBrowser, env);
 
 			////// 3. Templates
 			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
