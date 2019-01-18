@@ -93,10 +93,11 @@ public class AdminPortalController extends Comlibs {
 	static int allImageNums = 0;
 	static String urlLink;
 
-	public static VDVILogin loadURL(WebDriver driver, String bURL, String env) throws IOException {
+	public static VDVILogin loadURL(WebDriver driver, String bURL, String env) throws IOException, InterruptedException {
 		driver.get(bURL);
 		// Below to accept authentication only works for Firefox, Chrome scripts are not ready yet. 2018-11-06
 		if (env.equalsIgnoreCase("Prod")) {
+			Thread.sleep(2 * 1000);
 			driver.switchTo().alert().sendKeys("admin" + Keys.TAB + "g4TT73Xy!");
 			driver.switchTo().alert().accept();
 		}
@@ -965,12 +966,117 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		BackgroundSetsP.inputSetName(driver, tempSetName);
 		BackgroundSetsP.selectSetType(driver, 3);// 1-Old (Do Not User), 2-Flat on Flat on Flat, 3-Normal, 4-GM Only, 5-FCA Only
-		System.out.println("\nPlease wait at least 2 minutes until Backgrounds page showing...");
+		System.out.println("\nPlease wait at least 3 minutes until Backgrounds page showing...");
 		ac.Wait(wt);
 		BackgroundSetsP.clickSubmit(driver);
 		ac.Wait(wt);
-		// check bg image
-
+		
+		//********************* check bg image *********************
+		int sn=1;
+		double oneSNForScrollupPoint=8.44091;
+		double totalPoints=oneSNForScrollupPoint*1;
+		int scrollupPoints=1;
+		Backgrounds BackgroundsP=new Backgrounds(driver);
+		
+//		tc = "GM_Exterior_2019-GM-4NF56-4NF56-1SD_old ";////= modelcode bar  2019-GM-4NF56-4NF56-1SD    - sn=2014
+//		UserListP.scrollUp(driver, 17000, tc);// 17150 - value is on uper side
+//		BackgroundsP.ClickOneExteriorModelYearBtn(driver,tc);
+//		BackgroundsP.VerifyCarImage(driver, tc);
+//		BackgroundsP.clickRightArrowBtn(driver, tc);
+//		ac.Wait(wt);
+//		BackgroundsP.VerifyCarImage(driver, tc);
+//		BackgroundsP.clickLeftArrowBtn(driver, tc);
+//		ac.Wait(wt);
+//		BackgroundsP.VerifyCarImage(driver, tc);
+//		BackgroundsP.clickCloseX(driver, tc);
+//		UserListP.scrollUp(driver, -100000, tc);//scroll back to top
+//		
+//		tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_old";//= modelcode bar  2019-GM-4NF56-1SD-4NF56-1SD   - sn=4876
+//		UserListP.scrollUp(driver, 41158, tc);// 24100 - value is on uper side
+//		BackgroundsP.ClickOneInteriorModelYearBtn(driver,tc);
+//		BackgroundsP.VerifyCarImage(driver, tc);
+//		BackgroundsP.clickRightArrowBtn(driver, tc);
+//		BackgroundsP.clickLeftArrowBtn(driver, tc);
+//		BackgroundsP.clickCloseX(driver, tc);
+//		ac.Wait(wt);
+//		UserListP.scrollUp(driver, -100000, tc);//scroll back to top
+//		
+		
+		// ************************Check the failed loading car image from sn ************************		
+		
+		tc = "FCA_2016_bf";//= modelcode bar  2016_bf   - sn=17 from Excel-BG_CarCode table - green cols.
+		sn=2;
+		totalPoints=oneSNForScrollupPoint*sn;
+		scrollupPoints=(int) Math.round(totalPoints);
+		UserListP.scrollUp(driver, scrollupPoints, tc);//860
+		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver,sn , tc);
+		ac.Wait(wt*2);
+		BackgroundsP.VerifyCarImage(driver, tc);
+		BackgroundsP.clickRightArrowBtn(driver, tc);
+		ac.Wait(wt);
+		BackgroundsP.VerifyCarImage(driver, tc+"_Right_Arrow");
+		BackgroundsP.clickLeftArrowBtn(driver, tc);
+		ac.Wait(wt);
+		BackgroundsP.VerifyCarImage(driver, tc+"_Left_Arrow");
+		BackgroundsP.clickCloseX(driver, tc);
+		ac.Wait(wt);
+		UserListP.scrollUp(driver, -100000, tc);//scroll back to top
+		// ************************Check the loading car image from sn ************************
+		tc = "FCA_2019_lx";//= modelcode bar  2019_lx   - sn=102 from Excel-BG_CarCode table
+		sn=102;
+		totalPoints=oneSNForScrollupPoint*sn;
+		scrollupPoints=(int) Math.round(totalPoints);
+		UserListP.scrollUp(driver, scrollupPoints, tc);//860
+		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver,sn , tc);
+		ac.Wait(wt*2);
+		BackgroundsP.VerifyCarImage(driver, tc);
+		BackgroundsP.clickRightArrowBtn(driver, tc);
+		ac.Wait(wt);
+		BackgroundsP.VerifyCarImage(driver, tc+"_Right_Arrow");
+		BackgroundsP.clickLeftArrowBtn(driver, tc);
+		ac.Wait(wt);
+		BackgroundsP.VerifyCarImage(driver, tc+"_Left_Arrow");
+		BackgroundsP.clickCloseX(driver, tc);
+		ac.Wait(wt);
+		UserListP.scrollUp(driver, -100000, tc);//scroll back to top
+		
+		tc = "GM_Exterior_2019-GM-4NF56-4NF56-1SD_new ";////= modelcode bar  2019-GM-4NF56-4NF56-1SD    - sn=2014
+		sn=2014;
+		totalPoints=oneSNForScrollupPoint*sn;
+		scrollupPoints=(int) Math.round(totalPoints);
+		UserListP.scrollUp(driver, scrollupPoints, tc);//860
+		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver,sn , tc);
+		ac.Wait(wt*2);
+		BackgroundsP.VerifyCarImage(driver, tc);
+		BackgroundsP.clickRightArrowBtn(driver, tc);
+		ac.Wait(wt);
+		BackgroundsP.VerifyCarImage(driver, tc+"_Right_Arrow");
+		BackgroundsP.clickLeftArrowBtn(driver, tc);
+		ac.Wait(wt);
+		BackgroundsP.VerifyCarImage(driver, tc+"_Left_Arrow");
+		BackgroundsP.clickCloseX(driver, tc);
+		ac.Wait(wt);
+		UserListP.scrollUp(driver, -100000, tc);//scroll back to top
+		
+		tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_new";//= modelcode bar  2019-GM-4NF56-1SD-4NF56-1SD   - sn=4876
+		sn=4876;
+		totalPoints=oneSNForScrollupPoint*sn;
+		scrollupPoints=(int) Math.round(totalPoints);
+		UserListP.scrollUp(driver, scrollupPoints, tc);//860
+		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver,sn , tc);
+		ac.Wait(wt*2);
+		BackgroundsP.VerifyCarImage(driver, tc);
+		BackgroundsP.clickRightArrowBtn(driver, tc);
+		ac.Wait(wt);
+		BackgroundsP.VerifyCarImage(driver, tc+"_Right_Arrow");
+		BackgroundsP.clickLeftArrowBtn(driver, tc);
+		ac.Wait(wt);
+		BackgroundsP.VerifyCarImage(driver, tc+"_Left_Arrow");
+		BackgroundsP.clickCloseX(driver, tc);
+		ac.Wait(wt);
+		UserListP.scrollUp(driver, -100000, tc);//scroll back to top
+		// ************************End of Check the loading car image from sn ************************
+		//Add New BG Set
 		UserListP.clickManageBGSets(driver);
 		ac.clickRefleshF5Btn(driver, tc);
 		tc = "TC139534"; // Edit "a" background set
@@ -2099,10 +2205,10 @@ public class AdminPortalController extends Comlibs {
 			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 
-			 ////// 1.ManageDealerShipsAddNewAccount:
-			 bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
-			 ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-			 ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+//			 ////// 1.ManageDealerShipsAddNewAccount:
+//			 bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
+//			 ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+//			 ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
 
 			//// 2.ManageDealerShips:
 			loadURL(driver, baseURL, env);

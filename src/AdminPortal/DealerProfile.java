@@ -62,7 +62,8 @@ public class DealerProfile extends Comlibs {
 	// By backGroundLocator=By.xpath("//*[@id=\"bg-0\"]/div[1]/img");
 	// *[@id="dealerListBtn"]/span
 	By MessageDisplayedOnHead = By.xpath("//*[@id=\"header\"]/div/div[2]/span");
-
+	By popupOkayBtn=By.xpath("//*[@id=\"alertModal\"]/div/div/div[3]/button");
+	
 	public String getDealershipID(WebDriver driver) throws IOException {
 		String dealershipip = driver.findElement(DealershipIDLocator).getAttribute("value");
 		return dealershipip;
@@ -326,6 +327,8 @@ public class DealerProfile extends Comlibs {
 		By alertMsg=By.xpath("//*[@id=\"header\"]/div/div[2]/span");
 		try {
 			driver.findElement(By.id("uploadLogo")).sendKeys(imageLogPath);
+			Wait(2);
+			driver.findElement(popupOkayBtn).click();
 			//scrollup
 			scrollUp(driver, -2000, "ddd"); // QA -2000 Prod -3000
 			Wait(2);
@@ -337,7 +340,7 @@ public class DealerProfile extends Comlibs {
 			}
 			Wait(4);
 		}catch(Exception e) {
-			rwExcel("Upload Logo", false, "Upload a dealership Logo", "in Dealer Profile page");
+			rwExcel(tc, false, "Upload a dealership Logo", "in Dealer Profile page");
 			Wait(4);
 		}
 
@@ -348,10 +351,12 @@ public class DealerProfile extends Comlibs {
 		Wait(2);
 		try {
 			driver.findElement(By.id("uploadLogo")).sendKeys(imageLogPath);
+			Wait(2);
+			driver.findElement(popupOkayBtn).click();
 			rwExcel(tc, true, "Upload a dealership Logo", "in Dealer Profile page");
 			Wait(4);
 		}catch(Exception e) {
-			rwExcel("Upload Logo", false, "Upload a dealership Logo", "in Dealer Profile page");
+			rwExcel(tc, false, "Upload a dealership Logo", "in Dealer Profile page");
 			Wait(4);
 		}
 

@@ -29,28 +29,81 @@ public class Backgrounds extends Comlibs {
 
 	By dealerShipName = By.cssSelector("span");
 
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
-//	 By Locator=By.xpath("");
+	By exteriorModelYearBtn = By.xpath("//*[@id=\"dealerList\"]/div/div[2014]/button"); // = modelcode bar 2019-GM-4NF56-4NF56-1SD
+	By interiorModelYearBtn = By.xpath("//*[@id=\"dealerList\"]/div/div[4867]/button"); // = modelcode bar 2019-GM-4NF56-1SD-4NF56-1SD
+	By bigCarWithBGImage = By.xpath("//*[@id=\"carousel-example-generic\"]/div/div[1]/div/img[2]");
+	By bigCarWithBGImagefailed = By.xpath("//*[@id=\"carousel-example-generic\"]/a[1]");//("//*[@id=\"carousel-example-generic\"]/div/div[2]");
+	By closeX_Btn = By.xpath("//*[@id=\"modal\"]/div/div/div[1]/button/span");
+	By rightArrowBtn = By.xpath("//*[@id=\"carousel-example-generic\"]/a[2]/span[1]");
+	By leftArrowBtn = By.xpath("//*[@id=\"carousel-example-generic\"]/a[1]/span[1]");
 
 	public Backgrounds clickCreateNewSet(WebDriver driver) throws IOException {
-			driver.findElement(dealerShipName).click();
-			return this;
-		}
+		driver.findElement(dealerShipName).click();
+		return this;
+	}
+
 	public Backgrounds clickMapBackGrounds(WebDriver driver, int num) {
-//		By mapBackGroundsLocator=By.xpath("(//button[@id='listViewBtn'])[1]");
-		num=num*4-3;
-		By mapBackGroundsLocator=By.xpath("(//button[@id='listViewBtn'])["+num+"]");	
+		// By mapBackGroundsLocator=By.xpath("(//button[@id='listViewBtn'])[1]");
+		num = num * 4 - 3;
+		By mapBackGroundsLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");
 		driver.findElement(mapBackGroundsLocator).click();
 		return this;
 
 	}
+
 	public Backgrounds clickEditSet(WebDriver driver) throws IOException {
 		driver.findElement(dealerShipName).click();
 		return this;
 	}
 
+	public Backgrounds ClickOneExteriorModelYearBtn(WebDriver driver, String tc) throws Exception {
+		elementExist(driver, exteriorModelYearBtn, true, tc);
+		driver.findElement(exteriorModelYearBtn).click();
+
+		return this;
+	}
+
+	public Backgrounds ClickOneInteriorModelYearBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, interiorModelYearBtn, true, tc);
+		driver.findElement(interiorModelYearBtn).click();
+		return this;
+	}
+
+	public Backgrounds ClickAnyOneOfExteriorOrInteriorModelYearBtn(WebDriver driver, int sn, String tc)
+			throws Exception {
+		By anyModelYearBtn = By.xpath("//*[@id=\"dealerList\"]/div/div[" + sn + "]/button");
+		elementExist(driver, anyModelYearBtn, true, tc);
+		driver.findElement(anyModelYearBtn).click();
+
+		return this;
+	}
+
+	public void VerifyCarImage(WebDriver driver, String tc) throws IOException {
+		rwExcel(tc, "Verify Load Vehicle Image", " ");
+//		if (elementExist(driver, bigCarWithBGImagefailed, false, tc)) {
+//			rwExcel(tc, false,"Verify failed to load Vehicle Image", " Image failed to load...");
+//		};
+		VerifyImageLoaded(driver, bigCarWithBGImage, tc);
+	}
+	public void VerifyCarImaeLoadedFailed(WebDriver driver, String tc) throws IOException {
+		rwExcel(tc, "Verify failed to load Vehicle Image", " ");
+		VerifyImageLoaded(driver, bigCarWithBGImagefailed, tc);
+	}
+	public Backgrounds clickCloseX(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, closeX_Btn, true, tc);
+		driver.findElement(closeX_Btn).click();
+		return this;
+	}
+
+	public Backgrounds clickRightArrowBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, rightArrowBtn, true, tc);
+		driver.findElement(rightArrowBtn).click();
+		return this;
+	}
+
+	public Backgrounds clickLeftArrowBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, leftArrowBtn, true, tc);
+		driver.findElement(leftArrowBtn).click();
+		return this;
+	}
 }
