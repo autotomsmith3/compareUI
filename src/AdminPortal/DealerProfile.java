@@ -318,7 +318,6 @@ public class DealerProfile extends Comlibs {
 	}
 
 	public void scrollUp(WebDriver driver, int scrollNum, String tc) {
-
 		// Window scroll down to make the custom image visible.
 		JavascriptExecutor jsx = (JavascriptExecutor) driver;
 		jsx.executeScript("window.scrollBy(0," + scrollNum + ")", "");
@@ -328,9 +327,9 @@ public class DealerProfile extends Comlibs {
 		try {
 			driver.findElement(By.id("uploadLogo")).sendKeys(imageLogPath);
 			Wait(2);
-			driver.findElement(popupOkayBtn).click();
+//			driver.findElement(popupOkayBtn).click();// this is only needed when upload a gif file.
 			//scrollup
-			scrollUp(driver, -2000, "ddd"); // QA -2000 Prod -3000
+			scrollUp(driver, -2000, tc); // QA -2000 Prod -3000
 			Wait(2);
 			String alertMsgExist=driver.findElement(alertMsg).getText();
 			if (alertMsgExist.equalsIgnoreCase(msg)) {

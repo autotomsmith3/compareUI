@@ -32,10 +32,16 @@ public class Backgrounds extends Comlibs {
 	By exteriorModelYearBtn = By.xpath("//*[@id=\"dealerList\"]/div/div[2014]/button"); // = modelcode bar 2019-GM-4NF56-4NF56-1SD
 	By interiorModelYearBtn = By.xpath("//*[@id=\"dealerList\"]/div/div[4867]/button"); // = modelcode bar 2019-GM-4NF56-1SD-4NF56-1SD
 	By bigCarWithBGImage = By.xpath("//*[@id=\"carousel-example-generic\"]/div/div[1]/div/img[2]");
-	By bigCarWithBGImagefailed = By.xpath("//*[@id=\"carousel-example-generic\"]/a[1]");//("//*[@id=\"carousel-example-generic\"]/div/div[2]");
+	By bigCarWithBGImagefailed = By.xpath("//*[@id=\"carousel-example-generic\"]/a[1]");// ("//*[@id=\"carousel-example-generic\"]/div/div[2]");
 	By closeX_Btn = By.xpath("//*[@id=\"modal\"]/div/div/div[1]/button/span");
 	By rightArrowBtn = By.xpath("//*[@id=\"carousel-example-generic\"]/a[2]/span[1]");
 	By leftArrowBtn = By.xpath("//*[@id=\"carousel-example-generic\"]/a[1]/span[1]");
+	By BackgroundPicLocator = By.xpath("//*[@id=\"background-row\"]/div/img");
+	By BackgroundPic2Locator = By.xpath("//*[@id=\"background-row\"]/div[2]/img");
+
+	By saveAndCopyToAllMatching = By.xpath("//*[@id=\"btnSaveAll\"]");
+	By saveBtn = By.xpath("//*[@id=\"btnSave\"]");
+	By chooseFileBtn = By.xpath("//*[@id=\"btnUploadPics\"]");
 
 	public Backgrounds clickCreateNewSet(WebDriver driver) throws IOException {
 		driver.findElement(dealerShipName).click();
@@ -80,15 +86,17 @@ public class Backgrounds extends Comlibs {
 
 	public void VerifyCarImage(WebDriver driver, String tc) throws IOException {
 		rwExcel(tc, "Verify Load Vehicle Image", " ");
-//		if (elementExist(driver, bigCarWithBGImagefailed, false, tc)) {
-//			rwExcel(tc, false,"Verify failed to load Vehicle Image", " Image failed to load...");
-//		};
+		// if (elementExist(driver, bigCarWithBGImagefailed, false, tc)) {
+		// rwExcel(tc, false,"Verify failed to load Vehicle Image", " Image failed to load...");
+		// };
 		VerifyImageLoaded(driver, bigCarWithBGImage, tc);
 	}
+
 	public void VerifyCarImaeLoadedFailed(WebDriver driver, String tc) throws IOException {
 		rwExcel(tc, "Verify failed to load Vehicle Image", " ");
 		VerifyImageLoaded(driver, bigCarWithBGImagefailed, tc);
 	}
+
 	public Backgrounds clickCloseX(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, closeX_Btn, true, tc);
 		driver.findElement(closeX_Btn).click();
@@ -105,5 +113,48 @@ public class Backgrounds extends Comlibs {
 		elementExist(driver, leftArrowBtn, true, tc);
 		driver.findElement(leftArrowBtn).click();
 		return this;
+	}
+
+	public Backgrounds clickBackgroundPic(WebDriver driver, String tc) throws IOException {
+		try {
+			driver.findElement(BackgroundPicLocator).click();
+		} catch (Exception e) {
+			rwExcel(tc, false, "Upload background pictures", "Click on background picture.");
+		}
+		return this;
+	}
+
+	public Backgrounds clickBackgroundPic2(WebDriver driver, String tc) throws IOException {
+		try {
+			driver.findElement(BackgroundPic2Locator).click();
+		} catch (Exception e) {
+			rwExcel(tc, false, "Upload background pictures", "Click on background picture 2.");
+		}
+		return this;
+	}
+
+	public Backgrounds clickSaveAndCopyToAllMatching(WebDriver driver, String tc) throws IOException {
+		try {
+			driver.findElement(saveAndCopyToAllMatching).click();
+			rwExcel(tc, true, "Upload background pictures", "Click on Save And Copy To AllMatching button.");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Upload background pictures", "Click on Save And Copy To AllMatching button.");
+		}
+		return this;
+	}
+
+	public void uploadBackgroundPicture(WebDriver driver, String imagePath, String tc) throws IOException {
+
+		try {
+			// driver.findElement(By.id("btnUploadPics")).sendKeys(imagePath); // By id - ok
+			driver.findElement(chooseFileBtn).sendKeys(imagePath);// By X.Path - ?
+			Wait(2);
+			rwExcel(tc, true, "Upload background pictures",
+					"Click on Choose Files button in Backgrounds successfully.");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Upload background pictures", "Click on Choose Files button in Backgrounds.");
+			Wait(2);
+		}
+
 	}
 }

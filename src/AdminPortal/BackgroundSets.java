@@ -65,8 +65,7 @@ public class BackgroundSets extends Comlibs {
 	By cancelBtnLocator = By.xpath("//*[@id=\"newSetModal\"]/div/div/div[3]/button[2]");
 	By chooseFilesBtnLocator = By.xpath("//*[@id=\"images\"]");
 	By ManageImageTypesLocator = By.xpath("//*[@id=\"imagetypeMenu\"]");// Firefox: //*[@id="imagetypeMenu"]
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
+
 	// By Locator=By.xpath("");
 	// By Locator=By.xpath("");
 	// By Locator=By.xpath("");
@@ -117,9 +116,9 @@ public class BackgroundSets extends Comlibs {
 		By dealersUseBGLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");// 4,8,12...
 		try {
 			driver.findElement(dealersUseBGLocator).click();
-			rwExcel(tc, true, "Click on Dealer Use Background Button" , "Click on Button - successful!");
-		}catch (Exception e) {
-			rwExcel(tc, false, "Click on Dealer Use Background Button" , "Click on Button - failed!");
+			rwExcel(tc, true, "Click on Dealer Use Background Button", "Click on Button - successful!");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Click on Dealer Use Background Button", "Click on Button - failed!");
 		}
 		return this;
 	}
@@ -128,12 +127,13 @@ public class BackgroundSets extends Comlibs {
 		By deleteBGsetLocator = By.xpath("(//button[@id='dealerViewBtn'])[" + num + "]");// 1,2,3,4....
 		try {
 			driver.findElement(deleteBGsetLocator).click();
-			rwExcel(tc, true, "Click on Delete Background Set Button" , "Click on Delete Background Set Button - successful!");
-		}catch (Exception e) {
-			rwExcel(tc, false, "Click on Delete Background Set Button" , "Click on Delete Background Set Button - failed!");
+			rwExcel(tc, true, "Click on Delete Background Set Button",
+					"Click on Delete Background Set Button - successful!");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Click on Delete Background Set Button",
+					"Click on Delete Background Set Button - failed!");
 		}
 
-		
 		return this;
 	}
 
@@ -150,9 +150,9 @@ public class BackgroundSets extends Comlibs {
 	public BackgroundSets clickClose(WebDriver driver, String tc) throws IOException {
 		try {
 			driver.findElement(dealerUsingBGLocator).click();
-			rwExcel(tc, true, "Click on close button on pupup" , "Click on the Button - successful!");
-		}catch (Exception e) {
-			rwExcel(tc, false, "Click on close button on pupup" , "Click on the Button - failed");
+			rwExcel(tc, true, "Click on close button on pupup", "Click on the Button - successful!");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Click on close button on pupup", "Click on the Button - failed");
 		}
 		return this;
 	}
@@ -163,47 +163,65 @@ public class BackgroundSets extends Comlibs {
 		Wait(90);
 		return new Backgrounds(driver);
 	}
-	public BackgroundSets clickSubmitOnEdit(WebDriver driver,String tc) throws IOException {
+
+	public BackgroundSets clickSubmitOnEdit(WebDriver driver, String tc) throws IOException {
 		Wait(2);
-		
+
 		driver.findElement(subitBtnLocator).click();
-		//click the popup
-		acceptAlert(driver,tc,"OK"); 
+		// click the popup
+		acceptAlert(driver, tc, "OK");
 
 		return this;
 	}
+
 	public ImageTypeList clickManageImageType(WebDriver driver) throws IOException {
 		driver.findElement(ManageImageTypesLocator).click();
 		return new ImageTypeList(driver);
 	}
-	public BackgroundSets selectSetType(WebDriver driver,int num) throws IOException {
-		By SetTypeLocator = By.xpath("//*[@id='sequence']/option["+num+"]");
+
+	public BackgroundSets selectSetType(WebDriver driver, int num) throws IOException {
+		By SetTypeLocator = By.xpath("//*[@id='sequence']/option[" + num + "]");
 		driver.findElement(SetTypeLocator).click();
 		return this;
 	}
-	//*[@id='sequence']/option[3]
-	
-//	public BackgroundSets clickRefleshF5Btn(WebDriver driver, String tc) throws IOException {
-//		// driver.findElement(addInventoryBtn).sendKeys(Keys.F5);
-//		driver.navigate().to(driver.getCurrentUrl());
-//		return this;
-//	}
 
-//	public void acceptAlert(String tc, String alertType) throws IOException {
-//		boolean alertPass = false;
-//		Wait(1);
-//		try {
-//			driver.switchTo().alert().accept();// on the “Ok” button as soon as the pop up window appears.
-//			// driver.switchTo().alert().dismiss();// clicks on the “Cancel” button as soon as the pop up window appears.
-//			driver.switchTo().defaultContent();//
-//			alertPass = true;
-//			System.out.println("1. Accept the alert.");
-//			// rwExcel(tc, true, "Alert showing, Accept the alert =" + alertType, "Accetped successfully.");
-//		} catch (Throwable e) {
-//			alertPass = false;
-//			System.out.println("1. Failed to Accept the alert.");
-//			rwExcel(tc, false, "Alert showing, Accept the alert =" + alertType, "failed to accetp.");
-//		}
-//		// return alertPass;
-//	}
+	public void uploadBackgroundPicture(WebDriver driver, String imagePath, String tc) throws IOException {
+
+		try {
+			// driver.findElement(By.id("images")).sendKeys(imagePath); // By id - ok
+			driver.findElement(chooseFilesBtnLocator).sendKeys(imagePath);// By X.Path - ?
+			Wait(2);
+			rwExcel(tc, true, "Upload background pictures", "Click on Choose Files button successfully.");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Upload background pictures", "Click on Choose Files button.");
+			Wait(2);
+		}
+
+	}
+
+	// *[@id='sequence']/option[3]
+
+	// public BackgroundSets clickRefleshF5Btn(WebDriver driver, String tc) throws IOException {
+	// // driver.findElement(addInventoryBtn).sendKeys(Keys.F5);
+	// driver.navigate().to(driver.getCurrentUrl());
+	// return this;
+	// }
+
+	// public void acceptAlert(String tc, String alertType) throws IOException {
+	// boolean alertPass = false;
+	// Wait(1);
+	// try {
+	// driver.switchTo().alert().accept();// on the “Ok” button as soon as the pop up window appears.
+	// // driver.switchTo().alert().dismiss();// clicks on the “Cancel” button as soon as the pop up window appears.
+	// driver.switchTo().defaultContent();//
+	// alertPass = true;
+	// System.out.println("1. Accept the alert.");
+	// // rwExcel(tc, true, "Alert showing, Accept the alert =" + alertType, "Accetped successfully.");
+	// } catch (Throwable e) {
+	// alertPass = false;
+	// System.out.println("1. Failed to Accept the alert.");
+	// rwExcel(tc, false, "Alert showing, Accept the alert =" + alertType, "failed to accetp.");
+	// }
+	// // return alertPass;
+	// }
 }

@@ -211,7 +211,7 @@ public class AccountProfile extends Comlibs {
 		boolean messageExist = false;
 		if (msg.contains(message)) {
 			messageExist = true;
-			rwExcel(tc, true, "Verify msg =\"" + message, " shows on the page");
+			rwExcel(tc, true, "Verify msg =\"" + message, "\"shows on the page");
 		} else {
 			rwExcel(tc, false, "Verify msg =\"" + message,
 					" does not show on the page" + ". The showing MSG is \"" + msg + "\"");
