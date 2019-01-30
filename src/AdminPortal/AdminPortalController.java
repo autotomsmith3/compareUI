@@ -946,7 +946,7 @@ public class AdminPortalController extends Comlibs {
 			BackgroundSetsP.clickEditSetBtn(driver, 1);
 			ac.Wait(wt);
 			BackgroundSetsP.clickAllDealershipsCheckBox(driver);// check
-			System.out.println("\nFirst click it did not appear.Wait... ClickAllDealershipsCheckBox twice!!!!!");
+			System.out.println("\nFirst clicking it did not appear.Wait... ClickAllDealershipsCheckBox twice!!!!!");
 		}
 		ac.Wait(wt);
 		BackgroundSetsP.clickAllDealershipsCheckBox(driver);// uncheck
@@ -1057,9 +1057,11 @@ public class AdminPortalController extends Comlibs {
 		BackgroundsP.VerifyCarImage(driver, tc);
 		BackgroundsP.clickBackgroundPic(driver, tc);
 		BackgroundsP.VerifyCarImage(driver, tc + "_added_BG_Pic");
-		int numpics = 5;// Number of images for the model year vehicle
+		int numpics = 6;// Number of images for the model year vehicle
 		for (int i = 1; i <= numpics; i++) {
+			ac.Wait(wt);
 			BackgroundsP.clickRightArrowBtn(driver, tc + "_" + i);
+			ac.Wait(wt);
 			BackgroundsP.clickBackgroundPic(driver, tc + "_" + i);
 		}
 		ac.Wait(wt);
@@ -1071,7 +1073,8 @@ public class AdminPortalController extends Comlibs {
 		BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
 		ac.Wait(wt);
 		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
-		BackgroundsP.uploadBackgroundPicture(driver, backgroundSetPath2, tc + "_02");
+		BackgroundsP.uploadBackgroundPictureFrBackgroundsPage(driver, backgroundSetPath2, envBrowser, 180, 5,
+				tc + "_02");
 
 		tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_new";// = modelcode bar 2019-GM-4NF56-1SD-4NF56-1SD - sn=4876
 		sn = 4876;
@@ -2233,10 +2236,10 @@ public class AdminPortalController extends Comlibs {
 			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 
-			// ////// 1.ManageDealerShipsAddNewAccount:
-			// bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
-			// ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-			// ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+			////// 1.ManageDealerShipsAddNewAccount:
+			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
+			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
 
 			//// 2.ManageDealerShips:
 			loadURL(driver, baseURL, env);

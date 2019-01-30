@@ -198,7 +198,6 @@ public class BackgroundSets extends Comlibs {
 		}
 
 	}
-
 	// *[@id='sequence']/option[3]
 
 	// public BackgroundSets clickRefleshF5Btn(WebDriver driver, String tc) throws IOException {

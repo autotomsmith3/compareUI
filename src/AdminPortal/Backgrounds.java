@@ -150,11 +150,34 @@ public class Backgrounds extends Comlibs {
 			driver.findElement(chooseFileBtn).sendKeys(imagePath);// By X.Path - ?
 			Wait(2);
 			rwExcel(tc, true, "Upload background pictures",
-					"Click on Choose Files button in Backgrounds successfully.");
+					"Click on Choose Files button in Backgrounds page successfully.");
 		} catch (Exception e) {
-			rwExcel(tc, false, "Upload background pictures", "Click on Choose Files button in Backgrounds.");
+			rwExcel(tc, false, "Upload background pictures", "Click on Choose Files button in Backgrounds page.");
 			Wait(2);
 		}
 
+	}
+
+	public Backgrounds uploadBackgroundPictureFrBackgroundsPage(WebDriver driver, String imagePath, String browser,
+			int maxWaitTime, int minWaitTime, String tc) throws IOException {
+		int waitTime = maxWaitTime;
+		if (browser.equalsIgnoreCase("Chrome")) {// Chrome browser does not need the maxWaitTime because Chrome will check the Backgrounds page till it is up but FF does not.
+			waitTime = minWaitTime;
+		}
+		try {
+			// driver.findElement(By.id("btnUploadPics")).sendKeys(imagePath); // By id - ok
+			driver.findElement(chooseFileBtn).sendKeys(imagePath);// By X.Path - ?
+			System.out.println("\nPlease wait...this will be Waiting \"" + waitTime
+					+ "\" seconds for Backgrounds page reloadling... \n");
+			Wait(waitTime);
+			rwExcel(tc, true, "Upload background pictures from Background page",
+					"Click on Choose Files button in Backgrounds page successfully.");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Upload background pictures from Background page",
+					"Click on Choose Files button in Backgrounds page.");
+			Wait(2);
+		}
+		// return this; // does not work for waiting
+		return new Backgrounds(driver);
 	}
 }
