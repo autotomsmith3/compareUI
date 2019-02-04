@@ -45,7 +45,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		String vehGUID01 = prop.getProperty(env + ".VINpxVin01GUID");
 		String vehGUID02 = prop.getProperty(env + ".VINpxVin02GUID");
 		// String vinpxnewVin01 = prop.getProperty(env + ".VINpxNewVIN01");
-		String[] VINpxNewVINs = fetchOneDemArrayFromPropFile(env + ".VINpxNewVINs", prop);
+//		String[] VINpxNewVINs = fetchOneDemArrayFromPropFile(env + ".VINpxNewVINs", prop);
 		String serverName = prop.getProperty(env + ".serverName");
 		String dbName = prop.getProperty(env + ".dbName");
 		String userName = prop.getProperty(env + ".userName");
@@ -160,6 +160,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		Wait(wt);
 		tc = "TC228724";
 		AccountProfileP.clickResetPasswordBtn(driver);
+		Wait(wt);
 		AccountProfileP.checkMSGDisplayedHead(driver,
 				"An email containing a temporary password has been sent to the dealer", tc);
 		// Close Account Profile page

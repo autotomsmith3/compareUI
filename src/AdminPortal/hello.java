@@ -1,12 +1,21 @@
 package AdminPortal;
 
+
+import java.io.Console;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.bson.Document;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver.Window;
+import org.openqa.selenium.WebElement;
+import org.w3c.dom.css.DocumentCSS;
+
 
 public class hello {
 	public static VDVILogin loadURL(WebDriver driver, String bURL, String env) throws IOException, InterruptedException {
@@ -140,10 +149,52 @@ public class hello {
 		DealerPortal_Templates.clickHeaderEditBtn(driver);
 //		Templates:
 //		By Header_dealerShipAddressCheckBox=By.xpath("//*[@id=\"headerContent\"]/label[3]/span"); //   //*[@id="headerContent"]/label[3]/span; //checked: //*[@id="headerContent"]/label[3]/span
-		By Header_dealerShipAddressCheckBox=By.xpath("//*[@id=\"headerContent\"]/label[3]");
+		By Header_dealerShipAddressCheckBox=By.xpath("//*[@id='headerContent']/label[3]/span");//    //*[@id="headerContent"]/label[3]/span
+
+		// see ::after URL here:
+//		1. https://stackoverflow.com/questions/51992258/xpath-to-find-pseudo-element-after-in-side-a-div-element-with-out-any-content
+//		2. https://stackoverflow.com/questions/3012716/css-how-to-remove-pseudo-elements-after-before
 		
 		
-		String getSpanWhenChecked=driver.findElement(Header_dealerShipAddressCheckBox).getAttribute("label");// =null
+		
+//		console.log(window.getComputedStyle(document.querySelector('#headerContent > label:nth-child(6) > span'), ':after'));
+//		
+//		System.out.println("Begin...");
+//		
+////		console.log(window.window.getComputedStyle(document.querySelector("#headerContent > label:nth-child(6) > span"), ":after"));
+//		
+////		window.getComputedStyle(document.querySelector("#headerContent > label:nth-child(6) > span"), ":after");
+//		
+//		JavascriptExecutor js = (JavascriptExecutor) driver;         
+//		js.executeScript("return document.title");
+//		
+////		console.log(window.window.getComputedStyle(document.querySelector("#headerContent > label:nth-child(6) > span"), ":after"));
+//		 
+//		JavascriptExecutor js = (JavascriptExecutor) driver;         
+//		js.executeScript("return document.title");
+		
+		JavascriptExecutor js = (JavascriptExecutor) driver;         
+//		String tt=js.executeScript("return document.title").toString();//ok to see title
+		String tt=js.exec uteScript("return document.querySelector('#headerContent > label:nth-child(6) > span'), ':after'").toString();
+		System.out.println("\ntt="+tt);
+		JavascriptExecutor jss = (JavascriptExecutor) driver;         
+//		String tt=js.executeScript("return document.title").toString();//ok to see title
+		String ttt=jss.executeScript("return document.querySelector('#headerContent > label:nth-child(6) > span'), ':after'").toString();
+		System.out.println("\nttt="+ttt);
+		
+		
+		boolean getSpanWhenCheckeds=driver.findElement(Header_dealerShipAddressCheckBox).isSelected();// =null   span.checkmark::after
+		System.out.println("getSpanWhenCheckeds:"+getSpanWhenCheckeds);	
+		getSpanWhenCheckeds=driver.findElement(Header_dealerShipAddressCheckBox).isSelected();// =null   span.checkmark::after
+		System.out.println("getSpanWhenCheckeds:"+getSpanWhenCheckeds);	
+		
+		String getSpanWhenChecked=driver.findElement(Header_dealerShipAddressCheckBox).getCssValue("span.checkmark::after");// =null   span.checkmark::after
+		System.out.println("getSpanWhenChecked:"+getSpanWhenChecked);		
+		
+		 getSpanWhenChecked=driver.findElement(Header_dealerShipAddressCheckBox).getCssValue("span.checkmark::");// =null   span.checkmark::after
+		System.out.println("getSpanWhenChecked:"+getSpanWhenChecked);
+		
+		 getSpanWhenChecked=driver.findElement(Header_dealerShipAddressCheckBox).getCssValue("span");// =null   span.checkmark::after
 		System.out.println("getSpanWhenChecked:"+getSpanWhenChecked);
 		
 		getSpanWhenChecked=driver.findElement(Header_dealerShipAddressCheckBox).getCssValue("label");//=""

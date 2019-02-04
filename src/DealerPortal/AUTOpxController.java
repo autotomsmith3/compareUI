@@ -996,6 +996,8 @@ public class AUTOpxController extends Comlibs {
 		String MaxVins = prop.getProperty(env + ".MaxVinsForPreview");
 		String VINpxSupportEmail = prop.getProperty(env + ".VINpxSupportEmail");
 		String VINpxSupportEmailPS = prop.getProperty(env + ".VINpxSupportEmailPS");
+		String VINpxdlrGuid = prop.getProperty(env + ".VINpxdlrGuid");
+
 		int MaxVinsForPreview = Integer.parseInt(MaxVins);
 		// Initial
 		// final int wt_Secs = 6;
@@ -1130,6 +1132,8 @@ public class AUTOpxController extends Comlibs {
 			tempVehGUID = igP.getVehGUID(dealerCode, tempVIN, serverName, dbName, userName, password);
 			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, tempVIN, tempVehGUID, 1, TCnum);
 			igP.clickRefleshF5Btn(driver, TCnum);
+			ac.Wait(30);
+			igP.removeVINfrDealer(VINpxdlrGuid, tempVIN, serverName, dbName, userName, password);
 			// ********************End of Add VIN********************************************************
 		}
 		igP.clickSelectNoneBtn(driver, TCnum);
@@ -1400,6 +1404,7 @@ public class AUTOpxController extends Comlibs {
 		String MaxVins = prop.getProperty(env + ".MaxVinsForPreview");
 		String VINpxSupportEmail = prop.getProperty(env + ".VINpxSupportEmail");
 		String VINpxSupportEmailPS = prop.getProperty(env + ".VINpxSupportEmailPS");
+		String STOCKpxdlrGuid = prop.getProperty(env + ".STOCKpxdlrGuid");
 		int MaxVinsForPreview = Integer.parseInt(MaxVins);
 		// Initial
 		// final int wt_Secs = 6;
@@ -2912,12 +2917,12 @@ public class AUTOpxController extends Comlibs {
 			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
 			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
-			//////// bc.Wait(38*60);//wait 18 minutes;
-			////
-			// // ////// 4. LOTpx
-			// bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
-			// LOTpxInventoryTC(driver, tBrowser, env);
-			// LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
+//			////// bc.Wait(18*60);//wait 18 minutes;
+//			//
+//			 // ////// 4. LOTpx
+//			 bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
+//			 LOTpxInventoryTC(driver, tBrowser, env);
+//			 LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
 			System.out.println("Test is complete!!!");
