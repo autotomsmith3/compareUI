@@ -133,7 +133,7 @@ public class AUTOpxLogin extends Comlibs {
 
 	public void verifyHeaderFooter(String env, String versionNum, String tc) throws IOException {
 		String disclaimer, versionText;
-		String expectDisclaimer = "© 2018 Autodata Solutions, Inc. / Autodata Solutions Company";
+		String expectDisclaimer = "© 2019 Autodata Solutions, Inc. / Autodata Solutions Company";
 		String expectVersionNum = "App version: " + versionNum + " Environment: " + env + "";
 		boolean header, footerL1, footerL2, footerR, footerL1Text, footerL2Text;
 		header = elementExist(driver, logo_leftUpLocator, true, tc);

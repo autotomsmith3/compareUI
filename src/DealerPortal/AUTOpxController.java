@@ -172,12 +172,14 @@ public class AUTOpxController extends Comlibs {
 		// Help section
 		TCnum = "TC139675_7_igP"; // Help - Contact Support. email and tel no.
 		// igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, TCnum);
-		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,checkEmail ,TCnum);
+		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,
+				checkEmail, TCnum);
 		TCnum = "TC139675_14_igP";
 		igP.verifyHelpSystemHelp(driver, TCnum);// Help - System Help.
 		TCnum = "TC139675_17_igP"; // Help - Report Issue. email and tel no.
 		// igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, TCnum);
-		igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,checkEmail ,TCnum);
+		igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS, checkEmail,
+				TCnum);
 
 		// Type
 		igP.clickTypeBtn(driver, TCnum);
@@ -776,10 +778,10 @@ public class AUTOpxController extends Comlibs {
 		igP.clickColorExteriorTab(driver, TCnum);
 		igP.clickColorExteriorColorCheckBox(driver, "Summit White(GAZ)", TCnum);
 		igP.clickColorInteriorTab(driver, TCnum);
-		String selectedInterior="Dark Atmosphere/Medium Atmosphere w/Cloth Seat Trim(HHR)";
-		igP.clickColorInteriorColorCheckBox(driver, selectedInterior, TCnum); //on 2018-12-29
-//		 igP.clickColorInteriorColorCheckBox(driver, "Ebony Black", TCnum); //on 2018-09-30
-//		igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); // afte 2018-09-30, works for Chrome but Firefox 2018-12-17
+		String selectedInterior = "Dark Atmosphere/Medium Atmosphere w/Cloth Seat Trim(HHR)";
+		igP.clickColorInteriorColorCheckBox(driver, selectedInterior, TCnum); // on 2018-12-29
+		// igP.clickColorInteriorColorCheckBox(driver, "Ebony Black", TCnum); //on 2018-09-30
+		// igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); // afte 2018-09-30, works for Chrome but Firefox 2018-12-17
 		igP.clickColorApplyBtn(driver, TCnum);
 		igP.clickClearAllFiltersBtn(driver, TCnum);
 		TCnum = "TC139691_19_exterior";
@@ -787,12 +789,12 @@ public class AUTOpxController extends Comlibs {
 		igP.clickColorExteriorTab(driver, TCnum);
 		igP.clickColorExteriorColorCheckBox(driver, "Summit White(GAZ)", TCnum);
 		igP.clickColorInteriorTab(driver, TCnum);
-		 igP.clickColorInteriorColorCheckBox(driver, selectedInterior, TCnum); //on 2018-09-30
-//			igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); // afte 2018-09-30, works for Chrome but Firefox 2018-12-17
+		igP.clickColorInteriorColorCheckBox(driver, selectedInterior, TCnum); // on 2018-09-30
+		// igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); // afte 2018-09-30, works for Chrome but Firefox 2018-12-17
 		igP.clickColorApplyBtn(driver, TCnum);
 		igP.clickColorsBtn(driver, TCnum);
 		igP.clickColorExteriorTab(driver, TCnum);
-		String selectedExterior="Black Raven(GBA)";
+		String selectedExterior = "Black Raven(GBA)";
 		igP.clickColorExteriorColorCheckBox(driver, selectedExterior, TCnum);
 		igP.clickColorExteriorColorCheckBox(driver, selectedExterior, TCnum);
 		igP.clickColorApplyBtn(driver, TCnum);
@@ -842,7 +844,7 @@ public class AUTOpxController extends Comlibs {
 		// Stop here
 		igP.clickClearAllFiltersBtn(driver, TCnum);
 
-//		click on gridViewBtn and listViewBtn  - 20181218
+		// click on gridViewBtn and listViewBtn - 20181218
 		TCnum = "TC139693_01";
 		igP.clickGridViewBtn(driver, TCnum);
 		igP.clickTilesViewBtn(driver, TCnum);
@@ -850,7 +852,7 @@ public class AUTOpxController extends Comlibs {
 		igP.enterTextInSearch(vin01);
 		igP.clickGridRowOnlyOneRecordToCheck(driver, TCnum);
 		igP.clickGridRowOnlyOneRecord(driver, TCnum);
-		VehicleGallery vgP=new VehicleGallery(driver);
+		VehicleGallery vgP = new VehicleGallery(driver);
 		vgP.clickBackToInventoryBtn(driver);
 		TCnum = "TC139693_02";
 		igP.clickGridViewBtn(driver, TCnum);
@@ -860,7 +862,7 @@ public class AUTOpxController extends Comlibs {
 		igP.clickGridRowOneRecordWithNumToCheck(driver, "3", TCnum);
 		igP.clickGridRowOneRecordWithNum(driver, "3", TCnum);
 		vgP.clickBackToInventoryBtn(driver);
-		
+
 		// Verify Show All button TC141797
 
 		igP.clickSelectNoneBtn(driver, TCnum);
@@ -1088,11 +1090,13 @@ public class AUTOpxController extends Comlibs {
 		// Help section
 		TCnum = "TC139675_7_VINpx"; // Help - Contact Support. email and tel no.
 		// (WebDriver driver, String email, String tel,String VINpxSupportEmail, String VINpxSupportEmailPS, String tc
-		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,checkEmail, TCnum);
+		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,
+				checkEmail, TCnum);
 		TCnum = "TC139675_14_VINpx";
 		igP.verifyHelpSystemHelp(driver, TCnum);// Help - System Help.
 		TCnum = "TC139675_17_VINpx"; // Help - Report Issue. email and tel no.
-		igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,checkEmail, TCnum);
+		igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS, checkEmail,
+				TCnum);
 
 		tempVIN = "6";
 		igP.enterTextInSearch(tempVIN);
@@ -1143,7 +1147,7 @@ public class AUTOpxController extends Comlibs {
 		// allVinNums = igP.getReRenderNum(driver, TCnum);
 		allVinNums = igP.getReRenderNum(driver, TCnum);
 		igP.clickSelectNoneBtn(driver, TCnum);
-		
+
 		// Verify Rerender Single Vehicle 01 for VINpx dealer
 		TCnum = "TC139706_8";
 		igP.enterTextInSearch(vin01);
@@ -1164,7 +1168,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139706_10";
 		vgP.verifyLoadPannelImage(driver, TCnum);
 		vgP.clickBackToInventoryBtn(driver);
-		
+
 		// Verify Rerender Single Vehicle 02 for VINpx dealer
 		TCnum = "TC139706_8_vin02";
 		ac.Wait(2);
@@ -1263,9 +1267,9 @@ public class AUTOpxController extends Comlibs {
 		if (allVinNums >= MaxVinsForPreview) {
 			allVinNums = MaxVinsForPreview;
 		}
-		 ac.Wait(2);
-//		 igP.enterTextInSearch(vin01);  // This will make only one vehicle for the Next VIN.
-//		 ac.Wait(2);
+		ac.Wait(2);
+		// igP.enterTextInSearch(vin01); // This will make only one vehicle for the Next VIN.
+		// ac.Wait(2);
 		try {
 			allImageNums = igP.getTileImageNum(driver, vehGUID01, "");
 		} catch (Exception ex) {
@@ -1435,12 +1439,14 @@ public class AUTOpxController extends Comlibs {
 		// Help section
 		TCnum = "TC139675_7_STOCKpx"; // Help - Contact Support. email and tel no.
 		// igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, TCnum);
-		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,checkEmail, TCnum);
+		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,
+				checkEmail, TCnum);
 		TCnum = "TC139675_14_STOCKpx";
 		igP.verifyHelpSystemHelp(driver, TCnum);// Help - System Help.
 		TCnum = "TC139675_17_STOCKpx"; // Help - Report Issue. email and tel no.
 		// igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, TCnum);
-		igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,checkEmail, TCnum);
+		igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS, checkEmail,
+				TCnum);
 		if (addNewVIN.equalsIgnoreCase("Yes") && render.equalsIgnoreCase("Yes")) {
 			//// *********************Add VIN for STOCKpx*******************************************************
 			// Add VIN
@@ -1761,12 +1767,14 @@ public class AUTOpxController extends Comlibs {
 		// Help section
 		TCnum = "TC139675_7_LOTpx"; // Help - Contact Support. email and tel no.
 		// igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, TCnum);
-		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,checkEmail, TCnum);
+		igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,
+				checkEmail, TCnum);
 		TCnum = "TC139675_14_LOTpx";
 		igP.verifyHelpSystemHelp(driver, TCnum);// Help - System Help.
 		TCnum = "TC139675_17_LOTpx"; // Help - Report Issue. email and tel no.
 		// igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, TCnum);
-		igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS,checkEmail, TCnum);
+		igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, VINpxSupportEmail, VINpxSupportEmailPS, checkEmail,
+				TCnum);
 		tempVIN = "6";
 		igP.enterTextInSearch(tempVIN);
 		igP.verifyDealershipname(dealershipName, TCnum);
@@ -2169,7 +2177,7 @@ public class AUTOpxController extends Comlibs {
 	}
 
 	public static void VINpxTemplatesTC(WebDriver driver, String brw, String versionNum, String envment,
-			String checkEmail) throws IOException, InterruptedException, ClassNotFoundException, SQLException {
+			String checkEmail) throws Exception {
 
 		// Load environment parameters
 		Properties prop = new Properties();
@@ -2184,6 +2192,7 @@ public class AUTOpxController extends Comlibs {
 		String envBrowser = prop.getProperty("AUTOpx.browser");
 		String render = prop.getProperty("AUTOpx.render");
 		String addNewVIN = prop.getProperty("AUTOpx.addNewVIN");
+		String overlayImage = prop.getProperty("AUTOpx.overlayImagePathFile");
 		String accountEmail = prop.getProperty(env + ".VINpxEmail");
 		String accountPS = prop.getProperty(env + ".VINpxPassword");
 		// String baseURL = prop.getProperty(env + ".VINpxDealerPortalBaseURL");
@@ -2201,7 +2210,7 @@ public class AUTOpxController extends Comlibs {
 		String password = prop.getProperty(env + ".password");
 		String MaxVins = prop.getProperty(env + ".MaxVinsForPreview");
 		int MaxVinsForPreview = Integer.parseInt(MaxVins);
-		int MaxTimeForTemplatesPreview=Integer.parseInt(prop.getProperty(env + ".MaxTimeForTemplatesPreview"));
+		int MaxTimeForTemplatesPreview = Integer.parseInt(prop.getProperty(env + ".MaxTimeForTemplatesPreview"));
 		// Initial
 		// final int wt_Secs = 6;
 		String TCnum;
@@ -2239,255 +2248,730 @@ public class AUTOpxController extends Comlibs {
 		igP.clickTemplatesBtn(driver);
 		Templates tpP = new Templates(driver);
 
-		// *************************1st**************************************************************************
+		TCnum = "";
+		String checkboxName = "";
+		String checkboxSelectorID = "";
+		String checkboxCSSstyleID = "transform-origin";
+		String checkboxCSSstyleValue = "50% 50%";
+		boolean checkboxIsChecked = false;
+		String successfulMsg = "";
+		boolean MessageExist = false;
+		// *************************1. Header**************************************************************************
 		// Header
-		try {
-			tpP.clickHeaderEditBtn(driver);
-		} catch (Exception e) {
-			System.out.println(" Header checkbox is not checked, click again to check it!  ");
-			tpP.clickHeaderCheckBox(driver);
-			tpP.clickSaveBtn(driver);
-			tpP.clickHeaderEditBtn(driver);
-		}
-		// tpP.clickHeaderCheckBoxNotReadyYet(driver, true,TCnum);
+		boolean set_Header = true;
+		boolean set_Header_DealershipLogo = true;
+		boolean set_Header_DealershipAddress = false;
+		boolean set_Header_DealershipPhone = true;
+		boolean set_Header_DealershipEmail = false;
+		boolean set_Header_DealershipWebsite = true;
 
-		tpP.clickHeaderXBtn(driver);
-		tpP.clickHeaderEditBtn(driver);
-		tpP.clickDealershipLogoCheckBox(driver);
-		tpP.clickDealershipAddressCheckBox(driver);
-		tpP.clickDealershipPhoneCheckBox(driver);
-		tpP.clickDealershipEmailCheckBox(driver);
-		tpP.clickDealershipWebsiteCheckBox(driver);
-		tpP.clickContentHeaderSaveBtn(driver);
-		ac.Wait(1);
-		tpP.clickHeaderXBtn(driver);
-		ac.Wait(3);
-		// tpP.clickHeaderCheckBox(driver);
+		boolean set_Footer = true;
+		boolean set_Footer_BrandLog = false;
+		boolean set_Footer_VehicleInfo = true;
+		boolean set_Footer_Vin = false;
+		boolean set_Footer_StockNumber = false;
 
-		// Footer
-		try {
-			tpP.clickFooterEditBtn(driver);
-		} catch (Exception e) {
-			System.out.println(" Footer checkbox is not checked, click again to check it!  ");
-			tpP.clickFooterCheckBox(driver);
-			tpP.clickSaveBtn(driver);
-			tpP.clickFooterEditBtn(driver);
-		}
-		tpP.clickFooterXBtn(driver);
-		tpP.clickFooterEditBtn(driver);
-		tpP.clickVehicleInfoCheckBox(driver);
-		tpP.clickVINCheckBox(driver);
-		tpP.clickStockNumberCheckBox(driver);
-		tpP.clickBrandLogoCheckBox(driver);
-		tpP.clickContentFooterSaveBtn(driver);
-		ac.Wait(1);
-		tpP.clickFooterXBtn(driver);
-		ac.Wait(3);
-		// tpP.clickFooterCheckBox(driver);
+		boolean set_MarketingMessageTop = false;
+		boolean set_MarketingMessageBotton = true;
+		boolean set_AddAdditionalOverlay = false;
 
-		// Marketing Message Top
-		try {
-			tpP.clickMarketingMessageTopEditBtn(driver);
-		} catch (Exception e) {
-			System.out.println(" Add Additional Overlay Top checkbox is not checked, click again to check it!  ");
-			tpP.clickMarketingMessageTopCheckBox(driver);
-			tpP.clickSaveBtn(driver);
-			tpP.clickMarketingMessageTopEditBtn(driver);
-		}
-		tpP.clickOverlayXBtn(driver);
-		tpP.clickMarketingMessageTopEditBtn(driver);
-		tpP.inputGlbMsgIntoMarketingMSGTopContentField(driver, "Top_Global Message!");
-		tpP.clickContentOverlaySaveBtn(driver);
-		ac.Wait(1);
-		tpP.clickOverlayXBtn(driver);
-		ac.Wait(3);
-		// tpP.clickOverlayTopCheckBox(driver);
+		boolean set_TextImage_VDI = false;
+		boolean set_TextImage_WCI = true;
+		boolean set_TextImage_VBI = false;
 
-		// Add Additional Overly
-		tpP.clickAddAdditionalOverlayCheckBox(driver, TCnum);
-		ac.Wait(3);
-		// tpP.clickUploadBtn(driver, TCnum);
-		// tpP.acceptAlert(TCnum, "Cancel");//Need to find the right one, not ready
-		// tpP.clickUploadBtn(driver, TCnum);
-		tpP.clickAddAdditionalOverlayCheckBox(driver, TCnum);
+		/**
+		 * second run set_Header=true; set_Header_DealershipLogo=false; set_Header_DealershipAddress=true; set_Header_DealershipPhone=false; set_Header_DealershipEmail=true; set_Header_DealershipWebsite=false;
+		 * 
+		 * 
+		 * set_Footer=true; set_Footer_BrandLog=true; set_Footer_VehicleInfo=false; set_Footer_Vin=false; set_Footer_StockNumber=false;
+		 * 
+		 * set_MarketingMessageTop=false; set_MarketingMessageBotton=true; set_AddAdditionalOverlay=false;
+		 * 
+		 * set_TextImage_VDI=true; set_TextImage_WCI=false; set_TextImage_VBI=true;
+		 **/
 
-		// Select Text Images
-		tpP.scrollUp(driver, 3000, TCnum);
-		tpP.clickFeaturesVDICheckBox(driver);
-		tpP.clickWhatsCoolCheckBox(driver);
-		tpP.clickBenefitsVBICheckBox(driver);
-		ac.Wait(3);
-		tpP.scrollUp(driver, -3000, TCnum);
-		tpP.clickSaveBtn(driver);
-		ac.Wait(3);
-		tpP.clickInventoryGalleryBtn(driver);
-
-		// Verify Rerender Single Vehicle 01 for VINpx dealer
-		TCnum = "TC139706_8";
-		igP.enterTextInSearch(vin01);
-		ac.Wait(2);
-		igP.verifyRerenderBtnStatus(driver, false, TCnum);
-		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
-		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
-		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
-		ac.rwExcel("", "------ Single VIN re-rendering ------", "");
-		igP.clickRerenderBtn(driver, render, TCnum);
-		System.out.println("\n\n 1st time. Please check images once rendering is complete.....\n\n");
-		ac.Wait(2);
-		igP.verifyGoodMsgShowing(driver, TCnum);
-		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
-		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-		TCnum = "TC139706_9_vin02";
-		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
-		VehicleGallery vgP = new VehicleGallery(driver);
-		TCnum = "TC139706_10_vin02";
-		vgP.verifyLoadPannelImage(driver, TCnum);
-		if (render.equalsIgnoreCase("Yes") ) {
-			System.out.println("\nVIN #1. Waiting for 60, check Templates settings");
-			ac.Wait(MaxTimeForTemplatesPreview, true,
-					"\nVIN #1. Waiting for 60 seconds, please check Templates settings:\n\nHeader:\nDealership Logo, Dealership Phone, Dealership Website, \nFooter:\n+Vehicle Info (year, make, model, trim, Glb MSG Top, Text Images:WCI for vin: "
-							+ vin01+"\n");
-//			System.out.println("\n1. press Enter key to continue......");
-//			System.in.read();
-		}else {
-			System.out.println("\nVIN #1. Waiting for 0, check Templates settings");
-			ac.Wait(10, true,
-					"\nVIN #1. Waiting for 60 seconds, please check Templates settings:\n\nHeader:\nDealership Logo, Dealership Phone, Dealership Website, \nFooter:\n+Vehicle Info (year, make, model, trim, Glb MSG Top, Text Images:WCI for vin: "
-							+ vin01+"\n");
-		}
-
-		vgP.clickBackToInventoryBtn(driver);
-
-		// *************************2nd**************************************************************************
-		igP.clickTemplatesBtn(driver);
-		// Header
-		try {
-			tpP.clickHeaderEditBtn(driver);
-		} catch (Exception e) {
-			System.out.println(" Header checkbox is not checked, click again to check it!  ");
-			tpP.clickHeaderCheckBox(driver);
-			tpP.clickSaveBtn(driver);
-			tpP.clickHeaderEditBtn(driver);
-		}
-		// tpP.clickHeaderCheckBoxNotReadyYet(driver, true,TCnum);
-
-		tpP.clickHeaderXBtn(driver);
-		tpP.clickHeaderEditBtn(driver);
-		tpP.clickDealershipLogoCheckBox(driver);
-		tpP.clickDealershipAddressCheckBox(driver);
-		tpP.clickDealershipPhoneCheckBox(driver);
-		tpP.clickDealershipEmailCheckBox(driver);
-		tpP.clickDealershipWebsiteCheckBox(driver);
-		tpP.clickContentHeaderSaveBtn(driver);
-		ac.Wait(1);
-		tpP.clickHeaderXBtn(driver);
-		ac.Wait(3);
-		// tpP.clickHeaderCheckBox(driver);
-
-		// Footer
-		try {
-			tpP.clickFooterEditBtn(driver);
-		} catch (Exception e) {
-			System.out.println(" Footer checkbox is not checked, click again to check it!  ");
-			tpP.clickFooterCheckBox(driver);
-			tpP.clickSaveBtn(driver);
-			tpP.clickFooterEditBtn(driver);
-		}
-		tpP.clickFooterXBtn(driver);
-		tpP.clickFooterEditBtn(driver);
-		tpP.clickVehicleInfoCheckBox(driver);
-		tpP.clickVINCheckBox(driver);
-		tpP.clickStockNumberCheckBox(driver);
-		tpP.clickBrandLogoCheckBox(driver);
-		tpP.clickContentFooterSaveBtn(driver);
-		ac.Wait(1);
-		tpP.clickFooterXBtn(driver);
-		ac.Wait(3);
-		// tpP.clickFooterCheckBox(driver);
-
-		// // Marketing Message Top
 		// try {
-		// tpP.clickMarketingMessageTopEditBtn(driver);
+		// tpP.clickHeaderEditBtn(driver);
 		// } catch (Exception e) {
-		// System.out.println(" Marketing Message Top checkbox is not checked, click again to check it! ");
-		// tpP.clickMarketingMessageTopCheckBox(driver);
+		// System.out.println(" Header checkbox is not checked, click again to check it! ");
+		// tpP.clickHeaderCheckBox(driver);
 		// tpP.clickSaveBtn(driver);
-		// tpP.clickMarketingMessageTopEditBtn(driver);
+		// tpP.clickHeaderEditBtn(driver);
+		// }
+		for (int i = 1; i <= 3; i++) {
+			// 1.Header checkbox;
+			TCnum = "Header Checkbox";
+			checkboxName = "HeaderCheckbox";
+			checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(1) > span";
+			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header, false,
+					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+			if (!checkboxIsChecked) {
+				tpP.clickHeaderCheckBox(driver);
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header, true,
+						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+				if (!checkboxIsChecked) {
+					// Failed;
+					System.out.println("Failed to click the checkbox -" + checkboxName);
+				}
+			}
+			if (set_Header) {
+				tpP.clickHeaderEditBtn(driver);
+				ac.Wait(2);
+				// Header Content checkboxes;
+				TCnum = "1.1. Check the checkbox for DealershipLogo";
+				checkboxName = "DealershipLogo";
+				checkboxSelectorID = "#headerContent > label:nth-child(4) > span";
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipLogo,
+						false, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+				if (!checkboxIsChecked) {
+					tpP.clickDealershipLogoCheckBox(driver);
+					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipLogo,
+							true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+					if (!checkboxIsChecked) {
+						// Failed;
+						System.out.println("Failed to click the checkbox -" + checkboxName);
+
+					}
+				}
+
+				TCnum = "1.2. Check the checkbox for DealershipAddress";
+				checkboxName = "DealershipAddress";
+				checkboxSelectorID = "#headerContent > label:nth-child(6) > span";
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipAddress,
+						false, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+				if (!checkboxIsChecked) {
+					tpP.clickDealershipAddressCheckBox(driver);
+					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver,
+							set_Header_DealershipAddress, true, checkboxSelectorID, checkboxCSSstyleID,
+							checkboxCSSstyleValue, TCnum);
+					if (!checkboxIsChecked) {
+						// Failed;
+						System.out.println("Failed to click the checkbox -" + checkboxName);
+
+					}
+				}
+
+				TCnum = "1.3. Check the checkbox for DealershipPhone";
+				checkboxName = "DealershipPhone";
+				checkboxSelectorID = "#headerContent > label:nth-child(8) > span";
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipPhone,
+						false, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+				if (!checkboxIsChecked) {
+					tpP.clickDealershipPhoneCheckBox(driver);
+					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipPhone,
+							true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+					if (!checkboxIsChecked) {
+						// Failed;
+						System.out.println("Failed to click the checkbox -" + checkboxName);
+
+					}
+				}
+
+				TCnum = "1.4. Check the checkbox for DealershipEmail";
+				checkboxName = "DealershipEmail";
+				checkboxSelectorID = "#headerContent > label:nth-child(10) > span";
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipEmail,
+						false, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+				if (!checkboxIsChecked) {
+					tpP.clickDealershipEmailCheckBox(driver);
+					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipEmail,
+							true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+					if (!checkboxIsChecked) {
+						// Failed;
+						System.out.println("Failed to click the checkbox -" + checkboxName);
+
+					}
+				}
+
+				TCnum = "1.5. Check the checkbox for DealershipWebsite";
+				checkboxName = "DealershipWebsite";
+				checkboxSelectorID = "#headerContent > label:nth-child(12) > span";
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipWebsite,
+						false, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+				if (!checkboxIsChecked) {
+					tpP.clickDealershipWebsiteCheckBox(driver);
+					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver,
+							set_Header_DealershipWebsite, true, checkboxSelectorID, checkboxCSSstyleID,
+							checkboxCSSstyleValue, TCnum);
+					if (!checkboxIsChecked) {
+						// Failed;
+						System.out.println("Failed to click the checkbox -" + checkboxName);
+
+					}
+				}
+				tpP.clickContentHeaderSaveBtn(driver);
+				ac.Wait(2);
+				TCnum = "Templates-Click SAVE on Header Content box";
+				successfulMsg = "Your settings have been saved";// "Your settings have been saved"
+				MessageExist = tpP.checkMessageDisplayedHead(driver, successfulMsg, TCnum);
+				if (MessageExist) {
+					ac.rwExcel(TCnum, true, "Click on SAVE in Header Content box",
+							"Sucessful msg shows: Your settings have been saved");
+				} else {
+					ac.rwExcel(TCnum, false, "Click on SAVE in Header Content box",
+							"Failed to shows msg: Your settings have been saved.");
+				}
+
+				tpP.clickHeaderXBtn(driver);
+			}
+			// *************************End of 1. Header**************************************************************************
+
+			// *************************2. Footer**************************************************************************
+			// Footer
+			// try {
+			// tpP.clickHeaderEditBtn(driver);
+			// } catch (Exception e) {
+			// System.out.println(" Footer checkbox is not checked, click again to check it! ");
+			// tpP.clickFooterCheckBox(driver);
+			// tpP.clickSaveBtn(driver);
+			// tpP.clickFooterEditBtn(driver);
+			// }
+
+			// 2.Footer checkbox;
+			TCnum = "Footer Checkbox";
+			checkboxName = "FooterCheckbox";
+			checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(4) > span";
+			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer, false,
+					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+			if (!checkboxIsChecked) {
+				tpP.clickFooterCheckBox(driver);
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer, true,
+						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+				if (!checkboxIsChecked) {
+					// Failed;
+					System.out.println("Failed to click the checkbox -" + checkboxName);
+				}
+			}
+			if (set_Footer) {
+				tpP.clickFooterEditBtn(driver);
+				ac.Wait(2);
+				// Footer Content checkboxes;
+				TCnum = "2.1. Check the checkbox for BrandLogo";
+				checkboxName = "BrandLogo";
+				checkboxSelectorID = "#footerContent > label:nth-child(4) > span";
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_BrandLog, false,
+						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+				if (!checkboxIsChecked) {
+					tpP.clickBrandLogoCheckBox(driver);
+					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_BrandLog, true,
+							checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+					if (!checkboxIsChecked) {
+						// Failed;
+						System.out.println("Failed to click the checkbox -" + checkboxName);
+
+					}
+				}
+
+				TCnum = "2.2. Check the checkbox for VehicleInfo";
+				checkboxName = "VehicleInfo";
+				checkboxSelectorID = "#vehInfoLabel > span";
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_VehicleInfo, false,
+						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+				if (!checkboxIsChecked) {
+					tpP.clickVehicleInfoCheckBox(driver);
+					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_VehicleInfo,
+							true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+					if (!checkboxIsChecked) {
+						// Failed;
+						System.out.println("Failed to click the checkbox -" + checkboxName);
+
+					}
+				}
+
+				TCnum = "2.3. Check the checkbox for VIN";
+				checkboxName = "VIN";
+				checkboxSelectorID = "#vinLabel > span";
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_Vin, false,
+						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+				if (!checkboxIsChecked) {
+					tpP.clickVINCheckBox(driver);
+					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_Vin, true,
+							checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+					if (!checkboxIsChecked) {
+						// Failed;
+						System.out.println("Failed to click the checkbox -" + checkboxName);
+
+					}
+				}
+
+				TCnum = "2.4. Check the checkbox for StockNumber";
+				checkboxName = "StockNumber";
+				checkboxSelectorID = "#stockLabel > span";
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_StockNumber, false,
+						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+				if (!checkboxIsChecked) {
+					tpP.clickStockNumberCheckBox(driver);
+					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_StockNumber,
+							true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+					if (!checkboxIsChecked) {
+						// Failed;
+						System.out.println("Failed to click the checkbox -" + checkboxName);
+
+					}
+				}
+				tpP.clickContentFooterSaveBtn(driver);
+				ac.Wait(2);
+				TCnum = "Templates-Click SAVE on Footer Content box";
+				successfulMsg = "Your settings have been saved";// "Your settings have been saved"
+				MessageExist = tpP.checkMessageDisplayedHead(driver, successfulMsg, TCnum);
+				if (MessageExist) {
+					ac.rwExcel(TCnum, true, "Click on SAVE in Footer Content box",
+							"Sucessful msg shows: Your settings have been saved");
+				} else {
+					ac.rwExcel(TCnum, false, "Click on SAVE in Footer Content box",
+							"Failed to shows msg: Your settings have been saved.");
+				}
+				tpP.clickFooterXBtn(driver);
+			}
+			// *************************End of 2. Footer**************************************************************************
+
+			// *************************3.MarketingMessageTop checkbox;*************************
+			TCnum = "MarketingMessageTop Checkbox";
+			checkboxName = "MarketingMessageTop";
+			checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(7) > span";
+			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_MarketingMessageTop, false,
+					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+			if (!checkboxIsChecked) {
+				tpP.clickMarketingMessageTopCheckBox(driver);
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_MarketingMessageTop, true,
+						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+				if (!checkboxIsChecked) {
+					// Failed;
+					System.out.println("Failed to click the checkbox -" + checkboxName);
+
+				}
+			}
+			if (set_MarketingMessageTop) {
+				// tpP.clickOverlayXBtn(driver);
+				tpP.clickMarketingMessageTopEditBtn(driver);
+				tpP.inputGlbMsgIntoMarketingMSGTopContentField(driver, "Top_Global Message!");
+				tpP.clickContentOverlaySaveBtn(driver);
+				ac.Wait(1);
+				tpP.clickOverlayXBtn(driver);
+				ac.Wait(3);
+			}
+			// *************************4.MarketingMessageBotton checkbox;*************************
+			TCnum = "MarketingMessageBotton Checkbox";
+			checkboxName = "MarketingMessageBotton";
+			checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(10) > span";
+			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_MarketingMessageBotton, false,
+					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+			if (!checkboxIsChecked) {
+				tpP.clickMarketingMessageBottomCheckBox(driver);// clickMarketingMessageBottomCheckBox
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_MarketingMessageBotton,
+						true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+				if (!checkboxIsChecked) {
+					// Failed;
+					System.out.println("Failed to click the checkbox -" + checkboxName);
+
+				}
+			}
+			if (set_MarketingMessageBotton) {
+				// tpP.clickOverlayXBtn(driver);
+				tpP.clickMarketingMessageBottomEditBtn(driver);
+				tpP.inputGlbMsgIntoMarketingMSGTopContentField(driver, "Bottom_Global Message!");
+				tpP.clickContentOverlaySaveBtn(driver);
+				ac.Wait(1);
+				tpP.clickOverlayXBtn(driver);
+				ac.Wait(3);
+			}
+
+			// ************************* 5.AddAdditionalOverlay checkbox;*************************
+			TCnum = "AddAdditionalOverlay Checkbox";
+			checkboxName = "AddAdditionalOverlay";
+			checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(14) > span";
+			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_AddAdditionalOverlay, false,
+					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+			if (!checkboxIsChecked) {
+				tpP.clickAddAdditionalOverlayCheckBox(driver, TCnum);// clickMarketingMessageBottomCheckBox
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_AddAdditionalOverlay, true,
+						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+				if (!checkboxIsChecked) {
+					// Failed;
+					System.out.println("Failed to click the checkbox -" + checkboxName);
+
+				}
+			}
+			if (set_AddAdditionalOverlay) {
+				tpP.uploadOverlayPicture(driver, overlayImage, TCnum);
+				tpP.verifyDealershipTemplate(driver, TCnum);
+				tpP.clickXonDealershipTemplate(driver, TCnum);
+				tpP.uploadOverlayPicture(driver, overlayImage, TCnum);
+				tpP.verifyDealershipTemplate(driver, TCnum);
+			}
+
+			// ************************* 6.1 Features - VDI checkbox;*************************
+			tpP.scrollUp(driver, 3000, TCnum);
+			TCnum = "6.1 Check the checkbox for VDI";
+			checkboxName = "VDI";
+			checkboxSelectorID = "#main-container > div > div:nth-child(5) > div:nth-child(2) > label > span";
+			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_VDI, false,
+					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+			if (!checkboxIsChecked) {
+				tpP.clickFeaturesVDICheckBox(driver);
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_Vin, true,
+						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+				if (!checkboxIsChecked) {
+					// Failed;
+					System.out.println("Failed to click the checkbox -" + checkboxName);
+
+				}
+			}
+
+			// ************************* 6.2 What's Cool - WCI checkbox;*************************
+			TCnum = "6.2 Check the checkbox for WCI";
+			checkboxName = "WCI";
+			checkboxSelectorID = "#main-container > div > div:nth-child(5) > div:nth-child(3) > label > span";
+			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_WCI, false,
+					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+			if (!checkboxIsChecked) {
+				tpP.clickWhatsCoolCheckBox(driver);
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_Vin, true,
+						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+				if (!checkboxIsChecked) {
+					// Failed;
+					System.out.println("Failed to click the checkbox -" + checkboxName);
+
+				}
+			}
+
+			// ************************* 6.3 Benefits - VBI checkbox;*************************
+			TCnum = "6.3 Check the checkbox for VBI";
+			checkboxName = "VBI";
+			checkboxSelectorID = "#main-container > div > div:nth-child(5) > div:nth-child(4) > label > span";
+			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_VBI, false,
+					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+			if (!checkboxIsChecked) {
+				tpP.clickBenefitsVBICheckBox(driver);
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_Vin, true,
+						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+				if (!checkboxIsChecked) {
+					// Failed;
+					System.out.println("Failed to click the checkbox -" + checkboxName);
+
+				}
+			}
+
+			ac.Wait(2);
+			tpP.scrollUp(driver, -3000, TCnum);
+			TCnum = "Templates-Click the up right SAVE";
+			tpP.clickSaveBtn(driver);
+			successfulMsg = "Your settings have been saved";// "Your settings have been saved"
+			MessageExist = tpP.checkMessageDisplayedHead(driver, successfulMsg, TCnum);
+			if (MessageExist) {
+				ac.rwExcel(TCnum, true, "Click on SAVE in Templates page",
+						"Sucessful msg shows: Your settings have been saved");
+			} else {
+				ac.rwExcel(TCnum, false, "Click on SAVE in Templates page",
+						"Failed to shows msg: Your settings have been saved.");
+			}
+			ac.Wait(2);
+			tpP.clickInventoryGalleryBtn(driver);
+
+			/**
+			 * 
+			 * // tpP.verifyDealershipTemplate(driver, TCnum);//If the Dealership Template image is deleted, don't use this to verify it. It will still pass! // ************************* End of 5.AddAdditionalOverlay checkbox;*************************
+			 * 
+			 * // // 2.Footer checkbox; // TCnum = "Footer Checkbox"; // checkboxName = "FooterCheckbox"; // checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(4) > span"; // checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, true, false, checkboxSelectorID, // checkboxCSSstyleID, checkboxCSSstyleValue, TCnum); // if (!checkboxIsChecked) { // tpP.clickFooterCheckBox(driver); // checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, true, true, checkboxSelectorID, // checkboxCSSstyleID, checkboxCSSstyleValue, TCnum); // if (!checkboxIsChecked) { // // Failed; //
+			 * System.out.println("Failed to click the checkbox -" + checkboxName); // // } // }
+			 * 
+			 * // // ***************Final script 1 checked ****************************************************** // tc = "Check the checkbox for DealershipAddress"; // checkboxIsChecked = checkboxWithPseudoElement("DealershipAddress", driver, true, false, dealershipAddress, // dealershipAddressCSSstyleID, "50% 50%", tc); // if (!checkboxIsChecked) { // DealerPortal_Templates.clickDealershipAddressCheckBox(driver); // checkboxIsChecked = checkboxWithPseudoElement("DealershipAddress", driver, true, true, dealershipAddress, // dealershipAddressCSSstyleID, "50% 50%", tc); // } // // ***************End of Final script 1 checked
+			 * ******************************************************
+			 * 
+			 * tpP.clickHeaderXBtn(driver); tpP.clickHeaderEditBtn(driver); tpP.clickDealershipLogoCheckBox(driver); tpP.clickDealershipAddressCheckBox(driver); tpP.clickDealershipPhoneCheckBox(driver); tpP.clickDealershipEmailCheckBox(driver); tpP.clickDealershipWebsiteCheckBox(driver); tpP.clickContentHeaderSaveBtn(driver); ac.Wait(1); tpP.clickHeaderXBtn(driver); ac.Wait(3); // tpP.clickHeaderCheckBox(driver);
+			 * 
+			 * // Footer try { tpP.clickFooterEditBtn(driver); } catch (Exception e) { System.out.println(" Footer checkbox is not checked, click again to check it! "); tpP.clickFooterCheckBox(driver); tpP.clickSaveBtn(driver); tpP.clickFooterEditBtn(driver); } tpP.clickFooterXBtn(driver); tpP.clickFooterEditBtn(driver); tpP.clickVehicleInfoCheckBox(driver); tpP.clickVINCheckBox(driver); tpP.clickStockNumberCheckBox(driver); tpP.clickBrandLogoCheckBox(driver); tpP.clickContentFooterSaveBtn(driver); ac.Wait(1); tpP.clickFooterXBtn(driver); ac.Wait(3); // tpP.clickFooterCheckBox(driver);
+			 * 
+			 * // Marketing Message Top try { tpP.clickMarketingMessageTopEditBtn(driver); } catch (Exception e) { System.out.println(" Add Additional Overlay Top checkbox is not checked, click again to check it! "); tpP.clickMarketingMessageTopCheckBox(driver); tpP.clickSaveBtn(driver); tpP.clickMarketingMessageTopEditBtn(driver); } tpP.clickOverlayXBtn(driver); tpP.clickMarketingMessageTopEditBtn(driver); tpP.inputGlbMsgIntoMarketingMSGTopContentField(driver, "Top_Global Message!"); tpP.clickContentOverlaySaveBtn(driver); ac.Wait(1); tpP.clickOverlayXBtn(driver); ac.Wait(3); // tpP.clickOverlayTopCheckBox(driver);
+			 * 
+			 * // Add Additional Overly tpP.clickAddAdditionalOverlayCheckBox(driver, TCnum); ac.Wait(3); // tpP.clickUploadBtn(driver, TCnum); // tpP.acceptAlert(TCnum, "Cancel");//Need to find the right one, not ready // tpP.clickUploadBtn(driver, TCnum); tpP.clickAddAdditionalOverlayCheckBox(driver, TCnum);
+			 * 
+			 * // Select Text Images tpP.scrollUp(driver, 3000, TCnum); tpP.clickFeaturesVDICheckBox(driver); tpP.clickWhatsCoolCheckBox(driver); tpP.clickBenefitsVBICheckBox(driver); ac.Wait(3); tpP.scrollUp(driver, -3000, TCnum); tpP.clickSaveBtn(driver); ac.Wait(3); tpP.clickInventoryGalleryBtn(driver);
+			 **/
+			// Verify Rerender Single Vehicle 01 for VINpx dealer
+			TCnum = "TC139706_8";
+			igP.enterTextInSearch(vin01);
+			ac.Wait(2);
+			igP.verifyRerenderBtnStatus(driver, false, TCnum);
+			// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
+			igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
+			igP.verifyRerenderBtnStatus(driver, true, TCnum);
+			// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+			ac.rwExcel("", "------ Single VIN re-rendering ------", "");
+			igP.clickRerenderBtn(driver, render, TCnum);
+			System.out.println("\n\n 1st time. Please check images once rendering is complete.....\n\n");
+			ac.Wait(2);
+			igP.verifyGoodMsgShowing(driver, TCnum);
+			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
+			igP.verifyRerenderBtnStatus(driver, true, TCnum);
+			TCnum = "TC139706_9_vin02";
+			igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
+			VehicleGallery vgP = new VehicleGallery(driver);
+			TCnum = "TC139706_10_vin02";
+			vgP.verifyLoadPannelImage(driver, TCnum);
+			if (render.equalsIgnoreCase("Yes")) {
+				System.out.println("\nVIN #" + i + ". Waiting for 60, check Templates settings");
+				// ac.Wait(MaxTimeForTemplatesPreview, true,
+				// "\nVIN #1. Waiting for 60 seconds, please check Templates settings:\n\nHeader:\nDealership Logo, Dealership Phone, Dealership Website, \nFooter:\n+Vehicle Info (year, make, model, trim, Glb MSG Top, Text Images:WCI for vin: "
+				// + vin01 + "\n");
+				ac.Wait(MaxTimeForTemplatesPreview, true,
+						"\nVIN #" + i + ". Waiting for 60 seconds, please check Templates settings:\n\nHeader: "
+								+ set_Header + "\n1.DealershipLogo=" + set_Header_DealershipLogo
+								+ ", \n2.DealershipAddress=" + set_Header_DealershipAddress + ", \n3.DealershipPhone="
+								+ set_Header_DealershipPhone + ", \n4.DealershipEmail=" + set_Header_DealershipEmail
+								+ ", \n5.DealershipWebsite=" + set_Header_DealershipWebsite + "\n\nFooter: "
+								+ set_Footer + "\n1.BrandLogo=" + set_Footer_BrandLog + ", \n2.VehicleInfo="
+								+ set_Footer_VehicleInfo + ", \n3.VIN=" + set_Footer_Vin
+								+ ", \n4.set_Footer_StockNumber=" + set_Footer_StockNumber
+								+ ", \n\nMarketingMessageTop=" + set_MarketingMessageTop + ", \nMarketingMessageBotton="
+								+ set_MarketingMessageBotton + ", \nAddAdditionalOverlay=" + set_AddAdditionalOverlay
+								+ ", \n\nText Images: \nVDI=" + set_TextImage_VDI + ",  \nWCI=" + set_TextImage_WCI
+								+ ",  \nVBI=" + set_TextImage_VBI + ",  for vin=" + vin01);
+
+				// System.out.println("\n1. press Enter key to continue......");
+				// System.in.read();
+			} else {
+				System.out.println("\nVIN #\"+i+\". Waiting for 0, check Templates settings");
+				// ac.Wait(10, true,
+				// "\nVIN #1. Waiting for 0 seconds, please check Templates settings:\n\nHeader:\nDealership Logo, Dealership Phone, Dealership Website, \nFooter:\n+Vehicle Info (year, make, model, trim, Glb MSG Top, Text Images:WCI for vin: "
+				// + vin01 + "\n");
+				ac.Wait(10, true,
+						"\nVIN #" + i + ". Waiting for 0 seconds, please check Templates settings:\n\nHeader: "
+								+ set_Header + "\n1.DealershipLogo=" + set_Header_DealershipLogo
+								+ ", \n2.DealershipAddress=" + set_Header_DealershipAddress + ", \n3.DealershipPhone="
+								+ set_Header_DealershipPhone + ", \n4.DealershipEmail=" + set_Header_DealershipEmail
+								+ ", \n5.DealershipWebsite=" + set_Header_DealershipWebsite + "\n\nFooter: "
+								+ set_Footer + "\n1.BrandLogo=" + set_Footer_BrandLog + ", \n2.VehicleInfo="
+								+ set_Footer_VehicleInfo + ", \n3.VIN=" + set_Footer_Vin
+								+ ", \n4.set_Footer_StockNumber=" + set_Footer_StockNumber
+								+ ", \n\nMarketingMessageTop=" + set_MarketingMessageTop + ", \nMarketingMessageBotton="
+								+ set_MarketingMessageBotton + ", \nAddAdditionalOverlay=" + set_AddAdditionalOverlay
+								+ ", \n\nText Images: \nVDI=" + set_TextImage_VDI + ",  \nWCI=" + set_TextImage_WCI
+								+ ",  \nVBI=" + set_TextImage_VBI + ",  for vin=" + vin01);
+			}
+			vgP.clickBackToInventoryBtn(driver);
+			ac.Wait(2);
+			// *************************2nd**************************************************************************
+			igP.clickTemplatesBtn(driver);
+			ac.Wait(2);
+			if (i == 1) {
+				set_Header = true;
+				set_Header_DealershipLogo = false;
+				set_Header_DealershipAddress = true;
+				set_Header_DealershipPhone = false;
+				set_Header_DealershipEmail = true;
+				set_Header_DealershipWebsite = false;
+
+				set_Footer = true;
+				set_Footer_BrandLog = true;
+				set_Footer_VehicleInfo = false;
+				set_Footer_Vin = true;
+				set_Footer_StockNumber = true;
+
+				set_MarketingMessageTop = true;
+				set_MarketingMessageBotton = false;
+				set_AddAdditionalOverlay = true;
+
+				set_TextImage_VDI = true;
+				set_TextImage_WCI = false;
+				set_TextImage_VBI = true;
+			} else {
+				set_Header = true;
+				set_Header_DealershipLogo = true;
+				set_Header_DealershipAddress = false;
+				set_Header_DealershipPhone = true;
+				set_Header_DealershipEmail = false;
+				set_Header_DealershipWebsite = true;
+
+				set_Footer = true;
+				set_Footer_BrandLog = true;
+				set_Footer_VehicleInfo = true;
+				set_Footer_Vin = true;
+				set_Footer_StockNumber = true;
+
+				set_MarketingMessageTop = true;
+				set_MarketingMessageBotton = false;
+				set_AddAdditionalOverlay = false;
+
+				set_TextImage_VDI = true;
+				set_TextImage_WCI = true;
+				set_TextImage_VBI = true;
+			}
+			if (i == 1) {// Re-assignment - No Header no Footer
+				set_Header = false;
+				set_Header_DealershipLogo = false;
+				set_Header_DealershipAddress = true;
+				set_Header_DealershipPhone = false;
+				set_Header_DealershipEmail = true;
+				set_Header_DealershipWebsite = false;
+
+				set_Footer = false;
+				set_Footer_BrandLog = true;
+				set_Footer_VehicleInfo = false;
+				set_Footer_Vin = true;
+				set_Footer_StockNumber = true;
+
+				set_MarketingMessageTop = false;
+				set_MarketingMessageBotton = false;
+				set_AddAdditionalOverlay = false;
+
+				set_TextImage_VDI = true;
+				set_TextImage_WCI = true;
+				set_TextImage_VBI = true;
+			}
+
+		}
+		// // Header
+		// try {
+		// tpP.clickHeaderEditBtn(driver);
+		// } catch (Exception e) {
+		// System.out.println(" Header checkbox is not checked, click again to check it! ");
+		// tpP.clickHeaderCheckBox(driver);
+		// tpP.clickSaveBtn(driver);
+		// tpP.clickHeaderEditBtn(driver);
+		// }
+		// // tpP.clickHeaderCheckBoxNotReadyYet(driver, true,TCnum);
+		//
+		// tpP.clickHeaderXBtn(driver);
+		// tpP.clickHeaderEditBtn(driver);
+		// tpP.clickDealershipLogoCheckBox(driver);
+		// tpP.clickDealershipAddressCheckBox(driver);
+		// tpP.clickDealershipPhoneCheckBox(driver);
+		// tpP.clickDealershipEmailCheckBox(driver);
+		// tpP.clickDealershipWebsiteCheckBox(driver);
+		// tpP.clickContentHeaderSaveBtn(driver);
+		// ac.Wait(1);
+		// tpP.clickHeaderXBtn(driver);
+		// ac.Wait(3);
+		// // tpP.clickHeaderCheckBox(driver);
+		//
+		// // Footer
+		// try {
+		// tpP.clickFooterEditBtn(driver);
+		// } catch (Exception e) {
+		// System.out.println(" Footer checkbox is not checked, click again to check it! ");
+		// tpP.clickFooterCheckBox(driver);
+		// tpP.clickSaveBtn(driver);
+		// tpP.clickFooterEditBtn(driver);
+		// }
+		// tpP.clickFooterXBtn(driver);
+		// tpP.clickFooterEditBtn(driver);
+		// tpP.clickVehicleInfoCheckBox(driver);
+		// tpP.clickVINCheckBox(driver);
+		// tpP.clickStockNumberCheckBox(driver);
+		// tpP.clickBrandLogoCheckBox(driver);
+		// tpP.clickContentFooterSaveBtn(driver);
+		// ac.Wait(1);
+		// tpP.clickFooterXBtn(driver);
+		// ac.Wait(3);
+		// // tpP.clickFooterCheckBox(driver);
+		//
+		// // // Marketing Message Top
+		// // try {
+		// // tpP.clickMarketingMessageTopEditBtn(driver);
+		// // } catch (Exception e) {
+		// // System.out.println(" Marketing Message Top checkbox is not checked, click again to check it! ");
+		// // tpP.clickMarketingMessageTopCheckBox(driver);
+		// // tpP.clickSaveBtn(driver);
+		// // tpP.clickMarketingMessageTopEditBtn(driver);
+		// // }
+		// // tpP.clickOverlayXBtn(driver);
+		// // tpP.clickMarketingMessageTopEditBtn(driver);
+		// // tpP.inputGlbMsgIntoMarketingMSGTopContentField(driver, "");
+		// // tpP.clickContentOverlaySaveBtn(driver);
+		// // ac.Wait(1);
+		// // tpP.clickOverlayXBtn(driver);
+		// // ac.Wait(3);
+		// // // tpP.clickMarketingMessageTopCheckBox(driver);
+		//
+		// // Marketing Message Bottom
+		// try {
+		// tpP.clickMarketingMessageBottomEditBtn(driver);
+		// } catch (Exception e) {
+		// System.out.println(" Add Additional Overlay Bottom checkbox is not checked, click again to check it! ");
+		// tpP.clickMarketingMessageBottomCheckBox(driver);
+		// tpP.clickSaveBtn(driver);
+		// tpP.clickMarketingMessageBottomEditBtn(driver);
 		// }
 		// tpP.clickOverlayXBtn(driver);
-		// tpP.clickMarketingMessageTopEditBtn(driver);
-		// tpP.inputGlbMsgIntoMarketingMSGTopContentField(driver, "");
+		// tpP.clickMarketingMessageBottomEditBtn(driver);
+		// tpP.inputGlbMsgIntoMarketingMSGTopContentField(driver, "Bottom_Global Message!");
 		// tpP.clickContentOverlaySaveBtn(driver);
 		// ac.Wait(1);
 		// tpP.clickOverlayXBtn(driver);
 		// ac.Wait(3);
-		// // tpP.clickMarketingMessageTopCheckBox(driver);
-
-		// Marketing Message Bottom
-		try {
-			tpP.clickMarketingMessageBottomEditBtn(driver);
-		} catch (Exception e) {
-			System.out.println(" Add Additional Overlay Bottom checkbox is not checked, click again to check it!  ");
-			tpP.clickMarketingMessageBottomCheckBox(driver);
-			tpP.clickSaveBtn(driver);
-			tpP.clickMarketingMessageBottomEditBtn(driver);
-		}
-		tpP.clickOverlayXBtn(driver);
-		tpP.clickMarketingMessageBottomEditBtn(driver);
-		tpP.inputGlbMsgIntoMarketingMSGTopContentField(driver, "Bottom_Global Message!");
-		tpP.clickContentOverlaySaveBtn(driver);
-		ac.Wait(1);
-		tpP.clickOverlayXBtn(driver);
-		ac.Wait(3);
-		// tpP.clickOverlayTopCheckBox(driver);
-
-		// Select Text Images
-		tpP.scrollUp(driver, 3000, TCnum);
-		tpP.clickFeaturesVDICheckBox(driver);
-		tpP.clickWhatsCoolCheckBox(driver);
-		tpP.clickBenefitsVBICheckBox(driver);
-		ac.Wait(3);
-		tpP.scrollUp(driver, -3000, TCnum);
-		tpP.clickSaveBtn(driver);
-		ac.Wait(3);
-		tpP.clickInventoryGalleryBtn(driver);
-
-		// Verify Rerender Single Vehicle 01 for VINpx dealer
-		TCnum = "TC139706_8";
-		igP.enterTextInSearch(vin01);
-		ac.Wait(4);
-		igP.verifyRerenderBtnStatus(driver, false, TCnum);
-		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
-		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
-		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
-		ac.rwExcel("", "------ Single VIN re-rendering ------", "");
-		igP.clickRerenderBtn(driver, render, TCnum);
-		System.out.println("\n\n 2nd time. Please check images once rendering is complete.....\n\n");
-		ac.Wait(2);
-		igP.verifyGoodMsgShowing(driver, TCnum);
-		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
-		igP.verifyRerenderBtnStatus(driver, true, TCnum);
-		TCnum = "TC139706_9_vin02";
-		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
-		// VehicleGallery vgP = new VehicleGallery(driver);
-		TCnum = "TC139706_10_vin02";
-		vgP.verifyLoadPannelImage(driver, TCnum);
-		if (render.equalsIgnoreCase("Yes") ) {
-			System.out.println("VIN #2. Waiting for 60, check Templates settings");
-			ac.Wait(MaxTimeForTemplatesPreview, true,
-					"\nVIN #2. Waiting for 60 seconds, please check Templates settings:\n\nHeader:\nDealership Address+Dealership Email, \nFooter:\n+Brand Logo, Glb MSG Bottom, Text Images: VDI AND VBI for vin: "
-							+ vin01+"\n");
-//			System.out.println("\n1. press Enter key to continue......");
-//			System.in.read();
-		}else {
-			System.out.println("VIN #2. Waiting for 0, check Templates settings");
-			ac.Wait(10, true,
-					"\nVIN #2. Waiting for 0 seconds, please check Templates settings:\n\nHeader:\nDealership Address+Dealership Email, \nFooter:\n+Brand Logo, Glb MSG Bottom, Text Images: VDI AND VBI for vin: "
-							+ vin01+"\n");
-		}
-		vgP.clickBackToInventoryBtn(driver);
+		// // tpP.clickOverlayTopCheckBox(driver);
+		//
+		// // Select Text Images
+		// tpP.scrollUp(driver, 3000, TCnum);
+		// tpP.clickFeaturesVDICheckBox(driver);
+		// tpP.clickWhatsCoolCheckBox(driver);
+		// tpP.clickBenefitsVBICheckBox(driver);
+		// ac.Wait(3);
+		// tpP.scrollUp(driver, -3000, TCnum);
+		// tpP.clickSaveBtn(driver);
+		// ac.Wait(3);
+		// tpP.clickInventoryGalleryBtn(driver);
+		//
+		// // Verify Rerender Single Vehicle 01 for VINpx dealer
+		// TCnum = "TC139706_8";
+		// igP.enterTextInSearch(vin01);
+		// ac.Wait(4);
+		// igP.verifyRerenderBtnStatus(driver, false, TCnum);
+		// // igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
+		// igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
+		// igP.verifyRerenderBtnStatus(driver, true, TCnum);
+		// // igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
+		// ac.rwExcel("", "------ Single VIN re-rendering ------", "");
+		// igP.clickRerenderBtn(driver, render, TCnum);
+		// System.out.println("\n\n 2nd time. Please check images once rendering is complete.....\n\n");
+		// ac.Wait(2);
+		// igP.verifyGoodMsgShowing(driver, TCnum);
+		// igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
+		// igP.verifyRerenderBtnStatus(driver, true, TCnum);
+		// TCnum = "TC139706_9_vin02";
+		// igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
+		// // VehicleGallery vgP = new VehicleGallery(driver);
+		// TCnum = "TC139706_10_vin02";
+		// vgP.verifyLoadPannelImage(driver, TCnum);
+		// if (render.equalsIgnoreCase("Yes")) {
+		// System.out.println("VIN #2. Waiting for 60, check Templates settings");
+		// // ac.Wait(MaxTimeForTemplatesPreview, true,
+		// // "\nVIN #2. Waiting for 60 seconds, please check Templates settings:\n\nHeader:\nDealership Address+Dealership Email, \nFooter:\n+Brand Logo, Glb MSG Bottom, Text Images: VDI AND VBI for vin: "
+		// // + vin01 + "\n");
+		//
+		// ac.Wait(MaxTimeForTemplatesPreview, true,
+		// "\nVIN #2. Waiting for 60 seconds, please check Templates settings:\n\nHeader:\n1.DealershipLogo"
+		// + set_Header_DealershipLogo + ", 2.DealershipAddress" + set_Header_DealershipAddress
+		// + ", 3.DealershipPhone" + set_Header_DealershipPhone + ", 4.DealershipEmail"
+		// + set_Header_DealershipEmail + ", 5.DealershipWebsite" + set_Header_DealershipWebsite
+		// + "\nFooter:\n1.BrandLogo" + set_Footer_BrandLog + ", 2.VehicleInfo"
+		// + set_Footer_VehicleInfo + ", 3.VIN" + set_Footer_Vin + ", 4.set_Footer_StockNumber"
+		// + set_Footer_StockNumber + ", MarketingMessageTop " + set_MarketingMessageTop
+		// + ", MarketingMessageBotton " + set_MarketingMessageBotton + ", AddAdditionalOverlay "
+		// + set_AddAdditionalOverlay + ", Text Images: VDI" + set_TextImage_VDI + ", WCI"
+		// + set_TextImage_WCI + ", VBI" + set_TextImage_VBI + ", for vin: " + vin01 + "\n");
+		//
+		// // System.out.println("\n1. press Enter key to continue......");
+		// // System.in.read();
+		// } else {
+		// System.out.println("VIN #2. Waiting for 0, check Templates settings");
+		// // ac.Wait(10, true,
+		// // "\nVIN #2. Waiting for 0 seconds, please check Templates settings:\n\nHeader:\nDealership Address+Dealership Email, \nFooter:\n+Brand Logo, Glb MSG Bottom, Text Images: VDI AND VBI for vin: "
+		// // + vin01 + "\n");
+		// ac.Wait(10, true,
+		// "\nVIN #2. Waiting for 0 seconds, please check Templates settings:\n\nHeader:\n1.DealershipLogo"
+		// + set_Header_DealershipLogo + ", 2.DealershipAddress" + set_Header_DealershipAddress
+		// + ", 3.DealershipPhone" + set_Header_DealershipPhone + ", 4.DealershipEmail"
+		// + set_Header_DealershipEmail + ", 5.DealershipWebsite" + set_Header_DealershipWebsite
+		// + "\nFooter:\n1.BrandLogo" + set_Footer_BrandLog + ", 2.VehicleInfo"
+		// + set_Footer_VehicleInfo + ", 3.VIN" + set_Footer_Vin + ", 4.set_Footer_StockNumber"
+		// + set_Footer_StockNumber + ", MarketingMessageTop " + set_MarketingMessageTop
+		// + ", MarketingMessageBotton " + set_MarketingMessageBotton + ", AddAdditionalOverlay "
+		// + set_AddAdditionalOverlay + ", Text Images: VDI" + set_TextImage_VDI + ", WCI"
+		// + set_TextImage_WCI + ", VBI" + set_TextImage_VBI + ", for vin: " + vin01 + "\n");
+		// }
+		// vgP.clickBackToInventoryBtn(driver);
 
 		// // *************************3rd**************************************************************************
 		// igP.clickTemplatesBtn(driver);
@@ -2852,8 +3336,7 @@ public class AUTOpxController extends Comlibs {
 		return driver;
 	}
 
-	public static void main(String[] args)
-			throws IOException, InterruptedException, ClassNotFoundException, SQLException, AWTException {
+	public static void main(String[] args) throws Exception {
 		// Load environment parameters
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
@@ -2897,32 +3380,32 @@ public class AUTOpxController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			//// 0.General Inventory Gallery
-			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-			inventoryGalleryTC(driver, tBrowser, env, versionNum);
-			vehicleGallery(driver, tBrowser, env);
-			// verifyRerender(driver, tBrowser);
-
-			////// 1.VINpx:
-			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-
-			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-
-			////// 2. STOCKpx
-			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			STOCKpxInventoryTC(driver, tBrowser, env);
+			 //// 0.General Inventory Gallery
+			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
+			 vehicleGallery(driver, tBrowser, env);
+			 // verifyRerender(driver, tBrowser);
+			
+			 ////// 1.VINpx:
+			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+			
+			 // bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			
+			 ////// 2. STOCKpx
+			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			 STOCKpxInventoryTC(driver, tBrowser, env);
 
 			////// 3. Templates
 			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
 			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
-//			////// bc.Wait(18*60);//wait 18 minutes;
-//			//
-//			 // ////// 4. LOTpx
-//			 bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
-//			 LOTpxInventoryTC(driver, tBrowser, env);
-//			 LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
+			// ////// bc.Wait(18*60);//wait 18 minutes;
+			// //
+			// // ////// 4. LOTpx
+			// bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
+			// LOTpxInventoryTC(driver, tBrowser, env);
+			// LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
 			System.out.println("Test is complete!!!");

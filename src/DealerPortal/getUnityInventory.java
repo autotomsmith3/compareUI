@@ -23,51 +23,37 @@ public class getUnityInventory {
 		// String unityWorkURL = "https://data.dealervideos.com/v0.9/vehicles/";
 		String unityWorkURL = "https://data.dealervideos.com/v1.0/vehicles/"; // see VDVIIMG-759
 		// From Prod on January 31, 2018 total 44. Please see details on AUTOpx.xlsx on Prod_UnityWorkID table
-		// String[] unityWorkDealerShipID = {"27OE966","DP9B0OU","112Y2JUB","2FHFIYI"};
-//		String[] unityWorkDealerShipID = { "DJX6JEP", "9NR4XWCFAKE", "9NR4XWC", "BBM3FGT", "BBM3FGT", "CFO7UIZ",
-//				"CFO7UIZ", "TIFFY3P", "TIFFY3P", "KQO8CVH", "KQO8CVH", "KQO8CVH", "8OXDMU0", "8OXDMU0", "PDZE4CK",
-//				"3S09LIW", "3S09LIW", "PDZE4CK", "3S09LIW", "3S09LIW", "KUQ5EG8", "11CN47A9", "IKL88QJ", "IKL88QJ",
-//				"11CN47A9", "ISG2K4A", "ISG2K4A", "9XPGMW9", "9XPGMW9", "L87CBZX", "L87CBZX", "FB7CIB0", "FB7CIB0",
-//				"K6XG7MI", "K6XG7MI", "IM16T9H", "IM16T9H", "TH46625", "DET66GO", "DET66GO", "1DACJ4G", "3F6D163",
-//				"3F6D163", "2FC1ZF6", "BF32R16", "8X9F5TB", "8X9F5TB", "F4E9Q64", "F4E9Q64", "10UUQ6J0", "10UUQ6J0",
-//				"F2NF3UN", "F2NF3UN", "F2NF3UN", "F2NF3UN", "2RV24ZM", "2RV24ZM", "2GELMFG", "OVGH22E", "1E543A9",
-//				"3LAC8ND", "83K3ZCZ", "83NFA5V", "91F3YRQ", "2G3BOM8", "SSAH9MT", "3T2EOSE", "4C0CBC4", "BUNDG1V",
-//				"FJ03WUK", "4CZ4ER3", "2P5ABRK", "2ZA75G7", "3GF7WKT", "8FYDUQI", "30C4S4T", "PON1QS8", "2V0F2Q8",
-//				"F1Y6N4P", "2Z93TKG", "BW83FV1", "BIZ2TXN", "GWA5LW7", "GDMFXVB", "BQOCAM0", "HBNF95H", "K30D73Y",
-//				"DRE4C5R", "K30D73Y", "DRE4C5R", "DGLB2FH", "3RY5KFE", "37B998C", "CUG4744", "2HTB7QA", "7UT7OSP",
-//				"PPHGS6Z", "L4Z70X3", "CD32DO0", "BPNGGA4", "85D7QI6", "20A1B9C", "9P93FSC", "SA9BAU3", "KCTD05I",
-//				"2CT1GBZ", "336G0VN", "4GGEIQM", "33B5OGV", "G56EJGM", "K1H28SP", "KBY8P0Y", "H2X1LSE", "3D41CQL",
-//				"1KH43AC", "1V2FAJZ", "J4M2BVG", "7TI6EUF", "CH140C1", "BL593MS", "KYFFYM4", "DMR245M", "BB77RAC",
-//				"3JTH6TX", "3U2F062", "PI3BDJY", "BN5ECJP", "GWBF9Y3", "CY05E0F", "82P7HWC", "37P3L8Q", "9VBBXKX",
-//				"GKD73H5", "GNCD1MS", "EID1FSJ", "4OQ33O4", "HHH1OHY", "GG81MN0", "30OE50J", "2L41W3M", "3K3GR5N",
-//				"IF0GEL4", "9A880Q7", "48K289V", "DGK5V9L", "FX9CQKC", "WR1S66C", "GBT2V3D", "GNYD218", "C3MC3TL",
-//				"KZ2GH9F", "7VC73SH", "EVL8ODB", "32Y1PCW", "2IM8V9R", "27IBZXO", "3J6F6HT", "1Y6F36U", "3XH6Q6Y",
-//				"BNB8B19", "BN3H7HP", "48YFTUA", "C03EBOJ", "2QQD4R1", "2KAGUTE", "2U17E27", "2S9DTOF", "GKLFUO3",
-//				"2UWAMX2", "DDF4FME", "CE7C54X", "G64264O", "9MT8KBA", "7Z2EDFX", "3D72K6I", "EUO7OIT", "2FDCAJ5",
-//				"2FFF58W", "F2R9NJM", "4DI7BBA", "3LAC8ND", "9MD753B", "EHJF4K9", "917EKQ6", "7QB5LYY", "DA7C289",
-//				"T02A0CM", "BTX24S6", "87RG3Q3", "XG6P812", "19D6Q4P", "2M55XGW", "2VH9MO6", "2VM1YSY", "493IVV2",
-//				"OM95VHT", "G31FTM8", "EHZ1O0U", "3KVG6F6", "SW1B3J6", "3ELG9F7", "2RRG76P", "HH0ESG0", "2TF1HE4",
-//				"80479CR", "GD91YVE", "I8X52IT", "2IN1YG0", "HZO9BHL", "HJLDY6W", "C55G94Z", "3FB2YCC", "2NN4M8F",
-//				"2FEASPJ", "BMUBRUK", "F2L5S40", "E9D6FCA", "2XE6BEO", "FB98MIY", "L5KDIPI", "3QXAM0S", "RMUFXTR",
-//				"PVMH3XH", "4FGC316", "3SG8XJ1", "FC47HNJ", "LK174X8", "2UHFMRX", "2XE6BEO", "FB98MIY", "L5KDIPI",
-//				"3QXAM0S", "RMUFXTR", "PVMH3XH", "4FGC316", "3SG8XJ1", "FC47HNJ", "LK174X8", "2UHFMRX", "MEK2KIF",
-//				"FUTAFJN", "J5LCP07", "GV97K2O", "8418N7S", "J457QGD", "K2656FA", "E6GFUMF", "F30FQ97", "RIWEGNA",
-//				"EJU7HGM", "SGE95S0", "G8P7KQ7", "HGBC3N0", "KDK7Q4M", "KEQ3NC5", "PL9CWKZ", "TDRARWM", "U8B4C62" };// Total 258 not active dealers on November 19, 2018
-
-//		String[] unityWorkDealerShipID = { "2OLET45", "10DWC56S", "1125QZAN", "112Y2JUB", "11BW9H2I", "11D0Y1R8",
-//				"11FDEWDR", "11FK6G5J", "11FYPTW0", "11GFTTMR", "11GLU8DF", "11J18GNF", "11JQM19D", "1QWGIJS",
-//				"1V0BJMB", "246GNLU", "275D2EQ", "27OE966", "2BDCDUA", "2D962HH", "2FHFIYI", "2JH38WM", "2MH3Q9P",
-//				"2QO23PC", "2ZLGTS2", "2ZN8AC1", "31G3JLA", "33M1H95", "3AOCXEK", "3QXAM0S", "4B5CDSU", "8EU6HMR",
-//				"9L83MUH", "ARQFM74", "BX3EWMP", "BX72MDM", "C4QWU9Y", "C6C1MBD", "CGPB0MT", "COA94NS", "CSF1R1T",
-//				"D29DGRX", "D2E8HW2", "D2ZDQQW", "DP9B0OU", "DVAESPR", "EEY9NYG", "EH1UY6J", "EPY41RX", "ESW5ME9",
-//				"EVV73HI", "F2NF3UN", "F72BCJN", "FB7CIB0", "FGN8TC3", "FX592ZN", "G4WGL1P", "GMRCHL5", "GQ22UIC",
-//				"HAQETMB", "HSOFV9O", "HVBFDQZ", "JZZCJS8", "KAMF96C", "KJ0G41K", "KML7F2M", "KQO8CVH", "KTL1B32",
-//				"KW66VNM", "KWDER6A", "L87CBZX", "N7I80QB", "OCN5TPF", "R0AAKW2", "R504FV8", "SLOEASO", "SZ9CRGW",
-//				"T5H57YY", "V5254PG", "W97TIGT", "XZMIZ0A", "YXDADRM", "ZFEQR7R", "ZGX4FNH", "ZLAI0U0" };// Total 85 on August28, 2018 , total 84 on Nov 06,2018 D2E8HW2
-
+//		 String[] unityWorkDealerShipID = {"27OE966","DP9B0OU","112Y2JUB","2FHFIYI"};
+		 String[] unityWorkDealerShipID = { "10UUQ6J0", "11CN47A9", "19D6Q4P", "1DACJ4G", "1E543A9", "1KH43AC",
+		 "1V2FAJZ", "1Y6F36U", "20A1B9C", "27IBZXO", "2CT1GBZ", "2FC1ZF6", "2FDCAJ5", "2FEASPJ", "2FFF58W",
+		 "2G3BOM8", "2GELMFG", "2HTB7QA", "2IM8V9R", "2IN1YG0", "2KAGUTE", "2L41W3M", "2M55XGW", "2NN4M8F",
+		 "2P5ABRK", "2QQD4R1", "2RRG76P", "2RV24ZM", "2S9DTOF", "2TF1HE4", "2U17E27", "2UHFMRX", "2UWAMX2",
+		 "2V0F2Q8", "2VH9MO6", "2VM1YSY", "2XE6BEO", "2Z93TKG", "2ZA75G7", "30C4S4T", "30OE50J", "32Y1PCW",
+		 "336G0VN", "33B5OGV", "37B998C", "37P3L8Q", "3D41CQL", "3D72K6I", "3ELG9F7", "3F6D163", "3FB2YCC",
+		 "3GF7WKT", "3J6F6HT", "3JTH6TX", "3K3GR5N", "3KVG6F6", "3LAC8ND", "3QXAM0S", "3RY5KFE", "3S09LIW",
+		 "3SG8XJ1", "3T2EOSE", "3U2F062", "3XH6Q6Y", "48K289V", "48YFTUA", "493IVV2", "4C0CBC4", "4CZ4ER3",
+		 "4DI7BBA", "4FGC316", "4GGEIQM", "4OQ33O4", "7QB5LYY", "7TI6EUF", "7UT7OSP", "7VC73SH", "7Z2EDFX",
+		 "80479CR", "82P7HWC", "83K3ZCZ", "83NFA5V", "8418N7S", "85D7QI6", "87RG3Q3", "8FYDUQI", "8OXDMU0",
+		 "8X9F5TB", "917EKQ6", "91F3YRQ", "9A880Q7", "9MD753B", "9MT8KBA", "9NR4XWC", "9NR4XWCFAKE", "9P93FSC",
+		 "9VBBXKX", "9XPGMW9", "BB77RAC", "BBM3FGT", "BF32R16", "BIZ2TXN", "BL593MS", "BMUBRUK", "BN3H7HP",
+		 "BN5ECJP", "BNB8B19", "BPNGGA4", "BQOCAM0", "BTX24S6", "BUNDG1V", "BW83FV1", "C03EBOJ", "C3MC3TL",
+		 "C55G94Z", "CD32DO0", "CE7C54X", "CFO7UIZ", "CH140C1", "CUG4744", "CY05E0F", "DA7C289", "DDF4FME",
+		 "DET66GO", "DGK5V9L", "DGLB2FH", "DJX6JEP", "DMR245M", "DRE4C5R", "E6GFUMF", "E9D6FCA", "EHJF4K9",
+		 "EHZ1O0U", "EID1FSJ", "EJU7HGM", "EUO7OIT", "EVL8ODB", "F1Y6N4P", "F2L5S40", "F2NF3UN", "F2R9NJM",
+		 "F30FQ97", "F4E9Q64", "FB7CIB0", "FB98MIY", "FC47HNJ", "FJ03WUK", "FUTAFJN", "FX9CQKC", "G31FTM8",
+		 "G56EJGM", "G64264O", "G8P7KQ7", "GBT2V3D", "GD91YVE", "GDMFXVB", "GG81MN0", "GKD73H5", "GKLFUO3",
+		 "GNCD1MS", "GNYD218", "GV97K2O", "GWA5LW7", "GWBF9Y3", "H2X1LSE", "HBNF95H", "HGBC3N0", "HH0ESG0",
+		 "HHH1OHY", "HJLDY6W", "HZO9BHL", "I8X52IT", "IF0GEL4", "IKL88QJ", "IM16T9H", "ISG2K4A", "J457QGD",
+		 "J4M2BVG", "J5LCP07", "K1H28SP", "K2656FA", "K30D73Y", "K6XG7MI", "KBY8P0Y", "KCTD05I", "KDK7Q4M",
+		 "KEQ3NC5", "KQO8CVH", "KUQ5EG8", "KYFFYM4", "KZ2GH9F", "L4Z70X3", "L5KDIPI", "L87CBZX", "LK174X8",
+		 "MEK2KIF", "OM95VHT", "OVGH22E", "PDZE4CK", "PI3BDJY", "PL9CWKZ", "PON1QS8", "PPHGS6Z", "PVMH3XH",
+		 "RIWEGNA", "RMUFXTR", "SA9BAU3", "SGE95S0", "SSAH9MT", "SW1B3J6", "T02A0CM", "TDRARWM", "TH46625",
+		 "TIFFY3P", "U8B4C62", "WR1S66C", "XG6P812" };// Total 217 - Feb. 12, 2019
 		// String[] unityWorkDealerShipID = {"2FHFIYI","L87CBZX", "H5O4M8B"};//GMRCHL5
-		 String[] unityWorkDealerShipID = {"GMRCHL5"};//GMRCHL5  FCA only - provided by Drew on 2018-12-10 via Teams
-		
+		// String[] unityWorkDealerShipID = {"2L41W3M"};// 2L41W3M-no exterior, no trim - 2019-02-12
+		// String[] unityWorkDealerShipID = {"GMRCHL5"};//GMRCHL5 FCA only - provided by Drew on 2018-12-10 via Teams
+		// String[] unityWorkDealerShipID = {"F72BCJN","27OE966"};//F72BCJN - Hyundai, 27OE966 - Honda 20190211
+
 		// Returning nothing: "","",
 		for (String id : unityWorkDealerShipID) {
 			String jsonTextFrUnityWork = cPP.com_libs.getSourceCode(unityWorkURL, id);
@@ -86,6 +72,9 @@ public class getUnityInventory {
 		int wSize = titleString.length;
 		String[] jsonValue = new String[wSize];
 		cPP.com_libs.writeTitle(resultfile, titleString);
+		String exteriorColor = "";
+		String interiorColor = "";
+		String trim = "";
 		// System.out.println("S/N" + ", vehicleId:" + ", vin:" + ", stockNumber:" + ", used:" + ", certified:"
 		// + ", dateReceived:" + ", make:" + ", model:" + ", year:" + ", mileage:" + ", trim:" + ", bodyStyle:"
 		// + ", engine:" + ", transmission:" + ", exteriorColor:" + ", interiorColor:" + ", listPrice:"
@@ -102,12 +91,27 @@ public class getUnityInventory {
 			String model = jsonarray.getJSONObject(i).getString("model");
 			String year = jsonarray.getJSONObject(i).getString("year");
 			long mileage = jsonarray.getJSONObject(i).getLong("mileage");
-			String trim = jsonarray.getJSONObject(i).getString("trim");
+			try {
+				trim = jsonarray.getJSONObject(i).getString("trim");
+			} catch (Exception e) {
+				e.printStackTrace();
+				trim = "null";
+			}
 			String bodyStyle = jsonarray.getJSONObject(i).getString("bodyStyle");
 			String engine = jsonarray.getJSONObject(i).getString("engine");
 			String transmission = jsonarray.getJSONObject(i).getString("transmission");
-			String exteriorColor = jsonarray.getJSONObject(i).getString("exteriorColor");
-			String interiorColor = jsonarray.getJSONObject(i).getString("interiorColor");
+			try {
+				exteriorColor = jsonarray.getJSONObject(i).getString("exteriorColor");
+			} catch (Exception e) {
+				e.printStackTrace();
+				exteriorColor = "null";
+			}
+			try {
+				interiorColor = jsonarray.getJSONObject(i).getString("interiorColor");
+			} catch (Exception e) {
+				e.printStackTrace();
+				interiorColor = "null";
+			}
 			long listPrice = jsonarray.getJSONObject(i).getLong("listPrice");
 			String picture = jsonarray.getJSONObject(i).getString("picture");
 			String ctx = jsonarray.getJSONObject(i).getString("ctx");
