@@ -2298,7 +2298,7 @@ public class AUTOpxController extends Comlibs {
 		// tpP.clickSaveBtn(driver);
 		// tpP.clickHeaderEditBtn(driver);
 		// }
-		for (int i = 1; i <= 3; i++) {
+		for (int i = 1; i <= 4; i++) {
 			// 1.Header checkbox;
 			TCnum = "Header Checkbox";
 			checkboxName = "HeaderCheckbox";
@@ -2776,28 +2776,6 @@ public class AUTOpxController extends Comlibs {
 				set_TextImage_WCI = false;
 				set_TextImage_VBI = true;
 			} else {
-				set_Header = true;
-				set_Header_DealershipLogo = true;
-				set_Header_DealershipAddress = false;
-				set_Header_DealershipPhone = true;
-				set_Header_DealershipEmail = false;
-				set_Header_DealershipWebsite = true;
-
-				set_Footer = true;
-				set_Footer_BrandLog = true;
-				set_Footer_VehicleInfo = true;
-				set_Footer_Vin = true;
-				set_Footer_StockNumber = true;
-
-				set_MarketingMessageTop = true;
-				set_MarketingMessageBotton = false;
-				set_AddAdditionalOverlay = false;
-
-				set_TextImage_VDI = true;
-				set_TextImage_WCI = true;
-				set_TextImage_VBI = true;
-			}
-			if (i == 1) {// Re-assignment - No Header no Footer
 				set_Header = false;
 				set_Header_DealershipLogo = false;
 				set_Header_DealershipAddress = true;
@@ -2812,6 +2790,29 @@ public class AUTOpxController extends Comlibs {
 				set_Footer_StockNumber = true;
 
 				set_MarketingMessageTop = false;
+				set_MarketingMessageBotton = false;
+				set_AddAdditionalOverlay = false;
+
+				set_TextImage_VDI = true;
+				set_TextImage_WCI = true;
+				set_TextImage_VBI = true;
+				
+			}
+			if (i == 3) {// Re-assignment - No Header no Footer
+				set_Header = true;
+				set_Header_DealershipLogo = true;
+				set_Header_DealershipAddress = false;
+				set_Header_DealershipPhone = true;
+				set_Header_DealershipEmail = false;
+				set_Header_DealershipWebsite = true;
+
+				set_Footer = true;
+				set_Footer_BrandLog = true;
+				set_Footer_VehicleInfo = true;
+				set_Footer_Vin = true;
+				set_Footer_StockNumber = true;
+
+				set_MarketingMessageTop = true;
 				set_MarketingMessageBotton = false;
 				set_AddAdditionalOverlay = false;
 
@@ -3380,21 +3381,21 @@ public class AUTOpxController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			 //// 0.General Inventory Gallery
-			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
-			 vehicleGallery(driver, tBrowser, env);
-			 // verifyRerender(driver, tBrowser);
-			
-			 ////// 1.VINpx:
-			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-			
-			 // bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			
-			 ////// 2. STOCKpx
-			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			 STOCKpxInventoryTC(driver, tBrowser, env);
+			//// 0.General Inventory Gallery
+			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			inventoryGalleryTC(driver, tBrowser, env, versionNum);
+			vehicleGallery(driver, tBrowser, env);
+			// verifyRerender(driver, tBrowser);
+
+			////// 1.VINpx:
+			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+
+			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+
+			////// 2. STOCKpx
+			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			STOCKpxInventoryTC(driver, tBrowser, env);
 
 			////// 3. Templates
 			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
