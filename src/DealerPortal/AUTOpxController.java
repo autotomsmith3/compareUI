@@ -2690,6 +2690,7 @@ public class AUTOpxController extends Comlibs {
 			 **/
 			// Verify Rerender Single Vehicle 01 for VINpx dealer
 			TCnum = "TC139706_8";
+			ac.Wait(2);
 			igP.enterTextInSearch(vin01);
 			ac.Wait(2);
 			igP.verifyRerenderBtnStatus(driver, false, TCnum);

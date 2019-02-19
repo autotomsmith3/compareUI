@@ -586,7 +586,7 @@ public class Comlibs {
 				break;
 			} else {
 				Wait(1);
-				System.out.println("Waiting page title: " + title + " to show. Total = " + x + " times of " + s);
+				System.out.println("Waiting for page title: " + title + " to show. Total = " + x + " times of " + s);
 				x++;
 			}
 		}
