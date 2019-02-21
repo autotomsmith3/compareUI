@@ -145,7 +145,7 @@ public class ImageGallery extends Comlibs {
 	// By searchVinOrStockNo = By.id("searchVinOrStockNo");
 	By searchVinOrStockNo = By.xpath("//*[@id=\"searchVinOrStockNo\"]");
 	By templatesBtnLocator = By.xpath("//*[@id=\"navbarTabs\"]/li[3]/a");
-	 
+
 	// By
 	// hoverOn_01_Locator=By.xpath("//div[@id='vehicle_0CF51F3F-D51F-4CD4-B1AA-CD29AEAF3A5A']/div/div/div");
 	// //1. VIN= 1J8G6B8K77W628202
@@ -184,8 +184,8 @@ public class ImageGallery extends Comlibs {
 	By ContactSupportTelLine409 = By.xpath("//*[@id='reportIssueModal']/div/div/div[3]/div/span[3]");
 	By dealerShipInfoBtnLocator = By.xpath("//*[@id='navbarTabs']/li[2]/a");
 	By inventoryGalleryBtnLocator = By.xpath("//*[@id='navbarTabs']/li[1]/a");
-	By listViewBtnLocator=By.xpath("//*[@id=\"listViewBtn\"]/span");
-	By gridViewBtnLocator=By.xpath("//*[@id=\"gridViewBtn\"]/span");
+	By listViewBtnLocator = By.xpath("//*[@id=\"listViewBtn\"]/span");
+	By gridViewBtnLocator = By.xpath("//*[@id=\"gridViewBtn\"]/span");
 	static int allVinNums = 0;
 	static int allImageNums = 0;
 
@@ -791,7 +791,7 @@ public class ImageGallery extends Comlibs {
 
 				tempName = interColrCheckbox.getText();
 				if (tempName.equalsIgnoreCase(colorDes)) {
-//					scrollUp(driver, 500, tc);
+					// scrollUp(driver, 500, tc);
 					interColrCheckbox.click();
 
 					rwExcel(tc, true, "Click the interior color " + colorDes + " check-box",
@@ -894,55 +894,62 @@ public class ImageGallery extends Comlibs {
 		driver.navigate().to(driver.getCurrentUrl());
 		return new ImageGallery(driver);
 	}
+
 	public ImageGallery clickLoadMoreVehicleBtn(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, loadMoreVehicleBtnLocator, true, tc);
 		driver.findElement(loadMoreVehicleBtnLocator).click();
 		return new ImageGallery(driver);
 	}
+
 	public ImageGallery clickGridViewBtn(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, listViewBtnLocator, true, tc);
 		driver.findElement(listViewBtnLocator).click();
 		return this;
 	}
+
 	public ImageGallery clickTilesViewBtn(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, gridViewBtnLocator, true, tc);
 		driver.findElement(gridViewBtnLocator).click();
 		return this;
 	}
+
 	public void clickGridRowOnlyOneRecordToCheck(WebDriver driver, String tc) throws IOException {
-		By onlyOneRecord=By.xpath("//*[@id=\"vehicleTable\"]/tbody/tr/td[1]/input");
+		By onlyOneRecord = By.xpath("//*[@id=\"vehicleTable\"]/tbody/tr/td[1]/input");
 		elementExist(driver, onlyOneRecord, true, tc);
 		driver.findElement(onlyOneRecord).click();
 	}
-	public VehicleGallery clickGridRowOnlyOneRecord(WebDriver driver,String tc) throws IOException {
-		By OneRecordVin=By.xpath("//*[@id=\"vehicleTable\"]/tbody/tr/td[6]");
+
+	public VehicleGallery clickGridRowOnlyOneRecord(WebDriver driver, String tc) throws IOException {
+		By OneRecordVin = By.xpath("//*[@id=\"vehicleTable\"]/tbody/tr/td[6]");
 		elementExist(driver, OneRecordVin, true, tc);
 		driver.findElement(OneRecordVin).click();
 		return new VehicleGallery(driver);
 	}
-	public void clickGridRowOneRecordWithNumToCheck(WebDriver driver, String num,String tc) throws IOException {
-		By OneRecord=By.xpath("//*[@id=\"vehicleTable\"]/tbody/tr["+num+"]/td[1]/input");
+
+	public void clickGridRowOneRecordWithNumToCheck(WebDriver driver, String num, String tc) throws IOException {
+		By OneRecord = By.xpath("//*[@id=\"vehicleTable\"]/tbody/tr[" + num + "]/td[1]/input");
 		elementExist(driver, OneRecord, true, tc);
 		driver.findElement(OneRecord).click();
 	}
-	public VehicleGallery clickGridRowOneRecordWithNum(WebDriver driver, String num,String tc) throws IOException {
-		By OneRecordVin=By.xpath("//*[@id=\"vehicleTable\"]/tbody/tr["+num+"]/td[6]");
+
+	public VehicleGallery clickGridRowOneRecordWithNum(WebDriver driver, String num, String tc) throws IOException {
+		By OneRecordVin = By.xpath("//*[@id=\"vehicleTable\"]/tbody/tr[" + num + "]/td[6]");
 		elementExist(driver, OneRecordVin, true, tc);
 		driver.findElement(OneRecordVin).click();
 		return new VehicleGallery(driver);
 	}
-	
-	//*[@id="vehicleTable"]/tbody/tr/td[6]
-	
-	
+
+	// *[@id="vehicleTable"]/tbody/tr/td[6]
+
 	public String getVehGUID(String dlrCode, String sVin, String serverName, String dbName, String userName,
 			String password) throws ClassNotFoundException, SQLException {
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//		System.setProperty("java.net.preferIPv6Addresses", "true"); //doesn't help to resolve getConnection below
-		
-//		 Connection conn = DriverManager.getConnection("jdbc:sqlserver://LNOC-Q13V-MSQ1.autodata.org;user=VDVIWebServicesUserQA;password=HDuMy873JRFpkkU9;database=VDVI_Master");
-		 Connection conn = DriverManager.getConnection("jdbc:sqlserver://LNOC-Q13V-MSQ1.autodata.org;user=zhoul;password=Zljzlj19591112;database=VDVI_Master");
-//		Connection conn = DriverManager.getConnection("jdbc:sqlserver://" + serverName + ";user=" + userName + ";password=" + password + ";database=" + dbName);//worked one.
+		// System.setProperty("java.net.preferIPv6Addresses", "true"); //doesn't help to resolve getConnection below
+
+		// Connection conn = DriverManager.getConnection("jdbc:sqlserver://LNOC-Q13V-MSQ1.autodata.org;user=VDVIWebServicesUserQA;password=HDuMy873JRFpkkU9;database=VDVI_Master");
+		// Connection conn = DriverManager.getConnection("jdbc:sqlserver://LNOC-Q13V-MSQ1.autodata.org;user=zhoul;password=Zljzlj19591112;database=VDVI_Master");
+		Connection conn = DriverManager.getConnection("jdbc:sqlserver://" + serverName + ";user=" + userName
+				+ ";password=" + password + ";database=" + dbName);// worked one.
 
 		System.out.println("test");
 
@@ -1011,7 +1018,6 @@ public class ImageGallery extends Comlibs {
 		return actualStatus;
 
 	}
-
 
 	public boolean verifyLoadMoreVehicleBtnStatus(WebDriver driver, boolean status, String tc) throws IOException {
 		boolean tempStatus, actualStatus = false;
@@ -1627,83 +1633,46 @@ public class ImageGallery extends Comlibs {
 		JavascriptExecutor jsx = (JavascriptExecutor) driver;
 		jsx.executeScript("window.scrollBy(0," + scrollNum + ")", "");
 	}
+
 	public void removeVINfrDealer(String dlrGuid, String sVin, String serverName, String dbName, String userName,
-			String password) throws ClassNotFoundException, SQLException {
+			String password, String tc) throws ClassNotFoundException, SQLException, IOException {
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		// Connection conn = DriverManager.getConnection("jdbc:sqlserver://LNOC-Q13V-MSQ1.autodata.org;user=VDVIWebServicesUserQA;password=HDuMy873JRFpkkU9;database=VDVI_Master");
-		Connection conn = DriverManager.getConnection("jdbc:sqlserver://" + serverName + ";user=" + userName + ";password=" + password + ";database=" + dbName);
-
-		System.out.println("test");
-
+		Connection conn = DriverManager.getConnection("jdbc:sqlserver://" + serverName + ";user=" + userName
+				+ ";password=" + password + ";database=" + dbName);
+		System.out.println("Delete VIN:"+sVin+" from DB");
 		Statement sta = conn.createStatement();
-		String Sql_1 = "delete from VT03_RenderedImage where VehGUID in (select vehguid from VT01_DealerVehicles where DlrGUID =   \'" + dlrGuid + "\' AND (dbo.VT01_DealerVehicles.VIN in (\'" + sVin + "\')))";
-		String Sql_2 = "delete from VT02_VehicleMetadata where VehGUID in (select vehguid from VT01_DealerVehicles where DlrGUID = \'" + dlrGuid + "\' AND (dbo.VT01_DealerVehicles.VIN in (\'" + sVin + "\')))";
-		String Sql_3 = "delete from VT01_DealerVehicles where VehGUID in (select vehguid from VT01_DealerVehicles where DlrGUID =  \'" + dlrGuid + "\' AND (dbo.VT01_DealerVehicles.VIN in (\'" + sVin + "\')))";
+		String Sql_1 = "delete from VT03_RenderedImage where VehGUID in (select vehguid from VT01_DealerVehicles where DlrGUID =   \'"
+				+ dlrGuid + "\' AND (dbo.VT01_DealerVehicles.VIN in (\'" + sVin + "\')))";
+		String Sql_2 = "delete from VT02_VehicleMetadata where VehGUID in (select vehguid from VT01_DealerVehicles where DlrGUID = \'"
+				+ dlrGuid + "\' AND (dbo.VT01_DealerVehicles.VIN in (\'" + sVin + "\')))";
+		String Sql_3 = "delete from VT01_DealerVehicles where VehGUID in (select vehguid from VT01_DealerVehicles where DlrGUID =  \'"
+				+ dlrGuid + "\' AND (dbo.VT01_DealerVehicles.VIN in (\'" + sVin + "\')))";
 
-		String vGUID = "";
+		// *********rs1****************
+		// ResultSet rs1 = sta.executeQuery(Sql_1); //Cannot use this since there is no return - ResultSet return.
+		// Delete a VIN from VT03
+		try {
+			sta.execute(Sql_1);
+			rwExcel(tc, true, "Delete a VIN " + sVin + " from VT03 passed", Sql_1);
+		} catch (Exception e) {
+			rwExcel(tc, false, "Delete a VIN " + sVin + " from VT03 failed", Sql_1);
+		}
+		// Delete a VIN from VT02
+		try {
+			sta.execute(Sql_2);
+			rwExcel(tc, true, "Delete a VIN " + sVin + " from VT02 passed", Sql_2);
+		} catch (Exception e) {
+			rwExcel(tc, false, "Delete a VIN " + sVin + " from VT02 failed", Sql_2);
+		}
+		try {
+			sta.execute(Sql_3);
+			rwExcel(tc, true, "Delete a VIN " + sVin + " from VT01 passed", Sql_3);
+		} catch (Exception e) {
+			rwExcel(tc, false, "Delete a VIN " + sVin + " from VT01 failed", Sql_3);
+		}
 
-//		*********rs1****************
-		ResultSet rs1 = sta.executeQuery(Sql_1);
-		int icolumn1 = rs1.getRow();
-		while (rs1.next()) {
-			icolumn1 = rs1.getRow();
-			vGUID = rs1.getString("1 row affected");
-			System.out.println("Row =" + icolumn1);
-			System.out.println("DlrGuid = " + rs1.getString("dlrGuid") + "  VIN = " + rs1.getString("VIN")
-					+ "  VehGUID = " + rs1.getString("1 row affected"));
-		}
-		if (icolumn1 == 1) {
-			System.out.println("One VehGUID\n");
-			// rs.getString("VehGUID");
-			// String vGUID = rs.getString("VehGUID");
-		} else {
-			System.out.println("No any VehGUID or more than one\n");
-			vGUID = "error!";
-		}
-		rs1.close();
-
-//		*********rs2****************		
-		ResultSet rs2 = sta.executeQuery(Sql_2);
-		int icolumn2 = rs2.getRow();
-		while (rs2.next()) {
-			icolumn2 = rs2.getRow();
-			vGUID = rs2.getString("1 row affected");
-			System.out.println("Row =" + icolumn2);
-			System.out.println("DlrGuid = " + rs2.getString("dlrGuid") + "  VIN = " + rs2.getString("VIN")
-					+ "  VehGUID = " + rs2.getString("1 row affected"));
-		}
-		if (icolumn2 == 1) {
-			System.out.println("One VehGUID\n");
-			// rs.getString("VehGUID");
-			// String vGUID = rs.getString("VehGUID");
-		} else {
-			System.out.println("No any VehGUID or more than one\n");
-			vGUID = "error!";
-		}
-		rs2.close();
-
-//		*********rs3****************	
-		ResultSet rs3 = sta.executeQuery(Sql_3);
-		int icolumn3 = rs3.getRow();
-		while (rs3.next()) {
-			icolumn3 = rs3.getRow();
-			vGUID = rs3.getString("1 row affected");
-			System.out.println("Row =" + icolumn3);
-			System.out.println("DlrGuid = " + rs3.getString("dlrGuid") + "  VIN = " + rs3.getString("VIN")
-					+ "  VehGUID = " + rs3.getString("1 row affected"));
-		}
-		if (icolumn3 == 1) {
-			System.out.println("1 row affected\n");
-			// rs.getString("VehGUID");
-			// String vGUID = rs.getString("VehGUID");
-		} else {
-			System.out.println("No any row or more than one\n");
-			vGUID = "error!";
-		}
-		rs3.close();
-//		*********End of rs****************		
-		
 		sta.close();
 		conn.close();
-		}
+	}
 }
