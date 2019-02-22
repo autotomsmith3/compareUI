@@ -1140,6 +1140,7 @@ public class AUTOpxController extends Comlibs {
 			ac.Wait(30);
 			igP.removeVINfrDealer(VINpxdlrGuid, tempVIN, serverName, dbName, userName, password,TCnum);
 			igP.clickRefleshF5Btn(driver, TCnum); 
+			System.out.println("\nAdding a new VIN and removing it from the dealer processes are completed!\n");
 			// ********************End of Add VIN********************************************************
 		}
 		igP.clickSelectNoneBtn(driver, TCnum);
@@ -1477,11 +1478,16 @@ public class AUTOpxController extends Comlibs {
 			}
 			igP.clickAddInventoryXBtn(driver, TCnum);
 			igP.clickRefleshF5Btn(driver, TCnum);
+			ac.Wait(2);
+			igP.enterTextInSearch(tempVIN);
 			// get VehGUID with vin, dlrdoce
 			tempVehGUID = igP.getVehGUID(dealerCode, tempVIN, serverName, dbName, userName, password);
-			igP.enterTextInSearch(tempVIN);
 			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, tempVIN, tempVehGUID, 1, TCnum);
 			igP.clickRefleshF5Btn(driver, TCnum);
+			ac.Wait(30);
+			igP.removeVINfrDealer(STOCKpxdlrGuid, tempVIN, serverName, dbName, userName, password,TCnum);
+			igP.clickRefleshF5Btn(driver, TCnum); 
+			System.out.println("\nAdding a new Stock VIN and removing it from the dealer processes are complete!\n");
 			//// *********************End of Add VIN*******************************************************
 		}
 		// Verify Rerender Single Vehicle TC139707
@@ -2709,7 +2715,7 @@ public class AUTOpxController extends Comlibs {
 								+ ", \n\nMarketingMessageTop=" + set_MarketingMessageTop + ", \nMarketingMessageBotton="
 								+ set_MarketingMessageBotton + ", \nAddAdditionalOverlay=" + set_AddAdditionalOverlay
 								+ ", \n\nText Images: \nVDI=" + set_TextImage_VDI + ",  \nWCI=" + set_TextImage_WCI
-								+ ",  \nVBI=" + set_TextImage_VBI + ",  for vin=" + vin01);
+								+ ",  \nVBI=" + set_TextImage_VBI + ",  for vin=" + vin01+"\n");
 
 				// System.out.println("\n1. press Enter key to continue......");
 				// System.in.read();
@@ -2730,7 +2736,7 @@ public class AUTOpxController extends Comlibs {
 								+ ", \n\nMarketingMessageTop=" + set_MarketingMessageTop + ", \nMarketingMessageBotton="
 								+ set_MarketingMessageBotton + ", \nAddAdditionalOverlay=" + set_AddAdditionalOverlay
 								+ ", \n\nText Images: \nVDI=" + set_TextImage_VDI + ",  \nWCI=" + set_TextImage_WCI
-								+ ",  \nVBI=" + set_TextImage_VBI + ",  for vin=" + vin01);
+								+ ",  \nVBI=" + set_TextImage_VBI + ",  for vin=" + vin01+"\n");
 			}
 			vgP.clickBackToInventoryBtn(driver);
 			ac.Wait(2);
@@ -3117,16 +3123,16 @@ public class AUTOpxController extends Comlibs {
 //			vehicleGallery(driver, tBrowser, env);
 //			// verifyRerender(driver, tBrowser);
 //
-			////// 1.VINpx:
-			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-//
-//			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-//
-//			////// 2. STOCKpx
-//			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-//			STOCKpxInventoryTC(driver, tBrowser, env);
-//
+//			////// 1.VINpx:
+//			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+//			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+
+			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+
+			////// 2. STOCKpx
+			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			STOCKpxInventoryTC(driver, tBrowser, env);
+
 //			////// 3. Templates
 //			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
 //			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
