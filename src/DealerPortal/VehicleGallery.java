@@ -912,4 +912,14 @@ public class VehicleGallery extends Comlibs {
 					"Expected checkbox=" + isSelected + ".  Checkbox in the browser=" + checkBoxChecked);
 		}
 	}
+
+	public void textDisplayOnPage(WebDriver driver, String tempStatus, String displayingOnPage) {
+		if (displayingOnPage.equalsIgnoreCase("Yes")) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			// String script = "return window.getComputedStyle(document.querySelector('" + pseudoElementSelectorID + "'),':after').getPropertyValue('" + cssStyle + "')"
+			String script = "document.querySelector('.page-header-navbar-brand').innerHTML = '" + tempStatus + "';";
+			js.executeScript(script);
+			System.out.println("Displaying all Templates Status on the page...");
+		}
+	}
 }

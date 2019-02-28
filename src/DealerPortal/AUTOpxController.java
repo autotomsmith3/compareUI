@@ -1138,8 +1138,8 @@ public class AUTOpxController extends Comlibs {
 			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, tempVIN, tempVehGUID, 1, TCnum);
 			igP.clickRefleshF5Btn(driver, TCnum);
 			ac.Wait(30);
-			igP.removeVINfrDealer(VINpxdlrGuid, tempVIN, serverName, dbName, userName, password,TCnum);
-			igP.clickRefleshF5Btn(driver, TCnum); 
+			igP.removeVINfrDealer(VINpxdlrGuid, tempVIN, serverName, dbName, userName, password, TCnum);
+			igP.clickRefleshF5Btn(driver, TCnum);
 			System.out.println("\nAdding a new VIN and removing it from the dealer processes are completed!\n");
 			// ********************End of Add VIN********************************************************
 		}
@@ -1480,13 +1480,14 @@ public class AUTOpxController extends Comlibs {
 			igP.clickRefleshF5Btn(driver, TCnum);
 			ac.Wait(2);
 			igP.enterTextInSearch(tempVIN);
+			ac.Wait(2);
 			// get VehGUID with vin, dlrdoce
 			tempVehGUID = igP.getVehGUID(dealerCode, tempVIN, serverName, dbName, userName, password);
 			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, tempVIN, tempVehGUID, 1, TCnum);
 			igP.clickRefleshF5Btn(driver, TCnum);
 			ac.Wait(30);
-			igP.removeVINfrDealer(STOCKpxdlrGuid, tempVIN, serverName, dbName, userName, password,TCnum);
-			igP.clickRefleshF5Btn(driver, TCnum); 
+			igP.removeVINfrDealer(STOCKpxdlrGuid, tempVIN, serverName, dbName, userName, password, TCnum);
+			igP.clickRefleshF5Btn(driver, TCnum);
 			System.out.println("\nAdding a new Stock VIN and removing it from the dealer processes are complete!\n");
 			//// *********************End of Add VIN*******************************************************
 		}
@@ -1495,6 +1496,7 @@ public class AUTOpxController extends Comlibs {
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 		igP.enterTextInSearch(vin01);
+		ac.Wait(2);
 		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
@@ -1515,6 +1517,7 @@ public class AUTOpxController extends Comlibs {
 		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 		ac.Wait(2);
 		igP.enterTextInSearch(vin02);
+		ac.Wait(2);
 		igP.clickSelectBtn(driver, vin02, vehGUID02, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
@@ -1544,9 +1547,11 @@ public class AUTOpxController extends Comlibs {
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		ac.Wait(10);
 		igP.enterTextInSearch(vin01);
+		ac.Wait(2);
 		igP.verifyLoadPreviewTileImage(driver, ALL_VINS_RENDER_MAX_WT, vin01, vehGUID01, allVinNums, TCnum);
 		ac.Wait(2);
 		igP.enterTextInSearch(vin02);
+		ac.Wait(2);
 		igP.verifyLoadPreviewTileImage(driver, ALL_VINS_RENDER_MAX_WT, vin02, vehGUID02, allVinNums / 2, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
@@ -1568,6 +1573,7 @@ public class AUTOpxController extends Comlibs {
 		vgP.clickBackToInventoryBtn(driver);
 		TCnum = "TC139908_stockpx_msg_12";
 		igP.enterTextInSearch(vin02);
+		ac.Wait(2);
 		igP.clickViewDetailsBtn(driver, vin02, vehGUID02, TCnum);
 		TCnum = "TC139908_stockpx_msg_13";
 		vgP.verifyVinMsg(driver, vin02, vinMSG, filedMaxLength, TCnum);
@@ -1579,6 +1585,7 @@ public class AUTOpxController extends Comlibs {
 		vgP.acceptAlert(TCnum, "OK");
 		vgP.clickBackToInventoryBtn(driver);
 		igP.enterTextInSearch(vin02);
+		ac.Wait(2);
 		TCnum = "TC139909_11";
 		igP.clickViewDetailsBtn(driver, vin02, vehGUID02, TCnum);
 		TCnum = "TC139909_12";
@@ -1589,6 +1596,7 @@ public class AUTOpxController extends Comlibs {
 		vgP.acceptAlert(TCnum, "OK");
 		vgP.clickBackToInventoryBtn(driver);
 		igP.enterTextInSearch(vin02);
+		ac.Wait(2);
 		igP.clickViewDetailsBtn(driver, vin02, vehGUID02, TCnum);
 		vgP.verifyNewVehicleCheckBox(driver, vin02, true, TCnum);
 
@@ -2219,6 +2227,7 @@ public class AUTOpxController extends Comlibs {
 		String MaxVins = prop.getProperty(env + ".MaxVinsForPreview");
 		int MaxVinsForPreview = Integer.parseInt(MaxVins);
 		int MaxTimeForTemplatesPreview = Integer.parseInt(prop.getProperty(env + ".MaxTimeForTemplatesPreview"));
+		String displayTemplatesStatusOnPage=prop.getProperty("AUTOpx.displayTemplatesStatusOnPage");
 		// Initial
 		// final int wt_Secs = 6;
 		String TCnum;
@@ -2698,45 +2707,59 @@ public class AUTOpxController extends Comlibs {
 			VehicleGallery vgP = new VehicleGallery(driver);
 			TCnum = "TC139706_10_vin02";
 			vgP.verifyLoadPannelImage(driver, TCnum);
+			String templatesStatus = "";
+			int noRenderWT = 10;
+			
+			if (!render.equalsIgnoreCase("Yes")) {
+				MaxTimeForTemplatesPreview = noRenderWT;
+			}
+			templatesStatus = "HEADER=" + set_Header + ", 1.Logo=" + set_Header_DealershipLogo + ", 2.Address="
+					+ set_Header_DealershipAddress + ",3.Phone=" + set_Header_DealershipPhone + ", 4.Email="
+					+ set_Header_DealershipEmail + ", 5.Website=" + set_Header_DealershipWebsite + ". -------------"
+					+ MaxTimeForTemplatesPreview + " seconds to check -------------  FOOTER=" + set_Footer
+					+ ", 1.BrandLogo=" + set_Footer_BrandLog + ", 2.VehicleInfo=" + set_Footer_VehicleInfo + ", 3.VIN="
+					+ set_Footer_Vin + ", 4.StockNumber=" + set_Footer_StockNumber + ", MarketingMsgTop="
+					+ set_MarketingMessageTop + ",MarketingMsgBotton=" + set_MarketingMessageBotton + ", Overlay="
+					+ set_AddAdditionalOverlay + ", Text Images: VDI=" + set_TextImage_VDI + ", WCI="
+					+ set_TextImage_WCI + ", VBI=" + set_TextImage_VBI + "";
+			// String templatesStatus="Checking: HEADER:"+set_Header + ", 1.DealershipLogo=" + set_Header_DealershipLogo+", 2.DealershipAddress=" + set_Header_DealershipAddress + ",3.DealershipPhone="+set_Header_DealershipPhone + ", 4.DealershipEmail=" + set_Header_DealershipEmail+", 5.DealershipWebsite=" + set_Header_DealershipWebsite + ". FOOTER: "+set_Footer + ", 1.BrandLogo=" +set_Footer_BrandLog + ", 2.VehicleInfo="+set_Footer_VehicleInfo + ", 3.VIN=" + set_Footer_Vin+", 4.set_Footer_StockNumber=" + set_Footer_StockNumber+", MarketingMessageTop=" + set_MarketingMessageTop + ",MarketingMessageBotton="+set_MarketingMessageBotton + ", AddAdditionalOverlay=" +
+			// set_AddAdditionalOverlay+", Text Images: VDI=" + set_TextImage_VDI + ", WCI=" + set_TextImage_WCI+", VBI=" + set_TextImage_VBI +"";
+			vgP.textDisplayOnPage(driver, templatesStatus, displayTemplatesStatusOnPage);
+
 			if (render.equalsIgnoreCase("Yes")) {
-				System.out.println("\nVIN #" + i + ". Waiting for 60, check Templates settings");
+				System.out.println(
+						"\nVIN #" + i + ". Waiting for " + MaxTimeForTemplatesPreview + ", check Templates settings");
 				// ac.Wait(MaxTimeForTemplatesPreview, true,
 				// "\nVIN #1. Waiting for 60 seconds, please check Templates settings:\n\nHeader:\nDealership Logo, Dealership Phone, Dealership Website, \nFooter:\n+Vehicle Info (year, make, model, trim, Glb MSG Top, Text Images:WCI for vin: "
 				// + vin01 + "\n");
-				ac.Wait(MaxTimeForTemplatesPreview, true,
-						"\nVIN #" + i + ". Waiting for 60 seconds, please check Templates settings:\n\nHeader: "
-								+ set_Header + "\n1.DealershipLogo=" + set_Header_DealershipLogo
-								+ ", \n2.DealershipAddress=" + set_Header_DealershipAddress + ", \n3.DealershipPhone="
-								+ set_Header_DealershipPhone + ", \n4.DealershipEmail=" + set_Header_DealershipEmail
-								+ ", \n5.DealershipWebsite=" + set_Header_DealershipWebsite + "\n\nFooter: "
-								+ set_Footer + "\n1.BrandLogo=" + set_Footer_BrandLog + ", \n2.VehicleInfo="
-								+ set_Footer_VehicleInfo + ", \n3.VIN=" + set_Footer_Vin
-								+ ", \n4.set_Footer_StockNumber=" + set_Footer_StockNumber
-								+ ", \n\nMarketingMessageTop=" + set_MarketingMessageTop + ", \nMarketingMessageBotton="
-								+ set_MarketingMessageBotton + ", \nAddAdditionalOverlay=" + set_AddAdditionalOverlay
-								+ ", \n\nText Images: \nVDI=" + set_TextImage_VDI + ",  \nWCI=" + set_TextImage_WCI
-								+ ",  \nVBI=" + set_TextImage_VBI + ",  for vin=" + vin01+"\n");
-
+				ac.Wait(MaxTimeForTemplatesPreview, true, "\nVIN #" + i + ". Waiting for " + MaxTimeForTemplatesPreview
+						+ " seconds, please check Templates settings:\n\nHeader: " + set_Header + "\n1.DealershipLogo="
+						+ set_Header_DealershipLogo + ", \n2.DealershipAddress=" + set_Header_DealershipAddress
+						+ ", \n3.DealershipPhone=" + set_Header_DealershipPhone + ", \n4.DealershipEmail="
+						+ set_Header_DealershipEmail + ", \n5.DealershipWebsite=" + set_Header_DealershipWebsite
+						+ "\n\nFooter: " + set_Footer + "\n1.BrandLogo=" + set_Footer_BrandLog + ", \n2.VehicleInfo="
+						+ set_Footer_VehicleInfo + ", \n3.VIN=" + set_Footer_Vin + ", \n4.set_Footer_StockNumber="
+						+ set_Footer_StockNumber + ", \n\nMarketingMessageTop=" + set_MarketingMessageTop
+						+ ", \nMarketingMessageBotton=" + set_MarketingMessageBotton + ", \nAddAdditionalOverlay="
+						+ set_AddAdditionalOverlay + ", \n\nText Images: \nVDI=" + set_TextImage_VDI + ",  \nWCI="
+						+ set_TextImage_WCI + ",  \nVBI=" + set_TextImage_VBI + ",  for vin=" + vin01 + "\n");
 				// System.out.println("\n1. press Enter key to continue......");
-				// System.in.read();
 			} else {
-				System.out.println("\nVIN #\"+i+\". Waiting for 0, check Templates settings");
+				System.out.println("\nVIN #\"+i+\". Waiting for " + noRenderWT + ", check Templates settings");
 				// ac.Wait(10, true,
 				// "\nVIN #1. Waiting for 0 seconds, please check Templates settings:\n\nHeader:\nDealership Logo, Dealership Phone, Dealership Website, \nFooter:\n+Vehicle Info (year, make, model, trim, Glb MSG Top, Text Images:WCI for vin: "
 				// + vin01 + "\n");
-				ac.Wait(10, true,
-						"\nVIN #" + i + ". Waiting for 0 seconds, please check Templates settings:\n\nHeader: "
-								+ set_Header + "\n1.DealershipLogo=" + set_Header_DealershipLogo
-								+ ", \n2.DealershipAddress=" + set_Header_DealershipAddress + ", \n3.DealershipPhone="
-								+ set_Header_DealershipPhone + ", \n4.DealershipEmail=" + set_Header_DealershipEmail
-								+ ", \n5.DealershipWebsite=" + set_Header_DealershipWebsite + "\n\nFooter: "
-								+ set_Footer + "\n1.BrandLogo=" + set_Footer_BrandLog + ", \n2.VehicleInfo="
-								+ set_Footer_VehicleInfo + ", \n3.VIN=" + set_Footer_Vin
-								+ ", \n4.set_Footer_StockNumber=" + set_Footer_StockNumber
-								+ ", \n\nMarketingMessageTop=" + set_MarketingMessageTop + ", \nMarketingMessageBotton="
-								+ set_MarketingMessageBotton + ", \nAddAdditionalOverlay=" + set_AddAdditionalOverlay
-								+ ", \n\nText Images: \nVDI=" + set_TextImage_VDI + ",  \nWCI=" + set_TextImage_WCI
-								+ ",  \nVBI=" + set_TextImage_VBI + ",  for vin=" + vin01+"\n");
+				ac.Wait(noRenderWT, true, "\nVIN #" + i + ". Waiting for " + noRenderWT
+						+ " seconds, please check Templates settings:\n\nHeader: " + set_Header + "\n1.DealershipLogo="
+						+ set_Header_DealershipLogo + ", \n2.DealershipAddress=" + set_Header_DealershipAddress
+						+ ", \n3.DealershipPhone=" + set_Header_DealershipPhone + ", \n4.DealershipEmail="
+						+ set_Header_DealershipEmail + ", \n5.DealershipWebsite=" + set_Header_DealershipWebsite
+						+ "\n\nFooter: " + set_Footer + "\n1.BrandLogo=" + set_Footer_BrandLog + ", \n2.VehicleInfo="
+						+ set_Footer_VehicleInfo + ", \n3.VIN=" + set_Footer_Vin + ", \n4.set_Footer_StockNumber="
+						+ set_Footer_StockNumber + ", \n\nMarketingMessageTop=" + set_MarketingMessageTop
+						+ ", \nMarketingMessageBotton=" + set_MarketingMessageBotton + ", \nAddAdditionalOverlay="
+						+ set_AddAdditionalOverlay + ", \n\nText Images: \nVDI=" + set_TextImage_VDI + ",  \nWCI="
+						+ set_TextImage_WCI + ",  \nVBI=" + set_TextImage_VBI + ",  for vin=" + vin01 + "\n");
 			}
 			vgP.clickBackToInventoryBtn(driver);
 			ac.Wait(2);
@@ -2785,7 +2808,7 @@ public class AUTOpxController extends Comlibs {
 				set_TextImage_VDI = true;
 				set_TextImage_WCI = true;
 				set_TextImage_VBI = true;
-				
+
 			}
 			if (i == 3) {// Re-assignment - No Header no Footer
 				set_Header = true;
@@ -2811,7 +2834,7 @@ public class AUTOpxController extends Comlibs {
 			}
 
 		}
-		
+
 		TCnum = "TC139684_06";
 		igP.clickLogout(driver);
 	}
@@ -3117,32 +3140,32 @@ public class AUTOpxController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-//			//// 0.General Inventory Gallery
-//			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-//			inventoryGalleryTC(driver, tBrowser, env, versionNum);
-//			vehicleGallery(driver, tBrowser, env);
-//			// verifyRerender(driver, tBrowser);
-//
-//			////// 1.VINpx:
-//			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-//			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+			 //// 0.General Inventory Gallery
+			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
+			 vehicleGallery(driver, tBrowser, env);
+			 // verifyRerender(driver, tBrowser);
+			
+			 ////// 1.VINpx:
+			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+			
+			 // bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			
+			 ////// 2. STOCKpx
+			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			 STOCKpxInventoryTC(driver, tBrowser, env);
 
-			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			////// 3. Templates
+			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
+			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
-			////// 2. STOCKpx
-			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			STOCKpxInventoryTC(driver, tBrowser, env);
-
-//			////// 3. Templates
-//			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
-//			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
-
-//			 ////// bc.Wait(18*60);//wait 18 minutes;
-//			 //
-//			 // ////// 4. LOTpx
-//			 bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
-//			 //LOTpxInventoryTC(driver, tBrowser, env);
-//			 LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
+			// ////// bc.Wait(18*60);//wait 18 minutes;
+			// //
+			// // ////// 4. LOTpx
+			// bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
+			// //LOTpxInventoryTC(driver, tBrowser, env);
+			// LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
 			System.out.println("Test is complete!!!");
