@@ -2227,7 +2227,7 @@ public class AUTOpxController extends Comlibs {
 		String MaxVins = prop.getProperty(env + ".MaxVinsForPreview");
 		int MaxVinsForPreview = Integer.parseInt(MaxVins);
 		int MaxTimeForTemplatesPreview = Integer.parseInt(prop.getProperty(env + ".MaxTimeForTemplatesPreview"));
-		String displayTemplatesStatusOnPage=prop.getProperty("AUTOpx.displayTemplatesStatusOnPage");
+		String displayTemplatesStatusOnPage = prop.getProperty("AUTOpx.displayTemplatesStatusOnPage");
 		// Initial
 		// final int wt_Secs = 6;
 		String TCnum;
@@ -2709,19 +2709,23 @@ public class AUTOpxController extends Comlibs {
 			vgP.verifyLoadPannelImage(driver, TCnum);
 			String templatesStatus = "";
 			int noRenderWT = 10;
-			
+
 			if (!render.equalsIgnoreCase("Yes")) {
 				MaxTimeForTemplatesPreview = noRenderWT;
 			}
-			templatesStatus = "HEADER=" + set_Header + ", 1.Logo=" + set_Header_DealershipLogo + ", 2.Address="
-					+ set_Header_DealershipAddress + ",3.Phone=" + set_Header_DealershipPhone + ", 4.Email="
-					+ set_Header_DealershipEmail + ", 5.Website=" + set_Header_DealershipWebsite + ". -------------"
-					+ MaxTimeForTemplatesPreview + " seconds to check -------------  FOOTER=" + set_Footer
-					+ ", 1.BrandLogo=" + set_Footer_BrandLog + ", 2.VehicleInfo=" + set_Footer_VehicleInfo + ", 3.VIN="
-					+ set_Footer_Vin + ", 4.StockNumber=" + set_Footer_StockNumber + ", MarketingMsgTop="
-					+ set_MarketingMessageTop + ",MarketingMsgBotton=" + set_MarketingMessageBotton + ", Overlay="
-					+ set_AddAdditionalOverlay + ", Text Images: VDI=" + set_TextImage_VDI + ", WCI="
-					+ set_TextImage_WCI + ", VBI=" + set_TextImage_VBI + "";
+			templatesStatus = "<p style=\"color:red;LINE-HEIGHT:6px;font-size:10px;\">HEADER=" + set_Header
+					+ ": ------------------------------------------------------------------------------------------"
+					+ MaxTimeForTemplatesPreview
+					+ " seconds to check---------------------------------------------</p><p style=\"color:blue;LINE-HEIGHT:6px;font-size:10px;\">1.Logo="
+					+ set_Header_DealershipLogo + ", 2.Address=" + set_Header_DealershipAddress + ",3.Phone="
+					+ set_Header_DealershipPhone + ", 4.Email=" + set_Header_DealershipEmail + ", 5.Website="
+					+ set_Header_DealershipWebsite
+					+ ".</p>   <p style=\"color:red;LINE-HEIGHT:6px;font-size:10px;\"> FOOTER=" + set_Footer
+					+ ": </p><p style=\"color:blue;LINE-HEIGHT:6px;font-size:10px;\">1.BrandLogo=" + set_Footer_BrandLog
+					+ ", 2.VehicleInfo=" + set_Footer_VehicleInfo + ", 3.VIN=" + set_Footer_Vin + ", 4.StockNumber="
+					+ set_Footer_StockNumber + ". MsgTop=" + set_MarketingMessageTop + ", MsgBotton="
+					+ set_MarketingMessageBotton + ", Overlay=" + set_AddAdditionalOverlay + ", VDI="
+					+ set_TextImage_VDI + ", WCI=" + set_TextImage_WCI + ", VBI=" + set_TextImage_VBI + "</p>";
 			// String templatesStatus="Checking: HEADER:"+set_Header + ", 1.DealershipLogo=" + set_Header_DealershipLogo+", 2.DealershipAddress=" + set_Header_DealershipAddress + ",3.DealershipPhone="+set_Header_DealershipPhone + ", 4.DealershipEmail=" + set_Header_DealershipEmail+", 5.DealershipWebsite=" + set_Header_DealershipWebsite + ". FOOTER: "+set_Footer + ", 1.BrandLogo=" +set_Footer_BrandLog + ", 2.VehicleInfo="+set_Footer_VehicleInfo + ", 3.VIN=" + set_Footer_Vin+", 4.set_Footer_StockNumber=" + set_Footer_StockNumber+", MarketingMessageTop=" + set_MarketingMessageTop + ",MarketingMessageBotton="+set_MarketingMessageBotton + ", AddAdditionalOverlay=" +
 			// set_AddAdditionalOverlay+", Text Images: VDI=" + set_TextImage_VDI + ", WCI=" + set_TextImage_WCI+", VBI=" + set_TextImage_VBI +"";
 			vgP.textDisplayOnPage(driver, templatesStatus, displayTemplatesStatusOnPage);
@@ -3140,21 +3144,21 @@ public class AUTOpxController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			 //// 0.General Inventory Gallery
-			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
-			 vehicleGallery(driver, tBrowser, env);
-			 // verifyRerender(driver, tBrowser);
-			
-			 ////// 1.VINpx:
-			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-			
-			 // bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			
-			 ////// 2. STOCKpx
-			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			 STOCKpxInventoryTC(driver, tBrowser, env);
+			//// 0.General Inventory Gallery
+			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			inventoryGalleryTC(driver, tBrowser, env, versionNum);
+			vehicleGallery(driver, tBrowser, env);
+			// verifyRerender(driver, tBrowser);
+
+			////// 1.VINpx:
+			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+
+			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+
+			////// 2. STOCKpx
+			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			STOCKpxInventoryTC(driver, tBrowser, env);
 
 			////// 3. Templates
 			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
