@@ -454,7 +454,7 @@ public class VehicleGallery extends Comlibs {
 
 		// By allImagesLocator=By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]");
 		// By allImagesLocator=By.cssSelector("div.veh-img-tile-hover-container");//load 15
-		By allImagesLocator = By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]/div");// ok for finding custom dealer iamge
+		By allImagesLocator = By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]/div");// ok for finding custom dealer image
 		// By allImagesLocator=By.xpath("");
 
 		boolean selected = false;
@@ -513,7 +513,7 @@ public class VehicleGallery extends Comlibs {
 
 		// By allImagesLocator=By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]");
 		// By allImagesLocator=By.cssSelector("div.veh-img-tile-hover-container");//load 15
-		By allImagesLocator = By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]/div");// ok for finding custom dealer iamge
+		By allImagesLocator = By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]/div");// ok for finding custom dealer image
 		// By allImagesLocator=By.xpath("");
 
 		boolean selected = false;
@@ -565,7 +565,7 @@ public class VehicleGallery extends Comlibs {
 
 		// By allImagesLocator=By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]");
 		// By allImagesLocator=By.cssSelector("div.veh-img-tile-hover-container");//load 15
-		By allImagesLocator = By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]/div");// ok for finding custom dealer iamge
+		By allImagesLocator = By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]/div");// ok for finding custom dealer image
 		// By allImagesLocator=By.xpath("");
 
 		boolean selected = false;
@@ -623,7 +623,7 @@ public class VehicleGallery extends Comlibs {
 
 		// By allImagesLocator=By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]");
 		// By allImagesLocator=By.cssSelector("div.veh-img-tile-hover-container");//load 15
-		By allImagesLocator = By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]/div");// ok for finding custom dealer iamge
+		By allImagesLocator = By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]/div");// ok for finding custom dealer image
 		// By allImagesLocator=By.xpath("");
 
 		boolean selected = false;
@@ -674,7 +674,7 @@ public class VehicleGallery extends Comlibs {
 		// By PreviewBtn = By.xpath("//button[@id='previewBtn10']");
 		// By allImagesLocator=By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]");
 		// By allImagesLocator=By.cssSelector("div.veh-img-tile-hover-container");//load 15
-		By allImagesLocator = By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]/div");// ok for finding custom dealer iamge
+		By allImagesLocator = By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]/div");// ok for finding custom dealer image
 		// By allImagesLocator=By.xpath("");
 		boolean selected = false;
 		int listText1;
@@ -730,7 +730,7 @@ public class VehicleGallery extends Comlibs {
 
 		// By allImagesLocator=By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]");
 		// By allImagesLocator=By.cssSelector("div.veh-img-tile-hover-container");//load 15
-		By allImagesLocator = By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]/div");// ok for finding custom dealer iamge
+		By allImagesLocator = By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]/div");// ok for finding custom dealer image
 		// By allImagesLocator=By.xpath("");
 
 		boolean selected = false;
@@ -779,7 +779,7 @@ public class VehicleGallery extends Comlibs {
 		// By PreviewBtn = By.xpath("//button[@id='previewBtn10']");
 		// By allImagesLocator=By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]");
 		// By allImagesLocator=By.cssSelector("div.veh-img-tile-hover-container");//load 15
-		By allImagesLocator = By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]/div");// ok for finding custom dealer iamge
+		By allImagesLocator = By.xpath("//div[@id='content']/div[2]/div[2]/div[4]/div[2]/div");// ok for finding custom dealer image
 		// By allImagesLocator=By.xpath("");
 		boolean selected = false;
 		int listText1;
@@ -872,6 +872,20 @@ public class VehicleGallery extends Comlibs {
 		return Result;
 	}
 
+	public static boolean truefalseRandomm() {
+		Random r = new Random();
+		int Low = 1;
+		int High = 3;
+		boolean truefalseResult=false;
+		int Result = r.nextInt(High - Low) + Low;//1 or 2
+		if (Result==1) {
+			truefalseResult=true;
+		}else {
+			truefalseResult=false;
+		}
+		return truefalseResult;//return true or false;
+	}
+
 	public void selectNewVehicleCheckBox(WebDriver driver) {
 
 		boolean checkBoxChecked = driver.findElement(newVehicleCbx).isSelected();
@@ -920,6 +934,14 @@ public class VehicleGallery extends Comlibs {
 			String script = "document.querySelector('.page-header-navbar-brand').innerHTML = '" + tempStatus + "';";
 			js.executeScript(script);
 			System.out.println("Displaying all Templates Status on the page...");
+		}
+	}
+
+	public static void main(String[] args) {
+		for (int i = 1; i <= 100; i++) {
+			boolean tf = truefalseRandomm();
+			System.out.print(tf+", ");
+
 		}
 	}
 }

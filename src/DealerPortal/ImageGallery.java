@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Properties;
+import java.util.Random;
 import java.util.Set;
 
 import org.openqa.selenium.By;
@@ -1174,20 +1175,20 @@ public class ImageGallery extends Comlibs {
 				} else if (textString.equalsIgnoreCase("Unable to decode VIN. Images cannot be generated.")) {
 					// Unable to decode VIN...
 					waitTime = maxWT;
-					rwExcel(tc, false, "Verify loading preview tile image - Preview tile iamge is NOT showing",
+					rwExcel(tc, false, "Verify loading preview tile image - Preview tile image is NOT showing",
 							"Unable to decode VIN...showing");
 					System.out
-							.println("TC failed. Preview tile iamge is NOT showing, Unable to decode VIN...showing \n");
+							.println("TC failed. Preview tile image is NOT showing, Unable to decode VIN...showing \n");
 				} else if (textString.equalsIgnoreCase("Failed, No images found to Render")) {
 					// failed, No image...
 					waitTime = maxWT;
-					rwExcel(tc, false, "Verify loading preview tile image - Preview tile iamge is NOT showing",
+					rwExcel(tc, false, "Verify loading preview tile image - Preview tile image is NOT showing",
 							"Failed, No image...showing");
-					System.out.println("TC failed. Preview tile iamge is NOT showing, Failed, No image...showing \n");
+					System.out.println("TC failed. Preview tile image is NOT showing, Failed, No image...showing \n");
 				} else {
 					// don't know text
 					waitTime = maxWT;
-					rwExcel(tc, false, "Verify loading preview tile image - Preview tile iamge is NOT showing",
+					rwExcel(tc, false, "Verify loading preview tile image - Preview tile image is NOT showing",
 							"Don't kow text - " + textString + " - ...is showing");
 					System.out.println("TC failed. Don't know text, the text = " + textString + " \n");
 				}
@@ -1203,10 +1204,10 @@ public class ImageGallery extends Comlibs {
 			if ((waitTime >= maxWT) && (!tile)) {
 				// TC fail
 				System.out.println("Total VINs=" + totalVINs + ".  VIN=" + sVIN + ". "
-						+ "TC failed. Preview tile iamge is NOT showing, wait time exceeds max. " + round(maxWT / 60, 1)
+						+ "TC failed. Preview tile image is NOT showing, wait time exceeds max. " + round(maxWT / 60, 1)
 						+ " minutes \n");
 				rwExcel(tc, false,
-						"VIN=" + sVIN + ". " + "Verify loading preview tile image - Preview tile iamge is NOT showing",
+						"VIN=" + sVIN + ". " + "Verify loading preview tile image - Preview tile image is NOT showing",
 						"Please wait ....is always showing. Waiting time exceeds max " + round(maxWT / 60, 1)
 								+ " minutest");
 			}
@@ -1674,5 +1675,18 @@ public class ImageGallery extends Comlibs {
 
 		sta.close();
 		conn.close();
+	}
+	public boolean truefalseRandom() {
+		Random r = new Random();
+		int Low = 1;
+		int High = 3;
+		boolean truefalseResult=false;
+		int Result = r.nextInt(High - Low) + Low;//1 or 2
+		if (Result==1) {
+			truefalseResult=true;
+		}else {
+			truefalseResult=false;
+		}
+		return truefalseResult;//return true or false;
 	}
 }
