@@ -255,7 +255,7 @@ public class AdminPortalController extends Comlibs {
 				try {
 					DealerListP.clickEditBtn(driver, dealerSN);
 				} catch (Exception e) {
-					DealerListP.scrollUp(driver, 45, "ddd");
+					DealerListP.scrollUp(driver, 85, "ddd");
 					DealerListP.clickEditBtn(driver, dealerSN);
 				}
 				for (String winHandle : driver.getWindowHandles()) {
@@ -546,7 +546,7 @@ public class AdminPortalController extends Comlibs {
 		int SelectBackgroundSet = Integer.parseInt(prop.getProperty(env + ".SelectBackgroundSet"));
 		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
 		String AddNewAccountEmail = prop.getProperty(env + ".AddNewAccountEmail");
-		String addNewDealerExtension = addNewDealerExtension = prop.getProperty(env + ".addNewDealerExtension");
+		String addNewDealerExtension = prop.getProperty(env + ".addNewDealerExtension");
 		String dealershipLogoPath = prop.getProperty("AUTOpx.dealershipLogoPath");
 		String addNewDealerShip = prop.getProperty("AUTOpx.addNewDealerShip");
 		String backgroundSetPath1 = prop.getProperty("AUTOpx.backgroundSetPath1");
@@ -738,10 +738,10 @@ public class AdminPortalController extends Comlibs {
 		// Bug here since entered Metadata. See AUTOPXOPS-1227. Now it shows an error "An error occurred. Please try again."
 		// but the dealership has been created in our system. Issue fixed but "Your settings have been saved" message only shows a second and then disappears.
 		if (MessageExist) {
-			ac.rwExcel(tc, true, "Add a new dealership with all fields",
+			ac.rwExcel(tc, true, "Add a new dealership \""+addNewDealerExtension+"\" with all fields",
 					"Sucessful msg shows: Your settings have been saved");
 		} else {
-			ac.rwExcel(tc, false, "Add a new dealership with all fields",
+			ac.rwExcel(tc, false, "Add a new dealership \""+addNewDealerExtension+"\" with all fields",
 					"Failed to shows msg: Your settings have been saved. Currently it only shows a second and then disappears. Related to bug AUTOPXOPS-1227");
 		}
 
@@ -901,10 +901,10 @@ public class AdminPortalController extends Comlibs {
 		// Bug here since entered Metadata. See AUTOPXOPS-1227. Now it shows an error "An error occurred. Please try again."
 		// but the dealership has been created in our system.
 		if (MessageExist) {
-			ac.rwExcel("AddDealervalid", true, "Add a new dealership with all fields",
+			ac.rwExcel("AddDealervalid", true, "Add a new dealership \""+addNewDealership+"\" with all fields",
 					"Sucessful msg shows: Your settings have been saved");
 		} else {
-			ac.rwExcel("AddDealervalid", false, "Add a new dealership with all fields",
+			ac.rwExcel("AddDealervalid", false, "Add a new dealership \""+addNewDealership+"\" with all fields",
 					"Failed to shows msg: Your settings have been saved. Currently it only shows a second and then disappears. Related to bug AUTOPXOPS-1227");
 		}
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
@@ -1057,7 +1057,7 @@ public class AdminPortalController extends Comlibs {
 		BackgroundsP.VerifyCarImage(driver, tc);
 		BackgroundsP.clickBackgroundPic(driver, tc);
 		BackgroundsP.VerifyCarImage(driver, tc + "_added_BG_Pic");
-		int numpics = 6;// Number of images for the model year vehicle
+		int numpics = 8;// Number of images for the model year vehicle
 		for (int i = 1; i <= numpics; i++) {
 			ac.Wait(wt);
 			BackgroundsP.clickRightArrowBtn(driver, tc + "_" + i);
@@ -1235,6 +1235,7 @@ public class AdminPortalController extends Comlibs {
 		//// *************************clickManageAngleMappingsBtn******************************************************
 		ac.rwExcel("", "*********ManageAngleMappings**********", "");
 		ac.Wait(wt);
+		tc="ManageAngleMappings";
 		String patternS = "2019-GM-6N[A-Z]26-...-6N[A-Z]26-...";
 		// String patternS="2019-GM-6NF26-1SA-6NF26-1SA"; //WORKS IN QA TOOL
 		String noteS = "19 Cadi Int XT5";
@@ -1263,7 +1264,7 @@ public class AdminPortalController extends Comlibs {
 		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadi Int XT5, or only vdvi_interior is must.
 		AngleMappingListP.inputPattern(driver, patternS);
 		ac.Wait(wt * 4);
-		AngleMappingListP.selectImageType(driver, "1001", 2);
+		AngleMappingListP.selectImageType(driver, "1001", 2,tc);
 		AngleMappingListP.clickCancel(driver);
 		ac.Wait(wt);
 		// Input all fields and click the Submit
@@ -1281,13 +1282,13 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		// matches from QA: 10019-042,10029-044,10039-059,10049-058
 		// AngleMappingListP.selectImageType(driver, "1001", 2);
-		AngleMappingListP.selectImageType(driver, "10019", 42);
+		AngleMappingListP.selectImageType(driver, "10019", 42,tc);
 		// AngleMappingListP.selectImageType(driver, "1002", 4);
-		AngleMappingListP.selectImageType(driver, "10029", 44);
+		AngleMappingListP.selectImageType(driver, "10029", 44,tc);
 		// AngleMappingListP.selectImageType(driver, "1003", 6);
-		AngleMappingListP.selectImageType(driver, "10039", 59);
+		AngleMappingListP.selectImageType(driver, "10039", 59,tc);
 		// AngleMappingListP.selectImageType(driver, "1004", 8);
-		AngleMappingListP.selectImageType(driver, "10049", 58);
+		AngleMappingListP.selectImageType(driver, "10049", 58,tc);
 		AngleMappingListP.clickSubmit(driver);
 		ac.Wait(wt);
 		ac.acceptAlert(driver, tc, "OK");
@@ -1299,13 +1300,13 @@ public class AdminPortalController extends Comlibs {
 		AngleMappingListP.inputNote(driver, editedNotesS);
 		// matches from QA: 10019-042,10029-044,10039-059,10049-058
 		// AngleMappingListP.selectImageType(driver, "1001", 2);
-		AngleMappingListP.selectImageType(driver, "10019", 43);
+		AngleMappingListP.selectImageType(driver, "10019", 43,tc);
 		// AngleMappingListP.selectImageType(driver, "1002", 4);
-		AngleMappingListP.selectImageType(driver, "10029", 45);
+		AngleMappingListP.selectImageType(driver, "10029", 45,tc);
 		// AngleMappingListP.selectImageType(driver, "1003", 6);
-		AngleMappingListP.selectImageType(driver, "10039", 57);
+		AngleMappingListP.selectImageType(driver, "10039", 57,tc);
 		// AngleMappingListP.selectImageType(driver, "1004", 8);
-		AngleMappingListP.selectImageType(driver, "10049", 56);
+		AngleMappingListP.selectImageType(driver, "10049", 56,tc);
 		AngleMappingListP.clickSubmit(driver);
 		ac.acceptAlert(driver, tc, "OK");
 		ac.Wait(wt);
@@ -1950,7 +1951,7 @@ public class AdminPortalController extends Comlibs {
 		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadi Int XT5, or only vdvi_interior is must.
 		AngleMappingListP.inputPattern(driver, patternS);
 		ac.Wait(wt * 4);
-		AngleMappingListP.selectImageType(driver, "1001", 2);
+		AngleMappingListP.selectImageType(driver, "1001", 2,tc);
 		AngleMappingListP.clickCancel(driver);
 		ac.Wait(wt);
 		// Input all fields and click the Submit
@@ -1968,13 +1969,13 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		// matches from QA: 10019-042,10029-044,10039-059,10049-058
 		// AngleMappingListP.selectImageType(driver, "1001", 2);
-		AngleMappingListP.selectImageType(driver, "10019", 42);
+		AngleMappingListP.selectImageType(driver, "10019", 42,tc);
 		// AngleMappingListP.selectImageType(driver, "1002", 4);
-		AngleMappingListP.selectImageType(driver, "10029", 44);
+		AngleMappingListP.selectImageType(driver, "10029", 44,tc);
 		// AngleMappingListP.selectImageType(driver, "1003", 6);
-		AngleMappingListP.selectImageType(driver, "10039", 59);
+		AngleMappingListP.selectImageType(driver, "10039", 59,tc);
 		// AngleMappingListP.selectImageType(driver, "1004", 8);
-		AngleMappingListP.selectImageType(driver, "10049", 58);
+		AngleMappingListP.selectImageType(driver, "10049", 58,tc);
 		AngleMappingListP.clickSubmit(driver);
 		ac.Wait(wt);
 		ac.acceptAlert(driver, tc, "OK");
@@ -1986,13 +1987,13 @@ public class AdminPortalController extends Comlibs {
 		AngleMappingListP.inputNote(driver, editedNotesS);
 		// matches from QA: 10019-042,10029-044,10039-059,10049-058
 		// AngleMappingListP.selectImageType(driver, "1001", 2);
-		AngleMappingListP.selectImageType(driver, "10019", 43);
+		AngleMappingListP.selectImageType(driver, "10019", 43,tc);
 		// AngleMappingListP.selectImageType(driver, "1002", 4);
-		AngleMappingListP.selectImageType(driver, "10029", 45);
+		AngleMappingListP.selectImageType(driver, "10029", 45,tc);
 		// AngleMappingListP.selectImageType(driver, "1003", 6);
-		AngleMappingListP.selectImageType(driver, "10039", 57);
+		AngleMappingListP.selectImageType(driver, "10039", 57,tc);
 		// AngleMappingListP.selectImageType(driver, "1004", 8);
-		AngleMappingListP.selectImageType(driver, "10049", 56);
+		AngleMappingListP.selectImageType(driver, "10049", 56,tc);
 		AngleMappingListP.clickSubmit(driver);
 		ac.acceptAlert(driver, tc, "OK");
 		ac.Wait(wt);
@@ -2228,10 +2229,10 @@ public class AdminPortalController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			// //// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK for Prod on 2018-12-17 from ManageDealerships.
-			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-			// RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
-			//
+//			 //// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK for Prod on 2018-12-17 from ManageDealerships.
+//			 bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+//			 RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
+			
 			// //// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page
 			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
