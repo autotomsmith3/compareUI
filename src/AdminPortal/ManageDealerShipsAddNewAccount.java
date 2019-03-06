@@ -436,10 +436,10 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		// Bug here since entered Metadata. See AUTOPXOPS-1227. Now it shows an error "An error occurred. Please try again."
 		// but the dealership has been created in our system. Issue fixed but "Your settings have been saved" message only shows a second and then disappears.
 		if (MessageExist) {
-			rwExcel(tc, true, "Add a new dealership with all fields",
+			rwExcel(tc, true, "Add a new dealership \""+addNewDealership+"\" with all fields",
 					"Sucessful msg shows: Your settings have been saved");
 		} else {
-			rwExcel(tc, false, "Add a new dealership with all fields",
+			rwExcel(tc, false, "Add a new dealership \""+addNewDealership+"\" with all fields",
 					"Failed to shows msg: Your settings have been saved. Currently it only shows a second and then disappears. Related to bug AUTOPXOPS-1227");
 		}
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);// Stop here. Verify dealer added in system through Manage Dealership by input the dealerid and click the edit buttom then close Dealer Profile page

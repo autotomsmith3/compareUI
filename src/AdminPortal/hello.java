@@ -1,24 +1,21 @@
 package AdminPortal;
 
-
-import java.io.Console;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import org.bson.Document;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriver.Window;
 import org.openqa.selenium.WebElement;
-import org.w3c.dom.css.DocumentCSS;
+import org.openqa.selenium.interactions.Actions;
 
-
-public class hello {
-	public static VDVILogin loadURL(WebDriver driver, String bURL, String env) throws IOException, InterruptedException {
+public class hello extends Comlibs {
+	public static VDVILogin loadURL(WebDriver driver, String bURL, String env)
+			throws IOException, InterruptedException {
 		driver.get(bURL);
 		// Below to accept authentication only works for Firefox, Chrome scripts are not ready yet. 2018-11-06
 		if (env.equalsIgnoreCase("Prod")) {
@@ -29,6 +26,7 @@ public class hello {
 		;
 		return new VDVILogin(driver);
 	}
+
 	public static void ManageDealerShips(WebDriver driver, String brw, String versionNum, String envment,
 			String checkEmail) throws Exception {
 
@@ -137,92 +135,144 @@ public class hello {
 		UserListP.scrollUp(driver, 3000, "ddd"); // QA -2000 Prod -3000 - negative means scrolldown
 		UserListP.clickDisplayDropDownBtn(driver, "3");
 		UserListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000 - negative means scrolldown
-		
-		// =========================== Debug here============================================================		
-		tc="click view dealer portal link from admin portal";
+
+		// =========================== Debug here============================================================
+		tc = "click view dealer portal link from admin portal";
 		UserListP.clickExpandDealersArrow(driver, 1);
 		UserListP.clickViewDealerPortal(driver, 1, tc);
-		DealerPortal.DealerProfile DealerPortal_DealerProfile =new DealerPortal.DealerProfile(driver);
+		DealerPortal.DealerProfile DealerPortal_DealerProfile = new DealerPortal.DealerProfile(driver);
 		DealerPortal_DealerProfile.clickTemplatesBtn(driver);
-		
-		DealerPortal.Templates DealerPortal_Templates =new DealerPortal.Templates(driver);	
+
+		DealerPortal.Templates DealerPortal_Templates = new DealerPortal.Templates(driver);
 		DealerPortal_Templates.clickHeaderEditBtn(driver);
-//		Templates:
-//		By Header_dealerShipAddressCheckBox=By.xpath("//*[@id=\"headerContent\"]/label[3]/span"); //   //*[@id="headerContent"]/label[3]/span; //checked: //*[@id="headerContent"]/label[3]/span
-		By Header_dealerShipAddressCheckBox=By.xpath("//*[@id='headerContent']/label[3]/span");//    //*[@id="headerContent"]/label[3]/span
+		// Templates:
+		// By Header_dealerShipAddressCheckBox=By.xpath("//*[@id=\"headerContent\"]/label[3]/span"); // //*[@id="headerContent"]/label[3]/span; //checked: //*[@id="headerContent"]/label[3]/span
+		// By Header_dealerShipAddressCheckBox=By.xpath("//*[@id='headerContent']/label[3]/span");// //*[@id="headerContent"]/label[3]/span
+		// By Header_dealerShipAddressCheckBox=By.cssSelector("//*[@id='headerContent']/label[3]/span");// //*[@id="headerContent"]/label[3]/span
 
 		// see ::after URL here:
-//		1. https://stackoverflow.com/questions/51992258/xpath-to-find-pseudo-element-after-in-side-a-div-element-with-out-any-content
-//		2. https://stackoverflow.com/questions/3012716/css-how-to-remove-pseudo-elements-after-before
-		
-		
-		
-//		console.log(window.getComputedStyle(document.querySelector('#headerContent > label:nth-child(6) > span'), ':after'));
-//		
-//		System.out.println("Begin...");
-//		
-////		console.log(window.window.getComputedStyle(document.querySelector("#headerContent > label:nth-child(6) > span"), ":after"));
-//		
-////		window.getComputedStyle(document.querySelector("#headerContent > label:nth-child(6) > span"), ":after");
-//		
-//		JavascriptExecutor js = (JavascriptExecutor) driver;         
-//		js.executeScript("return document.title");
-//		
-////		console.log(window.window.getComputedStyle(document.querySelector("#headerContent > label:nth-child(6) > span"), ":after"));
-//		 
-//		JavascriptExecutor js = (JavascriptExecutor) driver;         
-//		js.executeScript("return document.title");
-		
-		JavascriptExecutor js = (JavascriptExecutor) driver;         
-//		String tt=js.executeScript("return document.title").toString();//ok to see title
-		String tt=js.exec uteScript("return document.querySelector('#headerContent > label:nth-child(6) > span'), ':after'").toString();
-		System.out.println("\ntt="+tt);
-		JavascriptExecutor jss = (JavascriptExecutor) driver;         
-//		String tt=js.executeScript("return document.title").toString();//ok to see title
-		String ttt=jss.executeScript("return document.querySelector('#headerContent > label:nth-child(6) > span'), ':after'").toString();
-		System.out.println("\nttt="+ttt);
-		
-		
-		boolean getSpanWhenCheckeds=driver.findElement(Header_dealerShipAddressCheckBox).isSelected();// =null   span.checkmark::after
-		System.out.println("getSpanWhenCheckeds:"+getSpanWhenCheckeds);	
-		getSpanWhenCheckeds=driver.findElement(Header_dealerShipAddressCheckBox).isSelected();// =null   span.checkmark::after
-		System.out.println("getSpanWhenCheckeds:"+getSpanWhenCheckeds);	
-		
-		String getSpanWhenChecked=driver.findElement(Header_dealerShipAddressCheckBox).getCssValue("span.checkmark::after");// =null   span.checkmark::after
-		System.out.println("getSpanWhenChecked:"+getSpanWhenChecked);		
-		
-		 getSpanWhenChecked=driver.findElement(Header_dealerShipAddressCheckBox).getCssValue("span.checkmark::");// =null   span.checkmark::after
-		System.out.println("getSpanWhenChecked:"+getSpanWhenChecked);
-		
-		 getSpanWhenChecked=driver.findElement(Header_dealerShipAddressCheckBox).getCssValue("span");// =null   span.checkmark::after
-		System.out.println("getSpanWhenChecked:"+getSpanWhenChecked);
-		
-		getSpanWhenChecked=driver.findElement(Header_dealerShipAddressCheckBox).getCssValue("label");//=""
-		System.out.println("getCssValue span:"+getSpanWhenChecked);
-		
-		getSpanWhenChecked=driver.findElement(Header_dealerShipAddressCheckBox).getAttribute("label");// or span
-		System.out.println("getAttribute span:"+getSpanWhenChecked);
-		
-		getSpanWhenChecked=driver.findElement(Header_dealerShipAddressCheckBox).getTagName();// or span
-		System.out.println("getTagName:"+getSpanWhenChecked);
-		
-		getSpanWhenChecked=driver.findElement(Header_dealerShipAddressCheckBox).getText();// or span
-		System.out.println("getText:"+getSpanWhenChecked);
-		
-		getSpanWhenChecked=driver.findElement(Header_dealerShipAddressCheckBox).getTagName();// = span
-		System.out.println("getTagName:"+getSpanWhenChecked);
-		
-		getSpanWhenChecked=driver.findElement(Header_dealerShipAddressCheckBox).getText();// or span
-		System.out.println("getText:"+getSpanWhenChecked);
-		
-		boolean Checked=driver.findElement(Header_dealerShipAddressCheckBox).isSelected();// or span
-		System.out.println("isSelected:"+Checked);
-		
-		Checked=driver.findElement(Header_dealerShipAddressCheckBox).isSelected();// or span
-		System.out.println("isSelected:"+Checked);
-		
-		// =========================== Debug here============================================================			
-		
+		// 1. https://stackoverflow.com/questions/51992258/xpath-to-find-pseudo-element-after-in-side-a-div-element-with-out-any-content
+		// 2. https://stackoverflow.com/questions/3012716/css-how-to-remove-pseudo-elements-after-before
+
+		// console.log(window.getComputedStyle(document.querySelector('#headerContent > label:nth-child(6) > span'), ':after'));
+		//
+		// System.out.println("Begin...");
+		//
+		//// console.log(window.window.getComputedStyle(document.querySelector("#headerContent > label:nth-child(6) > span"), ":after"));
+		// window.getComputedStyle(document.querySelector("#headerContent > label:nth-child(6) > span"), ":after");
+		//
+		// JavascriptExecutor js = (JavascriptExecutor) driver;
+		// js.executeScript("return document.title");
+		//
+		//// console.log(window.window.getComputedStyle(document.querySelector("#headerContent > label:nth-child(6) > span"), ":after"));
+		//
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String title = js.executeScript("return document.title").toString();
+		System.out.println("\ntitle=" + title);
+
+		// JavascriptExecutor js = (JavascriptExecutor) driver;
+		//// String tt=js.executeScript("return document.title").toString();//ok to see title
+		// // Dealership address: xpath://*[@id="headerContent"]/label[3]/span
+		// // Dealership address: selecter: #headerContent > label:nth-child(6) > span . #headerContent > label:nth-child(6)
+		// String tt=js.executeScript("return document.querySelector('#headerContent > label:nth-child(6) > span'), ''").toString();
+		// System.out.println("\ntt="+tt);
+		// JavascriptExecutor jss = (JavascriptExecutor) driver;
+		//// String tt=js.executeScript("return document.title").toString();//ok to see title
+		// String ttt=jss.executeScript("return document.querySelector('#headerContent > label:nth-child(6) > span'), 'span'").toString();
+		// System.out.println("\nttt="+ttt);
+		// By Header_dealerShipAddressCheckBox=By.cssSelector("#headerContent > label:nth-child(6) > span");// //*[@id="headerContent"]/label[3]/span
+
+		// console.log(window.window.getComputedStyle(document.querySelector('#headerContent > label:nth-child(6) > span'), ':begin'))
+		// console.log(window.window.getComputedStyle(document.querySelector("#headerContent > label:nth-child(6) > span"), ":begin"));
+
+		String dealershipAddress = "#headerContent > label:nth-child(6) > span";
+		String dealershipAddressCSSstyleID = "transform-origin";
+		String dealershipAddressCSSstyleValue = "50% 50%";
+		boolean checkboxIsChecked;
+
+		// ***************Final script 1 checked ******************************************************
+		tc = "Check the checkbox for DealershipAddress";
+		checkboxIsChecked = checkboxWithPseudoElement("DealershipAddress", driver, true, false, dealershipAddress,
+				dealershipAddressCSSstyleID, "50% 50%", tc);
+		if (!checkboxIsChecked) {
+			DealerPortal_Templates.clickDealershipAddressCheckBox(driver);
+			checkboxIsChecked = checkboxWithPseudoElement("DealershipAddress", driver, true, true, dealershipAddress,
+					dealershipAddressCSSstyleID, "50% 50%", tc);
+		}
+		// ***************End of Final script 1 checked ******************************************************
+
+		// ***************Final script 2 unchecked ******************************************************
+		tc = "Uncheck the checkbox for DealershipAddress";
+		checkboxIsChecked = checkboxWithPseudoElement("DealershipAddress", driver, false, false, dealershipAddress,
+				dealershipAddressCSSstyleID, "50% 50%", tc);
+		if (!checkboxIsChecked) {
+			DealerPortal_Templates.clickDealershipAddressCheckBox(driver);
+			checkboxIsChecked = checkboxWithPseudoElement("DealershipAddress", driver, false, true, dealershipAddress,
+					dealershipAddressCSSstyleID, "50% 50%", tc);
+		}
+
+		// ***************End of Final script 2 unchecked ******************************************************
+
+		// ***************return window.getComputedStyle(document.querySelector***********************************************************************************************************
+		/**
+		 * How to use xpath to find pseudo-element ::after in side a div element with out any content? https://stackoverflow.com/questions/51992258/xpath-to-find-pseudo-element-after-in-side-a-div-element-with-out-any-content
+		 * 
+		 * 1. Pseudo-elements don't exist in the DOM tree (hence the name), therefore they cannot be selected with XPath 2. Unfortunately, that's not possible with XPath. As mentioned by Tomalak, Pseudo-elements don't exist in the DOM tree (hence the name), therefore they cannot be selected with XPath and Selenium does not expose them as well. In general, ::before and ::after pseudo-elements are used for styling of containing element. 3. My solution: a. get all styles b. find out what is different between checked and unchecked c. getPropertyValue to identify checked and unchecked - transform-origin=50% 50% (unchecked) or 2.5px 5px (checked)
+		 **/
+
+		JavascriptExecutor js2 = (JavascriptExecutor) driver;
+		// String tt=js.executeScript("return document.title").toString();//ok to see title
+		// Dealership address: xpath://*[@id="headerContent"]/label[3]/span
+		// Dealership address: selecter: #headerContent > label:nth-child(6) > span . #headerContent > label:nth-child(6)
+
+		// window.getComputedStyle(document.querySelector('#element'),':after').getPropertyValue('content')
+
+		String script = "return window.getComputedStyle(document.querySelector('#headerContent > label:nth-child(6) > span'),':after').getPropertyValue('transform-origin')";//// get only value of transform-origin style. returned styles on checkbox checked and unchecked. On unchecked it contains one "moz-transform-origin=50% 50%"
+		String xxchecked = js2.executeScript(script).toString();
+		System.out.println("xxchecked:" + xxchecked);
+		String searchTxt = "50% 50%";// moz-transform-origin=50% 50% (unchecked) or 2.5px 5px (checked)
+		boolean checked = xxchecked.contains(searchTxt);
+		if (checked) {
+			System.out.println("checkbox is unchecked");
+		} else {
+			System.out.println("checkbox is checked");
+		}
+
+		DealerPortal_Templates.clickDealershipAddressCheckBox(driver);
+
+		script = "return window.getComputedStyle(document.querySelector('#headerContent > label:nth-child(6) > span'),':after').getPropertyValue('transform-origin')";
+		String unchecked = js2.executeScript(script).toString();
+		System.out.println("unchecked:" + unchecked);
+		checked = unchecked.contains(searchTxt);
+		if (checked) {
+			System.out.println("checkbox is unchecked");
+		} else {
+			System.out.println("checkbox is checked");
+		}
+
+		// ****************return window.window.getComputedStyle(document.querySelector**********************************************************************************************************
+
+		script = "return window.window.getComputedStyle(document.querySelector('#headerContent > label:nth-child(6) > span'), ':after')";// get all CSS styles
+		String checked2 = js2.executeScript(script).toString();
+		System.out.println("checked2:" + checked2);
+		System.out.println("unchecked:" + "Completed!\n");
+		checked = checked2.contains(searchTxt);
+		System.out.println("checked:" + checked);
+
+		DealerPortal_Templates.clickDealershipAddressCheckBox(driver);
+
+		script = "return window.window.getComputedStyle(document.querySelector('#headerContent > label:nth-child(6) > span'), ':after')";// get all CSS styles
+		String xnchecked = js2.executeScript(script).toString();
+		System.out.println("unchecked:" + xnchecked);
+		checked = xnchecked.contains(searchTxt);
+		System.out.println("checked:" + checked);
+
+		System.out.println("unchecked:" + "Completed!");
+		// window.getComputedStyle(document.querySelector('#headerContent > label:nth-child(6) > span'),':before')
+		// **************************************************************************************************************************
+
+		// =========================== Debug here============================================================
+
 		// =========================== Add New Account Process============================================================
 		tc = "TC_addNewAct_AttachDealer_DeleteIt";
 		UserListP.clickAddAccount(driver);
@@ -601,113 +651,113 @@ public class hello {
 		ac.Wait(wt);
 		BackgroundSetsP.clickSubmit(driver);
 		ac.Wait(wt);
-		
-		//********************* check bg image *********************
-		int sn=1;
-		double oneSNForScrollupPoint=8.44091;
-		double totalPoints=oneSNForScrollupPoint*1;
-		int scrollupPoints=1;
-		Backgrounds BackgroundsP=new Backgrounds(driver);
-		
-//		tc = "GM_Exterior_2019-GM-4NF56-4NF56-1SD_old ";////= modelcode bar  2019-GM-4NF56-4NF56-1SD    - sn=2014
-//		UserListP.scrollUp(driver, 17000, tc);// 17150 - value is on uper side
-//		BackgroundsP.ClickOneExteriorModelYearBtn(driver,tc);
-//		BackgroundsP.VerifyCarImage(driver, tc);
-//		BackgroundsP.clickRightArrowBtn(driver, tc);
-//		ac.Wait(wt);
-//		BackgroundsP.VerifyCarImage(driver, tc);
-//		BackgroundsP.clickLeftArrowBtn(driver, tc);
-//		ac.Wait(wt);
-//		BackgroundsP.VerifyCarImage(driver, tc);
-//		BackgroundsP.clickCloseX(driver, tc);
-//		UserListP.scrollUp(driver, -100000, tc);//scroll back to top
-//		
-//		tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_old";//= modelcode bar  2019-GM-4NF56-1SD-4NF56-1SD   - sn=4876
-//		UserListP.scrollUp(driver, 41158, tc);// 24100 - value is on uper side
-//		BackgroundsP.ClickOneInteriorModelYearBtn(driver,tc);
-//		BackgroundsP.VerifyCarImage(driver, tc);
-//		BackgroundsP.clickRightArrowBtn(driver, tc);
-//		BackgroundsP.clickLeftArrowBtn(driver, tc);
-//		BackgroundsP.clickCloseX(driver, tc);
-//		ac.Wait(wt);
-//		UserListP.scrollUp(driver, -100000, tc);//scroll back to top
-//		
-		
-		// ************************Check the failed loading car image from sn ************************		
-		
-		tc = "FCA_2016_bf";//= modelcode bar  2016_bf   - sn=17 from Excel-BG_CarCode table - green cols.
-		sn=2;
-		totalPoints=oneSNForScrollupPoint*sn;
-		scrollupPoints=(int) Math.round(totalPoints);
-		UserListP.scrollUp(driver, scrollupPoints, tc);//860
-		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver,sn , tc);
-		ac.Wait(wt*2);
+
+		// ********************* check bg image *********************
+		int sn = 1;
+		double oneSNForScrollupPoint = 8.44091;
+		double totalPoints = oneSNForScrollupPoint * 1;
+		int scrollupPoints = 1;
+		Backgrounds BackgroundsP = new Backgrounds(driver);
+
+		// tc = "GM_Exterior_2019-GM-4NF56-4NF56-1SD_old ";////= modelcode bar 2019-GM-4NF56-4NF56-1SD - sn=2014
+		// UserListP.scrollUp(driver, 17000, tc);// 17150 - value is on uper side
+		// BackgroundsP.ClickOneExteriorModelYearBtn(driver,tc);
+		// BackgroundsP.VerifyCarImage(driver, tc);
+		// BackgroundsP.clickRightArrowBtn(driver, tc);
+		// ac.Wait(wt);
+		// BackgroundsP.VerifyCarImage(driver, tc);
+		// BackgroundsP.clickLeftArrowBtn(driver, tc);
+		// ac.Wait(wt);
+		// BackgroundsP.VerifyCarImage(driver, tc);
+		// BackgroundsP.clickCloseX(driver, tc);
+		// UserListP.scrollUp(driver, -100000, tc);//scroll back to top
+		//
+		// tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_old";//= modelcode bar 2019-GM-4NF56-1SD-4NF56-1SD - sn=4876
+		// UserListP.scrollUp(driver, 41158, tc);// 24100 - value is on uper side
+		// BackgroundsP.ClickOneInteriorModelYearBtn(driver,tc);
+		// BackgroundsP.VerifyCarImage(driver, tc);
+		// BackgroundsP.clickRightArrowBtn(driver, tc);
+		// BackgroundsP.clickLeftArrowBtn(driver, tc);
+		// BackgroundsP.clickCloseX(driver, tc);
+		// ac.Wait(wt);
+		// UserListP.scrollUp(driver, -100000, tc);//scroll back to top
+		//
+
+		// ************************Check the failed loading car image from sn ************************
+
+		tc = "FCA_2016_bf";// = modelcode bar 2016_bf - sn=17 from Excel-BG_CarCode table - green cols.
+		sn = 2;
+		totalPoints = oneSNForScrollupPoint * sn;
+		scrollupPoints = (int) Math.round(totalPoints);
+		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
+		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
+		ac.Wait(wt * 2);
 		BackgroundsP.VerifyCarImage(driver, tc);
 		BackgroundsP.clickRightArrowBtn(driver, tc);
 		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc+"_Right_Arrow");
+		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
 		BackgroundsP.clickLeftArrowBtn(driver, tc);
 		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc+"_Left_Arrow");
+		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
 		BackgroundsP.clickCloseX(driver, tc);
 		ac.Wait(wt);
-		UserListP.scrollUp(driver, -100000, tc);//scroll back to top
+		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
 		// ************************Check the loading car image from sn ************************
-		tc = "FCA_2019_lx";//= modelcode bar  2019_lx   - sn=102 from Excel-BG_CarCode table
-		sn=102;
-		totalPoints=oneSNForScrollupPoint*sn;
-		scrollupPoints=(int) Math.round(totalPoints);
-		UserListP.scrollUp(driver, scrollupPoints, tc);//860
-		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver,sn , tc);
-		ac.Wait(wt*2);
+		tc = "FCA_2019_lx";// = modelcode bar 2019_lx - sn=102 from Excel-BG_CarCode table
+		sn = 102;
+		totalPoints = oneSNForScrollupPoint * sn;
+		scrollupPoints = (int) Math.round(totalPoints);
+		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
+		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
+		ac.Wait(wt * 2);
 		BackgroundsP.VerifyCarImage(driver, tc);
 		BackgroundsP.clickRightArrowBtn(driver, tc);
 		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc+"_Right_Arrow");
+		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
 		BackgroundsP.clickLeftArrowBtn(driver, tc);
 		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc+"_Left_Arrow");
+		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
 		BackgroundsP.clickCloseX(driver, tc);
 		ac.Wait(wt);
-		UserListP.scrollUp(driver, -100000, tc);//scroll back to top
-		
-		tc = "GM_Exterior_2019-GM-4NF56-4NF56-1SD_new ";////= modelcode bar  2019-GM-4NF56-4NF56-1SD    - sn=2014
-		sn=2014;
-		totalPoints=oneSNForScrollupPoint*sn;
-		scrollupPoints=(int) Math.round(totalPoints);
-		UserListP.scrollUp(driver, scrollupPoints, tc);//860
-		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver,sn , tc);
-		ac.Wait(wt*2);
+		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
+
+		tc = "GM_Exterior_2019-GM-4NF56-4NF56-1SD_new ";//// = modelcode bar 2019-GM-4NF56-4NF56-1SD - sn=2014
+		sn = 2014;
+		totalPoints = oneSNForScrollupPoint * sn;
+		scrollupPoints = (int) Math.round(totalPoints);
+		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
+		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
+		ac.Wait(wt * 2);
 		BackgroundsP.VerifyCarImage(driver, tc);
 		BackgroundsP.clickRightArrowBtn(driver, tc);
 		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc+"_Right_Arrow");
+		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
 		BackgroundsP.clickLeftArrowBtn(driver, tc);
 		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc+"_Left_Arrow");
+		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
 		BackgroundsP.clickCloseX(driver, tc);
 		ac.Wait(wt);
-		UserListP.scrollUp(driver, -100000, tc);//scroll back to top
-		
-		tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_new";//= modelcode bar  2019-GM-4NF56-1SD-4NF56-1SD   - sn=4876
-		sn=4876;
-		totalPoints=oneSNForScrollupPoint*sn;
-		scrollupPoints=(int) Math.round(totalPoints);
-		UserListP.scrollUp(driver, scrollupPoints, tc);//860
-		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver,sn , tc);
-		ac.Wait(wt*2);
+		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
+
+		tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_new";// = modelcode bar 2019-GM-4NF56-1SD-4NF56-1SD - sn=4876
+		sn = 4876;
+		totalPoints = oneSNForScrollupPoint * sn;
+		scrollupPoints = (int) Math.round(totalPoints);
+		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
+		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
+		ac.Wait(wt * 2);
 		BackgroundsP.VerifyCarImage(driver, tc);
 		BackgroundsP.clickRightArrowBtn(driver, tc);
 		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc+"_Right_Arrow");
+		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
 		BackgroundsP.clickLeftArrowBtn(driver, tc);
 		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc+"_Left_Arrow");
+		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
 		BackgroundsP.clickCloseX(driver, tc);
 		ac.Wait(wt);
-		UserListP.scrollUp(driver, -100000, tc);//scroll back to top
+		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
 		// ************************End of Check the loading car image from sn ************************
-		//Add New BG Set
+		// Add New BG Set
 		UserListP.clickManageBGSets(driver);
 		ac.clickRefleshF5Btn(driver, tc);
 		tc = "TC139534"; // Edit "a" background set
@@ -1093,13 +1143,85 @@ public class hello {
 		// driver.close();
 
 	}
+
 	private static String[] fetchOneDemArrayFromPropFile(String propertyName, Properties propFile)
 			throws IOException, InterruptedException {
 		// get array split up by the colin
 		String a[] = propFile.getProperty(propertyName).split(",");
 		return a;
 	}
-	
+
+	public static boolean checkboxWithPseudoElement(String checkboxName, WebDriver driver, boolean checked, boolean secondTime,
+			String pseudoElementSelectorID, String cssStyle, String cssStyleValue, String tc) throws IOException {
+
+		// ***************return window.getComputedStyle(document.querySelector***********************************************************************************************************
+		/**
+		 * How to use xpath to find pseudo-element ::after in side a div element with out any content? https://stackoverflow.com/questions/51992258/xpath-to-find-pseudo-element-after-in-side-a-div-element-with-out-any-content
+		 * 
+		 * 1. Pseudo-elements don't exist in the DOM tree (hence the name), therefore they cannot be selected with XPath 2. Unfortunately, that's not possible with XPath. As mentioned by Tomalak, Pseudo-elements don't exist in the DOM tree (hence the name), therefore they cannot be selected with XPath and Selenium does not expose them as well. In general, ::before and ::after pseudo-elements are used for styling of containing element. 3. My solution: a. get all styles b. find out what is different between checked and unchecked c. getPropertyValue to identify checked and unchecked - transform-origin=50% 50% (unchecked) or 2.5px 5px (checked)
+		 **/
+		boolean isTrue = false;
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		// String tt=js.executeScript("return document.title").toString();//ok to see title
+		// Dealership address: xpath://*[@id="headerContent"]/label[3]/span
+		// Dealership address: selecter: #headerContent > label:nth-child(6) > span . #headerContent > label:nth-child(6)
+
+		// window.getComputedStyle(document.querySelector('#element'),':after').getPropertyValue('content')
+
+		String Xscript = "return window.getComputedStyle(document.querySelector('#headerContent > label:nth-child(6) > span'),':after').getPropertyValue('transform-origin')";
+
+		String script = "return window.getComputedStyle(document.querySelector('" + pseudoElementSelectorID
+				+ "'),':after').getPropertyValue('" + cssStyle + "')";//// get only value of transform-origin style. returned styles on checkbox checked and unchecked. On unchecked it contains one "moz-transform-origin=50% 50%"
+		String xxchecked = js.executeScript(script).toString();
+		System.out.println("xxchecked:" + xxchecked);
+		String searchTxt = "50% 50%";// moz-transform-origin=50% 50% (unchecked) or 2.5px 5px (checked)
+		boolean siteChecked = xxchecked.contains(searchTxt);
+		if (siteChecked) {
+			if (!checked) {
+				isTrue = true;
+				/// write to excel pass; checkbox should not be checked
+				System.out.println("Passed." + checkboxName + " Checkbox is not checked!");
+//				rwExcel(tc, true, "Verify " + checkboxName, "Checkbox is not checked");
+			} else {
+				isTrue = false;
+				if (secondTime) {
+					// write to excel failed; checkbox cannot be unchecked.
+					System.out.println("Failed," + checkboxName + " checkbox is unchecked when should be checked!");
+//					rwExcel(tc, false, "Verify " + checkboxName, "Checkbox is unchecked when should be checked!");
+				}
+			}
+			System.out.println("The " + checkboxName + " Checkbox is unchecked");
+		} else if (checked) {
+			isTrue = true;
+			System.out.println("Passed," + checkboxName + " checkbox is checked");
+			// write to excel pass; checkbox should be checked
+//			rwExcel(tc, true, "Verify " + checkboxName, "Checkbox is checked");
+		} else {
+			isTrue = false;
+			if (secondTime) {
+				// write to excel failed; checkbox cannot be unchecked.
+				System.out.println("Failed," + checkboxName + "checkbox is checked when should be unchecked!");
+//				rwExcel(tc, false, "Verify " + checkboxName, "Checkbox is checked when should be unchecked!");
+			}
+		}
+		return isTrue;
+	};
+
+	// public static void checkboxcheck(WebDriver driver, String checkboxSelectorID, String checkboxCSSStyleID, String tc) {
+	// // ***************Final script 1 checked ******************************************************
+	//// tc = "Check the checkbox for DealershipAddress";
+	// boolean checkboxIsChecked = checkboxWithPseudoElement("DealershipAddress", driver, true, false, checkboxSelectorID,
+	// checkboxCSSStyleID, "50% 50%", tc);
+	// if (!checkboxIsChecked) {
+	// DealerPortal_Templates.clickDealershipAddressCheckBox(driver);
+	// checkboxIsChecked = checkboxWithPseudoElement("DealershipAddress", driver, true, true, checkboxSelectorID,
+	// checkboxCSSStyleID, "50% 50%", tc);
+	// }
+	// // ***************End of Final script 1 checked ******************************************************
+	//
+	// }
+
 	public static void main(String[] args) throws Exception {
 		// Load environment parameters
 		Properties prop = new Properties();
@@ -1157,10 +1279,10 @@ public class hello {
 			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 
-//			 ////// 1.ManageDealerShipsAddNewAccount:
-//			 bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
-//			 ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-//			 ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+			// ////// 1.ManageDealerShipsAddNewAccount:
+			// bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
+			// ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+			// ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
 
 			//// 2.ManageDealerShips:
 			loadURL(driver, baseURL, env);

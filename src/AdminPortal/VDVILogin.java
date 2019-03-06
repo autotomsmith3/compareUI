@@ -100,7 +100,7 @@ public class VDVILogin extends Comlibs {
 
 	public void verifyFooterVersionDisclaimer(String env, String versionNum, String tc) throws IOException {
 		String disclaimer, versionText;
-		String expectDisclaimer = "© 2018 Autodata Solutions, Inc. / Autodata Solutions Company | Legal Disclaimer";
+		String expectDisclaimer = "© 2019 Autodata Solutions, Inc. / Autodata Solutions Company | Legal Disclaimer";
 		// String expectVersionNum = "App version: " + versionNum + " Environment: " + env + "";
 		String expectVersionNum = "App version: " + versionNum + " Environment: " + env + "";
 		boolean footerL1, footerL2, footerL1Text, footerL2Text;

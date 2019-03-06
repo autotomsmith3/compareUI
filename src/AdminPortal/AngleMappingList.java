@@ -131,11 +131,23 @@ public class AngleMappingList extends Comlibs {
 		return this;
 	}
 
-	public AngleMappingList selectImageType(WebDriver driver, String shot, int typeNum) throws IOException {
+	public AngleMappingList selectImageType(WebDriver driver, String shot, int typeNum, String tc) throws IOException {
 		By selectImageTypeLocator = By.xpath("//*[@id='imgtype_" + shot + "']/option[" + typeNum + "]");// 1,2,3
 		// //*[@id="imgtype_10019"]/option[2]
 		// //*[@id="imgtype_1002"]/option[2]
-		driver.findElement(selectImageTypeLocator).click();
+		try {
+			driver.findElement(selectImageTypeLocator).click();
+		} catch (Exception e) {
+			System.out.println(e);
+			System.out.println("\nFirst clicking failed, wait for 60 seconds to click again...");
+			Wait(60);
+			try {
+				driver.findElement(selectImageTypeLocator).click();
+			} catch (Exception ee) {
+				rwExcel(tc, false, "Add Angle Mapping to select Image Type", "Clicking twice but still failed to select image type.");
+				return this;
+			}
+		}
 		return this;
 
 	}
