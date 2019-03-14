@@ -35,7 +35,7 @@ public class DealerProfile extends Comlibs {
 	By dealerShipIDBrands = By.id("brands");
 	By userPassword = By.id("userPassword");
 	By userPasswordConfirm = By.id("userConfirm");
-	By saveBtn = By.id("saveBtn");
+	By saveBtn = By.id("saveBtn");// x.path=//*[@id="saveBtn"]/span
 	By reRenderNOBtn = By.xpath("//div[@id='rerenderPrompt']/div/div/div[3]/button[2]");
 
 	// SELECT LogoImageGUID FROM dbo.DT01_Dealer WHERE(DlrCode = '123456')
@@ -69,6 +69,16 @@ public class DealerProfile extends Comlibs {
 	By templatesBtnLocator = By.xpath("//*[@id=\"navbarTabs\"]/li[3]/a");
 	// By brandLocator=By.xpath("//*[@id='dealerBrand']/option[2]");
 	// By Locator=By.xpath("");
+	By ContactTitle = By.xpath("//*[@id=\"contactTitle\"]");
+	By ContactName = By.xpath("//*[@id=\"contactName\"]");
+	By ContactDepartment = By.xpath("//*[@id=\"contactDepartment\"]");
+	By ContactPhone = By.xpath("//*[@id=\"contactPhone\"]");
+	By DealershipName = By.xpath("//*[@id=\"dealerName\"]");
+	By DealershipEmail = By.xpath("//*[@id=\"dealerEmail\"]");
+	By Address1 = By.xpath("//*[@id=\"dealerAddr1\"]");
+	By Address2 = By.xpath("//*[@id=\"dealerAddr2\"]");
+	By ChangePassword = By.xpath("//*[@id=\"userPassword\"]");
+	By ConfirmPassword = By.xpath("//*[@id=\"userConfirm\"]");
 
 	public ImageGallery clickViewInventoryBtn(WebDriver driver, String tc) throws IOException {
 		boolean viewInventoryBtn = elementExist(driver, viewInventoryBtnLocator, true, tc);
@@ -164,6 +174,16 @@ public class DealerProfile extends Comlibs {
 			rwExcel(tc, true, "Verify changing password", "Password changed");
 		} catch (Exception e) {
 			rwExcel(tc, false, "Verify changing password", "Password changed");
+		}
+		return new DealerProfile(driver);
+	}
+
+	public DealerProfile clickSAVE(WebDriver driver, String tc) throws IOException {
+		try {
+			driver.findElement(saveBtn).click();
+			rwExcel(tc, true, "Clicking on SAVE button", "Working fine");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Clicking on SAVE button", "Element does not exist!");
 		}
 		return new DealerProfile(driver);
 	}
@@ -389,6 +409,200 @@ public class DealerProfile extends Comlibs {
 	public void uploadDealershipLogo(WebDriver driver, String dealershipLogPath) throws IOException {
 		driver.findElement(By.id("uploadLogo")).sendKeys(dealershipLogPath);
 	}
+
+	public String retrieve_ContactTitle(WebDriver driver, String tc) throws Exception {
+		String text = "";
+		try {
+			text = driver.findElement(ContactTitle).getAttribute("value");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Try to get ContactTitle", "Failed");
+		}
+		return text;
+	}
+
+	public String retrieve_ContactName(WebDriver driver, String tc) throws Exception {
+		String text = "";
+		try {
+			text = driver.findElement(ContactName).getAttribute("value");
+		} catch (
+
+		Exception e) {
+			rwExcel(tc, false, "Try to get ContactName", "Failed");
+		}
+		return text;
+	}
+
+	public String retrieve_ContactDepartment(WebDriver driver, String tc) throws Exception {
+		String text = "";
+		try {
+			text = driver.findElement(ContactDepartment).getAttribute("value");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Try to get ContactDepartment", "Failed");
+		}
+		return text;
+	}
+
+	public String retrieve_ContactPhone(WebDriver driver, String tc) throws Exception {
+		String text = "";
+		try {
+			text = driver.findElement(ContactPhone).getAttribute("value");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Try to get ContactPhone", "Failed");
+		}
+		return text;
+	}
+
+	public String retrieve_DealershipName(WebDriver driver, String tc) throws Exception {
+		String text = "";
+		try {
+			text = driver.findElement(DealershipName).getAttribute("value");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Try to get DealershipName", "Failed");
+		}
+		return text;
+	}
+
+	public String retrieve_DealershipEmail(WebDriver driver, String tc) throws Exception {
+		String text = "";
+		try {
+			text = driver.findElement(DealershipEmail).getAttribute("value");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Try to get DealershipEmail", "Failed");
+		}
+		return text;
+	}
+
+	public String retrieve_Address1(WebDriver driver, String tc) throws Exception {
+		String text = "";
+		try {
+			text = driver.findElement(Address1).getText();
+		} catch (Exception e) {
+			rwExcel(tc, false, "Try to get Address1", "Failed");
+		}
+		return text;
+	}
+
+	public String retrieve_Address2(WebDriver driver, String tc) throws Exception {
+		String text = "";
+		try {
+			text = driver.findElement(Address2).getText();
+		} catch (Exception e) {
+			rwExcel(tc, false, "Try to get Address2", "Failed");
+		}
+		return text;
+	}
+
+	// *******************************
+	public void enter_ContactTitle(WebDriver driver, String inputText, String tc) throws Exception {
+
+		try {
+			driver.findElement(ContactTitle).clear();
+			driver.findElement(ContactTitle).sendKeys(inputText);
+		} catch (Exception e) {
+			rwExcel(tc, false, "Try to enter ContactTitle", "Failed");
+		}
+
+	}
+
+	public void enter_ContactName(WebDriver driver, String inputText, String tc) throws Exception {
+
+		try {
+			driver.findElement(ContactName).clear();
+			driver.findElement(ContactName).sendKeys(inputText);
+		} catch (
+
+		Exception e) {
+			rwExcel(tc, false, "Try to enter ContactName", "Failed");
+		}
+
+	}
+
+	public void enter_ContactDepartment(WebDriver driver, String inputText, String tc) throws Exception {
+
+		try {
+			driver.findElement(ContactDepartment).clear();
+			driver.findElement(ContactDepartment).sendKeys(inputText);
+		} catch (Exception e) {
+			rwExcel(tc, false, "Try to enter ContactDepartment", "Failed");
+		}
+
+	}
+
+	public void enter_ContactPhone(WebDriver driver, String inputText, String tc) throws Exception {
+
+		try {
+			driver.findElement(ContactPhone).clear();
+			driver.findElement(ContactPhone).sendKeys(inputText);
+		} catch (Exception e) {
+			rwExcel(tc, false, "Try to enter ContactPhone", "Failed");
+		}
+
+	}
+
+	public void enter_DealershipName(WebDriver driver, String inputText, String tc) throws Exception {
+
+		try {
+			driver.findElement(DealershipName).clear();
+			driver.findElement(DealershipName).sendKeys(inputText);
+		} catch (Exception e) {
+			rwExcel(tc, false, "Try to enter DealershipName", "Failed");
+		}
+
+	}
+
+	public void enter_DealershipEmail(WebDriver driver, String inputText, String tc) throws Exception {
+
+		try {
+			driver.findElement(DealershipEmail).clear();
+			driver.findElement(DealershipEmail).sendKeys(inputText);
+		} catch (Exception e) {
+			rwExcel(tc, false, "Try to enter DealershipEmail", "Failed");
+		}
+
+	}
+
+	public void enter_Address1(WebDriver driver, String inputText, String tc) throws Exception {
+
+		try {
+			driver.findElement(Address1).clear();
+			driver.findElement(Address1).sendKeys(inputText);
+		} catch (Exception e) {
+			rwExcel(tc, false, "Try to enter Address1", "Failed");
+		}
+
+	}
+
+	public void enter_Address2(WebDriver driver, String inputText, String tc) throws Exception {
+
+		try {
+			driver.findElement(Address2).clear();
+			driver.findElement(Address2).sendKeys(inputText);
+		} catch (Exception e) {
+			rwExcel(tc, false, "Try to enter Address2", "Failed");
+		}
+
+	}
+
+	public void enter_ChangePassword(WebDriver driver, String inputText, String tc) throws Exception {
+		try {
+			driver.findElement(ChangePassword).clear();
+			driver.findElement(ChangePassword).sendKeys(inputText);
+		} catch (Exception e) {
+			rwExcel(tc, false, "Try to enter ChangePassword", "Failed");
+		}
+
+	}
+
+	public void enter_ConfirmPassword(WebDriver driver, String inputText, String tc) throws Exception {
+		try {
+			driver.findElement(ConfirmPassword).clear();
+			driver.findElement(ConfirmPassword).sendKeys(inputText);
+		} catch (Exception e) {
+			rwExcel(tc, false, "Try to enter ConfirmPassword", "Failed");
+		}
+
+	}
+	// *******************************
 
 	public void jSONParse() {
 		// String text = "{\"employees\":[{\"firstName\":\"John\",\"lastName\":\"Doe\" },{\"firstName\":\"Anna\",\"lastName\":\"Smith\" },{\"firstName\":\"Peter\",\"lastName\":\"Jones\" }]}";

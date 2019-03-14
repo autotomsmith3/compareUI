@@ -23,7 +23,10 @@ public class getUnityInventory {
 		// String unityWorkURL = "https://data.dealervideos.com/v0.9/vehicles/";
 		String unityWorkURL = "https://data.dealervideos.com/v1.0/vehicles/"; // see VDVIIMG-759 - 20190306 from vinstatus: (unityworks.altid;275D2EQ):     https://data.dealervideos.com/v1.0/vehicles/275D2EQ/3GNCJKSB4KL242291
 		// From Prod on January 31, 2018 total 44. Please see details on AUTOpx.xlsx on Prod_UnityWorkID table
-//		 String[] unityWorkDealerShipID = {"27OE966","DP9B0OU","112Y2JUB","2FHFIYI"};
+//		 String[] unityWorkDealerShipID = {"27OE966","DP9B0OU","112Y2JUB","2FHFIYI"}; 
+		
+		//493IVV2
+		//below is full ids on March 11, 2019
 		 String[] unityWorkDealerShipID = { "10UUQ6J0", "11CN47A9", "19D6Q4P", "1DACJ4G", "1E543A9", "1KH43AC",
 		 "1V2FAJZ", "1Y6F36U", "20A1B9C", "27IBZXO", "2CT1GBZ", "2FC1ZF6", "2FDCAJ5", "2FEASPJ", "2FFF58W",
 		 "2G3BOM8", "2GELMFG", "2HTB7QA", "2IM8V9R", "2IN1YG0", "2KAGUTE", "2L41W3M", "2M55XGW", "2NN4M8F",
@@ -48,11 +51,13 @@ public class getUnityInventory {
 		 "KEQ3NC5", "KQO8CVH", "KUQ5EG8", "KYFFYM4", "KZ2GH9F", "L4Z70X3", "L5KDIPI", "L87CBZX", "LK174X8",
 		 "MEK2KIF", "OM95VHT", "OVGH22E", "PDZE4CK", "PI3BDJY", "PL9CWKZ", "PON1QS8", "PPHGS6Z", "PVMH3XH",
 		 "RIWEGNA", "RMUFXTR", "SA9BAU3", "SGE95S0", "SSAH9MT", "SW1B3J6", "T02A0CM", "TDRARWM", "TH46625",
-		 "TIFFY3P", "U8B4C62", "WR1S66C", "XG6P812" };// Total 217 - Feb. 12, 2019
+		 "TIFFY3P", "U8B4C62", "WR1S66C", "XG6P812" };// Total 217 - Mar 12, 2019
+		
 		// String[] unityWorkDealerShipID = {"2FHFIYI","L87CBZX", "H5O4M8B"};//GMRCHL5
 		// String[] unityWorkDealerShipID = {"2L41W3M"};// 2L41W3M-no exterior, no trim - 2019-02-12
 		// String[] unityWorkDealerShipID = {"GMRCHL5"};//GMRCHL5 FCA only - provided by Drew on 2018-12-10 via Teams
 		// String[] unityWorkDealerShipID = {"F72BCJN","27OE966"};//F72BCJN - Hyundai, 27OE966 - Honda 20190211
+		
 
 		// Returning nothing: "","",
 		for (String id : unityWorkDealerShipID) {
