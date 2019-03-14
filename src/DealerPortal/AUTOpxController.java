@@ -988,7 +988,7 @@ public class AUTOpxController extends Comlibs {
 			ac.rwExcel(TCnum, false, "Verify Edited DealershipName", "Failed! Edited_DealershipName =" + DealershipName
 					+ updatewith + ".  But site shows =" + Edited_DealershipName);
 		}
-		if (!Edited_DealershipEmail.equals((DealershipEmail + updatewith))) {
+		if (!Edited_DealershipEmail.equals((DealershipEmail +updatewith+ ".com"))) {
 			ac.rwExcel(TCnum, false, "Verify Edited DealershipEmail", "Failed! Edited_DealershipEmail ="
 					+ DealershipEmail + updatewith + ".  But site shows =" + Edited_DealershipEmail);
 		}
@@ -3268,9 +3268,9 @@ public class AUTOpxController extends Comlibs {
 
 			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
 
-			// ////// 2. STOCKpx
-			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			// STOCKpxInventoryTC(driver, tBrowser, env);
+			 ////// 2. STOCKpx
+			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			 STOCKpxInventoryTC(driver, tBrowser, env);
 
 			////// 3. Templates
 			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
