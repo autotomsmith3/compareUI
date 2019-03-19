@@ -96,12 +96,13 @@ public class AdminPortalController extends Comlibs {
 	public static VDVILogin loadURL(WebDriver driver, String bURL, String env)
 			throws IOException, InterruptedException {
 		driver.get(bURL);
-		// Below to accept authentication only works for Firefox, Chrome scripts are not ready yet. 2018-11-06
-		if (env.equalsIgnoreCase("Prod")) {
-			Thread.sleep(2 * 1000);
-			driver.switchTo().alert().sendKeys("admin" + Keys.TAB + "g4TT73Xy!");
-			driver.switchTo().alert().accept();
-		}
+		// Below to accept authentication only works for Firefox, Chrome scripts are not ready yet. 2018-11-06.
+		// Don't need below anymore since username and password embeded into the bURL that works. 2019-03-19.
+		// if (env.equalsIgnoreCase("Prod")) {
+		// Thread.sleep(2 * 1000);
+		// driver.switchTo().alert().sendKeys("admin" + Keys.TAB + "g4TT73Xy!");
+		// driver.switchTo().alert().accept();
+		// }
 		;
 		return new VDVILogin(driver);
 	}
@@ -202,6 +203,7 @@ public class AdminPortalController extends Comlibs {
 		String password = prop.getProperty(env + ".password");
 		String MaxVins = prop.getProperty(env + ".MaxVinsForPreview");
 		int MaxVinsForPreview = Integer.parseInt(MaxVins);
+		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
 		// Initial
 		// final int wt_Secs = 6;
 		String TCnum;
@@ -239,16 +241,16 @@ public class AdminPortalController extends Comlibs {
 		String parentHandle = driver.getWindowHandle(); // get the current window handle
 		UserList userListP = new UserList(driver);
 		userListP.clickManageDealerShips(driver);
-		ac.Wait(2);
+		ac.Wait(wt);
 		DealerList2 DealerListP = new DealerList2(driver);
 		DealerListP.clickDisplayDropDownBtn(driver, "3");
 		DealerListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000
 		for (int next = 0; next < 50; next++) {
 			for (int i = 0; i < 150; i++) {
 				if (i >= 10) {
-					ac.Wait(2);
+					ac.Wait(wt);
 					DealerListP.scrollUp(driver, 45, "ddd"); // 60 should be in Prod. 55 can run 150 records in QA. 120 - get almost 2 lines. 80 can run until 28 records, 60 can run until 110-120
-					ac.Wait(2);
+					ac.Wait(wt);
 				}
 				dealerN = dealerN + 1;
 				dealerSN = String.valueOf(dealerN);
@@ -302,7 +304,7 @@ public class AdminPortalController extends Comlibs {
 
 				DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, "TC_num");
 				if (i == 150) {
-					ac.Wait(2);
+					ac.Wait(wt);
 				}
 
 			}
@@ -738,10 +740,10 @@ public class AdminPortalController extends Comlibs {
 		// Bug here since entered Metadata. See AUTOPXOPS-1227. Now it shows an error "An error occurred. Please try again."
 		// but the dealership has been created in our system. Issue fixed but "Your settings have been saved" message only shows a second and then disappears.
 		if (MessageExist) {
-			ac.rwExcel(tc, true, "Add a new dealership \""+addNewDealerExtension+"\" with all fields",
+			ac.rwExcel(tc, true, "Add a new dealership \"" + addNewDealerExtension + "\" with all fields",
 					"Sucessful msg shows: Your settings have been saved");
 		} else {
-			ac.rwExcel(tc, false, "Add a new dealership \""+addNewDealerExtension+"\" with all fields",
+			ac.rwExcel(tc, false, "Add a new dealership \"" + addNewDealerExtension + "\" with all fields",
 					"Failed to shows msg: Your settings have been saved. Currently it only shows a second and then disappears. Related to bug AUTOPXOPS-1227");
 		}
 
@@ -901,10 +903,10 @@ public class AdminPortalController extends Comlibs {
 		// Bug here since entered Metadata. See AUTOPXOPS-1227. Now it shows an error "An error occurred. Please try again."
 		// but the dealership has been created in our system.
 		if (MessageExist) {
-			ac.rwExcel("AddDealervalid", true, "Add a new dealership \""+addNewDealership+"\" with all fields",
+			ac.rwExcel("AddDealervalid", true, "Add a new dealership \"" + addNewDealership + "\" with all fields",
 					"Sucessful msg shows: Your settings have been saved");
 		} else {
-			ac.rwExcel("AddDealervalid", false, "Add a new dealership \""+addNewDealership+"\" with all fields",
+			ac.rwExcel("AddDealervalid", false, "Add a new dealership \"" + addNewDealership + "\" with all fields",
 					"Failed to shows msg: Your settings have been saved. Currently it only shows a second and then disappears. Related to bug AUTOPXOPS-1227");
 		}
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
@@ -1235,7 +1237,7 @@ public class AdminPortalController extends Comlibs {
 		//// *************************clickManageAngleMappingsBtn******************************************************
 		ac.rwExcel("", "*********ManageAngleMappings**********", "");
 		ac.Wait(wt);
-		tc="ManageAngleMappings";
+		tc = "ManageAngleMappings";
 		String patternS = "2019-GM-6N[A-Z]26-...-6N[A-Z]26-...";
 		// String patternS="2019-GM-6NF26-1SA-6NF26-1SA"; //WORKS IN QA TOOL
 		String noteS = "19 Cadi Int XT5";
@@ -1264,7 +1266,7 @@ public class AdminPortalController extends Comlibs {
 		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadi Int XT5, or only vdvi_interior is must.
 		AngleMappingListP.inputPattern(driver, patternS);
 		ac.Wait(wt * 4);
-		AngleMappingListP.selectImageType(driver, "1001", 2,tc);
+		AngleMappingListP.selectImageType(driver, "1001", 2, tc);
 		AngleMappingListP.clickCancel(driver);
 		ac.Wait(wt);
 		// Input all fields and click the Submit
@@ -1282,13 +1284,13 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		// matches from QA: 10019-042,10029-044,10039-059,10049-058
 		// AngleMappingListP.selectImageType(driver, "1001", 2);
-		AngleMappingListP.selectImageType(driver, "10019", 42,tc);
+		AngleMappingListP.selectImageType(driver, "10019", 42, tc);
 		// AngleMappingListP.selectImageType(driver, "1002", 4);
-		AngleMappingListP.selectImageType(driver, "10029", 44,tc);
+		AngleMappingListP.selectImageType(driver, "10029", 44, tc);
 		// AngleMappingListP.selectImageType(driver, "1003", 6);
-		AngleMappingListP.selectImageType(driver, "10039", 59,tc);
+		AngleMappingListP.selectImageType(driver, "10039", 59, tc);
 		// AngleMappingListP.selectImageType(driver, "1004", 8);
-		AngleMappingListP.selectImageType(driver, "10049", 58,tc);
+		AngleMappingListP.selectImageType(driver, "10049", 58, tc);
 		AngleMappingListP.clickSubmit(driver);
 		ac.Wait(wt);
 		ac.acceptAlert(driver, tc, "OK");
@@ -1300,13 +1302,13 @@ public class AdminPortalController extends Comlibs {
 		AngleMappingListP.inputNote(driver, editedNotesS);
 		// matches from QA: 10019-042,10029-044,10039-059,10049-058
 		// AngleMappingListP.selectImageType(driver, "1001", 2);
-		AngleMappingListP.selectImageType(driver, "10019", 43,tc);
+		AngleMappingListP.selectImageType(driver, "10019", 43, tc);
 		// AngleMappingListP.selectImageType(driver, "1002", 4);
-		AngleMappingListP.selectImageType(driver, "10029", 45,tc);
+		AngleMappingListP.selectImageType(driver, "10029", 45, tc);
 		// AngleMappingListP.selectImageType(driver, "1003", 6);
-		AngleMappingListP.selectImageType(driver, "10039", 57,tc);
+		AngleMappingListP.selectImageType(driver, "10039", 57, tc);
 		// AngleMappingListP.selectImageType(driver, "1004", 8);
-		AngleMappingListP.selectImageType(driver, "10049", 56,tc);
+		AngleMappingListP.selectImageType(driver, "10049", 56, tc);
 		AngleMappingListP.clickSubmit(driver);
 		ac.acceptAlert(driver, tc, "OK");
 		ac.Wait(wt);
@@ -1951,7 +1953,7 @@ public class AdminPortalController extends Comlibs {
 		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadi Int XT5, or only vdvi_interior is must.
 		AngleMappingListP.inputPattern(driver, patternS);
 		ac.Wait(wt * 4);
-		AngleMappingListP.selectImageType(driver, "1001", 2,tc);
+		AngleMappingListP.selectImageType(driver, "1001", 2, tc);
 		AngleMappingListP.clickCancel(driver);
 		ac.Wait(wt);
 		// Input all fields and click the Submit
@@ -1969,13 +1971,13 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		// matches from QA: 10019-042,10029-044,10039-059,10049-058
 		// AngleMappingListP.selectImageType(driver, "1001", 2);
-		AngleMappingListP.selectImageType(driver, "10019", 42,tc);
+		AngleMappingListP.selectImageType(driver, "10019", 42, tc);
 		// AngleMappingListP.selectImageType(driver, "1002", 4);
-		AngleMappingListP.selectImageType(driver, "10029", 44,tc);
+		AngleMappingListP.selectImageType(driver, "10029", 44, tc);
 		// AngleMappingListP.selectImageType(driver, "1003", 6);
-		AngleMappingListP.selectImageType(driver, "10039", 59,tc);
+		AngleMappingListP.selectImageType(driver, "10039", 59, tc);
 		// AngleMappingListP.selectImageType(driver, "1004", 8);
-		AngleMappingListP.selectImageType(driver, "10049", 58,tc);
+		AngleMappingListP.selectImageType(driver, "10049", 58, tc);
 		AngleMappingListP.clickSubmit(driver);
 		ac.Wait(wt);
 		ac.acceptAlert(driver, tc, "OK");
@@ -1987,13 +1989,13 @@ public class AdminPortalController extends Comlibs {
 		AngleMappingListP.inputNote(driver, editedNotesS);
 		// matches from QA: 10019-042,10029-044,10039-059,10049-058
 		// AngleMappingListP.selectImageType(driver, "1001", 2);
-		AngleMappingListP.selectImageType(driver, "10019", 43,tc);
+		AngleMappingListP.selectImageType(driver, "10019", 43, tc);
 		// AngleMappingListP.selectImageType(driver, "1002", 4);
-		AngleMappingListP.selectImageType(driver, "10029", 45,tc);
+		AngleMappingListP.selectImageType(driver, "10029", 45, tc);
 		// AngleMappingListP.selectImageType(driver, "1003", 6);
-		AngleMappingListP.selectImageType(driver, "10039", 57,tc);
+		AngleMappingListP.selectImageType(driver, "10039", 57, tc);
 		// AngleMappingListP.selectImageType(driver, "1004", 8);
-		AngleMappingListP.selectImageType(driver, "10049", 56,tc);
+		AngleMappingListP.selectImageType(driver, "10049", 56, tc);
 		AngleMappingListP.clickSubmit(driver);
 		ac.acceptAlert(driver, tc, "OK");
 		ac.Wait(wt);
@@ -2229,10 +2231,10 @@ public class AdminPortalController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-//			 //// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK for Prod on 2018-12-17 from ManageDealerships.
-//			 bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-//			 RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
-			
+			//// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK for Prod (FF) on 2018-12-17 from ManageDealerships.
+			bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
+
 			// //// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page
 			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
