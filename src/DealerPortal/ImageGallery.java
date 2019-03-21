@@ -138,7 +138,7 @@ public class ImageGallery extends Comlibs {
 	By showAllLocator = By.id("showAll");
 	By loadMoreVehicleBtnLocator = By.id("loadMoreVehicles");
 	// ADD INVENTORY
-	By addInventoryBtn = By.id("addInventoryBtn");
+	By addInventoryBtn = By.xpath("//*[@id=\"addInventoryBtn\"]/span[1]");//By.id("addInventoryBtn");
 	By addInventoryAddBtn = By.xpath("//button[@id='addVinBtn']");
 	By addInventoryCancelBtn = By.xpath("//div[@id='addVinModal']/div/div/div[3]/button[2]");
 	By addInventoryXbtn = By.xpath("//div[@id='addVinModal']/div/div/div/button");

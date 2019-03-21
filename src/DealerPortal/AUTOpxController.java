@@ -945,9 +945,9 @@ public class AUTOpxController extends Comlibs {
 		dpP.enter_Address1(driver, DealershipAddress1 + updatewith, TCnum);
 		dpP.enter_Address2(driver, DealershipAddress2 + updatewith, TCnum);
 
-		// issue here with Change Password field
-		String updatewithempty = "";
-		dpP.enter_ChangePassword(driver, updatewithempty, TCnum); // remove this after issue fixed
+		// // issue here with Change Password field
+		// String updatewithempty = "";
+		// dpP.enter_ChangePassword(driver, updatewithempty, TCnum); // remove this after issue fixed
 
 		// Click on SAVE
 		TCnum = "TC139666_SAVE";
@@ -988,7 +988,7 @@ public class AUTOpxController extends Comlibs {
 			ac.rwExcel(TCnum, false, "Verify Edited DealershipName", "Failed! Edited_DealershipName =" + DealershipName
 					+ updatewith + ".  But site shows =" + Edited_DealershipName);
 		}
-		if (!Edited_DealershipEmail.equals((DealershipEmail +updatewith+ ".com"))) {
+		if (!Edited_DealershipEmail.equals((DealershipEmail + updatewith + ".com"))) {
 			ac.rwExcel(TCnum, false, "Verify Edited DealershipEmail", "Failed! Edited_DealershipEmail ="
 					+ DealershipEmail + updatewith + ".  But site shows =" + Edited_DealershipEmail);
 		}
@@ -1827,6 +1827,7 @@ public class AUTOpxController extends Comlibs {
 		String accountPS = prop.getProperty(env + ".LOTpxPassword");
 		// String baseURL = prop.getProperty(env + ".LOTpxDealerPortalBaseURL");
 		String dealershipName = prop.getProperty(env + ".LOTpxDealershipname");
+		String LOTpxDealershipBrandName = prop.getProperty(env + ".LOTpxDealershipBrandName");
 		String dealerCode = prop.getProperty(env + ".LOTpxDealerCode");
 		String vin01 = prop.getProperty(env + ".LOTpxVin01");
 		String vin02 = prop.getProperty(env + ".LOTpxVin02");
@@ -1867,6 +1868,13 @@ public class AUTOpxController extends Comlibs {
 
 		acceptLicenseP.clickAcceptBtn(driver);
 		ImageGallery igP = new ImageGallery(driver);
+		igP.clickDealerShipInfoBtn(driver);
+		DealerProfile dpP = new DealerProfile(driver);
+		dpP.selectBand(driver, LOTpxDealershipBrandName);
+		dpP.clickInventoryGalleryBtn(driver, TCnum);
+
+		// acceptLicenseP.clickAcceptBtn(driver);
+		// ImageGallery igP = new ImageGallery(driver);
 		// Help section
 		TCnum = "TC139675_7_LOTpx"; // Help - Contact Support. email and tel no.
 		// igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, TCnum);
@@ -2157,6 +2165,7 @@ public class AUTOpxController extends Comlibs {
 		String render = prop.getProperty("AUTOpx.render");
 		String img = prop.getProperty("AUTOpx.customPicPathFile");
 		String tBrowser = prop.getProperty("AUTOpx.browser");
+		String LOTpxDealershipBrandName = prop.getProperty(env + ".LOTpxDealershipBrandName");
 
 		String accountEmail = "";
 		String accountPS = "";
@@ -2194,7 +2203,14 @@ public class AUTOpxController extends Comlibs {
 		loginP.login(driver, accountEmail, accountPS);
 		AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
 		acceptLicenseP.clickAcceptBtn(driver);
+
 		ImageGallery igP = new ImageGallery(driver);
+		igP.clickDealerShipInfoBtn(driver);
+		DealerProfile dpP = new DealerProfile(driver);
+		dpP.selectBand(driver, LOTpxDealershipBrandName);
+		dpP.clickInventoryGalleryBtn(driver, TCnum);
+
+		// ImageGallery igP = new ImageGallery(driver);
 		TCnum = "TC139922_8_&_9";
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		VehicleGallery vgP = new VehicleGallery(driver);
@@ -2216,17 +2232,26 @@ public class AUTOpxController extends Comlibs {
 		}
 		if (alertPass) {
 			vgP.clickBackToInventoryBtn(driver);
+			ac.Wait(wt);
+			igP.clickTemplatesBtn(driver);
+			ac.Wait(wt);
+			Templates tpP = new Templates(driver);
+			tpP.clickInventoryGalleryBtn(driver);
+			ac.Wait(wt);
+			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
+			// System.out.println("\nPlease wait at least 60 seconds, vin: "+vin01+" is re-rendering...\n");
+			// ac.Wait(60);
 		} else {
 			driver = reLogin(driver, ac, tBrowser, envDevice, env, baseURL, accountEmail, accountPS);
 		}
 		TCnum = "TC139922_11";
-		igP.clickRefleshF5Btn(driver, TCnum);
-		TCnum = "TC139922_12";
-		ac.Wait(wt);
-		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
-		TCnum = "TC139922_13";
-		igP.clickRerenderBtn(driver, "Yes", TCnum);
-		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
+		// igP.clickRefleshF5Btn(driver, TCnum);
+		// TCnum = "TC139922_12";
+		// ac.Wait(wt);
+		// igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
+		// TCnum = "TC139922_13";
+		// igP.clickRerenderBtn(driver, "Yes", TCnum);
+		// igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 		TCnum = "TC139922_14";
 		String imageGUIDString = vgP.getImageGUID(dealerCode, vin01, vehGUID01, tempDateTime, serverName, dbName,
 				userName, password);
@@ -2237,14 +2262,18 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139922_14_1";
 		igP.scrollUp(driver, -650, TCnum);
 		ac.Wait(wt);
+		TCnum = "TC139922_14_2";
 		vgP.verifyLoadPannelImage(driver, TCnum);
+		TCnum = "TC139922_14_3";
 		igP.scrollUp(driver, 650, TCnum);
-		vgP.clickSelectImageBtn(driver, imageGUIDString, vehGUID01, TCnum);// Testing now. need to clear up the code
+		TCnum = "TC139922_14_4";
+		// vgP.clickSelectImageBtn(driver, imageGUIDString, vehGUID01, TCnum);// Testing now. need to clear up the code
 		TCnum = "TC139502_9_Debug";
 		boolean newLink = true;
 		if (newLink) {
 			String parentHandle = driver.getWindowHandle(); // get the current window handle
 			vgP.clickURLLink(driver, brw, TCnum);
+			ac.Wait(wt);
 			for (String winHandle : driver.getWindowHandles()) {
 				driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
 			}
@@ -3235,7 +3264,7 @@ public class AUTOpxController extends Comlibs {
 
 		// String[] VINpxNewVIN01
 		// =fetchOneDemArrayFromPropFile(env+".VINpxNewVINs",prop);
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 3; i++) {
 			System.out.println("Testing is started in " + env + "\n");
 			// Initial
 			Comlibs bc = new Comlibs();
@@ -3268,20 +3297,20 @@ public class AUTOpxController extends Comlibs {
 
 			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
 
-			 ////// 2. STOCKpx
-			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			 STOCKpxInventoryTC(driver, tBrowser, env);
+			////// 2. STOCKpx
+			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			STOCKpxInventoryTC(driver, tBrowser, env);
 
 			////// 3. Templates
 			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
 			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
-			// ////// bc.Wait(18*60);//wait 18 minutes;
-			// //
-			// // ////// 4. LOTpx
-			// bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
-			// //LOTpxInventoryTC(driver, tBrowser, env);
-			// LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
+			////// bc.Wait(18*60);//wait 18 minutes;
+			//
+			// ////// 4. LOTpx
+			bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
+			// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
+			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
 			System.out.println("Test is complete!!!");
