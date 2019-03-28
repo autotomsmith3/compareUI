@@ -2216,7 +2216,7 @@ public class AUTOpxController extends Comlibs {
 		VehicleGallery vgP = new VehicleGallery(driver);
 		String tempDateTime = vgP.getCurrentDateTime(4, serverName, dbName, userName, password);
 		vgP.uploadCustomPicture(driver, img);
-		ac.Wait(wt*2);
+		ac.Wait(wt*6);
 		boolean alertPass = false;
 		try {
 			driver.switchTo().alert().accept();// on the “Ok” button as soon as the pop up window appears.
