@@ -2211,12 +2211,12 @@ public class AUTOpxController extends Comlibs {
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
 
 		// ImageGallery igP = new ImageGallery(driver);
-		TCnum = "TC139922_8_&_9";
+		TCnum = "TC139922_8_&_9";//TC139497
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		VehicleGallery vgP = new VehicleGallery(driver);
 		String tempDateTime = vgP.getCurrentDateTime(4, serverName, dbName, userName, password);
 		vgP.uploadCustomPicture(driver, img);
-		ac.Wait(wt);
+		ac.Wait(wt*2);
 		boolean alertPass = false;
 		try {
 			driver.switchTo().alert().accept();// on the “Ok” button as soon as the pop up window appears.
@@ -2232,12 +2232,12 @@ public class AUTOpxController extends Comlibs {
 		}
 		if (alertPass) {
 			vgP.clickBackToInventoryBtn(driver);
-			ac.Wait(wt);
+			ac.Wait(wt*2);
 			igP.clickTemplatesBtn(driver);
-			ac.Wait(wt);
+			ac.Wait(wt*2);
 			Templates tpP = new Templates(driver);
 			tpP.clickInventoryGalleryBtn(driver);
-			ac.Wait(wt);
+			ac.Wait(wt*2);
 			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 			// System.out.println("\nPlease wait at least 60 seconds, vin: "+vin01+" is re-rendering...\n");
 			// ac.Wait(60);
@@ -2255,6 +2255,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139922_14";
 		String imageGUIDString = vgP.getImageGUID(dealerCode, vin01, vehGUID01, tempDateTime, serverName, dbName,
 				userName, password);
+		TCnum = "TC139497";
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		// Window scroll down to make the custom image visible.
 		igP.scrollUp(driver, 650, TCnum);
@@ -3053,6 +3054,7 @@ public class AUTOpxController extends Comlibs {
 		String vehGUID02 = prop.getProperty(env + ".VINpxVin02GUID");
 		// String vinpxnewVin01 = prop.getProperty(env + ".VINpxNewVIN01");
 		String[] VINpxNewVINs = fetchOneDemArrayFromPropFile(env + ".VINpxNewVINs", prop);
+		String VINpxDealershipBrandName = prop.getProperty(env + ".VINpxDealershipBrandName");
 		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
 		String TCnum;
 		String tempVIN = "";
@@ -3063,8 +3065,14 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "";
 		loginP.login(driver, accountEmail, accountPS);
 		AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+		
 		acceptLicenseP.clickAcceptBtn(driver);
 		ImageGallery igP = new ImageGallery(driver);
+		igP.clickDealerShipInfoBtn(driver);
+		DealerProfile dpP = new DealerProfile(driver);
+		dpP.selectBand(driver, VINpxDealershipBrandName);
+		dpP.clickInventoryGalleryBtn(driver, TCnum);
+		
 		// *********************Add VIN *******************************************************
 		// Add VIN
 
@@ -3264,7 +3272,7 @@ public class AUTOpxController extends Comlibs {
 
 		// String[] VINpxNewVIN01
 		// =fetchOneDemArrayFromPropFile(env+".VINpxNewVINs",prop);
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 1; i++) {
 			System.out.println("Testing is started in " + env + "\n");
 			// Initial
 			Comlibs bc = new Comlibs();
@@ -3282,8 +3290,8 @@ public class AUTOpxController extends Comlibs {
 			bc.rwExcel("", "Test Environment", env);
 
 			loadURL(driver, baseURL);
-			// tempDebug(driver);// ***************************************Debug*****************************************
-			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
+			//// tempDebug(driver);// ***************************************Debug*****************************************
+			//AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
 			//// 0.General Inventory Gallery
 			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");

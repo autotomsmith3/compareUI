@@ -436,7 +436,7 @@ public class VehicleGallery extends Comlibs {
 		} else {
 			System.out.println("No any ImageGUID or more than one\n");
 			// imageGUID = "error!";
-			rwExcel("", false, "GetImageGUID", "No any ImageGUID or more than one! ");
+			rwExcel("LOTpx_get_new_uploaded_ImageGUID", false, "GetImageGUID", "No any ImageGUID or more than one! ");
 		}
 		rs.close();
 		sta.close();
