@@ -912,6 +912,7 @@ public class AdminPortalController extends Comlibs {
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
 		tc = "TC229395_d1";// "Upload dealership logo after creating the dealership";
 		UserListP.clickManageDealerShips(driver);
+		ac.Wait(wt);
 		DealerList DealerListP = new DealerList(driver);
 		DealerListP.inputSearch(driver, addNewDealership);
 		DealerListP.clickEditBtn(driver, "1");
@@ -1240,8 +1241,8 @@ public class AdminPortalController extends Comlibs {
 		tc = "ManageAngleMappings";
 		String patternS = "2019-GM-6N[A-Z]26-...-6N[A-Z]26-...";
 		// String patternS="2019-GM-6NF26-1SA-6NF26-1SA"; //WORKS IN QA TOOL
-		String noteS = "19 Cadi Int XT5";
-		String editedNotesS = "Edited_19 Cadi Int XT5";
+		String noteS = "19 Cadillac Int XT5";
+		String editedNotesS = "Edited_19 Cadillac Int XT5";
 		UserListP.clickManageAngleMappings(driver);
 		ac.Wait(wt * 2);
 		AngleMappingList AngleMappingListP = new AngleMappingList(driver);
@@ -1260,10 +1261,10 @@ public class AdminPortalController extends Comlibs {
 		}
 		AngleMappingListP.inputOEM(driver, "gm");
 		AngleMappingListP.inputSequence(driver, "1");
-		AngleMappingListP.inputNote(driver, "19 Cadi Int XT5");
+		AngleMappingListP.inputNote(driver, "19 Cadillac Int XT5");
 		// Note for Pattern:
 		// 2019-GM-6N[A-Z]26-...-6N[A-Z]26-...
-		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadi Int XT5, or only vdvi_interior is must.
+		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadillac Int XT5, or only vdvi_interior is must.
 		AngleMappingListP.inputPattern(driver, patternS);
 		ac.Wait(wt * 4);
 		AngleMappingListP.selectImageType(driver, "1001", 2, tc);
@@ -1279,7 +1280,7 @@ public class AdminPortalController extends Comlibs {
 		AngleMappingListP.inputNote(driver, noteS);
 		// Note for Pattern:
 		// 2019-GM-6N[A-Z]26-...-6N[A-Z]26-...
-		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadi Int XT5, or only vdvi_interior is must.
+		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadillac Int XT5, or only vdvi_interior is must.
 		AngleMappingListP.inputPattern(driver, patternS);
 		ac.Wait(wt);
 		// matches from QA: 10019-042,10029-044,10039-059,10049-058
@@ -1937,8 +1938,8 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		String patternS = "2019-GM-6N[A-Z]26-...-6N[A-Z]26-...";
 		// String patternS="2019-GM-6NF26-1SA-6NF26-1SA"; //WORKS IN QA TOOL
-		String noteS = "19 Cadi Int XT5";
-		String editedNotesS = "Edited_19 Cadi Int XT5";
+		String noteS = "19 Cadillac Int XT5";
+		String editedNotesS = "Edited_19 Cadillac Int XT5";
 		UserListP.clickManageAngleMappings(driver);
 		AngleMappingList AngleMappingListP = new AngleMappingList(driver);
 		// Input all fields and click the Cancel
@@ -1947,10 +1948,10 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		AngleMappingListP.inputOEM(driver, "gm");
 		AngleMappingListP.inputSequence(driver, "1");
-		AngleMappingListP.inputNote(driver, "19 Cadi Int XT5");
+		AngleMappingListP.inputNote(driver, "19 Cadillac Int XT5");
 		// Note for Pattern:
 		// 2019-GM-6N[A-Z]26-...-6N[A-Z]26-...
-		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadi Int XT5, or only vdvi_interior is must.
+		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadillac Int XT5, or only vdvi_interior is must.
 		AngleMappingListP.inputPattern(driver, patternS);
 		ac.Wait(wt * 4);
 		AngleMappingListP.selectImageType(driver, "1001", 2, tc);
@@ -1966,7 +1967,7 @@ public class AdminPortalController extends Comlibs {
 		AngleMappingListP.inputNote(driver, noteS);
 		// Note for Pattern:
 		// 2019-GM-6N[A-Z]26-...-6N[A-Z]26-...
-		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadi Int XT5, or only vdvi_interior is must.
+		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadillac Int XT5, or only vdvi_interior is must.
 		AngleMappingListP.inputPattern(driver, patternS);
 		ac.Wait(wt);
 		// matches from QA: 10019-042,10029-044,10039-059,10049-058
@@ -2232,25 +2233,25 @@ public class AdminPortalController extends Comlibs {
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
 			//// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK for Prod (FF) on 2018-12-17 from ManageDealerships.
-			bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-			RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
+			//bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			//RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
 
-//			// //// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page
-//			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-//			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
-//
-//			////// 1.ManageDealerShipsAddNewAccount:
-//			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
-//			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-//			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
-//
-//			//// 2.ManageDealerShips:
-//			loadURL(driver, baseURL, env);
-//			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
-//			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+			// //// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page
+			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 
-			// bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
-			// driver.close();
+			////// 1.ManageDealerShipsAddNewAccount:
+			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
+			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+
+			//// 2.ManageDealerShips:
+			loadURL(driver, baseURL, env);
+			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
+			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+
+			 //bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
+			 //driver.close();
 			System.out.println("Test is complete!!!");
 		}
 		return;

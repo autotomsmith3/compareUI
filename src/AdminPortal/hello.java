@@ -887,8 +887,8 @@ public class hello extends Comlibs {
 		ac.Wait(wt);
 		String patternS = "2019-GM-6N[A-Z]26-...-6N[A-Z]26-...";
 		// String patternS="2019-GM-6NF26-1SA-6NF26-1SA"; //WORKS IN QA TOOL
-		String noteS = "19 Cadi Int XT5";
-		String editedNotesS = "Edited_19 Cadi Int XT5";
+		String noteS = "19 Cadillac Int XT5";
+		String editedNotesS = "Edited_19 Cadillac Int XT5";
 		UserListP.clickManageAngleMappings(driver);
 		ac.Wait(wt * 2);
 		AngleMappingList AngleMappingListP = new AngleMappingList(driver);
@@ -907,10 +907,10 @@ public class hello extends Comlibs {
 		}
 		AngleMappingListP.inputOEM(driver, "gm");
 		AngleMappingListP.inputSequence(driver, "1");
-		AngleMappingListP.inputNote(driver, "19 Cadi Int XT5");
+		AngleMappingListP.inputNote(driver, "19 Cadillac Int XT5");
 		// Note for Pattern:
 		// 2019-GM-6N[A-Z]26-...-6N[A-Z]26-...
-		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadi Int XT5, or only vdvi_interior is must.
+		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadillac Int XT5, or only vdvi_interior is must.
 		AngleMappingListP.inputPattern(driver, patternS);
 		ac.Wait(wt * 4);
 		AngleMappingListP.selectImageType(driver, "1001", 2);
@@ -926,7 +926,7 @@ public class hello extends Comlibs {
 		AngleMappingListP.inputNote(driver, noteS);
 		// Note for Pattern:
 		// 2019-GM-6N[A-Z]26-...-6N[A-Z]26-...
-		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadi Int XT5, or only vdvi_interior is must.
+		// good but need to input all info: vdvi_interior, GM, 2, 19 Cadillac Int XT5, or only vdvi_interior is must.
 		AngleMappingListP.inputPattern(driver, patternS);
 		ac.Wait(wt);
 		// matches from QA: 10019-042,10029-044,10039-059,10049-058
