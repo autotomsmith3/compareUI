@@ -795,6 +795,7 @@ public class VehicleGallery extends Comlibs {
 				String data_image_guid = driver.findElement(DeleteImageBtn).getAttribute("data-image-guid");
 				System.out.println("data_image_guid =" + data_image_guid);
 				if (data_image_guid.equalsIgnoreCase(imageGUIDString)) {
+					Wait(4);
 					hoverOnWebElement(driver, driver.findElement(hoverOnLocatori));
 					if (elementExist(driver, DeleteImageBtn, true, tc)) {
 						driver.findElement(DeleteImageBtn).click();

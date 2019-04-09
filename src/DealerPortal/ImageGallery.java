@@ -1579,6 +1579,7 @@ public class ImageGallery extends Comlibs {
 	public void enterTextInSearch(String sVIN) {
 		driver.findElement(searchVinOrStockNo).clear();
 		driver.findElement(searchVinOrStockNo).sendKeys(sVIN);
+		Wait(2);
 		driver.findElement(searchVinOrStockNo).sendKeys(Keys.RETURN);
 	}
 

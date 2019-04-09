@@ -778,10 +778,12 @@ public class AUTOpxController extends Comlibs {
 		igP.clickColorExteriorTab(driver, TCnum);
 		igP.clickColorExteriorColorCheckBox(driver, "Summit White(GAZ)", TCnum);
 		igP.clickColorInteriorTab(driver, TCnum);
-		String selectedInterior = "Dark Atmosphere/Medium Atmosphere w/Cloth Seat Trim(HHR)";
+		String selectedInterior = "Dark Walnut/Slate w/Cloth Seat Trim(HV5)";
+//		String selectedInterior = "Dark Atmosphere/Medium Atmosphere w/Cloth Seat Trim(HHR)";//20190409 worked for Chrome but failed on Firefox 20190409. It does not need to expose the string on Chrome but FF needs the string to expose on the screen. 
 		igP.clickColorInteriorColorCheckBox(driver, selectedInterior, TCnum); // on 2018-12-29
 		// igP.clickColorInteriorColorCheckBox(driver, "Ebony Black", TCnum); //on 2018-09-30
 		// igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); // afte 2018-09-30, works for Chrome but Firefox 2018-12-17
+
 		igP.clickColorApplyBtn(driver, TCnum);
 		igP.clickClearAllFiltersBtn(driver, TCnum);
 		TCnum = "TC139691_19_exterior";
@@ -878,7 +880,7 @@ public class AUTOpxController extends Comlibs {
 		if (allVinNums > 20) {
 			if (igP.verifyShowAllBtnStatus(driver, true, TCnum)) {
 				igP.clickShowAllBtn(driver, TCnum);
-				igP.verifyLoadMoreVehicleBtnStatus(driver, true, TCnum);
+				igP.verifyLoadMoreVehicleBtnStatus(driver, false, TCnum);
 				igP.verifyShowAllBtnStatus(driver, false, TCnum);
 			}
 		} else {
@@ -898,8 +900,13 @@ public class AUTOpxController extends Comlibs {
 				igP.verifyShowAllBtnStatus(driver, true, TCnum);
 				igP.scrollUp(driver, 650, TCnum);
 				igP.clickLoadMoreVehicleBtn(driver, TCnum);
-				igP.verifyLoadMoreVehicleBtnStatus(driver, false, TCnum);
-				igP.verifyShowAllBtnStatus(driver, false, TCnum);
+				if (allVinNums > 40) {
+					igP.verifyLoadMoreVehicleBtnStatus(driver, true, TCnum);
+					igP.verifyShowAllBtnStatus(driver, true, TCnum);
+				}else {
+					igP.verifyLoadMoreVehicleBtnStatus(driver, false, TCnum);
+					igP.verifyShowAllBtnStatus(driver, false, TCnum);
+				}
 			}
 		} else {
 			igP.verifyLoadMoreVehicleBtnStatus(driver, false, TCnum);
@@ -1012,6 +1019,7 @@ public class AUTOpxController extends Comlibs {
 		dpP.enter_Address1(driver, DealershipAddress1, TCnum);
 		dpP.enter_Address2(driver, DealershipAddress2, TCnum);
 		dpP.clickSAVE(driver, TCnum);
+		ac.Wait(wt);
 		dpP.clickNOBtn(driver, TCnum);
 		ac.Wait(wt);
 
@@ -2211,17 +2219,21 @@ public class AUTOpxController extends Comlibs {
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
 
 		// ImageGallery igP = new ImageGallery(driver);
-		TCnum = "TC139922_8_&_9";//TC139497
+		TCnum = "TC139922_8_&_9";// TC139497
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		VehicleGallery vgP = new VehicleGallery(driver);
 		String tempDateTime = vgP.getCurrentDateTime(4, serverName, dbName, userName, password);
 		vgP.uploadCustomPicture(driver, img);
-		ac.Wait(wt*6);
+		ac.Wait(wt * 6);
 		boolean alertPass = false;
 		try {
 			driver.switchTo().alert().accept();// on the “Ok” button as soon as the pop up window appears.
-			driver.switchTo().alert().dismiss();// clicks on the “Cancel” button as soon as the pop up window appears.
-			driver.switchTo().defaultContent();//
+			if (envBrowser.equalsIgnoreCase("Chrome")) {
+				driver.switchTo().alert().dismiss();// clicks on the “Cancel” button as soon as the pop up window appears.
+				driver.switchTo().defaultContent();//
+			}else if (envBrowser.equalsIgnoreCase("Firefox")) {
+				System.out.println("FireFox browser, ignore alert...!");
+			}
 			alertPass = true;
 			System.out.println("1. Accept the alert.");
 			ac.rwExcel(TCnum, true, "Upload Custom Picture", "Alerts showing, accetped.");
@@ -2232,12 +2244,12 @@ public class AUTOpxController extends Comlibs {
 		}
 		if (alertPass) {
 			vgP.clickBackToInventoryBtn(driver);
-			ac.Wait(wt*2);
+			ac.Wait(wt * 2);
 			igP.clickTemplatesBtn(driver);
-			ac.Wait(wt*2);
+			ac.Wait(wt * 2);
 			Templates tpP = new Templates(driver);
 			tpP.clickInventoryGalleryBtn(driver);
-			ac.Wait(wt*2);
+			ac.Wait(wt * 2);
 			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 			// System.out.println("\nPlease wait at least 60 seconds, vin: "+vin01+" is re-rendering...\n");
 			// ac.Wait(60);
@@ -2430,8 +2442,13 @@ public class AUTOpxController extends Comlibs {
 		boolean set_Footer_Vin = igP.truefalseRandom();
 		boolean set_Footer_StockNumber = igP.truefalseRandom();
 
-		boolean set_MarketingMessageTop = igP.truefalseRandom();
-		boolean set_MarketingMessageBotton = igP.truefalseRandom();
+		boolean set_MarketingMessageTop =false;
+		boolean set_MarketingMessageBotton = false;
+		set_MarketingMessageTop = igP.truefalseRandom();
+		if (!set_MarketingMessageTop) {
+			set_MarketingMessageBotton = igP.truefalseRandom();	
+		}
+	
 		boolean set_AddAdditionalOverlay = false;
 
 		boolean set_TextImage_VDI = igP.truefalseRandom();
@@ -3065,14 +3082,14 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "";
 		loginP.login(driver, accountEmail, accountPS);
 		AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
-		
+
 		acceptLicenseP.clickAcceptBtn(driver);
 		ImageGallery igP = new ImageGallery(driver);
 		igP.clickDealerShipInfoBtn(driver);
 		DealerProfile dpP = new DealerProfile(driver);
 		dpP.selectBand(driver, VINpxDealershipBrandName);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
-		
+
 		// *********************Add VIN *******************************************************
 		// Add VIN
 
@@ -3291,27 +3308,27 @@ public class AUTOpxController extends Comlibs {
 
 			loadURL(driver, baseURL);
 			//// tempDebug(driver);// ***************************************Debug*****************************************
-			//AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
+			 //AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			//// 0.General Inventory Gallery
-			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-			inventoryGalleryTC(driver, tBrowser, env, versionNum);
-			vehicleGallery(driver, tBrowser, env);
-			// verifyRerender(driver, tBrowser);
-
-			////// 1.VINpx:
-			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-
-			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-
-			////// 2. STOCKpx
-			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			STOCKpxInventoryTC(driver, tBrowser, env);
-
-			////// 3. Templates
-			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
-			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
+			 //// 0.General Inventory Gallery
+			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
+			 vehicleGallery(driver, tBrowser, env);
+			 // verifyRerender(driver, tBrowser);
+			
+			 ////// 1.VINpx:
+			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+			
+			 // bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			
+			 ////// 2. STOCKpx
+			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			 STOCKpxInventoryTC(driver, tBrowser, env);
+			
+			 ////// 3. Templates
+			 bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
+			 VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
 			////// bc.Wait(18*60);//wait 18 minutes;
 			//
