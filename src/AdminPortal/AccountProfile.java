@@ -147,8 +147,8 @@ public class AccountProfile extends Comlibs {
 		// get the current window handles before swithTo. This resolved the "driver.switchTo().window(windowHandle);" break sometimes.
 		Set<String> windowHandles = driver.getWindowHandles();
 
-		System.out.println("Original WindowHandle=" + windowHandle);
-		System.out.println("WindowHandles=" + windowHandles);
+		// System.out.println("Original WindowHandle=" + windowHandle);
+		// System.out.println("WindowHandles=" + windowHandles);
 
 		for (String NewWindowHandle : windowHandles) {
 			windowHandle = NewWindowHandle;

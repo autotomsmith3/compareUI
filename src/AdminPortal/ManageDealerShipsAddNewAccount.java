@@ -45,7 +45,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		String vehGUID01 = prop.getProperty(env + ".VINpxVin01GUID");
 		String vehGUID02 = prop.getProperty(env + ".VINpxVin02GUID");
 		// String vinpxnewVin01 = prop.getProperty(env + ".VINpxNewVIN01");
-//		String[] VINpxNewVINs = fetchOneDemArrayFromPropFile(env + ".VINpxNewVINs", prop);
+		// String[] VINpxNewVINs = fetchOneDemArrayFromPropFile(env + ".VINpxNewVINs", prop);
 		String serverName = prop.getProperty(env + ".serverName");
 		String dbName = prop.getProperty(env + ".dbName");
 		String userName = prop.getProperty(env + ".userName");
@@ -436,10 +436,10 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		// Bug here since entered Metadata. See AUTOPXOPS-1227. Now it shows an error "An error occurred. Please try again."
 		// but the dealership has been created in our system. Issue fixed but "Your settings have been saved" message only shows a second and then disappears.
 		if (MessageExist) {
-			rwExcel(tc, true, "Add a new dealership \""+addNewDealership+"\" with all fields",
+			rwExcel(tc, true, "Add a new dealership \"" + addNewDealership + "\" with all fields",
 					"Sucessful msg shows: Your settings have been saved");
 		} else {
-			rwExcel(tc, false, "Add a new dealership \""+addNewDealership+"\" with all fields",
+			rwExcel(tc, false, "Add a new dealership \"" + addNewDealership + "\" with all fields",
 					"Failed to shows msg: Your settings have been saved. Currently it only shows a second and then disappears. Related to bug AUTOPXOPS-1227");
 		}
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);// Stop here. Verify dealer added in system through Manage Dealership by input the dealerid and click the edit buttom then close Dealer Profile page
@@ -511,21 +511,6 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		// driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
 		// }
 		switchToWindow(driver);
-		System.out.println("Stop here 2018-11-19");
-		// Stop here!!! 2018-10-01
-
-		// driver.close();
-		// switchToWindow(driver);
-		// UserListP.clickDealerViewBtn(driver, 1);
-		// driver.close();
-		// switchToWindow(driver);
-		// *************************UserListP******************************************************
-		//// *************************UserListP******************************************************
-
-		// driver.close();
-		// switchToWindow(driver, parentHandle);
-		// driver.close();
-
 	}
 
 	private static String[] fetchOneDemArrayFromPropFile(String propertyName, Properties propFile)

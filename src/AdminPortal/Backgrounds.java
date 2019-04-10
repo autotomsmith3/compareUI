@@ -168,7 +168,7 @@ public class Backgrounds extends Comlibs {
 			// driver.findElement(By.id("btnUploadPics")).sendKeys(imagePath); // By id - ok
 			driver.findElement(chooseFileBtn).sendKeys(imagePath);// By X.Path - ?
 			System.out.println("\nPlease wait...this will be Waiting \"" + waitTime
-					+ "\" seconds for Backgrounds page reloadling... but it does not work on second bg uploading with FF\n");
+					+ "\" seconds for Backgrounds page reloadling... \n");
 			Wait(waitTime);
 			rwExcel(tc, true, "Upload background pictures from Background page",
 					"Click on Choose Files button in Backgrounds page successfully.");

@@ -62,8 +62,8 @@ public class DealerProfile extends Comlibs {
 	// By backGroundLocator=By.xpath("//*[@id=\"bg-0\"]/div[1]/img");
 	// *[@id="dealerListBtn"]/span
 	By MessageDisplayedOnHead = By.xpath("//*[@id=\"header\"]/div/div[2]/span");
-	By popupOkayBtn=By.xpath("//*[@id=\"alertModal\"]/div/div/div[3]/button");
-	
+	By popupOkayBtn = By.xpath("//*[@id=\"alertModal\"]/div/div/div[3]/button");
+
 	public String getDealershipID(WebDriver driver) throws IOException {
 		String dealershipip = driver.findElement(DealershipIDLocator).getAttribute("value");
 		return dealershipip;
@@ -133,8 +133,8 @@ public class DealerProfile extends Comlibs {
 		// get the current window handles before swithTo. This resolved the "driver.switchTo().window(windowHandle);" break sometimes.
 		Set<String> windowHandles = driver.getWindowHandles();
 
-		System.out.println("Original WindowHandle=" + windowHandle);
-		System.out.println("WindowHandles=" + windowHandles);
+		// System.out.println("Original WindowHandle=" + windowHandle);
+		// System.out.println("WindowHandles=" + windowHandles);
 
 		for (String NewWindowHandle : windowHandles) {
 			windowHandle = NewWindowHandle;
@@ -142,7 +142,7 @@ public class DealerProfile extends Comlibs {
 
 		driver.switchTo().window(windowHandle);
 
-//		return new DealerList(driver);
+		// return new DealerList(driver);
 	}
 
 	public DealerProfile clickSaveBtn(WebDriver driver, String tc) {
@@ -150,13 +150,14 @@ public class DealerProfile extends Comlibs {
 		return this;
 	}
 
-	public boolean checkMessageDisplayedHead(WebDriver driver, String message,String tc) throws Exception {
+	public boolean checkMessageDisplayedHead(WebDriver driver, String message, String tc) throws Exception {
 		String msg = driver.findElement(MessageDisplayedOnHead).getText();// .getAttribute("messageBox");
 		boolean messageExist = false;
 		if (msg.equalsIgnoreCase(message)) {
 			messageExist = true;
-		}else {
-			rwExcel(tc, false, "The message is displayed on head - Does NOT match","Expected msg is:\""+message+"\". The real message is displayed on head is:\""+msg+"\"");
+		} else {
+			rwExcel(tc, false, "The message is displayed on head - Does NOT match",
+					"Expected msg is:\"" + message + "\". The real message is displayed on head is:\"" + msg + "\"");
 		}
 		return messageExist;
 	}
@@ -322,31 +323,35 @@ public class DealerProfile extends Comlibs {
 		JavascriptExecutor jsx = (JavascriptExecutor) driver;
 		jsx.executeScript("window.scrollBy(0," + scrollNum + ")", "");
 	}
-	public void uploadDealershipLogo(WebDriver driver, String imageLogPath,String msg, String tc) throws IOException {
-		By alertMsg=By.xpath("//*[@id=\"header\"]/div/div[2]/span");
+
+	public void uploadDealershipLogo(WebDriver driver, String imageLogPath, String msg, String tc) throws IOException {
+		By alertMsg = By.xpath("//*[@id=\"header\"]/div/div[2]/span");
 		try {
 			driver.findElement(By.id("uploadLogo")).sendKeys(imageLogPath);
 			Wait(2);
-//			driver.findElement(popupOkayBtn).click();// this is only needed when upload a gif file.
-			//scrollup
+			// driver.findElement(popupOkayBtn).click();// this is only needed when upload a gif file.
+			// scrollup
 			scrollUp(driver, -2000, tc); // QA -2000 Prod -3000
 			Wait(2);
-			String alertMsgExist=driver.findElement(alertMsg).getText();
+			String alertMsgExist = driver.findElement(alertMsg).getText();
 			if (alertMsgExist.equalsIgnoreCase(msg)) {
 				rwExcel(tc, true, "Upload a dealership Logo", "Verify alert message showing in Dealer Profile page");
-			}else {
-				rwExcel(tc, false, "Upload a dealership Logo", "Verify alert message showing in Dealer Profile page. Now the message is:\""+alertMsgExist+"\". ");
+			} else {
+				rwExcel(tc, false, "Upload a dealership Logo",
+						"Verify alert message showing in Dealer Profile page. Now the message is:\"" + alertMsgExist
+								+ "\". ");
 			}
 			Wait(4);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			rwExcel(tc, false, "Upload a dealership Logo", "in Dealer Profile page");
 			Wait(4);
 		}
 
 	}
+
 	public void uploadDealershipLogo(WebDriver driver, String imageLogPath, String tc) throws IOException {
-//		driver.findElement(By.id("btnUploadPics")).sendKeys(vehicleImage);
-//		driver.findElement(By.xpath("//*[@id='uploadLogo']")).sendKeys(imageLogPath);
+		// driver.findElement(By.id("btnUploadPics")).sendKeys(vehicleImage);
+		// driver.findElement(By.xpath("//*[@id='uploadLogo']")).sendKeys(imageLogPath);
 		Wait(2);
 		try {
 			driver.findElement(By.id("uploadLogo")).sendKeys(imageLogPath);
@@ -354,7 +359,7 @@ public class DealerProfile extends Comlibs {
 			driver.findElement(popupOkayBtn).click();
 			rwExcel(tc, true, "Upload a dealership Logo", "in Dealer Profile page");
 			Wait(4);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			rwExcel(tc, false, "Upload a dealership Logo", "in Dealer Profile page");
 			Wait(4);
 		}

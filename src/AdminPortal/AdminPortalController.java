@@ -109,8 +109,8 @@ public class AdminPortalController extends Comlibs {
 
 	public static void switchToWindow(WebDriver driver, String windowHandel) {
 		Set<String> windowHandles = driver.getWindowHandles();
-		System.out.println("Original WindowHandle=" + windowHandel);
-		System.out.println("WindowHandles=" + windowHandles);
+		// System.out.println("Original WindowHandle=" + windowHandel);
+		// System.out.println("WindowHandles=" + windowHandles);
 
 		for (String NewWindowHandle : windowHandles) {
 			windowHandel = NewWindowHandle;
@@ -1088,11 +1088,16 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt * 2);
 		BackgroundsP.VerifyCarImage(driver, tc);
 		for (int i = 1; i <= numpics; i++) {
+			ac.Wait(wt);
 			BackgroundsP.clickRightArrowBtn(driver, tc + "_" + i);
+			ac.Wait(wt);
 			BackgroundsP.clickBackgroundPic2(driver, tc + "_" + i);
 			if (i == 2) {
+				ac.Wait(wt);
 				BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
+				ac.Wait(wt);
 				ac.acceptAlert(driver, tc, "OK");
+				ac.Wait(wt);
 			}
 		}
 		BackgroundsP.VerifyCarImage(driver, tc);
@@ -1317,6 +1322,7 @@ public class AdminPortalController extends Comlibs {
 		AngleMappingListP.inputSearch(driver, editedNotesS);
 		AngleMappingListP.clickDeleteBtn(driver, 1);
 		ac.acceptAlert(driver, tc, "OK");
+		ac.Wait(wt);
 		// verify the delete angle still be there by checking note
 		AngleMappingListP.inputSearch(driver, editedNotesS);
 		String noteName = AngleMappingListP.getNoteNameString(driver, 1);
@@ -2233,8 +2239,8 @@ public class AdminPortalController extends Comlibs {
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
 			//// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK for Prod (FF) on 2018-12-17 from ManageDealerships.
-			//bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-			//RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
+			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			// RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
 
 			// //// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page
 			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
@@ -2250,8 +2256,8 @@ public class AdminPortalController extends Comlibs {
 			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
 			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
 
-			 //bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
-			 //driver.close();
+			// bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
+			// driver.close();
 			System.out.println("Test is complete!!!");
 		}
 		return;
