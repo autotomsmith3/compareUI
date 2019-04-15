@@ -1,4 +1,4 @@
-VINPX CLICK-WRAP LICENSE AGREEMENT xxxxx
+VINPX CLICK-WRAP LICENSE AGREEMENT
  
 This VINpx Click-Wrap License Agreement (“Agreement”) is a legal contract between the customer 
 subscribing to the VINpx product (“you”) and Autodata Solutions, Inc. and its affiliates (“Autodata”, “we” 
