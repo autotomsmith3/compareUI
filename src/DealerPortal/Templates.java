@@ -545,7 +545,7 @@ public class Templates extends Comlibs {
 		 * 1. Pseudo-elements don't exist in the DOM tree (hence the name), therefore they cannot be selected with XPath 2. Unfortunately, that's not possible with XPath. As mentioned by Tomalak, Pseudo-elements don't exist in the DOM tree (hence the name), therefore they cannot be selected with XPath and Selenium does not expose them as well. In general, ::before and ::after pseudo-elements are used for styling of containing element. 3. My solution: a. get all styles b. find out what is different between checked and unchecked c. getPropertyValue to identify checked and unchecked - transform-origin=50% 50% (unchecked) or 2.5px 5px (checked)
 		 **/
 		boolean isTrue = false;
-
+		Wait(1);
 		try {
 
 			JavascriptExecutor js = (JavascriptExecutor) driver;

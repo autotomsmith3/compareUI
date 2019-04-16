@@ -1491,6 +1491,7 @@ public class AUTOpxController extends Comlibs {
 		String accountPS = prop.getProperty(env + ".STOCKpxPassword");
 		// String baseURL = prop.getProperty(env + ".STOCKpxDealerPortalBaseURL");
 		String dealershipName = prop.getProperty(env + ".STOCKpxDealershipname");
+		String STOCKpxDealershipBrandName = prop.getProperty(env + ".STOCKpxDealershipBrandName");
 		String dealerCode = prop.getProperty(env + ".STOCKpxDealerCode");
 		String vin01 = prop.getProperty(env + ".STOCKpxVin01");
 		String vin02 = prop.getProperty(env + ".STOCKpxVin02");
@@ -1532,6 +1533,12 @@ public class AUTOpxController extends Comlibs {
 
 		acceptLicenseP.clickAcceptBtn(driver);
 		ImageGallery igP = new ImageGallery(driver);
+
+		igP.clickDealerShipInfoBtn(driver);
+		DealerProfile dpP = new DealerProfile(driver);
+		dpP.selectBand(driver, STOCKpxDealershipBrandName);
+		dpP.clickInventoryGalleryBtn(driver, TCnum);
+		
 		igP.verifyDealershipname(dealershipName, TCnum);
 		// Help section
 		TCnum = "TC139675_7_STOCKpx"; // Help - Contact Support. email and tel no.
@@ -2451,7 +2458,7 @@ public class AUTOpxController extends Comlibs {
 	
 		boolean set_AddAdditionalOverlay = false;
 
-		boolean set_TextImage_VDI = igP.truefalseRandom();
+		boolean set_TextImage_VDI =igP.truefalseRandom();
 		boolean set_TextImage_WCI = igP.truefalseRandom();
 		boolean set_TextImage_VBI = igP.truefalseRandom();
 		/**
@@ -3102,24 +3109,25 @@ public class AUTOpxController extends Comlibs {
 		ac.Wait(wt);
 		igP.clickAddInventoryBtn(driver, TCnum);
 		int total = VINpxNewVINs.length;
-		ac.rwExcel("", "VINs Total=" + total, "");
+//		ac.rwExcel("", "VINs Total=" + total, "");
 		int c = 0;
 		for (String vin : VINpxNewVINs) {
 			c++;
+			System.out.println("Total "+c+" vins added");
 			igP.inputVinInAddInventoryField(driver, vin, TCnum);
 			igP.clickAddBtn(driver, TCnum);
-			if (igP.verifyGoodOrBadMsgShowing(driver, TCnum)) {
-				// good msg shows
-				tempVIN = vin;
-				ac.rwExcel("VIN#= " + c, true, "VIN= " + vin,
-						"VIN added, good message is showing under My Inventory Gallery");
-				// break;
-			} else {
-				// error msg shows
-				tempVIN = vin;
-				ac.rwExcel("VIN#= " + c, false, "VIN= " + vin, "error message is showing under My Inventory Gallery");
-
-			}
+//			if (igP.verifyGoodOrBadMsgShowing(driver, TCnum)) {
+//				// good msg shows
+//				tempVIN = vin;
+////				ac.rwExcel("VIN#= " + c, true, "VIN= " + vin,
+////						"VIN added, good message is showing under My Inventory Gallery");
+//				// break;
+//			} else {
+//				// error msg shows
+//				tempVIN = vin;
+//				ac.rwExcel("VIN#= " + c, false, "VIN= " + vin, "error message is showing under My Inventory Gallery");
+//
+//			}
 		}
 		igP.clickAddInventoryXBtn(driver, TCnum);
 		igP.clickRefleshF5Btn(driver, TCnum);
@@ -3308,17 +3316,17 @@ public class AUTOpxController extends Comlibs {
 
 			loadURL(driver, baseURL);
 			//// tempDebug(driver);// ***************************************Debug*****************************************
-			 //AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
+//			 AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			 //// 0.General Inventory Gallery
-			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
-			 vehicleGallery(driver, tBrowser, env);
-			 // verifyRerender(driver, tBrowser);
-			
-			 ////// 1.VINpx:
-			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+//			 //// 0.General Inventory Gallery
+//			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+//			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
+//			 vehicleGallery(driver, tBrowser, env);
+//			 // verifyRerender(driver, tBrowser);
+//			
+//			 ////// 1.VINpx:
+//			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+//			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
 			
 			 // bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
 			
