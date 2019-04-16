@@ -3318,15 +3318,15 @@ public class AUTOpxController extends Comlibs {
 			//// tempDebug(driver);// ***************************************Debug*****************************************
 //			 AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-//			 //// 0.General Inventory Gallery
-//			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-//			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
-//			 vehicleGallery(driver, tBrowser, env);
-//			 // verifyRerender(driver, tBrowser);
-//			
-//			 ////// 1.VINpx:
-//			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-//			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+			 //// 0.General Inventory Gallery
+			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
+			 vehicleGallery(driver, tBrowser, env);
+			 // verifyRerender(driver, tBrowser);
+			
+			 ////// 1.VINpx:
+			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
 			
 			 // bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
 			
