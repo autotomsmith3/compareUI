@@ -2251,12 +2251,12 @@ public class AUTOpxController extends Comlibs {
 		}
 		if (alertPass) {
 			vgP.clickBackToInventoryBtn(driver);
-			ac.Wait(wt * 2);
+			ac.Wait(wt * 4);
 			igP.clickTemplatesBtn(driver);
-			ac.Wait(wt * 2);
+			ac.Wait(wt * 4);
 			Templates tpP = new Templates(driver);
 			tpP.clickInventoryGalleryBtn(driver);
-			ac.Wait(wt * 2);
+			ac.Wait(wt * 4);
 			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 			// System.out.println("\nPlease wait at least 60 seconds, vin: "+vin01+" is re-rendering...\n");
 			// ac.Wait(60);
@@ -3323,16 +3323,16 @@ public class AUTOpxController extends Comlibs {
 //			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
 //			 vehicleGallery(driver, tBrowser, env);
 //			 // verifyRerender(driver, tBrowser);
-			
-			 ////// 1.VINpx:
-			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-			
-			 // bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			
-			 ////// 2. STOCKpx
-			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			 STOCKpxInventoryTC(driver, tBrowser, env);
+//			
+//			 ////// 1.VINpx:
+//			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+//			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+//			
+//			 // bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+//			
+//			 ////// 2. STOCKpx
+//			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+//			 STOCKpxInventoryTC(driver, tBrowser, env);
 			
 			 ////// 3. Templates
 			 bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
