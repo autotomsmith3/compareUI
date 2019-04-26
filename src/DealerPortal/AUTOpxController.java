@@ -756,7 +756,7 @@ public class AUTOpxController extends Comlibs {
 
 		igP.clickModelBtn(driver, TCnum);
 		igP.clickModelTab(driver, "Buick", TCnum);
-		igP.clickModelTrimCbx(driver, "Buick", "Cascada", TCnum);
+		igP.clickModelTrimCbx(driver, "Buick", "Enclave", TCnum);
 		igP.clickModelApplyBtn(driver, TCnum);
 		igP.clickClearAllFiltersBtn(driver, TCnum);
 
@@ -838,7 +838,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139688_16";
 		igP.clickColorsBtn(driver, TCnum);
 		igP.clickColorExteriorTab(driver, TCnum);
-		igP.clickColorExteriorColorCheckBox(driver, "Graphite Gray Metallic(G7Q)", TCnum);
+		igP.clickColorExteriorColorCheckBox(driver, "Coppertino Metallic(G8R)", TCnum);
 		igP.clickColorInteriorTab(driver, TCnum);
 		// igP.clickColorInteriorColorCheckBox(driver, "Jet Black (4AA)", TCnum);
 		igP.clickColorApplyBtn(driver, TCnum);
@@ -852,7 +852,7 @@ public class AUTOpxController extends Comlibs {
 		igP.clickTilesViewBtn(driver, TCnum);
 		igP.clickGridViewBtn(driver, TCnum);
 		igP.enterTextInSearch(vin01);
-		ac.Wait(wt * 3);
+		ac.Wait(wt * 4);
 		igP.clickGridRowOnlyOneRecordToCheck(driver, TCnum);
 		igP.clickGridRowOnlyOneRecord(driver, TCnum);
 		VehicleGallery vgP = new VehicleGallery(driver);
@@ -2251,12 +2251,12 @@ public class AUTOpxController extends Comlibs {
 		}
 		if (alertPass) {
 			vgP.clickBackToInventoryBtn(driver);
-			ac.Wait(wt * 4);
+			ac.Wait(wt * 2);
 			igP.clickTemplatesBtn(driver);
-			ac.Wait(wt * 4);
+			ac.Wait(wt * 2);
 			Templates tpP = new Templates(driver);
 			tpP.clickInventoryGalleryBtn(driver);
-			ac.Wait(wt * 4);
+			ac.Wait(wt * 2);
 			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 			// System.out.println("\nPlease wait at least 60 seconds, vin: "+vin01+" is re-rendering...\n");
 			// ac.Wait(60);
@@ -2276,6 +2276,7 @@ public class AUTOpxController extends Comlibs {
 				userName, password);
 		TCnum = "TC139497";
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
+		vgP.clickRightNextImageBtn(driver, TCnum);
 		// Window scroll down to make the custom image visible.
 		igP.scrollUp(driver, 650, TCnum);
 		vgP.clickPreviewBtn(driver, imageGUIDString, vin01, TCnum);
@@ -3316,23 +3317,23 @@ public class AUTOpxController extends Comlibs {
 
 			loadURL(driver, baseURL);
 			//// tempDebug(driver);// ***************************************Debug*****************************************
-//			 AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
+			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-//			 //// 0.General Inventory Gallery
-//			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-//			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
-//			 vehicleGallery(driver, tBrowser, env);
-//			 // verifyRerender(driver, tBrowser);
-//			
-//			 ////// 1.VINpx:
-//			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-//			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-//			
-//			 // bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-//			
-//			 ////// 2. STOCKpx
-//			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-//			 STOCKpxInventoryTC(driver, tBrowser, env);
+			 //// 0.General Inventory Gallery
+			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
+			 vehicleGallery(driver, tBrowser, env);
+			 // verifyRerender(driver, tBrowser);
+			
+			 ////// 1.VINpx:
+			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+			
+			 // bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			
+			 ////// 2. STOCKpx
+			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			 STOCKpxInventoryTC(driver, tBrowser, env);
 			
 			 ////// 3. Templates
 			 bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
