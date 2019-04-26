@@ -1284,6 +1284,7 @@ public class AUTOpxController extends Comlibs {
 		// Verify Rerender All Vehicles for VINpx dealer
 		// TC139709
 		TCnum = "TC139709_06";
+		System.out.println("Rerender All Vehicles for VINpx dealer");
 		igP.clickSelectAllBtn(driver, TCnum);
 		allVinNums = igP.getReRenderNum(driver, TCnum);
 		igP.clickRerenderBtn(driver, render, TCnum);
@@ -1638,6 +1639,7 @@ public class AUTOpxController extends Comlibs {
 		igP.clickSelectNoneBtn(driver, TCnum);
 		// Verify Rerender All Vehicles for STOCKpx dealer TC139712
 		TCnum = "TC139712_06";
+		System.out.println("Rerender All Vehicles for STOCKpx dealer");
 		if (allVinNums > 20) {
 			igP.clickShowAllBtn(driver, TCnum);
 		}
@@ -2276,7 +2278,9 @@ public class AUTOpxController extends Comlibs {
 				userName, password);
 		TCnum = "TC139497";
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
+		ac.Wait(2);
 		vgP.clickRightNextImageBtn(driver, TCnum);
+		ac.Wait(2);
 		// Window scroll down to make the custom image visible.
 		igP.scrollUp(driver, 650, TCnum);
 		vgP.clickPreviewBtn(driver, imageGUIDString, vin01, TCnum);
@@ -2309,6 +2313,9 @@ public class AUTOpxController extends Comlibs {
 		}
 		TCnum = "TC139922_17";
 		igP.scrollUp(driver, 650, TCnum);
+		ac.Wait(2);
+		vgP.clickRightNextImageBtn(driver, TCnum);
+		ac.Wait(2);
 		vgP.clickDeleteBtn(driver, imageGUIDString, vehGUID01, TCnum);// Testing now. need to clear up the code
 		ac.Wait(wt);
 		TCnum = "TC139922_18";
@@ -3319,25 +3326,25 @@ public class AUTOpxController extends Comlibs {
 			//// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			 //// 0.General Inventory Gallery
-			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
-			 vehicleGallery(driver, tBrowser, env);
-			 // verifyRerender(driver, tBrowser);
-			
-			 ////// 1.VINpx:
-			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-			
-			 // bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			
-			 ////// 2. STOCKpx
-			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			 STOCKpxInventoryTC(driver, tBrowser, env);
-			
-			 ////// 3. Templates
-			 bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
-			 VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
+//			 //// 0.General Inventory Gallery
+//			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+//			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
+//			 vehicleGallery(driver, tBrowser, env);
+//			 // verifyRerender(driver, tBrowser);
+//			
+//			 ////// 1.VINpx:
+//			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+//			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+//			
+//			 // bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+//			
+//			 ////// 2. STOCKpx
+//			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+//			 STOCKpxInventoryTC(driver, tBrowser, env);
+//			
+//			 ////// 3. Templates
+//			 bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
+//			 VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
 			////// bc.Wait(18*60);//wait 18 minutes;
 			//
