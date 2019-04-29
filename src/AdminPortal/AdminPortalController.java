@@ -931,249 +931,7 @@ public class AdminPortalController extends Comlibs {
 		//// *************************ManageDealerships - DealerListP******************************************************
 		//// *************************ManageDealerships - DealerListP******************************************************
 
-		//// *************************clickManageBGSetsBtn******************************************************
-		//// *************************clickManageBGSetsBtn******************************************************
-		ac.rwExcel("", "*********ManageBackGroundSets**********", "");
-		tc = "TC148055_b1";
-		UserListP.clickManageBGSets(driver);
-		BackgroundSets BackgroundSetsP = new BackgroundSets(driver);
-		// BackgroundSetsP.clickMapBackGrounds(driver, 3);
-		BackgroundSetsP.inputSearch(driver, AllProdDealerCode);
-		// ac.Wait(wt);
-		try {
-			BackgroundSetsP.clickEditSetBtn(driver, 1);
-			ac.Wait(wt);
-			BackgroundSetsP.clickAllDealershipsCheckBox(driver);// check
-		} catch (Exception ex2) {
-			ac.Wait(wt);
-			BackgroundSetsP.clickEditSetBtn(driver, 1);
-			ac.Wait(wt);
-			BackgroundSetsP.clickAllDealershipsCheckBox(driver);// check
-			System.out.println("\nFirst clicking it did not appear.Wait... ClickAllDealershipsCheckBox twice!!!!!");
-		}
-		ac.Wait(wt);
-		BackgroundSetsP.clickAllDealershipsCheckBox(driver);// uncheck
-		ac.Wait(wt);
-		BackgroundSetsP.clickCancel(driver);
-		ac.Wait(wt);
-		BackgroundSetsP.clickManageBGImageBtn(driver, 1);
-		ManageBackgrounds ManageBackgroundsP = new ManageBackgrounds(driver);
-		ManageBackgroundsP.clickBackToManageSets(driver, tc);
-		BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1, tc);
-		ac.Wait(wt);
-		BackgroundSetsP.clickClose(driver, tc);
-		ac.Wait(wt);
-		tc = "TC139447";
-		BackgroundSetsP.clickCreateNewSet(driver);
-		ac.Wait(wt);
-		String tempSetName = "a";
-		BackgroundSetsP.inputSetName(driver, tempSetName);
-		BackgroundSetsP.clickCancel(driver);
-		ac.Wait(wt);
-		BackgroundSetsP.clickCreateNewSet(driver);
-		ac.Wait(wt);
-		BackgroundSetsP.inputSetName(driver, tempSetName);
-		BackgroundSetsP.selectSetType(driver, 3);// 1-Old (Do Not User), 2-Flat on Flat on Flat, 3-Normal, 4-GM Only, 5-FCA Only
-		BackgroundSetsP.uploadBackgroundPicture(driver, backgroundSetPath1, tc + "_01");
-
-		System.out.println("\nPlease wait at least 3 minutes until Backgrounds page showing...");
-		ac.Wait(wt);
-		BackgroundSetsP.clickSubmit(driver);
-		ac.Wait(wt);
-
-		// ********************* check bg image *********************
-		int sn = 1;
-		double oneSNForScrollupPoint = 8.44091;
-		double totalPoints = oneSNForScrollupPoint * 1;
-		int scrollupPoints = 1;
-		Backgrounds BackgroundsP = new Backgrounds(driver);
-
-		// tc = "GM_Exterior_2019-GM-4NF56-4NF56-1SD_old ";////= modelcode bar 2019-GM-4NF56-4NF56-1SD - sn=2014
-		// UserListP.scrollUp(driver, 17000, tc);// 17150 - value is on uper side
-		// BackgroundsP.ClickOneExteriorModelYearBtn(driver,tc);
-		// BackgroundsP.VerifyCarImage(driver, tc);
-		// BackgroundsP.clickRightArrowBtn(driver, tc);
-		// ac.Wait(wt);
-		// BackgroundsP.VerifyCarImage(driver, tc);
-		// BackgroundsP.clickLeftArrowBtn(driver, tc);
-		// ac.Wait(wt);
-		// BackgroundsP.VerifyCarImage(driver, tc);
-		// BackgroundsP.clickCloseX(driver, tc);
-		// UserListP.scrollUp(driver, -100000, tc);//scroll back to top
-		//
-		// tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_old";//= modelcode bar 2019-GM-4NF56-1SD-4NF56-1SD - sn=4876
-		// UserListP.scrollUp(driver, 41158, tc);// 24100 - value is on uper side
-		// BackgroundsP.ClickOneInteriorModelYearBtn(driver,tc);
-		// BackgroundsP.VerifyCarImage(driver, tc);
-		// BackgroundsP.clickRightArrowBtn(driver, tc);
-		// BackgroundsP.clickLeftArrowBtn(driver, tc);
-		// BackgroundsP.clickCloseX(driver, tc);
-		// ac.Wait(wt);
-		// UserListP.scrollUp(driver, -100000, tc);//scroll back to top
-		//
-
-		// ************************Check the failed loading car image from sn ************************
-
-		tc = "FCA_2016_bf";// = modelcode bar 2016_bf - sn=17 from Excel-BG_CarCode table - green cols.
-		sn = 2;
-		totalPoints = oneSNForScrollupPoint * sn;
-		scrollupPoints = (int) Math.round(totalPoints);
-		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
-		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
-		ac.Wait(wt * 2);
-		BackgroundsP.VerifyCarImage(driver, tc);
-		BackgroundsP.clickRightArrowBtn(driver, tc);
-		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
-		BackgroundsP.clickLeftArrowBtn(driver, tc);
-		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
-		BackgroundsP.clickCloseX(driver, tc);
-		ac.Wait(wt);
-		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
-		// ************************Check the loading car image from sn ************************
-		tc = "FCA_2019_lx";// = modelcode bar 2019_lx - sn=102 from Excel-BG_CarCode table
-		sn = 102;
-		totalPoints = oneSNForScrollupPoint * sn;
-		scrollupPoints = (int) Math.round(totalPoints);
-		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
-		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
-		ac.Wait(wt * 2);
-		BackgroundsP.VerifyCarImage(driver, tc);
-		BackgroundsP.clickRightArrowBtn(driver, tc);
-		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
-		BackgroundsP.clickLeftArrowBtn(driver, tc);
-		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
-		BackgroundsP.clickCloseX(driver, tc);
-		ac.Wait(wt);
-		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
-
-		tc = "GM_Exterior_2019-GM-4NF56-4NF56-1SD_new ";//// = modelcode bar 2019-GM-4NF56-4NF56-1SD - sn=2014
-		sn = 2014;
-		totalPoints = oneSNForScrollupPoint * sn;
-		scrollupPoints = (int) Math.round(totalPoints);
-		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
-		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
-		ac.Wait(wt * 2);
-		BackgroundsP.VerifyCarImage(driver, tc);
-		BackgroundsP.clickBackgroundPic(driver, tc);
-		BackgroundsP.VerifyCarImage(driver, tc + "_added_BG_Pic");
-		int numpics = 8;// Number of images for the model year vehicle
-		for (int i = 1; i <= numpics; i++) {
-			ac.Wait(wt);
-			BackgroundsP.clickRightArrowBtn(driver, tc + "_" + i);
-			ac.Wait(wt);
-			BackgroundsP.clickBackgroundPic(driver, tc + "_" + i);
-		}
-		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
-		BackgroundsP.clickLeftArrowBtn(driver, tc);
-		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
-		// BackgroundsP.clickCloseX(driver, tc);
-		BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
-		ac.Wait(wt);
-		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
-		BackgroundsP.uploadBackgroundPictureFrBackgroundsPage(driver, backgroundSetPath2, envBrowser, 180, 5,
-				tc + "_02");
-
-		tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_new";// = modelcode bar 2019-GM-4NF56-1SD-4NF56-1SD - sn=4876
-		sn = 4876;
-		totalPoints = oneSNForScrollupPoint * sn;
-		scrollupPoints = (int) Math.round(totalPoints);
-		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
-		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
-		ac.Wait(wt * 2);
-		BackgroundsP.VerifyCarImage(driver, tc);
-		for (int i = 1; i <= numpics; i++) {
-			ac.Wait(wt);
-			BackgroundsP.clickRightArrowBtn(driver, tc + "_" + i);
-			ac.Wait(wt);
-			BackgroundsP.clickBackgroundPic2(driver, tc + "_" + i);
-			if (i == 2) {
-				ac.Wait(wt);
-				BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
-				ac.Wait(wt);
-				ac.acceptAlert(driver, tc, "OK");
-				ac.Wait(wt);
-			}
-		}
-		BackgroundsP.VerifyCarImage(driver, tc);
-		BackgroundsP.clickRightArrowBtn(driver, tc);
-		ac.Wait(wt);
-		BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
-		ac.Wait(wt * 2 * 2 * 2);
-		// BackgroundsP.VerifyCarImage(driver, tc+"_Right_Arrow");
-		// BackgroundsP.clickLeftArrowBtn(driver, tc);
-		// ac.Wait(wt);
-		// BackgroundsP.VerifyCarImage(driver, tc+"_Left_Arrow");
-		// BackgroundsP.clickCloseX(driver, tc);
-		ac.Wait(wt);
-		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
-		// ************************End of Check the loading car image from sn ************************
-		// Add New BG Set
-		UserListP.clickManageBGSets(driver);
-		ac.clickRefleshF5Btn(driver, tc);
-		tc = "TC139534"; // Edit "a" background set
-		ac.Wait(wt);
-		BackgroundSetsP.inputSearch(driver, tempSetName);
-		ac.Wait(wt);
-		BackgroundSetsP.clickEditSetBtn(driver, 1);
-		ac.Wait(wt);
-		String editString = "_Edited";
-		BackgroundSetsP.inputSetName(driver, editString);
-		BackgroundSetsP.selectSetType(driver, 4);// 4-GM
-		BackgroundSetsP.clickSubmitOnEdit(driver, tc);
-		ac.Wait(wt);
-		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
-		ac.Wait(wt);
-		try {
-			BackgroundSetsP.clickEditSetBtn(driver, 1);
-			ac.rwExcel(tc, true, "Verify Edited background set", "Edited background set exists!");
-		} catch (Exception e) {
-			ac.rwExcel(tc, false, "Verify Edited background set", "Edited background set does NOT exist!");
-		}
-		ac.Wait(wt);
-		BackgroundSetsP.clickSubmitOnEdit(driver, tc);
-		tc = "TC139457"; // Verify Manage Backgrounds Images
-		ac.Wait(wt);
-		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
-		ac.Wait(wt);
-		BackgroundSetsP.clickManageBGImageBtn(driver, 1);
-		ManageBackgroundsP.clickBackToManageSets(driver, tc);
-		tc = "TC226031"; // Verify Get List of Dealer button available
-		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
-		ac.Wait(wt);
-		BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1, tc);
-		ac.Wait(wt);
-		tc = "TC226032"; // Verify Get List of Dealer on the background
-		BackgroundSetsP.clickClose(driver, tc);
-
-		ac.Wait(wt);
-		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
-		ac.Wait(wt);
-		tc = "TC139558";
-		BackgroundSetsP.clickDeleteBGSetBtn(driver, 1, tc);
-		ac.acceptAlert(driver, tc, "OK");
-		ac.Wait(wt);
-		ac.clickRefleshF5Btn(driver, tc);
-		ac.Wait(wt);
-		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
-		ac.Wait(wt);
-		tc = "TC139459_d";
-		try {
-			BackgroundSetsP.clickEditSetBtn(driver, 1);
-			ac.rwExcel(tc, false, "Try to click the Edit button which should not exist",
-					"Edit element exists! It should not happen!");
-		} catch (Exception e) {
-			ac.rwExcel(tc, true, "Try to click the Edit button which should not exist", "Edit element does not exist!");
-		}
-
-		//// *************************clickManageBGSetsBtn******************************************************
-		//// *************************clickManageBGSetsBtn******************************************************
-
+		
 		//// *************************clickManageImageTypeBtn******************************************************
 		//// *************************clickManageImageTypeBtn******************************************************
 		ac.rwExcel("", "*********ManageImageType**********", "");
@@ -1503,7 +1261,363 @@ public class AdminPortalController extends Comlibs {
 		// driver.close();
 
 	}
+	public static void ManageBackgroundSets(WebDriver driver, String brw, String versionNum, String envment,
+			String checkEmail) throws Exception {
 
+
+		// Load environment parameters
+		Properties prop = new Properties();
+		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		try {
+			prop.load(AdminPortalController.class.getClassLoader()
+					.getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String tc = "";
+		String env = prop.getProperty("AUTOpx.environment");
+		String envBrowser = prop.getProperty("AUTOpx.browser");
+		String render = prop.getProperty("AUTOpx.render");
+		String addNewVIN = prop.getProperty("AUTOpx.addNewVIN");
+		String accountEmail = prop.getProperty(env + ".VINpxEmail");
+		String accountPS = prop.getProperty(env + ".VINpxPassword");
+		// String baseURL = prop.getProperty(env + ".VINpxDealerPortalBaseURL");
+		String dealershipName = prop.getProperty(env + ".VINpxDealershipname");
+		String dealerCode = prop.getProperty(env + ".VINpxDealerCode");
+		String vin01 = prop.getProperty(env + ".VINpxVin01");
+		String vin02 = prop.getProperty(env + ".VINpxVin02");
+		String vehGUID01 = prop.getProperty(env + ".VINpxVin01GUID");
+		String vehGUID02 = prop.getProperty(env + ".VINpxVin02GUID");
+		// String vinpxnewVin01 = prop.getProperty(env + ".VINpxNewVIN01");
+		String[] VINpxNewVINs = fetchOneDemArrayFromPropFile(env + ".VINpxNewVINs", prop);
+		String serverName = prop.getProperty(env + ".serverName");
+		String dbName = prop.getProperty(env + ".dbName");
+		String userName = prop.getProperty(env + ".userName");
+		String password = prop.getProperty(env + ".password");
+		String MaxVins = prop.getProperty(env + ".MaxVinsForPreview");
+		int MaxVinsForPreview = Integer.parseInt(MaxVins);
+		// dealership profile:
+		String OEM = prop.getProperty(env + ".OEM");
+		String[] Brands = fetchOneDemArrayFromPropFile(env + ".Brands", prop);
+		String AllProdDealerCode = prop.getProperty(env + ".AllProdDealerCode");
+		String AllProdEmail = prop.getProperty(env + ".AllProdEmail");
+		String DealershipID = prop.getProperty(env + ".DealershipID");
+		String DealershipName = prop.getProperty(env + ".DealershipName");
+		String[] Products = fetchOneDemArrayFromPropFile(env + ".Products", prop);
+		String MetadataValues = prop.getProperty(env + ".MetadataValues");
+		String Address = prop.getProperty(env + ".Address");
+		String AddressLine2 = prop.getProperty(env + ".AddressLine2");
+		String City = prop.getProperty(env + ".City");
+		int StateProvince = Integer.parseInt(prop.getProperty(env + ".StateProvince"));
+		int Country = Integer.parseInt(prop.getProperty(env + ".Country"));
+		String ZipPostalCode = prop.getProperty(env + ".ZipPostalCode");
+		String DealershipEmail = prop.getProperty(env + ".DealershipEmail");
+		String AccountEmail = prop.getProperty(env + ".AccountEmail");
+		String FirstName = prop.getProperty(env + ".FirstName");
+		String LastName = prop.getProperty(env + ".LastName");
+		String TagLineMarkingMsg = prop.getProperty(env + ".TagLineMarkingMsg");
+		String Website = prop.getProperty(env + ".Website");
+		String DealershipPhoneNumber = prop.getProperty(env + ".DealershipPhoneNumber");
+		int TemplateSettings = Integer.parseInt(prop.getProperty(env + ".TemplateSettings"));
+		int SelectBackgroundSet = Integer.parseInt(prop.getProperty(env + ".SelectBackgroundSet"));
+		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
+		String AddNewAccountEmail = prop.getProperty(env + ".AddNewAccountEmail");
+		String addNewDealerExtension = prop.getProperty(env + ".addNewDealerExtension");
+		String dealershipLogoPath = prop.getProperty("AUTOpx.dealershipLogoPath");
+		String addNewDealerShip = prop.getProperty("AUTOpx.addNewDealerShip");
+		String backgroundSetPath1 = prop.getProperty("AUTOpx.backgroundSetPath1");
+		String backgroundSetPath2 = prop.getProperty("AUTOpx.backgroundSetPath2");
+
+		// Initial
+		// final int wt_Secs = 6;
+		String TCnum;
+		// ====================
+		String tempVIN = "";
+		String tempVehGUID = "";
+		String ProductVINpx = "";
+		String ProductSTOCKpx = "";
+		String ProductLOTpx = "";
+		String Dealership_ID = "";
+		String Dealership_Name = "";
+		String Dealership_Email = "";
+		String Account_Email = "";
+		String Metadata = "";
+		String dlrGuid = "";
+		String alertmessage = "";
+		// ====================
+		Comlibs ac = new Comlibs();
+		ac.rwExcel("", "*********ManageDealerShips**********", "");
+
+		int count = 0;
+		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
+		String[] titleString = { "Env.", "S/N", "Dealership_ID", "Dealership_Name", "Account_Email", "Dealership_Email",
+				"ProductVINpx", "ProductSTOCKpx", "ProductLOTpx", "Metadata", "dlrGuid" };
+		// =================================================
+		ac.writeTitle(getMetadataSavePathFile, titleString);
+		int dataLength = 54;
+		String[] metadataValues = new String[dataLength + 1];
+		int datasize = metadataValues.length;
+
+		// =================================================
+		VDVILogin loginP = new VDVILogin(driver);
+		int dealerN = 0;
+		String dealerSN = "";
+		loginP.login(driver, accountEmail, accountPS, tc);
+		ac.Wait(wt);
+		String parentHandle = driver.getWindowHandle(); // get the current window handle
+
+		UserList UserListP = new UserList(driver);
+		
+		//// *************************clickManageBGSetsBtn******************************************************
+		//// *************************clickManageBGSetsBtn******************************************************
+		ac.rwExcel("", "*********ManageBackGroundSets**********", "");
+		tc = "TC148055_b1";
+		UserListP.clickManageBGSets(driver);
+		BackgroundSets BackgroundSetsP = new BackgroundSets(driver);
+		// BackgroundSetsP.clickMapBackGrounds(driver, 3);
+		BackgroundSetsP.inputSearch(driver, AllProdDealerCode);
+		// ac.Wait(wt);
+		try {
+			BackgroundSetsP.clickEditSetBtn(driver, 1);
+			ac.Wait(wt);
+			BackgroundSetsP.clickAllDealershipsCheckBox(driver);// check
+		} catch (Exception ex2) {
+			ac.Wait(wt);
+			BackgroundSetsP.clickEditSetBtn(driver, 1);
+			ac.Wait(wt);
+			BackgroundSetsP.clickAllDealershipsCheckBox(driver);// check
+			System.out.println("\nFirst clicking it did not appear.Wait... ClickAllDealershipsCheckBox twice!!!!!");
+		}
+		ac.Wait(wt);
+		BackgroundSetsP.clickAllDealershipsCheckBox(driver);// uncheck
+		ac.Wait(wt);
+		BackgroundSetsP.clickCancel(driver);
+		ac.Wait(wt);
+		BackgroundSetsP.clickManageBGImageBtn(driver, 1);
+		ManageBackgrounds ManageBackgroundsP = new ManageBackgrounds(driver);
+		ManageBackgroundsP.clickBackToManageSets(driver, tc);
+		BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1, tc);
+		ac.Wait(wt);
+		BackgroundSetsP.clickClose(driver, tc);
+		ac.Wait(wt);
+		tc = "TC139447";
+		BackgroundSetsP.clickCreateNewSet(driver);
+		ac.Wait(wt);
+		String tempSetName = "a";
+		BackgroundSetsP.inputSetName(driver, tempSetName);
+		BackgroundSetsP.clickCancel(driver);
+		ac.Wait(wt);
+		BackgroundSetsP.clickCreateNewSet(driver);
+		ac.Wait(wt);
+		BackgroundSetsP.inputSetName(driver, tempSetName);
+		BackgroundSetsP.selectSetType(driver, 3);// 1-Old (Do Not User), 2-Flat on Flat on Flat, 3-Normal, 4-GM Only, 5-FCA Only
+		BackgroundSetsP.uploadBackgroundPicture(driver, backgroundSetPath1, tc + "_01");
+
+		System.out.println("\nPlease wait at least 3 minutes until Backgrounds page showing...");
+		ac.Wait(wt);
+		BackgroundSetsP.clickSubmit(driver);
+		ac.Wait(wt);
+
+		// ********************* check bg image *********************
+		int sn = 1;
+		double oneSNForScrollupPoint = 8.44091;
+		double totalPoints = oneSNForScrollupPoint * 1;
+		int scrollupPoints = 1;
+		Backgrounds BackgroundsP = new Backgrounds(driver);
+
+		// tc = "GM_Exterior_2019-GM-4NF56-4NF56-1SD_old ";////= modelcode bar 2019-GM-4NF56-4NF56-1SD - sn=2014
+		// UserListP.scrollUp(driver, 17000, tc);// 17150 - value is on uper side
+		// BackgroundsP.ClickOneExteriorModelYearBtn(driver,tc);
+		// BackgroundsP.VerifyCarImage(driver, tc);
+		// BackgroundsP.clickRightArrowBtn(driver, tc);
+		// ac.Wait(wt);
+		// BackgroundsP.VerifyCarImage(driver, tc);
+		// BackgroundsP.clickLeftArrowBtn(driver, tc);
+		// ac.Wait(wt);
+		// BackgroundsP.VerifyCarImage(driver, tc);
+		// BackgroundsP.clickCloseX(driver, tc);
+		// UserListP.scrollUp(driver, -100000, tc);//scroll back to top
+		//
+		// tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_old";//= modelcode bar 2019-GM-4NF56-1SD-4NF56-1SD - sn=4876
+		// UserListP.scrollUp(driver, 41158, tc);// 24100 - value is on uper side
+		// BackgroundsP.ClickOneInteriorModelYearBtn(driver,tc);
+		// BackgroundsP.VerifyCarImage(driver, tc);
+		// BackgroundsP.clickRightArrowBtn(driver, tc);
+		// BackgroundsP.clickLeftArrowBtn(driver, tc);
+		// BackgroundsP.clickCloseX(driver, tc);
+		// ac.Wait(wt);
+		// UserListP.scrollUp(driver, -100000, tc);//scroll back to top
+		//
+
+		// ************************Check the failed loading car image from sn ************************
+
+		tc = "FCA_2016_bf";// = modelcode bar 2016_bf - sn=17 from Excel-BG_CarCode table - green cols.
+		sn = 2;
+		totalPoints = oneSNForScrollupPoint * sn;
+		scrollupPoints = (int) Math.round(totalPoints);
+		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
+		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
+		ac.Wait(wt * 2);
+		BackgroundsP.VerifyCarImage(driver, tc);
+		BackgroundsP.clickRightArrowBtn(driver, tc);
+		ac.Wait(wt);
+		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
+		BackgroundsP.clickLeftArrowBtn(driver, tc);
+		ac.Wait(wt);
+		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
+		BackgroundsP.clickCloseX(driver, tc);
+		ac.Wait(wt);
+		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
+		// ************************Check the loading car image from sn ************************
+		tc = "FCA_2019_lx";// = modelcode bar 2019_lx - sn=102 from Excel-BG_CarCode table
+		sn = 102;
+		totalPoints = oneSNForScrollupPoint * sn;
+		scrollupPoints = (int) Math.round(totalPoints);
+		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
+		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
+		ac.Wait(wt * 2);
+		BackgroundsP.VerifyCarImage(driver, tc);
+		BackgroundsP.clickRightArrowBtn(driver, tc);
+		ac.Wait(wt);
+		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
+		BackgroundsP.clickLeftArrowBtn(driver, tc);
+		ac.Wait(wt);
+		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
+		BackgroundsP.clickCloseX(driver, tc);
+		ac.Wait(wt);
+		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
+
+		tc = "GM_Exterior_2019-GM-4NF56-4NF56-1SD_new ";//// = modelcode bar 2019-GM-4NF56-4NF56-1SD - sn=2014
+		sn = 2014;
+		totalPoints = oneSNForScrollupPoint * sn;
+		scrollupPoints = (int) Math.round(totalPoints);
+		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
+		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
+		ac.Wait(wt * 2);
+		BackgroundsP.VerifyCarImage(driver, tc);
+		BackgroundsP.clickBackgroundPic(driver, tc);
+		BackgroundsP.VerifyCarImage(driver, tc + "_added_BG_Pic");
+		int numpics = 8;// Number of images for the model year vehicle
+		for (int i = 1; i <= numpics; i++) {
+			ac.Wait(wt);
+			BackgroundsP.clickRightArrowBtn(driver, tc + "_" + i);
+			ac.Wait(wt);
+			BackgroundsP.clickBackgroundPic(driver, tc + "_" + i);
+		}
+		ac.Wait(wt);
+		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
+		BackgroundsP.clickLeftArrowBtn(driver, tc);
+		ac.Wait(wt);
+		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
+		// BackgroundsP.clickCloseX(driver, tc);
+		BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
+		ac.Wait(wt);
+		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
+		BackgroundsP.uploadBackgroundPictureFrBackgroundsPage(driver, backgroundSetPath2, envBrowser, 180, 5,
+				tc + "_02");
+
+		tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_new";// = modelcode bar 2019-GM-4NF56-1SD-4NF56-1SD - sn=4876
+		sn = 4876;
+		totalPoints = oneSNForScrollupPoint * sn;
+		scrollupPoints = (int) Math.round(totalPoints);
+		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
+		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
+		ac.Wait(wt * 2);
+		BackgroundsP.VerifyCarImage(driver, tc);
+		for (int i = 1; i <= numpics; i++) {
+			ac.Wait(wt);
+			BackgroundsP.clickRightArrowBtn(driver, tc + "_" + i);
+			ac.Wait(wt);
+			BackgroundsP.clickBackgroundPic2(driver, tc + "_" + i);
+			if (i == 2) {
+				ac.Wait(wt);
+				BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
+				ac.Wait(wt);
+				ac.acceptAlert(driver, tc, "OK");
+				ac.Wait(wt);
+			}
+		}
+		BackgroundsP.VerifyCarImage(driver, tc);
+		BackgroundsP.clickRightArrowBtn(driver, tc);
+		ac.Wait(wt);
+		BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
+		ac.Wait(wt * 2 * 2 * 2);
+		// BackgroundsP.VerifyCarImage(driver, tc+"_Right_Arrow");
+		// BackgroundsP.clickLeftArrowBtn(driver, tc);
+		// ac.Wait(wt);
+		// BackgroundsP.VerifyCarImage(driver, tc+"_Left_Arrow");
+		// BackgroundsP.clickCloseX(driver, tc);
+		ac.Wait(wt);
+		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
+		// ************************End of Check the loading car image from sn ************************
+		// Add New BG Set
+		UserListP.clickManageBGSets(driver);
+		ac.clickRefleshF5Btn(driver, tc);
+		tc = "TC139534"; // Edit "a" background set
+		ac.Wait(wt);
+		BackgroundSetsP.inputSearch(driver, tempSetName);
+		ac.Wait(wt);
+		BackgroundSetsP.clickEditSetBtn(driver, 1);
+		ac.Wait(wt);
+		String editString = "_Edited";
+		BackgroundSetsP.inputSetName(driver, editString);
+		BackgroundSetsP.selectSetType(driver, 4);// 4-GM
+		BackgroundSetsP.clickSubmitOnEdit(driver, tc);
+		ac.Wait(wt);
+		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+		ac.Wait(wt);
+		try {
+			BackgroundSetsP.clickEditSetBtn(driver, 1);
+			ac.rwExcel(tc, true, "Verify Edited background set", "Edited background set exists!");
+		} catch (Exception e) {
+			ac.rwExcel(tc, false, "Verify Edited background set", "Edited background set does NOT exist!");
+		}
+		ac.Wait(wt);
+		BackgroundSetsP.clickSubmitOnEdit(driver, tc);
+		tc = "TC139457"; // Verify Manage Backgrounds Images
+		ac.Wait(wt);
+		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+		ac.Wait(wt);
+		BackgroundSetsP.clickManageBGImageBtn(driver, 1);
+		ManageBackgroundsP.clickBackToManageSets(driver, tc);
+		tc = "TC226031"; // Verify Get List of Dealer button available
+		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+		ac.Wait(wt);
+		BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1, tc);
+		ac.Wait(wt);
+		tc = "TC226032"; // Verify Get List of Dealer on the background
+		BackgroundSetsP.clickClose(driver, tc);
+
+		ac.Wait(wt);
+		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+		ac.Wait(wt);
+		tc = "TC139558";
+		BackgroundSetsP.clickDeleteBGSetBtn(driver, 1, tc);
+		ac.acceptAlert(driver, tc, "OK");
+		ac.Wait(wt);
+		ac.clickRefleshF5Btn(driver, tc);
+		ac.Wait(wt);
+		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+		ac.Wait(wt);
+		tc = "TC139459_d";
+		try {
+			BackgroundSetsP.clickEditSetBtn(driver, 1);
+			ac.rwExcel(tc, false, "Try to click the Edit button which should not exist",
+					"Edit element exists! It should not happen!");
+		} catch (Exception e) {
+			ac.rwExcel(tc, true, "Try to click the Edit button which should not exist", "Edit element does not exist!");
+		}
+
+		//// *************************clickManageBGSetsBtn******************************************************
+		//// *************************clickManageBGSetsBtn******************************************************
+
+		driver.close();
+		// switchToWindow(driver, parentHandle);
+		// driver.close();
+
+	
+	}
 	public static void ManageDealerShipsAddNewAccount(WebDriver driver, String brw, String versionNum, String envment,
 			String checkEmail) throws Exception {
 
@@ -2239,8 +2353,8 @@ public class AdminPortalController extends Comlibs {
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
 			//// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK for Prod (FF) on 2018-12-17 from ManageDealerships.
-			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-			// RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
+			//bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			//RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
 
 			// //// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page
 			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
@@ -2255,10 +2369,14 @@ public class AdminPortalController extends Comlibs {
 			loadURL(driver, baseURL, env);
 			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
 			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
-
-			// bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
-			// driver.close();
-			System.out.println("Test is complete!!!");
+			
+			//// 3. ManageBackgroundSets:
+			loadURL(driver, baseURL, env);
+			bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
+			ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
+			
+			 bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
+			 System.out.println("Test is complete!!!");
 		}
 		return;
 	}
