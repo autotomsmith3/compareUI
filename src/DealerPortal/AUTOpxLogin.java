@@ -45,16 +45,7 @@ public class AUTOpxLogin extends Comlibs {
 	By acceptAndContinueBtn = By.xpath("//button[@type='submit']");
 	By engboxesLocator = By.xpath("//ul[@id='engine-options']/li/div");// Engine only
 
-	 By errorMSGLocator=By.xpath("//*[@id=\"loginForm\"]/div[3]/span[1]");
-	// By Locator=
-	// By Locator=
-	// By Locator=
-	// By Locator=
-	// By Locator=
-	// By Locator=
-	// By Locator=
-	// By Locator=
-
+	By errorMSGLocator = By.xpath("//*[@id=\"loginForm\"]/div[3]/span[1]");
 
 	public AUTOpxLogin inputUername(WebDriver driver, String un) {
 		driver.findElement(usernameLocator).clear();
@@ -68,14 +59,16 @@ public class AUTOpxLogin extends Comlibs {
 		return this;
 	}
 
-	public AcceptLicenseAgreementtoContinue clickLoginBtn(WebDriver driver) throws IOException {
+	public DealerProfile clickLoginBtn(WebDriver driver) throws IOException {
 		driver.findElement(loginButtonLocator).click();
-		return new AcceptLicenseAgreementtoContinue(driver);
+		return new DealerProfile(driver);
 	}
+
 	public AUTOpxLogin clickLoginBtnForInvalid(WebDriver driver) throws IOException {
 		driver.findElement(loginButtonLocator).click();
 		return this;
 	}
+
 	public DealerProfile clickLoginBtnDealerProfile(WebDriver driver) throws IOException {
 		driver.findElement(loginButtonLocator).click();
 		return new DealerProfile(driver);
@@ -106,24 +99,26 @@ public class AUTOpxLogin extends Comlibs {
 		return pagetitle;
 	}
 
-	public AcceptLicenseAgreementtoContinue login(WebDriver driver, String usr, String ps) throws IOException {
+	public DealerProfile login(WebDriver driver, String usr, String ps) throws IOException {
 		inputUername(driver, usr);
 		inputPassword(driver, ps);
 		clickLoginBtn(driver);
-		return new AcceptLicenseAgreementtoContinue(driver);
+		return new DealerProfile(driver);
 	}
+
 	public AUTOpxLogin login(WebDriver driver, String usr, String ps, String tc, String errorMSG) throws IOException {
 		inputUername(driver, usr);
 		inputPassword(driver, ps);
 		clickLoginBtnForInvalid(driver);
-		String getErrorMSGfrPage=driver.findElement(errorMSGLocator).getText();
+		String getErrorMSGfrPage = driver.findElement(errorMSGLocator).getText();
 		if (getErrorMSGfrPage.contains(errorMSG)) {
-			rwExcel(tc, true, "Verify invalid login","Get the error message: \""+getErrorMSGfrPage+"\"");
+			rwExcel(tc, true, "Verify invalid login", "Get the error message: \"" + getErrorMSGfrPage + "\"");
 		} else {
-			rwExcel(tc, false, "Verify invalid login","Get the error message: \""+getErrorMSGfrPage+"\"");
+			rwExcel(tc, false, "Verify invalid login", "Get the error message: \"" + getErrorMSGfrPage + "\"");
 		}
 		return this;
 	}
+
 	public DealerProfile loginDealerProfile(WebDriver driver, String usr, String ps) throws IOException {
 		inputUername(driver, usr);
 		inputPassword(driver, ps);
