@@ -194,8 +194,8 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		DealerPortal.AUTOpxLogin dealerPortalloginP = new AUTOpxLogin(driver);
 		dealerPortalloginP.login(driver, AddNewAccountEmail, tempPS); // this should be correct one. Now issue here, see autopxops-1196
 		// loginP.loginDealerProfile(driver, accountEmail, tempPS);//this is temp, it skips agreement page
-		DealerPortal.AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
-		acceptLicenseP.clickAcceptPSBtn(driver);
+		// DealerPortal.AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+		// acceptLicenseP.clickAcceptPSBtn(driver);
 		DealerPortal.DealerProfile dpP = new DealerProfile(driver);
 		tc = "TC139104-TC139105";
 		dpP.changePS(driver, accountPS, tc);
@@ -212,7 +212,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		try {
 			DealerPortal.AUTOpxController.loadURL(driver, DealerPortalBaseURL);
 			dealerPortalloginP.login(driver, AddNewAccountEmail, accountPS);
-			acceptLicenseP.clickAcceptBtn(driver);
+			// acceptLicenseP.clickAcceptBtn(driver);
 			dpP.clickLogout(driver);
 			rwExcel(tc, true, "Verify Login Dealer Portal", "After changed PS");
 		} catch (Exception e) {
