@@ -81,6 +81,7 @@ public class AUTOpxController extends Comlibs {
 		if (!sPageTitle.equals(driver.getTitle())) {
 			// throw new IllegalStateException("The page title is NOT - "
 			// + sPageTitle);
+			System.out.println("The page title is NOT - "+ sPageTitle);
 		}
 	}
 
@@ -164,9 +165,9 @@ public class AUTOpxController extends Comlibs {
 		loginP.verifyHeaderFooter(env, ver, TCnum);
 
 		loginP.login(driver, accountEmail, accountPS);
-//		AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
-//		acceptLicenseP.clickAcceptBtn(driver);
-		DealerProfile dpP=new DealerProfile(driver);
+		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+		// acceptLicenseP.clickAcceptBtn(driver);
+		DealerProfile dpP = new DealerProfile(driver);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
 		TCnum = "TC5123123_ig1";
 		ImageGallery igP = new ImageGallery(driver);
@@ -278,11 +279,11 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC5123131";
 		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 		igP.gotoMyDealerShip(driver);
-//		DealerProfile dpP = new DealerProfile(driver);
+		// DealerProfile dpP = new DealerProfile(driver);
 		dpP.clickViewInventoryBtn(driver, TCnum);
 		dpP.clickLogout(driver);
 		loginP.login(driver, accountEmail, accountPS);
-//		acceptLicenseP.clickAcceptBtn(driver);
+		// acceptLicenseP.clickAcceptBtn(driver);
 		// login();
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
 		igP.gotoMyDealerShip(driver);
@@ -434,9 +435,9 @@ public class AUTOpxController extends Comlibs {
 		loginP.verifyHeaderFooter(env, versionNum, TCnum);
 
 		loginP.login(driver, accountEmail, accountPS);
-//		AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
-//		acceptLicenseP.clickAcceptBtn(driver);
-		DealerProfile dpP=new DealerProfile(driver);
+		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+		// acceptLicenseP.clickAcceptBtn(driver);
+		DealerProfile dpP = new DealerProfile(driver);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
 		TCnum = "TC5123123_ig2";
 
@@ -527,9 +528,9 @@ public class AUTOpxController extends Comlibs {
 		loginP.verifyHeaderFooter(env, versionNum, TCnum);
 
 		loginP.login(driver, accountEmail, accountPS);
-//		AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
-//		acceptLicenseP.clickAcceptBtn(driver);
-		DealerProfile ipP=new DealerProfile (driver);
+		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+		// acceptLicenseP.clickAcceptBtn(driver);
+		DealerProfile ipP = new DealerProfile(driver);
 		ipP.clickInventoryGalleryBtn(driver, TCnum);
 
 		TCnum = "TC139502_12";
@@ -565,7 +566,7 @@ public class AUTOpxController extends Comlibs {
 		dpP.clickLogout(driver);
 
 		loginP.login(driver, accountEmail, accountPS);
-//		acceptLicenseP.clickAcceptBtn(driver);
+		// acceptLicenseP.clickAcceptBtn(driver);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
 		igP.clickDealerShipInfoBtn(driver);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
@@ -687,35 +688,32 @@ public class AUTOpxController extends Comlibs {
 
 		TCnum = "TC144597";
 		loginP.login(driver, accountEmail, accountPS);
-//		AUTOPXOPS-1738 Removed Agreement page on 2019-04-30
-//		AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
-//		TCnum = "TC144866_ig";
-//		acceptLicenseP.verifyAgreementTitle(driver, 3, "VINpx Agreement", "STOCKpx Agreement", "LOTpx Agreement", true,
-//				TCnum); // VINpx Agreement, STOCKpx Agreement, LOTpx Agreement
-//		vinpxConent = acceptLicenseP.getFile("data/vinpxAgreement.txt");
-//		int vinpxAgreementTotalLines = acceptLicenseP.getLineNum();
-//		TCnum = "TC144867_5_vinpx";
-//		acceptLicenseP.verifyPDF(driver, 1, "vinpx", vinpxConent, vinpxAgreementTotalLines, TCnum, envment);
-//
-//		stockpxConent = acceptLicenseP.getFile("data/stockpxAgreement.txt");
-//		int stockpxAgreementTotalLines = acceptLicenseP.getLineNum();
-//		TCnum = "TC144868_5_stockpx";
-//		acceptLicenseP.verifyPDF(driver, 2, "stockpx", stockpxConent, stockpxAgreementTotalLines, TCnum, envment);
-//
-//		lotpxConent = acceptLicenseP.getFile("data/lotpxAgreement.txt");
-//		int lotpxAgreementTotalLines = acceptLicenseP.getLineNum();
-//		TCnum = "TC144869_5_lotpx";
-//
-//		acceptLicenseP.verifyPDF(driver, 3, "lotpx", lotpxConent, lotpxAgreementTotalLines, TCnum, envment);
-//
-//		acceptLicenseP.clickAcceptBtn(driver);
-		
-		DealerProfile dpP=new DealerProfile(driver);
+		// AUTOPXOPS-1738 Removed Agreement page on 2019-04-30
+		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+		// TCnum = "TC144866_ig";
+		// acceptLicenseP.verifyAgreementTitle(driver, 3, "VINpx Agreement", "STOCKpx Agreement", "LOTpx Agreement", true,
+		// TCnum); // VINpx Agreement, STOCKpx Agreement, LOTpx Agreement
+		// vinpxConent = acceptLicenseP.getFile("data/vinpxAgreement.txt");
+		// int vinpxAgreementTotalLines = acceptLicenseP.getLineNum();
+		// TCnum = "TC144867_5_vinpx";
+		// acceptLicenseP.verifyPDF(driver, 1, "vinpx", vinpxConent, vinpxAgreementTotalLines, TCnum, envment);
+		//
+		// stockpxConent = acceptLicenseP.getFile("data/stockpxAgreement.txt");
+		// int stockpxAgreementTotalLines = acceptLicenseP.getLineNum();
+		// TCnum = "TC144868_5_stockpx";
+		// acceptLicenseP.verifyPDF(driver, 2, "stockpx", stockpxConent, stockpxAgreementTotalLines, TCnum, envment);
+		//
+		// lotpxConent = acceptLicenseP.getFile("data/lotpxAgreement.txt");
+		// int lotpxAgreementTotalLines = acceptLicenseP.getLineNum();
+		// TCnum = "TC144869_5_lotpx";
+		//
+		// acceptLicenseP.verifyPDF(driver, 3, "lotpx", lotpxConent, lotpxAgreementTotalLines, TCnum, envment);
+		//
+		// acceptLicenseP.clickAcceptBtn(driver);
+
+		DealerProfile dpP = new DealerProfile(driver);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
-		
-		
-		
-		
+
 		ImageGallery igP = new ImageGallery(driver);
 
 		/**
@@ -793,7 +791,7 @@ public class AUTOpxController extends Comlibs {
 		igP.clickColorExteriorColorCheckBox(driver, "Summit White(GAZ)", TCnum);
 		igP.clickColorInteriorTab(driver, TCnum);
 		String selectedInterior = "Dark Walnut/Slate w/Cloth Seat Trim(HV5)";
-//		String selectedInterior = "Dark Atmosphere/Medium Atmosphere w/Cloth Seat Trim(HHR)";//20190409 worked for Chrome but failed on Firefox 20190409. It does not need to expose the string on Chrome but FF needs the string to expose on the screen. 
+		// String selectedInterior = "Dark Atmosphere/Medium Atmosphere w/Cloth Seat Trim(HHR)";//20190409 worked for Chrome but failed on Firefox 20190409. It does not need to expose the string on Chrome but FF needs the string to expose on the screen.
 		igP.clickColorInteriorColorCheckBox(driver, selectedInterior, TCnum); // on 2018-12-29
 		// igP.clickColorInteriorColorCheckBox(driver, "Ebony Black", TCnum); //on 2018-09-30
 		// igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); // afte 2018-09-30, works for Chrome but Firefox 2018-12-17
@@ -919,7 +917,7 @@ public class AUTOpxController extends Comlibs {
 				if (allVinNums > 40) {
 					igP.verifyLoadMoreVehicleBtnStatus(driver, true, TCnum);
 					igP.verifyShowAllBtnStatus(driver, true, TCnum);
-				}else {
+				} else {
 					igP.verifyLoadMoreVehicleBtnStatus(driver, false, TCnum);
 					igP.verifyShowAllBtnStatus(driver, false, TCnum);
 				}
@@ -942,7 +940,7 @@ public class AUTOpxController extends Comlibs {
 				// TC139666
 		TCnum = "TC139666_7";
 		igP.clickDealerShipInfoBtn(driver);
-//		DealerProfile dpP = new DealerProfile(driver);
+		// DealerProfile dpP = new DealerProfile(driver);
 		// removed on 2018-09-20 dpP.verifyDealershipIDBrands("GM123456_4 | ", "GMC | Cadillac | Buick | Chevrolet", TCnum);
 		// TC139666_8 Verify Dealership Name
 		TCnum = "TC139666_8";
@@ -1118,10 +1116,10 @@ public class AUTOpxController extends Comlibs {
 		loginP.login(driver, accountEmail, accountPS + "invalid", TCnum, "Invalid Username or Password");
 		ac.Wait(wt);// wait 20 secs here because we have a perfomance issue when login. Remove it once issue fixed. 2019-01-14
 		loginP.login(driver, accountEmail, accountPS);
-//		AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
-//		acceptLicenseP.clickCancelBtn(driver);
+		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+		// acceptLicenseP.clickCancelBtn(driver);
 		// Verify Forgot Password process
-		DealerProfile dpP=new DealerProfile(driver);
+		DealerProfile dpP = new DealerProfile(driver);
 		dpP.clickLogout(driver);
 		if ((accountEmail.contains("gmail.com")) && (checkEmail.equalsIgnoreCase("Yes"))) {
 			// So far only accept gmail email
@@ -1149,8 +1147,8 @@ public class AUTOpxController extends Comlibs {
 			loginP.login(driver, accountEmail, tempPS); // this should be correct one. Now issue here, see autopxops-1196
 			// loginP.loginDealerProfile(driver, accountEmail, tempPS);//this is temp, it skips agreement page
 			// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
-//			acceptLicenseP.clickAcceptPSBtn(driver);
-	
+			// acceptLicenseP.clickAcceptPSBtn(driver);
+
 			TCnum = "TC139674";
 			dpP.changePS(driver, accountPS, TCnum);
 			TCnum = "TC139686_02_NoBtn";
@@ -1172,19 +1170,19 @@ public class AUTOpxController extends Comlibs {
 		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
 
 		TCnum = "TC144867_vinpx";
-//		acceptLicenseP.verifyAgreementTitle(driver, 1, "VINpx Agreement", true, TCnum); // VINpx Agreement, STOCKpx Agreement, LOTpx Agreement
-//
-//		vinpxConent = acceptLicenseP.getFile("data/vinpxAgreement.txt");
-//		int vinpxAgreementTotalLines = acceptLicenseP.getLineNum();
-//		TCnum = "TC144867_5_vinpx";
-//		acceptLicenseP.verifyPDF(driver, 1, "vinpx", vinpxConent, vinpxAgreementTotalLines, TCnum, envment);
-//
-//		acceptLicenseP.clickAcceptBtn(driver);
-//		DealerProfile dpP=new DealerProfile(driver);
+		// acceptLicenseP.verifyAgreementTitle(driver, 1, "VINpx Agreement", true, TCnum); // VINpx Agreement, STOCKpx Agreement, LOTpx Agreement
+		//
+		// vinpxConent = acceptLicenseP.getFile("data/vinpxAgreement.txt");
+		// int vinpxAgreementTotalLines = acceptLicenseP.getLineNum();
+		// TCnum = "TC144867_5_vinpx";
+		// acceptLicenseP.verifyPDF(driver, 1, "vinpx", vinpxConent, vinpxAgreementTotalLines, TCnum, envment);
+		//
+		// acceptLicenseP.clickAcceptBtn(driver);
+		// DealerProfile dpP=new DealerProfile(driver);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
 		ImageGallery igP = new ImageGallery(driver);
 		igP.clickDealerShipInfoBtn(driver);
-//		DealerProfile dpP = new DealerProfile(driver);
+		// DealerProfile dpP = new DealerProfile(driver);
 		dpP.selectBand(driver, VINpxDealershipBrandName);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
 
@@ -1543,25 +1541,25 @@ public class AUTOpxController extends Comlibs {
 		loginP.verifyHeaderFooter(env, versionNum, TCnum);
 		TCnum = "TC141679_6_stockpx";
 		loginP.login(driver, accountEmail, accountPS);
-//		AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
-//		TCnum = "TC144868_stockpx";
-//		acceptLicenseP.verifyAgreementTitle(driver, 1, "STOCKpx Agreement", true, TCnum); // VINpx Agreement, STOCKpx Agreement, LOTpx Agreement
-//
-//		stockpxConent = acceptLicenseP.getFile("data/stockpxAgreement.txt");
-//		int stockpxAgreementTotalLines = acceptLicenseP.getLineNum();
-//		TCnum = "TC144868_5_stockpx";
-//		acceptLicenseP.verifyPDF(driver, 1, "stockpx", stockpxConent, stockpxAgreementTotalLines, TCnum, envment);
-//
-//		acceptLicenseP.clickAcceptBtn(driver);
-		DealerProfile dpP=new DealerProfile(driver);
+		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+		// TCnum = "TC144868_stockpx";
+		// acceptLicenseP.verifyAgreementTitle(driver, 1, "STOCKpx Agreement", true, TCnum); // VINpx Agreement, STOCKpx Agreement, LOTpx Agreement
+		//
+		// stockpxConent = acceptLicenseP.getFile("data/stockpxAgreement.txt");
+		// int stockpxAgreementTotalLines = acceptLicenseP.getLineNum();
+		// TCnum = "TC144868_5_stockpx";
+		// acceptLicenseP.verifyPDF(driver, 1, "stockpx", stockpxConent, stockpxAgreementTotalLines, TCnum, envment);
+		//
+		// acceptLicenseP.clickAcceptBtn(driver);
+		DealerProfile dpP = new DealerProfile(driver);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
 		ImageGallery igP = new ImageGallery(driver);
 
 		igP.clickDealerShipInfoBtn(driver);
-//		DealerProfile dpP = new DealerProfile(driver);
+		// DealerProfile dpP = new DealerProfile(driver);
 		dpP.selectBand(driver, STOCKpxDealershipBrandName);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
-		
+
 		igP.verifyDealershipname(dealershipName, TCnum);
 		// Help section
 		TCnum = "TC139675_7_STOCKpx"; // Help - Contact Support. email and tel no.
@@ -1896,21 +1894,21 @@ public class AUTOpxController extends Comlibs {
 		loginP.verifyHeaderFooter(env, versionNum, TCnum);
 		TCnum = "TC141679_6_lotpx";
 		loginP.login(driver, accountEmail, accountPS);
-//		AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
-//		TCnum = "TC144866_ig";
-//		acceptLicenseP.verifyAgreementTitle(driver, 1, "LOTpx Agreement", true, TCnum); // VINpx Agreement, STOCKpx Agreement, LOTpx Agreement
-//
-//		lotpxConent = acceptLicenseP.getFile("data/lotpxAgreement.txt");
-//		int lotpxAgreementTotalLines = acceptLicenseP.getLineNum();
-//		TCnum = "TC144869_5_lotpx";
-//		acceptLicenseP.verifyPDF(driver, 1, "lotpx", lotpxConent, lotpxAgreementTotalLines, TCnum, envment);
-//
-//		acceptLicenseP.clickAcceptBtn(driver);
-		DealerProfile dpP=new DealerProfile(driver);
+		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+		// TCnum = "TC144866_ig";
+		// acceptLicenseP.verifyAgreementTitle(driver, 1, "LOTpx Agreement", true, TCnum); // VINpx Agreement, STOCKpx Agreement, LOTpx Agreement
+		//
+		// lotpxConent = acceptLicenseP.getFile("data/lotpxAgreement.txt");
+		// int lotpxAgreementTotalLines = acceptLicenseP.getLineNum();
+		// TCnum = "TC144869_5_lotpx";
+		// acceptLicenseP.verifyPDF(driver, 1, "lotpx", lotpxConent, lotpxAgreementTotalLines, TCnum, envment);
+		//
+		// acceptLicenseP.clickAcceptBtn(driver);
+		DealerProfile dpP = new DealerProfile(driver);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
 		ImageGallery igP = new ImageGallery(driver);
 		igP.clickDealerShipInfoBtn(driver);
-//		DealerProfile dpP = new DealerProfile(driver);
+		// DealerProfile dpP = new DealerProfile(driver);
 		dpP.selectBand(driver, LOTpxDealershipBrandName);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
 
@@ -2242,13 +2240,13 @@ public class AUTOpxController extends Comlibs {
 		ac.rwExcel("", "*********LOPpx Upload Custom Picture TCs**********", "");
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 		loginP.login(driver, accountEmail, accountPS);
-//		AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
-//		acceptLicenseP.clickAcceptBtn(driver);
-		DealerProfile dpP=new DealerProfile(driver);
+		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+		// acceptLicenseP.clickAcceptBtn(driver);
+		DealerProfile dpP = new DealerProfile(driver);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
 		ImageGallery igP = new ImageGallery(driver);
 		igP.clickDealerShipInfoBtn(driver);
-//		DealerProfile dpP = new DealerProfile(driver);
+		// DealerProfile dpP = new DealerProfile(driver);
 		dpP.selectBand(driver, LOTpxDealershipBrandName);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
 
@@ -2265,7 +2263,7 @@ public class AUTOpxController extends Comlibs {
 			if (envBrowser.equalsIgnoreCase("Chrome")) {
 				driver.switchTo().alert().dismiss();// clicks on the “Cancel” button as soon as the pop up window appears.
 				driver.switchTo().defaultContent();//
-			}else if (envBrowser.equalsIgnoreCase("Firefox")) {
+			} else if (envBrowser.equalsIgnoreCase("Firefox")) {
 				System.out.println("FireFox browser, ignore alert...!");
 			}
 			alertPass = true;
@@ -2278,12 +2276,12 @@ public class AUTOpxController extends Comlibs {
 		}
 		if (alertPass) {
 			vgP.clickBackToInventoryBtn(driver);
-			ac.Wait(wt * 2);
+			ac.Wait(wt * 4);
 			igP.clickTemplatesBtn(driver);
-			ac.Wait(wt * 2);
+			ac.Wait(wt * 4);
 			Templates tpP = new Templates(driver);
 			tpP.clickInventoryGalleryBtn(driver);
-			ac.Wait(wt * 2);
+			ac.Wait(wt * 4);
 			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 			// System.out.println("\nPlease wait at least 60 seconds, vin: "+vin01+" is re-rendering...\n");
 			// ac.Wait(60);
@@ -2416,20 +2414,20 @@ public class AUTOpxController extends Comlibs {
 		loginP.login(driver, accountEmail, accountPS);
 		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
 
-//		TCnum = "TC144867_vinpx";
-//		// acceptLicenseP.verifyAgreementTitle(driver, 1, "VINpx Agreement", true, TCnum); // VINpx Agreement, STOCKpx Agreement, LOTpx Agreement
-//
-//		vinpxConent = acceptLicenseP.getFile("data/vinpxAgreement.txt");
-//		int vinpxAgreementTotalLines = acceptLicenseP.getLineNum();
-//		TCnum = "TC144867_5_vinpx";
-//		// acceptLicenseP.verifyPDF(driver, 1, "vinpx", vinpxConent, vinpxAgreementTotalLines, TCnum, envment);
-//
-//		acceptLicenseP.clickAcceptBtn(driver);
-		DealerProfile dpP=new DealerProfile(driver);
+		// TCnum = "TC144867_vinpx";
+		// // acceptLicenseP.verifyAgreementTitle(driver, 1, "VINpx Agreement", true, TCnum); // VINpx Agreement, STOCKpx Agreement, LOTpx Agreement
+		//
+		// vinpxConent = acceptLicenseP.getFile("data/vinpxAgreement.txt");
+		// int vinpxAgreementTotalLines = acceptLicenseP.getLineNum();
+		// TCnum = "TC144867_5_vinpx";
+		// // acceptLicenseP.verifyPDF(driver, 1, "vinpx", vinpxConent, vinpxAgreementTotalLines, TCnum, envment);
+		//
+		// acceptLicenseP.clickAcceptBtn(driver);
+		DealerProfile dpP = new DealerProfile(driver);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
 		ImageGallery igP = new ImageGallery(driver);
 		igP.clickDealerShipInfoBtn(driver);
-//		DealerProfile dpP = new DealerProfile(driver);
+		// DealerProfile dpP = new DealerProfile(driver);
 		dpP.selectBand(driver, VINpxDealershipBrandName);
 
 		igP.clickTemplatesBtn(driver);
@@ -2480,16 +2478,16 @@ public class AUTOpxController extends Comlibs {
 		boolean set_Footer_Vin = igP.truefalseRandom();
 		boolean set_Footer_StockNumber = igP.truefalseRandom();
 
-		boolean set_MarketingMessageTop =false;
+		boolean set_MarketingMessageTop = false;
 		boolean set_MarketingMessageBotton = false;
 		set_MarketingMessageTop = igP.truefalseRandom();
 		if (!set_MarketingMessageTop) {
-			set_MarketingMessageBotton = igP.truefalseRandom();	
+			set_MarketingMessageBotton = igP.truefalseRandom();
 		}
-	
+
 		boolean set_AddAdditionalOverlay = false;
 
-		boolean set_TextImage_VDI =igP.truefalseRandom();
+		boolean set_TextImage_VDI = igP.truefalseRandom();
 		boolean set_TextImage_WCI = igP.truefalseRandom();
 		boolean set_TextImage_VBI = igP.truefalseRandom();
 		/**
@@ -3119,14 +3117,14 @@ public class AUTOpxController extends Comlibs {
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 		TCnum = "";
 		loginP.login(driver, accountEmail, accountPS);
-//		AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
-//
-//		acceptLicenseP.clickAcceptBtn(driver);
-		DealerProfile dpP=new DealerProfile(driver);
+		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+		//
+		// acceptLicenseP.clickAcceptBtn(driver);
+		DealerProfile dpP = new DealerProfile(driver);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
 		ImageGallery igP = new ImageGallery(driver);
 		igP.clickDealerShipInfoBtn(driver);
-//		DealerProfile dpP = new DealerProfile(driver);
+		// DealerProfile dpP = new DealerProfile(driver);
 		dpP.selectBand(driver, VINpxDealershipBrandName);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
 
@@ -3142,25 +3140,25 @@ public class AUTOpxController extends Comlibs {
 		ac.Wait(wt);
 		igP.clickAddInventoryBtn(driver, TCnum);
 		int total = VINpxNewVINs.length;
-//		ac.rwExcel("", "VINs Total=" + total, "");
+		// ac.rwExcel("", "VINs Total=" + total, "");
 		int c = 0;
 		for (String vin : VINpxNewVINs) {
 			c++;
-			System.out.println("Total "+c+" vins added");
+			System.out.println("Total " + c + " vins added");
 			igP.inputVinInAddInventoryField(driver, vin, TCnum);
 			igP.clickAddBtn(driver, TCnum);
-//			if (igP.verifyGoodOrBadMsgShowing(driver, TCnum)) {
-//				// good msg shows
-//				tempVIN = vin;
-////				ac.rwExcel("VIN#= " + c, true, "VIN= " + vin,
-////						"VIN added, good message is showing under My Inventory Gallery");
-//				// break;
-//			} else {
-//				// error msg shows
-//				tempVIN = vin;
-//				ac.rwExcel("VIN#= " + c, false, "VIN= " + vin, "error message is showing under My Inventory Gallery");
-//
-//			}
+			// if (igP.verifyGoodOrBadMsgShowing(driver, TCnum)) {
+			// // good msg shows
+			// tempVIN = vin;
+			//// ac.rwExcel("VIN#= " + c, true, "VIN= " + vin,
+			//// "VIN added, good message is showing under My Inventory Gallery");
+			// // break;
+			// } else {
+			// // error msg shows
+			// tempVIN = vin;
+			// ac.rwExcel("VIN#= " + c, false, "VIN= " + vin, "error message is showing under My Inventory Gallery");
+			//
+			// }
 		}
 		igP.clickAddInventoryXBtn(driver, TCnum);
 		igP.clickRefleshF5Btn(driver, TCnum);
@@ -3260,15 +3258,15 @@ public class AUTOpxController extends Comlibs {
 		// **********************************Debug Area**************************************************************
 
 		loginP.login(driver, accountEmail, accountPS);
-//		AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
-//
-//		acceptLicenseP.clickAcceptBtn(driver);
-		DealerProfile dpP=new DealerProfile(driver);
+		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+		//
+		// acceptLicenseP.clickAcceptBtn(driver);
+		DealerProfile dpP = new DealerProfile(driver);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
 		ImageGallery igP = new ImageGallery(driver);
 		TCnum = "TC_Debug_01";
 		igP.gotoMyDealerShip(driver);
-//		DealerProfile dpP = new DealerProfile(driver);
+		// DealerProfile dpP = new DealerProfile(driver);
 		// TCnum = "TC139666_13_14";
 		// dpP.verifyCountryStateDropDowns(driver, country,stateProvince, TCnum);
 		// TCnum = "TC139666_20";
@@ -3303,9 +3301,9 @@ public class AUTOpxController extends Comlibs {
 		loadURL(driver, baseURL);
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 		loginP.login(driver, accountEmail, accountPS);
-//		AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
-//		acceptLicenseP.clickAcceptBtn(driver);
-		DealerProfile dpP=new DealerProfile(driver);
+		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+		// acceptLicenseP.clickAcceptBtn(driver);
+		DealerProfile dpP = new DealerProfile(driver);
 		dpP.clickInventoryGalleryBtn(driver, "reLogin");
 		// ImageGallery igP = new ImageGallery(driver);
 		return driver;
@@ -3355,25 +3353,25 @@ public class AUTOpxController extends Comlibs {
 			//// tempDebug(driver);// ***************************************Debug*****************************************
 			//// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			 //// 0.General Inventory Gallery
-			 bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-			 inventoryGalleryTC(driver, tBrowser, env, versionNum);
-			 vehicleGallery(driver, tBrowser, env);
-			 // verifyRerender(driver, tBrowser);
-			
-			 ////// 1.VINpx:
-			 bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-			 VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-			
-			 // bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			
-			 ////// 2. STOCKpx
-			 bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			 STOCKpxInventoryTC(driver, tBrowser, env);
-			
-			 ////// 3. Templates
-			 bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
-			 VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
+			//// 0.General Inventory Gallery
+			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			inventoryGalleryTC(driver, tBrowser, env, versionNum);
+			vehicleGallery(driver, tBrowser, env);
+			// verifyRerender(driver, tBrowser);
+
+			////// 1.VINpx:
+			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+
+			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+
+			////// 2. STOCKpx
+			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			STOCKpxInventoryTC(driver, tBrowser, env);
+
+			////// 3. Templates
+			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
+			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
 			////// bc.Wait(18*60);//wait 18 minutes;
 			//
