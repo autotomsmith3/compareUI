@@ -939,6 +939,7 @@ public class AUTOpxController extends Comlibs {
 				// My Dealership Settings
 				// TC139666
 		TCnum = "TC139666_7";
+		igP.scrollUp(driver, -650, TCnum);
 		igP.clickDealerShipInfoBtn(driver);
 		// DealerProfile dpP = new DealerProfile(driver);
 		// removed on 2018-09-20 dpP.verifyDealershipIDBrands("GM123456_4 | ", "GMC | Cadillac | Buick | Chevrolet", TCnum);
