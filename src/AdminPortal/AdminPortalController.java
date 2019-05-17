@@ -1256,7 +1256,7 @@ public class AdminPortalController extends Comlibs {
 		//// *************************ManageGlobalConfig******************************************************
 		//// *************************ManageGlobalConfig******************************************************
 
-		driver.close();
+		//driver.close();
 		// switchToWindow(driver, parentHandle);
 		// driver.close();
 
@@ -1612,7 +1612,7 @@ public class AdminPortalController extends Comlibs {
 		//// *************************clickManageBGSetsBtn******************************************************
 		//// *************************clickManageBGSetsBtn******************************************************
 
-		driver.close();
+		//driver.close();
 		// switchToWindow(driver, parentHandle);
 		// driver.close();
 
@@ -2360,15 +2360,15 @@ public class AdminPortalController extends Comlibs {
 			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 
-			////// 1.ManageDealerShipsAddNewAccount:
-			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
-			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
-
-			//// 2.ManageDealerShips:
-			loadURL(driver, baseURL, env);
-			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
-			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+//			////// 1.ManageDealerShipsAddNewAccount:
+//			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
+//			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+//			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+//
+//			//// 2.ManageDealerShips:
+//			loadURL(driver, baseURL, env);
+//			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
+//			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
 			
 			//// 3. ManageBackgroundSets:
 			loadURL(driver, baseURL, env);
@@ -2376,6 +2376,7 @@ public class AdminPortalController extends Comlibs {
 			ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
 			
 			 bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
+			 driver.close();
 			 System.out.println("Test is complete!!!");
 		}
 		return;
