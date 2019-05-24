@@ -81,7 +81,7 @@ public class AUTOpxController extends Comlibs {
 		if (!sPageTitle.equals(driver.getTitle())) {
 			// throw new IllegalStateException("The page title is NOT - "
 			// + sPageTitle);
-			System.out.println("The page title is NOT - "+ sPageTitle);
+			System.out.println("The page title is NOT - " + sPageTitle);
 		}
 	}
 
@@ -209,14 +209,14 @@ public class AUTOpxController extends Comlibs {
 		igP.clickClearAllFiltersBtn(driver, TCnum);
 
 		igP.clickYearBtn(driver, TCnum);
-		igP.clickYearSelected(driver, "2015", TCnum);
-		igP.clickYearSelected(driver, "2016", TCnum);
+		igP.clickYearSelected(driver, "2018", TCnum);
+		igP.clickYearSelected(driver, "2019", TCnum);
 		igP.clickYearClearBtn(driver, TCnum);
-		igP.clickYearSelected(driver, "2015", TCnum);
+		igP.clickYearSelected(driver, "2016", TCnum);
 		igP.clickYearXBtn(driver, TCnum);
 		igP.clickYearBtn(driver, TCnum);
-		igP.clickYearSelected(driver, "2015", TCnum);
-		igP.clickYearSelected(driver, "2016", TCnum);
+		igP.clickYearSelected(driver, "2018", TCnum);
+		igP.clickYearSelected(driver, "2019", TCnum);
 		igP.clickYearApplyBtn(driver, TCnum);
 		igP.clickClearAllFiltersBtn(driver, TCnum);
 		// Make
@@ -832,7 +832,7 @@ public class AUTOpxController extends Comlibs {
 		// Year
 		TCnum = "TC139688_8";
 		igP.clickYearBtn(driver, TCnum);
-		igP.clickYearSelected(driver, "2016", TCnum);
+		igP.clickYearSelected(driver, "2019", TCnum);
 		igP.clickYearApplyBtn(driver, TCnum);
 		// Make
 		TCnum = "TC139688_11";
@@ -1056,6 +1056,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC141679_6_ig";
 		igP.verifyDealershipname(dealershipName, TCnum);
 		TCnum = "TC139684_06";
+		ac.Wait(wt);
 		igP.clickLogout(driver);
 	}
 
@@ -1303,7 +1304,8 @@ public class AUTOpxController extends Comlibs {
 		// Verify Rerender All Vehicles for VINpx dealer
 		// TC139709
 		TCnum = "TC139709_06";
-		System.out.println("Rerender All Vehicles for VINpx dealer");
+		System.out.println(
+				"Rerender All Vehicles for VINpx dealer. Re-render VIN number: " + igP.getReRenderNum(driver, TCnum));
 		igP.clickSelectAllBtn(driver, TCnum);
 		allVinNums = igP.getReRenderNum(driver, TCnum);
 		igP.clickRerenderBtn(driver, render, TCnum);
@@ -1660,7 +1662,8 @@ public class AUTOpxController extends Comlibs {
 		igP.clickSelectNoneBtn(driver, TCnum);
 		// Verify Rerender All Vehicles for STOCKpx dealer TC139712
 		TCnum = "TC139712_06";
-		System.out.println("Rerender All Vehicles for STOCKpx dealer");
+		System.out.println(
+				"Rerender All Vehicles for STOCKpx dealer. Re-render VIN number: " + igP.getReRenderNum(driver, TCnum));
 		if (allVinNums > 20) {
 			igP.clickShowAllBtn(driver, TCnum);
 		}
