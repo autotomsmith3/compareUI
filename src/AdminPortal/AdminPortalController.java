@@ -1376,7 +1376,22 @@ public class AdminPortalController extends Comlibs {
 		EnableDisableVehicles EnableDisableVehiclesP = new EnableDisableVehicles(driver);
 		String paternName="2019-GM-1XP26-1XP26-1LS";
 		EnableDisableVehiclesP.inputSearch(driver, paternName,tc);
-		EnableDisableVehiclesP.clickDisabledCheckBox(driver, paternName,tc);
+
+		boolean checkboxStatus=EnableDisableVehiclesP.CheckDisabledCheckBoxStatus(driver, paternName,tc);
+		if (checkboxStatus) {
+			EnableDisableVehiclesP.clickDisabledCheckBox(driver, paternName,tc);
+			EnableDisableVehiclesP.inputSearch(driver, paternName,tc);
+			EnableDisableVehiclesP.clickDisabledCheckBox(driver, paternName,tc);
+		}else {
+			EnableDisableVehiclesP.clickDisabledCheckBox(driver, paternName,tc);
+		}
+		EnableDisableVehiclesP.inputSearch(driver, paternName,tc);
+		checkboxStatus=EnableDisableVehiclesP.CheckDisabledCheckBoxStatus(driver, paternName,tc);
+		if (checkboxStatus) {
+			ac.rwExcel(tc, true, "Enable/Disable Vehicles - Disable Check Box", "Clicking on Disable Check Box.");
+		}else {
+			ac.rwExcel(tc, false, "Enable/Disable Vehicles - Disable Check Box", "Clicking on Disable Check Box failed it is still unchecked");
+		}
 	
 		
 		//// *************************Enable/DisableVehiclesBtn******************************************************		
@@ -2372,16 +2387,17 @@ public class AdminPortalController extends Comlibs {
 			// //// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page
 			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
+			//*****************************************************************************************************************
+			
+			////// 1.ManageDealerShipsAddNewAccount:
+			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
+			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
 
-//			////// 1.ManageDealerShipsAddNewAccount:
-//			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
-//			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-//			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
-//
-//			//// 2.ManageDealerShips:
-//			loadURL(driver, baseURL, env);
-//			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
-//			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+			//// 2.ManageDealerShips:
+			loadURL(driver, baseURL, env);
+			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
+			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
 			
 			//// 3. ManageBackgroundSets:
 			loadURL(driver, baseURL, env);
