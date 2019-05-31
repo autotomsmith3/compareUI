@@ -62,7 +62,7 @@ public class UserList extends Comlibs {
 	 By accountsLocator=By.xpath("//table[@id='dealerTable']/tbody");//xpath=//table[@id='dealerTable']/tbody
 	 By nextLocator=By.xpath("//*[@id=\"dealerTable_next\"]");
 	 By firstNameSortLocator=By.xpath("//*[@id=\"dealerTable\"]/thead/tr/th[4]");
-	// By Locator=By.xpath("");
+	 By EnableDisableVehiclesLocator=By.xpath("//*[@id=\"enableMenu\"]");
 	// By Locator=By.xpath("");
 	// By Locator=By.xpath("");
 	// By Locator=
@@ -483,7 +483,10 @@ public class UserList extends Comlibs {
 		driver.findElement(ManageGlobalConfigLocator).click();
 		return new GlobalConfig(driver);
 	}
-
+	public EnableDisableVehicles clickEnableDisableVehicles(WebDriver driver, String tc) throws IOException {
+		driver.findElement(EnableDisableVehiclesLocator).click();
+		return new EnableDisableVehicles(driver);
+	}
 	public DealerPortal.ImageGallery clickDealerViewBtn(WebDriver driver, int sn) throws IOException {
 		By dealerViewBtnLocator = By.xpath("(//button[@id='dealerViewBtn'])[" + sn + "]");// 1,2,3...
 		driver.findElement(dealerViewBtnLocator).click();

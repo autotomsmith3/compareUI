@@ -1,13 +1,9 @@
 package AdminPortal;
-
 /**
 * @author Zhoul
-* Initial date: 2019
-* Modified by Zhoul...improved by Zhoul...updated by Zhoul...created by Zhoul...
-* replaced by replaced byreplaced by replaced by replaced by replaced by replaced by replaced by replaced by 
-* replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by 
-* replaced by replaced by replaced by replaced by replaced by replaced by replaced by 
-* replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by   
+* Initial date: 2019.05.01 based on AUTOPXOPS-1744
+* Created by Zhoul...modified by Zhoul...improved by Zhoul...updated by Zhoul...
+* 
  */
 /*
  * replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by 
@@ -15,6 +11,10 @@ package AdminPortal;
  * replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by 
  * replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by 
  *  
+ */
+/*
+ * **************Manage Account******************
+ *
  */
 import java.awt.AWTException;
 import java.io.BufferedInputStream;
@@ -1347,7 +1347,7 @@ public class AdminPortalController extends Comlibs {
 		String alertmessage = "";
 		// ====================
 		Comlibs ac = new Comlibs();
-		ac.rwExcel("", "*********ManageDealerShips**********", "");
+//		ac.rwExcel("", "*********ManageDealerShips**********", "");
 
 		int count = 0;
 		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
@@ -1368,6 +1368,19 @@ public class AdminPortalController extends Comlibs {
 		String parentHandle = driver.getWindowHandle(); // get the current window handle
 
 		UserList UserListP = new UserList(driver);
+
+		//// *************************Enable/DisableVehiclesBtn******************************************************
+		tc = "TC_EnableDisableVehicles_01";
+		UserListP.clickEnableDisableVehicles(driver,tc);
+		
+		EnableDisableVehicles EnableDisableVehiclesP = new EnableDisableVehicles(driver);
+		String paternName="2019-GM-1XP26-1XP26-1LS";
+		EnableDisableVehiclesP.inputSearch(driver, paternName,tc);
+		EnableDisableVehiclesP.clickDisabledCheckBox(driver, paternName,tc);
+	
+		
+		//// *************************Enable/DisableVehiclesBtn******************************************************		
+		
 		
 		//// *************************clickManageBGSetsBtn******************************************************
 		//// *************************clickManageBGSetsBtn******************************************************
