@@ -137,7 +137,7 @@ public class AdminPortalController extends Comlibs {
 			throws ClassNotFoundException, SQLException {
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		Connection conn = DriverManager.getConnection(
-				"jdbc:sqlserver://LNOC-Q13V-MSQ1.autodata.org;user=VDVIWebServicesUserQA;password=HDuMy873JRFpkkU9;database=VDVI_Master");
+				"jdbc:sqlserver://LNOC-Q13V-MSQ2.autodata.org;user=VDVIWebServicesUserQA;password=HDuMy873JRFpkkU9;database=VDVI_Master");
 
 		System.out.println("test");
 
@@ -1542,9 +1542,14 @@ public class AdminPortalController extends Comlibs {
 		BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
 		ac.Wait(wt);
 		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
+		try {
 		BackgroundsP.uploadBackgroundPictureFrBackgroundsPage(driver, backgroundSetPath2, envBrowser, 180, 5,
 				tc + "_02");
-
+		ac.rwExcel(tc, true, "upload Background Picture From Backgrounds Page", "Seems good so far!");
+		}catch (Exception e) {
+			System.out.println("Upload Background Picture (path: "+backgroundSetPath2+", Browser: "+envBrowser+") from Backgrounds Page failed!");
+			ac.rwExcel(tc, false, "upload Background Picture From Backgrounds Page", "Upload Background Picture (path: "+backgroundSetPath2+", Browser: "+envBrowser+") from Backgrounds Page failed!");
+		}
 		tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_new";// = modelcode bar 2019-GM-4NF56-1SD-4NF56-1SD - sn=4876
 		sn = 4876;
 		totalPoints = oneSNForScrollupPoint * sn;

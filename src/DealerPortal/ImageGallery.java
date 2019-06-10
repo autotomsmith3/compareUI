@@ -947,8 +947,8 @@ public class ImageGallery extends Comlibs {
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		// System.setProperty("java.net.preferIPv6Addresses", "true"); //doesn't help to resolve getConnection below
 
-		// Connection conn = DriverManager.getConnection("jdbc:sqlserver://LNOC-Q13V-MSQ1.autodata.org;user=VDVIWebServicesUserQA;password=HDuMy873JRFpkkU9;database=VDVI_Master");
-		// Connection conn = DriverManager.getConnection("jdbc:sqlserver://LNOC-Q13V-MSQ1.autodata.org;user=zhoul;password=Zljzlj19591112;database=VDVI_Master");
+		// Connection conn = DriverManager.getConnection("jdbc:sqlserver://LNOC-Q13V-MSQ2.autodata.org;user=VDVIWebServicesUserQA;password=HDuMy873JRFpkkU9;database=VDVI_Master");
+		// Connection conn = DriverManager.getConnection("jdbc:sqlserver://LNOC-Q13V-MSQ2.autodata.org;user=zhoul;password=Zljzlj19591112;database=VDVI_Master");
 		Connection conn = DriverManager.getConnection("jdbc:sqlserver://" + serverName + ";user=" + userName
 				+ ";password=" + password + ";database=" + dbName);// worked one.
 
@@ -1639,7 +1639,7 @@ public class ImageGallery extends Comlibs {
 	public void removeVINfrDealer(String dlrGuid, String sVin, String serverName, String dbName, String userName,
 			String password, String tc) throws ClassNotFoundException, SQLException, IOException {
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		// Connection conn = DriverManager.getConnection("jdbc:sqlserver://LNOC-Q13V-MSQ1.autodata.org;user=VDVIWebServicesUserQA;password=HDuMy873JRFpkkU9;database=VDVI_Master");
+		// Connection conn = DriverManager.getConnection("jdbc:sqlserver://LNOC-Q13V-MSQ2.autodata.org;user=VDVIWebServicesUserQA;password=HDuMy873JRFpkkU9;database=VDVI_Master");
 		Connection conn = DriverManager.getConnection("jdbc:sqlserver://" + serverName + ";user=" + userName
 				+ ";password=" + password + ";database=" + dbName);
 		System.out.println("Delete VIN:"+sVin+" from DB");

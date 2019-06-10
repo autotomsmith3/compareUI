@@ -203,7 +203,7 @@ public class AUTOpxController extends Comlibs {
 
 		TCnum = "TC139691_9";
 		igP.clickYearBtn(driver, TCnum);
-		igP.clickYearSelected(driver, "2015", TCnum);
+		igP.clickYearSelected(driver, "2016", TCnum);
 		igP.clickYearApplyBtn(driver, TCnum);
 		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 		igP.clickClearAllFiltersBtn(driver, TCnum);
@@ -739,11 +739,11 @@ public class AUTOpxController extends Comlibs {
 		// Year
 		TCnum = "TC139691_9";
 		igP.clickYearBtn(driver, TCnum);
-		igP.clickYearSelected(driver, "2015", TCnum);
+		igP.clickYearSelected(driver, "2016", TCnum);
 		igP.clickYearApplyBtn(driver, TCnum);
 		igP.clickYearBtn(driver, TCnum);
-		igP.clickYearSelected(driver, "2015", TCnum);
-		igP.clickYearSelected(driver, "2015", TCnum);
+		igP.clickYearSelected(driver, "2019", TCnum);
+		igP.clickYearSelected(driver, "2019", TCnum);
 		igP.clickYearClearBtn(driver, TCnum);
 		igP.clickYearXBtn(driver, TCnum);
 		igP.clickClearAllFiltersBtn(driver, TCnum);
@@ -3055,7 +3055,7 @@ public class AUTOpxController extends Comlibs {
 			throws ClassNotFoundException, SQLException {
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		Connection conn = DriverManager.getConnection(
-				"jdbc:sqlserver://LNOC-Q13V-MSQ1.autodata.org;user=VDVIWebServicesUserQA;password=HDuMy873JRFpkkU9;database=VDVI_Master");
+				"jdbc:sqlserver://LNOC-Q13V-MSQ2.autodata.org;user=VDVIWebServicesUserQA;password=HDuMy873JRFpkkU9;database=VDVI_Master");
 
 		System.out.println("test");
 

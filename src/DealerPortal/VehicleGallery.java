@@ -412,7 +412,7 @@ public class VehicleGallery extends Comlibs {
 			String serverName, String dbName, String userName, String password)
 			throws ClassNotFoundException, SQLException, IOException {
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		// Connection conn = DriverManager.getConnection("jdbc:sqlserver://LNOC-Q13V-MSQ1.autodata.org;user=VDVIWebServicesUserQA;password=HDuMy873JRFpkkU9;database=VDVI_Master");
+		// Connection conn = DriverManager.getConnection("jdbc:sqlserver://LNOC-Q13V-MSQ2.autodata.org;user=VDVIWebServicesUserQA;password=HDuMy873JRFpkkU9;database=VDVI_Master");
 		Connection conn = DriverManager.getConnection("jdbc:sqlserver://" + serverName + ";user=" + userName
 				+ ";password=" + password + ";database=" + dbName);
 

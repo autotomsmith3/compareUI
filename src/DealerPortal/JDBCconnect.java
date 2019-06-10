@@ -59,7 +59,7 @@ public class JDBCconnect {
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 		// Loading the required JDBC Driver class
 		String serverName, dbName, userName, password;
-		serverName = "LNOC-Q13V-MSQ1.autodata.org";
+		serverName = "LNOC-Q13V-MSQ2.autodata.org";
 		dbName = "VDVI_Master";
 		userName = "VDVIWebServicesUserQA";
 		password = "HDuMy873JRFpkkU9";

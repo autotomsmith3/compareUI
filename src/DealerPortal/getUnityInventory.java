@@ -67,16 +67,17 @@ public class getUnityInventory {
 //				"OCN5TPF", "R0AAKW2", "R504FV8", "SLOEASO", "SZ9CRGW", "T5H57YY", "t6k7yx5", "U6Y76GP", "V5254PG",
 //				"W97TIGT", "X8IZNFE", "Y6LS1GS", "ZFEQR7R", "ZGX4FNH", "ZVQNOZO"};// Total 84 - April 10 - 11, 2019 from Prod Metadata valid unityWorks ids
 
-		 String[] unityWorkDealerShipID = { "10V692JH", "112Y2JUB", "11BW9H2I", "11D0Y1R8", "11FDEWDR", "11FK6G5J",
-				 "11FYPTW0", "11GFTTMR", "11GLU8DF", "11J18GNF", "11JQM19D", "11OTGAXK", "1QWGIJS", "1V0BJMB", "246GNLU",
-				 "275D2EQ", "27OE966", "2BDCDUA", "2D962HH", "2FHFIYI", "2FV5V6U", "2JH38WM", "2OLET45", "2QO23PC",
-				 "2ZLGTS2", "33M1H95", "3AOCXEK", "3QXAM0S", "4B5CDSU", "8EU6HMR", "8IU4NI2", "9L83MUH", "ARQFM74",
-				 "BX3EWMP", "BX72MDM", "C4QWU9Y", "C6C1MBD", "CGPB0MT", "COA94NS", "D29DGRX", "D2QGVYI", "D2ZDQQW",
-				 "DP9B0OU", "DVAESPR", "EH1UY6J", "ESW5ME9", "EVV73HI", "F72BCJN", "FB7CIB0", "FGN8TC3", "FX592ZN",
-				 "G08CAFX"};//GMRCHL5
+//		 String[] unityWorkDealerShipID = { "10V692JH", "112Y2JUB", "11BW9H2I", "11D0Y1R8", "11FDEWDR", "11FK6G5J",
+//				 "11FYPTW0", "11GFTTMR", "11GLU8DF", "11J18GNF", "11JQM19D", "11OTGAXK", "1QWGIJS", "1V0BJMB", "246GNLU",
+//				 "275D2EQ", "27OE966", "2BDCDUA", "2D962HH", "2FHFIYI", "2FV5V6U", "2JH38WM", "2OLET45", "2QO23PC",
+//				 "2ZLGTS2", "33M1H95", "3AOCXEK", "3QXAM0S", "4B5CDSU", "8EU6HMR", "8IU4NI2", "9L83MUH", "ARQFM74",
+//				 "BX3EWMP", "BX72MDM", "C4QWU9Y", "C6C1MBD", "CGPB0MT", "COA94NS", "D29DGRX", "D2QGVYI", "D2ZDQQW",
+//				 "DP9B0OU", "DVAESPR", "EH1UY6J", "ESW5ME9", "EVV73HI", "F72BCJN", "FB7CIB0", "FGN8TC3", "FX592ZN",
+//				 "G08CAFX"};//GMRCHL5 - is for FCA 
 		// String[] unityWorkDealerShipID = {"2L41W3M"};// 2L41W3M-no exterior, no trim - 2019-02-12
-		// String[] unityWorkDealerShipID = {"GMRCHL5"};//GMRCHL5 FCA only - provided by Drew on 2018-12-10 via Teams
+//		 String[] unityWorkDealerShipID = {"GMRCHL5"};//GMRCHL5 FCA only - provided by Drew on 2018-12-10 via Teams
 		// String[] unityWorkDealerShipID = {"F72BCJN","27OE966"};//F72BCJN - Hyundai, 27OE966 - Honda 20190211
+		 String[] unityWorkDealerShipID = {"11FDEWDR","2FHFIYI","DP9B0OU","GMRCHL5"};// 20190529-testing for 1728
 
 		// Returning nothing: "","",
 		for (String id : unityWorkDealerShipID) {
