@@ -60,7 +60,7 @@ public class AdminPortalController extends Comlibs {
 		this.data.driver = driver;
 		// String wh1=driver.getWindowHandle();
 
-		String sPageTitle = "AUTOpx Login";
+		String sPageTitle = "VINpx Login";
 		boolean existTitle = TitleDisplay(driver, sPageTitle);
 		if (existTitle)
 			try {

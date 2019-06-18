@@ -63,7 +63,7 @@ public class AUTOpxController extends Comlibs {
 		this.driver = driver;
 		// String wh1=driver.getWindowHandle();
 
-		String sPageTitle = "AUTOpx Login";
+		String sPageTitle = "VINpx Login";
 		boolean existTitle = TitleDisplay(driver, sPageTitle);
 		if (existTitle)
 			try {
@@ -530,8 +530,8 @@ public class AUTOpxController extends Comlibs {
 		loginP.login(driver, accountEmail, accountPS);
 		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
 		// acceptLicenseP.clickAcceptBtn(driver);
-		DealerProfile ipP = new DealerProfile(driver);
-		ipP.clickInventoryGalleryBtn(driver, TCnum);
+//		DealerProfile ipP = new DealerProfile(driver);
+//		ipP.clickInventoryGalleryBtn(driver, TCnum);
 
 		TCnum = "TC139502_12";
 
@@ -711,11 +711,16 @@ public class AUTOpxController extends Comlibs {
 		//
 		// acceptLicenseP.clickAcceptBtn(driver);
 
-		DealerProfile dpP = new DealerProfile(driver);
-		dpP.clickInventoryGalleryBtn(driver, TCnum);
+//		DealerProfile dpP = new DealerProfile(driver);
+//		dpP.clickInventoryGalleryBtn(driver, TCnum);
 
 		ImageGallery igP = new ImageGallery(driver);
 
+		igP.clickDealerShipInfoBtn(driver);
+		
+		DealerProfile dpP = new DealerProfile(driver);
+		dpP.clickInventoryGalleryBtn(driver, TCnum);
+		
 		/**
 		 * // Help section TCnum = "TC139675_7_InventoryG"; // Help - Contact Support. email and tel no. igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, TCnum); TCnum = "TC139675_14_InventoryG"; igP.verifyHelpSystemHelp(driver, TCnum);// Help - System Help. TCnum = "TC139675_17_InventoryG"; // Help - Report Issue. email and tel no. igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, TCnum);
 		 **/
@@ -1121,7 +1126,12 @@ public class AUTOpxController extends Comlibs {
 		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
 		// acceptLicenseP.clickCancelBtn(driver);
 		// Verify Forgot Password process
+		
+
+		ImageGallery igP = new ImageGallery(driver);
+		igP.clickDealerShipInfoBtn(driver);
 		DealerProfile dpP = new DealerProfile(driver);
+		dpP.clickInventoryGalleryBtn(driver, TCnum);
 		dpP.clickLogout(driver);
 		if ((accountEmail.contains("gmail.com")) && (checkEmail.equalsIgnoreCase("Yes"))) {
 			// So far only accept gmail email
@@ -1146,8 +1156,8 @@ public class AUTOpxController extends Comlibs {
 			// mailPassword = "Autodata1";
 			tempPS = gMail.getTemporaryPS(subject, psB4, psAfter, "Imap.gmail.com", accountEmail, accountPS);
 			TCnum = "TC139686_02_tempPS";
-			loginP.login(driver, accountEmail, tempPS); // this should be correct one. Now issue here, see autopxops-1196
-			// loginP.loginDealerProfile(driver, accountEmail, tempPS);//this is temp, it skips agreement page
+//			loginP.login(driver, accountEmail, tempPS); // this should be correct one. Now issue here, see autopxops-1196
+			 loginP.loginDealerProfile(driver, accountEmail, tempPS);//this is temp, it skips agreement page
 			// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
 			// acceptLicenseP.clickAcceptPSBtn(driver);
 
@@ -1182,7 +1192,7 @@ public class AUTOpxController extends Comlibs {
 		// acceptLicenseP.clickAcceptBtn(driver);
 		// DealerProfile dpP=new DealerProfile(driver);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
-		ImageGallery igP = new ImageGallery(driver);
+//		ImageGallery igP = new ImageGallery(driver);
 		igP.clickDealerShipInfoBtn(driver);
 		// DealerProfile dpP = new DealerProfile(driver);
 		dpP.selectBand(driver, VINpxDealershipBrandName);
@@ -1554,9 +1564,10 @@ public class AUTOpxController extends Comlibs {
 		// acceptLicenseP.verifyPDF(driver, 1, "stockpx", stockpxConent, stockpxAgreementTotalLines, TCnum, envment);
 		//
 		// acceptLicenseP.clickAcceptBtn(driver);
+		ImageGallery igP = new ImageGallery(driver);
+		igP.clickDealerShipInfoBtn(driver);	
 		DealerProfile dpP = new DealerProfile(driver);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
-		ImageGallery igP = new ImageGallery(driver);
 
 		igP.clickDealerShipInfoBtn(driver);
 		// DealerProfile dpP = new DealerProfile(driver);
@@ -2246,9 +2257,11 @@ public class AUTOpxController extends Comlibs {
 		loginP.login(driver, accountEmail, accountPS);
 		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
 		// acceptLicenseP.clickAcceptBtn(driver);
+		ImageGallery igP = new ImageGallery(driver);
+		igP.clickDealerShipInfoBtn(driver);
 		DealerProfile dpP = new DealerProfile(driver);
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
-		ImageGallery igP = new ImageGallery(driver);
+
 		igP.clickDealerShipInfoBtn(driver);
 		// DealerProfile dpP = new DealerProfile(driver);
 		dpP.selectBand(driver, LOTpxDealershipBrandName);
@@ -2427,16 +2440,14 @@ public class AUTOpxController extends Comlibs {
 		// // acceptLicenseP.verifyPDF(driver, 1, "vinpx", vinpxConent, vinpxAgreementTotalLines, TCnum, envment);
 		//
 		// acceptLicenseP.clickAcceptBtn(driver);
-		DealerProfile dpP = new DealerProfile(driver);
-		dpP.clickInventoryGalleryBtn(driver, TCnum);
 		ImageGallery igP = new ImageGallery(driver);
 		igP.clickDealerShipInfoBtn(driver);
+		DealerProfile dpP = new DealerProfile(driver);
+//		dpP.clickInventoryGalleryBtn(driver, TCnum);
 		// DealerProfile dpP = new DealerProfile(driver);
 		dpP.selectBand(driver, VINpxDealershipBrandName);
-
 		igP.clickTemplatesBtn(driver);
 		Templates tpP = new Templates(driver);
-
 		TCnum = "";
 		String checkboxName = "";
 		String checkboxSelectorID = "";

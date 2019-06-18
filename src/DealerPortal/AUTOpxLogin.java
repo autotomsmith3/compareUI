@@ -14,7 +14,7 @@ public class AUTOpxLogin extends Comlibs {
 	public AUTOpxLogin(WebDriver driver) throws IOException {
 		this.driver = driver;
 		// String wh1=driver.getWindowHandle();
-		String sPageTitle = "AUTOpx Login";
+		String sPageTitle = "VINpx Login";
 		boolean existTitle = TitleDisplay(driver, sPageTitle);
 		if (existTitle) {
 			rwExcel("", true, "Page Title is displayed", sPageTitle);
@@ -44,9 +44,8 @@ public class AUTOpxLogin extends Comlibs {
 	By forgotPSLocator = By.xpath("//a[contains(text(),'Forgot Password?')]");
 	By acceptAndContinueBtn = By.xpath("//button[@type='submit']");
 	By engboxesLocator = By.xpath("//ul[@id='engine-options']/li/div");// Engine only
-
-	By errorMSGLocator = By.xpath("//*[@id=\"loginForm\"]/div[3]/span[1]");
-
+//	By errorMSGLocator = By.xpath("//*[@id=\"loginForm\"]/div[3]/span[1]");  
+	By errorMSGLocator = By.xpath("//*[@id=\"loginForm\"]/div[2]/span[1]");  //*[@id="loginForm"]/div[2]/span[1]
 	public AUTOpxLogin inputUername(WebDriver driver, String un) {
 		driver.findElement(usernameLocator).clear();
 		driver.findElement(usernameLocator).sendKeys(un);
@@ -59,9 +58,13 @@ public class AUTOpxLogin extends Comlibs {
 		return this;
 	}
 
-	public DealerProfile clickLoginBtn(WebDriver driver) throws IOException {
+//	public DealerProfile clickLoginBtn(WebDriver driver) throws IOException {
+//		driver.findElement(loginButtonLocator).click();
+//		return new DealerProfile(driver);
+//	}
+	public ImageGallery clickLoginBtn(WebDriver driver) throws IOException {
 		driver.findElement(loginButtonLocator).click();
-		return new DealerProfile(driver);
+		return new ImageGallery(driver);
 	}
 
 	public AUTOpxLogin clickLoginBtnForInvalid(WebDriver driver) throws IOException {
@@ -99,13 +102,18 @@ public class AUTOpxLogin extends Comlibs {
 		return pagetitle;
 	}
 
-	public DealerProfile login(WebDriver driver, String usr, String ps) throws IOException {
+//	public DealerProfile login(WebDriver driver, String usr, String ps) throws IOException {
+//		inputUername(driver, usr);
+//		inputPassword(driver, ps);
+//		clickLoginBtn(driver);
+//		return new DealerProfile(driver);
+//	}
+	public ImageGallery login(WebDriver driver, String usr, String ps) throws IOException {
 		inputUername(driver, usr);
 		inputPassword(driver, ps);
 		clickLoginBtn(driver);
-		return new DealerProfile(driver);
+		return new ImageGallery(driver);
 	}
-
 	public AUTOpxLogin login(WebDriver driver, String usr, String ps, String tc, String errorMSG) throws IOException {
 		inputUername(driver, usr);
 		inputPassword(driver, ps);
