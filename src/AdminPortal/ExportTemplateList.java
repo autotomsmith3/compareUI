@@ -117,12 +117,12 @@ public class ExportTemplateList extends Comlibs {
 		return this;
 	}
 
-	public ExportTemplateList clickCombinedFileCheckBox(WebDriver driver) throws IOException {
+	public ExportTemplateList clickCombinedFileCheckBox_removed_by_AUTOPXOPS_1816(WebDriver driver) throws IOException {
 		driver.findElement(combinedFileLocator).click();
 		return this;
 	}
 
-	public ExportTemplateList clickBrandedImagesCheckBox(WebDriver driver) throws IOException {
+	public ExportTemplateList clickBrandedImagesCheckBox_removed_by_AUTOPXOPS_1816(WebDriver driver) throws IOException {
 		driver.findElement(brandedImagesLocator).click();
 		return this;
 	}

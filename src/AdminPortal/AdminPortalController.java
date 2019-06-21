@@ -1119,8 +1119,8 @@ public class AdminPortalController extends Comlibs {
 		ExportTemplateListP.inputPassword(driver, "5k2cGG1");
 		ExportTemplateListP.inputHost(driver, "LOCALHOST");
 		ExportTemplateListP.inputTemplate(driver, templateS);
-		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
+//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
 		ExportTemplateListP.clickCancel(driver);
 		ac.Wait(wt);
 		// Add an Export Template and submit
@@ -1133,11 +1133,11 @@ public class AdminPortalController extends Comlibs {
 		ExportTemplateListP.inputHost(driver, "LOCALHOST");
 		ExportTemplateListP.inputTemplate(driver, templateS);
 		ac.Wait(wt);
-		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
-		ac.Wait(wt);
-		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
-		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
+//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+//		ac.Wait(wt);
+//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
 		ExportTemplateListP.clickSubmit(driver);
 		ac.acceptAlert(driver, tc, "OK");
 		// Edit Export Template
@@ -1152,11 +1152,11 @@ public class AdminPortalController extends Comlibs {
 		ExportTemplateListP.inputHost(driver, "Edited_LOCALHOST");
 		ExportTemplateListP.inputTemplate(driver, "Edited_" + templateS);
 		ac.Wait(wt);
-		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
-		ac.Wait(wt);
-		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
+//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+//		ac.Wait(wt);
+//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
+//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
 		ExportTemplateListP.clickSubmit(driver);
 		ac.acceptAlert(driver, tc, "OK");
 		ac.Wait(wt);
@@ -1370,7 +1370,7 @@ public class AdminPortalController extends Comlibs {
 		UserList UserListP = new UserList(driver);
 
 		//// *************************Enable/DisableVehiclesBtn******************************************************
-		tc = "TC_EnableDisableVehicles_01";
+		tc = "TC233499";
 		UserListP.clickEnableDisableVehicles(driver,tc);
 		
 		EnableDisableVehicles EnableDisableVehiclesP = new EnableDisableVehicles(driver);
@@ -1379,10 +1379,12 @@ public class AdminPortalController extends Comlibs {
 
 		boolean checkboxStatus=EnableDisableVehiclesP.CheckDisabledCheckBoxStatus(driver, paternName,tc);
 		if (checkboxStatus) {
+			tc = "TC233499_01";
 			EnableDisableVehiclesP.clickDisabledCheckBox(driver, paternName,tc);
 			EnableDisableVehiclesP.inputSearch(driver, paternName,tc);
 			EnableDisableVehiclesP.clickDisabledCheckBox(driver, paternName,tc);
 		}else {
+			tc = "TC233500_01";
 			EnableDisableVehiclesP.clickDisabledCheckBox(driver, paternName,tc);
 		}
 		EnableDisableVehiclesP.inputSearch(driver, paternName,tc);
@@ -2195,8 +2197,8 @@ public class AdminPortalController extends Comlibs {
 		ExportTemplateListP.inputPassword(driver, "5k2cGG1");
 		ExportTemplateListP.inputHost(driver, "LOCALHOST");
 		ExportTemplateListP.inputTemplate(driver, templateS);
-		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
+//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
 		ExportTemplateListP.clickCancel(driver);
 		ac.Wait(wt);
 		// Add an Export Template and submit
@@ -2209,11 +2211,11 @@ public class AdminPortalController extends Comlibs {
 		ExportTemplateListP.inputHost(driver, "LOCALHOST");
 		ExportTemplateListP.inputTemplate(driver, templateS);
 		ac.Wait(wt);
-		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
-		ac.Wait(wt);
-		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
-		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
+//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+//		ac.Wait(wt);
+//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
 		ExportTemplateListP.clickSubmit(driver);
 		ac.acceptAlert(driver, tc, "OK");
 		// Edit Export Template
@@ -2228,11 +2230,11 @@ public class AdminPortalController extends Comlibs {
 		ExportTemplateListP.inputHost(driver, "Edited_LOCALHOST");
 		ExportTemplateListP.inputTemplate(driver, "Edited_" + templateS);
 		ac.Wait(wt);
-		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
-		ac.Wait(wt);
-		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
+//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+//		ac.Wait(wt);
+//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
+//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
 		ExportTemplateListP.clickSubmit(driver);
 		ac.acceptAlert(driver, tc, "OK");
 		ac.Wait(wt);

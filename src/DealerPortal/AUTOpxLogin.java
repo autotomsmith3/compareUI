@@ -58,10 +58,10 @@ public class AUTOpxLogin extends Comlibs {
 		return this;
 	}
 
-//	public DealerProfile clickLoginBtn(WebDriver driver) throws IOException {
-//		driver.findElement(loginButtonLocator).click();
-//		return new DealerProfile(driver);
-//	}
+	public DealerProfile clickLoginToDealerProfile(WebDriver driver) throws IOException {
+		driver.findElement(loginButtonLocator).click();
+		return new DealerProfile(driver);
+	}
 	public ImageGallery clickLoginBtn(WebDriver driver) throws IOException {
 		driver.findElement(loginButtonLocator).click();
 		return new ImageGallery(driver);
@@ -102,10 +102,10 @@ public class AUTOpxLogin extends Comlibs {
 		return pagetitle;
 	}
 
-//	public DealerProfile login(WebDriver driver, String usr, String ps) throws IOException {
+//	public DealerProfile loginDealerProfile(WebDriver driver, String usr, String ps) throws IOException {
 //		inputUername(driver, usr);
 //		inputPassword(driver, ps);
-//		clickLoginBtn(driver);
+//		clickLoginToDealerProfile(driver);
 //		return new DealerProfile(driver);
 //	}
 	public ImageGallery login(WebDriver driver, String usr, String ps) throws IOException {

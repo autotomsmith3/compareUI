@@ -795,9 +795,9 @@ public class AUTOpxController extends Comlibs {
 		igP.clickColorExteriorTab(driver, TCnum);
 		igP.clickColorExteriorColorCheckBox(driver, "Summit White(GAZ)", TCnum);
 		igP.clickColorInteriorTab(driver, TCnum);
-		String selectedInterior = "Dark Walnut/Slate w/Cloth Seat Trim(HV5)";
+		String selectedInterior = "Dark Titanium/Jet Black w/Perforated Leather-Appointed Seat Trim(H1Q)";//Updated on 2019-06-20
 		// String selectedInterior = "Dark Atmosphere/Medium Atmosphere w/Cloth Seat Trim(HHR)";//20190409 worked for Chrome but failed on Firefox 20190409. It does not need to expose the string on Chrome but FF needs the string to expose on the screen.
-		igP.clickColorInteriorColorCheckBox(driver, selectedInterior, TCnum); // on 2018-12-29
+		igP.clickColorInteriorColorCheckBox(driver, selectedInterior, TCnum); // on 2019-06-20
 		// igP.clickColorInteriorColorCheckBox(driver, "Ebony Black", TCnum); //on 2018-09-30
 		// igP.clickColorInteriorColorCheckBox(driver, "Jet Black w/Cloth Seat Trim(AFJ)", TCnum); // afte 2018-09-30, works for Chrome but Firefox 2018-12-17
 

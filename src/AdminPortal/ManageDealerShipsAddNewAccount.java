@@ -192,8 +192,9 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		}
 		tc = "TC228725_1";
 		DealerPortal.AUTOpxLogin dealerPortalloginP = new AUTOpxLogin(driver);
-		dealerPortalloginP.login(driver, AddNewAccountEmail, tempPS); // this should be correct one. Now issue here, see autopxops-1196
-		// loginP.loginDealerProfile(driver, accountEmail, tempPS);//this is temp, it skips agreement page
+//		dealerPortalloginP.login(driver, AddNewAccountEmail, tempPS); // this should be correct one. Now issue here, see autopxops-1196
+		dealerPortalloginP.loginDealerProfile(driver, AddNewAccountEmail, tempPS);
+//		 loginP.loginDealerProfile(driver, accountEmail, tempPS);//this is temp, it skips agreement page
 		// DealerPortal.AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
 		// acceptLicenseP.clickAcceptPSBtn(driver);
 		DealerPortal.DealerProfile dpP = new DealerProfile(driver);
