@@ -310,7 +310,7 @@ public class DealerProfile extends Comlibs {
 	}
 
 	public DealerProfile selectBackGroundSet(WebDriver driver, int num) {
-		By backGroundSetLocator = By.xpath("//*[@id=\"bg-" + num + "\"]/div[1]/img");// Generic Dealership=7; White Gradient=0
+		By backGroundSetLocator = By.xpath("//*[@id=\"bg-" + num + "\"]/div[1]/img");// Jack Wilson=5; White Gradient=0
 		// By backGroundSetLocator=By.xpath("//*[@id=\"bg-7\"]/div[1]/img");
 		// By backGroundLocator=By.xpath("//*[@id=\"bg-0\"]/div[1]/img");
 		scrollUp(driver, 1000, "ddd"); // QA -2000 Prod -3000

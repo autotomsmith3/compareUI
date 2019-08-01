@@ -61,8 +61,12 @@ public class VehicleGallery extends Comlibs {
 
 	// By urlLocator = By.xpath("//input[@id='previewImageUrl']"); // this is old one - url field
 	// By urlLocator = By.xpath("//*[@id=\"content\"]/div[2]/div[2]/div[2]/div[2]/div/div/div[11]/div[2]/span"); // failed on Dec. 04, 2018
-	By urlLocator_9 = By.xpath("/html/body/div/div[2]/div[2]/div[2]/div[2]/div/div/div[9]/div[2]/span");// New, OK on Dec. 04, 2018
-	By urlLocator_11 = By.xpath("/html/body/div/div[2]/div[2]/div[2]/div[2]/div/div/div[11]/div[2]/span");// New, OK on Dec. 04, 2018
+	// By urlLocator_9 = By.xpath("/html/body/div/div[2]/div[2]/div[2]/div[2]/div/div/div[9]/div[2]/span");// New, OK on Dec. 04, 2018 failed on Aug 1, 2019
+	By urlLocator_9 = By.xpath("/html/body/div/div[2]/div[2]/div[2]/div[2]/div/div/div[13]/div[2]/span");// Updated to 13 which working for Firefox, OK on Aug. 01, 2019. Because added Visible To Dealer and Force Stockpx 2 checkboxes.
+
+	// By urlLocator_11 = By.xpath("/html/body/div/div[2]/div[2]/div[2]/div[2]/div/div/div[11]/div[2]/span");// New, OK on Dec. 04, 2018, failed on Aug 01, 2019
+	By urlLocator_11 = By.xpath("//div[@id='content']/div[2]/div[2]/div[2]/div[2]/div/div/div[13]/div[2]/span/a");// New, 2019-08-01, not good.
+
 	By urlLocatorChrome = By.xpath("//*[@id=\"imagePreviewLink\"]");
 
 	By urImageLocator = By.xpath("//img");
@@ -86,8 +90,8 @@ public class VehicleGallery extends Comlibs {
 	By previewBtn = By.xpath("//button[@id='previewBtn1']"); // start from Btn0
 	By deleteBtn = By.xpath("");// start from Btn0
 	By newVehicleCbx = By.xpath("//*[@id=\"newVehicle\"]");
-	// By =By.xpath();
-	// By =By.xpath();
+	By visibleToDealer = By.xpath("//*[@id=\"visible\"]");
+	By forceStockpx = By.xpath("//*[@id=\"rndrConfigDetailKey\"]");
 	// By =By.xpath();
 
 	public VehicleGallery clickSaveChangesBtn(WebDriver driver, String tc) throws IOException {
@@ -249,6 +253,8 @@ public class VehicleGallery extends Comlibs {
 				driver.findElement(urlLocatorChrome).click();
 			}
 		} catch (Exception e) {
+			rwExcel(tc, false, "Click URL link in Vehicle Gallery page",
+					"not wokring properly with brower - " + envBrowser + ". trying different way next step...");
 			Wait(2);
 			tc = tc + "_11";
 			if (envBrowser.equalsIgnoreCase("Chrome")) {
@@ -877,14 +883,14 @@ public class VehicleGallery extends Comlibs {
 		Random r = new Random();
 		int Low = 1;
 		int High = 3;
-		boolean truefalseResult=false;
-		int Result = r.nextInt(High - Low) + Low;//1 or 2
-		if (Result==1) {
-			truefalseResult=true;
-		}else {
-			truefalseResult=false;
+		boolean truefalseResult = false;
+		int Result = r.nextInt(High - Low) + Low;// 1 or 2
+		if (Result == 1) {
+			truefalseResult = true;
+		} else {
+			truefalseResult = false;
 		}
-		return truefalseResult;//return true or false;
+		return truefalseResult;// return true or false;
 	}
 
 	public void selectNewVehicleCheckBox(WebDriver driver) {
@@ -909,6 +915,89 @@ public class VehicleGallery extends Comlibs {
 		}
 	}
 
+	public void selectVisibleToDealerCheckBox(WebDriver driver, boolean checkboxChecked, String tc) throws Exception {
+		if (checkboxChecked) {
+			try {
+				boolean checkBoxChecked = driver.findElement(visibleToDealer).isSelected();
+				if (checkBoxChecked) {
+					driver.findElement(visibleToDealer).click();
+					driver.findElement(visibleToDealer).click();
+				} else {
+					driver.findElement(visibleToDealer).click();
+				}
+			} catch (Exception e) {
+				rwExcel(tc, false, "Click on checkbox of visibleToDealer", "Select checkbox does not work properly");
+			}
+		} else {
+			// unChecked
+			try {
+				boolean checkBoxChecked = driver.findElement(visibleToDealer).isSelected();
+				if (checkBoxChecked) {
+					driver.findElement(visibleToDealer).click();
+				} else {
+					driver.findElement(visibleToDealer).click();
+					driver.findElement(visibleToDealer).click();
+				}
+			} catch (Exception e) {
+				rwExcel(tc, false, "Click on checkbox of visibleToDealer", "Unselect checkbox does not work properly");
+			}
+		}
+	}
+
+	public void unSelectVisibleToDealerCheckBox(WebDriver driver, boolean checkbox, String tc) throws Exception {
+		try {
+			boolean checkBoxChecked = driver.findElement(visibleToDealer).isSelected();
+			if (checkBoxChecked) {
+				driver.findElement(visibleToDealer).click();
+			} else {
+				driver.findElement(visibleToDealer).click();
+				driver.findElement(visibleToDealer).click();
+			}
+		} catch (Exception e) {
+			rwExcel(tc, false, "Click on checkbox of visibleToDealer", "Unselect checkbox does not work properly");
+		}
+	}
+
+	public void selectforceStockpxCheckBox(WebDriver driver, boolean checkboxChecked, String tc) throws Exception {
+		if (checkboxChecked) {
+			try {
+				boolean checkBoxChecked = driver.findElement(forceStockpx).isSelected();
+				if (checkBoxChecked) {
+					driver.findElement(forceStockpx).click();
+					driver.findElement(forceStockpx).click();
+				} else {
+					driver.findElement(forceStockpx).click();
+				}
+			} catch (Exception e) {
+				rwExcel(tc, false, "Click on checkbox of forceStockpx", "Select checkbox does not work properly");
+			}
+		} else {
+			// unChecked
+			try {
+				boolean checkBoxChecked = driver.findElement(forceStockpx).isSelected();
+				if (checkBoxChecked) {
+					driver.findElement(forceStockpx).click();
+				} else {
+					driver.findElement(forceStockpx).click();
+					driver.findElement(forceStockpx).click();
+				}
+			} catch (Exception e) {
+				rwExcel(tc, false, "Click on checkbox of forceStockpx", "Unselect checkbox does not work properly");
+			}
+		}
+	}
+
+	public void unSelectforceStockpxCheckBox(WebDriver driver, boolean checkbox, String tc) {
+
+		boolean checkBoxChecked = driver.findElement(forceStockpx).isSelected();
+		if (checkBoxChecked) {
+			driver.findElement(forceStockpx).click();
+		} else {
+			driver.findElement(forceStockpx).click();
+			driver.findElement(forceStockpx).click();
+		}
+	}
+
 	public void verifyNewVehicleCheckBox(WebDriver driver, String vin, boolean isSelected, String tc)
 			throws IOException {
 
@@ -928,6 +1017,25 @@ public class VehicleGallery extends Comlibs {
 		}
 	}
 
+	public void verifyVisibleToDealerCheckBox(WebDriver driver, String vin, boolean isSelected, String tc)
+			throws IOException {
+
+		boolean checkBoxChecked = driver.findElement(visibleToDealer).isSelected();
+		if (isSelected && checkBoxChecked) {
+			System.out.println("VisibleToDealer checkbox is selected. VIN=" + vin + ". Pass!!");
+			rwExcel(tc, true, "Verify VisibleToDealer Checkbox. VIN=" + vin, "Checkbox is selected.");
+		} else if (!(isSelected) && !(checkBoxChecked)) {
+			System.out.println("VisibleToDealer checkbox is not selected as expected. VIN=" + vin + ". Pass!!");
+			rwExcel(tc, true, "Verify VisibleToDealer Checkbox. VIN=" + vin, "Checkbox is not selected as expected.");
+		} else {
+			// Fail
+			System.out.println("Verify VisibleToDealer Checkbox. VIN=" + vin + ". Fail!!!  Expected checkbox="
+					+ isSelected + ".  Checkbox in the browser=" + checkBoxChecked);
+			rwExcel(tc, false, "Verify VisibleToDealer Checkbox. VIN=" + vin,
+					"Expected checkbox=" + isSelected + ".  Checkbox in the browser=" + checkBoxChecked);
+		}
+	}
+
 	public void textDisplayOnPage(WebDriver driver, String tempStatus, String displayingOnPage) {
 		if (displayingOnPage.equalsIgnoreCase("Yes")) {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -941,7 +1049,7 @@ public class VehicleGallery extends Comlibs {
 	public static void main(String[] args) {
 		for (int i = 1; i <= 100; i++) {
 			boolean tf = truefalseRandomm();
-			System.out.print(tf+", ");
+			System.out.print(tf + ", ");
 
 		}
 	}

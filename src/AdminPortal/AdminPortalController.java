@@ -2387,14 +2387,14 @@ public class AdminPortalController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			//// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK for Prod (FF) on 2018-12-17 from ManageDealerships.
+			//// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK for Prod (FF) on 2018-12-17 from ManageDealerships.2019-07-04 Worked.
 			//bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			//RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
 
-			// //// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page
-			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
-			//*****************************************************************************************************************
+			////// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page
+			//bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			//RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
+			////*****************************************************************************************************************
 			
 			////// 1.ManageDealerShipsAddNewAccount:
 			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
@@ -2406,10 +2406,10 @@ public class AdminPortalController extends Comlibs {
 			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
 			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
 			
-			//// 3. ManageBackgroundSets:
-			loadURL(driver, baseURL, env);
-			bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
-			ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
+//			//// 3. ManageBackgroundSets:
+//			loadURL(driver, baseURL, env);
+//			bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
+//			ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
 			
 			 bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			 driver.close();
