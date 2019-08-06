@@ -66,9 +66,12 @@ public class BackgroundSets extends Comlibs {
 	By chooseFilesBtnLocator = By.xpath("//*[@id=\"images\"]");
 	By ManageImageTypesLocator = By.xpath("//*[@id=\"imagetypeMenu\"]");// Firefox: //*[@id="imagetypeMenu"]
 
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
+	 By allOems=By.xpath("//*[@id=\"anyCheck\"]");
+	 By gm=By.xpath("//*[@id=\"gmCheck\"]");
+	 By chrysler=By.xpath("//*[@id=\"chryslerCheck\"]");
+	 
+	 By studio=By.xpath("//*[@id=\"studio\"]");
+	 By environmental=By.xpath("//*[@id=\"environmental\"]");
 	// By Locator=By.xpath("");
 	// By Locator=By.xpath("");
 
@@ -141,7 +144,33 @@ public class BackgroundSets extends Comlibs {
 		driver.findElement(editSetPopUpAllDealerCheckBoxLocator).click();
 		return this;
 	}
-
+	public BackgroundSets clickAllOemsCheckBox(WebDriver driver) throws IOException {
+		driver.findElement(allOems).click();
+		return this;
+	}
+	
+	public BackgroundSets clickGmCheckBox(WebDriver driver) throws IOException {
+		if (!driver.findElement(allOems).isSelected()) {
+			driver.findElement(gm).click();
+		}
+		return this;
+	}	
+	public BackgroundSets clickChryslerCheckBox(WebDriver driver) throws IOException {
+		if (!driver.findElement(allOems).isSelected()) {
+			driver.findElement(chrysler).click();
+		}
+		return this;
+	}
+	
+	
+	public BackgroundSets clickStudioCheckBox(WebDriver driver) throws IOException {
+		driver.findElement(studio).click();
+		return this;
+	}
+	public BackgroundSets clickEnvironmentalCheckBox(WebDriver driver) throws IOException {
+		driver.findElement(environmental).click();
+		return this;
+	}
 	public BackgroundSets clickCancel(WebDriver driver) throws IOException {
 		driver.findElement(editSetPopUpCancelLocator).click();
 		return this;

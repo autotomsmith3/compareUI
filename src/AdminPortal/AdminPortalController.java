@@ -1261,7 +1261,7 @@ public class AdminPortalController extends Comlibs {
 		// driver.close();
 
 	}
-	public static void ManageBackgroundSets(WebDriver driver, String brw, String versionNum, String envment,
+	public static void EnableDisalbeVehicles_ManageBackgroundSets(WebDriver driver, String brw, String versionNum, String envment,
 			String checkEmail) throws Exception {
 
 
@@ -1411,6 +1411,15 @@ public class AdminPortalController extends Comlibs {
 		try {
 			BackgroundSetsP.clickEditSetBtn(driver, 1);
 			ac.Wait(wt);
+			BackgroundSetsP.clickAllOemsCheckBox(driver);
+			BackgroundSetsP.clickAllOemsCheckBox(driver);
+			BackgroundSetsP.clickGmCheckBox(driver);
+			BackgroundSetsP.clickChryslerCheckBox(driver);
+			BackgroundSetsP.clickGmCheckBox(driver);
+			BackgroundSetsP.clickChryslerCheckBox(driver);
+			BackgroundSetsP.clickEnvironmentalCheckBox(driver);
+			BackgroundSetsP.clickStudioCheckBox(driver);
+			BackgroundSetsP.clickEnvironmentalCheckBox(driver);
 			BackgroundSetsP.clickAllDealershipsCheckBox(driver);// check
 		} catch (Exception ex2) {
 			ac.Wait(wt);
@@ -1431,225 +1440,225 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		BackgroundSetsP.clickClose(driver, tc);
 		ac.Wait(wt);
-		tc = "TC139447";
-		BackgroundSetsP.clickCreateNewSet(driver);
-		ac.Wait(wt);
-		String tempSetName = "a";
-		BackgroundSetsP.inputSetName(driver, tempSetName);
-		BackgroundSetsP.clickCancel(driver);
-		ac.Wait(wt);
-		BackgroundSetsP.clickCreateNewSet(driver);
-		ac.Wait(wt);
-		BackgroundSetsP.inputSetName(driver, tempSetName);
-		BackgroundSetsP.selectSetType(driver, 3);// 1-Old (Do Not User), 2-Flat on Flat on Flat, 3-Normal, 4-GM Only, 5-FCA Only
-		BackgroundSetsP.uploadBackgroundPicture(driver, backgroundSetPath1, tc + "_01");
-
-		System.out.println("\nPlease wait at least 3 minutes until Backgrounds page showing...");
-		ac.Wait(wt);
-		BackgroundSetsP.clickSubmit(driver);
-		ac.Wait(wt);
-
-		// ********************* check bg image *********************
-		int sn = 1;
-		double oneSNForScrollupPoint = 8.44091;
-		double totalPoints = oneSNForScrollupPoint * 1;
-		int scrollupPoints = 1;
-		Backgrounds BackgroundsP = new Backgrounds(driver);
-
-		// tc = "GM_Exterior_2019-GM-4NF56-4NF56-1SD_old ";////= modelcode bar 2019-GM-4NF56-4NF56-1SD - sn=2014
-		// UserListP.scrollUp(driver, 17000, tc);// 17150 - value is on uper side
-		// BackgroundsP.ClickOneExteriorModelYearBtn(driver,tc);
-		// BackgroundsP.VerifyCarImage(driver, tc);
-		// BackgroundsP.clickRightArrowBtn(driver, tc);
-		// ac.Wait(wt);
-		// BackgroundsP.VerifyCarImage(driver, tc);
-		// BackgroundsP.clickLeftArrowBtn(driver, tc);
-		// ac.Wait(wt);
-		// BackgroundsP.VerifyCarImage(driver, tc);
-		// BackgroundsP.clickCloseX(driver, tc);
-		// UserListP.scrollUp(driver, -100000, tc);//scroll back to top
-		//
-		// tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_old";//= modelcode bar 2019-GM-4NF56-1SD-4NF56-1SD - sn=4876
-		// UserListP.scrollUp(driver, 41158, tc);// 24100 - value is on uper side
-		// BackgroundsP.ClickOneInteriorModelYearBtn(driver,tc);
-		// BackgroundsP.VerifyCarImage(driver, tc);
-		// BackgroundsP.clickRightArrowBtn(driver, tc);
-		// BackgroundsP.clickLeftArrowBtn(driver, tc);
-		// BackgroundsP.clickCloseX(driver, tc);
-		// ac.Wait(wt);
-		// UserListP.scrollUp(driver, -100000, tc);//scroll back to top
-		//
-
-		// ************************Check the failed loading car image from sn ************************
-
-		tc = "FCA_2016_bf";// = modelcode bar 2016_bf - sn=17 from Excel-BG_CarCode table - green cols.
-		sn = 2;
-		totalPoints = oneSNForScrollupPoint * sn;
-		scrollupPoints = (int) Math.round(totalPoints);
-		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
-		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
-		ac.Wait(wt * 2);
-		BackgroundsP.VerifyCarImage(driver, tc);
-		BackgroundsP.clickRightArrowBtn(driver, tc);
-		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
-		BackgroundsP.clickLeftArrowBtn(driver, tc);
-		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
-		BackgroundsP.clickCloseX(driver, tc);
-		ac.Wait(wt);
-		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
-		// ************************Check the loading car image from sn ************************
-		tc = "FCA_2019_lx";// = modelcode bar 2019_lx - sn=102 from Excel-BG_CarCode table
-		sn = 102;
-		totalPoints = oneSNForScrollupPoint * sn;
-		scrollupPoints = (int) Math.round(totalPoints);
-		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
-		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
-		ac.Wait(wt * 2);
-		BackgroundsP.VerifyCarImage(driver, tc);
-		BackgroundsP.clickRightArrowBtn(driver, tc);
-		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
-		BackgroundsP.clickLeftArrowBtn(driver, tc);
-		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
-		BackgroundsP.clickCloseX(driver, tc);
-		ac.Wait(wt);
-		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
-
-		tc = "GM_Exterior_2019-GM-4NF56-4NF56-1SD_new ";//// = modelcode bar 2019-GM-4NF56-4NF56-1SD - sn=2014
-		sn = 2014;
-		totalPoints = oneSNForScrollupPoint * sn;
-		scrollupPoints = (int) Math.round(totalPoints);
-		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
-		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
-		ac.Wait(wt * 2);
-		BackgroundsP.VerifyCarImage(driver, tc);
-		BackgroundsP.clickBackgroundPic(driver, tc);
-		BackgroundsP.VerifyCarImage(driver, tc + "_added_BG_Pic");
-		int numpics = 8;// Number of images for the model year vehicle
-		for (int i = 1; i <= numpics; i++) {
-			ac.Wait(wt);
-			BackgroundsP.clickRightArrowBtn(driver, tc + "_" + i);
-			ac.Wait(wt);
-			BackgroundsP.clickBackgroundPic(driver, tc + "_" + i);
-		}
-		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
-		BackgroundsP.clickLeftArrowBtn(driver, tc);
-		ac.Wait(wt);
-		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
-		// BackgroundsP.clickCloseX(driver, tc);
-		BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
-		ac.Wait(wt);
-		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
-		try {
-		BackgroundsP.uploadBackgroundPictureFrBackgroundsPage(driver, backgroundSetPath2, envBrowser, 180, 5,
-				tc + "_02");
-		ac.rwExcel(tc, true, "upload Background Picture From Backgrounds Page", "Seems good so far!");
-		}catch (Exception e) {
-			System.out.println("Upload Background Picture (path: "+backgroundSetPath2+", Browser: "+envBrowser+") from Backgrounds Page failed!");
-			ac.rwExcel(tc, false, "upload Background Picture From Backgrounds Page", "Upload Background Picture (path: "+backgroundSetPath2+", Browser: "+envBrowser+") from Backgrounds Page failed!");
-		}
-		tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_new";// = modelcode bar 2019-GM-4NF56-1SD-4NF56-1SD - sn=4876
-		sn = 4876;
-		totalPoints = oneSNForScrollupPoint * sn;
-		scrollupPoints = (int) Math.round(totalPoints);
-		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
-		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
-		ac.Wait(wt * 2);
-		BackgroundsP.VerifyCarImage(driver, tc);
-		for (int i = 1; i <= numpics; i++) {
-			ac.Wait(wt);
-			BackgroundsP.clickRightArrowBtn(driver, tc + "_" + i);
-			ac.Wait(wt);
-			BackgroundsP.clickBackgroundPic2(driver, tc + "_" + i);
-			if (i == 2) {
-				ac.Wait(wt);
-				BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
-				ac.Wait(wt);
-				ac.acceptAlert(driver, tc, "OK");
-				ac.Wait(wt);
-			}
-		}
-		BackgroundsP.VerifyCarImage(driver, tc);
-		BackgroundsP.clickRightArrowBtn(driver, tc);
-		ac.Wait(wt);
-		BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
-		ac.Wait(wt * 2 * 2 * 2);
-		// BackgroundsP.VerifyCarImage(driver, tc+"_Right_Arrow");
-		// BackgroundsP.clickLeftArrowBtn(driver, tc);
-		// ac.Wait(wt);
-		// BackgroundsP.VerifyCarImage(driver, tc+"_Left_Arrow");
-		// BackgroundsP.clickCloseX(driver, tc);
-		ac.Wait(wt);
-		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
-		// ************************End of Check the loading car image from sn ************************
-		// Add New BG Set
-		UserListP.clickManageBGSets(driver);
-		ac.clickRefleshF5Btn(driver, tc);
-		tc = "TC139534"; // Edit "a" background set
-		ac.Wait(wt);
-		BackgroundSetsP.inputSearch(driver, tempSetName);
-		ac.Wait(wt);
-		BackgroundSetsP.clickEditSetBtn(driver, 1);
-		ac.Wait(wt);
-		String editString = "_Edited";
-		BackgroundSetsP.inputSetName(driver, editString);
-		BackgroundSetsP.selectSetType(driver, 4);// 4-GM
-		BackgroundSetsP.clickSubmitOnEdit(driver, tc);
-		ac.Wait(wt);
-		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
-		ac.Wait(wt);
-		try {
-			BackgroundSetsP.clickEditSetBtn(driver, 1);
-			ac.rwExcel(tc, true, "Verify Edited background set", "Edited background set exists!");
-		} catch (Exception e) {
-			ac.rwExcel(tc, false, "Verify Edited background set", "Edited background set does NOT exist!");
-		}
-		ac.Wait(wt);
-		BackgroundSetsP.clickSubmitOnEdit(driver, tc);
-		tc = "TC139457"; // Verify Manage Backgrounds Images
-		ac.Wait(wt);
-		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
-		ac.Wait(wt);
-		BackgroundSetsP.clickManageBGImageBtn(driver, 1);
-		ManageBackgroundsP.clickBackToManageSets(driver, tc);
-		tc = "TC226031"; // Verify Get List of Dealer button available
-		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
-		ac.Wait(wt);
-		BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1, tc);
-		ac.Wait(wt);
-		tc = "TC226032"; // Verify Get List of Dealer on the background
-		BackgroundSetsP.clickClose(driver, tc);
-
-		ac.Wait(wt);
-		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
-		ac.Wait(wt);
-		tc = "TC139558";
-		BackgroundSetsP.clickDeleteBGSetBtn(driver, 1, tc);
-		ac.acceptAlert(driver, tc, "OK");
-		ac.Wait(wt);
-		ac.clickRefleshF5Btn(driver, tc);
-		ac.Wait(wt);
-		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
-		ac.Wait(wt);
-		tc = "TC139459_d";
-		try {
-			BackgroundSetsP.clickEditSetBtn(driver, 1);
-			ac.rwExcel(tc, false, "Try to click the Edit button which should not exist",
-					"Edit element exists! It should not happen!");
-		} catch (Exception e) {
-			ac.rwExcel(tc, true, "Try to click the Edit button which should not exist", "Edit element does not exist!");
-		}
-
-		//// *************************clickManageBGSetsBtn******************************************************
-		//// *************************clickManageBGSetsBtn******************************************************
-
-		//driver.close();
-		// switchToWindow(driver, parentHandle);
-		// driver.close();
+//		tc = "TC139447";
+//		BackgroundSetsP.clickCreateNewSet(driver);
+//		ac.Wait(wt);
+//		String tempSetName = "a";
+//		BackgroundSetsP.inputSetName(driver, tempSetName);
+//		BackgroundSetsP.clickCancel(driver);
+//		ac.Wait(wt);
+//		BackgroundSetsP.clickCreateNewSet(driver);
+//		ac.Wait(wt);
+//		BackgroundSetsP.inputSetName(driver, tempSetName);
+//		BackgroundSetsP.selectSetType(driver, 3);// 1-Old (Do Not User), 2-Flat on Flat on Flat, 3-Normal, 4-GM Only, 5-FCA Only
+//		BackgroundSetsP.uploadBackgroundPicture(driver, backgroundSetPath1, tc + "_01");
+//
+//		System.out.println("\nPlease wait at least 3 minutes until Backgrounds page showing...");
+//		ac.Wait(wt);
+//		BackgroundSetsP.clickSubmit(driver);
+//		ac.Wait(wt);
+//
+//		// ********************* check bg image *********************
+//		int sn = 1;
+//		double oneSNForScrollupPoint = 8.44091;
+//		double totalPoints = oneSNForScrollupPoint * 1;
+//		int scrollupPoints = 1;
+//		Backgrounds BackgroundsP = new Backgrounds(driver);
+//
+//		// tc = "GM_Exterior_2019-GM-4NF56-4NF56-1SD_old ";////= modelcode bar 2019-GM-4NF56-4NF56-1SD - sn=2014
+//		// UserListP.scrollUp(driver, 17000, tc);// 17150 - value is on uper side
+//		// BackgroundsP.ClickOneExteriorModelYearBtn(driver,tc);
+//		// BackgroundsP.VerifyCarImage(driver, tc);
+//		// BackgroundsP.clickRightArrowBtn(driver, tc);
+//		// ac.Wait(wt);
+//		// BackgroundsP.VerifyCarImage(driver, tc);
+//		// BackgroundsP.clickLeftArrowBtn(driver, tc);
+//		// ac.Wait(wt);
+//		// BackgroundsP.VerifyCarImage(driver, tc);
+//		// BackgroundsP.clickCloseX(driver, tc);
+//		// UserListP.scrollUp(driver, -100000, tc);//scroll back to top
+//		//
+//		// tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_old";//= modelcode bar 2019-GM-4NF56-1SD-4NF56-1SD - sn=4876
+//		// UserListP.scrollUp(driver, 41158, tc);// 24100 - value is on uper side
+//		// BackgroundsP.ClickOneInteriorModelYearBtn(driver,tc);
+//		// BackgroundsP.VerifyCarImage(driver, tc);
+//		// BackgroundsP.clickRightArrowBtn(driver, tc);
+//		// BackgroundsP.clickLeftArrowBtn(driver, tc);
+//		// BackgroundsP.clickCloseX(driver, tc);
+//		// ac.Wait(wt);
+//		// UserListP.scrollUp(driver, -100000, tc);//scroll back to top
+//		//
+//
+//		// ************************Check the failed loading car image from sn ************************
+//
+//		tc = "FCA_2016_bf";// = modelcode bar 2016_bf - sn=17 from Excel-BG_CarCode table - green cols.
+//		sn = 2;
+//		totalPoints = oneSNForScrollupPoint * sn;
+//		scrollupPoints = (int) Math.round(totalPoints);
+//		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
+//		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
+//		ac.Wait(wt * 2);
+//		BackgroundsP.VerifyCarImage(driver, tc);
+//		BackgroundsP.clickRightArrowBtn(driver, tc);
+//		ac.Wait(wt);
+//		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
+//		BackgroundsP.clickLeftArrowBtn(driver, tc);
+//		ac.Wait(wt);
+//		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
+//		BackgroundsP.clickCloseX(driver, tc);
+//		ac.Wait(wt);
+//		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
+//		// ************************Check the loading car image from sn ************************
+//		tc = "FCA_2019_lx";// = modelcode bar 2019_lx - sn=102 from Excel-BG_CarCode table
+//		sn = 102;
+//		totalPoints = oneSNForScrollupPoint * sn;
+//		scrollupPoints = (int) Math.round(totalPoints);
+//		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
+//		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
+//		ac.Wait(wt * 2);
+//		BackgroundsP.VerifyCarImage(driver, tc);
+//		BackgroundsP.clickRightArrowBtn(driver, tc);
+//		ac.Wait(wt);
+//		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
+//		BackgroundsP.clickLeftArrowBtn(driver, tc);
+//		ac.Wait(wt);
+//		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
+//		BackgroundsP.clickCloseX(driver, tc);
+//		ac.Wait(wt);
+//		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
+//
+//		tc = "GM_Exterior_2019-GM-4NF56-4NF56-1SD_new ";//// = modelcode bar 2019-GM-4NF56-4NF56-1SD - sn=2014
+//		sn = 2014;
+//		totalPoints = oneSNForScrollupPoint * sn;
+//		scrollupPoints = (int) Math.round(totalPoints);
+//		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
+//		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
+//		ac.Wait(wt * 2);
+//		BackgroundsP.VerifyCarImage(driver, tc);
+//		BackgroundsP.clickBackgroundPic(driver, tc);
+//		BackgroundsP.VerifyCarImage(driver, tc + "_added_BG_Pic");
+//		int numpics = 8;// Number of images for the model year vehicle
+//		for (int i = 1; i <= numpics; i++) {
+//			ac.Wait(wt);
+//			BackgroundsP.clickRightArrowBtn(driver, tc + "_" + i);
+//			ac.Wait(wt);
+//			BackgroundsP.clickBackgroundPic(driver, tc + "_" + i);
+//		}
+//		ac.Wait(wt);
+//		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
+//		BackgroundsP.clickLeftArrowBtn(driver, tc);
+//		ac.Wait(wt);
+//		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
+//		// BackgroundsP.clickCloseX(driver, tc);
+//		BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
+//		ac.Wait(wt);
+//		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
+//		try {
+//		BackgroundsP.uploadBackgroundPictureFrBackgroundsPage(driver, backgroundSetPath2, envBrowser, 180, 5,
+//				tc + "_02");
+//		ac.rwExcel(tc, true, "upload Background Picture From Backgrounds Page", "Seems good so far!");
+//		}catch (Exception e) {
+//			System.out.println("Upload Background Picture (path: "+backgroundSetPath2+", Browser: "+envBrowser+") from Backgrounds Page failed!");
+//			ac.rwExcel(tc, false, "upload Background Picture From Backgrounds Page", "Upload Background Picture (path: "+backgroundSetPath2+", Browser: "+envBrowser+") from Backgrounds Page failed!");
+//		}
+//		tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_new";// = modelcode bar 2019-GM-4NF56-1SD-4NF56-1SD - sn=4876
+//		sn = 4876;
+//		totalPoints = oneSNForScrollupPoint * sn;
+//		scrollupPoints = (int) Math.round(totalPoints);
+//		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
+//		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
+//		ac.Wait(wt * 2);
+//		BackgroundsP.VerifyCarImage(driver, tc);
+//		for (int i = 1; i <= numpics; i++) {
+//			ac.Wait(wt);
+//			BackgroundsP.clickRightArrowBtn(driver, tc + "_" + i);
+//			ac.Wait(wt);
+//			BackgroundsP.clickBackgroundPic2(driver, tc + "_" + i);
+//			if (i == 2) {
+//				ac.Wait(wt);
+//				BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
+//				ac.Wait(wt);
+//				ac.acceptAlert(driver, tc, "OK");
+//				ac.Wait(wt);
+//			}
+//		}
+//		BackgroundsP.VerifyCarImage(driver, tc);
+//		BackgroundsP.clickRightArrowBtn(driver, tc);
+//		ac.Wait(wt);
+//		BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
+//		ac.Wait(wt * 2 * 2 * 2);
+//		// BackgroundsP.VerifyCarImage(driver, tc+"_Right_Arrow");
+//		// BackgroundsP.clickLeftArrowBtn(driver, tc);
+//		// ac.Wait(wt);
+//		// BackgroundsP.VerifyCarImage(driver, tc+"_Left_Arrow");
+//		// BackgroundsP.clickCloseX(driver, tc);
+//		ac.Wait(wt);
+//		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
+//		// ************************End of Check the loading car image from sn ************************
+//		// Add New BG Set
+//		UserListP.clickManageBGSets(driver);
+//		ac.clickRefleshF5Btn(driver, tc);
+//		tc = "TC139534"; // Edit "a" background set
+//		ac.Wait(wt);
+//		BackgroundSetsP.inputSearch(driver, tempSetName);
+//		ac.Wait(wt);
+//		BackgroundSetsP.clickEditSetBtn(driver, 1);
+//		ac.Wait(wt);
+//		String editString = "_Edited";
+//		BackgroundSetsP.inputSetName(driver, editString);
+//		BackgroundSetsP.selectSetType(driver, 4);// 4-GM
+//		BackgroundSetsP.clickSubmitOnEdit(driver, tc);
+//		ac.Wait(wt);
+//		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+//		ac.Wait(wt);
+//		try {
+//			BackgroundSetsP.clickEditSetBtn(driver, 1);
+//			ac.rwExcel(tc, true, "Verify Edited background set", "Edited background set exists!");
+//		} catch (Exception e) {
+//			ac.rwExcel(tc, false, "Verify Edited background set", "Edited background set does NOT exist!");
+//		}
+//		ac.Wait(wt);
+//		BackgroundSetsP.clickSubmitOnEdit(driver, tc);
+//		tc = "TC139457"; // Verify Manage Backgrounds Images
+//		ac.Wait(wt);
+//		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+//		ac.Wait(wt);
+//		BackgroundSetsP.clickManageBGImageBtn(driver, 1);
+//		ManageBackgroundsP.clickBackToManageSets(driver, tc);
+//		tc = "TC226031"; // Verify Get List of Dealer button available
+//		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+//		ac.Wait(wt);
+//		BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1, tc);
+//		ac.Wait(wt);
+//		tc = "TC226032"; // Verify Get List of Dealer on the background
+//		BackgroundSetsP.clickClose(driver, tc);
+//
+//		ac.Wait(wt);
+//		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+//		ac.Wait(wt);
+//		tc = "TC139558";
+//		BackgroundSetsP.clickDeleteBGSetBtn(driver, 1, tc);
+//		ac.acceptAlert(driver, tc, "OK");
+//		ac.Wait(wt);
+//		ac.clickRefleshF5Btn(driver, tc);
+//		ac.Wait(wt);
+//		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+//		ac.Wait(wt);
+//		tc = "TC139459_d";
+//		try {
+//			BackgroundSetsP.clickEditSetBtn(driver, 1);
+//			ac.rwExcel(tc, false, "Try to click the Edit button which should not exist",
+//					"Edit element exists! It should not happen!");
+//		} catch (Exception e) {
+//			ac.rwExcel(tc, true, "Try to click the Edit button which should not exist", "Edit element does not exist!");
+//		}
+//
+//		//// *************************clickManageBGSetsBtn******************************************************
+//		//// *************************clickManageBGSetsBtn******************************************************
+//
+//		//driver.close();
+//		// switchToWindow(driver, parentHandle);
+//		// driver.close();
 
 	
 	}
@@ -2406,10 +2415,10 @@ public class AdminPortalController extends Comlibs {
 			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
 			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
 			
-//			//// 3. ManageBackgroundSets:
-//			loadURL(driver, baseURL, env);
-//			bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
-//			ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
+			//// 3. Enable/Disable Vehicles and ManageBackgroundSets:
+			loadURL(driver, baseURL, env);
+			bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
+			EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
 			
 			 bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			 driver.close();
