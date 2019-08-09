@@ -11,11 +11,13 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -61,11 +63,17 @@ public class VehicleGallery extends Comlibs {
 
 	// By urlLocator = By.xpath("//input[@id='previewImageUrl']"); // this is old one - url field
 	// By urlLocator = By.xpath("//*[@id=\"content\"]/div[2]/div[2]/div[2]/div[2]/div/div/div[11]/div[2]/span"); // failed on Dec. 04, 2018
-	// By urlLocator_9 = By.xpath("/html/body/div/div[2]/div[2]/div[2]/div[2]/div/div/div[9]/div[2]/span");// New, OK on Dec. 04, 2018 failed on Aug 1, 2019
-	By urlLocator_9 = By.xpath("/html/body/div/div[2]/div[2]/div[2]/div[2]/div/div/div[13]/div[2]/span");// Updated to 13 which working for Firefox, OK on Aug. 01, 2019. Because added Visible To Dealer and Force Stockpx 2 checkboxes.
-
-	// By urlLocator_11 = By.xpath("/html/body/div/div[2]/div[2]/div[2]/div[2]/div/div/div[11]/div[2]/span");// New, OK on Dec. 04, 2018, failed on Aug 01, 2019
-	By urlLocator_11 = By.xpath("//div[@id='content']/div[2]/div[2]/div[2]/div[2]/div/div/div[13]/div[2]/span/a");// New, 2019-08-01, not good.
+	// By urlLocator_FF = By.xpath("/html/body/div/div[2]/div[2]/div[2]/div[2]/div/div/div[9]/div[2]/span");// New, OK on Dec. 04, 2018 failed on Aug 1, 2019
+    // By urlLocator_FF = By.xpath("/html/body/div/div[2]/div[2]/div[2]/div[2]/div/div/div[13]/div[2]/span");// Updated to 13 which working for Firefox, OK on Aug. 01, 2019. Because added Visible To Dealer and Force Stockpx 2 checkboxes.
+	// By urlLocator_FF = By.xpath("//div[@id='content']/div[2]/div[2]/div[2]/div[2]/div/div/div[13]/div[2]/span");// Updated to 13 which working for Firefox, OK on Aug. 01, 2019. Because added Visible To Dealer and Force Stockpx 2 checkboxes. Failed again on Aug. 08, 2019.
+//    By urlLocator_FF = By.xpath("//div[@id='content']/div[2]/div[2]/div[2]/div[2]/div/div/div[13]/div[2]/span");// Updated to 13 which working for Firefox, OK on Aug. 01, 2019. Because added Visible To Dealer and Force Stockpx 2 checkboxes.
+	By urlLocator_FF = By.xpath("//*[@id=\"imagePreviewLink\"]");
+//	By urlLocator_FF= By.linkText("imagePreviewLink"); //doesn't work.
+	
+    //xpath=//div[@id='content']/div[2]/div[2]/div[2]/div[2]/div/div/div[13]/div[2]/span/a
+	// By urlLocator_FF2 = By.xpath("/html/body/div/div[2]/div[2]/div[2]/div[2]/div/div/div[11]/div[2]/span");// New, OK on Dec. 04, 2018, failed on Aug 01, 2019
+//	By urlLocator_FF2 = By.xpath("//div[@id='content']/div[2]/div[2]/div[2]/div[2]/div/div/div[13]/div[2]/span/a");// New, 2019-08-01, not good.
+	By urlLocator_FF2 = By.xpath("//div[@id='content']/div[2]/div[2]/div[2]/div[2]/div/div[2]/div[13]/div[2]/span/a");// New, 2019-08-08, not good.
 
 	By urlLocatorChrome = By.xpath("//*[@id=\"imagePreviewLink\"]");
 
@@ -232,22 +240,30 @@ public class VehicleGallery extends Comlibs {
 	}
 
 	public String getURLLink(WebDriver driver, String tc) throws IOException {
-		elementExist(driver, urlLocator_9, true, tc);
+		elementExist(driver, urlLocator_FF, true, tc);
 		// String urlLink = driver.findElement(urlLocator).getAttribute("value");
 		// .getText("placeholder");
-		String urlLink = driver.findElement(urlLocator_9).getText();
+		String urlLink = driver.findElement(urlLocator_FF).getText();
 		return urlLink;
 	}
 
-	public void clickURLLink(WebDriver driver, String envBrowser, String tc) throws IOException {
+	public boolean  clickURLLink(WebDriver driver, String envBrowser, String tc) throws IOException {
 		Wait(2);
+		boolean urlClick=true;
 		try {
 			if (envBrowser.equalsIgnoreCase("Chrome")) {
 				elementExist(driver, urlLocatorChrome, true, tc);
 				driver.findElement(urlLocatorChrome).click();
 			} else if (envBrowser.equalsIgnoreCase("FireFox")) {
-				elementExist(driver, urlLocator_9, true, tc);
-				driver.findElement(urlLocator_9).click();
+				if (elementExist(driver, urlLocator_FF, true, tc)) {
+					String urlLink=getURLLink(driver, tc);
+					//open a new tab and switch to the tab.
+//					String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL,Keys.RETURN); 
+//					driver.findElement(By.linkText(urlLink)).sendKeys(selectLinkOpeninNewTab);
+					//and switch to the tab.				
+//					driver.get(urlLink);//open the url in current tab
+				};
+				driver.findElement(urlLocator_FF).click(); // this works fine within FF on 2019-08-09 after download a ne geckodriver v24.
 			} else {
 				elementExist(driver, urlLocatorChrome, true, tc);
 				driver.findElement(urlLocatorChrome).click();
@@ -255,21 +271,28 @@ public class VehicleGallery extends Comlibs {
 		} catch (Exception e) {
 			rwExcel(tc, false, "Click URL link in Vehicle Gallery page",
 					"not wokring properly with brower - " + envBrowser + ". trying different way next step...");
+			urlClick=false;
 			Wait(2);
 			tc = tc + "_11";
 			if (envBrowser.equalsIgnoreCase("Chrome")) {
 				elementExist(driver, urlLocatorChrome, true, tc);
 				driver.findElement(urlLocatorChrome).click();
 			} else if (envBrowser.equalsIgnoreCase("FireFox")) {
-				elementExist(driver, urlLocator_11, true, tc);
-				driver.findElement(urlLocator_11).click();
+				try {
+					elementExist(driver, urlLocator_FF2, true, tc);
+					driver.findElement(urlLocator_FF2).click();
+				} catch (Exception ee) {
+					rwExcel(tc, false, "Click URL link again with different element in Vehicle Gallery page",
+							"not wokring properly with brower - " + envBrowser + ". Stop here!");
+					urlClick=false;
+				}
 			} else {
 				elementExist(driver, urlLocatorChrome, true, tc);
 				driver.findElement(urlLocatorChrome).click();
 			}
 			Wait(2);
 		}
-
+		return urlClick;
 	}
 
 	public String retriveVIN(WebDriver driver) throws IOException {

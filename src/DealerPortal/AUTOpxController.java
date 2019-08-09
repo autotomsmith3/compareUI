@@ -545,13 +545,27 @@ public class AUTOpxController extends Comlibs {
 		boolean newLink = true;
 		if (newLink) {
 			String parentHandle = driver.getWindowHandle(); // get the current window handle
-			vgP.clickURLLink(driver, brw, TCnum);
-			for (String winHandle : driver.getWindowHandles()) {
-				driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+			
+			if (vgP.clickURLLink(driver, brw, TCnum)){
+				System.out.println("wait... 1");
+				ac.Wait(wt);
+				for (String winHandle : driver.getWindowHandles()) {
+					driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+					System.out.println("wait... winHandle="+winHandle);
+					ac.Wait(wt);
+					}
+				vgP.verifyLoadURLImage(driver, TCnum);
+				driver.close();
+				driver.switchTo().window(parentHandle); // switch back to the original window
+				
+				
+				
+				
+//				
+//				vgP.verifyLoadURLImage(driver, TCnum);
+//				driver.close();
+//				driver.switchTo().window(parentHandle); // switch back to the original window
 			}
-			vgP.verifyLoadURLImage(driver, TCnum);
-			driver.close();
-			driver.switchTo().window(parentHandle); // switch back to the original window
 		} else {
 			driver.get(urlLink);
 			urlLink = vgP.getURLLink(driver, TCnum);
@@ -946,6 +960,10 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139666_7";
 		igP.scrollUp(driver, -650, TCnum);
 		igP.clickDealerShipInfoBtn(driver);
+		ac.Wait(2);
+		igP.clickDealerShipInfoBtn(driver);// click again as there is an issue with FF which stucks to two tabs.
+		System.out.println("passed...");
+
 		// DealerProfile dpP = new DealerProfile(driver);
 		// removed on 2018-09-20 dpP.verifyDealershipIDBrands("GM123456_4 | ", "GMC | Cadillac | Buick | Chevrolet", TCnum);
 		// TC139666_8 Verify Dealership Name
@@ -1477,8 +1495,10 @@ public class AUTOpxController extends Comlibs {
 		if (newLink) {
 			String parentHandle = driver.getWindowHandle(); // get the current window handle
 			vgP.clickURLLink(driver, brw, TCnum);
+			ac.Wait(wt);
 			for (String winHandle : driver.getWindowHandles()) {
 				driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+				ac.Wait(wt);
 			}
 			vgP.verifyLoadURLImage(driver, TCnum);
 			driver.close();
@@ -1828,8 +1848,10 @@ public class AUTOpxController extends Comlibs {
 		if (newLink) {
 			String parentHandle = driver.getWindowHandle(); // get the current window handle
 			vgP.clickURLLink(driver, brw, TCnum);
+			ac.Wait(wt);
 			for (String winHandle : driver.getWindowHandles()) {
 				driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+				ac.Wait(wt);
 			}
 			vgP.verifyLoadURLImage(driver, TCnum);
 			driver.close();
@@ -2177,8 +2199,10 @@ public class AUTOpxController extends Comlibs {
 		if (newLink) {
 			String parentHandle = driver.getWindowHandle(); // get the current window handle
 			vgP.clickURLLink(driver, brw, TCnum);
+			ac.Wait(wt);
 			for (String winHandle : driver.getWindowHandles()) {
 				driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+				ac.Wait(wt);
 			}
 			vgP.verifyLoadURLImage(driver, TCnum);
 			driver.close();
@@ -2336,14 +2360,18 @@ public class AUTOpxController extends Comlibs {
 		boolean newLink = true;
 		if (newLink) {
 			String parentHandle = driver.getWindowHandle(); // get the current window handle
-			vgP.clickURLLink(driver, brw, TCnum);
-			ac.Wait(wt);
-			for (String winHandle : driver.getWindowHandles()) {
-				driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+			if (vgP.clickURLLink(driver, brw, TCnum)) {
+				ac.Wait(wt);
+				for (String winHandle : driver.getWindowHandles()) {
+					driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+					ac.Wait(wt);
+				}
+				vgP.verifyLoadURLImage(driver, TCnum);
+				driver.close();
+				driver.switchTo().window(parentHandle); // switch back to the original window
+				}else{
+					ac.rwExcel(TCnum, false, "Click URL link in "+env+" with "+tBrowser, "not working properly.");
 			}
-			vgP.verifyLoadURLImage(driver, TCnum);
-			driver.close();
-			driver.switchTo().window(parentHandle); // switch back to the original window
 		} else {
 			driver.get(urlLink);
 			urlLink = vgP.getURLLink(driver, TCnum);
@@ -3402,11 +3430,11 @@ public class AUTOpxController extends Comlibs {
 			//// tempDebug(driver);// ***************************************Debug*****************************************
 			//// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			//// 0.General Inventory Gallery
-			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-			inventoryGalleryTC(driver, tBrowser, env, versionNum);
-			vehicleGallery(driver, tBrowser, env);
-			// verifyRerender(driver, tBrowser);
+//			//// 0.General Inventory Gallery
+//			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+//			inventoryGalleryTC(driver, tBrowser, env, versionNum);
+//			vehicleGallery(driver, tBrowser, env);
+//			// verifyRerender(driver, tBrowser);
 
 			////// 1.VINpx:
 			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");

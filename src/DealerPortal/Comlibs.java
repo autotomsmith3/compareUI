@@ -385,7 +385,14 @@ public class Comlibs {
 			// profile.addExtension(new File(seleniumExpertIDE));
 			// Add more if needed
 			// WebDriver driver = new FirefoxDriver(profile); //adding profile invalid since 12/13/2017
-			WebDriver driver = new FirefoxDriver();
+			
+			
+//			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+//			capabilities.setCapability("marionette", true);
+////			WebDriver driver = new FirefoxDriver(capabilities);
+			
+			
+			WebDriver driver = new FirefoxDriver(); // working fine with v56, not for v68 but after updated geckodriver to 24, working fine.
 
 			// WebDriver driver = new FirefoxDriver();
 			return driver;
