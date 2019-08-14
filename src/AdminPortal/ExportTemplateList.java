@@ -42,6 +42,13 @@ public class ExportTemplateList extends Comlibs {
 	By templateLocator = By.xpath("//*[@id=\"template\"]");
 	By combinedFileLocator = By.xpath("//*[@id=\"combineFile\"]");
 	By brandedImagesLocator = By.xpath("//*[@id=\"branded\"]");
+//	By runExporticon= By.xpath("//*[@id='runExportBtn']/span"); //1,2,3...
+//	By runExporticon2= By.xpath("//button[@id='runExportBtn']/span"); //1,2,3...
+//	By runExporticon3= By.xpath("//td[7]/button/span"); //1,2,3...
+//	By runExporticon4= By.cssSelector(".odd:nth-child(1) #runExportBtn > .glyphicon");//1,2,3...
+	
+//	By downLoadicon= By.xpath("//*[@id=\"imageTypeTable\"]/tbody/tr[1]/td[7]/form/button/span"); //1,2,3...
+	// By nameLocator= By.xpath("//tr[2]/td"); //1,2,3...
 	// By nameLocator= By.xpath("//tr[2]/td"); //1,2,3...
 
 	public ExportTemplateList clickAddExportTemplateBtn(WebDriver driver) throws IOException {
@@ -73,6 +80,35 @@ public class ExportTemplateList extends Comlibs {
 
 	public ExportTemplateList clickSubmit(WebDriver driver) throws IOException {
 		driver.findElement(submitBtnLocator).click();
+		return this;
+	}
+	
+	public ExportTemplateList clickRunExoprt(WebDriver driver, String tc) throws IOException {
+		By runExporticon= By.xpath("//*[@id='runExportBtn']/span"); //1,2,3...
+//		By runExporticon2= By.xpath("//button[@id='runExportBtn']/span"); //1,2,3...
+//		By runExporticon3= By.xpath("//td[7]/button/span"); //1,2,3...
+//		By runExporticon4= By.cssSelector(".odd:nth-child(1) #runExportBtn > .glyphicon");//1,2,3...
+		boolean elementExist = elementExist(driver, runExporticon, true, tc);
+		if (elementExist) {
+			driver.findElement(runExporticon).click();
+//			driver.findElement(runExporticon2).click();
+//			driver.findElement(runExporticon3).click();
+//			driver.findElement(runExporticon4).click();
+		}
+		
+		return this;
+	}
+	
+	public ExportTemplateList clickDownload(WebDriver driver, String tc) throws IOException {
+		By downLoadicon= By.xpath("//*[@id=\"imageTypeTable\"]/tbody/tr[1]/td[7]/form/button/span"); //1,2,3...
+		boolean elementExist = elementExist(driver, downLoadicon, true, tc);
+		if (elementExist) {
+			driver.findElement(downLoadicon).click();
+//			driver.findElement(downLoadicon).click();
+//			driver.findElement(downLoadicon).click();
+//			driver.findElement(downLoadicon).click();
+		}
+
 		return this;
 	}
 

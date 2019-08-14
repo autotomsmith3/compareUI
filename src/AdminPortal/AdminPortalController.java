@@ -21,6 +21,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 //Test updated 02
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -553,7 +554,11 @@ public class AdminPortalController extends Comlibs {
 		String addNewDealerShip = prop.getProperty("AUTOpx.addNewDealerShip");
 		String backgroundSetPath1 = prop.getProperty("AUTOpx.backgroundSetPath1");
 		String backgroundSetPath2 = prop.getProperty("AUTOpx.backgroundSetPath2");
-
+		String exportName = prop.getProperty("AUTOpx.exportName");
+		String exportFilePath = prop.getProperty("AUTOpx.exportFilePath");
+		
+		
+		
 		// Initial
 		// final int wt_Secs = 6;
 		String TCnum;
@@ -1110,14 +1115,15 @@ public class AdminPortalController extends Comlibs {
 		String editedName = "cdkxxxxxx";
 		String templateS = "dealer_id Vin photo_updated photo_url\r\n{{#vehicles}}\r\n{{dealer.dlrCode}} {{vehicle.vin}} Y {{#imageUrls}}{{.}} {{/imageUrls}}\r\n{{/vehicles}}";
 		ExportTemplateList ExportTemplateListP = new ExportTemplateList(driver);
+		
 		// Add an Export Template and cancel
 		ExportTemplateListP.clickAddExportTemplateBtn(driver);
 		ExportTemplateListP.inputExportName(driver, searchName);
 		ExportTemplateListP.inputExportPrettyName(driver, searchName.toUpperCase());
 		ExportTemplateListP.inputFileName(driver, "phone.txt");
-		ExportTemplateListP.inputUser(driver, "TEST@autodata.net");
-		ExportTemplateListP.inputPassword(driver, "5k2cGG1");
-		ExportTemplateListP.inputHost(driver, "LOCALHOST");
+		ExportTemplateListP.inputUser(driver, "AutopxDEV");
+		ExportTemplateListP.inputPassword(driver, "crO9hop@UJ");
+		ExportTemplateListP.inputHost(driver, "ftp.autodata.net");
 		ExportTemplateListP.inputTemplate(driver, templateS);
 //		ExportTemplateListP.clickCombinedFileCheckBox(driver);
 //		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
@@ -1128,9 +1134,9 @@ public class AdminPortalController extends Comlibs {
 		ExportTemplateListP.inputExportName(driver, searchName);
 		ExportTemplateListP.inputExportPrettyName(driver, searchName.toUpperCase());
 		ExportTemplateListP.inputFileName(driver, "phone.txt");
-		ExportTemplateListP.inputUser(driver, "TEST@autodata.net");
-		ExportTemplateListP.inputPassword(driver, "5k2cGG1");
-		ExportTemplateListP.inputHost(driver, "LOCALHOST");
+		ExportTemplateListP.inputUser(driver, "AutopxDEV");
+		ExportTemplateListP.inputPassword(driver, "crO9hop@UJ");
+		ExportTemplateListP.inputHost(driver, "ftp.autodata.net");
 		ExportTemplateListP.inputTemplate(driver, templateS);
 		ac.Wait(wt);
 //		ExportTemplateListP.clickCombinedFileCheckBox(driver);
@@ -1147,9 +1153,9 @@ public class AdminPortalController extends Comlibs {
 		ExportTemplateListP.inputExportName(driver, editedName);
 		ExportTemplateListP.inputExportPrettyName(driver, editedName.toUpperCase());
 		ExportTemplateListP.inputFileName(driver, "Edited_phone.txt");
-		ExportTemplateListP.inputUser(driver, "Edited_TEST@autodata.net");
-		ExportTemplateListP.inputPassword(driver, "Edited_5k2cGG1");
-		ExportTemplateListP.inputHost(driver, "Edited_LOCALHOST");
+		ExportTemplateListP.inputUser(driver, "Edited_AutopxDEV");
+		ExportTemplateListP.inputPassword(driver, "Edited_crO9hop@UJ");
+		ExportTemplateListP.inputHost(driver, "Edited_ftp.autodata.net");
 		ExportTemplateListP.inputTemplate(driver, "Edited_" + templateS);
 		ac.Wait(wt);
 //		ExportTemplateListP.clickCombinedFileCheckBox(driver);
@@ -1176,6 +1182,36 @@ public class AdminPortalController extends Comlibs {
 		} else {
 			ac.rwExcel(tc, true, "Delete an Export Template", "Edited name is not showing - Deleted.");
 		}
+		
+		// check Run Export icon and Download icon
+		ExportTemplateListP.inputSearch(driver, exportName);
+		tc = "Click on RunExport icon";
+		ExportTemplateListP.clickRunExoprt(driver,tc);
+		ac.acceptAlert(driver, tc, "OK");
+		ac.Wait(10);
+		tc = "Click Run Export and Download icon";
+		ExportTemplateListP.clickDownload(driver,tc);
+		ac.Wait(wt);
+		//read file in String and count
+		FileReader fr=new FileReader(exportFilePath+exportName);
+		BufferedReader br= new BufferedReader(fr);
+		String x="";
+		String xAll="";
+		while ((x=br.readLine()) != null)
+		{
+			System.out.println(x +"\n");
+			xAll=xAll+x;
+		}
+		br.close();
+		int xAllCount=xAll.length();
+		if (xAllCount>10000) {
+			System.out.println(searchName+" passed, Total length = "+xAllCount);
+			ac.rwExcel(tc, true, "Verify Export Downloading \""+searchName, "\"Total length = "+xAllCount);
+		} else {
+			System.out.println(searchName+" failed, Total length = "+xAllCount);
+			ac.rwExcel(tc, false, "Verify Export Downloading \""+searchName, "\"Total length = "+xAllCount);	
+		}
+		
 		//// *************************ManageExportTemplates******************************************************
 		//// *************************ManageExportTemplates******************************************************
 
@@ -2405,11 +2441,11 @@ public class AdminPortalController extends Comlibs {
 			//RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 			////*****************************************************************************************************************
 			
-			////// 1.ManageDealerShipsAddNewAccount:
-			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
-			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
-
+//			////// 1.ManageDealerShipsAddNewAccount:
+//			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
+//			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+//			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+//
 			//// 2.ManageDealerShips:
 			loadURL(driver, baseURL, env);
 			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
