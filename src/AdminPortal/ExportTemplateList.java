@@ -57,6 +57,7 @@ public class ExportTemplateList extends Comlibs {
 	}
 
 	public ExportTemplateList inputSearch(WebDriver driver, String name) throws IOException {
+		driver.findElement(searchLocator).clear();
 		driver.findElement(searchLocator).sendKeys(name);
 		return this;
 	}

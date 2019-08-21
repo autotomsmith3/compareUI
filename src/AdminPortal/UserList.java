@@ -203,7 +203,9 @@ public class UserList extends Comlibs {
 	}
 	public String getAccountEmail(WebDriver driver, int num, String tc) throws IOException {
 		String accEmail="null";
-		By accountEmail = By.xpath("//table[@id='dealerTable']/tbody/tr["+num+"]/td[2]");//xpath=//table[@id='dealerTable']/tbody/tr[3]/td[2]  --- [3].. 1,2,3...
+//		By accountEmail = By.xpath("//table[@id='dealerTable']/tbody/tr["+num+"]/td[2]");//xpath=//table[@id='dealerTable']/tbody/tr[3]/td[2]  --- [3].. 1,2,3...
+		//*[@id="dealerTable"]/tbody/tr[2]/td[2]  - //this is second one.
+		By accountEmail = By.xpath("//*[@id=\"dealerTable\"]/tbody/tr["+num+"]/td[2]");//2019-08-19
 		boolean elementExist = elementExist(driver, accountEmail, true, tc);
 		if (elementExist) {
 			accEmail = driver.findElement(accountEmail).getText();//.getAttribute("src");

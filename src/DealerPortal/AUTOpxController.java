@@ -5,19 +5,18 @@ package DealerPortal;
 * @author Zhoul - re-imported on 2018-11-08 after migration to Win 10
 * Initial date: 
 * Modified by ...
-* replaced by replaced byreplaced by replaced by replaced by replaced by replaced by replaced by replaced by 
-* replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by 
-* replaced by replaced by replaced by replaced by replaced by replaced by replaced by 
-* replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by   
- */
-
-/*
- * replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by 
- * replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by
- * replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by 
- * replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by 
- *  
- */
+* In case of broken, update may needed:
+*  1. Selenium Webdriver
+*  2. Chromedriver
+*  3. geckodriver (FF)
+*  4. poi-3.9-20121203.jar
+*  5. sqljdbc4.jar
+*  6. javamail.jar
+*  7.json-20160212.jar
+*  8. bson-3.30.jar
+*  
+*   
+*   */
 import java.awt.AWTException;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -3430,11 +3429,11 @@ public class AUTOpxController extends Comlibs {
 			//// tempDebug(driver);// ***************************************Debug*****************************************
 			//// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-//			//// 0.General Inventory Gallery
-//			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-//			inventoryGalleryTC(driver, tBrowser, env, versionNum);
-//			vehicleGallery(driver, tBrowser, env);
-//			// verifyRerender(driver, tBrowser);
+			//// 0.General Inventory Gallery
+			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			inventoryGalleryTC(driver, tBrowser, env, versionNum);
+			vehicleGallery(driver, tBrowser, env);
+			// verifyRerender(driver, tBrowser);
 
 			////// 1.VINpx:
 			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");

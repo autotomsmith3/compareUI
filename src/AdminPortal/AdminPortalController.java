@@ -241,9 +241,14 @@ public class AdminPortalController extends Comlibs {
 		loginP.login(driver, accountEmail, accountPS, "");
 		String parentHandle = driver.getWindowHandle(); // get the current window handle
 		UserList userListP = new UserList(driver);
+		//get Account Email
+		
+		Account_Email=userListP.getAccountEmail(driver, dealerN+1, "getAccountEmail");
+		
 		userListP.clickManageDealerShips(driver);
 		ac.Wait(wt);
 		DealerList2 DealerListP = new DealerList2(driver);
+		DealerListP.scrollUp(driver, 3000, "ddd");
 		DealerListP.clickDisplayDropDownBtn(driver, "3");
 		DealerListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000
 		for (int next = 0; next < 50; next++) {
@@ -1111,12 +1116,14 @@ public class AdminPortalController extends Comlibs {
 		UserListP.clickManageExportTemplates(driver);
 		ac.rwExcel("", "*********ManageExportTemplates**********", "");
 		ac.Wait(wt);
+		tc = "Manage Export Templates";
 		String searchName = "cdk123456";
 		String editedName = "cdkxxxxxx";
 		String templateS = "dealer_id Vin photo_updated photo_url\r\n{{#vehicles}}\r\n{{dealer.dlrCode}} {{vehicle.vin}} Y {{#imageUrls}}{{.}} {{/imageUrls}}\r\n{{/vehicles}}";
 		ExportTemplateList ExportTemplateListP = new ExportTemplateList(driver);
 		
 		// Add an Export Template and cancel
+		tc = "TC144857";
 		ExportTemplateListP.clickAddExportTemplateBtn(driver);
 		ExportTemplateListP.inputExportName(driver, searchName);
 		ExportTemplateListP.inputExportPrettyName(driver, searchName.toUpperCase());
@@ -1167,13 +1174,13 @@ public class AdminPortalController extends Comlibs {
 		ac.acceptAlert(driver, tc, "OK");
 		ac.Wait(wt);
 		// Delete an Export Template
+		tc = "TC229188";
 		ExportTemplateListP.inputSearch(driver, editedName);
 		ExportTemplateListP.clickDeleteBtn(driver, 1);
 		ac.acceptAlert(driver, tc, "OK");
 		ac.Wait(wt);
 		ExportTemplateListP.inputSearch(driver, editedName);
 		String newName = ExportTemplateListP.getNameString(driver, 1);
-		tc = "Delate an Export Tempate";
 		if (newName.equalsIgnoreCase(editedName)) {
 			// Bug here. Failed to delete an Export Template...logged AUTOPXOPS-1171
 			System.out.println("\nFailed to delete an Export Template here......logged AUTOPXOPS-1171");
@@ -1185,11 +1192,11 @@ public class AdminPortalController extends Comlibs {
 		
 		// check Run Export icon and Download icon
 		ExportTemplateListP.inputSearch(driver, exportName);
-		tc = "Click on RunExport icon";
+		tc = "TC234599";
 		ExportTemplateListP.clickRunExoprt(driver,tc);
 		ac.acceptAlert(driver, tc, "OK");
 		ac.Wait(10);
-		tc = "Click Run Export and Download icon";
+		tc = "TC234600";
 		ExportTemplateListP.clickDownload(driver,tc);
 		ac.Wait(wt);
 		//read file in String and count
@@ -2432,20 +2439,20 @@ public class AdminPortalController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			//// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK for Prod (FF) on 2018-12-17 from ManageDealerships.2019-07-04 Worked.
-			//bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-			//RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
+//			// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK for Prod (FF) on 2018-12-17 from ManageDealerships.2019-07-04 Worked.
+//			bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+//			RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
 
-			////// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page
+			////// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page - not used any more 2019
 			//bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			//RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 			////*****************************************************************************************************************
 			
-//			////// 1.ManageDealerShipsAddNewAccount:
-//			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
-//			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-//			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
-//
+			////// 1.ManageDealerShipsAddNewAccount:
+			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
+			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+
 			//// 2.ManageDealerShips:
 			loadURL(driver, baseURL, env);
 			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
