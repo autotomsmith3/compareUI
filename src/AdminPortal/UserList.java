@@ -429,7 +429,8 @@ public class UserList extends Comlibs {
 		return lineNum;
 	}
 
-	public DealerProfile clickAddDealerShip(WebDriver driver) throws IOException {
+	public DealerProfile clickAddDealerShip(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, addDealerShipBtnLocator, true, tc);
 		driver.findElement(addDealerShipBtnLocator).click();
 		for (String winHandle : driver.getWindowHandles()) {
 			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
@@ -438,11 +439,14 @@ public class UserList extends Comlibs {
 		return new DealerProfile(driver);
 	}
 
-	public UserList inputSearch(WebDriver driver, String dlrID) throws IOException {
+	public UserList inputSearch(WebDriver driver, String dlrID, String tc) throws IOException {
+		elementExist(driver, searchLocator, true, tc);
 		driver.findElement(searchLocator).sendKeys(dlrID);
 		return this;
 	}
-	public UserList clickManageAccounts(WebDriver driver) throws IOException {
+	public UserList clickManageAccounts(WebDriver driver, String tc) throws IOException {
+		
+		elementExist(driver, ManageAccountsLocator, true, tc);
 		driver.findElement(ManageAccountsLocator).click();
 		return this;
 	}
@@ -451,46 +455,54 @@ public class UserList extends Comlibs {
 //		Wait(3);
 //		return this;
 //	}
-	public DealerList clickManageDealerShips(WebDriver driver) throws IOException {
+	public DealerList clickManageDealerShips(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, ManageDealerShipsLocator, true, tc);
 		driver.findElement(ManageDealerShipsLocator).click();
 		Wait(3);
 		return new DealerList(driver);
 	}
-	public BackgroundSets clickManageBGSets(WebDriver driver) throws IOException {
+	public BackgroundSets clickManageBGSets(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, ManageBGSetsLocator, true, tc);
 		driver.findElement(ManageBGSetsLocator).click();
 		return new BackgroundSets(driver);
 	}
 
-	public ImageTypeList clickManageImageType(WebDriver driver) throws IOException {
+	public ImageTypeList clickManageImageType(WebDriver driver, String tc) throws IOException {
 //		ManageImageTypesLocator=By.id("imagetypeMenu");
 //		WebElement we0 = driver.findElement(ManageImageTypesLocator);
 //		hoverOnWebElement(driver,we0);
 //		boolean existE=driver.findElement(ManageImageTypesLocator).isDisplayed();
 //		existE=elementExist(ManageImageTypesLocator);
+		elementExist(driver, ManageImageTypesLocator, true, tc);
 		driver.findElement(ManageImageTypesLocator).click();
 		return new ImageTypeList(driver);
 	}
 
-	public AngleMappingList clickManageAngleMappings(WebDriver driver) throws IOException {
+	public AngleMappingList clickManageAngleMappings(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, ManageAngleMappingsLocator, true, tc);
 		driver.findElement(ManageAngleMappingsLocator).click();
 		return new AngleMappingList(driver);
 	}
 
-	public ExportTemplateList clickManageExportTemplates(WebDriver driver) throws IOException {
+	public ExportTemplateList clickManageExportTemplates(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, ManageExportTemplatesLocator, true, tc);
 		driver.findElement(ManageExportTemplatesLocator).click();
 		return new ExportTemplateList(driver);
 	}
 
-	public GlobalConfig clickManageGlobalConfig(WebDriver driver) throws IOException {
+	public GlobalConfig clickManageGlobalConfig(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, ManageGlobalConfigLocator, true, tc);
 		driver.findElement(ManageGlobalConfigLocator).click();
 		return new GlobalConfig(driver);
 	}
 	public EnableDisableVehicles clickEnableDisableVehicles(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, EnableDisableVehiclesLocator, true, tc);
 		driver.findElement(EnableDisableVehiclesLocator).click();
 		return new EnableDisableVehicles(driver);
 	}
-	public DealerPortal.ImageGallery clickDealerViewBtn(WebDriver driver, int sn) throws IOException {
+	public DealerPortal.ImageGallery clickDealerViewBtn(WebDriver driver, int sn, String tc) throws IOException {
 		By dealerViewBtnLocator = By.xpath("(//button[@id='dealerViewBtn'])[" + sn + "]");// 1,2,3...
+		elementExist(driver, dealerViewBtnLocator, true, tc);
 		driver.findElement(dealerViewBtnLocator).click();
 		for (String winHandle : driver.getWindowHandles()) {
 			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
@@ -498,20 +510,23 @@ public class UserList extends Comlibs {
 		return new DealerPortal.ImageGallery(driver);
 	}
 
-	public AccountProfile clickAddAccount(WebDriver driver) throws IOException {
+	public AccountProfile clickAddAccount(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, AddAccountBtnLocator, true, tc);
 		driver.findElement(AddAccountBtnLocator).click();
 		for (String winHandle : driver.getWindowHandles()) {
 			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
 		}
 		return new AccountProfile(driver);
 	}
-	public UserList clickExpandDealersArrow(WebDriver driver,int num) throws IOException {
+	public UserList clickExpandDealersArrow(WebDriver driver,int num, String tc) throws IOException {
 		By expandDealersArrowLocator = By.xpath("//*[@id='dealerTable']/tbody/tr/td["+num+"]");//1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
+		elementExist(driver, expandDealersArrowLocator, true, tc);
 		driver.findElement(expandDealersArrowLocator).click();
 		return this;
 	}
-	public DealerProfile clickEditOnDealer(WebDriver driver,int num) throws IOException {
+	public DealerProfile clickEditOnDealer(WebDriver driver,int num, String tc) throws IOException {
 		By editOnDealerLocator = By.xpath("(//button[@id='listViewBtn'])["+num+"]");//1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
+		elementExist(driver, editOnDealerLocator, true, tc);
 		driver.findElement(editOnDealerLocator).click();
 		for (String winHandle : driver.getWindowHandles()) {
 			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
@@ -520,6 +535,7 @@ public class UserList extends Comlibs {
 	}
 	public DealerPortal.DealerProfile clickViewDealerPortal(WebDriver driver,int num, String tc) throws IOException {
 		By viewDealerPortalLocator = By.xpath("(//button[@id='dealerViewBtn'])["+num+"]");//1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
+		elementExist(driver, viewDealerPortalLocator, true, tc);
 		try {
 			driver.findElement(viewDealerPortalLocator).click();
 			rwExcel(tc, true, "Clicking on Go to Dealer Portal","Line goes to Dealer Portal.");
@@ -531,13 +547,15 @@ public class UserList extends Comlibs {
 		}
 		return new DealerPortal.DealerProfile(driver);
 	}
-	public UserList clickViewDealerships(WebDriver driver,int num) throws IOException {
+	public UserList clickViewDealerships(WebDriver driver,int num, String tc) throws IOException {
 		By viewDealerships = By.xpath("//table[@id='dealerTable']/tbody/tr["+num+"]/td");//1,2,3... 	xpath=//table[@id='dealerTable']/tbody/tr[2]/td
+		elementExist(driver, viewDealerships, true, tc);
 		driver.findElement(viewDealerships).click();
 		return this;
 	}
-	public DealerProfile clickEditOnDealership(WebDriver driver,int num) throws IOException {
+	public DealerProfile clickEditOnDealership(WebDriver driver,int num, String tc) throws IOException {
 		By editOnDealerLocator = By.xpath("(//button[@id='listViewBtn'])["+num+"]");//1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
+		elementExist(driver, editOnDealerLocator, true, tc);
 		driver.findElement(editOnDealerLocator).click();
 		for (String winHandle : driver.getWindowHandles()) {
 			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
@@ -547,12 +565,13 @@ public class UserList extends Comlibs {
 	public UserList clickNext(WebDriver driver, int num, String tc) throws IOException {
 //		By expandDealersArrowLocator = By.xpath("//*[@id='dealerTable']/tbody/tr/td["+num+"]");//1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
 		By expandDealersArrowLocator = By.xpath("//*[@id=\"dealerTable_next\"]");
-
+		elementExist(driver, expandDealersArrowLocator, true, tc);
 		//*[@id="dealerTable_next"]
 		driver.findElement(expandDealersArrowLocator).click();
 		return this;
 	}
 	public UserList clickFirstNameSort(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, firstNameSortLocator, true, tc);
 		driver.findElement(firstNameSortLocator).click();
 		return this;
 	}

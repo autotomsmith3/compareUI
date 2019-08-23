@@ -64,27 +64,32 @@ public class DealerProfile extends Comlibs {
 	By MessageDisplayedOnHead = By.xpath("//*[@id=\"header\"]/div/div[2]/span");
 	By popupOkayBtn = By.xpath("//*[@id=\"alertModal\"]/div/div/div[3]/button");
 
-	public String getDealershipID(WebDriver driver) throws IOException {
+	public String getDealershipID(WebDriver driver,String tc) throws IOException {
+		elementExist(driver, DealershipIDLocator, true, tc);
 		String dealershipip = driver.findElement(DealershipIDLocator).getAttribute("value");
 		return dealershipip;
 	}
 
-	public String getDealershipName(WebDriver driver) throws IOException {
+	public String getDealershipName(WebDriver driver,String tc) throws IOException {
+		elementExist(driver, DealershipNameLocator, true, tc);
 		String dealershipname = driver.findElement(DealershipNameLocator).getAttribute("value");
 		return dealershipname;
 	}
 
-	public String getDealershipEmail(WebDriver driver) throws IOException {
+	public String getDealershipEmail(WebDriver driver,String tc) throws IOException {
+		elementExist(driver, DealershipEmailLocator, true, tc);
 		String dealerdshipemail = driver.findElement(DealershipEmailLocator).getAttribute("value");
 		return dealerdshipemail;
 	}
 
-	public String getAccountEmail(WebDriver driver) throws IOException {
+	public String getAccountEmail(WebDriver driver,String tc) throws IOException {
+		elementExist(driver, AccountEmailLocator, true, tc);
 		String accountemail = driver.findElement(AccountEmailLocator).getAttribute("value");
 		return accountemail;
 	}
 
-	public String getMetadata(WebDriver driver) throws IOException {
+	public String getMetadata(WebDriver driver,String tc) throws IOException {
+		elementExist(driver, MetadataLocator, true, tc);
 		String metadata = driver.findElement(MetadataLocator).getAttribute("value");
 		return metadata;
 	}
@@ -145,7 +150,8 @@ public class DealerProfile extends Comlibs {
 		// return new DealerList(driver);
 	}
 
-	public DealerProfile clickSaveBtn(WebDriver driver, String tc) {
+	public DealerProfile clickSaveBtn(WebDriver driver, String tc) throws Exception {
+		elementExist(driver, SaveBtn, true, tc);
 		driver.findElement(SaveBtn).click();
 		return this;
 	}
@@ -177,143 +183,161 @@ public class DealerProfile extends Comlibs {
 		return dlrGuid;
 	}
 
-	public DealerProfile selectOEM(WebDriver driver, int oemNum) {
+	public DealerProfile selectOEM(WebDriver driver, int oemNum,String tc) throws Exception {
 		By OEMSelect = By.xpath("//*[@id=\"dealerOem\"]/option[" + oemNum + "]");// 13=GM
+		elementExist(driver, OEMSelect, true, tc);
 		driver.findElement(OEMSelect).click();
 		return this;
 	}
 
-	public DealerProfile selectOEMBrands(WebDriver driver, int oemBrandNum) {
+	public DealerProfile selectOEMBrands(WebDriver driver, int oemBrandNum,String tc) throws Exception {
 		By OEMBrand = By.xpath("//*[@id=\"dealerInfoBody\"]/div/div/div[1]/div[2]/div[1]/div/div/div/div[13]/label["
 				+ oemBrandNum + "]/input");// 1=Buick, 2=Cadillac, 3=Chevrolet, 4=GMC
+		elementExist(driver, OEMBrand, true, tc);
 		driver.findElement(OEMBrand).click();
 		return this;
 	}
 
-	public DealerProfile inputDealersipID(WebDriver driver, String dlrID) {
+	public DealerProfile inputDealersipID(WebDriver driver, String dlrID,String tc) throws Exception {
+		elementExist(driver, DealershipIDLocator, true, tc);
 		driver.findElement(DealershipIDLocator).sendKeys(dlrID);
-		;
 		return this;
 
 	}
 
-	public DealerProfile inputDealershipName(WebDriver driver, String dlrName) {
+	public DealerProfile inputDealershipName(WebDriver driver, String dlrName,String tc) throws Exception {
+		elementExist(driver, DealershipNameLocator, true, tc);
 		driver.findElement(DealershipNameLocator).sendKeys(dlrName);
-		;
 		return this;
 	}
 
-	public DealerProfile inputDealersipEmail(WebDriver driver, String dlrEmail) {
+	public DealerProfile inputDealersipEmail(WebDriver driver, String dlrEmail,String tc) throws Exception {
+		elementExist(driver, DealershipEmailLocator, true, tc);
 		driver.findElement(DealershipEmailLocator).sendKeys(dlrEmail);
-		;
 		return this;
 	}
 
-	public DealerProfile inputAccountEmail(WebDriver driver, String acctEmail) {
+	public DealerProfile inputAccountEmail(WebDriver driver, String acctEmail,String tc) throws Exception {
+		elementExist(driver, AccountEmailLocator, true, tc);
 		driver.findElement(AccountEmailLocator).sendKeys(acctEmail);
-		;
 		return this;
 	}
 
-	public DealerProfile inputMetadata(WebDriver driver, String metaData) {
+	public DealerProfile inputMetadata(WebDriver driver, String metaData,String tc) throws Exception {
+		elementExist(driver, MetadataLocator, true, tc);
 		driver.findElement(MetadataLocator).sendKeys(metaData);
-		;
 		return this;
 	}
 
-	public DealerProfile selectVINpxProd(WebDriver driver) {
+	public DealerProfile selectVINpxProd(WebDriver driver,String tc) throws Exception {
+		elementExist(driver, ProductVINpxLocator, true, tc);
 		driver.findElement(ProductVINpxLocator).click();
 		;
 		return this;
 	}
 
-	public DealerProfile selectSTOCKpxProd(WebDriver driver) {
+	public DealerProfile selectSTOCKpxProd(WebDriver driver,String tc) throws Exception {
+		elementExist(driver, ProductSTOCKpxLocator, true, tc);
 		driver.findElement(ProductSTOCKpxLocator).click();
 		;
 		return this;
 	}
 
-	public DealerProfile selectLOTpxProd(WebDriver driver) {
+	public DealerProfile selectLOTpxProd(WebDriver driver,String tc) throws Exception {
+		elementExist(driver, ProductLOTpxLocator, true, tc);
 		driver.findElement(ProductLOTpxLocator).click();
 		;
 		return this;
 	}
 
-	public DealerProfile inputAddress(WebDriver driver, String address) {
+	public DealerProfile inputAddress(WebDriver driver, String address,String tc) throws Exception {
+		elementExist(driver, AddrssLocator, true, tc);
 		driver.findElement(AddrssLocator).sendKeys(address);
 		return this;
 	}
 
-	public DealerProfile inputAddressLine2(WebDriver driver, String address2) {
+	public DealerProfile inputAddressLine2(WebDriver driver, String address2,String tc) throws Exception {
+		elementExist(driver, AddressLine2Locator, true, tc);
 		driver.findElement(AddressLine2Locator).sendKeys(address2);
 		return this;
 	}
 
-	public DealerProfile inputCity(WebDriver driver, String city) {
+	public DealerProfile inputCity(WebDriver driver, String city,String tc) throws Exception {
+		elementExist(driver, CityLocator, true, tc);
 		driver.findElement(CityLocator).sendKeys(city);
 		return this;
 	}
 
-	public DealerProfile inputState(WebDriver driver, int state) {
+	public DealerProfile inputState(WebDriver driver, int state, String tc) throws Exception {
 		By StateProvinceLocator = By.xpath("//*[@id=\"dealerState\"]/option[" + state + "]");// NY=33
+		elementExist(driver, StateProvinceLocator, true, tc);
 		driver.findElement(StateProvinceLocator).click();
-		;
 		return this;
 	}
 
-	public DealerProfile inputCountry(WebDriver driver, int country) {
+	public DealerProfile inputCountry(WebDriver driver, int country,String tc) throws Exception {
 		By CountryLocator = By.xpath("//*[@id=\"dealerCountry\"]/option[" + country + "]");// USA=1
+		elementExist(driver, CountryLocator, true, tc);
 		driver.findElement(CountryLocator).click();
 		;
 		return this;
 	}
 
-	public DealerProfile inputZipCode(WebDriver driver, String zipCode) {
+	public DealerProfile inputZipCode(WebDriver driver, String zipCode, String tc) throws Exception {
+		elementExist(driver, ZipPostalCodeLocator, true, tc);
 		driver.findElement(ZipPostalCodeLocator).sendKeys(zipCode);
 		return this;
 	}
 
-	public DealerProfile inputFirstName(WebDriver driver, String firstName) {
+	public DealerProfile inputFirstName(WebDriver driver, String firstName, String tc) throws Exception {
+		elementExist(driver, FirstNameLocator, true, tc);
 		driver.findElement(FirstNameLocator).sendKeys(firstName);
 		return this;
 	}
 
-	public DealerProfile inputLastName(WebDriver driver, String lastName) {
+	public DealerProfile inputLastName(WebDriver driver, String lastName, String tc) throws Exception {
+		elementExist(driver, LastNameLocator, true, tc);
 		driver.findElement(LastNameLocator).sendKeys(lastName);
 		return this;
 	}
 
-	public DealerProfile inputTagLineMarkingMsg(WebDriver driver, String msg) {
+	public DealerProfile inputTagLineMarkingMsg(WebDriver driver, String msg, String tc) throws Exception {
+		elementExist(driver, TagLineMarkingMsgLocator, true, tc);
 		driver.findElement(TagLineMarkingMsgLocator).sendKeys(msg);
 		return this;
 	}
 
-	public DealerProfile inputWebsite(WebDriver driver, String website) {
+	public DealerProfile inputWebsite(WebDriver driver, String website, String tc) throws Exception {
+		elementExist(driver, WebsiteLocator, true, tc);
 		driver.findElement(WebsiteLocator).sendKeys(website);
 		return this;
 	}
 
-	public DealerProfile inputDealershipPhone(WebDriver driver, String num) {
+	public DealerProfile inputDealershipPhone(WebDriver driver, String num, String tc) throws Exception {
+		elementExist(driver, DealershipPhoneNumberLocator, true, tc);
 		driver.findElement(DealershipPhoneNumberLocator).sendKeys(num);
 		return this;
 	}
 
-	public DealerProfile selectTemplateSetting(WebDriver driver, int num) {
+	public DealerProfile selectTemplateSetting(WebDriver driver, int num, String tc) throws Exception {
 		By TemplateSettingsLocator = By.xpath("//*[@id=\"selectedBackground\"]/option[" + num + "]");// DEFAULT=1; replace=2;overlay=3;
+		elementExist(driver, TemplateSettingsLocator, true, tc);
 		driver.findElement(TemplateSettingsLocator).click();
 		return this;
 	}
 
-	public DealerProfile clickUploadBtn(WebDriver driver, int num) {
+	public DealerProfile clickUploadBtn(WebDriver driver, int num, String tc) throws Exception {
+		elementExist(driver, UploadBtn, true, tc);
 		driver.findElement(UploadBtn).click();
 		return this;
 	}
 
-	public DealerProfile selectBackGroundSet(WebDriver driver, int num) {
+	public DealerProfile selectBackGroundSet(WebDriver driver, int num, String tc) throws Exception {
 		By backGroundSetLocator = By.xpath("//*[@id=\"bg-" + num + "\"]/div[1]/img");// Jack Wilson=5; White Gradient=0
 		// By backGroundSetLocator=By.xpath("//*[@id=\"bg-7\"]/div[1]/img");
 		// By backGroundLocator=By.xpath("//*[@id=\"bg-0\"]/div[1]/img");
 		scrollUp(driver, 1000, "ddd"); // QA -2000 Prod -3000
+		elementExist(driver, backGroundSetLocator, true, tc);
 		driver.findElement(backGroundSetLocator).click();
 		return this;
 	}

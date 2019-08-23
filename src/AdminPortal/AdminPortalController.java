@@ -242,10 +242,10 @@ public class AdminPortalController extends Comlibs {
 		String parentHandle = driver.getWindowHandle(); // get the current window handle
 		UserList userListP = new UserList(driver);
 		//get Account Email
-		
+		TCnum="TCx_01";
 		Account_Email=userListP.getAccountEmail(driver, dealerN+1, "getAccountEmail");
 		
-		userListP.clickManageDealerShips(driver);
+		userListP.clickManageDealerShips(driver,TCnum);
 		ac.Wait(wt);
 		DealerList2 DealerListP = new DealerList2(driver);
 		DealerListP.scrollUp(driver, 3000, "ddd");
@@ -271,14 +271,15 @@ public class AdminPortalController extends Comlibs {
 				}
 				DealerProfile DealerProfieP = new DealerProfile(driver);
 				// =========================================
+				TCnum="TC xxxx_01";
 				ProductVINpx = DealerProfieP.getVINpxProduct(driver, "");
 				ProductSTOCKpx = DealerProfieP.getSTOCKpxProduct(driver, "");
 				ProductLOTpx = DealerProfieP.getLOTpxProduct(driver, "");
-				Dealership_ID = DealerProfieP.getDealershipID(driver);
-				Dealership_Name = DealerProfieP.getDealershipName(driver);
-				Dealership_Email = DealerProfieP.getDealershipEmail(driver);
+				Dealership_ID = DealerProfieP.getDealershipID(driver,TCnum);
+				Dealership_Name = DealerProfieP.getDealershipName(driver,TCnum);
+				Dealership_Email = DealerProfieP.getDealershipEmail(driver,TCnum);
 				// Account_Email = DealerProfieP.getAccountEmail(driver);
-				Metadata = DealerProfieP.getMetadata(driver);
+				Metadata = DealerProfieP.getMetadata(driver,TCnum);
 				dlrGuid = DealerProfieP.getDlrGuid(driver);
 				dlrGuid = DealerProfieP.trimURL(dlrGuid);
 				// =========================================
@@ -396,13 +397,13 @@ public class AdminPortalController extends Comlibs {
 		UserListP.clickFirstNameSort(driver, "TC number");
 		UserListP.clickFirstNameSort(driver, "TC number");
 		UserListP.clickDisplayDropDownBtn(driver, "1"); // no longer use since 2018-11-02
-
+		TCnum="TCXXXXX_01";
 		for (int next = 1; next <= 117; next++) {// prod=117, QA=86
 			int numAccts = UserListP.getNumOfAccounts(driver, 1, "account nums");
 			for (int i = 1; i <= numAccts; i++) {
 
 				accountEmail = UserListP.getAccountEmail(driver, i, "tc");
-				UserListP.clickViewDealerships(driver, i);
+				UserListP.clickViewDealerships(driver, i,TCnum);
 				if (i == numAccts) {
 					UserListP.scrollUp(driver, 600, "ddd");
 				}
@@ -411,11 +412,11 @@ public class AdminPortalController extends Comlibs {
 				for (int dealer = 1; dealer <= dealers; dealer++) {
 					// UserListP.getNumOfDealerships(driver,1,"tc"); //not ready yet 2018-11-06
 					try {
-						UserListP.clickEditOnDealership(driver, dealer);
+						UserListP.clickEditOnDealership(driver, dealer,TCnum);
 					} catch (Exception e) {
 						System.out.println("Account Email = " + accountEmail + ". Its Dealer number: " + dealer
 								+ " does not exist. Exit!");
-						UserListP.clickViewDealerships(driver, i);
+						UserListP.clickViewDealerships(driver, i,TCnum);
 						break;
 						// ac.rwExcel("Dealer number: "+dealer+" does not exist", false, "", "");
 					}
@@ -441,14 +442,15 @@ public class AdminPortalController extends Comlibs {
 					}
 					DealerProfile DealerProfieP = new DealerProfile(driver);
 					// =========================================
+					TCnum="TCxxxx_01";
 					ProductVINpx = DealerProfieP.getVINpxProduct(driver, "");
 					ProductSTOCKpx = DealerProfieP.getSTOCKpxProduct(driver, "");
 					ProductLOTpx = DealerProfieP.getLOTpxProduct(driver, "");
-					Dealership_ID = DealerProfieP.getDealershipID(driver);
-					Dealership_Name = DealerProfieP.getDealershipName(driver);
-					Dealership_Email = DealerProfieP.getDealershipEmail(driver);
+					Dealership_ID = DealerProfieP.getDealershipID(driver,TCnum);
+					Dealership_Name = DealerProfieP.getDealershipName(driver,TCnum);
+					Dealership_Email = DealerProfieP.getDealershipEmail(driver,TCnum);
 					// Account_Email = DealerProfieP.getAccountEmail(driver);
-					Metadata = DealerProfieP.getMetadata(driver);
+					Metadata = DealerProfieP.getMetadata(driver,TCnum);
 					dlrGuid = DealerProfieP.getDlrGuid(driver);
 					dlrGuid = DealerProfieP.trimURL(dlrGuid);
 					// =========================================
@@ -611,7 +613,7 @@ public class AdminPortalController extends Comlibs {
 		UserListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000 - negative means scrolldown
 		// =========================== Add New Account Process============================================================
 		tc = "TC_addNewAct_AttachDealer_DeleteIt";
-		UserListP.clickAddAccount(driver);
+		UserListP.clickAddAccount(driver, tc);
 		AccountProfile AccountProfileP = new AccountProfile(driver);
 		AccountProfileP.inputAccountEmail(driver, AddNewAccountEmail);
 		AccountProfileP.inputFirstName(driver, FirstName);
@@ -621,7 +623,7 @@ public class AdminPortalController extends Comlibs {
 
 		// =========================== Add Account============================================================
 		tc = "TC228658_n";// "TC_addNewAct_with_Existing_ActEamil";
-		UserListP.clickAddAccount(driver);
+		UserListP.clickAddAccount(driver, tc);
 		// AccountProfile AccountProfileP = new AccountProfile(driver);
 		AccountProfileP.inputAccountEmail(driver, accountEmail);
 		AccountProfileP.inputFirstName(driver, FirstName);
@@ -629,7 +631,7 @@ public class AdminPortalController extends Comlibs {
 		AccountProfileP.selectAccountStatus(driver, 1);
 		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
 		tc = "TC228658_s";// "TC_addNewAct_with_Existing_ActEamil_SAVE";
-		UserListP.clickAddAccount(driver);
+		UserListP.clickAddAccount(driver, tc);
 		AccountProfileP.inputAccountEmail(driver, accountEmail);
 		AccountProfileP.inputFirstName(driver, FirstName);
 		AccountProfileP.inputLastName(driver, LastName);
@@ -658,10 +660,10 @@ public class AdminPortalController extends Comlibs {
 
 		// =========================== Manage Account - Add Dealership for existing DealerID============================================================
 		tc = "TC228656_m1";
-		UserListP.clickAddDealerShip(driver);
+		UserListP.clickAddDealerShip(driver, tc);
 
 		DealerProfile DealerProfieP = new DealerProfile(driver);
-		DealerProfieP.selectOEM(driver, 13);
+		DealerProfieP.selectOEM(driver, 13,tc);
 		// check Buick and Cadillac and Chevrolet and GMC
 		// DealerProfieP.selectOEMBrands(driver, 1); // check Buick
 		// DealerProfieP.selectOEMBrands(driver, 2); // check Cadillac
@@ -669,29 +671,29 @@ public class AdminPortalController extends Comlibs {
 		// DealerProfieP.selectOEMBrands(driver, 4); // check GMC
 		// DealerProfieP.selectOEMBrands(driver, 5); // check Hummer
 		for (String brand : Brands) {
-			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand));
+			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand),tc);
 		}
-		DealerProfieP.inputDealersipID(driver, DealershipID);
-		DealerProfieP.selectVINpxProd(driver);
-		DealerProfieP.selectSTOCKpxProd(driver);
+		DealerProfieP.inputDealersipID(driver, DealershipID,tc);
+		DealerProfieP.selectVINpxProd(driver,tc);
+		DealerProfieP.selectSTOCKpxProd(driver,tc);
 		// DealerProfieP.selectLOTpxProd(driver);
 		// DealerProfieP.inputMetadata(driver, MetadataValues);
 
 		// DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
 		// DealerProfieP.selectTemplateSetting(driver, 1);
-		DealerProfieP.inputDealershipName(driver, DealershipName);
-		DealerProfieP.inputAddress(driver, Address);
-		DealerProfieP.inputAddressLine2(driver, AddressLine2);
-		DealerProfieP.inputCity(driver, City);
-		DealerProfieP.inputDealersipEmail(driver, DealershipEmail);
-		DealerProfieP.inputZipCode(driver, ZipPostalCode);
-		DealerProfieP.inputCountry(driver, Country);// USA=1
-		DealerProfieP.inputState(driver, StateProvince);// NY=33
-		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg);
-		DealerProfieP.inputWebsite(driver, Website);
-		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber);
+		DealerProfieP.inputDealershipName(driver, DealershipName,tc);
+		DealerProfieP.inputAddress(driver, Address,tc);
+		DealerProfieP.inputAddressLine2(driver, AddressLine2,tc);
+		DealerProfieP.inputCity(driver, City,tc);
+		DealerProfieP.inputDealersipEmail(driver, DealershipEmail,tc);
+		DealerProfieP.inputZipCode(driver, ZipPostalCode,tc);
+		DealerProfieP.inputCountry(driver, Country,tc);// USA=1
+		DealerProfieP.inputState(driver, StateProvince, tc);// NY=33
+		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg,tc);
+		DealerProfieP.inputWebsite(driver, Website,tc);
+		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber,tc);
 
-		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
+		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
 
@@ -709,35 +711,35 @@ public class AdminPortalController extends Comlibs {
 		// **************************Manage Account - Add a new dealership for account*****************************************************
 		// click Add Dealership btn
 		tc = "TC139021_m1";// Add a new dealership for account
-		UserListP.clickAddDealerShip(driver);
-		DealerProfieP.selectOEM(driver, 13);
+		UserListP.clickAddDealerShip(driver, tc);
+		DealerProfieP.selectOEM(driver, 13,tc);
 		for (String brand : Brands) {
-			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand));
+			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand),tc);
 		}
 		// String addNewDealerExtension = "_New_Added_18";// ************************ New one should be 18 ****************************
-		DealerProfieP.inputDealersipID(driver, DealershipID + addNewDealerExtension);
-		DealerProfieP.selectVINpxProd(driver);
-		DealerProfieP.selectSTOCKpxProd(driver);
+		DealerProfieP.inputDealersipID(driver, DealershipID + addNewDealerExtension,tc);
+		DealerProfieP.selectVINpxProd(driver,tc);
+		DealerProfieP.selectSTOCKpxProd(driver,tc);
 		// DealerProfieP.selectLOTpxProd(driver);
-		DealerProfieP.inputMetadata(driver, MetadataValues);
+		DealerProfieP.inputMetadata(driver, MetadataValues,tc);
 
 		// DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
 		// DealerProfieP.selectTemplateSetting(driver, 1);
-		DealerProfieP.inputDealershipName(driver, DealershipName);
-		DealerProfieP.inputAddress(driver, Address);
-		DealerProfieP.inputAddressLine2(driver, AddressLine2);
-		DealerProfieP.inputCity(driver, City);
-		DealerProfieP.inputDealersipEmail(driver, "Autotomsmith4@gmail.com");// Auto_Added_"+DealershipEmail);
-		DealerProfieP.inputZipCode(driver, ZipPostalCode);
-		DealerProfieP.inputCountry(driver, Country);// USA=1
-		DealerProfieP.inputState(driver, StateProvince);// NY=33
-		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg);
-		DealerProfieP.inputWebsite(driver, Website);
-		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber);
+		DealerProfieP.inputDealershipName(driver, DealershipName,tc);
+		DealerProfieP.inputAddress(driver, Address,tc);
+		DealerProfieP.inputAddressLine2(driver, AddressLine2,tc);
+		DealerProfieP.inputCity(driver, City,tc);
+		DealerProfieP.inputDealersipEmail(driver, "Autotomsmith4@gmail.com",tc);// Auto_Added_"+DealershipEmail);
+		DealerProfieP.inputZipCode(driver, ZipPostalCode,tc);
+		DealerProfieP.inputCountry(driver, Country,tc);// USA=1
+		DealerProfieP.inputState(driver, StateProvince, tc);// NY=33
+		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg,tc);
+		DealerProfieP.inputWebsite(driver, Website,tc);
+		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber,tc);
 		alertmessage = "You must save the dealer information before you can take this action";
 		DealerProfieP.uploadDealershipLogo(driver, dealershipLogoPath, alertmessage, tc);
 		ac.Wait(wt);
-		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
+		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
 		// Stop here for the time being since there is bug here AUTOPXOPS-1227
@@ -761,9 +763,9 @@ public class AdminPortalController extends Comlibs {
 
 		// =========================== Manage Account - Add Dealership============================================================
 		// **************************************************************************************
-		UserListP.clickManageAccounts(driver);
+		UserListP.clickManageAccounts(driver, tc);
 		ac.Wait(wt);
-		UserListP.inputSearch(driver, AllProdEmail);
+		UserListP.inputSearch(driver, AllProdEmail, tc);
 		tc = "TC228723_m1";
 		UserListP.clickEditBtn(driver, "1");// 1,2,3...
 		String attachedDealerName = AccountProfileP.selectOneDealerFrAllDealers(driver, 7, tc);
@@ -789,8 +791,8 @@ public class AdminPortalController extends Comlibs {
 		AccountProfileP.scrollUp(driver, -3000, tc);
 		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
 		tc = "TC139406_m1";
-		UserListP.clickExpandDealersArrow(driver, 1);
-		UserListP.clickEditOnDealer(driver, 1);
+		UserListP.clickExpandDealersArrow(driver, 1, tc);
+		UserListP.clickEditOnDealer(driver, 1, tc);
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
 		UserListP.clickViewDealerPortal(driver, 1, tc);
 		DealerPortal.DealerProfile DealerPortalDealerProfieP = new DealerPortal.DealerProfile(driver);
@@ -808,7 +810,7 @@ public class AdminPortalController extends Comlibs {
 		//// *************************ManageDealerships - DealerListP******************************************************
 
 		// This part is the same of "Add Dealership for existing account" to end of "ManageAccounts - UserListP"
-		UserListP.clickManageDealerShips(driver);
+		UserListP.clickManageDealerShips(driver, tc);
 		ac.Wait(wt * 2);
 		DealerList2 DealerListP2 = new DealerList2(driver);
 		// Checking View On Dealer Portal link
@@ -817,13 +819,13 @@ public class AdminPortalController extends Comlibs {
 		DealerListP2.clickViewOnDealerPortalBtn(driver, 1, tc);
 		driver.close();
 		ac.switchToWindow(driver);
-		UserListP.clickManageDealerShips(driver);
+		UserListP.clickManageDealerShips(driver, tc);
 		ac.Wait(wt * 3);
 		tc = "TC229371_d1";
 		DealerListP2.clickAddDealerShip(driver);
 		ac.Wait(wt * 2);
 		DealerProfile DealerProfileP = new DealerProfile(driver);
-		DealerProfileP.selectOEM(driver, 13);
+		DealerProfileP.selectOEM(driver, 13,tc);
 		// check Buick and Cadillac and Chevrolet and GMC
 		// DealerProfileP.selectOEMBrands(driver, 1); // check Buick
 		// DealerProfileP.selectOEMBrands(driver, 2); // check Cadillac
@@ -831,29 +833,29 @@ public class AdminPortalController extends Comlibs {
 		// DealerProfileP.selectOEMBrands(driver, 4); // check GMC
 		// DealerProfileP.selectOEMBrands(driver, 5); // check Hummer
 		for (String brand : Brands) {
-			DealerProfileP.selectOEMBrands(driver, Integer.parseInt(brand));
+			DealerProfileP.selectOEMBrands(driver, Integer.parseInt(brand),tc);
 		}
-		DealerProfileP.inputDealersipID(driver, DealershipID);
-		DealerProfileP.selectVINpxProd(driver);
-		DealerProfileP.selectSTOCKpxProd(driver);
+		DealerProfileP.inputDealersipID(driver, DealershipID,tc);
+		DealerProfileP.selectVINpxProd(driver,tc);
+		DealerProfileP.selectSTOCKpxProd(driver,tc);
 		// DealerProfileP.selectLOTpxProd(driver);
 		// DealerProfileP.inputMetadata(driver, MetadataValues);
 
 		// DealerProfileP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
 		// DealerProfileP.selectTemplateSetting(driver, 1);
-		DealerProfileP.inputDealershipName(driver, DealershipName);
-		DealerProfileP.inputAddress(driver, Address);
-		DealerProfileP.inputAddressLine2(driver, AddressLine2);
-		DealerProfileP.inputCity(driver, City);
-		DealerProfileP.inputDealersipEmail(driver, DealershipEmail);
-		DealerProfileP.inputZipCode(driver, ZipPostalCode);
-		DealerProfileP.inputCountry(driver, Country);// USA=1
-		DealerProfileP.inputState(driver, StateProvince);// NY=33
-		DealerProfileP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg);
-		DealerProfileP.inputWebsite(driver, Website);
-		DealerProfileP.inputDealershipPhone(driver, DealershipPhoneNumber);
+		DealerProfileP.inputDealershipName(driver, DealershipName,tc);
+		DealerProfileP.inputAddress(driver, Address,tc);
+		DealerProfileP.inputAddressLine2(driver, AddressLine2,tc);
+		DealerProfileP.inputCity(driver, City,tc);
+		DealerProfileP.inputDealersipEmail(driver, DealershipEmail,tc);
+		DealerProfileP.inputZipCode(driver, ZipPostalCode,tc);
+		DealerProfileP.inputCountry(driver, Country,tc);// USA=1
+		DealerProfileP.inputState(driver, StateProvince, tc);// NY=33
+		DealerProfileP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg,tc);
+		DealerProfileP.inputWebsite(driver, Website,tc);
+		DealerProfileP.inputDealershipPhone(driver, DealershipPhoneNumber,tc);
 		ac.Wait(wt);
-		DealerProfileP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
+		DealerProfileP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
 		DealerProfileP.scrollUp(driver, -3000, tc);
 		DealerProfileP.clickSaveBtn(driver, tc);
 		ac.Wait(wt);
@@ -870,37 +872,37 @@ public class AdminPortalController extends Comlibs {
 
 		// **************************ManageDealerships - Add a new dealership for account*****************************************************
 		// click Add Dealership btn
-		UserListP.clickAddDealerShip(driver);
-		DealerProfileP.selectOEM(driver, 13);
+		UserListP.clickAddDealerShip(driver, tc);
+		DealerProfileP.selectOEM(driver, 13,tc);
 		for (String brand : Brands) {
-			DealerProfileP.selectOEMBrands(driver, Integer.parseInt(brand));
+			DealerProfileP.selectOEMBrands(driver, Integer.parseInt(brand),tc);
 		}
 		// String addNewDealerExtension="_New_Added_16";// *******************************New one should be 17********************
 		tc = "TC229370_d1";
 		String addNewDealership = DealershipID + addNewDealerExtension + "_D";
-		DealerProfileP.inputDealersipID(driver, addNewDealership);//
-		DealerProfileP.selectVINpxProd(driver);
-		DealerProfileP.selectSTOCKpxProd(driver);
+		DealerProfileP.inputDealersipID(driver, addNewDealership,tc);//
+		DealerProfileP.selectVINpxProd(driver,tc);
+		DealerProfileP.selectSTOCKpxProd(driver,tc);
 		// DealerProfileP.selectLOTpxProd(driver);
-		DealerProfileP.inputMetadata(driver, MetadataValues);
+		DealerProfileP.inputMetadata(driver, MetadataValues,tc);
 
 		// DealerProfileP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
 		// DealerProfileP.selectTemplateSetting(driver, 1);
-		DealerProfileP.inputDealershipName(driver, DealershipName);
-		DealerProfileP.inputAddress(driver, Address);
-		DealerProfileP.inputAddressLine2(driver, AddressLine2);
-		DealerProfileP.inputCity(driver, City);
-		DealerProfileP.inputDealersipEmail(driver, "Autotomsmith4@gmail.com");// Auto_Added_"+DealershipEmail);
-		DealerProfileP.inputZipCode(driver, ZipPostalCode);
-		DealerProfileP.inputCountry(driver, Country);// USA=1
-		DealerProfileP.inputState(driver, StateProvince);// NY=33
-		DealerProfileP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg);
-		DealerProfileP.inputWebsite(driver, Website);
-		DealerProfileP.inputDealershipPhone(driver, DealershipPhoneNumber);
+		DealerProfileP.inputDealershipName(driver, DealershipName,tc);
+		DealerProfileP.inputAddress(driver, Address,tc);
+		DealerProfileP.inputAddressLine2(driver, AddressLine2,tc);
+		DealerProfileP.inputCity(driver, City,tc);
+		DealerProfileP.inputDealersipEmail(driver, "Autotomsmith4@gmail.com",tc);// Auto_Added_"+DealershipEmail);
+		DealerProfileP.inputZipCode(driver, ZipPostalCode,tc);
+		DealerProfileP.inputCountry(driver, Country,tc);// USA=1
+		DealerProfileP.inputState(driver, StateProvince, tc);// NY=33
+		DealerProfileP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg,tc);
+		DealerProfileP.inputWebsite(driver, Website,tc);
+		DealerProfileP.inputDealershipPhone(driver, DealershipPhoneNumber,tc);
 		alertmessage = "You must save the dealer information before you can take this action";
 		DealerProfieP.uploadDealershipLogo(driver, dealershipLogoPath, alertmessage, tc);
 		ac.Wait(wt);
-		DealerProfileP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
+		DealerProfileP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
 		DealerProfileP.scrollUp(driver, -3000, tc);
 		DealerProfileP.clickSaveBtn(driver, tc);
 		// Verify msg: "Your settings have been saved"
@@ -921,7 +923,7 @@ public class AdminPortalController extends Comlibs {
 		}
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
 		tc = "TC229395_d1";// "Upload dealership logo after creating the dealership";
-		UserListP.clickManageDealerShips(driver);
+		UserListP.clickManageDealerShips(driver, tc);
 		ac.Wait(wt);
 		DealerList DealerListP = new DealerList(driver);
 		DealerListP.inputSearch(driver, addNewDealership);
@@ -951,7 +953,7 @@ public class AdminPortalController extends Comlibs {
 		String editedDefaultSequence = "10101";
 		ac.clickRefleshF5Btn(driver, tc);
 		// UserListP.clickManageAccounts(driver);
-		UserListP.clickManageImageType(driver);
+		UserListP.clickManageImageType(driver, tc);
 		ImageTypeList ImageTypeListP = new ImageTypeList(driver);
 		// Add an Image Type and cancel
 		ac.Wait(wt * 2);
@@ -966,7 +968,7 @@ public class AdminPortalController extends Comlibs {
 		ImageTypeListP.clickCancel(driver);
 		ac.Wait(wt);
 		// Add an Image Type and submit
-		UserListP.clickManageImageType(driver);
+		UserListP.clickManageImageType(driver, tc);
 		ac.Wait(wt);
 		ImageTypeListP.clickAddImageTypeBtn(driver);
 		ac.Wait(wt);
@@ -1016,7 +1018,7 @@ public class AdminPortalController extends Comlibs {
 		// String patternS="2019-GM-6NF26-1SA-6NF26-1SA"; //WORKS IN QA TOOL
 		String noteS = "19 Cadillac Int XT5";
 		String editedNotesS = "Edited_19 Cadillac Int XT5";
-		UserListP.clickManageAngleMappings(driver);
+		UserListP.clickManageAngleMappings(driver, tc);
 		ac.Wait(wt * 2);
 		AngleMappingList AngleMappingListP = new AngleMappingList(driver);
 		// Input all fields and click the Cancel
@@ -1113,7 +1115,7 @@ public class AdminPortalController extends Comlibs {
 		//// *************************ManageExportTemplates******************************************************
 		//// *************************ManageExportTemplates******************************************************
 
-		UserListP.clickManageExportTemplates(driver);
+		UserListP.clickManageExportTemplates(driver, tc);
 		ac.rwExcel("", "*********ManageExportTemplates**********", "");
 		ac.Wait(wt);
 		tc = "Manage Export Templates";
@@ -1225,7 +1227,7 @@ public class AdminPortalController extends Comlibs {
 		//// *************************ManageGlobalConfig******************************************************
 		//// *************************ManageGlobalConfig******************************************************
 		for (int j = 1; j <= 1; j++) { // 100 worked fine.
-			UserListP.clickManageGlobalConfig(driver);
+			UserListP.clickManageGlobalConfig(driver, tc);
 			ac.rwExcel("", "*********ManageGlobalConfig**********", "");
 			String searchKey = "test_IMPORT_SITE";
 			String editedKey = "edited_test_IMPORT_SITE";
@@ -1446,7 +1448,7 @@ public class AdminPortalController extends Comlibs {
 		//// *************************clickManageBGSetsBtn******************************************************
 		ac.rwExcel("", "*********ManageBackGroundSets**********", "");
 		tc = "TC148055_b1";
-		UserListP.clickManageBGSets(driver);
+		UserListP.clickManageBGSets(driver, tc);
 		BackgroundSets BackgroundSetsP = new BackgroundSets(driver);
 		// BackgroundSetsP.clickMapBackGrounds(driver, 3);
 		BackgroundSetsP.inputSearch(driver, AllProdDealerCode);
@@ -1812,7 +1814,7 @@ public class AdminPortalController extends Comlibs {
 		UserListP.scrollUp(driver, -3000, "ddd"); // QA -2000 Prod -3000 - negative means scrolldown
 		// =========================== Add New Account Process============================================================
 		tc = "TC_addNewAct_AttachDealer_DeleteIt";
-		UserListP.clickAddAccount(driver);
+		UserListP.clickAddAccount(driver, tc);
 		AccountProfile AccountProfileP = new AccountProfile(driver);
 		AccountProfileP.inputAccountEmail(driver, AddNewAccountEmail);
 		AccountProfileP.inputFirstName(driver, FirstName);
@@ -1822,7 +1824,7 @@ public class AdminPortalController extends Comlibs {
 
 		// =========================== Add Account============================================================
 		tc = "TC_addNewAct_with_Existing_ActEamil";
-		UserListP.clickAddAccount(driver);
+		UserListP.clickAddAccount(driver, tc);
 		// AccountProfile AccountProfileP = new AccountProfile(driver);
 		AccountProfileP.inputAccountEmail(driver, accountEmail);
 		AccountProfileP.inputFirstName(driver, FirstName);
@@ -1830,7 +1832,7 @@ public class AdminPortalController extends Comlibs {
 		AccountProfileP.selectAccountStatus(driver, 1);
 		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
 		tc = "TC_addNewAct_with_Existing_ActEamil_SAVE";
-		UserListP.clickAddAccount(driver);
+		UserListP.clickAddAccount(driver, tc);
 		AccountProfileP.inputAccountEmail(driver, accountEmail);
 		AccountProfileP.inputFirstName(driver, FirstName);
 		AccountProfileP.inputLastName(driver, LastName);
@@ -1859,10 +1861,10 @@ public class AdminPortalController extends Comlibs {
 
 		// =========================== Add Dealership for existing account============================================================
 		tc = "TC139021_01";
-		UserListP.clickAddDealerShip(driver);
+		UserListP.clickAddDealerShip(driver, tc);
 
 		DealerProfile DealerProfieP = new DealerProfile(driver);
-		DealerProfieP.selectOEM(driver, 13);
+		DealerProfieP.selectOEM(driver, 13, tc);
 		// check Buick and Cadillac and Chevrolet and GMC
 		// DealerProfieP.selectOEMBrands(driver, 1); // check Buick
 		// DealerProfieP.selectOEMBrands(driver, 2); // check Cadillac
@@ -1870,29 +1872,29 @@ public class AdminPortalController extends Comlibs {
 		// DealerProfieP.selectOEMBrands(driver, 4); // check GMC
 		// DealerProfieP.selectOEMBrands(driver, 5); // check Hummer
 		for (String brand : Brands) {
-			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand));
+			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand), tc);
 		}
-		DealerProfieP.inputDealersipID(driver, DealershipID);
-		DealerProfieP.selectVINpxProd(driver);
-		DealerProfieP.selectSTOCKpxProd(driver);
+		DealerProfieP.inputDealersipID(driver, DealershipID, tc);
+		DealerProfieP.selectVINpxProd(driver, tc);
+		DealerProfieP.selectSTOCKpxProd(driver, tc);
 		// DealerProfieP.selectLOTpxProd(driver);
 		// DealerProfieP.inputMetadata(driver, MetadataValues);
 
 		// DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
 		// DealerProfieP.selectTemplateSetting(driver, 1);
-		DealerProfieP.inputDealershipName(driver, DealershipName);
-		DealerProfieP.inputAddress(driver, Address);
-		DealerProfieP.inputAddressLine2(driver, AddressLine2);
-		DealerProfieP.inputCity(driver, City);
-		DealerProfieP.inputDealersipEmail(driver, DealershipEmail);
-		DealerProfieP.inputZipCode(driver, ZipPostalCode);
-		DealerProfieP.inputCountry(driver, Country);// USA=1
-		DealerProfieP.inputState(driver, StateProvince);// NY=33
-		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg);
-		DealerProfieP.inputWebsite(driver, Website);
-		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber);
+		DealerProfieP.inputDealershipName(driver, DealershipName, tc);
+		DealerProfieP.inputAddress(driver, Address, tc);
+		DealerProfieP.inputAddressLine2(driver, AddressLine2, tc);
+		DealerProfieP.inputCity(driver, City, tc);
+		DealerProfieP.inputDealersipEmail(driver, DealershipEmail, tc);
+		DealerProfieP.inputZipCode(driver, ZipPostalCode, tc);
+		DealerProfieP.inputCountry(driver, Country, tc);// USA=1
+		DealerProfieP.inputState(driver, StateProvince, tc);// NY=33
+		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg, tc);
+		DealerProfieP.inputWebsite(driver, Website, tc);
+		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber, tc);
 
-		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
+		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet, tc);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
 
@@ -1909,33 +1911,33 @@ public class AdminPortalController extends Comlibs {
 
 		// **************************Add a new dealership for account*****************************************************
 		// click Add Dealership btn
-		UserListP.clickAddDealerShip(driver);
-		DealerProfieP.selectOEM(driver, 13);
+		UserListP.clickAddDealerShip(driver, tc);
+		DealerProfieP.selectOEM(driver, 13, tc);
 		for (String brand : Brands) {
-			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand));
+			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand), tc);
 		}
 
-		DealerProfieP.inputDealersipID(driver, DealershipID + "_New_Added_14");// New one show be 15
-		DealerProfieP.selectVINpxProd(driver);
-		DealerProfieP.selectSTOCKpxProd(driver);
+		DealerProfieP.inputDealersipID(driver, DealershipID + "_New_Added_14", tc);// New one show be 15
+		DealerProfieP.selectVINpxProd(driver, tc);
+		DealerProfieP.selectSTOCKpxProd(driver, tc);
 		// DealerProfieP.selectLOTpxProd(driver);
-		DealerProfieP.inputMetadata(driver, MetadataValues);
+		DealerProfieP.inputMetadata(driver, MetadataValues, tc);
 
 		// DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
 		// DealerProfieP.selectTemplateSetting(driver, 1);
-		DealerProfieP.inputDealershipName(driver, DealershipName);
-		DealerProfieP.inputAddress(driver, Address);
-		DealerProfieP.inputAddressLine2(driver, AddressLine2);
-		DealerProfieP.inputCity(driver, City);
-		DealerProfieP.inputDealersipEmail(driver, "Autotomsmith4@gmail.com");// Auto_Added_"+DealershipEmail);
-		DealerProfieP.inputZipCode(driver, ZipPostalCode);
-		DealerProfieP.inputCountry(driver, Country);// USA=1
-		DealerProfieP.inputState(driver, StateProvince);// NY=33
-		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg);
-		DealerProfieP.inputWebsite(driver, Website);
-		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber);
+		DealerProfieP.inputDealershipName(driver, DealershipName, tc);
+		DealerProfieP.inputAddress(driver, Address, tc);
+		DealerProfieP.inputAddressLine2(driver, AddressLine2, tc);
+		DealerProfieP.inputCity(driver, City, tc);
+		DealerProfieP.inputDealersipEmail(driver, "Autotomsmith4@gmail.com", tc);// Auto_Added_"+DealershipEmail);
+		DealerProfieP.inputZipCode(driver, ZipPostalCode, tc);
+		DealerProfieP.inputCountry(driver, Country, tc);// USA=1
+		DealerProfieP.inputState(driver, StateProvince,tc);// NY=33
+		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg, tc);
+		DealerProfieP.inputWebsite(driver, Website, tc);
+		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber, tc);
 
-		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet);// Generic Dealership=7; White Gradient=0
+		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet, tc);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
 		// Stop here for the time being since there is bug here AUTOPXOPS-1227
@@ -1960,9 +1962,9 @@ public class AdminPortalController extends Comlibs {
 
 		// **************************************************************************************
 		//
-		UserListP.clickManageAccounts(driver);
+		UserListP.clickManageAccounts(driver, tc);
 		ac.Wait(wt);
-		UserListP.inputSearch(driver, AllProdEmail);
+		UserListP.inputSearch(driver, AllProdEmail, tc);
 		// **************************************************************************************
 		// **************************************************************************************
 		// **************************************************************************************
@@ -1993,8 +1995,8 @@ public class AdminPortalController extends Comlibs {
 		AccountProfileP.scrollUp(driver, -3000, tc);
 		AccountProfileP.clickBackToDealerListBtn(driver, parentHandle, tc);
 		tc = "TC139406_n1";
-		UserListP.clickExpandDealersArrow(driver, 1);
-		UserListP.clickEditOnDealer(driver, 1);
+		UserListP.clickExpandDealersArrow(driver, 1, tc);
+		UserListP.clickEditOnDealer(driver, 1, tc);
 		DealerProfieP.clickBackToDealerListBtn(driver, parentHandle, tc);
 		UserListP.clickViewDealerPortal(driver, 1, tc);
 
@@ -2024,7 +2026,7 @@ public class AdminPortalController extends Comlibs {
 		//// *************************clickManageBGSetsBtn******************************************************
 		//// *************************clickManageBGSetsBtn******************************************************
 		ac.rwExcel("", "*********ManageBackGroundSets**********", "");
-		UserListP.clickManageBGSets(driver);
+		UserListP.clickManageBGSets(driver, tc);
 		BackgroundSets BackgroundSetsP = new BackgroundSets(driver);
 		// BackgroundSetsP.clickMapBackGrounds(driver, 3);
 		BackgroundSetsP.inputSearch(driver, AllProdDealerCode);
@@ -2068,7 +2070,7 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		BackgroundSetsP.clickSubmit(driver);
 		ac.Wait(wt);
-		UserListP.clickManageBGSets(driver);
+		UserListP.clickManageBGSets(driver, tc);
 		ac.clickRefleshF5Btn(driver, tc);
 		tc = "TC148169_n";
 		BackgroundSetsP.clickDeleteBGSetBtn(driver, 1, tc);
@@ -2086,7 +2088,7 @@ public class AdminPortalController extends Comlibs {
 		String editedDefaultSequence = "10101";
 		ac.clickRefleshF5Btn(driver, tc);
 		// UserListP.clickManageAccounts(driver);
-		UserListP.clickManageImageType(driver);
+		UserListP.clickManageImageType(driver, tc);
 		ImageTypeList ImageTypeListP = new ImageTypeList(driver);
 		// Add an Image Type and cancel
 		ImageTypeListP.clickAddImageTypeBtn(driver);
@@ -2100,7 +2102,7 @@ public class AdminPortalController extends Comlibs {
 		ImageTypeListP.clickCancel(driver);
 		ac.Wait(wt);
 		// Add an Image Type and submit
-		UserListP.clickManageImageType(driver);
+		UserListP.clickManageImageType(driver, tc);
 		ImageTypeListP.clickAddImageTypeBtn(driver);
 		ImageTypeListP.inputShortIdentifier(driver, "996");
 		ImageTypeListP.inputImageGroup(driver, "CUSTOM");
@@ -2147,7 +2149,7 @@ public class AdminPortalController extends Comlibs {
 		// String patternS="2019-GM-6NF26-1SA-6NF26-1SA"; //WORKS IN QA TOOL
 		String noteS = "19 Cadillac Int XT5";
 		String editedNotesS = "Edited_19 Cadillac Int XT5";
-		UserListP.clickManageAngleMappings(driver);
+		UserListP.clickManageAngleMappings(driver, tc);
 		AngleMappingList AngleMappingListP = new AngleMappingList(driver);
 		// Input all fields and click the Cancel
 		AngleMappingListP.clickAddAngleMappingBtn(driver);
@@ -2233,7 +2235,7 @@ public class AdminPortalController extends Comlibs {
 		//// *************************ManageExportTemplates******************************************************
 		//// *************************ManageExportTemplates******************************************************
 
-		UserListP.clickManageExportTemplates(driver);
+		UserListP.clickManageExportTemplates(driver, tc);
 		ac.rwExcel("", "*********ManageExportTemplates**********", "");
 		ac.Wait(wt);
 		String searchName = "cdk123456";
@@ -2310,7 +2312,7 @@ public class AdminPortalController extends Comlibs {
 		//// *************************ManageGlobalConfig******************************************************
 		//// *************************ManageGlobalConfig******************************************************
 		for (int j = 1; j <= 1; j++) { // 100 worked fine.
-			UserListP.clickManageGlobalConfig(driver);
+			UserListP.clickManageGlobalConfig(driver, tc);
 			ac.rwExcel("", "*********ManageGlobalConfig**********", "");
 			String searchKey = "test_IMPORT_SITE";
 			String editedKey = "edited_test_IMPORT_SITE";

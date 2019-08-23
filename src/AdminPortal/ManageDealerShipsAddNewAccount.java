@@ -374,7 +374,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		DealerProfieP.inputDealersipEmail(driver, DealershipEmail);
 		DealerProfieP.inputZipCode(driver, ZipPostalCode);
 		DealerProfieP.inputCountry(driver, Country);// USA=1
-		DealerProfieP.inputState(driver, StateProvince);// NY=33
+		DealerProfieP.inputState(driver, StateProvince,tc);// NY=33
 		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg);
 		DealerProfieP.inputWebsite(driver, Website);
 		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber);
@@ -418,7 +418,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		DealerProfieP.inputDealersipEmail(driver, "Autotomsmith4@gmail.com");// Auto_Added_"+DealershipEmail);
 		DealerProfieP.inputZipCode(driver, ZipPostalCode);
 		DealerProfieP.inputCountry(driver, Country);// USA=1
-		DealerProfieP.inputState(driver, StateProvince);// NY=33
+		DealerProfieP.inputState(driver, StateProvince,tc);// NY=33
 		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg);
 		DealerProfieP.inputWebsite(driver, Website);
 		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber);
