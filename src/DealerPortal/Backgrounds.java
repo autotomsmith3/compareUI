@@ -89,12 +89,20 @@ public class Backgrounds extends Comlibs {
 
 	public Backgrounds clickBackground(WebDriver driver, int num, String tc) throws IOException {
 		By selectBackground = By
-				.xpath("/html/body/div[4]/div[2]/div/div/div[2]/div/div/div/div[1]/div[" + num + "]/div/div[1]/img");// 1,2,3....level count
+				.xpath("/html/body/div[2]/div[2]/div/div/div[2]/div/div/div/div[1]/div[" + num + "]/div/div[1]/img");// 1,2,3....level count
 		elementExist(driver, selectBackground, true, tc);
 		driver.findElement(selectBackground).click();
 		return this;
 	}
-
+	public String getBackgroundName(WebDriver driver, int num, String tc) throws IOException {
+		By selectBackground = By
+				.xpath("/html/body/div[2]/div[2]/div/div/div[2]/div/div/div/div[1]/div["+num+"]/div/div[1]/img");// 1,2,3....level count
+		           //     /html/body/div[2]/div[2]/div/div/div[2]/div/div/div/div[1]/div[11]/div/div[1]/img
+		
+		elementExist(driver, selectBackground, true, tc);
+		String bgName=driver.findElement(selectBackground).getAttribute("alt");
+		return bgName;
+	}
 	public Backgrounds clickXButton(WebDriver driver, int num, String tc) throws IOException {
 		num = num + 1;
 		By xBtn = By.cssSelector("tr:nth-child(" + num + ") .btn");// 1,2,3....vertical count
@@ -102,7 +110,7 @@ public class Backgrounds extends Comlibs {
 		driver.findElement(xBtn).click();
 		return this;
 	}
-
+	
 	public Backgrounds selectYear(WebDriver driver, int num, String tc) throws IOException {
 		num = num + 2;
 		By yearLocator = By.xpath("//div[@id='root']/div/table/tbody/tr[" + num + "]/th[4]/select");//ok but only open the dropdown menu    //*[@id="2019"]
@@ -111,7 +119,50 @@ public class Backgrounds extends Comlibs {
 		driver.findElement(yearLocator).click();
 		return this;
 	}
+
+	public String getBackgroundSetName(WebDriver driver, int num, String tc) throws IOException {
+		num = num + 1;
+		By backGroundSetLocator = By.xpath("//div[@id='root']/div/table/tbody/tr[" + num + "]/th[3]");//ok
+		
+		//*[@id="root"]/div/table/tbody/tr[2]/th[3]
+		//*[@id="root"]/div/table/tbody/tr[3]/th[3]
+		
+		elementExist(driver, backGroundSetLocator, true, tc);
+		String bgSetName=driver.findElement(backGroundSetLocator).getText();//ok
+		return bgSetName;
+	}
 	
+	public int getBGSetRow(WebDriver driver, String bgSetNameString, String tc) throws IOException {
+		int SetNum=0;
+		String bgSetNamefrPage="";
+		By backGroundSetLocator = By.xpath("//*[@id='root']/div/table/tbody/tr");//
+		//*[@id="root"]/div/table/tbody/tr[2]   - 1
+		//*[@id="root"]/div/table/tbody/tr[3]/th[3]   - 2
+		
+		elementExist(driver, backGroundSetLocator, true, tc);
+		int bgSetSize=driver.findElements(backGroundSetLocator).size();
+		
+		for (int i=2;i<=bgSetSize;i++) {
+			By bgSetName=By.xpath("//*[@id='root']/div/table/tbody/tr["+i+"]/th[3]");//
+			bgSetNamefrPage=driver.findElement(bgSetName).getText();
+			if (bgSetNamefrPage.equalsIgnoreCase(bgSetNameString)) {
+				SetNum=i-1;
+				break;
+			}else if (i==bgSetSize) {
+				System.out.println("Failed to get bgSet number!");
+				rwExcel(tc, false, "Get the background to match the background set name","Fails to get the number. Returns 0!");
+			}
+			
+		}
+		return SetNum;
+	}
+	
+	public int getBGSetTotalRows(WebDriver driver, String tc) throws IOException {
+		By backGroundSetLocator = By.xpath("//*[@id='root']/div/table/tbody/tr");//
+		elementExist(driver, backGroundSetLocator, true, tc);
+		int bgSetSize=driver.findElements(backGroundSetLocator).size()-1;
+		return bgSetSize;
+	}
 	
 	
 	public Backgrounds ssxxxxselectYearValue(WebDriver driver,int yearRowNum, String tc) throws IOException {
@@ -135,6 +186,14 @@ public class Backgrounds extends Comlibs {
 	
 	
 	
+	public Backgrounds selectMakeValue(WebDriver driver,int makeRowNum, String makeString, String tc) throws IOException {
+		makeRowNum=makeRowNum+1;
+		By makeLocator = By.xpath("//div[@id='root']/div/table/tbody/tr["+makeRowNum+"]/th[5]/select"); // 
+		elementExist(driver, makeLocator, true, tc);
+		Select drpMaker=new Select(driver.findElement(makeLocator));
+		drpMaker.selectByValue(makeString);
+		return this;
+	}	
 	
 	
 	

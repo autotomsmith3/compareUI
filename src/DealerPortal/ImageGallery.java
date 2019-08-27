@@ -187,6 +187,9 @@ public class ImageGallery extends Comlibs {
 	By inventoryGalleryBtnLocator = By.xpath("//*[@id='navbarTabs']/li[1]/a");
 	By listViewBtnLocator = By.xpath("//*[@id=\"listViewBtn\"]/span");
 	By gridViewBtnLocator = By.xpath("//*[@id=\"gridViewBtn\"]/span");
+	By backgroundsLocator = By.xpath("//*[@id=\"navbarTabs\"]/li[4]/a");
+	
+	
 	static int allVinNums = 0;
 	static int allImageNums = 0;
 
@@ -940,7 +943,11 @@ public class ImageGallery extends Comlibs {
 		return new VehicleGallery(driver);
 	}
 
-	// *[@id="vehicleTable"]/tbody/tr/td[6]
+	public Backgrounds clickBackgroundsBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, backgroundsLocator, true, tc);
+		driver.findElement(backgroundsLocator).click();
+		return new Backgrounds(driver);
+	}
 
 	public String getVehGUID(String dlrCode, String sVin, String serverName, String dbName, String userName,
 			String password) throws ClassNotFoundException, SQLException {

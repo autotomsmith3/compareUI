@@ -2860,24 +2860,23 @@ public class AUTOpxController extends Comlibs {
 			tpP.scrollUp(driver, 3000, TCnum);
 			TCnum = i + ": " + "6.1 Check the checkbox for VDI";
 			checkboxName = "VDI";
-			checkboxSelectorID = "#main-container > div > div:nth-child(5) > div:nth-child(2) > label > span";
-			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_VDI, false,
-					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//			checkboxSelectorID = "#main-container > div > div:nth-child(4) > div:nth-child(2) > label > span";  //use Chrome F12 to copy selector; before 20190827
+			checkboxSelectorID = "#main-container > div > div:nth-child(4) > div:nth-child(2) > label > span";  //use Chrome F12 to copy selector; 20190827 got: #main-container > div > div:nth-child(4) > div:nth-child(2) > label > span
+			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_VDI, false, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
 			if (!checkboxIsChecked) {
 				tpP.clickFeaturesVDICheckBox(driver);
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_Vin, true,
-						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_Vin, true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
 				if (!checkboxIsChecked) {
 					// Failed;
 					System.out.println("Failed to click the checkbox -" + checkboxName);
-
 				}
 			}
 
 			// ************************* 6.2 What's Cool - WCI checkbox;*************************
 			TCnum = i + ": " + "6.2 Check the checkbox for WCI";
 			checkboxName = "WCI";
-			checkboxSelectorID = "#main-container > div > div:nth-child(5) > div:nth-child(3) > label > span";
+//			checkboxSelectorID = "#main-container > div > div:nth-child(5) > div:nth-child(3) > label > span";// before 20190827
+			checkboxSelectorID = "#main-container > div > div:nth-child(4) > div:nth-child(3) > label > span";// after  20190827
 			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_WCI, false,
 					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
 			if (!checkboxIsChecked) {
@@ -2894,7 +2893,8 @@ public class AUTOpxController extends Comlibs {
 			// ************************* 6.3 Benefits - VBI checkbox;*************************
 			TCnum = i + ": " + "6.3 Check the checkbox for VBI";
 			checkboxName = "VBI";
-			checkboxSelectorID = "#main-container > div > div:nth-child(5) > div:nth-child(4) > label > span";
+//			checkboxSelectorID = "#main-container > div > div:nth-child(5) > div:nth-child(4) > label > span";// before 20190827
+			checkboxSelectorID = "#main-container > div > div:nth-child(4) > div:nth-child(4) > label > span";// after  20190827
 			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_VBI, false,
 					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
 			if (!checkboxIsChecked) {
@@ -3114,7 +3114,149 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139684_06";
 		igP.clickLogout(driver);
 	}
+	
 
+	public static void MultipleBGTC(WebDriver driver, String brw, String versionNum, String envment,
+			String checkEmail) throws Exception{
+		Properties prop = new Properties();
+		try {
+			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String env = prop.getProperty("AUTOpx.environment");
+		String envBrowser = prop.getProperty("AUTOpx.browser");
+		String render = prop.getProperty("AUTOpx.render");
+		String addNewVIN = prop.getProperty("AUTOpx.addNewVIN");
+		String overlayImage = prop.getProperty("AUTOpx.overlayImagePathFile");
+		String accountEmail = prop.getProperty(env + ".VINpxEmail");
+		String accountPS = prop.getProperty(env + ".VINpxPassword");
+		// String baseURL = prop.getProperty(env + ".VINpxDealerPortalBaseURL");
+		String dealershipName = prop.getProperty(env + ".VINpxDealershipname");
+		String VINpxDealershipBrandName = prop.getProperty(env + ".VINpxDealershipBrandName");
+		String dealerCode = prop.getProperty(env + ".VINpxDealerCode");
+		String vin01 = prop.getProperty(env + ".VINpxVin01");
+		String vin02 = prop.getProperty(env + ".VINpxVin02");
+		String vehGUID01 = prop.getProperty(env + ".VINpxVin01GUID");
+		String vehGUID02 = prop.getProperty(env + ".VINpxVin02GUID");
+		// String vinpxnewVin01 = prop.getProperty(env + ".VINpxNewVIN01");
+		String[] VINpxNewVINs = fetchOneDemArrayFromPropFile(env + ".VINpxNewVINs", prop);
+		String serverName = prop.getProperty(env + ".serverName");
+		String dbName = prop.getProperty(env + ".dbName");
+		String userName = prop.getProperty(env + ".userName");
+		String password = prop.getProperty(env + ".password");
+		String MaxVins = prop.getProperty(env + ".MaxVinsForPreview");
+		int MaxVinsForPreview = Integer.parseInt(MaxVins);
+		int MaxTimeForTemplatesPreview = Integer.parseInt(prop.getProperty(env + ".MaxTimeForTemplatesPreview"));
+		String displayTemplatesStatusOnPage = prop.getProperty("AUTOpx.displayTemplatesStatusOnPage");
+		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
+		// Initial
+		// final int wt_Secs = 6;
+		String TCnum;
+		// String ptitle;
+		String tempVIN = "";
+		String tempVehGUID = "";
+		Comlibs ac = new Comlibs();
+		ac.rwExcel("", "*********Multiple Background TCs**********", "");
+		AUTOpxLogin loginP = new AUTOpxLogin(driver);
+		TCnum = "multiple_BG_01";
+		loginP.verifyHeaderFooter(env, versionNum, TCnum);
+		TCnum = "multiple_BG_02";
+
+		loginP.login(driver, accountEmail, accountPS);
+
+		ImageGallery igP = new ImageGallery(driver);
+		igP.clickDealerShipInfoBtn(driver);
+		DealerProfile dpP = new DealerProfile(driver);
+		// dpP.clickInventoryGalleryBtn(driver, TCnum);
+		// DealerProfile dpP = new DealerProfile(driver);
+		dpP.selectBand(driver, VINpxDealershipBrandName);
+		TCnum = "multiple_BG_03";
+		igP.clickBackgroundsBtn(driver,TCnum);
+		TCnum = "MultipleBGs_01";
+		Backgrounds bgP = new Backgrounds(driver);
+		bgP.clickAddBackgrounds(driver, TCnum);
+		ac.Wait(wt);
+		TCnum = "MultipleBGs_02_01";
+		int bgNum=11;
+		String bgName=bgP.getBackgroundName(driver, bgNum, TCnum);
+		
+		
+		
+		TCnum = "MultipleBGs_02_2";
+		bgP.clickBackground(driver, bgNum, TCnum);
+		TCnum = "MultipleBGs_03";
+//		bgP.scrollUp(driver, 1000, TCnum);
+		bgP.clickAddBtn(driver, TCnum);
+		ac.Wait(wt);
+		TCnum = "MultipleBGs_04";
+//		bgP.selectYear(driver, 1, TCnum);
+		TCnum = "MultipleBGs_05";
+		System.out.println("1st stop");
+		ac.Wait(wt);
+		TCnum = "MultipleBGs_06_01";
+		int bgSetTotalRows=bgP.getBGSetTotalRows(driver, TCnum);
+		int bgSetNum=bgP.getBGSetRow(driver, bgName, TCnum);
+		TCnum = "MultipleBGs_06_02";
+		
+		
+		
+		
+		String bgSetName=bgP.getBackgroundSetName(driver,bgSetNum,TCnum);
+		
+		TCnum = "MultipleBGs_06_03";
+		bgP.selectYearValue(driver, bgSetNum, "2020", TCnum);
+		bgP.selectMakeValue(driver, bgSetNum, "Chevrolet", TCnum);
+		ac.Wait(wt);
+		TCnum = "MultipleBGs_07";
+		bgP.selectYearValue(driver, 1, "2019", TCnum);
+		bgP.selectMakeValue(driver, 1, "GMC", TCnum);
+		ac.Wait(wt);
+		TCnum = "MultipleBGs_08";
+		bgP.selectYearValue(driver, bgSetNum, "2019", TCnum);
+		bgP.selectMakeValue(driver, bgSetNum, "Buick", TCnum);
+		ac.Wait(wt);
+		//Go to Inventory page and select vin01 and vin02 to render
+		TCnum = "MultipleBGs_09";
+		bgP.clickInventoryGalleryBtn(driver);
+		igP.enterTextInSearch("72");
+		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
+		igP.clickSelectBtn(driver, vin02, vehGUID02, TCnum);
+		TCnum = "MultipleBGs_10";
+		igP.clickRerenderBtn(driver, render, TCnum);
+		TCnum = "MultipleBGs_11";
+		igP.verifyGoodMsgShowing(driver, TCnum);
+		TCnum = "MultipleBGs_11_vin01";
+		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID02, 1, TCnum);
+		TCnum = "MultipleBGs_11_vin02";
+		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin02, vehGUID02, 1, TCnum);
+		
+		TCnum = "MultipleBGs_11";
+		igP.clickBackgroundsBtn(driver, TCnum);
+		
+		TCnum = "MultipleBGs_09";
+		bgP.selectYearValue(driver, 1, "Any", TCnum);
+		bgP.selectMakeValue(driver, 1, "Any", TCnum);
+		ac.Wait(wt);
+		TCnum = "MultipleBGs_10";
+		bgP.selectYearValue(driver, 2, "Any", TCnum);
+		bgP.selectMakeValue(driver, 2, "Any", TCnum);
+		ac.Wait(wt);
+		System.out.println("12nd stop");
+		
+		ac.Wait(wt);
+		TCnum = "MultipleBGs_11";
+		bgP.clickXButton(driver, 1, TCnum);
+		TCnum = "MultipleBGs_12";
+		bgP.clickInventoryGalleryBtn(driver, TCnum);
+		TCnum = "MultipleBGs_13";
+		igP.clickBackgroundsBtn(driver,TCnum);
+		
+		for (int i = 1; i <= 4; i++) {}
+
+		TCnum = "TC139684_06";
+		igP.clickLogout(driver);
+	}
 	private static String[] fetchOneDemArrayFromPropFile(String propertyName, Properties propFile) {
 
 		// get array split up by the colin
@@ -3455,6 +3597,13 @@ public class AUTOpxController extends Comlibs {
 			bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
 			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
 			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
+
+//			// ////// 5. Multiple Backgrounds
+//			bc.rwExcel("", "-----Multiple Backgrounds Testing started-----" + (i + 1), "");
+//			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
+//			MultipleBGTC(driver, tBrowser, versionNum, env, chkEmail); // All or LOTpx. This should be in the end of all testing
+			
+			
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
 			System.out.println("Test is complete!!!");

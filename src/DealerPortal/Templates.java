@@ -103,11 +103,15 @@ public class Templates extends Comlibs {
 	By uploadBtnLocator = By.xpath("//*[@id=\"dealerLogoContainer\"]/div[2]/div[1]/div");
 	// *[@id="dealerLogoContainer"]/div[2]/div[1]/div
 
-	By featuresVDILocator = By.xpath("//*[@id='main-container']/div/div[5]/div[2]/label/span");// //*[@id="main-container"]/div/div[5]/div[2]/label/span
-	// *[@id="main-container"]/div/div[5]/div[2]/label/span
-	By whatsCoolWCILocator = By.xpath("//*[@id='main-container']/div/div[5]/div[3]/label/span");
-	// *[@id="main-container"]/div/div[5]/div[3]/label/span
-	By benefitsVBILocator = By.xpath("//*[@id='main-container']/div/div[5]/div[4]/label/span");
+	By featuresVDILocator = By.xpath("//*[@id='main-container']/div/div[4]/div[2]/label/span");// //*[@id="main-container"]/div/div[5]/div[2]/label/span
+	// *[@id="main-container"]/div/div[5]/div[2]/label/span   before 20190827
+	//*[@id="main-container"]/div/div[4]/div[2]/label/span    after 20190827
+	By whatsCoolWCILocator = By.xpath("//*[@id='main-container']/div/div[4]/div[3]/label/span");
+	// *[@id="main-container"]/div/div[5]/div[3]/label/span   before 20190827
+	//*[@id="main-container"]/div/div[4]/div[3]/label/span   after 20190827
+	By benefitsVBILocator = By.xpath("//*[@id='main-container']/div/div[4]/div[4]/label/span");
+	//*[@id='main-container']/div/div[5]/div[4]/label/span  before 20190827
+	//*[@id="main-container"]/div/div[4]/div[4]/label/span  after 20190827
 
 	By MessageDisplayedOnHead = By.xpath("//*[@id=\"successMessage\"]");
 	// By Locator=By.xpath("");
@@ -133,51 +137,61 @@ public class Templates extends Comlibs {
 	// By Locator=By.xpath("");
 
 	public DealerProfile clickDealerShipInfoBtn(WebDriver driver) throws IOException {
+		elementExist(driver, dealerShipInfoBtnLocator, true, "clickDealerShipInfoBtn");
 		driver.findElement(dealerShipInfoBtnLocator).click();
 		return new DealerProfile(driver);
 	}
 
 	public ImageGallery clickInventoryGalleryBtn(WebDriver driver) throws IOException {
+		elementExist(driver, inventoryGalleryBtnLocator, true, "clickInventoryGalleryBtn");
 		driver.findElement(inventoryGalleryBtnLocator).click();
 		return new ImageGallery(driver);
 	}
 
 	public Templates clickTemplatesBtn(WebDriver driver) throws IOException {
+		elementExist(driver, templatesBtnLocator, true, "clickTemplatesBtn");
 		driver.findElement(templatesBtnLocator).click();
 		return this;
 	}
 
 	public Templates clickSaveBtn(WebDriver driver) throws IOException {
+		elementExist(driver, saveBtnLocator, true, "clickSaveBtn");
 		driver.findElement(saveBtnLocator).click();
 		return this;
 	}
 
 	public Templates clickContentHeaderSaveBtn(WebDriver driver) throws IOException {
+		elementExist(driver, contentHeaderSAVEBtnLocator, true, "clickContentHeaderSaveBtn");
 		driver.findElement(contentHeaderSAVEBtnLocator).click();
 		return this;
 	}
 
 	public Templates clickContentFooterSaveBtn(WebDriver driver) throws IOException {
+		elementExist(driver, contentFooterSAVEBtnLocator, true, "clickContentFooterSaveBtn");
 		driver.findElement(contentFooterSAVEBtnLocator).click();
 		return this;
 	}
 
 	public Templates clickContentOverlaySaveBtn(WebDriver driver) throws IOException {
+		elementExist(driver, contentOverlaySAVEBtnLocator, true, "clickContentOverlaySaveBtn");
 		driver.findElement(contentOverlaySAVEBtnLocator).click();
 		return this;
 	}
 
 	public Templates clickHeaderXBtn(WebDriver driver) throws IOException {
+		elementExist(driver, contentHeaderXBtnLocator, true, "clickHeaderXBtn");
 		driver.findElement(contentHeaderXBtnLocator).click();
 		return this;
 	}
 
 	public Templates clickFooterXBtn(WebDriver driver) throws IOException {
+		elementExist(driver, contentFooterXBtnLocator, true, "clickFooterXBtn");
 		driver.findElement(contentFooterXBtnLocator).click();
 		return this;
 	}
 
 	public Templates clickOverlayXBtn(WebDriver driver) throws IOException {
+		elementExist(driver, contentOverlayXBtnLocator, true, "clickOverlayXBtn");
 		driver.findElement(contentOverlayXBtnLocator).click();
 		return this;
 	}
@@ -310,107 +324,128 @@ public class Templates extends Comlibs {
 	}
 
 	public Templates clickHeaderCheckBox(WebDriver driver) throws IOException {
+		elementExist(driver, headerCheckBoxLocator, true, "clickHeaderCheckBox checkbox");
 		driver.findElement(headerCheckBoxLocator).click();
 		return this;
 	}
 
 	public Templates clickHeaderEditBtn(WebDriver driver) throws IOException {
+		elementExist(driver, headerEditLocator, true, "clickHeaderEditBtn checkbox");
 		driver.findElement(headerEditLocator).click();
 		return this;
 	}
 
 	public Templates clickDealershipLogoCheckBox(WebDriver driver) throws IOException {
+		elementExist(driver, headerContent_DealershipLogo_CheckBoxLocator, true, "clickDealershipLogoCheckBox checkbox");
 		driver.findElement(headerContent_DealershipLogo_CheckBoxLocator).click();
 		return this;
 	}
 
 	public Templates clickDealershipAddressCheckBox(WebDriver driver) throws IOException {
+		elementExist(driver, headerContent_DealershipAddress_CheckBoxLocator, true, "clickDealershipAddressCheckBox checkbox");
 		driver.findElement(headerContent_DealershipAddress_CheckBoxLocator).click();
 		return this;
 	}
 
 	public Templates clickDealershipPhoneCheckBox(WebDriver driver) throws IOException {
+		elementExist(driver, headerContent_DealershipPhone_CheckBoxLocator, true, "clickDealershipPhoneCheckBox checkbox");
 		driver.findElement(headerContent_DealershipPhone_CheckBoxLocator).click();
 		return this;
 	}
 
 	public Templates clickDealershipEmailCheckBox(WebDriver driver) throws IOException {
+		elementExist(driver, headerContent_DealershipEmail_CheckBoxLocator, true, "clickDealershipEmailCheckBox checkbox");
 		driver.findElement(headerContent_DealershipEmail_CheckBoxLocator).click();
 		return this;
 	}
 
 	public Templates clickDealershipWebsiteCheckBox(WebDriver driver) throws IOException {
+		elementExist(driver, headerContent_DealershipWebsite_CheckBoxLocator, true, "clickDealershipWebsiteCheckBox checkbox");
 		driver.findElement(headerContent_DealershipWebsite_CheckBoxLocator).click();
 		return this;
 	}
 
 	public Templates clickFooterCheckBox(WebDriver driver) throws IOException {
+		elementExist(driver, footerCheckBoxLocator, true, "clickFooterCheckBox checkbox");
 		driver.findElement(footerCheckBoxLocator).click();
 		return this;
 	}
 
 	public Templates clickFooterEditBtn(WebDriver driver) throws IOException {
+		elementExist(driver, footerEditLocator, true, "clickFooterEditBtn checkbox");
 		driver.findElement(footerEditLocator).click();
 		return this;
 	}
 
 	public Templates clickVehicleInfoCheckBox(WebDriver driver) throws IOException {
+		elementExist(driver, footerContent_VehicleInfo_CheckBoxLocator, true, "clickVehicleInfoCheckBox checkbox");
 		driver.findElement(footerContent_VehicleInfo_CheckBoxLocator).click();
 		return this;
 	}
 
 	public Templates clickVINCheckBox(WebDriver driver) throws IOException {
+		elementExist(driver, footerContent_VIN_CheckBoxLocator, true, "clickVINCheckBox checkbox");
 		driver.findElement(footerContent_VIN_CheckBoxLocator).click();
 		return this;
 	}
 
 	public Templates clickStockNumberCheckBox(WebDriver driver) throws IOException {
+		elementExist(driver, footerContent_StockNumber_CheckBoxLocator, true, "clickStockNumberCheckBox checkbox");
 		driver.findElement(footerContent_StockNumber_CheckBoxLocator).click();
 		return this;
 	}
 
 	public Templates clickBrandLogoCheckBox(WebDriver driver) throws IOException {
+		elementExist(driver, footerContent_BrandLogo_CheckBoxLocator, true, "clickBrandLogoCheckBox checkbox");
 		driver.findElement(footerContent_BrandLogo_CheckBoxLocator).click();
 		return this;
 	}
 
 	public Templates clickMarketingMessageTopCheckBox(WebDriver driver) throws IOException {
+		elementExist(driver, MarketingMessageTopCheckBoxLocator, true, "clickMarketingMessageTopCheckBox checkbox");
 		driver.findElement(MarketingMessageTopCheckBoxLocator).click();
 		return this;
 	}
 
 	public Templates clickMarketingMessageBottomCheckBox(WebDriver driver) throws IOException {
+		elementExist(driver, MarketingMessageBottomCheckBoxLocator, true, "clickMarketingMessageBottomCheckBox checkbox");
 		driver.findElement(MarketingMessageBottomCheckBoxLocator).click();
 		return this;
 	}
 
 	public Templates clickMarketingMessageTopEditBtn(WebDriver driver) throws IOException {
+		elementExist(driver, MarketingMessageTopEditLocator, true, "xclickMarketingMessageTopEditBtnxxx checkbox");
 		driver.findElement(MarketingMessageTopEditLocator).click();
 		return this;
 	}
 
 	public Templates clickMarketingMessageBottomEditBtn(WebDriver driver) throws IOException {
+		elementExist(driver, MarketingMessageBottomEditLocator, true, "clickMarketingMessageBottomEditBtn checkbox");
 		driver.findElement(MarketingMessageBottomEditLocator).click();
 		return this;
 	}
 
 	public Templates inputGlbMsgIntoMarketingMSGTopContentField(WebDriver driver, String glbMsg) throws IOException {
+		elementExist(driver, MarketingMessageTopContent_globleMSG_fieldLocator, true, "inputGlbMsgIntoMarketingMSGTopContentField");
 		driver.findElement(MarketingMessageTopContent_globleMSG_fieldLocator).clear();
 		driver.findElement(MarketingMessageTopContent_globleMSG_fieldLocator).sendKeys(glbMsg);
 		return this;
 	}
 
 	public Templates clickFeaturesVDICheckBox(WebDriver driver) throws IOException {
+		elementExist(driver, featuresVDILocator, true, "VDI checkbox");
 		driver.findElement(featuresVDILocator).click();
 		return this;
 	}
 
 	public Templates clickWhatsCoolCheckBox(WebDriver driver) throws IOException {
+		elementExist(driver, whatsCoolWCILocator, true, "WCI checkbox");
 		driver.findElement(whatsCoolWCILocator).click();
 		return this;
 	}
 
 	public Templates clickBenefitsVBICheckBox(WebDriver driver) throws IOException {
+		elementExist(driver, benefitsVBILocator, true, "VBI checkbox");
 		driver.findElement(benefitsVBILocator).click();
 		return this;
 	}
@@ -596,6 +631,7 @@ public class Templates extends Comlibs {
 			}
 		} catch (Exception e) {
 			isTrue = false;
+			rwExcel(tc, false, "Verify " + checkboxName, "Checkbox cannot be identified!");
 		}
 		return isTrue;
 	};
