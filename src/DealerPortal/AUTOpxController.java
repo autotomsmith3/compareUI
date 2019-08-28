@@ -2401,6 +2401,7 @@ public class AUTOpxController extends Comlibs {
 		if (!alertPass) {
 			driver.close();
 		}
+		vgP.clickLogout(driver);
 	}
 
 	public static void VINpxTemplatesTC(WebDriver driver, String brw, String versionNum, String envment,
@@ -3178,7 +3179,7 @@ public class AUTOpxController extends Comlibs {
 		bgP.clickAddBackgrounds(driver, TCnum);
 		ac.Wait(wt);
 		TCnum = "MultipleBGs_02_01";
-		int bgNum=11;
+		int bgNum=19;
 		String bgName=bgP.getBackgroundName(driver, bgNum, TCnum);
 		
 		
@@ -3230,7 +3231,7 @@ public class AUTOpxController extends Comlibs {
 		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID02, 1, TCnum);
 		TCnum = "MultipleBGs_11_vin02";
 		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin02, vehGUID02, 1, TCnum);
-		
+		ac.Wait(wt*4);
 		TCnum = "MultipleBGs_11";
 		igP.clickBackgroundsBtn(driver, TCnum);
 		
@@ -3598,10 +3599,10 @@ public class AUTOpxController extends Comlibs {
 			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
 			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
 
-//			// ////// 5. Multiple Backgrounds
-//			bc.rwExcel("", "-----Multiple Backgrounds Testing started-----" + (i + 1), "");
-//			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
-//			MultipleBGTC(driver, tBrowser, versionNum, env, chkEmail); // All or LOTpx. This should be in the end of all testing
+			// ////// 5. Multiple Backgrounds
+			bc.rwExcel("", "-----Multiple Backgrounds Testing started-----" + (i + 1), "");
+			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
+			MultipleBGTC(driver, tBrowser, versionNum, env, chkEmail); // All or LOTpx. This should be in the end of all testing
 			
 			
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
