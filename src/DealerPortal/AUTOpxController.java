@@ -3158,6 +3158,11 @@ public class AUTOpxController extends Comlibs {
 		String tempVIN = "";
 		String tempVehGUID = "";
 		Comlibs ac = new Comlibs();
+		String y1="2019";
+		String m1="GMC";
+		String y2="2019";
+		String m2="GMC";
+		int wtime=10;
 		ac.rwExcel("", "*********Multiple Background TCs**********", "");
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 		TCnum = "multiple_BG_01";
@@ -3203,6 +3208,7 @@ public class AUTOpxController extends Comlibs {
 		
 		
 		
+		
 		String bgSetName=bgP.getBackgroundSetName(driver,bgSetNum,TCnum);
 		
 		TCnum = "MultipleBGs_06_03";
@@ -3210,30 +3216,122 @@ public class AUTOpxController extends Comlibs {
 		bgP.selectMakeValue(driver, bgSetNum, "Chevrolet", TCnum);
 		ac.Wait(wt);
 		TCnum = "MultipleBGs_07";
-		bgP.selectYearValue(driver, 1, "2019", TCnum);
-		bgP.selectMakeValue(driver, 1, "GMC", TCnum);
+		y1="2019";
+		m1="Buick";
+		y2="2019";
+		m2="GMC";
+		bgP.selectYearValue(driver, 1, y1, TCnum);
+		bgP.selectMakeValue(driver, 1, m1, TCnum);
 		ac.Wait(wt);
-		TCnum = "MultipleBGs_08";
-		bgP.selectYearValue(driver, bgSetNum, "2019", TCnum);
-		bgP.selectMakeValue(driver, bgSetNum, "Buick", TCnum);
+		bgP.selectYearValue(driver, bgSetNum, y2, TCnum);
+		bgP.selectMakeValue(driver, bgSetNum, m2, TCnum);
 		ac.Wait(wt);
 		//Go to Inventory page and select vin01 and vin02 to render
 		TCnum = "MultipleBGs_09";
-		bgP.clickInventoryGalleryBtn(driver);
-		igP.enterTextInSearch("72");
-		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
-		igP.clickSelectBtn(driver, vin02, vehGUID02, TCnum);
-		TCnum = "MultipleBGs_10";
-		igP.clickRerenderBtn(driver, render, TCnum);
-		TCnum = "MultipleBGs_11";
-		igP.verifyGoodMsgShowing(driver, TCnum);
-		TCnum = "MultipleBGs_11_vin01";
-		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID02, 1, TCnum);
-		TCnum = "MultipleBGs_11_vin02";
-		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin02, vehGUID02, 1, TCnum);
-		ac.Wait(wt*4);
-		TCnum = "MultipleBGs_11";
-		igP.clickBackgroundsBtn(driver, TCnum);
+		
+		int tcs=8;
+		for (int i=1;i<tcs;i++) {
+		
+			bgP.clickInventoryGalleryBtn(driver);
+			igP.enterTextInSearch("72");
+			igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
+			igP.clickSelectBtn(driver, vin02, vehGUID02, TCnum);
+			
+//			igP.clickSelectAllBtn(driver, TCnum);
+			
+			TCnum = "MultipleBGs_10";
+			igP.clickRerenderBtn(driver, render, TCnum);
+			TCnum = "MultipleBGs_11";
+			igP.verifyGoodMsgShowing(driver, TCnum);
+			TCnum = "MultipleBGs_11_vin01";
+			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID02, 1, TCnum);
+			TCnum = "MultipleBGs_11_vin02";
+			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin02, vehGUID02, 1, TCnum);
+			
+			System.out.println("\ni = "+(i)+" of "+tcs+". First BG is vinpx_stockpx.  Year 1 = "+y1+". Make = "+m1+"");
+			System.out.println("i = "+(i)+" of "+tcs+". Second BG is 588.  Year 2 = "+y2+". Make = "+m2+"\n");
+			System.out.println("Wait ...."+wtime+" x wt seconds.");
+			ac.Wait(wt*wtime);
+			TCnum = "MultipleBGs_11";
+			igP.clickBackgroundsBtn(driver, TCnum);
+		
+			if (i==1) {
+				y1="2018";
+				m1="any";
+				y2="any";
+				m2="any";
+						
+				bgP.selectYearValue(driver, 1, y1, TCnum);
+				bgP.selectMakeValue(driver, 1, m1, TCnum);
+				ac.Wait(wt);
+				bgP.selectYearValue(driver, bgSetNum, y2, TCnum);
+				bgP.selectMakeValue(driver, bgSetNum, m2, TCnum);
+			}else if (i ==2) {
+				y1="any";
+				m1="any";
+				y2="2018";
+				m2="any";
+						
+				bgP.selectYearValue(driver, 1, y1, TCnum);
+				bgP.selectMakeValue(driver, 1, m1, TCnum);
+				ac.Wait(wt);
+				bgP.selectYearValue(driver, bgSetNum, y2, TCnum);
+				bgP.selectMakeValue(driver, bgSetNum, m2, TCnum);
+			}else if (i==3) {
+				y1="2020";
+				m1="Buick";
+				y2="2020";
+				m2="GMC";
+						
+				bgP.selectYearValue(driver, 1, y1, TCnum);
+				bgP.selectMakeValue(driver, 1, m1, TCnum);
+				ac.Wait(wt);
+				bgP.selectYearValue(driver, bgSetNum, y2, TCnum);
+				bgP.selectMakeValue(driver, bgSetNum, m2, TCnum);
+			}else if (i==4) {
+				y1="any";
+				m1="Cadillac";
+				y2="any";
+				m2="Chev";
+						
+				bgP.selectYearValue(driver, 1, y1, TCnum);
+				bgP.selectMakeValue(driver, 1, m1, TCnum);
+				ac.Wait(wt);
+				bgP.selectYearValue(driver, bgSetNum, y2, TCnum);
+				bgP.selectMakeValue(driver, bgSetNum, m2, TCnum);
+			}else if (i==5) {
+				y1="2019";
+				m1="Cadillac";
+				y2="2019";
+				m2="Chev";
+						
+				bgP.selectYearValue(driver, 1, y1, TCnum);
+				bgP.selectMakeValue(driver, 1, m1, TCnum);
+				ac.Wait(wt);
+				bgP.selectYearValue(driver, bgSetNum, y2, TCnum);
+				bgP.selectMakeValue(driver, bgSetNum, m2, TCnum);
+			}else if (i==6) {
+				y1="2019";
+				m1="Cadillac";
+				y2="2019";
+				m2="Chev";
+						
+				bgP.selectYearValue(driver, 1, y1, TCnum);
+				bgP.selectMakeValue(driver, 1, m1, TCnum);
+				ac.Wait(wt);
+				bgP.selectYearValue(driver, bgSetNum, y2, TCnum);
+				bgP.selectMakeValue(driver, bgSetNum, m2, TCnum);
+			}else if (i==7) {
+				System.out.println("\ni = "+(i)+" of "+tcs+".");
+			}else if (i==8) {
+				System.out.println("\ni = "+(i)+" of "+tcs+".");
+			}	
+		}
+		
+		
+		
+		
+		
 		
 		TCnum = "MultipleBGs_09";
 		bgP.selectYearValue(driver, 1, "Any", TCnum);
@@ -3572,32 +3670,32 @@ public class AUTOpxController extends Comlibs {
 			//// tempDebug(driver);// ***************************************Debug*****************************************
 			//// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			//// 0.General Inventory Gallery
-			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-			inventoryGalleryTC(driver, tBrowser, env, versionNum);
-			vehicleGallery(driver, tBrowser, env);
-			// verifyRerender(driver, tBrowser);
-
-			////// 1.VINpx:
-			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-
-			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-
-			////// 2. STOCKpx
-			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			STOCKpxInventoryTC(driver, tBrowser, env);
-
-			////// 3. Templates
-			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
-			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
-
-			//// bc.Wait(18*60);//wait 18 minutes;
-
-			// ////// 4. LOTpx
-			bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
-			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
-			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
+//			//// 0.General Inventory Gallery
+//			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+//			inventoryGalleryTC(driver, tBrowser, env, versionNum);
+//			vehicleGallery(driver, tBrowser, env);
+//			// verifyRerender(driver, tBrowser);
+//
+//			////// 1.VINpx:
+//			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+//			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+//
+//			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+//
+//			////// 2. STOCKpx
+//			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+//			STOCKpxInventoryTC(driver, tBrowser, env);
+//
+//			////// 3. Templates
+//			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
+//			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
+//
+//			//// bc.Wait(18*60);//wait 18 minutes;
+//
+//			// ////// 4. LOTpx
+//			bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
+//			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
+//			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
 
 			// ////// 5. Multiple Backgrounds
 			bc.rwExcel("", "-----Multiple Backgrounds Testing started-----" + (i + 1), "");

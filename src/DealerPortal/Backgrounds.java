@@ -188,7 +188,11 @@ public class Backgrounds extends Comlibs {
 	
 	public Backgrounds selectMakeValue(WebDriver driver,int makeRowNum, String makeString, String tc) throws IOException {
 		makeRowNum=makeRowNum+1;
-		By makeLocator = By.xpath("//div[@id='root']/div/table/tbody/tr["+makeRowNum+"]/th[5]/select"); // 
+//		By makeLocator = By.xpath("//div[@id='root']/div/table/tbody/tr["+makeRowNum+"]/th[5]/select"); // 
+		
+		//*[@id="root"]/div/table/tbody/tr[2]/th[5]   //chrome copy xpath on parent div
+		By makeLocator = By.xpath("//*[@id=\"root\"]/div/table/tbody/tr["+makeRowNum+"]/th[5]/select"); // 
+
 		elementExist(driver, makeLocator, true, tc);
 		Select drpMaker=new Select(driver.findElement(makeLocator));
 		drpMaker.selectByValue(makeString);

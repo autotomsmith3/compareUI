@@ -693,7 +693,7 @@ public class AdminPortalController extends Comlibs {
 		DealerProfieP.inputWebsite(driver, Website,tc);
 		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber,tc);
 
-		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
+//		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
 
@@ -739,7 +739,7 @@ public class AdminPortalController extends Comlibs {
 		alertmessage = "You must save the dealer information before you can take this action";
 		DealerProfieP.uploadDealershipLogo(driver, dealershipLogoPath, alertmessage, tc);
 		ac.Wait(wt);
-		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
+//		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
 		// Stop here for the time being since there is bug here AUTOPXOPS-1227
@@ -855,7 +855,7 @@ public class AdminPortalController extends Comlibs {
 		DealerProfileP.inputWebsite(driver, Website,tc);
 		DealerProfileP.inputDealershipPhone(driver, DealershipPhoneNumber,tc);
 		ac.Wait(wt);
-		DealerProfileP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
+//		DealerProfileP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
 		DealerProfileP.scrollUp(driver, -3000, tc);
 		DealerProfileP.clickSaveBtn(driver, tc);
 		ac.Wait(wt);
@@ -902,7 +902,7 @@ public class AdminPortalController extends Comlibs {
 		alertmessage = "You must save the dealer information before you can take this action";
 		DealerProfieP.uploadDealershipLogo(driver, dealershipLogoPath, alertmessage, tc);
 		ac.Wait(wt);
-		DealerProfileP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
+//		DealerProfileP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
 		DealerProfileP.scrollUp(driver, -3000, tc);
 		DealerProfileP.clickSaveBtn(driver, tc);
 		// Verify msg: "Your settings have been saved"
@@ -1894,7 +1894,7 @@ public class AdminPortalController extends Comlibs {
 		DealerProfieP.inputWebsite(driver, Website, tc);
 		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber, tc);
 
-		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet, tc);// Generic Dealership=7; White Gradient=0
+//		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet, tc);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
 
@@ -1937,7 +1937,7 @@ public class AdminPortalController extends Comlibs {
 		DealerProfieP.inputWebsite(driver, Website, tc);
 		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber, tc);
 
-		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet, tc);// Generic Dealership=7; White Gradient=0
+//		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet, tc);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
 		// Stop here for the time being since there is bug here AUTOPXOPS-1227

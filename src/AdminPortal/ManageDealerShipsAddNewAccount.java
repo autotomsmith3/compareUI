@@ -362,7 +362,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		DealerProfieP.inputDealersipID(driver, DealershipID, tc);
 		DealerProfieP.selectVINpxProd(driver, tc);
 		DealerProfieP.selectSTOCKpxProd(driver, tc);
-		// DealerProfieP.selectLOTpxProd(driver);
+//		 DealerProfieP.selectLOTpxProd(driver);
 		// DealerProfieP.inputMetadata(driver, MetadataValues);
 
 		// DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
@@ -378,7 +378,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg, tc);
 		DealerProfieP.inputWebsite(driver, Website, tc);
 		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber, tc);
-		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet, tc);// Generic Dealership=7; White Gradient=0
+//		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet, tc);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
 		Wait(wt);
@@ -424,7 +424,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber, tc);
 		alertmessage = "You must save the dealer information before you can take this action";
 		DealerProfieP.uploadDealershipLogo(driver, dealershipLogoPath, alertmessage, tc);
-		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet, tc);// Generic Dealership=7; White Gradient=0
+//		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet, tc);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
 		Wait(wt);
