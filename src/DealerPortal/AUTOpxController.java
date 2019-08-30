@@ -3183,28 +3183,192 @@ public class AUTOpxController extends Comlibs {
 		Backgrounds bgP = new Backgrounds(driver);
 		bgP.clickAddBackgrounds(driver, TCnum);
 		ac.Wait(wt);
-		TCnum = "MultipleBGs_02_01";
+		TCnum = "Add GB_01_1";
 		int bgNum=19;
-		String bgName=bgP.getBackgroundName(driver, bgNum, TCnum);
+		String bgName=bgP.getBackgroundNameFrPopup(driver, bgNum, TCnum);
 		
-		
-		
-		TCnum = "MultipleBGs_02_2";
+		TCnum = "Add GB_01_2";
 		bgP.clickBackground(driver, bgNum, TCnum);
-		TCnum = "MultipleBGs_03";
+		TCnum = "Add GB_01_3";
 //		bgP.scrollUp(driver, 1000, TCnum);
 		bgP.clickAddBtn(driver, TCnum);
 		ac.Wait(wt);
+		
+		
+		int addNew=5;
+		for (int i=1;i<=addNew;i++) {
+			TCnum = "Test Run to Add New BGs_"+i;
+			bgP.clickAddBackgrounds(driver, TCnum);
+			bgP.clickBackground(driver, bgNum, TCnum);
+//			bgP.scrollUp(driver, 1000, TCnum);
+			bgP.clickAddBtn(driver, TCnum);
+			ac.Wait(wt);
+		}
+		
 		TCnum = "MultipleBGs_04";
 //		bgP.selectYear(driver, 1, TCnum);
 		TCnum = "MultipleBGs_05";
-		System.out.println("1st stop");
+		System.out.println("Added "+addNew+" same backgrounds");
 		ac.Wait(wt);
 		TCnum = "MultipleBGs_06_01";
 		int bgSetTotalRows=bgP.getBGSetTotalRows(driver, TCnum);
-		int bgSetNum=bgP.getBGSetRow(driver, bgName, TCnum);
 		TCnum = "MultipleBGs_06_02";
+		int duplicateBGsTotal=0;
+		String dName="";
+		boolean[] duplicateBG= new boolean[bgSetTotalRows+1];
+
+		for (int i=0;i<bgSetTotalRows;i++) {
+			duplicateBG[i]=false;
+		}
 		
+		
+		for (int i=1;i<=bgSetTotalRows;i++) {
+			dName=bgP.getBackgroundSetName(driver, i, TCnum+"_"+i);
+			if (dName.equalsIgnoreCase(bgName)) {
+				duplicateBGsTotal=duplicateBGsTotal+1;
+				duplicateBG[i]=true;
+			}else {
+				duplicateBG[i]=false;
+			}
+		};
+		TCnum = "Check_Duplicate_BGs_01";
+		bgP.clickInventoryGalleryBtn(driver);
+		igP.clickBackgroundsBtn(driver, TCnum);
+		
+		int bgSetTotalRows02= bgP.getBGSetTotalRows(driver, TCnum);
+		if (bgSetTotalRows02==bgSetTotalRows) {
+			System.out.println("Pass. Match! Before going to Inventory page Total ="+bgSetTotalRows+".  After back to Backgrounds page Total ="+bgSetTotalRows02+"\n");
+			ac.rwExcel(TCnum, true, "Compare Backgrounds before and after going to Inventory Gallary Page","Before going to Inventory page Total ="+bgSetTotalRows+".  After back to Backgrounds page Total ="+bgSetTotalRows02);
+	
+		}else {
+			System.out.println("Failed to match new added BGs. Before going to Inventory page Total ="+bgSetTotalRows+".  After back to Backgrounds page Total ="+bgSetTotalRows02+"\n");
+			ac.rwExcel(TCnum, false, "Compare Backgrounds before and after going to Inventory Gallary Page","BGs lost! Before going to Inventory page Total ="+bgSetTotalRows+".  After back to Backgrounds page Total ="+bgSetTotalRows02);
+		}
+		
+		
+		//get all new added bgs array
+		TCnum = "New Duplicate_BGs_01_1";
+		for (int i=0;i<bgSetTotalRows02;i++) {
+			duplicateBG[i]=false;
+		}
+		for (int i=1;i<=bgSetTotalRows02;i++) {
+			dName=bgP.getBackgroundSetName(driver, i, TCnum+"_"+i);
+			if (dName.equalsIgnoreCase(bgName)) {
+				duplicateBGsTotal=duplicateBGsTotal+1;
+				duplicateBG[i]=true;
+			}else {
+				duplicateBG[i]=false;
+			}
+		};
+		
+		System.out.println("\nAll BGs Total is = "+bgSetTotalRows+". And total duplicate BGs ="+duplicateBGsTotal+"\n");
+		//delete all duplicates
+		TCnum = "Delete all New Duplicate_BGs_01";
+		for (int i=bgSetTotalRows02;i>0;i--) {
+			if (duplicateBG[i]) {
+				bgP.clickXButton(driver, i, TCnum+"_"+i);
+			}
+		}
+		System.out.println("\nAll New Added BGs are deleted\n");
+		TCnum = "Add New_Duplicate_BGs";
+		bgP.clickInventoryGalleryBtn(driver);
+		igP.clickBackgroundsBtn(driver, TCnum);
+		
+		//Add 3 new duplicate BG
+		addNew=3;
+		for (int i=1;i<=addNew;i++) {
+			TCnum = "Add New BG_"+i;
+			bgP.clickAddBackgrounds(driver, TCnum);
+			bgP.clickBackground(driver, bgNum, TCnum);
+//			bgP.scrollUp(driver, 1000, TCnum);
+			bgP.clickAddBtn(driver, TCnum);
+			ac.Wait(wt);
+		}
+		for (int i=0;i<bgSetTotalRows;i++) {
+			duplicateBG[i]=false;
+		}
+		bgSetTotalRows=bgP.getBGSetTotalRows(driver, TCnum);
+		TCnum = "Add New Backgrounds_01";
+		duplicateBGsTotal=0;
+		dName="";	
+		
+		for (int i=1;i<=bgSetTotalRows;i++) {
+			dName=bgP.getBackgroundSetName(driver, i, TCnum+"_"+i);
+			if (dName.equalsIgnoreCase(bgName)) {
+				duplicateBGsTotal=duplicateBGsTotal+1;
+				duplicateBG[i]=true;
+			}else {
+				duplicateBG[i]=false;
+			}
+		};
+		TCnum = "Check_Duplicate_BGs_01";
+//		bgP.clickInventoryGalleryBtn(driver);
+//		igP.clickBackgroundsBtn(driver, TCnum);
+		
+		//get the row numbers for each new added bgs.
+		int [] newDuplicateBGsRow=new int[addNew+1];
+		int count=0;
+		
+		for (int i=1;i<=bgSetTotalRows;i++) {
+			if (duplicateBG[i]) {
+				count=count+1;
+				newDuplicateBGsRow[count]=i;
+			}
+			
+		}
+		
+		
+		TCnum = "Set Duplicate_BGs_01";
+		for (int i=1;i<=addNew;i++) {
+			if (i==1) {
+				y1="2019";
+				m1="Buick";
+				bgP.selectYearValue(driver, newDuplicateBGsRow[i], y1, TCnum);
+				bgP.selectMakeValue(driver, newDuplicateBGsRow[i], m1, TCnum);
+			}else if (i==2) {
+				y1="2019";
+				m1="Cadillac";
+				bgP.selectYearValue(driver, newDuplicateBGsRow[i], y1, TCnum);
+				bgP.selectMakeValue(driver, newDuplicateBGsRow[i], m1, TCnum);
+				ac.Wait(wt);
+			}else if (i==3) {
+				y1="2020";
+				m1="GMC";
+				bgP.selectYearValue(driver, newDuplicateBGsRow[i], y1, TCnum);
+				bgP.selectMakeValue(driver, newDuplicateBGsRow[i], m1, TCnum);
+			}else if (i==4) {
+//				y1="x";
+//				m1="x";
+//				y2="x";
+//				m2="x";
+//				bgP.selectYearValue(driver, newDuplicateBGsRow[i], y1, TCnum);
+//				bgP.selectMakeValue(driver, newDuplicateBGsRow[i], m1, TCnum);
+			}else if (i==5) {
+//				y1="x";
+//				m1="x";
+//				y2="x";
+//				m2="x";
+//				bgP.selectYearValue(driver, newDuplicateBGsRow[i], y1, TCnum);
+//				bgP.selectMakeValue(driver, newDuplicateBGsRow[i], m1, TCnum);
+			}else if (i==6) {
+//				y1="x";
+//				m1="x";
+//				y2="x";
+//				m2="x";
+//				bgP.selectYearValue(driver, newDuplicateBGsRow[i], y1, TCnum);
+//				bgP.selectMakeValue(driver, newDuplicateBGsRow[i], m1, TCnum);
+			}
+		}
+		
+		//stop here!!!
+		
+		
+		
+		
+		
+		
+		int bgSetNum=bgP.getBGSetRow(driver, bgName, TCnum);
+
 		
 		
 		
@@ -3229,18 +3393,20 @@ public class AUTOpxController extends Comlibs {
 		//Go to Inventory page and select vin01 and vin02 to render
 		TCnum = "MultipleBGs_09";
 		
-		int tcs=8;
+	
+		
+		int tcs=1;
 		for (int i=1;i<tcs;i++) {
 		
 			bgP.clickInventoryGalleryBtn(driver);
-			igP.enterTextInSearch("72");
-			igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
-			igP.clickSelectBtn(driver, vin02, vehGUID02, TCnum);
+//			igP.enterTextInSearch("72");
+//			igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
+//			igP.clickSelectBtn(driver, vin02, vehGUID02, TCnum);
 			
 //			igP.clickSelectAllBtn(driver, TCnum);
-			
-			TCnum = "MultipleBGs_10";
-			igP.clickRerenderBtn(driver, render, TCnum);
+//			
+//			TCnum = "MultipleBGs_10";
+//			igP.clickRerenderBtn(driver, render, TCnum);
 			TCnum = "MultipleBGs_11";
 			igP.verifyGoodMsgShowing(driver, TCnum);
 			TCnum = "MultipleBGs_11_vin01";
@@ -3255,77 +3421,6 @@ public class AUTOpxController extends Comlibs {
 			TCnum = "MultipleBGs_11";
 			igP.clickBackgroundsBtn(driver, TCnum);
 		
-			if (i==1) {
-				y1="2018";
-				m1="any";
-				y2="any";
-				m2="any";
-						
-				bgP.selectYearValue(driver, 1, y1, TCnum);
-				bgP.selectMakeValue(driver, 1, m1, TCnum);
-				ac.Wait(wt);
-				bgP.selectYearValue(driver, bgSetNum, y2, TCnum);
-				bgP.selectMakeValue(driver, bgSetNum, m2, TCnum);
-			}else if (i ==2) {
-				y1="any";
-				m1="any";
-				y2="2018";
-				m2="any";
-						
-				bgP.selectYearValue(driver, 1, y1, TCnum);
-				bgP.selectMakeValue(driver, 1, m1, TCnum);
-				ac.Wait(wt);
-				bgP.selectYearValue(driver, bgSetNum, y2, TCnum);
-				bgP.selectMakeValue(driver, bgSetNum, m2, TCnum);
-			}else if (i==3) {
-				y1="2020";
-				m1="Buick";
-				y2="2020";
-				m2="GMC";
-						
-				bgP.selectYearValue(driver, 1, y1, TCnum);
-				bgP.selectMakeValue(driver, 1, m1, TCnum);
-				ac.Wait(wt);
-				bgP.selectYearValue(driver, bgSetNum, y2, TCnum);
-				bgP.selectMakeValue(driver, bgSetNum, m2, TCnum);
-			}else if (i==4) {
-				y1="any";
-				m1="Cadillac";
-				y2="any";
-				m2="Chev";
-						
-				bgP.selectYearValue(driver, 1, y1, TCnum);
-				bgP.selectMakeValue(driver, 1, m1, TCnum);
-				ac.Wait(wt);
-				bgP.selectYearValue(driver, bgSetNum, y2, TCnum);
-				bgP.selectMakeValue(driver, bgSetNum, m2, TCnum);
-			}else if (i==5) {
-				y1="2019";
-				m1="Cadillac";
-				y2="2019";
-				m2="Chev";
-						
-				bgP.selectYearValue(driver, 1, y1, TCnum);
-				bgP.selectMakeValue(driver, 1, m1, TCnum);
-				ac.Wait(wt);
-				bgP.selectYearValue(driver, bgSetNum, y2, TCnum);
-				bgP.selectMakeValue(driver, bgSetNum, m2, TCnum);
-			}else if (i==6) {
-				y1="2019";
-				m1="Cadillac";
-				y2="2019";
-				m2="Chev";
-						
-				bgP.selectYearValue(driver, 1, y1, TCnum);
-				bgP.selectMakeValue(driver, 1, m1, TCnum);
-				ac.Wait(wt);
-				bgP.selectYearValue(driver, bgSetNum, y2, TCnum);
-				bgP.selectMakeValue(driver, bgSetNum, m2, TCnum);
-			}else if (i==7) {
-				System.out.println("\ni = "+(i)+" of "+tcs+".");
-			}else if (i==8) {
-				System.out.println("\ni = "+(i)+" of "+tcs+".");
-			}	
 		}
 		
 		
@@ -3670,32 +3765,32 @@ public class AUTOpxController extends Comlibs {
 			//// tempDebug(driver);// ***************************************Debug*****************************************
 			//// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-//			//// 0.General Inventory Gallery
-//			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-//			inventoryGalleryTC(driver, tBrowser, env, versionNum);
-//			vehicleGallery(driver, tBrowser, env);
-//			// verifyRerender(driver, tBrowser);
-//
-//			////// 1.VINpx:
-//			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-//			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-//
-//			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-//
-//			////// 2. STOCKpx
-//			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-//			STOCKpxInventoryTC(driver, tBrowser, env);
-//
-//			////// 3. Templates
-//			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
-//			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
-//
-//			//// bc.Wait(18*60);//wait 18 minutes;
-//
-//			// ////// 4. LOTpx
-//			bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
-//			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
-//			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
+			//// 0.General Inventory Gallery
+			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			inventoryGalleryTC(driver, tBrowser, env, versionNum);
+			vehicleGallery(driver, tBrowser, env);
+			// verifyRerender(driver, tBrowser);
+
+			////// 1.VINpx:
+			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+
+			// bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+
+			////// 2. STOCKpx
+			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			STOCKpxInventoryTC(driver, tBrowser, env);
+
+			////// 3. Templates
+			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
+			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
+
+			//// bc.Wait(18*60);//wait 18 minutes;
+
+			// ////// 4. LOTpx
+			bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
+			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
+			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
 
 			// ////// 5. Multiple Backgrounds
 			bc.rwExcel("", "-----Multiple Backgrounds Testing started-----" + (i + 1), "");

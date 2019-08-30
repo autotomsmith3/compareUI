@@ -63,7 +63,9 @@ public class Backgrounds extends Comlibs {
 		driver.findElement(AddBackground).click();
 		return this;
 	}
-
+	
+	
+	
 	public Backgrounds clickYearDropDown(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, yearDropDownLocator, true, tc);
 		driver.findElement(yearDropDownLocator).click();
@@ -94,7 +96,7 @@ public class Backgrounds extends Comlibs {
 		driver.findElement(selectBackground).click();
 		return this;
 	}
-	public String getBackgroundName(WebDriver driver, int num, String tc) throws IOException {
+	public String getBackgroundNameFrPopup(WebDriver driver, int num, String tc) throws IOException {
 		By selectBackground = By
 				.xpath("/html/body/div[2]/div[2]/div/div/div[2]/div/div/div/div[1]/div["+num+"]/div/div[1]/img");// 1,2,3....level count
 		           //     /html/body/div[2]/div[2]/div/div/div[2]/div/div/div/div[1]/div[11]/div/div[1]/img
@@ -191,8 +193,10 @@ public class Backgrounds extends Comlibs {
 //		By makeLocator = By.xpath("//div[@id='root']/div/table/tbody/tr["+makeRowNum+"]/th[5]/select"); // 
 		
 		//*[@id="root"]/div/table/tbody/tr[2]/th[5]   //chrome copy xpath on parent div
+//		By makeLocator = By.xpath("//*[@id=\"root\"]/div/table/tbody/tr["+makeRowNum+"]/th[5]/select"); // not working 20190829
 		By makeLocator = By.xpath("//*[@id=\"root\"]/div/table/tbody/tr["+makeRowNum+"]/th[5]/select"); // 
-
+		//*[@id="root"]/div/table/tbody/tr[2]/th[5]
+		
 		elementExist(driver, makeLocator, true, tc);
 		Select drpMaker=new Select(driver.findElement(makeLocator));
 		drpMaker.selectByValue(makeString);
