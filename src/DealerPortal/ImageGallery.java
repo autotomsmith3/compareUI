@@ -138,7 +138,7 @@ public class ImageGallery extends Comlibs {
 	By showAllLocator = By.id("showAll");
 	By loadMoreVehicleBtnLocator = By.id("loadMoreVehicles");
 	// ADD INVENTORY
-	By addInventoryBtn = By.xpath("//*[@id=\"addInventoryBtn\"]/span[1]");//By.id("addInventoryBtn");
+	By addInventoryBtn = By.xpath("//*[@id=\"addInventoryBtn\"]/span[1]");// By.id("addInventoryBtn");
 	By addInventoryAddBtn = By.xpath("//button[@id='addVinBtn']");
 	By addInventoryCancelBtn = By.xpath("//div[@id='addVinModal']/div/div/div[3]/button[2]");
 	By addInventoryXbtn = By.xpath("//div[@id='addVinModal']/div/div/div/button");
@@ -188,8 +188,7 @@ public class ImageGallery extends Comlibs {
 	By listViewBtnLocator = By.xpath("//*[@id=\"listViewBtn\"]/span");
 	By gridViewBtnLocator = By.xpath("//*[@id=\"gridViewBtn\"]/span");
 	By backgroundsLocator = By.xpath("//*[@id=\"navbarTabs\"]/li[4]/a");
-	
-	
+
 	static int allVinNums = 0;
 	static int allImageNums = 0;
 
@@ -1627,11 +1626,15 @@ public class ImageGallery extends Comlibs {
 		int num;
 		String temp;
 		num = 0;
-		temp = driver.findElement(By.xpath("//div[@id='vehicle_" + vehGUID + "']/div")).getText();
-		if (temp.contains("Failed")) {
-			rwExcel(tc, false, "Get Tile ImageNumber", "GetTileImageNumber contains fail");
-		} else {
-			num = Integer.parseInt(temp);
+		try {
+			temp = driver.findElement(By.xpath("//div[@id='vehicle_" + vehGUID + "']/div")).getText();
+			if (temp.contains("Failed")) {
+				rwExcel(tc, false, "Get Tile ImageNumber", "GetTileImageNumber contains fail");
+			} else {
+				num = Integer.parseInt(temp);
+			}
+		} catch (Throwable e) {
+			rwExcel(tc, false, "getTileImageNum vehGUID =" + vehGUID, "try failed! may increase the search number in previous step?");
 		}
 		return num;
 	}
@@ -1649,7 +1652,7 @@ public class ImageGallery extends Comlibs {
 		// Connection conn = DriverManager.getConnection("jdbc:sqlserver://LNOC-Q13V-MSQ2.autodata.org;user=VDVIWebServicesUserQA;password=HDuMy873JRFpkkU9;database=VDVI_Master");
 		Connection conn = DriverManager.getConnection("jdbc:sqlserver://" + serverName + ";user=" + userName
 				+ ";password=" + password + ";database=" + dbName);
-		System.out.println("Delete VIN:"+sVin+" from DB");
+		System.out.println("Delete VIN:" + sVin + " from DB");
 		Statement sta = conn.createStatement();
 		String Sql_1 = "delete from VT03_RenderedImage where VehGUID in (select vehguid from VT01_DealerVehicles where DlrGUID =   \'"
 				+ dlrGuid + "\' AND (dbo.VT01_DealerVehicles.VIN in (\'" + sVin + "\')))";
@@ -1684,17 +1687,18 @@ public class ImageGallery extends Comlibs {
 		sta.close();
 		conn.close();
 	}
+
 	public boolean truefalseRandom() {
 		Random r = new Random();
 		int Low = 1;
 		int High = 3;
-		boolean truefalseResult=false;
-		int Result = r.nextInt(High - Low) + Low;//1 or 2
-		if (Result==1) {
-			truefalseResult=true;
-		}else {
-			truefalseResult=false;
+		boolean truefalseResult = false;
+		int Result = r.nextInt(High - Low) + Low;// 1 or 2
+		if (Result == 1) {
+			truefalseResult = true;
+		} else {
+			truefalseResult = false;
 		}
-		return truefalseResult;//return true or false;
+		return truefalseResult;// return true or false;
 	}
 }

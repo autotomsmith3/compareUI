@@ -601,7 +601,7 @@ public class AUTOpxController extends Comlibs {
 			allVinNums = MaxVinsForPreview;
 		}
 		ac.Wait(wt);
-		igP.enterTextInSearch(vin01.substring(1, 5));// igP.enterTextInSearch(vin01.substring(1, 6));igP.enterTextInSearch(vin01);
+		igP.enterTextInSearch(vin01.substring(1, 9));// 20190830 igP.enterTextInSearch(vin01.substring(1, 5));,  old: igP.enterTextInSearch(vin01.substring(1, 6));igP.enterTextInSearch(vin01);
 		ac.Wait(wt * 3);
 		allImageNums = igP.getTileImageNum(driver, vehGUID01, "");
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
