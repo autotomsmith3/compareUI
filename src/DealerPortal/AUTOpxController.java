@@ -3265,8 +3265,10 @@ public class AUTOpxController extends Comlibs {
 		//delete all duplicates
 		TCnum = "Delete all New Duplicate_BGs_01";
 		for (int i=bgSetTotalRows02;i>0;i--) {
+			bgP.scrollUp(driver, 1000, TCnum);
 			if (duplicateBG[i]) {
 				bgP.clickXButton(driver, i, TCnum+"_"+i);
+				ac.Wait(wt-1);
 			}
 		}
 		System.out.println("\nAll New Added BGs are deleted\n");
@@ -3395,18 +3397,19 @@ public class AUTOpxController extends Comlibs {
 		
 	
 		
-		int tcs=1;
+		int tcs=2;
 		for (int i=1;i<tcs;i++) {
 		
 			bgP.clickInventoryGalleryBtn(driver);
-//			igP.enterTextInSearch("72");
-//			igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
-//			igP.clickSelectBtn(driver, vin02, vehGUID02, TCnum);
+			ac.Wait(wt);
+			igP.enterTextInSearch("72");
+			igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
+			igP.clickSelectBtn(driver, vin02, vehGUID02, TCnum);
 			
 //			igP.clickSelectAllBtn(driver, TCnum);
 //			
 //			TCnum = "MultipleBGs_10";
-//			igP.clickRerenderBtn(driver, render, TCnum);
+			igP.clickRerenderBtn(driver, render, TCnum);
 			TCnum = "MultipleBGs_11";
 			igP.verifyGoodMsgShowing(driver, TCnum);
 			TCnum = "MultipleBGs_11_vin01";
@@ -3440,7 +3443,8 @@ public class AUTOpxController extends Comlibs {
 		
 		ac.Wait(wt);
 		TCnum = "MultipleBGs_11";
-		bgP.clickXButton(driver, 1, TCnum);
+//		bgP.clickXButton(driver, 1, TCnum);
+		ac.Wait(wt);
 		TCnum = "MultipleBGs_12";
 		bgP.clickInventoryGalleryBtn(driver, TCnum);
 		TCnum = "MultipleBGs_13";
@@ -3765,12 +3769,12 @@ public class AUTOpxController extends Comlibs {
 			//// tempDebug(driver);// ***************************************Debug*****************************************
 			//// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			//// 0.General Inventory Gallery
-			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-			inventoryGalleryTC(driver, tBrowser, env, versionNum);
-			vehicleGallery(driver, tBrowser, env);
-			// verifyRerender(driver, tBrowser);
-
+//			//// 0.General Inventory Gallery
+//			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+//			inventoryGalleryTC(driver, tBrowser, env, versionNum);
+//			vehicleGallery(driver, tBrowser, env);
+//			// verifyRerender(driver, tBrowser);
+//
 			////// 1.VINpx:
 			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
 			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
