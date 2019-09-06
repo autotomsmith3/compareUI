@@ -2401,6 +2401,7 @@ public class AUTOpxController extends Comlibs {
 		if (!alertPass) {
 			driver.close();
 		}
+		ac.Wait(wt);
 		vgP.clickLogout(driver);
 	}
 
@@ -3199,6 +3200,7 @@ public class AUTOpxController extends Comlibs {
 		for (int i=1;i<=addNew;i++) {
 			TCnum = "Test Run to Add New BGs_"+i;
 			bgP.clickAddBackgrounds(driver, TCnum);
+			ac.Wait(wt);
 			bgP.clickBackground(driver, bgNum, TCnum);
 //			bgP.scrollUp(driver, 1000, TCnum);
 			bgP.clickAddBtn(driver, TCnum);
@@ -3281,6 +3283,7 @@ public class AUTOpxController extends Comlibs {
 		for (int i=1;i<=addNew;i++) {
 			TCnum = "Add New BG_"+i;
 			bgP.clickAddBackgrounds(driver, TCnum);
+			ac.Wait(wt);
 			bgP.clickBackground(driver, bgNum, TCnum);
 //			bgP.scrollUp(driver, 1000, TCnum);
 			bgP.clickAddBtn(driver, TCnum);
@@ -3769,12 +3772,12 @@ public class AUTOpxController extends Comlibs {
 			//// tempDebug(driver);// ***************************************Debug*****************************************
 			//// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-//			//// 0.General Inventory Gallery
-//			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-//			inventoryGalleryTC(driver, tBrowser, env, versionNum);
-//			vehicleGallery(driver, tBrowser, env);
-//			// verifyRerender(driver, tBrowser);
-//
+			//// 0.General Inventory Gallery
+			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			inventoryGalleryTC(driver, tBrowser, env, versionNum);
+			vehicleGallery(driver, tBrowser, env);
+			// verifyRerender(driver, tBrowser);
+
 			////// 1.VINpx:
 			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
 			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
