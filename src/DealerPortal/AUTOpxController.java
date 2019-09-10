@@ -3411,7 +3411,7 @@ public class AUTOpxController extends Comlibs {
 			
 //			igP.clickSelectAllBtn(driver, TCnum);
 //			
-//			TCnum = "MultipleBGs_10";
+			TCnum = "TC234386_"+i;
 			igP.clickRerenderBtn(driver, render, TCnum);
 			TCnum = "MultipleBGs_11";
 			igP.verifyGoodMsgShowing(driver, TCnum);
@@ -3442,7 +3442,7 @@ public class AUTOpxController extends Comlibs {
 		bgP.selectYearValue(driver, 2, "Any", TCnum);
 		bgP.selectMakeValue(driver, 2, "Any", TCnum);
 		ac.Wait(wt);
-		System.out.println("12nd stop");
+		System.out.println("2nd stop");
 		
 		ac.Wait(wt);
 		TCnum = "MultipleBGs_11";
