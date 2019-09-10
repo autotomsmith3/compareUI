@@ -1,6 +1,11 @@
 package AdminPortal;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -1001,8 +1006,8 @@ public class hello extends Comlibs {
 		ExportTemplateListP.inputPassword(driver, "5k2cGG1");
 		ExportTemplateListP.inputHost(driver, "LOCALHOST");
 		ExportTemplateListP.inputTemplate(driver, templateS);
-//		ExportTemplateListP.clickCombinedFileCheckBox(driver, tc);
-//		ExportTemplateListP.clickBrandedImagesCheckBox(driver, tc);
+		// ExportTemplateListP.clickCombinedFileCheckBox(driver, tc);
+		// ExportTemplateListP.clickBrandedImagesCheckBox(driver, tc);
 		ExportTemplateListP.clickCancel(driver);
 		ac.Wait(wt);
 		// Add an Export Template and submit
@@ -1015,11 +1020,11 @@ public class hello extends Comlibs {
 		ExportTemplateListP.inputHost(driver, "LOCALHOST");
 		ExportTemplateListP.inputTemplate(driver, templateS);
 		ac.Wait(wt);
-//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
-//		ac.Wait(wt);
-//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
-//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		// ExportTemplateListP.clickCombinedFileCheckBox(driver);
+		// ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		// ac.Wait(wt);
+		// ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		// ExportTemplateListP.clickBrandedImagesCheckBox(driver);
 		ExportTemplateListP.clickSubmit(driver);
 		ac.acceptAlert(driver, tc, "OK");
 		// Edit Export Template
@@ -1034,11 +1039,11 @@ public class hello extends Comlibs {
 		ExportTemplateListP.inputHost(driver, "Edited_LOCALHOST");
 		ExportTemplateListP.inputTemplate(driver, "Edited_" + templateS);
 		ac.Wait(wt);
-//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
-//		ac.Wait(wt);
-//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		// ExportTemplateListP.clickCombinedFileCheckBox(driver);
+		// ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		// ac.Wait(wt);
+		// ExportTemplateListP.clickCombinedFileCheckBox(driver);
+		// ExportTemplateListP.clickBrandedImagesCheckBox(driver);
 		ExportTemplateListP.clickSubmit(driver);
 		ac.acceptAlert(driver, tc, "OK");
 		ac.Wait(wt);
@@ -1064,7 +1069,7 @@ public class hello extends Comlibs {
 		//// *************************ManageGlobalConfig******************************************************
 		//// *************************ManageGlobalConfig******************************************************
 		for (int j = 1; j <= 1; j++) { // 100 worked fine.
-			UserListP.clickManageGlobalConfig(driver,tc);
+			UserListP.clickManageGlobalConfig(driver, tc);
 			ac.rwExcel("", "*********ManageGlobalConfig**********", "");
 			String searchKey = "test_IMPORT_SITE";
 			String editedKey = "edited_test_IMPORT_SITE";
@@ -1151,8 +1156,9 @@ public class hello extends Comlibs {
 		return a;
 	}
 
-	public static boolean checkboxWithPseudoElement(String checkboxName, WebDriver driver, boolean checked, boolean secondTime,
-			String pseudoElementSelectorID, String cssStyle, String cssStyleValue, String tc) throws IOException {
+	public static boolean checkboxWithPseudoElement(String checkboxName, WebDriver driver, boolean checked,
+			boolean secondTime, String pseudoElementSelectorID, String cssStyle, String cssStyleValue, String tc)
+			throws IOException {
 
 		// ***************return window.getComputedStyle(document.querySelector***********************************************************************************************************
 		/**
@@ -1182,13 +1188,13 @@ public class hello extends Comlibs {
 				isTrue = true;
 				/// write to excel pass; checkbox should not be checked
 				System.out.println("Passed." + checkboxName + " Checkbox is not checked!");
-//				rwExcel(tc, true, "Verify " + checkboxName, "Checkbox is not checked");
+				// rwExcel(tc, true, "Verify " + checkboxName, "Checkbox is not checked");
 			} else {
 				isTrue = false;
 				if (secondTime) {
 					// write to excel failed; checkbox cannot be unchecked.
 					System.out.println("Failed," + checkboxName + " checkbox is unchecked when should be checked!");
-//					rwExcel(tc, false, "Verify " + checkboxName, "Checkbox is unchecked when should be checked!");
+					// rwExcel(tc, false, "Verify " + checkboxName, "Checkbox is unchecked when should be checked!");
 				}
 			}
 			System.out.println("The " + checkboxName + " Checkbox is unchecked");
@@ -1196,13 +1202,13 @@ public class hello extends Comlibs {
 			isTrue = true;
 			System.out.println("Passed," + checkboxName + " checkbox is checked");
 			// write to excel pass; checkbox should be checked
-//			rwExcel(tc, true, "Verify " + checkboxName, "Checkbox is checked");
+			// rwExcel(tc, true, "Verify " + checkboxName, "Checkbox is checked");
 		} else {
 			isTrue = false;
 			if (secondTime) {
 				// write to excel failed; checkbox cannot be unchecked.
 				System.out.println("Failed," + checkboxName + "checkbox is checked when should be unchecked!");
-//				rwExcel(tc, false, "Verify " + checkboxName, "Checkbox is checked when should be unchecked!");
+				// rwExcel(tc, false, "Verify " + checkboxName, "Checkbox is checked when should be unchecked!");
 			}
 		}
 		return isTrue;
@@ -1221,8 +1227,54 @@ public class hello extends Comlibs {
 	// // ***************End of Final script 1 checked ******************************************************
 	//
 	// }
+	public static String timeString() {
+		String dateStamp, timeStamp;
+		Calendar cal = Calendar.getInstance();
+		cal.getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		timeStamp = sdf.format(cal.getTime());
+		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+		Date d = new Date();
+		dateStamp = df.format(d);
+		timeStamp = dateStamp + "  " + timeStamp;
+		timeStamp = timeStamp.replace("/", "_");
+		timeStamp = timeStamp.replace(":", "_");
+		timeStamp = timeStamp.replace(" ", "_");
+		return timeStamp;
+	}
+	public static void changefilename() {
+		boolean success=false;
+		String timeStamp=timeString();
+		// File (or directory) with old name
+		File file = new File("C:\\Users\\Zhoul\\Downloads\\stringauto");
+		if (file.exists()) {
+			System.out.println("file stringauto exists!");
+			// throw new java.io.IOException("file exists");
+		}
 
+		// File (or directory) with new name
+		File file2 = new File("C:\\Users\\Zhoul\\Downloads\\stringauto_" + timeStamp);
+
+		if (file2.exists()) {
+			System.out.println("file exists!");
+			// throw new java.io.IOException("file exists");
+		} else {
+			// not existing
+			success = file.renameTo(file2);
+		}
+		// Rename file (or directory)
+
+		if (!success) {
+			// File was not successfully renamed
+			System.out.println("Not successfully renamed!");
+		}
+		
+
+	}
 	public static void main(String[] args) throws Exception {
+
+		changefilename();
+
 		// Load environment parameters
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));

@@ -36,6 +36,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.ProfilesIni;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.Select;
@@ -377,20 +378,55 @@ public class Comlibs {
 			final String seleniumExpertIDE = "C:\\1\\Eclipse\\RefLibraris\\selenium_expert_selenium_ide-0.25-fx.xpi";
 			//added geckodriver.exe since selenium 3.0 on-wards.
 			System.setProperty("webdriver.gecko.driver","C:/1/Eclipse/RefLibraris/geckodriver.exe");
-			FirefoxProfile profile = new FirefoxProfile();
+//			FirefoxProfile profile = new FirefoxProfile();  //old b4 20190906
+			
+			//not working below: 20190909
+//			fr: https://www.guru99.com/firefox-profile-selenium-webdriver.html
+//			ProfilesIni profile = new ProfilesIni();
+//			FirefoxProfile myprofile = profile.getProfile("zljProfile");
 
 			
-			profile.addExtension(new File(firebugPath));
-			profile.addExtension(new File(firepathPath));
-//			profile.setAcceptUntrustedCertificates(true);   //doesn't work
-//			profile.setAssumeUntrustedCertificateIssuer(false); //doesn't work
-//			profile.setPreference("security.insecure_password.ui.enabled", false);   // works. 5/5/2017
-			profile.setPreference("security.insecure_field_warning.contextual.enabled", true);  //better works. Using false/true. 03/27/2018
-			
-			// profile.addExtension(new File(seleniumExpertIDE));
-			// Add more if needed
-//			WebDriver driver = new FirefoxDriver(profile); //adding profile invalid since 12/13/2017
+			FirefoxProfile firefoxProfile = new FirefoxProfile();
+
+			firefoxProfile.setPreference("browser.download.folderList",2);
+			firefoxProfile.setPreference("browser.download.manager.showWhenStarting",false);
+			firefoxProfile.setPreference("browser.download.dir","c:\\downloads");
+			firefoxProfile.setPreference("browser.helperApps.neverAsk.saveToDisk","text/csv");
+
 			WebDriver driver = new FirefoxDriver();
+			
+			
+//			WebDriver driver = new FirefoxDriver(firefoxProfile); //invalid 20190910
+			
+			
+			
+			
+			
+
+//			profile.addExtension(new File(firebugPath));
+//			profile.addExtension(new File(firepathPath));
+////			profile.setAcceptUntrustedCertificates(true);   //doesn't work
+////			profile.setAssumeUntrustedCertificateIssuer(false); //doesn't work
+////			profile.setPreference("security.insecure_password.ui.enabled", false);   // works. 5/5/2017
+//			profile.setPreference("security.insecure_field_warning.contextual.enabled", true);  //better works. Using false/true. 03/27/2018
+//			
+//			//Disable Ask Save to disk - seems not working below - 20190906 - not working fr: https://stackoverflow.com/questions/1176348/access-to-file-download-dialog-in-firefox
+//			profile.setPreference("browser.download.folderList",2);
+//			profile.setPreference("browser.download.manager.showWhenStarting",false);
+//			profile.setPreference("browser.download.dir","C:\\Users\\Zhoul\\Downloads");
+//			profile.setPreference("browser.helperApps.neverAsk.saveToDisk","text/csv");
+//			
+//			profile.setPreference("browser.helperApps.alwaysAsk.force", false);
+//			
+//			// profile.addExtension(new File(seleniumExpertIDE));
+//			// Add more if needed
+////			WebDriver driver = new FirefoxDriver(profile); //adding profile invalid since 12/13/2017
+//			
+//			
+//			
+//
+//			
+//			WebDriver driver = new FirefoxDriver();
 
 			//WebDriver driver = new FirefoxDriver();
 			return driver;

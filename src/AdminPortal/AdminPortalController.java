@@ -1,9 +1,21 @@
 package AdminPortal;
+
 /**
 * @author Zhoul
 * Initial date: 2019.05.01 based on AUTOPXOPS-1744
 * Created by Zhoul...modified by Zhoul...improved by Zhoul...updated by Zhoul...
 * 
+* https://watirmelon.blog/
+* e2e tests - end-to-end testing: 
+* 1. They test a complete user flow through an application from start to finish (end-to-end)
+  2. They test how a real user would use a using a fully deployed system
+  3. They test the happy-path of the most commonly used scenarios, avoiding error validation or edge-cases
+  
+  End-to-end tests are expensive to maintain and execute so the widely accepted view is to have as few of 
+  these as possible for your application, which means avoiding things like negative and error validation 
+  testing during end-to-end tests as these things can be tested much more easily and quickly in isolation 
+  as other types of automated tests (unit, component or integration).
+  
  */
 /*
  * replaced by replaced by replaced by replaced by replaced by replaced by replaced by replaced by 
@@ -17,6 +29,8 @@ package AdminPortal;
  *
  */
 import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -241,11 +255,11 @@ public class AdminPortalController extends Comlibs {
 		loginP.login(driver, accountEmail, accountPS, "");
 		String parentHandle = driver.getWindowHandle(); // get the current window handle
 		UserList userListP = new UserList(driver);
-		//get Account Email
-		TCnum="TCx_01";
-		Account_Email=userListP.getAccountEmail(driver, dealerN+1, "getAccountEmail");
-		
-		userListP.clickManageDealerShips(driver,TCnum);
+		// get Account Email
+		TCnum = "TCx_01";
+		Account_Email = userListP.getAccountEmail(driver, dealerN + 1, "getAccountEmail");
+
+		userListP.clickManageDealerShips(driver, TCnum);
 		ac.Wait(wt);
 		DealerList2 DealerListP = new DealerList2(driver);
 		DealerListP.scrollUp(driver, 3000, "ddd");
@@ -271,15 +285,15 @@ public class AdminPortalController extends Comlibs {
 				}
 				DealerProfile DealerProfieP = new DealerProfile(driver);
 				// =========================================
-				TCnum="TC xxxx_01";
+				TCnum = "TC xxxx_01";
 				ProductVINpx = DealerProfieP.getVINpxProduct(driver, "");
 				ProductSTOCKpx = DealerProfieP.getSTOCKpxProduct(driver, "");
 				ProductLOTpx = DealerProfieP.getLOTpxProduct(driver, "");
-				Dealership_ID = DealerProfieP.getDealershipID(driver,TCnum);
-				Dealership_Name = DealerProfieP.getDealershipName(driver,TCnum);
-				Dealership_Email = DealerProfieP.getDealershipEmail(driver,TCnum);
+				Dealership_ID = DealerProfieP.getDealershipID(driver, TCnum);
+				Dealership_Name = DealerProfieP.getDealershipName(driver, TCnum);
+				Dealership_Email = DealerProfieP.getDealershipEmail(driver, TCnum);
 				// Account_Email = DealerProfieP.getAccountEmail(driver);
-				Metadata = DealerProfieP.getMetadata(driver,TCnum);
+				Metadata = DealerProfieP.getMetadata(driver, TCnum);
 				dlrGuid = DealerProfieP.getDlrGuid(driver);
 				dlrGuid = DealerProfieP.trimURL(dlrGuid);
 				// =========================================
@@ -397,13 +411,13 @@ public class AdminPortalController extends Comlibs {
 		UserListP.clickFirstNameSort(driver, "TC number");
 		UserListP.clickFirstNameSort(driver, "TC number");
 		UserListP.clickDisplayDropDownBtn(driver, "1"); // no longer use since 2018-11-02
-		TCnum="TCXXXXX_01";
+		TCnum = "TCXXXXX_01";
 		for (int next = 1; next <= 117; next++) {// prod=117, QA=86
 			int numAccts = UserListP.getNumOfAccounts(driver, 1, "account nums");
 			for (int i = 1; i <= numAccts; i++) {
 
 				accountEmail = UserListP.getAccountEmail(driver, i, "tc");
-				UserListP.clickViewDealerships(driver, i,TCnum);
+				UserListP.clickViewDealerships(driver, i, TCnum);
 				if (i == numAccts) {
 					UserListP.scrollUp(driver, 600, "ddd");
 				}
@@ -412,11 +426,11 @@ public class AdminPortalController extends Comlibs {
 				for (int dealer = 1; dealer <= dealers; dealer++) {
 					// UserListP.getNumOfDealerships(driver,1,"tc"); //not ready yet 2018-11-06
 					try {
-						UserListP.clickEditOnDealership(driver, dealer,TCnum);
+						UserListP.clickEditOnDealership(driver, dealer, TCnum);
 					} catch (Exception e) {
 						System.out.println("Account Email = " + accountEmail + ". Its Dealer number: " + dealer
 								+ " does not exist. Exit!");
-						UserListP.clickViewDealerships(driver, i,TCnum);
+						UserListP.clickViewDealerships(driver, i, TCnum);
 						break;
 						// ac.rwExcel("Dealer number: "+dealer+" does not exist", false, "", "");
 					}
@@ -442,15 +456,15 @@ public class AdminPortalController extends Comlibs {
 					}
 					DealerProfile DealerProfieP = new DealerProfile(driver);
 					// =========================================
-					TCnum="TCxxxx_01";
+					TCnum = "TCxxxx_01";
 					ProductVINpx = DealerProfieP.getVINpxProduct(driver, "");
 					ProductSTOCKpx = DealerProfieP.getSTOCKpxProduct(driver, "");
 					ProductLOTpx = DealerProfieP.getLOTpxProduct(driver, "");
-					Dealership_ID = DealerProfieP.getDealershipID(driver,TCnum);
-					Dealership_Name = DealerProfieP.getDealershipName(driver,TCnum);
-					Dealership_Email = DealerProfieP.getDealershipEmail(driver,TCnum);
+					Dealership_ID = DealerProfieP.getDealershipID(driver, TCnum);
+					Dealership_Name = DealerProfieP.getDealershipName(driver, TCnum);
+					Dealership_Email = DealerProfieP.getDealershipEmail(driver, TCnum);
 					// Account_Email = DealerProfieP.getAccountEmail(driver);
-					Metadata = DealerProfieP.getMetadata(driver,TCnum);
+					Metadata = DealerProfieP.getMetadata(driver, TCnum);
 					dlrGuid = DealerProfieP.getDlrGuid(driver);
 					dlrGuid = DealerProfieP.trimURL(dlrGuid);
 					// =========================================
@@ -563,9 +577,7 @@ public class AdminPortalController extends Comlibs {
 		String backgroundSetPath2 = prop.getProperty("AUTOpx.backgroundSetPath2");
 		String exportName = prop.getProperty("AUTOpx.exportName");
 		String exportFilePath = prop.getProperty("AUTOpx.exportFilePath");
-		
-		
-		
+
 		// Initial
 		// final int wt_Secs = 6;
 		String TCnum;
@@ -663,7 +675,7 @@ public class AdminPortalController extends Comlibs {
 		UserListP.clickAddDealerShip(driver, tc);
 
 		DealerProfile DealerProfieP = new DealerProfile(driver);
-		DealerProfieP.selectOEM(driver, 13,tc);
+		DealerProfieP.selectOEM(driver, 13, tc);
 		// check Buick and Cadillac and Chevrolet and GMC
 		// DealerProfieP.selectOEMBrands(driver, 1); // check Buick
 		// DealerProfieP.selectOEMBrands(driver, 2); // check Cadillac
@@ -671,29 +683,31 @@ public class AdminPortalController extends Comlibs {
 		// DealerProfieP.selectOEMBrands(driver, 4); // check GMC
 		// DealerProfieP.selectOEMBrands(driver, 5); // check Hummer
 		for (String brand : Brands) {
-			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand),tc);
+			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand), tc);
 		}
-		DealerProfieP.inputDealersipID(driver, DealershipID,tc);
-		DealerProfieP.selectVINpxProd(driver,tc);
-		DealerProfieP.selectSTOCKpxProd(driver,tc);
+		DealerProfieP.inputDealersipID(driver, DealershipID, tc);
+		DealerProfieP.selectVINpxProd(driver, tc);
+		DealerProfieP.selectSTOCKpxProd(driver, tc);
 		// DealerProfieP.selectLOTpxProd(driver);
+		DealerProfieP.selectDealerBrandedNewProd(driver, tc + "_01");
+		DealerProfieP.selectDealerBrandedUsedProd(driver, tc + "_01");
 		// DealerProfieP.inputMetadata(driver, MetadataValues);
 
 		// DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
 		// DealerProfieP.selectTemplateSetting(driver, 1);
-		DealerProfieP.inputDealershipName(driver, DealershipName,tc);
-		DealerProfieP.inputAddress(driver, Address,tc);
-		DealerProfieP.inputAddressLine2(driver, AddressLine2,tc);
-		DealerProfieP.inputCity(driver, City,tc);
-		DealerProfieP.inputDealersipEmail(driver, DealershipEmail,tc);
-		DealerProfieP.inputZipCode(driver, ZipPostalCode,tc);
-		DealerProfieP.inputCountry(driver, Country,tc);// USA=1
+		DealerProfieP.inputDealershipName(driver, DealershipName, tc);
+		DealerProfieP.inputAddress(driver, Address, tc);
+		DealerProfieP.inputAddressLine2(driver, AddressLine2, tc);
+		DealerProfieP.inputCity(driver, City, tc);
+		DealerProfieP.inputDealersipEmail(driver, DealershipEmail, tc);
+		DealerProfieP.inputZipCode(driver, ZipPostalCode, tc);
+		DealerProfieP.inputCountry(driver, Country, tc);// USA=1
 		DealerProfieP.inputState(driver, StateProvince, tc);// NY=33
-		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg,tc);
-		DealerProfieP.inputWebsite(driver, Website,tc);
-		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber,tc);
+		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg, tc);
+		DealerProfieP.inputWebsite(driver, Website, tc);
+		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber, tc);
 
-//		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
+		// DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
 
@@ -712,34 +726,36 @@ public class AdminPortalController extends Comlibs {
 		// click Add Dealership btn
 		tc = "TC139021_m1";// Add a new dealership for account
 		UserListP.clickAddDealerShip(driver, tc);
-		DealerProfieP.selectOEM(driver, 13,tc);
+		DealerProfieP.selectOEM(driver, 13, tc);
 		for (String brand : Brands) {
-			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand),tc);
+			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand), tc);
 		}
 		// String addNewDealerExtension = "_New_Added_18";// ************************ New one should be 18 ****************************
-		DealerProfieP.inputDealersipID(driver, DealershipID + addNewDealerExtension,tc);
-		DealerProfieP.selectVINpxProd(driver,tc);
-		DealerProfieP.selectSTOCKpxProd(driver,tc);
+		DealerProfieP.inputDealersipID(driver, DealershipID + addNewDealerExtension, tc);
+		DealerProfieP.selectVINpxProd(driver, tc);
+		DealerProfieP.selectSTOCKpxProd(driver, tc);
 		// DealerProfieP.selectLOTpxProd(driver);
-		DealerProfieP.inputMetadata(driver, MetadataValues,tc);
+		DealerProfieP.selectDealerBrandedNewProd(driver, tc + "_02");
+		DealerProfieP.selectDealerBrandedUsedProd(driver, tc + "_02");
+		DealerProfieP.inputMetadata(driver, MetadataValues, tc);
 
 		// DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
 		// DealerProfieP.selectTemplateSetting(driver, 1);
-		DealerProfieP.inputDealershipName(driver, DealershipName,tc);
-		DealerProfieP.inputAddress(driver, Address,tc);
-		DealerProfieP.inputAddressLine2(driver, AddressLine2,tc);
-		DealerProfieP.inputCity(driver, City,tc);
-		DealerProfieP.inputDealersipEmail(driver, "Autotomsmith4@gmail.com",tc);// Auto_Added_"+DealershipEmail);
-		DealerProfieP.inputZipCode(driver, ZipPostalCode,tc);
-		DealerProfieP.inputCountry(driver, Country,tc);// USA=1
+		DealerProfieP.inputDealershipName(driver, DealershipName, tc);
+		DealerProfieP.inputAddress(driver, Address, tc);
+		DealerProfieP.inputAddressLine2(driver, AddressLine2, tc);
+		DealerProfieP.inputCity(driver, City, tc);
+		DealerProfieP.inputDealersipEmail(driver, "Autotomsmith4@gmail.com", tc);// Auto_Added_"+DealershipEmail);
+		DealerProfieP.inputZipCode(driver, ZipPostalCode, tc);
+		DealerProfieP.inputCountry(driver, Country, tc);// USA=1
 		DealerProfieP.inputState(driver, StateProvince, tc);// NY=33
-		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg,tc);
-		DealerProfieP.inputWebsite(driver, Website,tc);
-		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber,tc);
+		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg, tc);
+		DealerProfieP.inputWebsite(driver, Website, tc);
+		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber, tc);
 		alertmessage = "You must save the dealer information before you can take this action";
 		DealerProfieP.uploadDealershipLogo(driver, dealershipLogoPath, alertmessage, tc);
 		ac.Wait(wt);
-//		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
+		// DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
 		// Stop here for the time being since there is bug here AUTOPXOPS-1227
@@ -825,7 +841,7 @@ public class AdminPortalController extends Comlibs {
 		DealerListP2.clickAddDealerShip(driver);
 		ac.Wait(wt * 2);
 		DealerProfile DealerProfileP = new DealerProfile(driver);
-		DealerProfileP.selectOEM(driver, 13,tc);
+		DealerProfileP.selectOEM(driver, 13, tc);
 		// check Buick and Cadillac and Chevrolet and GMC
 		// DealerProfileP.selectOEMBrands(driver, 1); // check Buick
 		// DealerProfileP.selectOEMBrands(driver, 2); // check Cadillac
@@ -833,29 +849,31 @@ public class AdminPortalController extends Comlibs {
 		// DealerProfileP.selectOEMBrands(driver, 4); // check GMC
 		// DealerProfileP.selectOEMBrands(driver, 5); // check Hummer
 		for (String brand : Brands) {
-			DealerProfileP.selectOEMBrands(driver, Integer.parseInt(brand),tc);
+			DealerProfileP.selectOEMBrands(driver, Integer.parseInt(brand), tc);
 		}
-		DealerProfileP.inputDealersipID(driver, DealershipID,tc);
-		DealerProfileP.selectVINpxProd(driver,tc);
-		DealerProfileP.selectSTOCKpxProd(driver,tc);
+		DealerProfileP.inputDealersipID(driver, DealershipID, tc);
+		DealerProfileP.selectVINpxProd(driver, tc);
+		DealerProfileP.selectSTOCKpxProd(driver, tc);
 		// DealerProfileP.selectLOTpxProd(driver);
+		DealerProfieP.selectDealerBrandedNewProd(driver, tc + "_03");
+		DealerProfieP.selectDealerBrandedUsedProd(driver, tc + "_03");
 		// DealerProfileP.inputMetadata(driver, MetadataValues);
 
 		// DealerProfileP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
 		// DealerProfileP.selectTemplateSetting(driver, 1);
-		DealerProfileP.inputDealershipName(driver, DealershipName,tc);
-		DealerProfileP.inputAddress(driver, Address,tc);
-		DealerProfileP.inputAddressLine2(driver, AddressLine2,tc);
-		DealerProfileP.inputCity(driver, City,tc);
-		DealerProfileP.inputDealersipEmail(driver, DealershipEmail,tc);
-		DealerProfileP.inputZipCode(driver, ZipPostalCode,tc);
-		DealerProfileP.inputCountry(driver, Country,tc);// USA=1
+		DealerProfileP.inputDealershipName(driver, DealershipName, tc);
+		DealerProfileP.inputAddress(driver, Address, tc);
+		DealerProfileP.inputAddressLine2(driver, AddressLine2, tc);
+		DealerProfileP.inputCity(driver, City, tc);
+		DealerProfileP.inputDealersipEmail(driver, DealershipEmail, tc);
+		DealerProfileP.inputZipCode(driver, ZipPostalCode, tc);
+		DealerProfileP.inputCountry(driver, Country, tc);// USA=1
 		DealerProfileP.inputState(driver, StateProvince, tc);// NY=33
-		DealerProfileP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg,tc);
-		DealerProfileP.inputWebsite(driver, Website,tc);
-		DealerProfileP.inputDealershipPhone(driver, DealershipPhoneNumber,tc);
+		DealerProfileP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg, tc);
+		DealerProfileP.inputWebsite(driver, Website, tc);
+		DealerProfileP.inputDealershipPhone(driver, DealershipPhoneNumber, tc);
 		ac.Wait(wt);
-//		DealerProfileP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
+		// DealerProfileP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
 		DealerProfileP.scrollUp(driver, -3000, tc);
 		DealerProfileP.clickSaveBtn(driver, tc);
 		ac.Wait(wt);
@@ -873,36 +891,38 @@ public class AdminPortalController extends Comlibs {
 		// **************************ManageDealerships - Add a new dealership for account*****************************************************
 		// click Add Dealership btn
 		UserListP.clickAddDealerShip(driver, tc);
-		DealerProfileP.selectOEM(driver, 13,tc);
+		DealerProfileP.selectOEM(driver, 13, tc);
 		for (String brand : Brands) {
-			DealerProfileP.selectOEMBrands(driver, Integer.parseInt(brand),tc);
+			DealerProfileP.selectOEMBrands(driver, Integer.parseInt(brand), tc);
 		}
 		// String addNewDealerExtension="_New_Added_16";// *******************************New one should be 17********************
 		tc = "TC229370_d1";
 		String addNewDealership = DealershipID + addNewDealerExtension + "_D";
-		DealerProfileP.inputDealersipID(driver, addNewDealership,tc);//
-		DealerProfileP.selectVINpxProd(driver,tc);
-		DealerProfileP.selectSTOCKpxProd(driver,tc);
+		DealerProfileP.inputDealersipID(driver, addNewDealership, tc);//
+		DealerProfileP.selectVINpxProd(driver, tc);
+		DealerProfileP.selectSTOCKpxProd(driver, tc);
 		// DealerProfileP.selectLOTpxProd(driver);
-		DealerProfileP.inputMetadata(driver, MetadataValues,tc);
+		DealerProfieP.selectDealerBrandedNewProd(driver, tc + "_04");
+		DealerProfieP.selectDealerBrandedUsedProd(driver, tc + "_04");
+		DealerProfileP.inputMetadata(driver, MetadataValues, tc);
 
 		// DealerProfileP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
 		// DealerProfileP.selectTemplateSetting(driver, 1);
-		DealerProfileP.inputDealershipName(driver, DealershipName,tc);
-		DealerProfileP.inputAddress(driver, Address,tc);
-		DealerProfileP.inputAddressLine2(driver, AddressLine2,tc);
-		DealerProfileP.inputCity(driver, City,tc);
-		DealerProfileP.inputDealersipEmail(driver, "Autotomsmith4@gmail.com",tc);// Auto_Added_"+DealershipEmail);
-		DealerProfileP.inputZipCode(driver, ZipPostalCode,tc);
-		DealerProfileP.inputCountry(driver, Country,tc);// USA=1
+		DealerProfileP.inputDealershipName(driver, DealershipName, tc);
+		DealerProfileP.inputAddress(driver, Address, tc);
+		DealerProfileP.inputAddressLine2(driver, AddressLine2, tc);
+		DealerProfileP.inputCity(driver, City, tc);
+		DealerProfileP.inputDealersipEmail(driver, "Autotomsmith4@gmail.com", tc);// Auto_Added_"+DealershipEmail);
+		DealerProfileP.inputZipCode(driver, ZipPostalCode, tc);
+		DealerProfileP.inputCountry(driver, Country, tc);// USA=1
 		DealerProfileP.inputState(driver, StateProvince, tc);// NY=33
-		DealerProfileP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg,tc);
-		DealerProfileP.inputWebsite(driver, Website,tc);
-		DealerProfileP.inputDealershipPhone(driver, DealershipPhoneNumber,tc);
+		DealerProfileP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg, tc);
+		DealerProfileP.inputWebsite(driver, Website, tc);
+		DealerProfileP.inputDealershipPhone(driver, DealershipPhoneNumber, tc);
 		alertmessage = "You must save the dealer information before you can take this action";
 		DealerProfieP.uploadDealershipLogo(driver, dealershipLogoPath, alertmessage, tc);
 		ac.Wait(wt);
-//		DealerProfileP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
+		// DealerProfileP.selectBackGroundSet(driver, SelectBackgroundSet,tc);// Generic Dealership=7; White Gradient=0
 		DealerProfileP.scrollUp(driver, -3000, tc);
 		DealerProfileP.clickSaveBtn(driver, tc);
 		// Verify msg: "Your settings have been saved"
@@ -943,7 +963,6 @@ public class AdminPortalController extends Comlibs {
 		//// *************************ManageDealerships - DealerListP******************************************************
 		//// *************************ManageDealerships - DealerListP******************************************************
 
-		
 		//// *************************clickManageImageTypeBtn******************************************************
 		//// *************************clickManageImageTypeBtn******************************************************
 		ac.rwExcel("", "*********ManageImageType**********", "");
@@ -1123,7 +1142,7 @@ public class AdminPortalController extends Comlibs {
 		String editedName = "cdkxxxxxx";
 		String templateS = "dealer_id Vin photo_updated photo_url\r\n{{#vehicles}}\r\n{{dealer.dlrCode}} {{vehicle.vin}} Y {{#imageUrls}}{{.}} {{/imageUrls}}\r\n{{/vehicles}}";
 		ExportTemplateList ExportTemplateListP = new ExportTemplateList(driver);
-		
+
 		// Add an Export Template and cancel
 		tc = "TC144857";
 		ExportTemplateListP.clickAddExportTemplateBtn(driver);
@@ -1134,8 +1153,8 @@ public class AdminPortalController extends Comlibs {
 		ExportTemplateListP.inputPassword(driver, "crO9hop@UJ");
 		ExportTemplateListP.inputHost(driver, "ftp.autodata.net");
 		ExportTemplateListP.inputTemplate(driver, templateS);
-//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		// ExportTemplateListP.clickCombinedFileCheckBox(driver);
+		// ExportTemplateListP.clickBrandedImagesCheckBox(driver);
 		ExportTemplateListP.clickCancel(driver);
 		ac.Wait(wt);
 		// Add an Export Template and submit
@@ -1148,11 +1167,11 @@ public class AdminPortalController extends Comlibs {
 		ExportTemplateListP.inputHost(driver, "ftp.autodata.net");
 		ExportTemplateListP.inputTemplate(driver, templateS);
 		ac.Wait(wt);
-//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
-//		ac.Wait(wt);
-//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
-//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		// ExportTemplateListP.clickCombinedFileCheckBox(driver);
+		// ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		// ac.Wait(wt);
+		// ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		// ExportTemplateListP.clickBrandedImagesCheckBox(driver);
 		ExportTemplateListP.clickSubmit(driver);
 		ac.acceptAlert(driver, tc, "OK");
 		// Edit Export Template
@@ -1167,11 +1186,11 @@ public class AdminPortalController extends Comlibs {
 		ExportTemplateListP.inputHost(driver, "Edited_ftp.autodata.net");
 		ExportTemplateListP.inputTemplate(driver, "Edited_" + templateS);
 		ac.Wait(wt);
-//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
-//		ac.Wait(wt);
-//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		// ExportTemplateListP.clickCombinedFileCheckBox(driver);
+		// ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		// ac.Wait(wt);
+		// ExportTemplateListP.clickCombinedFileCheckBox(driver);
+		// ExportTemplateListP.clickBrandedImagesCheckBox(driver);
 		ExportTemplateListP.clickSubmit(driver);
 		ac.acceptAlert(driver, tc, "OK");
 		ac.Wait(wt);
@@ -1191,36 +1210,97 @@ public class AdminPortalController extends Comlibs {
 		} else {
 			ac.rwExcel(tc, true, "Delete an Export Template", "Edited name is not showing - Deleted.");
 		}
-		
+
 		// check Run Export icon and Download icon
 		ExportTemplateListP.inputSearch(driver, exportName);
 		tc = "TC234599";
-		ExportTemplateListP.clickRunExoprt(driver,tc);
+		ExportTemplateListP.clickRunExoprt(driver, tc);
 		ac.acceptAlert(driver, tc, "OK");
 		ac.Wait(10);
-		tc = "TC234600";
-		ExportTemplateListP.clickDownload(driver,tc);
-		ac.Wait(wt);
-		//read file in String and count
-		FileReader fr=new FileReader(exportFilePath+exportName);
-		BufferedReader br= new BufferedReader(fr);
-		String x="";
-		String xAll="";
-		while ((x=br.readLine()) != null)
-		{
-			System.out.println(x +"\n");
-			xAll=xAll+x;
-		}
-		br.close();
-		int xAllCount=xAll.length();
-		if (xAllCount>10000) {
-			System.out.println(searchName+" passed, Total length = "+xAllCount);
-			ac.rwExcel(tc, true, "Verify Export Downloading \""+searchName, "\"Total length = "+xAllCount);
-		} else {
-			System.out.println(searchName+" failed, Total length = "+xAllCount);
-			ac.rwExcel(tc, false, "Verify Export Downloading \""+searchName, "\"Total length = "+xAllCount);	
+
+		// check to see if exportName exists
+		boolean success = false;
+		String timeStamp = ExportTemplateListP.timeString();
+		// File (or directory) with old name
+		File file = new File(exportFilePath + exportName);
+		File file2 = new File(exportFilePath + exportName + "_" + timeStamp + ".txt");
+		if (file.exists()) {
+			// file exists
+			System.out.println("The file " + exportName + " exists! Need to rename it.");
+			// throw new java.io.IOException("file exists");
+			if (file2.exists()) {
+				System.out.println("file exists!");
+				throw new java.io.IOException("file exists");
+
+			} else {
+				// not existing
+				success = file.renameTo(file2);
+			}
+
 		}
 		
+		tc = "TC234600";
+		ExportTemplateListP.clickDownload(driver, tc);
+		ac.Wait(wt);
+		// //FF pops up SAVE window, need to click OK to save the file. 
+		//Also you can change Settings from FF Options - Applications - set Text/CSV to SAVE File (FF won't get pop-up) but automation launch new settings. Not workign.
+		//Or type about:config in address bar to set up Text/CSV to SAVE File - Not workign.
+		//Below works
+		 if (envBrowser.equalsIgnoreCase("FireFox")) {
+			 System.out.println("started...........");
+				ac.Wait(wt);
+			 Robot robot = new Robot();
+			 robot.keyPress(KeyEvent.VK_ENTER);
+			 System.out.println("in progress...........");
+				ac.Wait(wt);
+			 robot.keyRelease(KeyEvent.VK_ENTER);
+			 
+			 System.out.println("Ended...........");
+				ac.Wait(wt);
+		 }
+
+		file = new File(exportFilePath + exportName);
+		// check if download exportName exists
+		if (!(file.exists())) {
+			// file does not exist
+			ac.rwExcel(tc, false, "Verify Export Downloading \"" + exportFilePath + exportName,
+					"\" does not exist. Failed to download.");
+
+		} else {
+
+			// read file in String and count
+			FileReader fr = new FileReader(exportFilePath + exportName);
+			BufferedReader br = new BufferedReader(fr);
+			String x = "";
+			String xAll = "";
+			while ((x = br.readLine()) != null) {
+				System.out.println(x + "\n");
+				xAll = xAll + x;
+			}
+			br.close();
+			int xAllCount = xAll.length();
+			if (xAllCount > 10000) {
+				System.out.println(searchName + " passed, Total length = " + xAllCount);
+				ac.rwExcel(tc, true, "Verify Export Downloading \"" + searchName, "\"Total length = " + xAllCount);
+			} else {
+				System.out.println(searchName + " failed, Total length = " + xAllCount);
+				ac.rwExcel(tc, false, "Verify Export Downloading \"" + searchName, "\"Total length = " + xAllCount);
+			}
+			timeStamp = ExportTemplateListP.timeString();
+			;
+			file = new File(exportFilePath + exportName);
+			file2 = new File(exportFilePath + exportName + "_" + timeStamp + ".txt");
+			success = file.renameTo(file2);
+			if (!success) {
+				// File was not successfully renamed
+				System.out.println("File name =\"" + exportFilePath + exportName
+						+ "\" is not successfully renamed after downloaded!");
+				ac.rwExcel(tc, false, "Verify Export Downloading fine \"" + searchName + "\"",
+						"Not successfully renamed after downloaded!");
+			}
+
+		}
+
 		//// *************************ManageExportTemplates******************************************************
 		//// *************************ManageExportTemplates******************************************************
 
@@ -1301,14 +1381,14 @@ public class AdminPortalController extends Comlibs {
 		//// *************************ManageGlobalConfig******************************************************
 		//// *************************ManageGlobalConfig******************************************************
 
-		//driver.close();
+		// driver.close();
 		// switchToWindow(driver, parentHandle);
 		// driver.close();
 
 	}
-	public static void EnableDisalbeVehicles_ManageBackgroundSets(WebDriver driver, String brw, String versionNum, String envment,
-			String checkEmail) throws Exception {
 
+	public static void EnableDisalbeVehicles_ManageBackgroundSets(WebDriver driver, String brw, String versionNum,
+			String envment, String checkEmail) throws Exception {
 
 		// Load environment parameters
 		Properties prop = new Properties();
@@ -1392,7 +1472,7 @@ public class AdminPortalController extends Comlibs {
 		String alertmessage = "";
 		// ====================
 		Comlibs ac = new Comlibs();
-//		ac.rwExcel("", "*********ManageDealerShips**********", "");
+		// ac.rwExcel("", "*********ManageDealerShips**********", "");
 
 		int count = 0;
 		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
@@ -1416,34 +1496,33 @@ public class AdminPortalController extends Comlibs {
 
 		//// *************************Enable/DisableVehiclesBtn******************************************************
 		tc = "TC233499";
-		UserListP.clickEnableDisableVehicles(driver,tc);
-		
-		EnableDisableVehicles EnableDisableVehiclesP = new EnableDisableVehicles(driver);
-		String paternName="2019-GM-1XP26-1XP26-1LS";
-		EnableDisableVehiclesP.inputSearch(driver, paternName,tc);
+		UserListP.clickEnableDisableVehicles(driver, tc);
 
-		boolean checkboxStatus=EnableDisableVehiclesP.CheckDisabledCheckBoxStatus(driver, paternName,tc);
+		EnableDisableVehicles EnableDisableVehiclesP = new EnableDisableVehicles(driver);
+		String paternName = "2019-GM-1XP26-1XP26-1LS";
+		EnableDisableVehiclesP.inputSearch(driver, paternName, tc);
+
+		boolean checkboxStatus = EnableDisableVehiclesP.CheckDisabledCheckBoxStatus(driver, paternName, tc);
 		if (checkboxStatus) {
 			tc = "TC233499_01";
-			EnableDisableVehiclesP.clickDisabledCheckBox(driver, paternName,tc);
-			EnableDisableVehiclesP.inputSearch(driver, paternName,tc);
-			EnableDisableVehiclesP.clickDisabledCheckBox(driver, paternName,tc);
-		}else {
+			EnableDisableVehiclesP.clickDisabledCheckBox(driver, paternName, tc);
+			EnableDisableVehiclesP.inputSearch(driver, paternName, tc);
+			EnableDisableVehiclesP.clickDisabledCheckBox(driver, paternName, tc);
+		} else {
 			tc = "TC233500_01";
-			EnableDisableVehiclesP.clickDisabledCheckBox(driver, paternName,tc);
+			EnableDisableVehiclesP.clickDisabledCheckBox(driver, paternName, tc);
 		}
-		EnableDisableVehiclesP.inputSearch(driver, paternName,tc);
-		checkboxStatus=EnableDisableVehiclesP.CheckDisabledCheckBoxStatus(driver, paternName,tc);
+		EnableDisableVehiclesP.inputSearch(driver, paternName, tc);
+		checkboxStatus = EnableDisableVehiclesP.CheckDisabledCheckBoxStatus(driver, paternName, tc);
 		if (checkboxStatus) {
 			ac.rwExcel(tc, true, "Enable/Disable Vehicles - Disable Check Box", "Clicking on Disable Check Box.");
-		}else {
-			ac.rwExcel(tc, false, "Enable/Disable Vehicles - Disable Check Box", "Clicking on Disable Check Box failed it is still unchecked");
+		} else {
+			ac.rwExcel(tc, false, "Enable/Disable Vehicles - Disable Check Box",
+					"Clicking on Disable Check Box failed it is still unchecked");
 		}
-	
-		
-		//// *************************Enable/DisableVehiclesBtn******************************************************		
-		
-		
+
+		//// *************************Enable/DisableVehiclesBtn******************************************************
+
 		//// *************************clickManageBGSetsBtn******************************************************
 		//// *************************clickManageBGSetsBtn******************************************************
 		ac.rwExcel("", "*********ManageBackGroundSets**********", "");
@@ -1485,228 +1564,228 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		BackgroundSetsP.clickClose(driver, tc);
 		ac.Wait(wt);
-//		tc = "TC139447";
-//		BackgroundSetsP.clickCreateNewSet(driver);
-//		ac.Wait(wt);
-//		String tempSetName = "a";
-//		BackgroundSetsP.inputSetName(driver, tempSetName);
-//		BackgroundSetsP.clickCancel(driver);
-//		ac.Wait(wt);
-//		BackgroundSetsP.clickCreateNewSet(driver);
-//		ac.Wait(wt);
-//		BackgroundSetsP.inputSetName(driver, tempSetName);
-//		BackgroundSetsP.selectSetType(driver, 3);// 1-Old (Do Not User), 2-Flat on Flat on Flat, 3-Normal, 4-GM Only, 5-FCA Only
-//		BackgroundSetsP.uploadBackgroundPicture(driver, backgroundSetPath1, tc + "_01");
-//
-//		System.out.println("\nPlease wait at least 3 minutes until Backgrounds page showing...");
-//		ac.Wait(wt);
-//		BackgroundSetsP.clickSubmit(driver);
-//		ac.Wait(wt);
-//
-//		// ********************* check bg image *********************
-//		int sn = 1;
-//		double oneSNForScrollupPoint = 8.44091;
-//		double totalPoints = oneSNForScrollupPoint * 1;
-//		int scrollupPoints = 1;
-//		Backgrounds BackgroundsP = new Backgrounds(driver);
-//
-//		// tc = "GM_Exterior_2019-GM-4NF56-4NF56-1SD_old ";////= modelcode bar 2019-GM-4NF56-4NF56-1SD - sn=2014
-//		// UserListP.scrollUp(driver, 17000, tc);// 17150 - value is on uper side
-//		// BackgroundsP.ClickOneExteriorModelYearBtn(driver,tc);
-//		// BackgroundsP.VerifyCarImage(driver, tc);
-//		// BackgroundsP.clickRightArrowBtn(driver, tc);
-//		// ac.Wait(wt);
-//		// BackgroundsP.VerifyCarImage(driver, tc);
-//		// BackgroundsP.clickLeftArrowBtn(driver, tc);
-//		// ac.Wait(wt);
-//		// BackgroundsP.VerifyCarImage(driver, tc);
-//		// BackgroundsP.clickCloseX(driver, tc);
-//		// UserListP.scrollUp(driver, -100000, tc);//scroll back to top
-//		//
-//		// tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_old";//= modelcode bar 2019-GM-4NF56-1SD-4NF56-1SD - sn=4876
-//		// UserListP.scrollUp(driver, 41158, tc);// 24100 - value is on uper side
-//		// BackgroundsP.ClickOneInteriorModelYearBtn(driver,tc);
-//		// BackgroundsP.VerifyCarImage(driver, tc);
-//		// BackgroundsP.clickRightArrowBtn(driver, tc);
-//		// BackgroundsP.clickLeftArrowBtn(driver, tc);
-//		// BackgroundsP.clickCloseX(driver, tc);
-//		// ac.Wait(wt);
-//		// UserListP.scrollUp(driver, -100000, tc);//scroll back to top
-//		//
-//
-//		// ************************Check the failed loading car image from sn ************************
-//
-//		tc = "FCA_2016_bf";// = modelcode bar 2016_bf - sn=17 from Excel-BG_CarCode table - green cols.
-//		sn = 2;
-//		totalPoints = oneSNForScrollupPoint * sn;
-//		scrollupPoints = (int) Math.round(totalPoints);
-//		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
-//		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
-//		ac.Wait(wt * 2);
-//		BackgroundsP.VerifyCarImage(driver, tc);
-//		BackgroundsP.clickRightArrowBtn(driver, tc);
-//		ac.Wait(wt);
-//		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
-//		BackgroundsP.clickLeftArrowBtn(driver, tc);
-//		ac.Wait(wt);
-//		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
-//		BackgroundsP.clickCloseX(driver, tc);
-//		ac.Wait(wt);
-//		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
-//		// ************************Check the loading car image from sn ************************
-//		tc = "FCA_2019_lx";// = modelcode bar 2019_lx - sn=102 from Excel-BG_CarCode table
-//		sn = 102;
-//		totalPoints = oneSNForScrollupPoint * sn;
-//		scrollupPoints = (int) Math.round(totalPoints);
-//		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
-//		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
-//		ac.Wait(wt * 2);
-//		BackgroundsP.VerifyCarImage(driver, tc);
-//		BackgroundsP.clickRightArrowBtn(driver, tc);
-//		ac.Wait(wt);
-//		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
-//		BackgroundsP.clickLeftArrowBtn(driver, tc);
-//		ac.Wait(wt);
-//		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
-//		BackgroundsP.clickCloseX(driver, tc);
-//		ac.Wait(wt);
-//		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
-//
-//		tc = "GM_Exterior_2019-GM-4NF56-4NF56-1SD_new ";//// = modelcode bar 2019-GM-4NF56-4NF56-1SD - sn=2014
-//		sn = 2014;
-//		totalPoints = oneSNForScrollupPoint * sn;
-//		scrollupPoints = (int) Math.round(totalPoints);
-//		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
-//		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
-//		ac.Wait(wt * 2);
-//		BackgroundsP.VerifyCarImage(driver, tc);
-//		BackgroundsP.clickBackgroundPic(driver, tc);
-//		BackgroundsP.VerifyCarImage(driver, tc + "_added_BG_Pic");
-//		int numpics = 8;// Number of images for the model year vehicle
-//		for (int i = 1; i <= numpics; i++) {
-//			ac.Wait(wt);
-//			BackgroundsP.clickRightArrowBtn(driver, tc + "_" + i);
-//			ac.Wait(wt);
-//			BackgroundsP.clickBackgroundPic(driver, tc + "_" + i);
-//		}
-//		ac.Wait(wt);
-//		BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
-//		BackgroundsP.clickLeftArrowBtn(driver, tc);
-//		ac.Wait(wt);
-//		BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
-//		// BackgroundsP.clickCloseX(driver, tc);
-//		BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
-//		ac.Wait(wt);
-//		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
-//		try {
-//		BackgroundsP.uploadBackgroundPictureFrBackgroundsPage(driver, backgroundSetPath2, envBrowser, 180, 5,
-//				tc + "_02");
-//		ac.rwExcel(tc, true, "upload Background Picture From Backgrounds Page", "Seems good so far!");
-//		}catch (Exception e) {
-//			System.out.println("Upload Background Picture (path: "+backgroundSetPath2+", Browser: "+envBrowser+") from Backgrounds Page failed!");
-//			ac.rwExcel(tc, false, "upload Background Picture From Backgrounds Page", "Upload Background Picture (path: "+backgroundSetPath2+", Browser: "+envBrowser+") from Backgrounds Page failed!");
-//		}
-//		tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_new";// = modelcode bar 2019-GM-4NF56-1SD-4NF56-1SD - sn=4876
-//		sn = 4876;
-//		totalPoints = oneSNForScrollupPoint * sn;
-//		scrollupPoints = (int) Math.round(totalPoints);
-//		UserListP.scrollUp(driver, scrollupPoints, tc);// 860
-//		BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
-//		ac.Wait(wt * 2);
-//		BackgroundsP.VerifyCarImage(driver, tc);
-//		for (int i = 1; i <= numpics; i++) {
-//			ac.Wait(wt);
-//			BackgroundsP.clickRightArrowBtn(driver, tc + "_" + i);
-//			ac.Wait(wt);
-//			BackgroundsP.clickBackgroundPic2(driver, tc + "_" + i);
-//			if (i == 2) {
-//				ac.Wait(wt);
-//				BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
-//				ac.Wait(wt);
-//				ac.acceptAlert(driver, tc, "OK");
-//				ac.Wait(wt);
-//			}
-//		}
-//		BackgroundsP.VerifyCarImage(driver, tc);
-//		BackgroundsP.clickRightArrowBtn(driver, tc);
-//		ac.Wait(wt);
-//		BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
-//		ac.Wait(wt * 2 * 2 * 2);
-//		// BackgroundsP.VerifyCarImage(driver, tc+"_Right_Arrow");
-//		// BackgroundsP.clickLeftArrowBtn(driver, tc);
-//		// ac.Wait(wt);
-//		// BackgroundsP.VerifyCarImage(driver, tc+"_Left_Arrow");
-//		// BackgroundsP.clickCloseX(driver, tc);
-//		ac.Wait(wt);
-//		UserListP.scrollUp(driver, -100000, tc);// scroll back to top
-//		// ************************End of Check the loading car image from sn ************************
-//		// Add New BG Set
-//		UserListP.clickManageBGSets(driver);
-//		ac.clickRefleshF5Btn(driver, tc);
-//		tc = "TC139534"; // Edit "a" background set
-//		ac.Wait(wt);
-//		BackgroundSetsP.inputSearch(driver, tempSetName);
-//		ac.Wait(wt);
-//		BackgroundSetsP.clickEditSetBtn(driver, 1);
-//		ac.Wait(wt);
-//		String editString = "_Edited";
-//		BackgroundSetsP.inputSetName(driver, editString);
-//		BackgroundSetsP.selectSetType(driver, 4);// 4-GM
-//		BackgroundSetsP.clickSubmitOnEdit(driver, tc);
-//		ac.Wait(wt);
-//		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
-//		ac.Wait(wt);
-//		try {
-//			BackgroundSetsP.clickEditSetBtn(driver, 1);
-//			ac.rwExcel(tc, true, "Verify Edited background set", "Edited background set exists!");
-//		} catch (Exception e) {
-//			ac.rwExcel(tc, false, "Verify Edited background set", "Edited background set does NOT exist!");
-//		}
-//		ac.Wait(wt);
-//		BackgroundSetsP.clickSubmitOnEdit(driver, tc);
-//		tc = "TC139457"; // Verify Manage Backgrounds Images
-//		ac.Wait(wt);
-//		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
-//		ac.Wait(wt);
-//		BackgroundSetsP.clickManageBGImageBtn(driver, 1);
-//		ManageBackgroundsP.clickBackToManageSets(driver, tc);
-//		tc = "TC226031"; // Verify Get List of Dealer button available
-//		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
-//		ac.Wait(wt);
-//		BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1, tc);
-//		ac.Wait(wt);
-//		tc = "TC226032"; // Verify Get List of Dealer on the background
-//		BackgroundSetsP.clickClose(driver, tc);
-//
-//		ac.Wait(wt);
-//		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
-//		ac.Wait(wt);
-//		tc = "TC139558";
-//		BackgroundSetsP.clickDeleteBGSetBtn(driver, 1, tc);
-//		ac.acceptAlert(driver, tc, "OK");
-//		ac.Wait(wt);
-//		ac.clickRefleshF5Btn(driver, tc);
-//		ac.Wait(wt);
-//		BackgroundSetsP.inputSearch(driver, tempSetName + editString);
-//		ac.Wait(wt);
-//		tc = "TC139459_d";
-//		try {
-//			BackgroundSetsP.clickEditSetBtn(driver, 1);
-//			ac.rwExcel(tc, false, "Try to click the Edit button which should not exist",
-//					"Edit element exists! It should not happen!");
-//		} catch (Exception e) {
-//			ac.rwExcel(tc, true, "Try to click the Edit button which should not exist", "Edit element does not exist!");
-//		}
-//
-//		//// *************************clickManageBGSetsBtn******************************************************
-//		//// *************************clickManageBGSetsBtn******************************************************
-//
-//		//driver.close();
-//		// switchToWindow(driver, parentHandle);
-//		// driver.close();
+		// tc = "TC139447";
+		// BackgroundSetsP.clickCreateNewSet(driver);
+		// ac.Wait(wt);
+		// String tempSetName = "a";
+		// BackgroundSetsP.inputSetName(driver, tempSetName);
+		// BackgroundSetsP.clickCancel(driver);
+		// ac.Wait(wt);
+		// BackgroundSetsP.clickCreateNewSet(driver);
+		// ac.Wait(wt);
+		// BackgroundSetsP.inputSetName(driver, tempSetName);
+		// BackgroundSetsP.selectSetType(driver, 3);// 1-Old (Do Not User), 2-Flat on Flat on Flat, 3-Normal, 4-GM Only, 5-FCA Only
+		// BackgroundSetsP.uploadBackgroundPicture(driver, backgroundSetPath1, tc + "_01");
+		//
+		// System.out.println("\nPlease wait at least 3 minutes until Backgrounds page showing...");
+		// ac.Wait(wt);
+		// BackgroundSetsP.clickSubmit(driver);
+		// ac.Wait(wt);
+		//
+		// // ********************* check bg image *********************
+		// int sn = 1;
+		// double oneSNForScrollupPoint = 8.44091;
+		// double totalPoints = oneSNForScrollupPoint * 1;
+		// int scrollupPoints = 1;
+		// Backgrounds BackgroundsP = new Backgrounds(driver);
+		//
+		// // tc = "GM_Exterior_2019-GM-4NF56-4NF56-1SD_old ";////= modelcode bar 2019-GM-4NF56-4NF56-1SD - sn=2014
+		// // UserListP.scrollUp(driver, 17000, tc);// 17150 - value is on uper side
+		// // BackgroundsP.ClickOneExteriorModelYearBtn(driver,tc);
+		// // BackgroundsP.VerifyCarImage(driver, tc);
+		// // BackgroundsP.clickRightArrowBtn(driver, tc);
+		// // ac.Wait(wt);
+		// // BackgroundsP.VerifyCarImage(driver, tc);
+		// // BackgroundsP.clickLeftArrowBtn(driver, tc);
+		// // ac.Wait(wt);
+		// // BackgroundsP.VerifyCarImage(driver, tc);
+		// // BackgroundsP.clickCloseX(driver, tc);
+		// // UserListP.scrollUp(driver, -100000, tc);//scroll back to top
+		// //
+		// // tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_old";//= modelcode bar 2019-GM-4NF56-1SD-4NF56-1SD - sn=4876
+		// // UserListP.scrollUp(driver, 41158, tc);// 24100 - value is on uper side
+		// // BackgroundsP.ClickOneInteriorModelYearBtn(driver,tc);
+		// // BackgroundsP.VerifyCarImage(driver, tc);
+		// // BackgroundsP.clickRightArrowBtn(driver, tc);
+		// // BackgroundsP.clickLeftArrowBtn(driver, tc);
+		// // BackgroundsP.clickCloseX(driver, tc);
+		// // ac.Wait(wt);
+		// // UserListP.scrollUp(driver, -100000, tc);//scroll back to top
+		// //
+		//
+		// // ************************Check the failed loading car image from sn ************************
+		//
+		// tc = "FCA_2016_bf";// = modelcode bar 2016_bf - sn=17 from Excel-BG_CarCode table - green cols.
+		// sn = 2;
+		// totalPoints = oneSNForScrollupPoint * sn;
+		// scrollupPoints = (int) Math.round(totalPoints);
+		// UserListP.scrollUp(driver, scrollupPoints, tc);// 860
+		// BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
+		// ac.Wait(wt * 2);
+		// BackgroundsP.VerifyCarImage(driver, tc);
+		// BackgroundsP.clickRightArrowBtn(driver, tc);
+		// ac.Wait(wt);
+		// BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
+		// BackgroundsP.clickLeftArrowBtn(driver, tc);
+		// ac.Wait(wt);
+		// BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
+		// BackgroundsP.clickCloseX(driver, tc);
+		// ac.Wait(wt);
+		// UserListP.scrollUp(driver, -100000, tc);// scroll back to top
+		// // ************************Check the loading car image from sn ************************
+		// tc = "FCA_2019_lx";// = modelcode bar 2019_lx - sn=102 from Excel-BG_CarCode table
+		// sn = 102;
+		// totalPoints = oneSNForScrollupPoint * sn;
+		// scrollupPoints = (int) Math.round(totalPoints);
+		// UserListP.scrollUp(driver, scrollupPoints, tc);// 860
+		// BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
+		// ac.Wait(wt * 2);
+		// BackgroundsP.VerifyCarImage(driver, tc);
+		// BackgroundsP.clickRightArrowBtn(driver, tc);
+		// ac.Wait(wt);
+		// BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
+		// BackgroundsP.clickLeftArrowBtn(driver, tc);
+		// ac.Wait(wt);
+		// BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
+		// BackgroundsP.clickCloseX(driver, tc);
+		// ac.Wait(wt);
+		// UserListP.scrollUp(driver, -100000, tc);// scroll back to top
+		//
+		// tc = "GM_Exterior_2019-GM-4NF56-4NF56-1SD_new ";//// = modelcode bar 2019-GM-4NF56-4NF56-1SD - sn=2014
+		// sn = 2014;
+		// totalPoints = oneSNForScrollupPoint * sn;
+		// scrollupPoints = (int) Math.round(totalPoints);
+		// UserListP.scrollUp(driver, scrollupPoints, tc);// 860
+		// BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
+		// ac.Wait(wt * 2);
+		// BackgroundsP.VerifyCarImage(driver, tc);
+		// BackgroundsP.clickBackgroundPic(driver, tc);
+		// BackgroundsP.VerifyCarImage(driver, tc + "_added_BG_Pic");
+		// int numpics = 8;// Number of images for the model year vehicle
+		// for (int i = 1; i <= numpics; i++) {
+		// ac.Wait(wt);
+		// BackgroundsP.clickRightArrowBtn(driver, tc + "_" + i);
+		// ac.Wait(wt);
+		// BackgroundsP.clickBackgroundPic(driver, tc + "_" + i);
+		// }
+		// ac.Wait(wt);
+		// BackgroundsP.VerifyCarImage(driver, tc + "_Right_Arrow");
+		// BackgroundsP.clickLeftArrowBtn(driver, tc);
+		// ac.Wait(wt);
+		// BackgroundsP.VerifyCarImage(driver, tc + "_Left_Arrow");
+		// // BackgroundsP.clickCloseX(driver, tc);
+		// BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
+		// ac.Wait(wt);
+		// UserListP.scrollUp(driver, -100000, tc);// scroll back to top
+		// try {
+		// BackgroundsP.uploadBackgroundPictureFrBackgroundsPage(driver, backgroundSetPath2, envBrowser, 180, 5,
+		// tc + "_02");
+		// ac.rwExcel(tc, true, "upload Background Picture From Backgrounds Page", "Seems good so far!");
+		// }catch (Exception e) {
+		// System.out.println("Upload Background Picture (path: "+backgroundSetPath2+", Browser: "+envBrowser+") from Backgrounds Page failed!");
+		// ac.rwExcel(tc, false, "upload Background Picture From Backgrounds Page", "Upload Background Picture (path: "+backgroundSetPath2+", Browser: "+envBrowser+") from Backgrounds Page failed!");
+		// }
+		// tc = "GM_Interior_2019-GM-4NF56-1SD-4NF56-1SD_new";// = modelcode bar 2019-GM-4NF56-1SD-4NF56-1SD - sn=4876
+		// sn = 4876;
+		// totalPoints = oneSNForScrollupPoint * sn;
+		// scrollupPoints = (int) Math.round(totalPoints);
+		// UserListP.scrollUp(driver, scrollupPoints, tc);// 860
+		// BackgroundsP.ClickAnyOneOfExteriorOrInteriorModelYearBtn(driver, sn, tc);
+		// ac.Wait(wt * 2);
+		// BackgroundsP.VerifyCarImage(driver, tc);
+		// for (int i = 1; i <= numpics; i++) {
+		// ac.Wait(wt);
+		// BackgroundsP.clickRightArrowBtn(driver, tc + "_" + i);
+		// ac.Wait(wt);
+		// BackgroundsP.clickBackgroundPic2(driver, tc + "_" + i);
+		// if (i == 2) {
+		// ac.Wait(wt);
+		// BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
+		// ac.Wait(wt);
+		// ac.acceptAlert(driver, tc, "OK");
+		// ac.Wait(wt);
+		// }
+		// }
+		// BackgroundsP.VerifyCarImage(driver, tc);
+		// BackgroundsP.clickRightArrowBtn(driver, tc);
+		// ac.Wait(wt);
+		// BackgroundsP.clickSaveAndCopyToAllMatching(driver, tc);
+		// ac.Wait(wt * 2 * 2 * 2);
+		// // BackgroundsP.VerifyCarImage(driver, tc+"_Right_Arrow");
+		// // BackgroundsP.clickLeftArrowBtn(driver, tc);
+		// // ac.Wait(wt);
+		// // BackgroundsP.VerifyCarImage(driver, tc+"_Left_Arrow");
+		// // BackgroundsP.clickCloseX(driver, tc);
+		// ac.Wait(wt);
+		// UserListP.scrollUp(driver, -100000, tc);// scroll back to top
+		// // ************************End of Check the loading car image from sn ************************
+		// // Add New BG Set
+		// UserListP.clickManageBGSets(driver);
+		// ac.clickRefleshF5Btn(driver, tc);
+		// tc = "TC139534"; // Edit "a" background set
+		// ac.Wait(wt);
+		// BackgroundSetsP.inputSearch(driver, tempSetName);
+		// ac.Wait(wt);
+		// BackgroundSetsP.clickEditSetBtn(driver, 1);
+		// ac.Wait(wt);
+		// String editString = "_Edited";
+		// BackgroundSetsP.inputSetName(driver, editString);
+		// BackgroundSetsP.selectSetType(driver, 4);// 4-GM
+		// BackgroundSetsP.clickSubmitOnEdit(driver, tc);
+		// ac.Wait(wt);
+		// BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+		// ac.Wait(wt);
+		// try {
+		// BackgroundSetsP.clickEditSetBtn(driver, 1);
+		// ac.rwExcel(tc, true, "Verify Edited background set", "Edited background set exists!");
+		// } catch (Exception e) {
+		// ac.rwExcel(tc, false, "Verify Edited background set", "Edited background set does NOT exist!");
+		// }
+		// ac.Wait(wt);
+		// BackgroundSetsP.clickSubmitOnEdit(driver, tc);
+		// tc = "TC139457"; // Verify Manage Backgrounds Images
+		// ac.Wait(wt);
+		// BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+		// ac.Wait(wt);
+		// BackgroundSetsP.clickManageBGImageBtn(driver, 1);
+		// ManageBackgroundsP.clickBackToManageSets(driver, tc);
+		// tc = "TC226031"; // Verify Get List of Dealer button available
+		// BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+		// ac.Wait(wt);
+		// BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1, tc);
+		// ac.Wait(wt);
+		// tc = "TC226032"; // Verify Get List of Dealer on the background
+		// BackgroundSetsP.clickClose(driver, tc);
+		//
+		// ac.Wait(wt);
+		// BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+		// ac.Wait(wt);
+		// tc = "TC139558";
+		// BackgroundSetsP.clickDeleteBGSetBtn(driver, 1, tc);
+		// ac.acceptAlert(driver, tc, "OK");
+		// ac.Wait(wt);
+		// ac.clickRefleshF5Btn(driver, tc);
+		// ac.Wait(wt);
+		// BackgroundSetsP.inputSearch(driver, tempSetName + editString);
+		// ac.Wait(wt);
+		// tc = "TC139459_d";
+		// try {
+		// BackgroundSetsP.clickEditSetBtn(driver, 1);
+		// ac.rwExcel(tc, false, "Try to click the Edit button which should not exist",
+		// "Edit element exists! It should not happen!");
+		// } catch (Exception e) {
+		// ac.rwExcel(tc, true, "Try to click the Edit button which should not exist", "Edit element does not exist!");
+		// }
+		//
+		// //// *************************clickManageBGSetsBtn******************************************************
+		// //// *************************clickManageBGSetsBtn******************************************************
+		//
+		// //driver.close();
+		// // switchToWindow(driver, parentHandle);
+		// // driver.close();
 
-	
 	}
+
 	public static void ManageDealerShipsAddNewAccount(WebDriver driver, String brw, String versionNum, String envment,
 			String checkEmail) throws Exception {
 
@@ -1878,6 +1957,8 @@ public class AdminPortalController extends Comlibs {
 		DealerProfieP.selectVINpxProd(driver, tc);
 		DealerProfieP.selectSTOCKpxProd(driver, tc);
 		// DealerProfieP.selectLOTpxProd(driver);
+		DealerProfieP.selectDealerBrandedNewProd(driver, tc + "_05");
+		// DealerProfieP.selectDealerBrandedUsedProd(driver,tc+"_05");
 		// DealerProfieP.inputMetadata(driver, MetadataValues);
 
 		// DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
@@ -1894,7 +1975,7 @@ public class AdminPortalController extends Comlibs {
 		DealerProfieP.inputWebsite(driver, Website, tc);
 		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber, tc);
 
-//		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet, tc);// Generic Dealership=7; White Gradient=0
+		// DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet, tc);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
 
@@ -1921,6 +2002,8 @@ public class AdminPortalController extends Comlibs {
 		DealerProfieP.selectVINpxProd(driver, tc);
 		DealerProfieP.selectSTOCKpxProd(driver, tc);
 		// DealerProfieP.selectLOTpxProd(driver);
+		// DealerProfieP.selectDealerBrandedNewProd(driver,tc+"_06");
+		DealerProfieP.selectDealerBrandedUsedProd(driver, tc + "_06");
 		DealerProfieP.inputMetadata(driver, MetadataValues, tc);
 
 		// DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
@@ -1932,12 +2015,12 @@ public class AdminPortalController extends Comlibs {
 		DealerProfieP.inputDealersipEmail(driver, "Autotomsmith4@gmail.com", tc);// Auto_Added_"+DealershipEmail);
 		DealerProfieP.inputZipCode(driver, ZipPostalCode, tc);
 		DealerProfieP.inputCountry(driver, Country, tc);// USA=1
-		DealerProfieP.inputState(driver, StateProvince,tc);// NY=33
+		DealerProfieP.inputState(driver, StateProvince, tc);// NY=33
 		DealerProfieP.inputTagLineMarkingMsg(driver, TagLineMarkingMsg, tc);
 		DealerProfieP.inputWebsite(driver, Website, tc);
 		DealerProfieP.inputDealershipPhone(driver, DealershipPhoneNumber, tc);
 
-//		DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet, tc);// Generic Dealership=7; White Gradient=0
+		// DealerProfieP.selectBackGroundSet(driver, SelectBackgroundSet, tc);// Generic Dealership=7; White Gradient=0
 		DealerProfieP.scrollUp(driver, -3000, tc);
 		DealerProfieP.clickSaveBtn(driver, tc);
 		// Stop here for the time being since there is bug here AUTOPXOPS-1227
@@ -2251,8 +2334,8 @@ public class AdminPortalController extends Comlibs {
 		ExportTemplateListP.inputPassword(driver, "5k2cGG1");
 		ExportTemplateListP.inputHost(driver, "LOCALHOST");
 		ExportTemplateListP.inputTemplate(driver, templateS);
-//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		// ExportTemplateListP.clickCombinedFileCheckBox(driver);
+		// ExportTemplateListP.clickBrandedImagesCheckBox(driver);
 		ExportTemplateListP.clickCancel(driver);
 		ac.Wait(wt);
 		// Add an Export Template and submit
@@ -2265,11 +2348,11 @@ public class AdminPortalController extends Comlibs {
 		ExportTemplateListP.inputHost(driver, "LOCALHOST");
 		ExportTemplateListP.inputTemplate(driver, templateS);
 		ac.Wait(wt);
-//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
-//		ac.Wait(wt);
-//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
-//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		// ExportTemplateListP.clickCombinedFileCheckBox(driver);
+		// ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		// ac.Wait(wt);
+		// ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		// ExportTemplateListP.clickBrandedImagesCheckBox(driver);
 		ExportTemplateListP.clickSubmit(driver);
 		ac.acceptAlert(driver, tc, "OK");
 		// Edit Export Template
@@ -2284,11 +2367,11 @@ public class AdminPortalController extends Comlibs {
 		ExportTemplateListP.inputHost(driver, "Edited_LOCALHOST");
 		ExportTemplateListP.inputTemplate(driver, "Edited_" + templateS);
 		ac.Wait(wt);
-//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
-//		ac.Wait(wt);
-//		ExportTemplateListP.clickCombinedFileCheckBox(driver);
-//		ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		// ExportTemplateListP.clickCombinedFileCheckBox(driver);
+		// ExportTemplateListP.clickBrandedImagesCheckBox(driver);
+		// ac.Wait(wt);
+		// ExportTemplateListP.clickCombinedFileCheckBox(driver);
+		// ExportTemplateListP.clickBrandedImagesCheckBox(driver);
 		ExportTemplateListP.clickSubmit(driver);
 		ac.acceptAlert(driver, tc, "OK");
 		ac.Wait(wt);
@@ -2441,33 +2524,33 @@ public class AdminPortalController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-//			// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK for Prod (FF) on 2018-12-17 from ManageDealerships.2019-07-04 Worked.
-//			bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-//			RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
+			// // 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK for Prod (FF) on 2018-12-17 from ManageDealerships.2019-07-04 Worked.
+			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			// RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
 
 			////// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page - not used any more 2019
-			//bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-			//RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
-			////*****************************************************************************************************************
-			
-			////// 1.ManageDealerShipsAddNewAccount:
-			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
-			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
+			//// *****************************************************************************************************************
 
-			//// 2.ManageDealerShips:
+//			 ////// 1.ManageDealerShipsAddNewAccount:
+//			 bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
+//			 ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+//			 ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+
+			//// 2.ManageDealerShips and others (Manage Image Type, Manage Angle Mappings, Manage Export Templates and Manage Global Config):
 			loadURL(driver, baseURL, env);
 			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
 			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
-			
-			//// 3. Enable/Disable Vehicles and ManageBackgroundSets:
-			loadURL(driver, baseURL, env);
-			bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
-			EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
-			
-			 bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
-			 driver.close();
-			 System.out.println("Test is complete!!!");
+
+//			 //// 3. Enable/Disable Vehicles and ManageBackgroundSets:
+//			 loadURL(driver, baseURL, env);
+//			 bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
+//			 EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
+
+			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
+			driver.close();
+			System.out.println("Test is complete!!!");
 		}
 		return;
 	}

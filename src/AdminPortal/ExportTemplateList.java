@@ -1,6 +1,13 @@
 package AdminPortal;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -99,7 +106,79 @@ public class ExportTemplateList extends Comlibs {
 		
 		return this;
 	}
-	
+	public void clickOKwithWindowAlert() throws AWTException {
+		Wait(1);
+		// String vehicleImage="";
+		// //Don't try to debug below code
+		// StringSelection ss = new StringSelection(vehicleImage);
+		// Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+		Robot robot = new Robot();
+		try {
+			robot.keyPress(KeyEvent.VK_ACCEPT);
+			robot.keyRelease(KeyEvent.VK_ACCEPT);
+
+		} catch (Throwable e) {
+			System.out.println("0 Error to Accept the alert.");
+		}
+		// robot.keyPress(KeyEvent.VK_CONTROL);
+		// robot.keyPress(KeyEvent.VK_V);
+		// robot.keyRelease(KeyEvent.VK_V);
+		// robot.keyRelease(KeyEvent.VK_CONTROL);
+		// robot.keyPress(KeyEvent.VK_ENTER);
+		// Wait(1);
+		// robot.keyRelease(KeyEvent.VK_ENTER);
+		Wait(1);
+		System.out.println("Click Accept!");
+	}
+	public void clickOKwithWindowAlert1() throws AWTException {
+		Wait(1);
+		// String vehicleImage="";
+		// //Don't try to debug below code
+		// StringSelection ss = new StringSelection(vehicleImage);
+		// Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+		try {
+			Robot robot = new Robot();
+			robot.keyPress(KeyEvent.VK_SPACE);
+			robot.keyRelease(KeyEvent.VK_SPACE);
+		} catch (Throwable e) {
+			System.out.println("1 Error to Accept the alert.");
+		}
+
+		// robot.keyPress(KeyEvent.VK_CONTROL);
+		// robot.keyPress(KeyEvent.VK_V);
+		// robot.keyRelease(KeyEvent.VK_V);
+		// robot.keyRelease(KeyEvent.VK_CONTROL);
+		// robot.keyPress(KeyEvent.VK_ENTER);
+		// Wait(1);
+		// robot.keyRelease(KeyEvent.VK_ENTER);
+		Wait(3);
+		System.out.println("Click Space!");
+	}
+
+	public void clickOKwithWindowAlert2() throws AWTException {
+		Wait(1);
+		// String vehicleImage="";
+		// //Don't try to debug below code
+		// StringSelection ss = new StringSelection(vehicleImage);
+		// Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+		try {
+			Robot robot = new Robot();
+			robot.keyPress(KeyEvent.VK_O);
+			robot.keyRelease(KeyEvent.VK_O);
+		} catch (Throwable e) {
+			System.out.println("2 Error to Accept the alert.");
+		}
+
+		// robot.keyPress(KeyEvent.VK_CONTROL);
+		// robot.keyPress(KeyEvent.VK_V);
+		// robot.keyRelease(KeyEvent.VK_V);
+		// robot.keyRelease(KeyEvent.VK_CONTROL);
+		// robot.keyPress(KeyEvent.VK_ENTER);
+		// Wait(1);
+		// robot.keyRelease(KeyEvent.VK_ENTER);
+		Wait(3);
+		System.out.println("Click O key!");
+	}
 	public ExportTemplateList clickDownload(WebDriver driver, String tc) throws IOException {
 		By downLoadicon= By.xpath("//*[@id=\"imageTypeTable\"]/tbody/tr[1]/td[7]/form/button/span"); //1,2,3...
 		boolean elementExist = elementExist(driver, downLoadicon, true, tc);
@@ -173,5 +252,20 @@ public class ExportTemplateList extends Comlibs {
 			nameS = "null";
 		}
 		return nameS;
+	}
+	public String timeString() {
+		String dateStamp, timeStamp;
+		Calendar cal = Calendar.getInstance();
+		cal.getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		timeStamp = sdf.format(cal.getTime());
+		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+		Date d = new Date();
+		dateStamp = df.format(d);
+		timeStamp = dateStamp + "  " + timeStamp;
+		timeStamp = timeStamp.replace("/", "_");
+		timeStamp = timeStamp.replace(":", "_");
+		timeStamp = timeStamp.replace(" ", "_");
+		return timeStamp;
 	}
 }

@@ -42,6 +42,11 @@ public class DealerProfile extends Comlibs {
 	By ProductVINpxLocator = By.xpath("//*[@id=\"vinpx\"]");
 	By ProductSTOCKpxLocator = By.xpath("//*[@id=\"stockpx\"]");
 	By ProductLOTpxLocator = By.xpath("//*[@id=\"lotpx\"]");
+	
+	By ProductDealerBrandedNew = By.xpath("//*[@id=\"dBrandNew\"]");
+	By ProductDealerBrandedUsed = By.xpath("//*[@id=\"dBrandUsed\"]");
+	
+	
 	// By OEMSelect=By.xpath("//*[@id=\"dealerOem\"]/option[13]");
 	By AddrssLocator = By.xpath("//*[@id=\"dealerAddr1\"]");
 	By AddressLine2Locator = By.xpath("//*[@id=\"dealerAddr2\"]");
@@ -249,7 +254,19 @@ public class DealerProfile extends Comlibs {
 		;
 		return this;
 	}
-
+	public DealerProfile selectDealerBrandedNewProd(WebDriver driver,String tc) throws Exception {
+		elementExist(driver, ProductDealerBrandedNew, true, tc);
+		driver.findElement(ProductDealerBrandedNew).click();
+		;
+		return this;
+	}
+	public DealerProfile selectDealerBrandedUsedProd(WebDriver driver,String tc) throws Exception {
+		elementExist(driver, ProductDealerBrandedUsed, true, tc);
+		driver.findElement(ProductDealerBrandedUsed).click();
+		;
+		return this;
+	}
+	
 	public DealerProfile inputAddress(WebDriver driver, String address,String tc) throws Exception {
 		elementExist(driver, AddrssLocator, true, tc);
 		driver.findElement(AddrssLocator).sendKeys(address);

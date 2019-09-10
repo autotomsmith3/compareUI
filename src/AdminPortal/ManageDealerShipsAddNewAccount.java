@@ -363,6 +363,8 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		DealerProfieP.selectVINpxProd(driver, tc);
 		DealerProfieP.selectSTOCKpxProd(driver, tc);
 //		 DealerProfieP.selectLOTpxProd(driver);
+		DealerProfieP.selectDealerBrandedNewProd(driver,tc+"_07");
+//		DealerProfieP.selectDealerBrandedUsedProd(driver,tc+"_07");
 		// DealerProfieP.inputMetadata(driver, MetadataValues);
 
 		// DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
@@ -407,6 +409,8 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		DealerProfieP.selectVINpxProd(driver, tc);
 		DealerProfieP.selectSTOCKpxProd(driver, tc);
 		// DealerProfieP.selectLOTpxProd(driver);
+//		DealerProfieP.selectDealerBrandedNewProd(driver,tc+"_08");
+		DealerProfieP.selectDealerBrandedUsedProd(driver,tc+"_08");
 		DealerProfieP.inputMetadata(driver, MetadataValues, tc);
 
 		// DealerProfieP.selectTemplateSetting(driver, TemplateSettings);// DEFAULT=1; replace=2;overlay=3;
