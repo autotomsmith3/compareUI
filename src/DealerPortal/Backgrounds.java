@@ -63,9 +63,7 @@ public class Backgrounds extends Comlibs {
 		driver.findElement(AddBackground).click();
 		return this;
 	}
-	
-	
-	
+
 	public Backgrounds clickYearDropDown(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, yearDropDownLocator, true, tc);
 		driver.findElement(yearDropDownLocator).click();
@@ -96,15 +94,45 @@ public class Backgrounds extends Comlibs {
 		driver.findElement(selectBackground).click();
 		return this;
 	}
+
 	public String getBackgroundNameFrPopup(WebDriver driver, int num, String tc) throws IOException {
 		By selectBackground = By
-				.xpath("/html/body/div[2]/div[2]/div/div/div[2]/div/div/div/div[1]/div["+num+"]/div/div[1]/img");// 1,2,3....level count
-		           //     /html/body/div[2]/div[2]/div/div/div[2]/div/div/div/div[1]/div[11]/div/div[1]/img
-		
+				.xpath("/html/body/div[2]/div[2]/div/div/div[2]/div/div/div/div[1]/div[" + num + "]/div/div[1]/img");// 1,2,3....level count
+		// /html/body/div[2]/div[2]/div/div/div[2]/div/div/div/div[1]/div[11]/div/div[1]/img
+
 		elementExist(driver, selectBackground, true, tc);
-		String bgName=driver.findElement(selectBackground).getAttribute("alt");
+		String bgName = driver.findElement(selectBackground).getAttribute("alt");
 		return bgName;
 	}
+
+	public int getBackgroundNumberFrPopup(WebDriver driver, String bgName, String tc) throws IOException {
+		int num = 30;// assume there are 30 BGs.
+		String getbgName = "";
+		for (int i = 1; i <= num; i++) {
+			By selectBackground = By
+					.xpath("/html/body/div[2]/div[2]/div/div/div[2]/div/div/div/div[1]/div[" + i + "]/div/div[1]/img");// 1,2,3....level count
+			// /html/body/div[2]/div[2]/div/div/div[2]/div/div/div/div[1]/div[11]/div/div[1]/img
+			if (elementExist(driver, selectBackground, true, tc)) {
+				// exists, return the number
+				getbgName = driver.findElement(selectBackground).getAttribute("alt");
+				if (getbgName.equalsIgnoreCase(bgName)) {
+					num = i;
+					break;
+				}
+			} else if (i >= num) {
+				// does not exist 
+				rwExcel(tc, false, "Failed to get the number from background name \"" + bgName + "\"",
+						"Total tried: " + num + " to getBackgroundNumberFrPopup, returned -1");
+				num = -1;
+			} else {
+				//continue...
+			}
+		}
+		// elementExist(driver, selectBackground, true, tc);
+		// String bgName=driver.findElement(selectBackground).getAttribute("alt");
+		return num;
+	}
+
 	public Backgrounds clickXButton(WebDriver driver, int num, String tc) throws IOException {
 		num = num + 1;
 		By xBtn = By.cssSelector("tr:nth-child(" + num + ") .btn");// 1,2,3....vertical count
@@ -112,11 +140,11 @@ public class Backgrounds extends Comlibs {
 		driver.findElement(xBtn).click();
 		return this;
 	}
-	
+
 	public Backgrounds selectYear(WebDriver driver, int num, String tc) throws IOException {
 		num = num + 2;
-		By yearLocator = By.xpath("//div[@id='root']/div/table/tbody/tr[" + num + "]/th[4]/select");//ok but only open the dropdown menu    //*[@id="2019"]
-		
+		By yearLocator = By.xpath("//div[@id='root']/div/table/tbody/tr[" + num + "]/th[4]/select");// ok but only open the dropdown menu //*[@id="2019"]
+
 		elementExist(driver, yearLocator, true, tc);
 		driver.findElement(yearLocator).click();
 		return this;
@@ -124,93 +152,84 @@ public class Backgrounds extends Comlibs {
 
 	public String getBackgroundSetName(WebDriver driver, int num, String tc) throws IOException {
 		num = num + 1;
-		By backGroundSetLocator = By.xpath("//div[@id='root']/div/table/tbody/tr[" + num + "]/th[3]");//ok
-		
-		//*[@id="root"]/div/table/tbody/tr[2]/th[3]
-		//*[@id="root"]/div/table/tbody/tr[3]/th[3]
-		
+		By backGroundSetLocator = By.xpath("//div[@id='root']/div/table/tbody/tr[" + num + "]/th[3]");// ok
+
+		// *[@id="root"]/div/table/tbody/tr[2]/th[3]
+		// *[@id="root"]/div/table/tbody/tr[3]/th[3]
+
 		elementExist(driver, backGroundSetLocator, true, tc);
-		String bgSetName=driver.findElement(backGroundSetLocator).getText();//ok
+		String bgSetName = driver.findElement(backGroundSetLocator).getText();// ok
 		return bgSetName;
 	}
-	
+
 	public int getBGSetRow(WebDriver driver, String bgSetNameString, String tc) throws IOException {
-		int SetNum=0;
-		String bgSetNamefrPage="";
+		int SetNum = 0;
+		String bgSetNamefrPage = "";
 		By backGroundSetLocator = By.xpath("//*[@id='root']/div/table/tbody/tr");//
-		//*[@id="root"]/div/table/tbody/tr[2]   - 1
-		//*[@id="root"]/div/table/tbody/tr[3]/th[3]   - 2
-		
+		// *[@id="root"]/div/table/tbody/tr[2] - 1
+		// *[@id="root"]/div/table/tbody/tr[3]/th[3] - 2
+
 		elementExist(driver, backGroundSetLocator, true, tc);
-		int bgSetSize=driver.findElements(backGroundSetLocator).size();
-		
-		for (int i=2;i<=bgSetSize;i++) {
-			By bgSetName=By.xpath("//*[@id='root']/div/table/tbody/tr["+i+"]/th[3]");//
-			bgSetNamefrPage=driver.findElement(bgSetName).getText();
+		int bgSetSize = driver.findElements(backGroundSetLocator).size();
+
+		for (int i = 2; i <= bgSetSize; i++) {
+			By bgSetName = By.xpath("//*[@id='root']/div/table/tbody/tr[" + i + "]/th[3]");//
+			bgSetNamefrPage = driver.findElement(bgSetName).getText();
 			if (bgSetNamefrPage.equalsIgnoreCase(bgSetNameString)) {
-				SetNum=i-1;
+				SetNum = i - 1;
 				break;
-			}else if (i==bgSetSize) {
+			} else if (i == bgSetSize) {
 				System.out.println("Failed to get bgSet number!");
-				rwExcel(tc, false, "Get the background to match the background set name","Fails to get the number. Returns 0!");
+				rwExcel(tc, false, "Get the background to match the background set name",
+						"Fails to get the number. Returns 0!");
 			}
-			
+
 		}
 		return SetNum;
 	}
-	
+
 	public int getBGSetTotalRows(WebDriver driver, String tc) throws IOException {
 		By backGroundSetLocator = By.xpath("//*[@id='root']/div/table/tbody/tr");//
 		elementExist(driver, backGroundSetLocator, true, tc);
-		int bgSetSize=driver.findElements(backGroundSetLocator).size()-1;
+		int bgSetSize = driver.findElements(backGroundSetLocator).size() - 1;
 		return bgSetSize;
 	}
-	
-	
-	public Backgrounds ssxxxxselectYearValue(WebDriver driver,int yearRowNum, String tc) throws IOException {
-//		By yearnumLocator = By.xpath("//*[@id=\""+yearValue+"\"]"); // ok //*[@id="2019"]  //div[@id='root']/div/table/tbody/tr[2]/th[4]/select/2019
-		yearRowNum=yearRowNum+1;
-		By yearnumLocator = By.xpath("//div[@id='root']/div/table/tbody/tr["+yearRowNum+"]/th[4]/select"); //  //div[@id='root']/div/table/tbody/tr[2]/th[4]/select/2019
+
+	public Backgrounds ssxxxxselectYearValue(WebDriver driver, int yearRowNum, String tc) throws IOException {
+		// By yearnumLocator = By.xpath("//*[@id=\""+yearValue+"\"]"); // ok //*[@id="2019"] //div[@id='root']/div/table/tbody/tr[2]/th[4]/select/2019
+		yearRowNum = yearRowNum + 1;
+		By yearnumLocator = By.xpath("//div[@id='root']/div/table/tbody/tr[" + yearRowNum + "]/th[4]/select"); // //div[@id='root']/div/table/tbody/tr[2]/th[4]/select/2019
 		elementExist(driver, yearnumLocator, true, tc);
 		driver.findElement(yearnumLocator).click();
 		return this;
 	}
-	
-	public Backgrounds selectYearValue(WebDriver driver,int yearRowNum, String yearString, String tc) throws IOException {
-//		By yearnumLocator = By.xpath("//*[@id=\""+yearValue+"\"]"); // ok //*[@id="2019"]  //div[@id='root']/div/table/tbody/tr[2]/th[4]/select/2019
-		yearRowNum=yearRowNum+1;
-		By yearnumLocator = By.xpath("//div[@id='root']/div/table/tbody/tr["+yearRowNum+"]/th[4]/select"); //  //div[@id='root']/div/table/tbody/tr[2]/th[4]/select/2019
+
+	public Backgrounds selectYearValue(WebDriver driver, int yearRowNum, String yearString, String tc)
+			throws IOException {
+		// By yearnumLocator = By.xpath("//*[@id=\""+yearValue+"\"]"); // ok //*[@id="2019"] //div[@id='root']/div/table/tbody/tr[2]/th[4]/select/2019
+		yearRowNum = yearRowNum + 1;
+		By yearnumLocator = By.xpath("//div[@id='root']/div/table/tbody/tr[" + yearRowNum + "]/th[4]/select"); // //div[@id='root']/div/table/tbody/tr[2]/th[4]/select/2019
 		elementExist(driver, yearnumLocator, true, tc);
-		Select drpYear=new Select(driver.findElement(yearnumLocator));
+		Select drpYear = new Select(driver.findElement(yearnumLocator));
 		drpYear.selectByValue(yearString);
 		return this;
-	}	
-	
-	
-	
-	public Backgrounds selectMakeValue(WebDriver driver,int makeRowNum, String makeString, String tc) throws IOException {
-		makeRowNum=makeRowNum+1;
-//		By makeLocator = By.xpath("//div[@id='root']/div/table/tbody/tr["+makeRowNum+"]/th[5]/select"); // 
-		
-		//*[@id="root"]/div/table/tbody/tr[2]/th[5]   //chrome copy xpath on parent div
-//		By makeLocator = By.xpath("//*[@id=\"root\"]/div/table/tbody/tr["+makeRowNum+"]/th[5]/select"); // not working 20190829
-		By makeLocator = By.xpath("//*[@id=\"root\"]/div/table/tbody/tr["+makeRowNum+"]/th[5]/select"); // 
-		//*[@id="root"]/div/table/tbody/tr[2]/th[5]
-		
+	}
+
+	public Backgrounds selectMakeValue(WebDriver driver, int makeRowNum, String makeString, String tc)
+			throws IOException {
+		makeRowNum = makeRowNum + 1;
+		// By makeLocator = By.xpath("//div[@id='root']/div/table/tbody/tr["+makeRowNum+"]/th[5]/select"); //
+
+		// *[@id="root"]/div/table/tbody/tr[2]/th[5] //chrome copy xpath on parent div
+		// By makeLocator = By.xpath("//*[@id=\"root\"]/div/table/tbody/tr["+makeRowNum+"]/th[5]/select"); // not working 20190829
+		By makeLocator = By.xpath("//*[@id=\"root\"]/div/table/tbody/tr[" + makeRowNum + "]/th[5]/select"); //
+		// *[@id="root"]/div/table/tbody/tr[2]/th[5]
+
 		elementExist(driver, makeLocator, true, tc);
-		Select drpMaker=new Select(driver.findElement(makeLocator));
+		Select drpMaker = new Select(driver.findElement(makeLocator));
 		drpMaker.selectByValue(makeString);
 		return this;
-	}	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}
 
 	public void scrollUp(WebDriver driver, int scrollNum, String tc) {
 

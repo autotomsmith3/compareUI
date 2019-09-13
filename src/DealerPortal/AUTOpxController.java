@@ -3185,8 +3185,18 @@ public class AUTOpxController extends Comlibs {
 		bgP.clickAddBackgrounds(driver, TCnum);
 		ac.Wait(wt);
 		TCnum = "Add GB_01_1";
-		int bgNum=19;
+		int bgNum=18; //Select 18 - Auto_ChangedTo_588_644  
+		String selectBGName="Auto_ChangedTo_588_644";
+
+		bgNum=bgP.getBackgroundNumberFrPopup(driver, selectBGName, TCnum);
+		if (bgNum==-1) {
+			System.out.println("\n\nFailed to get number of background!!!\n\n");
+		}
 		String bgName=bgP.getBackgroundNameFrPopup(driver, bgNum, TCnum);
+		if (!bgName.equalsIgnoreCase(selectBGName)) {
+			TCnum = "Select BG";
+			ac.rwExcel(TCnum, false, "Select background does not match the original one","Real web BG name is:\" "+bgName+"\". Expected BG name is: \" "+selectBGName+"\"");
+		}
 		
 		TCnum = "Add GB_01_2";
 		bgP.clickBackground(driver, bgNum, TCnum);
@@ -3210,7 +3220,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "MultipleBGs_04";
 //		bgP.selectYear(driver, 1, TCnum);
 		TCnum = "MultipleBGs_05";
-		System.out.println("Added "+addNew+" same backgrounds");
+		System.out.println("Added "+(addNew+1)+" same backgrounds");
 		ac.Wait(wt);
 		TCnum = "MultipleBGs_06_01";
 		int bgSetTotalRows=bgP.getBGSetTotalRows(driver, TCnum);
@@ -3253,6 +3263,7 @@ public class AUTOpxController extends Comlibs {
 		for (int i=0;i<bgSetTotalRows02;i++) {
 			duplicateBG[i]=false;
 		}
+		duplicateBGsTotal=0;
 		for (int i=1;i<=bgSetTotalRows02;i++) {
 			dName=bgP.getBackgroundSetName(driver, i, TCnum+"_"+i);
 			if (dName.equalsIgnoreCase(bgName)) {
@@ -3292,6 +3303,7 @@ public class AUTOpxController extends Comlibs {
 		for (int i=0;i<bgSetTotalRows;i++) {
 			duplicateBG[i]=false;
 		}
+		System.out.println("Added "+(addNew)+" same backgrounds");
 		bgSetTotalRows=bgP.getBGSetTotalRows(driver, TCnum);
 		TCnum = "Add New Backgrounds_01";
 		duplicateBGsTotal=0;
