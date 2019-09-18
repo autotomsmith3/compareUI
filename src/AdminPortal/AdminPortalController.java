@@ -227,7 +227,8 @@ public class AdminPortalController extends Comlibs {
 		String tempVehGUID = "";
 		String ProductVINpx = "";
 		String ProductSTOCKpx = "";
-		String ProductLOTpx = "";
+		String ProductLOTpx_01 = "";
+		String ProductLOTpx_02 = "";
 		String Dealership_ID = "";
 		String Dealership_Name = "";
 		String Dealership_Email = "";
@@ -241,7 +242,7 @@ public class AdminPortalController extends Comlibs {
 		int count = 0;
 		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
 		String[] titleString = { "Env.", "S/N", "Dealership_ID", "Dealership_Name", "Account_Email", "Dealership_Email",
-				"ProductVINpx", "ProductSTOCKpx", "ProductLOTpx", "Metadata", "dlrGuid" };
+				"ProductVINpx", "ProductSTOCKpx", "DealerBrandedNew","DealerBrandedUsed", "Metadata", "dlrGuid" };
 		// =================================================
 		ac.writeTitle(getMetadataSavePathFile, titleString);
 		int dataLength = 54;
@@ -288,7 +289,8 @@ public class AdminPortalController extends Comlibs {
 				TCnum = "TC xxxx_01";
 				ProductVINpx = DealerProfieP.getVINpxProduct(driver, "");
 				ProductSTOCKpx = DealerProfieP.getSTOCKpxProduct(driver, "");
-				ProductLOTpx = DealerProfieP.getLOTpxProduct(driver, "");
+				ProductLOTpx_01 = DealerProfieP.getLOTpx01Product(driver, "");
+				ProductLOTpx_02 = DealerProfieP.getLOTpx02Product(driver, "");
 				Dealership_ID = DealerProfieP.getDealershipID(driver, TCnum);
 				Dealership_Name = DealerProfieP.getDealershipName(driver, TCnum);
 				Dealership_Email = DealerProfieP.getDealershipEmail(driver, TCnum);
@@ -309,16 +311,17 @@ public class AdminPortalController extends Comlibs {
 				DealerSettingsArray[5] = Dealership_Email;
 				DealerSettingsArray[6] = ProductVINpx;
 				DealerSettingsArray[7] = ProductSTOCKpx;
-				DealerSettingsArray[8] = ProductLOTpx;
-				DealerSettingsArray[9] = Metadata;
-				DealerSettingsArray[10] = dlrGuid;
+				DealerSettingsArray[8] = ProductLOTpx_01;
+				DealerSettingsArray[9] = ProductLOTpx_02;
+				DealerSettingsArray[10] = Metadata;
+				DealerSettingsArray[11] = dlrGuid;
 				ac.writeToSheet(getMetadataSavePathFile, DealerSettingsArray);
 
 				// =========================================
 
 				System.out.println("\nS/N=" + (i + 1) + " of page " + (next + 1) + ". Dealer number=" + dealerN + "\n");
-				System.out.println("VINpx=" + ProductVINpx + "\n" + "STOCKpx= " + ProductSTOCKpx + "\n" + "LOTpx= "
-						+ ProductLOTpx);
+				System.out.println("VINpx=" + ProductVINpx + "\n" + "STOCKpx= " + ProductSTOCKpx + "\n" + "LOTpx_01= "
+						+ ProductLOTpx_01+ "\n" + "LOTpx_01= "+ ProductLOTpx_02+ "\n" );
 				System.out.println("Dealership_ID: " + Dealership_ID + "\n" + "Dealership_Name: " + Dealership_Name
 						+ "\n" + "Dealership_Email: " + Dealership_Email + "\n" + "Account_Email: " + Account_Email
 						+ "\n" + "Metadata: " + Metadata + "\n" + "dlrGuid:" + dlrGuid + "\n");
@@ -996,7 +999,7 @@ public class AdminPortalController extends Comlibs {
 		ImageTypeListP.inputImageDefinition(driver, "DEALER IMAGE");
 		ImageTypeListP.inputImageDescription(driver, "VEHICLE BENEFITS");
 		ImageTypeListP.inputDefaultSequence(driver, searchDefaultSequence);
-		ImageTypeListP.inputBackGroundType(driver, "n");
+		ImageTypeListP.inputBackGroundType(driver, "Y");
 		ImageTypeListP.clickSubmit(driver);
 		ac.acceptAlert(driver, tc, "OK");
 		ac.Wait(wt);
@@ -2524,25 +2527,25 @@ public class AdminPortalController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			// // 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK for Prod (FF) on 2018-12-17 from ManageDealerships.2019-07-04 Worked.
-			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-			// RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
+			 // 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK for Prod (FF) on 2018-12-17 from ManageDealerships.2019-07-04 Worked.
+			 bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			 RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
 
-			////// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page - not used any more 2019
-			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
-			//// *****************************************************************************************************************
-
+//			////// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page - not used any more 2019
+//			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+//			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
+//			//// *****************************************************************************************************************
+//
 //			 ////// 1.ManageDealerShipsAddNewAccount:
 //			 bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
 //			 ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
 //			 ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
-
-			//// 2.ManageDealerShips and others (Manage Image Type, Manage Angle Mappings, Manage Export Templates and Manage Global Config):
-			loadURL(driver, baseURL, env);
-			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
-			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
-
+//
+//			//// 2.ManageDealerShips and others (Manage Image Type, Manage Angle Mappings, Manage Export Templates and Manage Global Config):
+//			loadURL(driver, baseURL, env);
+//			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
+//			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+//
 //			 //// 3. Enable/Disable Vehicles and ManageBackgroundSets:
 //			 loadURL(driver, baseURL, env);
 //			 bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");

@@ -41,7 +41,9 @@ public class DealerProfile extends Comlibs {
 	By BackToDealerListLocator = By.xpath("//*[@id=\"dealerListBtn\"]/span");
 	By ProductVINpxLocator = By.xpath("//*[@id=\"vinpx\"]");
 	By ProductSTOCKpxLocator = By.xpath("//*[@id=\"stockpx\"]");
-	By ProductLOTpxLocator = By.xpath("//*[@id=\"lotpx\"]");
+//	By ProductLOTpxLocator = By.xpath("//*[@id=\"lotpx\"]");
+	By ProductLOTpx_01_Locator = By.xpath("//*[@id=\"dealerBrandedNew\"]");
+	By ProductLOTpx_02_Locator = By.xpath("//*[@id=\"dealerBrandedUsed\"]");
 	
 	By ProductDealerBrandedNew = By.xpath("//*[@id=\"dBrandNew\"]");
 	By ProductDealerBrandedUsed = By.xpath("//*[@id=\"dBrandUsed\"]");
@@ -121,11 +123,21 @@ public class DealerProfile extends Comlibs {
 		return getSTOCKpx;
 	}
 
-	public String getLOTpxProduct(WebDriver driver, String tc) throws IOException {
-		boolean elementExist = elementExist(driver, ProductLOTpxLocator, true, tc);
+	public String getLOTpx01Product(WebDriver driver, String tc) throws IOException {
+		boolean elementExist = elementExist(driver, ProductLOTpx_01_Locator, true, tc);
 		String getLOTpx = "";
 		if (elementExist) {
-			getLOTpx = driver.findElement(ProductLOTpxLocator).getAttribute("checked");
+			getLOTpx = driver.findElement(ProductLOTpx_01_Locator).getAttribute("checked");
+		} else {
+			getLOTpx = "";
+		}
+		return getLOTpx;
+	}
+	public String getLOTpx02Product(WebDriver driver, String tc) throws IOException {
+		boolean elementExist = elementExist(driver, ProductLOTpx_02_Locator, true, tc);
+		String getLOTpx = "";
+		if (elementExist) {
+			getLOTpx = driver.findElement(ProductLOTpx_02_Locator).getAttribute("checked");
 		} else {
 			getLOTpx = "";
 		}
@@ -248,9 +260,15 @@ public class DealerProfile extends Comlibs {
 		return this;
 	}
 
-	public DealerProfile selectLOTpxProd(WebDriver driver,String tc) throws Exception {
-		elementExist(driver, ProductLOTpxLocator, true, tc);
-		driver.findElement(ProductLOTpxLocator).click();
+	public DealerProfile selectLOT01pxProd(WebDriver driver,String tc) throws Exception {
+		elementExist(driver, ProductLOTpx_01_Locator, true, tc);
+		driver.findElement(ProductLOTpx_01_Locator).click();
+		;
+		return this;
+	}
+	public DealerProfile selectLOT02pxProd(WebDriver driver,String tc) throws Exception {
+		elementExist(driver, ProductLOTpx_02_Locator, true, tc);
+		driver.findElement(ProductLOTpx_02_Locator).click();
 		;
 		return this;
 	}
