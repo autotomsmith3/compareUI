@@ -318,7 +318,7 @@ public class AdminPortalController extends Comlibs {
 				ac.writeToSheet(getMetadataSavePathFile, DealerSettingsArray);
 
 				// =========================================
-
+				Account_Email="";
 				System.out.println("\nS/N=" + (i + 1) + " of page " + (next + 1) + ". Dealer number=" + dealerN + "\n");
 				System.out.println("VINpx=" + ProductVINpx + "\n" + "STOCKpx= " + ProductSTOCKpx + "\n" + "LOTpx_01= "
 						+ ProductLOTpx_01+ "\n" + "LOTpx_01= "+ ProductLOTpx_02+ "\n" );
@@ -2531,25 +2531,25 @@ public class AdminPortalController extends Comlibs {
 			 bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			 RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
 
-//			////// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page - not used any more 2019
-//			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-//			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
-//			//// *****************************************************************************************************************
-//
-//			 ////// 1.ManageDealerShipsAddNewAccount:
-//			 bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
-//			 ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-//			 ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
-//
-//			//// 2.ManageDealerShips and others (Manage Image Type, Manage Angle Mappings, Manage Export Templates and Manage Global Config):
-//			loadURL(driver, baseURL, env);
-//			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
-//			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
-//
-//			 //// 3. Enable/Disable Vehicles and ManageBackgroundSets:
-//			 loadURL(driver, baseURL, env);
-//			 bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
-//			 EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
+			////// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page - not used any more 2019
+			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
+			//// *****************************************************************************************************************
+
+			 ////// 1.ManageDealerShipsAddNewAccount:
+			 bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
+			 ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+			 ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+
+			//// 2.ManageDealerShips and others (Manage Image Type, Manage Angle Mappings, Manage Export Templates and Manage Global Config):
+			loadURL(driver, baseURL, env);
+			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
+			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+
+			 //// 3. Enable/Disable Vehicles and ManageBackgroundSets:
+			 loadURL(driver, baseURL, env);
+			 bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
+			 EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
 
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
