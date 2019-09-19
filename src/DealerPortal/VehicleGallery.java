@@ -1063,7 +1063,7 @@ public class VehicleGallery extends Comlibs {
 		if (displayingOnPage.equalsIgnoreCase("Yes")) {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			// String script = "return window.getComputedStyle(document.querySelector('" + pseudoElementSelectorID + "'),':after').getPropertyValue('" + cssStyle + "')"
-			String script = "document.querySelector('.page-header-navbar-brand').innerHTML = '" + tempStatus + "';";
+			String script = "document.querySelector('.page-header-navbar-brand').innerHTML = '" + tempStatus + "';";//use FF to get '.page-header-navbar-brand'
 			js.executeScript(script);
 			System.out.println("Displaying all Templates Status on the page...");
 		}

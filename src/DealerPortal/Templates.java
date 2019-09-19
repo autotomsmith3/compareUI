@@ -599,6 +599,7 @@ public class Templates extends Comlibs {
 					+ "'),':after').getPropertyValue('" + cssStyle + "')";//// get only value of transform-origin style. returned styles on checkbox checked and unchecked. On unchecked it contains one "moz-transform-origin=50% 50%"
 			String xxchecked = js.executeScript(script).toString();
 			System.out.println("xxchecked:" + xxchecked);
+			Wait(1);
 			// String searchTxt = "50% 50%";// moz-transform-origin=50% 50% (unchecked) or 2.5px 5px (checked)
 			boolean siteChecked = xxchecked.contains(cssStyleValue);
 			if (siteChecked) {
