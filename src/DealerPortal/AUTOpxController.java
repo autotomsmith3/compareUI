@@ -2866,7 +2866,7 @@ public class AUTOpxController extends Comlibs {
 					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
 			if (!checkboxIsChecked) {
 				tpP.clickFeaturesVDICheckBox(driver);
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_Vin, true,
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_VDI, true,
 						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
 				if (!checkboxIsChecked) {
 					// Failed;
@@ -2883,7 +2883,7 @@ public class AUTOpxController extends Comlibs {
 					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
 			if (!checkboxIsChecked) {
 				tpP.clickWhatsCoolCheckBox(driver);
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_Vin, true,
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_WCI, true,
 						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
 				if (!checkboxIsChecked) {
 					// Failed;
@@ -2901,7 +2901,7 @@ public class AUTOpxController extends Comlibs {
 					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
 			if (!checkboxIsChecked) {
 				tpP.clickBenefitsVBICheckBox(driver);
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_Vin, true,
+				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_VBI, true,
 						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
 				if (!checkboxIsChecked) {
 					// Failed;
@@ -3472,11 +3472,11 @@ public class AUTOpxController extends Comlibs {
 					+ ": ------------------------------------------------------------------------------------------"
 					+ MaxTimeForTemplatesPreview
 					+ " seconds to check---------------------------------------------</p><p style=\"color:blue;LINE-HEIGHT:6px;font-size:10px;\">_____1. Background Name = "
-					+ selectBGName + ", 2.Year = " + y2 + ",3.Make = " + m2 + "," + set_Header_DealershipEmail + " "
+					+ selectBGName + " (showing \"CHEVROLET\"), 2.Year = " + y2 + ",3.Make = " + m2 + "," + set_Header_DealershipEmail + " "
 					+ set_Header_DealershipWebsite + " " + set_ForceStockpx
 					+ ".</p>   <p style=\"color:red;LINE-HEIGHT:6px;font-size:10px;\">___Second vehicle = " + vin01
 					+ ": </p><p style=\"color:blue;LINE-HEIGHT:6px;font-size:10px;\">_____2.Background Name = "
-					+ selectBGName02 + ", 2.Year = " + y1 + ", 3.Make = " + m1 + "," + set_Footer_StockNumber + " "
+					+ selectBGName02 + ", (showing \"White/Black\") 2.Year = " + y1 + ", 3.Make = " + m1 + "," + set_Footer_StockNumber + " "
 					+ set_MarketingMessageTop + " " + set_MarketingMessageBotton + " " + set_AddAdditionalOverlay + " "
 					+ set_TextImage_VDI + " " + set_TextImage_WCI + " " + set_TextImage_VBI + "</p>";
 			// String templatesStatus="Checking: HEADER:"+set_Header + ", 1.DealershipLogo=" + set_Header_DealershipLogo+", 2.DealershipAddress=" + set_Header_DealershipAddress + ",3.DealershipPhone="+set_Header_DealershipPhone + ", 4.DealershipEmail=" + set_Header_DealershipEmail+", 5.DealershipWebsite=" + set_Header_DealershipWebsite + ". FOOTER: "+set_Footer + ", 1.BrandLogo=" +set_Footer_BrandLog + ", 2.VehicleInfo="+set_Footer_VehicleInfo + ", 3.VIN=" + set_Footer_Vin+", 4.set_Footer_StockNumber=" + set_Footer_StockNumber+", MarketingMessageTop=" + set_MarketingMessageTop + ",MarketingMessageBotton="+set_MarketingMessageBotton + ", AddAdditionalOverlay=" +
@@ -3808,7 +3808,7 @@ public class AUTOpxController extends Comlibs {
 
 		// String[] VINpxNewVIN01
 		// =fetchOneDemArrayFromPropFile(env+".VINpxNewVINs",prop);
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 6; i++) {
 			System.out.println("Testing is started in " + env + "\n");
 			// Initial
 			Comlibs bc = new Comlibs();
@@ -3863,7 +3863,7 @@ public class AUTOpxController extends Comlibs {
 
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
-			System.out.println("Test is complete!!!");
+			System.out.println("Test is complete!!!   i = "+ (i + 1));
 		}
 		return;
 	}
