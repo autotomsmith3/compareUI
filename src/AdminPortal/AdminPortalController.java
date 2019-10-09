@@ -242,7 +242,7 @@ public class AdminPortalController extends Comlibs {
 		int count = 0;
 		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
 		String[] titleString = { "Env.", "S/N", "Dealership_ID", "Dealership_Name", "Account_Email", "Dealership_Email",
-				"ProductVINpx", "ProductSTOCKpx", "DealerBrandedNew","DealerBrandedUsed", "Metadata", "dlrGuid" };
+				"ProductVINpx", "ProductSTOCKpx", "DealerBrandedNew", "DealerBrandedUsed", "Metadata", "dlrGuid" };
 		// =================================================
 		ac.writeTitle(getMetadataSavePathFile, titleString);
 		int dataLength = 54;
@@ -318,10 +318,10 @@ public class AdminPortalController extends Comlibs {
 				ac.writeToSheet(getMetadataSavePathFile, DealerSettingsArray);
 
 				// =========================================
-				Account_Email="";
+				Account_Email = "";
 				System.out.println("\nS/N=" + (i + 1) + " of page " + (next + 1) + ". Dealer number=" + dealerN + "\n");
 				System.out.println("VINpx=" + ProductVINpx + "\n" + "STOCKpx= " + ProductSTOCKpx + "\n" + "LOTpx_01= "
-						+ ProductLOTpx_01+ "\n" + "LOTpx_01= "+ ProductLOTpx_02+ "\n" );
+						+ ProductLOTpx_01 + "\n" + "LOTpx_01= " + ProductLOTpx_02 + "\n");
 				System.out.println("Dealership_ID: " + Dealership_ID + "\n" + "Dealership_Name: " + Dealership_Name
 						+ "\n" + "Dealership_Email: " + Dealership_Email + "\n" + "Account_Email: " + Account_Email
 						+ "\n" + "Metadata: " + Metadata + "\n" + "dlrGuid:" + dlrGuid + "\n");
@@ -462,7 +462,7 @@ public class AdminPortalController extends Comlibs {
 					TCnum = "TCxxxx_01";
 					ProductVINpx = DealerProfieP.getVINpxProduct(driver, "");
 					ProductSTOCKpx = DealerProfieP.getSTOCKpxProduct(driver, "");
-					ProductLOTpx = DealerProfieP.getLOTpxProduct(driver, "");
+					ProductLOTpx = DealerProfieP.getLOTpx01Product(driver, "");
 					Dealership_ID = DealerProfieP.getDealershipID(driver, TCnum);
 					Dealership_Name = DealerProfieP.getDealershipName(driver, TCnum);
 					Dealership_Email = DealerProfieP.getDealershipEmail(driver, TCnum);
@@ -1241,33 +1241,33 @@ public class AdminPortalController extends Comlibs {
 			}
 
 		}
-		
+
 		tc = "TC234600";
 		ExportTemplateListP.clickDownload(driver, tc);
 		ac.Wait(wt);
-		// //FF pops up SAVE window, need to click OK to save the file. 
-		//Also you can change Settings from FF Options - Applications - set Text/CSV to SAVE File (FF won't get pop-up) but automation launch new settings. Not workign.
-		//Or type about:config in address bar to set up Text/CSV to SAVE File - Not workign.
-		//Below works
-		 if (envBrowser.equalsIgnoreCase("FireFox")) {
-			 System.out.println("started...........");
-				ac.Wait(wt);
-			 Robot robot = new Robot();
-			 robot.keyPress(KeyEvent.VK_ENTER);
-			 System.out.println("in progress...........");
-				ac.Wait(wt);
-			 robot.keyRelease(KeyEvent.VK_ENTER);
-			 
-			 System.out.println("Ended...........");
-				ac.Wait(wt);
-		 }
+		// //FF pops up SAVE window, need to click OK to save the file.
+		// Also you can change Settings from FF Options - Applications - set Text/CSV to SAVE File (FF won't get pop-up) but automation launch new settings. Not workign.
+		// Or type about:config in address bar to set up Text/CSV to SAVE File - Not workign.
+		// Below works
+		if (envBrowser.equalsIgnoreCase("FireFox")) {
+			System.out.println("started...........");
+			ac.Wait(wt);
+			Robot robot = new Robot();
+			robot.keyPress(KeyEvent.VK_ENTER);
+			System.out.println("in progress...........");
+			ac.Wait(wt);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+
+			System.out.println("Ended...........");
+			ac.Wait(wt);
+		}
 
 		file = new File(exportFilePath + exportName);
 		// check if download exportName exists
 		if (!(file.exists())) {
 			// file does not exist
-			ac.rwExcel(tc, false, "Verify Export Downloading \"" + exportFilePath + exportName,
-					"\" does not exist. Failed to download.");
+			ac.rwExcel(tc, false, "Verify Export Downloading \"" + exportFilePath + exportName + "\"",
+					"file does not exist. Failed to download.");
 
 		} else {
 
@@ -1500,7 +1500,7 @@ public class AdminPortalController extends Comlibs {
 		//// *************************Enable/DisableVehiclesBtn******************************************************
 		tc = "TC233499";
 		UserListP.clickEnableDisableVehicles(driver, tc);
-
+		ac.Wait(wt * 2);
 		EnableDisableVehicles EnableDisableVehiclesP = new EnableDisableVehicles(driver);
 		String paternName = "2019-GM-1XP26-1XP26-1LS";
 		EnableDisableVehiclesP.inputSearch(driver, paternName, tc);
@@ -1787,6 +1787,175 @@ public class AdminPortalController extends Comlibs {
 		// // switchToWindow(driver, parentHandle);
 		// // driver.close();
 
+	}
+
+	public static void NewVehiclesAndWhiteList(WebDriver driver, String brw, String versionNum, String envment,
+			String checkEmail) throws Exception {
+
+		// Load environment parameters
+		Properties prop = new Properties();
+		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		try {
+			prop.load(AdminPortalController.class.getClassLoader()
+					.getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String tc = "";
+		String env = prop.getProperty("AUTOpx.environment");
+		String envBrowser = prop.getProperty("AUTOpx.browser");
+		String render = prop.getProperty("AUTOpx.render");
+		String addNewVIN = prop.getProperty("AUTOpx.addNewVIN");
+		String accountEmail = prop.getProperty(env + ".VINpxEmail");
+		String accountPS = prop.getProperty(env + ".VINpxPassword");
+		// String baseURL = prop.getProperty(env + ".VINpxDealerPortalBaseURL");
+		String dealershipName = prop.getProperty(env + ".VINpxDealershipname");
+		String dealerCode = prop.getProperty(env + ".VINpxDealerCode");
+		String vin01 = prop.getProperty(env + ".VINpxVin01");
+		String vin02 = prop.getProperty(env + ".VINpxVin02");
+		String vehGUID01 = prop.getProperty(env + ".VINpxVin01GUID");
+		String vehGUID02 = prop.getProperty(env + ".VINpxVin02GUID");
+		// String vinpxnewVin01 = prop.getProperty(env + ".VINpxNewVIN01");
+		String[] VINpxNewVINs = fetchOneDemArrayFromPropFile(env + ".VINpxNewVINs", prop);
+		String serverName = prop.getProperty(env + ".serverName");
+		String dbName = prop.getProperty(env + ".dbName");
+		String userName = prop.getProperty(env + ".userName");
+		String password = prop.getProperty(env + ".password");
+		String MaxVins = prop.getProperty(env + ".MaxVinsForPreview");
+		int MaxVinsForPreview = Integer.parseInt(MaxVins);
+		// dealership profile:
+		String OEM = prop.getProperty(env + ".OEM");
+		String[] Brands = fetchOneDemArrayFromPropFile(env + ".Brands", prop);
+		String AllProdDealerCode = prop.getProperty(env + ".AllProdDealerCode");
+		String AllProdEmail = prop.getProperty(env + ".AllProdEmail");
+		String DealershipID = prop.getProperty(env + ".DealershipID");
+		String DealershipName = prop.getProperty(env + ".DealershipName");
+		String[] Products = fetchOneDemArrayFromPropFile(env + ".Products", prop);
+		String MetadataValues = prop.getProperty(env + ".MetadataValues");
+		String Address = prop.getProperty(env + ".Address");
+		String AddressLine2 = prop.getProperty(env + ".AddressLine2");
+		String City = prop.getProperty(env + ".City");
+		int StateProvince = Integer.parseInt(prop.getProperty(env + ".StateProvince"));
+		int Country = Integer.parseInt(prop.getProperty(env + ".Country"));
+		String ZipPostalCode = prop.getProperty(env + ".ZipPostalCode");
+		String DealershipEmail = prop.getProperty(env + ".DealershipEmail");
+		String AccountEmail = prop.getProperty(env + ".AccountEmail");
+		String FirstName = prop.getProperty(env + ".FirstName");
+		String LastName = prop.getProperty(env + ".LastName");
+		String TagLineMarkingMsg = prop.getProperty(env + ".TagLineMarkingMsg");
+		String Website = prop.getProperty(env + ".Website");
+		String DealershipPhoneNumber = prop.getProperty(env + ".DealershipPhoneNumber");
+		int TemplateSettings = Integer.parseInt(prop.getProperty(env + ".TemplateSettings"));
+		int SelectBackgroundSet = Integer.parseInt(prop.getProperty(env + ".SelectBackgroundSet"));
+		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
+		String AddNewAccountEmail = prop.getProperty(env + ".AddNewAccountEmail");
+		String addNewDealerExtension = prop.getProperty(env + ".addNewDealerExtension");
+		String dealershipLogoPath = prop.getProperty("AUTOpx.dealershipLogoPath");
+		String addNewDealerShip = prop.getProperty("AUTOpx.addNewDealerShip");
+		String backgroundSetPath1 = prop.getProperty("AUTOpx.backgroundSetPath1");
+		String backgroundSetPath2 = prop.getProperty("AUTOpx.backgroundSetPath2");
+
+		// Initial
+		// final int wt_Secs = 6;
+		String TCnum;
+		// ====================
+		String tempVIN = "";
+		String tempVehGUID = "";
+		String ProductVINpx = "";
+		String ProductSTOCKpx = "";
+		String ProductLOTpx = "";
+		String Dealership_ID = "";
+		String Dealership_Name = "";
+		String Dealership_Email = "";
+		String Account_Email = "";
+		String Metadata = "";
+		String dlrGuid = "";
+		String alertmessage = "";
+		// ====================
+		Comlibs ac = new Comlibs();
+		ac.rwExcel("", "*********New Vehicle and WhiteListBtn**********", "");
+		int count = 0;
+		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
+		String[] titleString = { "Env.", "S/N", "Dealership_ID", "Dealership_Name", "Account_Email", "Dealership_Email",
+				"ProductVINpx", "ProductSTOCKpx", "ProductLOTpx", "Metadata", "dlrGuid" };
+		// =================================================
+		ac.writeTitle(getMetadataSavePathFile, titleString);
+		int dataLength = 54;
+		String[] metadataValues = new String[dataLength + 1];
+		int datasize = metadataValues.length;
+
+		// =================================================
+		VDVILogin loginP = new VDVILogin(driver);
+		int dealerN = 0;
+		String dealerSN = "";
+		loginP.login(driver, accountEmail, accountPS, tc);
+		ac.Wait(wt);
+		String parentHandle = driver.getWindowHandle(); // get the current window handle
+
+		UserList UserListP = new UserList(driver);
+
+		//// *************************New Vehicle and WhiteListBtn******************************************************
+		tc = "NewVehicleAndWhiteList_01";
+
+		UserListP.clickNewVehiclesAndWhiteList(driver, tc);
+		ac.Wait(wt * 2);
+		NewVehiclesAndWhiteList NewVehicleAndWhiteListP = new NewVehiclesAndWhiteList(driver);
+		String searchText = "camaro"; // "Silverado 3500HD ";// "camaro"
+		tc = "TC236111";
+		NewVehicleAndWhiteListP.inputSearch(driver, searchText, tc);
+
+		int testRows = 4;//2017, 2018, 2019, 2020
+		for (int i = 1; i <= testRows; i++) {
+			// -------------------------------------Vehicles-----------------------------------
+			tc = "TC236111_01_"+i;
+			int records = NewVehicleAndWhiteListP.returnNewVehicleRecordsFrPage(driver, tc);
+			tc = "TC236111_2_"+i;
+			int vehicleCountFrPage = NewVehicleAndWhiteListP.returnVehicleUsageFrPage(driver, i, tc);
+
+			tc = "TC236111_03_"+i;
+			NewVehicleAndWhiteListP.clickVehicleUsagePreViewLink(driver,i, tc);
+			ac.Wait(wt);
+			tc = "TC236111_4_";
+			int vehicleCountFrLink = NewVehicleAndWhiteListP.returnDealersFrPopup(driver, tc);
+			if (vehicleCountFrLink == vehicleCountFrPage) {
+				ac.rwExcel(tc, true, "Verify Vehicle Usage", "Vehicle Usage matches the count in link");
+			} else {
+				ac.rwExcel(tc, false, "Verify Dealer Usage. Vehicle Usage does not match the count in link",
+						"Vehicle Usage on the page = " + vehicleCountFrPage + ". Vehicle Usage from link ="
+								+ vehicleCountFrLink);
+			}
+
+			NewVehicleAndWhiteListP.clickXBtn(driver, tc);
+			// -------------------------------------Vehicles-----------------------------------
+
+			// -------------------------------------Dealers-----------------------------------
+			tc = "TC236113_01_"+i;
+			int dealerCountFrPage = NewVehicleAndWhiteListP.returnDealersFrPage(driver, i, tc);
+
+			tc = "TC236113_02_"+i;
+			NewVehicleAndWhiteListP.clickDealerCountPreViewLink(driver,i, tc);
+			ac.Wait(wt);
+
+			tc = "TC236113_03_"+i;
+			int dealerCountFrLink = NewVehicleAndWhiteListP.returnDealersFrPopup(driver, tc);
+			if (dealerCountFrLink == dealerCountFrPage) {
+				ac.rwExcel(tc, true, "Verify Dealer Count", "Dealer Count matches the count in link");
+			} else {
+				ac.rwExcel(tc, false, "Verify Dealer Count. Dealer Count does not match the count in link",
+						"Dealer Count on the page = " + dealerCountFrPage + ". Dealer Count from link ="
+								+ dealerCountFrLink);
+			}
+
+			ac.Wait(wt);
+			NewVehicleAndWhiteListP.clickXBtn(driver, tc);
+			// -------------------------------------Dealers-----------------------------------
+
+		}
+
+		ac.Wait(wt);
+
+		//// *************************New Vehicle and WhiteListBtn******************************************************
 	}
 
 	public static void ManageDealerShipsAddNewAccount(WebDriver driver, String brw, String versionNum, String envment,
@@ -2527,29 +2696,33 @@ public class AdminPortalController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			 // 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage: took back on 2018-11-29 - OK for Prod (FF) on 2018-12-17 from ManageDealerships.2019-07-04 Worked.
-			 bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-			 RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
+			//// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage:2019-09-04 Worked. took back on 2018-11-29 - OK for Prod (FF) on 2018-12-17 from ManageDealerships.
+			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			// RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
 
 			////// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page - not used any more 2019
 			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 			//// *****************************************************************************************************************
 
-			 ////// 1.ManageDealerShipsAddNewAccount:
-			 bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
-			 ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-			 ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+			// ////// 1.ManageDealerShipsAddNewAccount:
+			// bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
+			// ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+			// ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+			//
+			// //// 2.ManageDealerShips and others (Manage Image Type, Manage Angle Mappings, Manage Export Templates and Manage Global Config):
+			// loadURL(driver, baseURL, env);
+			// bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
+			// ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+			//
+			// //// 3. Enable/Disable Vehicles and ManageBackgroundSets:
+			// loadURL(driver, baseURL, env);
+			// bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
+			// EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
 
-			//// 2.ManageDealerShips and others (Manage Image Type, Manage Angle Mappings, Manage Export Templates and Manage Global Config):
+			//// 4. NewVehicle and WhiteList:
 			loadURL(driver, baseURL, env);
-			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
-			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
-
-			 //// 3. Enable/Disable Vehicles and ManageBackgroundSets:
-			 loadURL(driver, baseURL, env);
-			 bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
-			 EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
+			NewVehiclesAndWhiteList(driver, tBrowser, versionNum, env, chkEmail);
 
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();

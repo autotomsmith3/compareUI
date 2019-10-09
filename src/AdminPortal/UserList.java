@@ -63,7 +63,7 @@ public class UserList extends Comlibs {
 	 By nextLocator=By.xpath("//*[@id=\"dealerTable_next\"]");
 	 By firstNameSortLocator=By.xpath("//*[@id=\"dealerTable\"]/thead/tr/th[4]");
 	 By EnableDisableVehiclesLocator=By.xpath("//*[@id=\"enableMenu\"]");
-	// By Locator=By.xpath("");
+	 By NewVehiclesAndWhiteList=By.xpath("//*[@id=\"whitelistMenu\"]");
 	// By Locator=By.xpath("");
 	// By Locator=
 	// By Locator=
@@ -575,6 +575,10 @@ public class UserList extends Comlibs {
 		driver.findElement(firstNameSortLocator).click();
 		return this;
 	}
-
+	public NewVehiclesAndWhiteList clickNewVehiclesAndWhiteList(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, NewVehiclesAndWhiteList, true, tc);
+		driver.findElement(NewVehiclesAndWhiteList).click();
+		return new NewVehiclesAndWhiteList(driver);
+	}
 	
 }
