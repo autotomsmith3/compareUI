@@ -1009,39 +1009,68 @@ public class AUTOpxController extends Comlibs {
 		String Edited_DealershipEmail = dpP.retrieve_DealershipEmail(driver, TCnum);
 		String Edited_DealershipAddress1 = dpP.retrieve_Address1(driver, TCnum);
 		String Edited_DealershipAddress2 = dpP.retrieve_Address2(driver, TCnum);
+		boolean Edited_ContactTitle_Status = false;
+		boolean Edited_ContactName_Status = false;
+		boolean Edited_ContactDepartment_Status = false;
+		boolean Edited_ContactPhone_Status = false;
+		boolean Edited_DealershipName_Status = false;
+		boolean Edited_DealershipEmail_Status = false;
+		boolean Edited_DealershipAddress1_Status = false;
+		boolean Edited_DealershipAddress2_Status = false;
 
 		// Verify all fields
 		if (!Edited_ContactTitle.equals((ContactTitle + updatewith))) {
 			ac.rwExcel(TCnum, false, "Verify Edited ContactTitle", "Failed! Edited_ContactTitle =" + ContactTitle
 					+ updatewith + ".  But site shows =" + Edited_ContactTitle);
+		} else {
+			Edited_ContactTitle_Status = true;
 		}
 		if (!Edited_ContactName.equals((ContactName + updatewith))) {
 			ac.rwExcel(TCnum, false, "Verify Edited ContactName", "Failed! Edited_ContactName =" + ContactName
 					+ updatewith + ".  But site shows =" + Edited_ContactName);
+		} else {
+			Edited_ContactName_Status = true;
 		}
 		if (!Edited_ContactDepartment.equals((ContactDepartment + updatewith))) {
 			ac.rwExcel(TCnum, false, "Verify Edited ContactDepartment", "Failed! Edited_ContactDepartment ="
 					+ ContactDepartment + updatewith + ".  But site shows =" + Edited_ContactDepartment);
+		} else {
+			Edited_ContactDepartment_Status = true;
 		}
 		if (!Edited_ContactPhone.equals((ContactPhone + updatewith))) {
 			ac.rwExcel(TCnum, false, "Verify Edited ContactPhone", "Failed! Edited_ContactPhone =" + ContactPhone
 					+ updatewith + ".  But site shows =" + Edited_ContactPhone);
+		} else {
+			Edited_ContactPhone_Status = true;
 		}
 		if (!Edited_DealershipName.equals((DealershipName + updatewith))) {
 			ac.rwExcel(TCnum, false, "Verify Edited DealershipName", "Failed! Edited_DealershipName =" + DealershipName
 					+ updatewith + ".  But site shows =" + Edited_DealershipName);
+		} else {
+			Edited_DealershipName_Status = true;
 		}
 		if (!Edited_DealershipEmail.equals((DealershipEmail + updatewith + ".com"))) {
 			ac.rwExcel(TCnum, false, "Verify Edited DealershipEmail", "Failed! Edited_DealershipEmail ="
 					+ DealershipEmail + updatewith + ".  But site shows =" + Edited_DealershipEmail);
+		} else {
+			Edited_DealershipEmail_Status = true;
 		}
 		if (!Edited_DealershipAddress1.equals((DealershipAddress1 + updatewith))) {
 			ac.rwExcel(TCnum, false, "Verify Edited DealershipAddress1", "Failed! Edited_DealershipAddress1 ="
 					+ DealershipAddress1 + updatewith + ".  But site shows =" + Edited_DealershipAddress1);
+		} else {
+			Edited_DealershipAddress1_Status = true;
 		}
 		if (!Edited_DealershipAddress2.equals((DealershipAddress2 + updatewith))) {
 			ac.rwExcel(TCnum, false, "Verify Edited DealershipAddress2", "Failed! Edited_DealershipAddress2 ="
 					+ DealershipAddress2 + updatewith + ".  But site shows =" + Edited_DealershipAddress2);
+		} else {
+			Edited_DealershipAddress2_Status = true;
+		}
+		if (Edited_ContactTitle_Status && Edited_ContactName_Status && Edited_ContactDepartment_Status
+				&& Edited_ContactPhone_Status && Edited_DealershipName_Status && Edited_DealershipEmail_Status
+				&& Edited_DealershipAddress1_Status && Edited_DealershipAddress2_Status) {
+			ac.rwExcel(TCnum, true, "Verify Edited Most feilds of Dealership Info", "All passed.");
 		}
 
 		// Re-enter all dealership info
@@ -1179,7 +1208,7 @@ public class AUTOpxController extends Comlibs {
 			dpP.changePS(driver, accountPS, TCnum);
 			TCnum = "TC139686_02_NoBtn";
 			ac.Wait(wt);
-			dpP.clickNOBtn(driver, TCnum);
+			// dpP.clickNOBtn(driver, TCnum);//The re-render pop-up does not show for changePS since 20191008
 			TCnum = "TC139686_02_Inv";
 			ac.Wait(wt);
 			dpP.clickInventoryGalleryBtn(driver, TCnum);
@@ -3472,13 +3501,14 @@ public class AUTOpxController extends Comlibs {
 					+ ": ------------------------------------------------------------------------------------------"
 					+ MaxTimeForTemplatesPreview
 					+ " seconds to check---------------------------------------------</p><p style=\"color:blue;LINE-HEIGHT:6px;font-size:10px;\">_____1. Background Name = "
-					+ selectBGName + " (showing \"CHEVROLET\"), 2.Year = " + y2 + ",3.Make = " + m2 + "," + set_Header_DealershipEmail + " "
-					+ set_Header_DealershipWebsite + " " + set_ForceStockpx
+					+ selectBGName + " (showing \"CHEVROLET\"), 2.Year = " + y2 + ",3.Make = " + m2 + ","
+					+ set_Header_DealershipEmail + " " + set_Header_DealershipWebsite + " " + set_ForceStockpx
 					+ ".</p>   <p style=\"color:red;LINE-HEIGHT:6px;font-size:10px;\">___Second vehicle = " + vin01
 					+ ": </p><p style=\"color:blue;LINE-HEIGHT:6px;font-size:10px;\">_____2.Background Name = "
-					+ selectBGName02 + ", (showing \"White/Black\") 2.Year = " + y1 + ", 3.Make = " + m1 + "," + set_Footer_StockNumber + " "
-					+ set_MarketingMessageTop + " " + set_MarketingMessageBotton + " " + set_AddAdditionalOverlay + " "
-					+ set_TextImage_VDI + " " + set_TextImage_WCI + " " + set_TextImage_VBI + "</p>";
+					+ selectBGName02 + ", (showing \"White/Black\") 2.Year = " + y1 + ", 3.Make = " + m1 + ","
+					+ set_Footer_StockNumber + " " + set_MarketingMessageTop + " " + set_MarketingMessageBotton + " "
+					+ set_AddAdditionalOverlay + " " + set_TextImage_VDI + " " + set_TextImage_WCI + " "
+					+ set_TextImage_VBI + "</p>";
 			// String templatesStatus="Checking: HEADER:"+set_Header + ", 1.DealershipLogo=" + set_Header_DealershipLogo+", 2.DealershipAddress=" + set_Header_DealershipAddress + ",3.DealershipPhone="+set_Header_DealershipPhone + ", 4.DealershipEmail=" + set_Header_DealershipEmail+", 5.DealershipWebsite=" + set_Header_DealershipWebsite + ". FOOTER: "+set_Footer + ", 1.BrandLogo=" +set_Footer_BrandLog + ", 2.VehicleInfo="+set_Footer_VehicleInfo + ", 3.VIN=" + set_Footer_Vin+", 4.set_Footer_StockNumber=" + set_Footer_StockNumber+", MarketingMessageTop=" + set_MarketingMessageTop + ",MarketingMessageBotton="+set_MarketingMessageBotton + ", AddAdditionalOverlay=" +
 			// set_AddAdditionalOverlay+", Text Images: VDI=" + set_TextImage_VDI + ", WCI=" + set_TextImage_WCI+", VBI=" + set_TextImage_VBI +"";
 			igP.textDisplayOnPage(driver, backgroundsStatus, displayTemplatesStatusOnPage);
@@ -3808,7 +3838,7 @@ public class AUTOpxController extends Comlibs {
 
 		// String[] VINpxNewVIN01
 		// =fetchOneDemArrayFromPropFile(env+".VINpxNewVINs",prop);
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 1; i++) {
 			System.out.println("Testing is started in " + env + "\n");
 			// Initial
 			Comlibs bc = new Comlibs();
@@ -3863,7 +3893,7 @@ public class AUTOpxController extends Comlibs {
 
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
-			System.out.println("Test is complete!!!   i = "+ (i + 1));
+			System.out.println("Test is complete!!!   i = " + (i + 1));
 		}
 		return;
 	}

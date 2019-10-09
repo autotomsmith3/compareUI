@@ -33,11 +33,15 @@ public class DealerProfile extends Comlibs {
 	By dealerNameDropDownLocator = By.cssSelector("span.glyphicon.glyphicon-menu-down");
 	By logOutLinkLocator = By.linkText("Logout");
 	By dealerShipIDBrands = By.id("brands");
-	By userPassword = By.id("userPassword");
-	By userPasswordConfirm = By.id("userConfirm");
-	By saveBtn = By.id("saveBtn");// x.path=//*[@id="saveBtn"]/span
+//	By userPassword = By.id("userPassword");// before 20191007
+	By userPassword = By.xpath("//*[@id='userPassword']");
+//	By userPasswordConfirm = By.id("userConfirm");// before 20191007
+	By userPasswordConfirm = By.xpath("//*[@id='userConfirm']");
+//	By saveBtn = By.id("saveBtn");// x.path=//*[@id="saveBtn"]/span; // before 20191007
+//	By saveBtn =      By.xpath("//*[@id='saveUserPassword']/span"); // b4 20191009
+	By saveBtn =         By.xpath("//*[@id='saveBtn']/span");	//  //*[@id="saveBtn"]/span
+	By dropDownSaveBtn = By.xpath("//*[@id='saveUserPassword']");	
 	By reRenderNOBtn = By.xpath("//div[@id='rerenderPrompt']/div/div/div[3]/button[2]");
-
 	// SELECT LogoImageGUID FROM dbo.DT01_Dealer WHERE(DlrCode = '123456')
 	By logoImageGUID = By.xpath("//*[@id=\"dealer-logo\"]");
 	// By dealershipIDBrands = By.xpath("")
@@ -47,8 +51,12 @@ public class DealerProfile extends Comlibs {
 	By dealershipEmaillocator = By.id("dealerEmail");
 	By dealershipPhonelocator = By.id("dealerPhone");
 	By globalMarketingMsglocator = By.id("globalMarketingMessage");
-	By fisrtNamelocator = By.id("userFirstName");
-	By lastNamelocator = By.id("userLastName");
+//	By fisrtNamelocator = By.id("userFirstName");// before 20191007
+//	By lastNamelocator = By.id("userLastName");// before 20191007
+	By fisrtNamelocator = By.xpath("//*[@id='userFirstName']");
+	By lastNamelocator = By.xpath("//*[@id='userLastName']"); //   //*[@id="userLastName"]
+	By accountEmaillocator=By.xpath("//*[@id='accEmail']"); // this is new since 20191007
+	
 	By addresslocator = By.id("dealerAddr1");
 	By citylocator = By.id("dealerCity");
 	By countrylocator = By.id("dealerCountry");
@@ -166,11 +174,12 @@ public class DealerProfile extends Comlibs {
 
 	public DealerProfile changePS(WebDriver driver, String ps, String tc) throws IOException {
 		try {
+			driver.findElement(dealerNameDropDownLocator).click();
 			driver.findElement(userPassword).clear();
 			driver.findElement(userPassword).sendKeys(ps);
 			driver.findElement(userPasswordConfirm).clear();
 			driver.findElement(userPasswordConfirm).sendKeys(ps);
-			driver.findElement(saveBtn).click();
+			driver.findElement(dropDownSaveBtn).click();
 			rwExcel(tc, true, "Verify changing password", "Password changed");
 		} catch (Exception e) {
 			rwExcel(tc, false, "Verify changing password", "Password changed");

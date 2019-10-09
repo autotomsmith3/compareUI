@@ -147,8 +147,9 @@ public class AUTOpxLogin extends Comlibs {
 		versionText = driver.findElement(foot_02_VersionLocator).getText();
 		footerL1Text = disclaimer.equalsIgnoreCase(expectDisclaimer);
 		footerL2Text = versionText.equalsIgnoreCase(expectVersionNum);
+		rwExcel(tc, "Footer Version", "Footer and Version are displayed - "+footerL2Text);
 		if (header && footerL1 && footerL2 && footerR && footerL1Text && footerL2Text) {
-			rwExcel(tc, true, "Verify Header and Footer", "Header and Footer are displayed");
+			rwExcel(tc, true, "Verify Header and Footer", "Header and Footer are displayed - "+footerL2Text);
 		} else {
 			rwExcel(tc, false, "Verify Header and Footer", "Header and Footer are NOT displayed properly");
 			if (!header) {
