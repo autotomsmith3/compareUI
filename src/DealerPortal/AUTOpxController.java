@@ -3192,13 +3192,17 @@ public class AUTOpxController extends Comlibs {
 		String y2 = "2019";
 		String m2 = "GMC";
 		int wtime = 10;
+		int browserWT=1;
+		if (envBrowser.equalsIgnoreCase("Firefox")) {//Fire loads the Add Backgrounds slower than Chrome
+			browserWT=11;
+		}
 		String backgroundsStatus = "";
 		ac.rwExcel("", "*********Multiple Background TCs**********", "");
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 		TCnum = "multiple_BG_01";
 		loginP.verifyHeaderFooter(env, versionNum, TCnum);
 		TCnum = "multiple_BG_02";
-
+		
 		loginP.login(driver, accountEmail, accountPS);
 
 		ImageGallery igP = new ImageGallery(driver);
@@ -3212,13 +3216,13 @@ public class AUTOpxController extends Comlibs {
 		// igP.enterTextInSearch(vin01);
 		// igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		// VehicleG allery vgP = new VehicleGallery(driver);
-
+		
 		TCnum = "multiple_BG_03";
 		igP.clickBackgroundsBtn(driver, TCnum);
 		TCnum = "MultipleBGs_01";
 		Backgrounds bgP = new Backgrounds(driver);
 		bgP.clickAddBackgrounds(driver, TCnum);
-		ac.Wait(wt);
+		ac.Wait(wt*browserWT);
 		TCnum = "Add GB_01_1";
 		int bgNum = 18; // Select 18 - Auto_ChangedTo_588_644
 		String selectBGName = "Auto_ChangedTo_588_644";
@@ -3344,7 +3348,12 @@ public class AUTOpxController extends Comlibs {
 		for (int i = 1; i <= addNew; i++) {
 			TCnum = "Add New BG_" + i;
 			bgP.clickAddBackgrounds(driver, TCnum);
-			ac.Wait(wt);
+			if (i==1) {
+				ac.Wait(wt*browserWT);
+			}else {
+				ac.Wait(wt*1);
+			}
+			ac.Wait(wt*browserWT);
 			bgP.clickBackground(driver, bgNum, TCnum);
 			// bgP.scrollUp(driver, 1000, TCnum);
 			bgP.clickAddBtn(driver, TCnum);
