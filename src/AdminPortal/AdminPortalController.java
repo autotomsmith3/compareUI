@@ -1919,9 +1919,9 @@ public class AdminPortalController extends Comlibs {
 			tc = "TC236111_4_";
 			int vehicleCountFrLink = NewVehicleAndWhiteListP.returnDealersFrPopup(driver, tc);
 			if (vehicleCountFrLink == vehicleCountFrPage) {
-				ac.rwExcel(tc, true, "Verify Vehicle Usage", "Vehicle Usage matches the count in link");
+				ac.rwExcel(tc, true, "Verify Vehicle Usage. Row="+i, "Vehicle Usage matches the count in link");
 			} else {
-				ac.rwExcel(tc, false, "Verify Dealer Usage. Vehicle Usage does not match the count in link",
+				ac.rwExcel(tc, false, "Verify Dealer Usage. Row="+i+"; Vehicle Usage does not match the count in link",
 						"Vehicle Usage on the page = " + vehicleCountFrPage + ". Vehicle Usage from link ="
 								+ vehicleCountFrLink);
 			}
@@ -1940,9 +1940,9 @@ public class AdminPortalController extends Comlibs {
 			tc = "TC236113_03_" + i;
 			int dealerCountFrLink = NewVehicleAndWhiteListP.returnDealersFrPopup(driver, tc);
 			if (dealerCountFrLink == dealerCountFrPage) {
-				ac.rwExcel(tc, true, "Verify Dealer Count", "Dealer Count matches the count in link");
+				ac.rwExcel(tc, true, "Verify Dealer Count. Row="+i, "Dealer Count matches the count in link");
 			} else {
-				ac.rwExcel(tc, false, "Verify Dealer Count. Dealer Count does not match the count in link",
+				ac.rwExcel(tc, false, "Verify Dealer Count. Row="+i+"Dealer Count does not match the count in link",
 						"Dealer Count on the page = " + dealerCountFrPage + ". Dealer Count from link ="
 								+ dealerCountFrLink);
 			}
@@ -2071,7 +2071,7 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		TriageVinStatus TriageVinStatuP = new TriageVinStatus(driver);
 		String searchText = "1GKKNPLS4KZ142418"; // 1C6SRFHT4LN136212 (2020 RAM 1500), 1GKKNPLS4KZ142418 (GM Buick 2019)
-		tc = "TriageVinStatus_GM_VIN_01";
+		tc = "TC236128_01";
 		TriageVinStatuP.inputSearch(driver, searchText, tc);
 		TriageVinStatuP.clickSubmit(driver, tc);
 		ac.Wait(wt * 5);
@@ -2082,13 +2082,13 @@ public class AdminPortalController extends Comlibs {
 		boolean getDataError4 = resoltData.contains("Possible Flik link");// GM
 		if (getDataError1 && getDataError2 && (getDataError3 || getDataError4)) {
 			// ok
-			ac.rwExcel(tc, true, "Triage Vin Status Results", "GM VIN Result data:" + resoltData);
+			ac.rwExcel(tc, true, "Triage Vin Status Results GM Vin", "GM VIN Result data:" + resoltData);
 		} else {
-			ac.rwExcel(tc, false, "Triage Vin Status Results", "GM VIN Result data:" + resoltData);
+			ac.rwExcel(tc, false, "Triage Vin Status Results GM Vin", "GM VIN Result data:" + resoltData);
 		}
 		ac.Wait(wt);
 		searchText = "1C6SRFHT4LN136212"; // 1C6SRFHT4LN136212 (2020 RAM 1500), 1GKKNPLS4KZ142418 (GM Buick 2019)
-		tc = "TriageVinStatus_FCA_VIN_01";
+		tc = "TC236131_02";
 		TriageVinStatuP.inputSearch(driver, searchText, tc);
 		TriageVinStatuP.clickSubmit(driver, tc);
 		ac.Wait(wt * 5);
@@ -2099,9 +2099,9 @@ public class AdminPortalController extends Comlibs {
 		getDataError4 = resoltData.contains("Possible Flik link");// GM
 		if (getDataError1 && getDataError2 && (getDataError3 || getDataError4)) {
 			// ok
-			ac.rwExcel(tc, true, "Triage Vin Status Results", "FCA VIN Result data:" + resoltData);
+			ac.rwExcel(tc, true, "Triage Vin Status Results FCA Vin", "FCA VIN Result data:" + resoltData);
 		} else {
-			ac.rwExcel(tc, false, "Triage Vin Status Results", "FCA VIN Result data:" + resoltData);
+			ac.rwExcel(tc, false, "Triage Vin Status Results FCA Vin", "FCA VIN Result data:" + resoltData);
 		}
 		ac.Wait(wt);
 
@@ -2855,24 +2855,24 @@ public class AdminPortalController extends Comlibs {
 			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 			//// *****************************************************************************************************************
 
-			// ////// 1.ManageDealerShipsAddNewAccount:
-			// bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
-			// ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-			// ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
-			//
-			// //// 2.ManageDealerShips and others (Manage Image Type, Manage Angle Mappings, Manage Export Templates and Manage Global Config):
-			// loadURL(driver, baseURL, env);
-			// bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
-			// ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
-			//
-			// //// 3. Enable/Disable Vehicles and ManageBackgroundSets:
-			// loadURL(driver, baseURL, env);
-			// bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
-			// EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
+			 ////// 1.ManageDealerShipsAddNewAccount:
+			 bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
+			 ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+			 ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+			
+			 //// 2.ManageDealerShips and others (Manage Image Type, Manage Angle Mappings, Manage Export Templates and Manage Global Config):
+			 loadURL(driver, baseURL, env);
+			 bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
+			 ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+			
+			 //// 3. Enable/Disable Vehicles and ManageBackgroundSets:
+			 loadURL(driver, baseURL, env);
+			 bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
+			 EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
 
-			// //// 4. NewVehicle and WhiteList:
-			// loadURL(driver, baseURL, env);
-			// NewVehiclesAndWhiteList(driver, tBrowser, versionNum, env, chkEmail);
+			 //// 4. NewVehicle and WhiteList:
+			 loadURL(driver, baseURL, env);
+			 NewVehiclesAndWhiteList(driver, tBrowser, versionNum, env, chkEmail);
 
 			//// 5. Triage Vin Status:
 			loadURL(driver, baseURL, env);
