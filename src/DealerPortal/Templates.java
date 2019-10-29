@@ -45,7 +45,7 @@ public class Templates extends Comlibs {
 	By saveBtnLocator = By.xpath("//*[@id=\"saveBtn\"]/span");
 
 	// By headerCheckBoxLocator = By.xpath("//*[@id=\"templateBuilder\"]/div[3]/form/label[1]");////*[@id="templateBuilder"]/div[3]/form/label[1]/span
-	By headerCheckBoxLocator = By.xpath("//*[@id=\"templateBuilder\"]/div[3]/label[1]/span");//// *[@id="templateBuilder"]/div[3]/label[1]/span
+	By headerCheckBoxLocator = By.xpath("//*[@id='templateBuilder']/div[2]/div[2]/label[1]/span");//  //*[@id="templateBuilder"]/div[2]/div[2]/label[1]/span
 	By headerEditLocator = By.xpath("//*[@id=\"headerEditBtn\"]");
 	By headerContent_DealershipLogo_CheckBoxLocator = By.xpath("//*[@id='headerContent']/label[2]/span");
 	By headerContent_DealershipAddress_CheckBoxLocator = By.xpath("//*[@id='headerContent']/label[3]/span");
@@ -62,7 +62,7 @@ public class Templates extends Comlibs {
 	By contentOverlaySAVEBtnLocator = By.xpath("//*[@id=\"saveOverlayContentBtn\"]");
 
 	// By footerCheckBoxLocator = By.xpath("//*[@id='templateBuilder']/div[3]/form/label[2]/span"); // //*[@id="templateBuilder"]/div[3]/form/label[2]/span
-	By footerCheckBoxLocator = By.xpath("//*[@id=\"templateBuilder\"]/div[3]/label[2]/span");
+	By footerCheckBoxLocator = By.xpath("//*[@id='templateBuilder']/div[2]/div[2]/label[2]/span");
 
 	By footerEditLocator = By.xpath("//*[@id=\"footerEditBtn\"]");
 	// By footerContent_VehicleInfo_CheckBoxLocator = By.xpath("//*[@id=\"footerContent\"]/label[2]/span");// new //*[@id="vehInfoLabel"]/span
@@ -76,11 +76,11 @@ public class Templates extends Comlibs {
 
 	// *[@id="templateBuilder"]/div[3]/label[3]/span
 	// By MarketingMessageTopCheckBoxLocator = By.xpath("//*[@id='templateBuilder']/div[3]/label[3]/span");// //*[@id="templateBuilder"]/div[3]/form/label[3]/span
-	By MarketingMessageTopCheckBoxLocator = By.xpath("//*[@id=\"templateBuilder\"]/div[3]/label[3]/span");
+	By MarketingMessageTopCheckBoxLocator = By.xpath("//*[@id='templateBuilder']/div[2]/div[2]/label[3]/span");
 	By MarketingMessageTopEditLocator = By.xpath("//*[@id=\"overlayTopEditBtn\"]");// //*[@id="overlayTopEditBtn"]
 	By MarketingMessageTopContent_globleMSG_fieldLocator = By.xpath("//*[@id=\"overlayContent\"]/textarea");
 	// By MarketingMessageBottomCheckBoxLocator = By.xpath("//*[@id='templateBuilder']/div[3]/label[4]/span");//
-	By MarketingMessageBottomCheckBoxLocator = By.xpath("//*[@id=\"templateBuilder\"]/div[3]/label[4]/span");//
+	By MarketingMessageBottomCheckBoxLocator = By.xpath("//*[@id='templateBuilder']/div[2]/div[2]/label[4]/span");//
 	By MarketingMessageBottomEditLocator = By.xpath("//*[@id=\"overlayBottomEditBtn\"]");//
 	By MarketingMessageBottomContent_globleMSG_fieldLocator = By.xpath("//*[@id=\"gmm\"]");
 	By uploadOverlayImageBtn = By.xpath("//*[@id=\"uploadLogo\"]");
@@ -97,7 +97,8 @@ public class Templates extends Comlibs {
 
 	// *[@id="saveOverlayContentBtn"]/span
 
-	By replaceTemplateWithOwnCheckBoxLocator = By.xpath("//*[@id=\"templateBuilder\"]/div[3]/label[5]/span");
+	By replaceTemplateWithOwnCheckBoxLocator = By.xpath("//*[@id=\"templateBuilder\"]/div[3]/label[5]/span");//  Add Additional Overlay:
+	//*[@id="templateBuilder"]/div[2]/div[2]/label[5]/span
 	// *[@id="templateBuilder"]/div[3]/label[5]/span
 
 	By uploadBtnLocator = By.xpath("//*[@id=\"dealerLogoContainer\"]/div[2]/div[1]/div");
@@ -114,25 +115,6 @@ public class Templates extends Comlibs {
 	//*[@id="main-container"]/div/div[4]/div[4]/label/span  after 20190827
 
 	By MessageDisplayedOnHead = By.xpath("//*[@id=\"successMessage\"]");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
-	// By Locator=By.xpath("");
 	// By Locator=By.xpath("");
 	// By Locator=By.xpath("");
 

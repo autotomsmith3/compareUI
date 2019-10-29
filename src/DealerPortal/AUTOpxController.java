@@ -2587,7 +2587,8 @@ public class AUTOpxController extends Comlibs {
 			// 1.Header checkbox;
 			TCnum = i + ": " + "Header Checkbox";
 			checkboxName = "HeaderCheckbox";
-			checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(1) > span";
+//			checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(1) > span";// old copy selector
+			checkboxSelectorID = "#templateBuilder > div.movable-image-gallery.clearfix > div:nth-child(2) > label:nth-child(1) > span";
 			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header, false,
 					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
 			if (!checkboxIsChecked) {
@@ -3527,15 +3528,32 @@ public class AUTOpxController extends Comlibs {
 			igP.clickBackgroundsBtn(driver, TCnum);
 
 		}
-
-		TCnum = "MultipleBGs_09";
-		bgP.selectYearValue(driver, 1, "Any", TCnum);
-		bgP.selectMakeValue(driver, 1, "Any", TCnum);
-		ac.Wait(wt);
-		TCnum = "MultipleBGs_10";
-		bgP.selectYearValue(driver, 2, "Any", TCnum);
-		bgP.selectMakeValue(driver, 2, "Any", TCnum);
-		ac.Wait(wt);
+		for (int i=1;i<=(addNew+1);i++) {
+			TCnum = "MultipleBGs_AddToAny_"+i;
+			bgP.selectYearValue(driver, i, "Any", TCnum);
+			bgP.selectMakeValue(driver, i, "Any", TCnum);
+			ac.Wait(wt);
+		}
+		
+		
+		
+		
+//		TCnum = "MultipleBGs_09";
+//		bgP.selectYearValue(driver, 1, "Any", TCnum);
+//		bgP.selectMakeValue(driver, 1, "Any", TCnum);
+//		ac.Wait(wt);
+//		TCnum = "MultipleBGs_10";
+//		bgP.selectYearValue(driver, 2, "Any", TCnum);
+//		bgP.selectMakeValue(driver, 2, "Any", TCnum);
+//		ac.Wait(wt);
+//		TCnum = "MultipleBGs_11";
+//		bgP.selectYearValue(driver, 3, "Any", TCnum);
+//		bgP.selectMakeValue(driver, 3, "Any", TCnum);
+//		ac.Wait(wt);
+//		TCnum = "MultipleBGs_12";
+//		bgP.selectYearValue(driver, 4, "Any", TCnum);
+//		bgP.selectMakeValue(driver, 4, "Any", TCnum);
+//		ac.Wait(wt);
 		System.out.println("2nd stop");
 
 		ac.Wait(wt);
@@ -3884,9 +3902,9 @@ public class AUTOpxController extends Comlibs {
 			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
 			STOCKpxInventoryTC(driver, tBrowser, env);
 
-			////// 3. Templates
-			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
-			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
+//			////// 3. Templates
+//			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
+//			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
 			//// bc.Wait(18*60);//wait 18 minutes;
 
