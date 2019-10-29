@@ -1534,9 +1534,9 @@ public class AdminPortalController extends Comlibs {
 		BackgroundSets BackgroundSetsP = new BackgroundSets(driver);
 		// BackgroundSetsP.clickMapBackGrounds(driver, 3);
 		BackgroundSetsP.inputSearch(driver, AllProdDealerCode);
-		// ac.Wait(wt);
+		//************1st button**********************
 		try {
-			BackgroundSetsP.clickEditSetBtn(driver, 1);
+			BackgroundSetsP.clickEditSetBtn(driver, 1);// wrong, get element for the first button
 			ac.Wait(wt);
 			BackgroundSetsP.clickAllOemsCheckBox(driver);
 			BackgroundSetsP.clickAllOemsCheckBox(driver);
@@ -1560,13 +1560,24 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		BackgroundSetsP.clickCancel(driver);
 		ac.Wait(wt);
-		BackgroundSetsP.clickManageBGImageBtn(driver, 1);
-		ManageBackgrounds ManageBackgroundsP = new ManageBackgrounds(driver);
-		ManageBackgroundsP.clickBackToManageSets(driver, tc);
-		BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1, tc);
-		ac.Wait(wt);
+		//**************2nd button**********************
+		BackgroundSetsP.clickGetListOfDealersBtn(driver,1);
+//		ManageBackgrounds ManageBackgroundsP = new ManageBackgrounds(driver);
+//		ManageBackgroundsP.clickBackToManageSets(driver, tc);
+//		BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1, tc);
+//		ac.Wait(wt);
 		BackgroundSetsP.clickClose(driver, tc);
 		ac.Wait(wt);
+		//**************3rd button Delete BG**********************
+		//Todo: 
+		//1. Run backgroundImporter
+		//2. Get Set Name 
+		//3. Search the Set Name
+		//4. Delete the Set Name
+		//5. Fresh page F5
+		//6. Search the Set Name again
+		//7. Click the 1st button, if not exist, working as expected. Done.
+	
 		// tc = "TC139447";
 		// BackgroundSetsP.clickCreateNewSet(driver);
 		// ac.Wait(wt);
@@ -1916,14 +1927,14 @@ public class AdminPortalController extends Comlibs {
 			tc = "TC236111_03_" + i;
 			NewVehicleAndWhiteListP.clickVehicleUsagePreViewLink(driver, i, tc);
 			ac.Wait(wt);
-			tc = "TC236111_4_";
+			tc = "TC236111_4_"+i;
 			int vehicleCountFrLink = NewVehicleAndWhiteListP.returnDealersFrPopup(driver, tc);
 			if (vehicleCountFrLink == vehicleCountFrPage) {
 				ac.rwExcel(tc, true, "Verify Vehicle Usage. Row="+i, "Vehicle Usage matches the count in link");
 			} else {
 				ac.rwExcel(tc, false, "Verify Dealer Usage. Row="+i+"; Vehicle Usage does not match the count in link",
 						"Vehicle Usage on the page = " + vehicleCountFrPage + ". Vehicle Usage from link ="
-								+ vehicleCountFrLink);
+								+ vehicleCountFrLink+".  -- known issue, currently not implemented.");
 			}
 
 			NewVehicleAndWhiteListP.clickXBtn(driver, tc);

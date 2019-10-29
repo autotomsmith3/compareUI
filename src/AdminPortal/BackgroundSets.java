@@ -56,7 +56,7 @@ public class BackgroundSets extends Comlibs {
 	By deleteBGsetLocator2 = By.xpath("(//button[@id='dealerViewBtn'])[2]");
 	By deleteBGsetLocator3 = By.xpath("(//button[@id='dealerViewBtn'])[3]");
 	By deleteBGsetLocator4 = By.xpath("(//button[@id='dealerViewBtn'])[4]");
-	By editSetPopUpCancelLocator = By.xpath("//*[@id=\"newSetModal\"]/div/div/div[3]/button[2]");
+	By editSetPopUpCancelLocator = By.xpath("//*[@id=\"newSetModal\"]/div/div/div[5]/button[2]");// //*[@id="newSetModal"]/div/div/div[5]/button[2]
 	By editSetPopUpSubmitLocator = By.xpath("//*[@id=\"newSetModalBtn\"]");
 	By editSetPopUpAllDealerCheckBoxLocator = By.xpath("//*[@id=\"ckAllDealers\"]");
 	By dealerUsingBGLocator = By.xpath("//*[@id=\"dealerListModal\"]/div/div/div[3]/button");
@@ -101,22 +101,23 @@ public class BackgroundSets extends Comlibs {
 	}
 
 	public BackgroundSets clickEditSetBtn(WebDriver driver, int num) throws IOException {
-		num = (num - 1) * 4 + 2;
-		By editsetBtnLocator1 = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");// 2,6,10..., there is a 4 btw set.
+//		num = (num - 1) * 4 + 2;// chrome : get : //*[@id="listViewBtn"]/span    FF get: /html/body/div[1]/div/div[2]/div/div/div/div/div/div/table/tbody/tr/td[4]/button[1]/span
+		//  
+//		By editsetBtnLocator1 = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");// 2,6,10..., there is a 4 btw set.
+		By editsetBtnLocator1 = By.xpath("/html/body/div[1]/div/div[2]/div/div/div/div/div/div/table/tbody/tr["+num+"]/td[4]/button[1]/span"); // get from FF 
 		driver.findElement(editsetBtnLocator1).click();
 		return this;
 	}
-
 	public ManageBackgrounds clickManageBGImageBtn(WebDriver driver, int num) throws IOException {
 		num = (num - 1) * 4 + 3;
 		By manageBGsetBtnLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");
 		driver.findElement(manageBGsetBtnLocator).click();
 		return new ManageBackgrounds(driver);
 	}
-
 	public BackgroundSets clickDealersUseBackGroundBtn(WebDriver driver, int num, String tc) throws IOException {
 		num = (num - 1) * 4 + 4;
-		By dealersUseBGLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");// 4,8,12...
+//		By dealersUseBGLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");// 4,8,12...  
+		By dealersUseBGLocator = By.xpath("/html/body/div[1]/div/div[2]/div/div/div/div/div/div/table/tbody/tr/td[4]/button[2]/span");// From FF or Chrome full xpath: /html/body/div[1]/div/div[2]/div/div/div/div/div/div/table/tbody/tr/td[4]/button[2]/span
 		try {
 			driver.findElement(dealersUseBGLocator).click();
 			rwExcel(tc, true, "Click on Dealer Use Background Button", "Click on Button - successful!");
@@ -124,6 +125,19 @@ public class BackgroundSets extends Comlibs {
 			rwExcel(tc, false, "Click on Dealer Use Background Button", "Click on Button - failed!");
 		}
 		return this;
+	}
+	public ManageBackgrounds clickManageBackgroundsBtn(WebDriver driver, int num) throws IOException {
+		num = (num - 1) * 4 + 3;
+		By manageBGsetBtnLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");
+		driver.findElement(manageBGsetBtnLocator).click();
+		return new ManageBackgrounds(driver);
+	}
+	public BackgroundSets clickGetListOfDealersBtn(WebDriver driver, int num) throws IOException {
+//		num = (num - 1) * 4 + 3;
+//		By manageBGsetBtnLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");////*[@id="listViewBtn"]/span
+		By manageBGsetBtnLocator = By.xpath("/html/body/div[1]/div/div[2]/div/div/div/div/div/div/table/tbody/tr["+num+"]/td[4]/button[2]/span");
+		driver.findElement(manageBGsetBtnLocator).click();
+		return new BackgroundSets(driver);
 	}
 
 	public BackgroundSets clickDeleteBGSetBtn(WebDriver driver, int num, String tc) throws IOException {
