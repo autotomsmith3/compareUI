@@ -2266,7 +2266,7 @@ public class AUTOpxController extends Comlibs {
 		String env = prop.getProperty("AUTOpx.environment");
 		String envDevice = prop.getProperty("AUTOpx.envDevice");
 		String envBrowser = prop.getProperty("AUTOpx.browser");
-		String onScreen=prop.getProperty("AUTOpx.onScreen");
+		String onScreen = prop.getProperty("AUTOpx.onScreen");
 		String render = prop.getProperty("AUTOpx.render");
 		String img = prop.getProperty("AUTOpx.customPicPathFile");
 		String tBrowser = prop.getProperty("AUTOpx.browser");
@@ -2354,7 +2354,7 @@ public class AUTOpxController extends Comlibs {
 			// System.out.println("\nPlease wait at least 60 seconds, vin: "+vin01+" is re-rendering...\n");
 			// ac.Wait(60);
 		} else {
-			driver = reLogin(driver, ac, tBrowser, envDevice, env, baseURL, accountEmail, accountPS,onScreen);
+			driver = reLogin(driver, ac, tBrowser, envDevice, env, baseURL, accountEmail, accountPS, onScreen);
 		}
 		TCnum = "TC139922_11";
 		// igP.clickRefleshF5Btn(driver, TCnum);
@@ -2448,7 +2448,7 @@ public class AUTOpxController extends Comlibs {
 		}
 		String env = prop.getProperty("AUTOpx.environment");
 		String envBrowser = prop.getProperty("AUTOpx.browser");
-		String onScreen=prop.getProperty("AUTOpx.onScreen");
+		String onScreen = prop.getProperty("AUTOpx.onScreen");
 		String render = prop.getProperty("AUTOpx.render");
 		String addNewVIN = prop.getProperty("AUTOpx.addNewVIN");
 		String overlayImage = prop.getProperty("AUTOpx.overlayImagePathFile");
@@ -2567,112 +2567,120 @@ public class AUTOpxController extends Comlibs {
 		boolean set_VisibleToDealer = igP.truefalseRandom();
 		boolean set_ForceStockpx = igP.truefalseRandom();
 
-		
-		// *************************Angle Image**************************************************************************	
-		tpP.scrollUp(driver, 450, TCnum);
-		TCnum = "Drap and drop_01";
-		
-		
+		// *************************Angle Image**************************************************************************
 
-		
-		
-		//--------------------1st----doesn't work below drag and drop----------------------------------------------------
-		
-		//drap from
-		int from=2;
-		//drop to
-		int to=1;
-		System.out.println("Start to Drag and drop angle image from "+from+" to "+to);
-		ac.Wait(wt*2);
-//		tpP.drapAndDropConfigAngleImage3(driver, from, to, TCnum);//no error but nothing happened, not working
-//		tpP.drapHoldAndMoveDropAngleImage5(driver, from, to, TCnum);//catch an error
-//		tpP.drapHoldAndDropAngleImage4(driver, from, to, TCnum);// no error, drag is ok but can't drop,
-//		tpP.drapHoldAndDropAngleImage4_1(driver, from, to, TCnum);// need to move mouse to any location, it then drops.
-		tpP.drapHoldAndDropAngleImage4_2(driver, onScreen, from, to, TCnum);//s.
-//		int to1=228;//176;//228;//149
-//		int to2=252;//30;//252;//269   2-3 btw
-//		tpP.drapAndDropAngleImageBypixel2(driver, from, to1,to2, TCnum); //catch an error
-//		tpP.drapAndDropAngleImage(driver, from, to, TCnum);//no error, drag is ok but can't drop, same as hold above
-		System.out.println("Drag and drop angle image from "+from+" to "+to+"  is done!");
-//		ac.Wait(wt*2);
-//		from=7;
-//		to=3;
-//		System.out.println("Start to Drag and drop angle image from "+from+" to "+to);
-//		ac.Wait(wt*2);
-//		tpP.drapAndDropAngleImage1(driver, from, to, TCnum);// no error, drag is ok but can't drop,
-//		System.out.println("Drag and drop angle image from "+from+" to "+to+"  is done!!");	
-//		TCnum = "Drap and drop_02";
-//		
-		
-//		//-------------2nd----doesn't work either------------------------------------------------------------------
-//		//Javescript for drag and drop
-//		//https://gist.github.com/rcorreia/2362544
-//		//Drag 1st control to layout
-//	    String js_filepath = "C:\\1\\Eclipse\\RefLibraris\\drag_and_drop_helper.js";
-//	    String java_script="";
-//	    String text;
-//
-//	    BufferedReader input = new BufferedReader(new FileReader(js_filepath));
-//	    StringBuffer buffer = new StringBuffer();
-//
-//	    while ((text = input.readLine()) != null)
-//	        buffer.append(text + " ");
-//	        java_script = buffer.toString();
-//
-//	    input.close();
-//
-//	    String source = "#tab6 > div.tab-pane-body > div.visible-images > div > div:nth-child(6)";// > div";// 6th, using Chrome to copy selector to get selector ID;
-//	    String target = "#tab6 > div.tab-pane-body > div.visible-images > div > div:nth-child(5)";// > div";
-//	    java_script = java_script+"$('#"+source+"').simulate( '#" +target+ "');" ;
-//	    ((JavascriptExecutor) driver).executeScript(java_script);//error shows
-//
-//		System.out.println("Stop here!");	
+		// --------------------1st----doesn't work below drag and drop----------------------------------------------------
 
-//		//-------------3rd----working? no!------------------------------------------------------------------
-//		//Javescript for drag and drop
-//		//https://gist.github.com/rcorreia/2362544
-//		//Drag 1st control to layout
-//	    String js_filepath = "C:\\1\\Eclipse\\RefLibraris\\drag_and_drop_2.js";
-//	    String java_script="";
-//	    String text;
-//
-//	    BufferedReader input = new BufferedReader(new FileReader(js_filepath));
-//	    StringBuffer buffer = new StringBuffer();
-//
-//	    while ((text = input.readLine()) != null)
-//	        buffer.append(text + " ");
-//	        java_script = buffer.toString();
-//
-//	    input.close();
-//
-//	    String source = "#tab6 > div.tab-pane-body > div.visible-images > div > div:nth-child(6)";// > div";// 6th, using Chrome to copy selector to get selector ID;
-//	    String target = "#tab6 > div.tab-pane-body > div.visible-images > div > div:nth-child(5)";// > div";
-//	    java_script = java_script+"simulateHTML5DragAndDrop(arguments[0], arguments[1])";
-//	    ((JavascriptExecutor) driver).executeScript(java_script,source,target);//no error but nothing happened.
-//	    ac.Wait(2);
-//		System.out.println("Stop here!");	
-		
-		
-		//Check msg b4 SAVE
-		TCnum ="Check msg B4 SAVE";
-		String msgB4SAVEExpected="Changes have not been saved! Click SAVE to save changes.";
-		tpP.checkMsgB4SAVE(driver, msgB4SAVEExpected, TCnum);
-
-		//Click SAVE
-		TCnum ="Click Angle Image SAVE_01";
-		tpP.clickSaveAngleImageBtn(driver, TCnum);
+		// //drap from
+		// int from=6;
+		// //drop to
+		// int to=1;
+		// System.out.println("Start to Drag and drop angle image from "+from+" to "+to);
+		// ac.Wait(wt*2);
+		// tpP.drapAndDropConfigAngleImage3(driver, from, to, TCnum);//no error but nothing happened, not working
+		// tpP.drapHoldAndMoveDropAngleImage5(driver, from, to, TCnum);//catch an error
+		// tpP.drapHoldAndDropAngleImage4(driver, from, to, TCnum);// no error, drag is ok but can't drop,
+		// tpP.drapHoldAndDropAngleImage4_1(driver, from, to, TCnum);// need to move mouse to any location, it then drops.
+		// tpP.drapHoldAndDropAngleImage4_2(driver, onScreen, from, to, TCnum);//Temproary solution - OK, need to move mouse to any location, it then drops.
+		// int to1=228;//176;//228;//149
+		// int to2=252;//30;//252;//269 2-3 btw
+		// tpP.drapAndDropAngleImageBypixel2(driver, from, to1,to2, TCnum); //catch an error
+		//// tpP.drapAndDropAngleImage(driver, from, to, TCnum);//no error, drag is ok but can't drop, same as hold above
+		// System.out.println("Drag and drop angle image from "+from+" to "+to+" is done!");
+		// ac.Wait(wt*2);
+		// from=7;
+		// to=3;
+		// System.out.println("Start to Drag and drop angle image from "+from+" to "+to);
+		// ac.Wait(wt*2);
+		// tpP.drapAndDropAngleImage1(driver, from, to, TCnum);// no error, drag is ok but can't drop,
+		// System.out.println("Drag and drop angle image from "+from+" to "+to+" is done!!");
+		// TCnum = "Drap and drop_02";
 		//
-		//Check msg after SAVE
-		TCnum ="Check msg after SAVE";
-		String msgAfterSAVEExpected="data saved successfully.";
-		tpP.checkMsgAfterSAVE(driver, msgAfterSAVEExpected, TCnum);
-		tpP.clickInventoryGalleryBtn(driver, TCnum);
-		
-		
-		
-		// *************************End of Angle Image**************************************************************************			
-		
-		
+
+		// //-------------2nd----doesn't work either------------------------------------------------------------------
+		// //Javescript for drag and drop
+		// //https://gist.github.com/rcorreia/2362544
+		// //Drag 1st control to layout
+		// String js_filepath = "C:\\1\\Eclipse\\RefLibraris\\drag_and_drop_helper.js";
+		// String java_script="";
+		// String text;
+		//
+		// BufferedReader input = new BufferedReader(new FileReader(js_filepath));
+		// StringBuffer buffer = new StringBuffer();
+		//
+		// while ((text = input.readLine()) != null)
+		// buffer.append(text + " ");
+		// java_script = buffer.toString();
+		//
+		// input.close();
+		//
+		// String source = "#tab6 > div.tab-pane-body > div.visible-images > div > div:nth-child(6)";// > div";// 6th, using Chrome to copy selector to get selector ID;
+		// String target = "#tab6 > div.tab-pane-body > div.visible-images > div > div:nth-child(5)";// > div";
+		// java_script = java_script+"$('#"+source+"').simulate( '#" +target+ "');" ;
+		// ((JavascriptExecutor) driver).executeScript(java_script);//error shows
+		//
+		// System.out.println("Stop here!");
+
+		// //-------------3rd----working? no!------------------------------------------------------------------
+		// //Javescript for drag and drop
+		// //https://gist.github.com/rcorreia/2362544
+		// //Drag 1st control to layout
+		// String js_filepath = "C:\\1\\Eclipse\\RefLibraris\\drag_and_drop_2.js";
+		// String java_script="";
+		// String text;
+		//
+		// BufferedReader input = new BufferedReader(new FileReader(js_filepath));
+		// StringBuffer buffer = new StringBuffer();
+		//
+		// while ((text = input.readLine()) != null)
+		// buffer.append(text + " ");
+		// java_script = buffer.toString();
+		//
+		// input.close();
+		//
+		// String source = "#tab6 > div.tab-pane-body > div.visible-images > div > div:nth-child(6)";// > div";// 6th, using Chrome to copy selector to get selector ID;
+		// String target = "#tab6 > div.tab-pane-body > div.visible-images > div > div:nth-child(5)";// > div";
+		// java_script = java_script+"simulateHTML5DragAndDrop(arguments[0], arguments[1])";
+		// ((JavascriptExecutor) driver).executeScript(java_script,source,target);//no error but nothing happened.
+		// ac.Wait(2);
+		// System.out.println("Stop here!");
+		for (int i = 1; i <= 3; i++) {
+			tpP.scrollUp(driver, 450, TCnum);
+			TCnum = "Drap and drop_01" + i;
+			// drap from
+			int from = 6;
+			// drop to
+			int to = 1;
+			System.out.println("Start to Drag and drop angle image from " + from + " to " + to);
+			ac.Wait(wt);
+
+			tpP.drapHoldAndDropAngleImage4_2(driver, onScreen, from, to, TCnum);// Temproary solution - OK, need to move mouse to any location, it then drops.
+
+			System.out.println("Drag and drop angle image from " + from + " to " + to + "  is done!");
+
+			// Check msg b4 SAVE
+			TCnum = "Check msg B4 SAVE_0" + i;
+			String msgB4SAVEExpected = "Changes have not been saved! Click SAVE to save changes.";
+			tpP.checkMsgB4SAVE(driver, msgB4SAVEExpected, TCnum);
+
+			// Click SAVE
+			TCnum = "Click Angle Image SAVE_0" + i;
+			tpP.clickSaveAngleImageBtn(driver, TCnum);
+			//
+			// Check msg after SAVE
+			TCnum = "Check msg after SAVE_0" + i;
+			String msgAfterSAVEExpected = "data saved successfully.";
+			tpP.checkMsgAfterSAVE(driver, msgAfterSAVEExpected, TCnum);
+			tpP.scrollUp(driver, -450, TCnum);
+			tpP.clickInventoryGalleryBtn(driver, TCnum);
+			ac.Wait(wt*2);
+			igP.clickTemplatesBtn(driver);
+			int waitTime = 5;
+			System.out.println("Waiting for " + waitTime + " secs!");
+			ac.Wait(waitTime);
+		}
+		// *************************End of Angle Image**************************************************************************
+
 		/**
 		 * second run set_Header=true; set_Header_DealershipLogo=false; set_Header_DealershipAddress=true; set_Header_DealershipPhone=false; set_Header_DealershipEmail=true; set_Header_DealershipWebsite=false;
 		 * 
@@ -2692,12 +2700,14 @@ public class AUTOpxController extends Comlibs {
 		// tpP.clickSaveBtn(driver);
 		// tpP.clickHeaderEditBtn(driver);
 		// }
+		System.out.println("Stop here! Wait 5 mins...  Footer need to update xpath...");
+		// ac.Wait(60*5);
 		tpP.scrollUp(driver, -450, TCnum);
 		for (int i = 1; i <= 4; i++) {
 			// 1.Header checkbox;
 			TCnum = i + ": " + "Header Checkbox";
 			checkboxName = "HeaderCheckbox";
-//			checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(1) > span";// old copy selector
+			// checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(1) > span";// old copy selector
 			checkboxSelectorID = "#templateBuilder > div.movable-image-gallery.clearfix > div:nth-child(2) > label:nth-child(1) > span";
 			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header, false,
 					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
@@ -2826,7 +2836,8 @@ public class AUTOpxController extends Comlibs {
 			// 2.Footer checkbox;
 			TCnum = i + ": " + "Footer Checkbox";
 			checkboxName = "FooterCheckbox";
-			checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(4) > span";
+			// checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(4) > span";// before 20191101
+			checkboxSelectorID = "#templateBuilder > div.movable-image-gallery.clearfix > div:nth-child(2) > label:nth-child(4) > span";
 			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer, false,
 					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
 			if (!checkboxIsChecked) {
@@ -2924,7 +2935,8 @@ public class AUTOpxController extends Comlibs {
 			// *************************3.MarketingMessageTop checkbox;*************************
 			TCnum = i + ": " + "MarketingMessageTop Checkbox";
 			checkboxName = "MarketingMessageTop";
-			checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(7) > span";
+			// checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(7) > span";// before 20191101
+			checkboxSelectorID = "#templateBuilder > div.movable-image-gallery.clearfix > div:nth-child(2) > label:nth-child(7) > span";
 			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_MarketingMessageTop, false,
 					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
 			if (!checkboxIsChecked) {
@@ -2949,7 +2961,8 @@ public class AUTOpxController extends Comlibs {
 			// *************************4.MarketingMessageBotton checkbox;*************************
 			TCnum = i + ": " + "MarketingMessageBotton Checkbox";
 			checkboxName = "MarketingMessageBotton";
-			checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(10) > span";
+			// checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(10) > span";// before 20191101
+			checkboxSelectorID = "#templateBuilder > div.movable-image-gallery.clearfix > div:nth-child(2) > label:nth-child(10) > span";
 			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_MarketingMessageBotton, false,
 					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
 			if (!checkboxIsChecked) {
@@ -2975,7 +2988,8 @@ public class AUTOpxController extends Comlibs {
 			// ************************* 5.AddAdditionalOverlay checkbox;*************************
 			TCnum = i + ": " + "AddAdditionalOverlay Checkbox";
 			checkboxName = "AddAdditionalOverlay";
-			checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(14) > span";
+			// checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(14) > span";// before 20191101
+			checkboxSelectorID = "#templateBuilder > div.movable-image-gallery.clearfix > div:nth-child(2) > label:nth-child(14) > span";
 			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_AddAdditionalOverlay, false,
 					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
 			if (!checkboxIsChecked) {
@@ -2996,59 +3010,59 @@ public class AUTOpxController extends Comlibs {
 				tpP.verifyDealershipTemplate(driver, TCnum);
 			}
 
-			// ************************* 6.1 Features - VDI checkbox;*************************
-			tpP.scrollUp(driver, 3000, TCnum);
-			TCnum = i + ": " + "6.1 Check the checkbox for VDI";
-			checkboxName = "VDI";
-			// checkboxSelectorID = "#main-container > div > div:nth-child(4) > div:nth-child(2) > label > span"; //use Chrome F12 to copy selector; before 20190827
-			checkboxSelectorID = "#main-container > div > div:nth-child(4) > div:nth-child(2) > label > span"; // use Chrome F12 to copy selector; 20190827 got: #main-container > div > div:nth-child(4) > div:nth-child(2) > label > span
-			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_VDI, false,
-					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-			if (!checkboxIsChecked) {
-				tpP.clickFeaturesVDICheckBox(driver);
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_VDI, true,
-						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-				if (!checkboxIsChecked) {
-					// Failed;
-					System.out.println("Failed to click the checkbox -" + checkboxName);
-				}
-			}
-
-			// ************************* 6.2 What's Cool - WCI checkbox;*************************
-			TCnum = i + ": " + "6.2 Check the checkbox for WCI";
-			checkboxName = "WCI";
-			// checkboxSelectorID = "#main-container > div > div:nth-child(5) > div:nth-child(3) > label > span";// before 20190827
-			checkboxSelectorID = "#main-container > div > div:nth-child(4) > div:nth-child(3) > label > span";// after 20190827
-			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_WCI, false,
-					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-			if (!checkboxIsChecked) {
-				tpP.clickWhatsCoolCheckBox(driver);
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_WCI, true,
-						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-				if (!checkboxIsChecked) {
-					// Failed;
-					System.out.println("Failed to click the checkbox -" + checkboxName);
-
-				}
-			}
-
-			// ************************* 6.3 Benefits - VBI checkbox;*************************
-			TCnum = i + ": " + "6.3 Check the checkbox for VBI";
-			checkboxName = "VBI";
-			// checkboxSelectorID = "#main-container > div > div:nth-child(5) > div:nth-child(4) > label > span";// before 20190827
-			checkboxSelectorID = "#main-container > div > div:nth-child(4) > div:nth-child(4) > label > span";// after 20190827
-			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_VBI, false,
-					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-			if (!checkboxIsChecked) {
-				tpP.clickBenefitsVBICheckBox(driver);
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_VBI, true,
-						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-				if (!checkboxIsChecked) {
-					// Failed;
-					System.out.println("Failed to click the checkbox -" + checkboxName);
-
-				}
-			}
+			// // ************************* 6.1 Features - VDI checkbox;*************************
+			// tpP.scrollUp(driver, 3000, TCnum);
+			// TCnum = i + ": " + "6.1 Check the checkbox for VDI";
+			// checkboxName = "VDI";
+			// // checkboxSelectorID = "#main-container > div > div:nth-child(4) > div:nth-child(2) > label > span"; //use Chrome F12 to copy selector; before 20190827
+			// checkboxSelectorID = "#main-container > div > div:nth-child(4) > div:nth-child(2) > label > span"; // use Chrome F12 to copy selector; 20190827 got: #main-container > div > div:nth-child(4) > div:nth-child(2) > label > span
+			// checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_VDI, false,
+			// checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+			// if (!checkboxIsChecked) {
+			// tpP.clickFeaturesVDICheckBox(driver);
+			// checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_VDI, true,
+			// checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+			// if (!checkboxIsChecked) {
+			// // Failed;
+			// System.out.println("Failed to click the checkbox -" + checkboxName);
+			// }
+			// }
+			//
+			// // ************************* 6.2 What's Cool - WCI checkbox;*************************
+			// TCnum = i + ": " + "6.2 Check the checkbox for WCI";
+			// checkboxName = "WCI";
+			// // checkboxSelectorID = "#main-container > div > div:nth-child(5) > div:nth-child(3) > label > span";// before 20190827
+			// checkboxSelectorID = "#main-container > div > div:nth-child(4) > div:nth-child(3) > label > span";// after 20190827
+			// checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_WCI, false,
+			// checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+			// if (!checkboxIsChecked) {
+			// tpP.clickWhatsCoolCheckBox(driver);
+			// checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_WCI, true,
+			// checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+			// if (!checkboxIsChecked) {
+			// // Failed;
+			// System.out.println("Failed to click the checkbox -" + checkboxName);
+			//
+			// }
+			// }
+			//
+			// // ************************* 6.3 Benefits - VBI checkbox;*************************
+			// TCnum = i + ": " + "6.3 Check the checkbox for VBI";
+			// checkboxName = "VBI";
+			// // checkboxSelectorID = "#main-container > div > div:nth-child(5) > div:nth-child(4) > label > span";// before 20190827
+			// checkboxSelectorID = "#main-container > div > div:nth-child(4) > div:nth-child(4) > label > span";// after 20190827
+			// checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_VBI, false,
+			// checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+			// if (!checkboxIsChecked) {
+			// tpP.clickBenefitsVBICheckBox(driver);
+			// checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_TextImage_VBI, true,
+			// checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+			// if (!checkboxIsChecked) {
+			// // Failed;
+			// System.out.println("Failed to click the checkbox -" + checkboxName);
+			//
+			// }
+			// }
 
 			ac.Wait(wt);
 			tpP.scrollUp(driver, -3000, TCnum);
@@ -3303,9 +3317,9 @@ public class AUTOpxController extends Comlibs {
 		String y2 = "2019";
 		String m2 = "GMC";
 		int wtime = 10;
-		int browserWT=1;
-		if (envBrowser.equalsIgnoreCase("Firefox")) {//Fire loads the Add Backgrounds slower than Chrome
-			browserWT=11;
+		int browserWT = 1;
+		if (envBrowser.equalsIgnoreCase("Firefox")) {// Fire loads the Add Backgrounds slower than Chrome
+			browserWT = 11;
 		}
 		String backgroundsStatus = "";
 		ac.rwExcel("", "*********Multiple Background TCs**********", "");
@@ -3313,7 +3327,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "multiple_BG_01";
 		loginP.verifyHeaderFooter(env, versionNum, TCnum);
 		TCnum = "multiple_BG_02";
-		
+
 		loginP.login(driver, accountEmail, accountPS);
 
 		ImageGallery igP = new ImageGallery(driver);
@@ -3327,13 +3341,13 @@ public class AUTOpxController extends Comlibs {
 		// igP.enterTextInSearch(vin01);
 		// igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		// VehicleG allery vgP = new VehicleGallery(driver);
-		
+
 		TCnum = "multiple_BG_03";
 		igP.clickBackgroundsBtn(driver, TCnum);
 		TCnum = "MultipleBGs_01";
 		Backgrounds bgP = new Backgrounds(driver);
 		bgP.clickAddBackgrounds(driver, TCnum);
-		ac.Wait(wt*browserWT);
+		ac.Wait(wt * browserWT);
 		TCnum = "Add GB_01_1";
 		int bgNum = 18; // Select 18 - Auto_ChangedTo_588_644
 		String selectBGName = "Auto_ChangedTo_588_644";
@@ -3459,12 +3473,12 @@ public class AUTOpxController extends Comlibs {
 		for (int i = 1; i <= addNew; i++) {
 			TCnum = "Add New BG_" + i;
 			bgP.clickAddBackgrounds(driver, TCnum);
-			if (i==1) {
-				ac.Wait(wt*browserWT);
-			}else {
-				ac.Wait(wt*1);
+			if (i == 1) {
+				ac.Wait(wt * browserWT);
+			} else {
+				ac.Wait(wt * 1);
 			}
-			ac.Wait(wt*browserWT);
+			ac.Wait(wt * browserWT);
 			bgP.clickBackground(driver, bgNum, TCnum);
 			// bgP.scrollUp(driver, 1000, TCnum);
 			bgP.clickAddBtn(driver, TCnum);
@@ -3638,32 +3652,29 @@ public class AUTOpxController extends Comlibs {
 			igP.clickBackgroundsBtn(driver, TCnum);
 
 		}
-		for (int i=1;i<=(addNew+1);i++) {
-			TCnum = "MultipleBGs_AddToAny_"+i;
+		for (int i = 1; i <= (addNew + 1); i++) {
+			TCnum = "MultipleBGs_AddToAny_" + i;
 			bgP.selectYearValue(driver, i, "Any", TCnum);
 			bgP.selectMakeValue(driver, i, "Any", TCnum);
 			ac.Wait(wt);
 		}
-		
-		
-		
-		
-//		TCnum = "MultipleBGs_09";
-//		bgP.selectYearValue(driver, 1, "Any", TCnum);
-//		bgP.selectMakeValue(driver, 1, "Any", TCnum);
-//		ac.Wait(wt);
-//		TCnum = "MultipleBGs_10";
-//		bgP.selectYearValue(driver, 2, "Any", TCnum);
-//		bgP.selectMakeValue(driver, 2, "Any", TCnum);
-//		ac.Wait(wt);
-//		TCnum = "MultipleBGs_11";
-//		bgP.selectYearValue(driver, 3, "Any", TCnum);
-//		bgP.selectMakeValue(driver, 3, "Any", TCnum);
-//		ac.Wait(wt);
-//		TCnum = "MultipleBGs_12";
-//		bgP.selectYearValue(driver, 4, "Any", TCnum);
-//		bgP.selectMakeValue(driver, 4, "Any", TCnum);
-//		ac.Wait(wt);
+
+		// TCnum = "MultipleBGs_09";
+		// bgP.selectYearValue(driver, 1, "Any", TCnum);
+		// bgP.selectMakeValue(driver, 1, "Any", TCnum);
+		// ac.Wait(wt);
+		// TCnum = "MultipleBGs_10";
+		// bgP.selectYearValue(driver, 2, "Any", TCnum);
+		// bgP.selectMakeValue(driver, 2, "Any", TCnum);
+		// ac.Wait(wt);
+		// TCnum = "MultipleBGs_11";
+		// bgP.selectYearValue(driver, 3, "Any", TCnum);
+		// bgP.selectMakeValue(driver, 3, "Any", TCnum);
+		// ac.Wait(wt);
+		// TCnum = "MultipleBGs_12";
+		// bgP.selectYearValue(driver, 4, "Any", TCnum);
+		// bgP.selectMakeValue(driver, 4, "Any", TCnum);
+		// ac.Wait(wt);
 		System.out.println("2nd stop");
 
 		ac.Wait(wt);
@@ -3987,7 +3998,7 @@ public class AUTOpxController extends Comlibs {
 
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			if (!tBrowser.equalsIgnoreCase("Chromexxxxxxxxx")) { // only Chrome doesn't work since Chrome updated on Jul, 2017, works on Dec 13,2017 webdriver ver3.8.5
-				bc.SelecBroswerResolution(driver, envDevice,onScreen);
+				bc.SelecBroswerResolution(driver, envDevice, onScreen);
 			}
 			bc.rwExcel("", "****** Testing started ******" + (i + 1), "");
 			bc.rwExcel("", "Test Browser", tBrowser);
@@ -3997,37 +4008,41 @@ public class AUTOpxController extends Comlibs {
 			////// tempDebug(driver);// ***************************************Debug*****************************************
 			//// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-//			//// 0.General Inventory Gallery
-//			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-//			inventoryGalleryTC(driver, tBrowser, env, versionNum);
-//			vehicleGallery(driver, tBrowser, env);
-//			// verifyRerender(driver, tBrowser);
-//
-//			////// 1.VINpx:
-//			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-//			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-//
-//			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-//
-//			////// 2. STOCKpx
-//			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-//			STOCKpxInventoryTC(driver, tBrowser, env);
-
-			////// 3. Templates
+			////// 3. Templates - run this first to move mouse 3 times during the Angle Images testing in Templates
 			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
 			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
+			//// 0.General Inventory Gallery
+			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			inventoryGalleryTC(driver, tBrowser, env, versionNum);
+			vehicleGallery(driver, tBrowser, env);
+			// verifyRerender(driver, tBrowser);
+
+			////// 1.VINpx:
+			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+
+			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+
+			////// 2. STOCKpx
+			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			STOCKpxInventoryTC(driver, tBrowser, env);
+
+//			////// 3. Templates
+//			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
+//			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
+
 			//// bc.Wait(18*60);//wait 18 minutes;
 
-//			// ////// 4. LOTpx
-//			bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
-//			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
-//			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
-//
-//			// ////// 5. Multiple Backgrounds
-//			bc.rwExcel("", "-----Multiple Backgrounds Testing started-----" + (i + 1), "");
-//			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
-//			MultipleBGTC(driver, tBrowser, versionNum, env, chkEmail); // All or LOTpx. This should be in the end of all testing
+			// ////// 4. LOTpx
+			bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
+			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
+			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
+
+			// ////// 5. Multiple Backgrounds
+			bc.rwExcel("", "-----Multiple Backgrounds Testing started-----" + (i + 1), "");
+			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
+			MultipleBGTC(driver, tBrowser, versionNum, env, chkEmail); // All or LOTpx. This should be in the end of all testing
 
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
