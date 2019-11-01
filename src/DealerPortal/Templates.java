@@ -1,15 +1,19 @@
 package DealerPortal;
 
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.io.IOException;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.json.*;
-
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 public class Templates extends Comlibs {
 	private final WebDriver driver;
 
@@ -115,7 +119,7 @@ public class Templates extends Comlibs {
 	//*[@id="main-container"]/div/div[4]/div[4]/label/span  after 20190827
 
 	By MessageDisplayedOnHead = By.xpath("//*[@id=\"successMessage\"]");
-	// By Locator=By.xpath("");
+	 By saveAngleImageBtnLocator=By.xpath("//*[@id=\"tab6\"]/div[1]/div/span");
 	// By Locator=By.xpath("");
 
 	public DealerProfile clickDealerShipInfoBtn(WebDriver driver) throws IOException {
@@ -650,7 +654,270 @@ public class Templates extends Comlibs {
 		}
 		return messageExist;
 	}
+	public void drapAndDropAngleImage1(WebDriver driver, int from, int to, String tc) throws IOException {
+		// from: https://www.guru99.com/drag-drop-selenium.html
+		By fromLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+from+"]/div/div[1]"); 
+		By toLocation =   By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+to+"]/div/div[1]"); 
+		
+		try {
+			//Element which needs to drag.    		
+        	WebElement From=driver.findElement(fromLocation);	
+        	//Element on which need to drop.		
+        	WebElement To=driver.findElement(toLocation);		
+         
+            //Using Action class for drag and drop.		
+            Actions act=new Actions(driver);					
+            //Dragged and dropped.		
+            Wait(2);
+            act.dragAndDrop(From, To).build().perform();
+            Wait(2);
+			rwExcel(tc, true, "Drap from "+from+" to "+to+"", "working as expected.");
+		} catch (Exception e) {
+			System.out.println("catch an error!");
+			rwExcel(tc, false, "Drap from "+from+" to "+to+"", "failed to drap and drop.");
+			Wait(2);
+		}
 
+	}
+	public void drapAndDropAngleImageBypixel2(WebDriver driver, int from, int to1,int to2, String tc) throws IOException {
+		By fromLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+from+"]/div/div[1]"); 
+//		By toLocation =   By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+to+"]/div/div[1]"); 
+		
+		try {
+			//Element which needs to drag.    		
+        	WebElement From=driver.findElement(fromLocation);	
+        	//Element on which need to drop.		
+//        	WebElement To=driver.findElement(toLocation);		
+         
+            //Using Action class for drag and drop.		
+            Actions act=new Actions(driver);					
+            //Dragged and dropped by pixel.		
+            Wait(2);
+            act.dragAndDropBy(From, to1, to2).build().perform();
+            Wait(2);
+			rwExcel(tc, true, "Drap from "+from+" to "+to1+" "+" "+to2, "working as expected.");
+		} catch (Exception e) {
+			System.out.println("catch an error!");
+			rwExcel(tc, false, "Drap from "+from+" to "+to1+" "+" "+to2, "failed to drap and drop.");
+			Wait(2);
+		}
+
+	}
+	public void drapAndDropConfigAngleImage3(WebDriver driver, int from, int to, String tc) throws IOException {
+		// from: https://stackoverflow.com/questions/14210051/how-to-automate-drag-drop-functionality-using-selenium-webdriver-java
+		By fromLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+from+"]/div/div[1]"); 
+		By toLocation =   By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+to+  "]/div/div[1]"); 
+		
+		try {
+			//Element which needs to drag.    		
+        	WebElement From=driver.findElement(fromLocation);	
+        	//Element on which need to drop.		
+        	WebElement To=driver.findElement(toLocation);		
+         
+        	// Configure the action
+        	Actions builder = new Actions(driver);
+
+        	builder.keyDown(Keys.CONTROL).click(From).click(To).keyUp(Keys.CONTROL);
+
+        	// Then get the action:
+        	Action selectMultiple = builder.build();
+            Wait(2);
+        	// And execute it:
+        	selectMultiple.perform();
+    	
+//            //Dragged and dropped.		
+//            act.dragAndDrop(From, To).build().perform();
+			rwExcel(tc, true, "Drap from "+from+" to "+to+"", "working as expected.");
+		} catch (Exception e) {
+			System.out.println("catch an error!");
+			rwExcel(tc, false, "Drap from "+from+" to "+to+"", "failed to drap and drop.");
+			Wait(2);
+		}
+
+	}
+	public void drapHoldAndDropAngleImage4(WebDriver driver, int from, int to, String tc) throws IOException {
+		// from: https://www.guru99.com/drag-drop-selenium.html
+		By fromLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+from+"]/div/div[1]"); 
+		By toLocation =   By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+to+"]/div/div[1]"); 
+		
+		try {
+			//Element which needs to drag.    		
+        	WebElement From=driver.findElement(fromLocation);	
+        	//Element on which need to drop.		
+        	WebElement To=driver.findElement(toLocation);		
+         
+            //Using Action class for drag and drop.		
+            Actions builder=new Actions(driver);	
+            Action dragAndDrop = builder.clickAndHold(From).moveToElement(To).release(To).build();
+            Wait(2);
+            dragAndDrop.perform();
+            Wait(2);
+//            //Dragged and dropped.		
+//            act.dragAndDrop(From, To).build().perform();
+			rwExcel(tc, true, "Drap from "+from+" to "+to+"", "working as expected.");
+		} catch (Exception e) {
+			System.out.println("catch an error!");
+			rwExcel(tc, false, "Drap from "+from+" to "+to+"", "failed to drap and drop.");
+			Wait(2);
+		}
+
+	}
+	public void drapHoldAndDropAngleImage4_1(WebDriver driver, int from, int to, String tc) throws IOException {
+		// from: https://www.guru99.com/drag-drop-selenium.html
+		By fromLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+from+"]/div/div[1]"); 
+		By toLocation =   By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+to+"]/div/div[1]"); 
+		
+		try {
+			//Element which needs to drag.    		
+        	WebElement From=driver.findElement(fromLocation);	
+        	//Element on which need to drop.		
+        	WebElement To=driver.findElement(toLocation);		
+         
+//            //Using Action class for drag and drop.		
+//            Actions builder=new Actions(driver);	
+//            Action dragAndMove = builder.clickAndHold(From).moveToElement(To).release(To).build();
+//            Wait(2);
+//            dragAndMove.perform();// need to move mouse to any location then it drops
+//            Wait(2);
+            
+            Actions act=new Actions(driver);					
+            //Dragged and dropped.
+            To.click();
+            Wait(2);
+            act.dragAndDrop(From, To).build().perform();// need to move mouse to any location then it drops
+            Wait(2);
+
+			rwExcel(tc, true, "Drap from "+from+" to "+to+"", "working as expected.");
+		} catch (Exception e) {
+			System.out.println("catch an error!");
+			rwExcel(tc, false, "Drap from "+from+" to "+to+"", "failed to drap and drop.");
+			Wait(2);
+		}
+
+	}
+	public void drapHoldAndDropAngleImage4_2(WebDriver driver, int from, int to, String tc) throws IOException {
+		// from: https://www.guru99.com/drag-drop-selenium.html
+		By fromLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+from+"]/div/div[1]"); 
+		By toLocation =   By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+to+"]/div/div[1]"); 
+		
+		try {
+			//Element which needs to drag.    		
+        	WebElement From=driver.findElement(fromLocation);	
+        	//Element on which need to drop.		
+        	WebElement To=driver.findElement(toLocation);	
+        	
+        	
+          Actions builder=new Actions(driver);	
+          try {
+        	    // These coordinates are screen coordinates
+        	    int xCoord = -900;
+        	    int yCoord = 552;
+        	    
+        	    
+
+        	    // Move the cursor
+        	    Robot robot = new Robot();
+        	    robot.mouseMove(xCoord, yCoord);
+        	} catch (AWTException e) {
+        	}
+          
+          
+          Action dragAndMove = builder.clickAndHold(From).moveToElement(To).release(To).build();
+          Wait(2);
+          dragAndMove.perform();// need to move mouse to any location then it drops
+          Wait(2);
+        	
+        	
+        	
+        	
+        	
+        	
+         
+//            //Using Action class for drag and drop.		
+//            Actions builder=new Actions(driver);	
+//            Action dragAndMove = builder.clickAndHold(From).moveToElement(To).release(To).build();
+//            Wait(2);
+//            dragAndMove.perform();// need to move mouse to any location then it drops
+//            Wait(2);
+            
+            Actions act=new Actions(driver);					
+            //Dragged and dropped.
+            To.click();
+            Wait(2);
+            act.dragAndDrop(From, To).build().perform();// need to move mouse to any location then it drops
+            Wait(2);
+
+			rwExcel(tc, true, "Drap from "+from+" to "+to+"", "working as expected.");
+		} catch (Exception e) {
+			System.out.println("catch an error!");
+			rwExcel(tc, false, "Drap from "+from+" to "+to+"", "failed to drap and drop.");
+			Wait(2);
+		}
+
+	}
+	public void drapHoldAndMoveDropAngleImage5(WebDriver driver, int fromfrom, int toto, String tc) throws IOException {
+		// from: https://www.guru99.com/drag-drop-selenium.html
+//		By fromLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+from+"]/div/div[1]"); 
+//		By toLocation =   By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+to+"]/div/div[1]"); 
+		
+		By fromLocation = By.xpath("//*[@id=\"tab6\"]/div[2]/div[2]/div/div["+fromfrom+"]"); 
+		By toLocation =   By.xpath("//*[@id=\"tab6\"]/div[2]/div[2]/div/div["+toto+"]"); //  //*[@id="tab6"]/div[2]/div[2]/div/div[5]
+		
+		
+		try {
+			//Element which needs to drag.    		
+        	WebElement From=driver.findElement(fromLocation);	
+        	//Element on which need to drop.		
+        	WebElement To=driver.findElement(toLocation);		
+         
+            //Using Action class for drag and drop.		
+            Actions builder=new Actions(driver);	
+//            Action dragAndDrop = builder.clickAndHold(From).moveByOffset(-1,-1).moveToElement(To).release(To).build();
+            int x=To.getLocation().getX()+To.getSize().getWidth()/2;
+            int y= To.getLocation().getY()+To.getSize().getHeight()/2;
+            Action dragAndDrop = builder.clickAndHold(From).moveByOffset(-1, -1).moveToElement(To, x,y).release().build();//not working
+            
+//            To.getLocation().getX()+To.getSize().getWidth()/2, 
+//            To.getLocation().getY()+To.getSize().getHeight()/2)
+            
+            
+            Wait(2);
+            dragAndDrop.perform();
+//            //Dragged and dropped.		
+//            act.dragAndDrop(From, To).build().perform();
+			rwExcel(tc, true, "Drap from "+fromfrom+" to "+toto+"", "working as expected.");
+		} catch (Exception e) {
+			System.out.println("catch an error!");
+			rwExcel(tc, false, "Drap from "+fromfrom+" to "+toto+"", "failed to drap and drop.");
+			Wait(2);
+		}
+
+	}
+	public Templates clickSaveAngleImageBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, saveAngleImageBtnLocator, true, tc);
+		driver.findElement(saveAngleImageBtnLocator).click();
+		return this;
+	}
+	public void checkMsgB4SAVE(WebDriver driver, String expectedMsg, String tc) throws IOException {
+		elementExist(driver, saveAngleImageBtnLocator, true, tc);
+		String msg=driver.findElement(saveAngleImageBtnLocator).getText();
+		if (msg.equalsIgnoreCase(expectedMsg)) {
+			rwExcel(tc, true, "Check message before SAVE", "works as expected.");
+		}else {
+			rwExcel(tc, false, "Check message before SAVE", "Website shows: \""+msg+"\". Expected:\""+expectedMsg+"\"");
+		}
+		;
+	}
+	public void checkMsgAfterSAVE(WebDriver driver, String expectedMsg, String tc) throws IOException {
+		elementExist(driver, saveAngleImageBtnLocator, true, tc);
+		String msg=driver.findElement(saveAngleImageBtnLocator).getText();
+		if (msg.equalsIgnoreCase(expectedMsg)) {
+			rwExcel(tc, true, "Check message After SAVE", "works as expected.");
+		}else {
+			rwExcel(tc, false, "Check message After SAVE", "Website shows: \""+msg+"\". Expected:\""+expectedMsg+"\"");
+		}
+		;
+	}
 	public void jSONParse() {
 		// String text = "{\"employees\":[{\"firstName\":\"John\",\"lastName\":\"Doe\" },{\"firstName\":\"Anna\",\"lastName\":\"Smith\" },{\"firstName\":\"Peter\",\"lastName\":\"Jones\" }]}";
 		// String text="{\"posts\": [{\"post_id\": \"123456789012_123456789012\",\"actor_id\": \"1234567890\",\"picOfPersonWhoPosted\": \"http://example.com/photo.jpg\",\"nameOfPersonWhoPosted\": \"Jane Doe\",\"message\": \"Sounds cool. Can't wait to see it!\",\"likesCount\": \"2\",\"comments\": [],\"timeOfPost\": \"1234567890\"} ]}";
