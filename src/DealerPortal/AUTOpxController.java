@@ -4181,11 +4181,11 @@ public class AUTOpxController extends Comlibs {
 			////// tempDebug(driver);// ***************************************Debug*****************************************
 			//// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 			
-			////// 3.1 STOCKpx Angle images sorting - Templates - run this first to move mouse 2 times during the Angle Images testing in Templates
+			////// 5.1 STOCKpx Angle images sorting - Templates - run this first to move mouse 2 times during the Angle Images testing in Templates
 			bc.rwExcel("", "-----STOCKpx Sorting in Templates Testing started-----" + (i + 1), "");
 			STOCKpxSortingOnlyTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 			
-			////// 3. Templates - run this first to move mouse 3 times during the Angle Images testing in Templates
+			////// 5.2 VINpx Angle images sorting and Templates - run this first to move mouse 3 times during the Angle Images testing in Templates
 			bc.rwExcel("", "-----Templates FCA Sorting Testing started-----" + (i + 1), "");
 			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
@@ -4199,26 +4199,19 @@ public class AUTOpxController extends Comlibs {
 			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
 			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
 
-			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-
 			////// 2. STOCKpx
 			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
 			STOCKpxInventoryTC(driver, tBrowser, env);
 
-			// ////// 3. Templates - moved to fist run
-			// bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
-			// VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
-
 			//// bc.Wait(18*60);//wait 18 minutes;
 
-			// ////// 4. LOTpx
+			// ////// 3. LOTpx
 			bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
 			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
 			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
 
-			// ////// 5. Multiple Backgrounds
+			// ////// 4. Multiple Backgrounds
 			bc.rwExcel("", "-----Multiple Backgrounds Testing started-----" + (i + 1), "");
-			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
 			MultipleBGTC(driver, tBrowser, versionNum, env, chkEmail); // All or LOTpx. This should be in the end of all testing
 
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
