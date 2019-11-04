@@ -829,10 +829,10 @@ public class Templates extends Comlibs {
 				// These coordinates are screen coordinates
 				if (onScreen.equalsIgnoreCase("left")) {
 					xCoord = -900;
-					yCoord = 552;
+					yCoord = 585;//552
 				} else {
 					xCoord = 400;
-					yCoord = 552;
+					yCoord = 585;//552
 				}
 
 				// Move the cursor

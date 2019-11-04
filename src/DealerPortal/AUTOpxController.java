@@ -1719,8 +1719,8 @@ public class AUTOpxController extends Comlibs {
 		igP.clickSelectNoneBtn(driver, TCnum);
 		// Verify Rerender All Vehicles for STOCKpx dealer TC139712
 		TCnum = "TC139712_06";
-		System.out.println(
-				"Rerender All Vehicles for STOCKpx dealer. Re-render VIN number: " + igP.getReRenderNum(driver, TCnum));
+//		System.out.println("Rerender All Vehicles for STOCKpx dealer. Re-render VIN number: " + igP.getReRenderNum(driver, TCnum));//Not show the number
+		System.out.println("Rerender All Vehicles for STOCKpx dealer. Re-render VIN number: " + allVinNums);
 		if (allVinNums > 20) {
 			igP.clickShowAllBtn(driver, TCnum);
 		}
@@ -2644,6 +2644,7 @@ public class AUTOpxController extends Comlibs {
 		// ((JavascriptExecutor) driver).executeScript(java_script,source,target);//no error but nothing happened.
 		// ac.Wait(2);
 		// System.out.println("Stop here!");
+		if (envBrowser.equalsIgnoreCase("Chrome")) {  //Only works for Chrome. Firefox is not working. 
 		for (int i = 1; i <= 3; i++) {
 			tpP.scrollUp(driver, 450, TCnum);
 			TCnum = "Drap and drop_01" + i;
@@ -2678,6 +2679,7 @@ public class AUTOpxController extends Comlibs {
 			int waitTime = 5;
 			System.out.println("Waiting for " + waitTime + " secs!");
 			ac.Wait(waitTime);
+		}
 		}
 		// *************************End of Angle Image**************************************************************************
 
@@ -3270,7 +3272,178 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139684_06";
 		igP.clickLogout(driver);
 	}
+	public static void STOCKpxSortingOnlyTemplatesTC(WebDriver driver, String brw, String versionNum, String envment,
+			String checkEmail) throws Exception {
 
+		// Load environment parameters
+		Properties prop = new Properties();
+		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		try {
+			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String env = prop.getProperty("AUTOpx.environment");
+		String envBrowser = prop.getProperty("AUTOpx.browser");
+		String onScreen = prop.getProperty("AUTOpx.onScreen");
+		String render = prop.getProperty("AUTOpx.render");
+		String addNewVIN = prop.getProperty("AUTOpx.addNewVIN");
+		String overlayImage = prop.getProperty("AUTOpx.overlayImagePathFile");
+		String accountEmail = prop.getProperty(env + ".STOCKpxEmail");
+		String accountPS = prop.getProperty(env + ".STOCKpxPassword");
+		// String baseURL = prop.getProperty(env + ".VINpxDealerPortalBaseURL");
+		String dealershipName = prop.getProperty(env + ".STOCKpxDealershipname");
+		String STOCKpxDealershipBrandName = prop.getProperty(env + ".STOCKpxDealershipBrandName");
+		String dealerCode = prop.getProperty(env + ".STOCKpxDealerCode");
+		String vin01 = prop.getProperty(env + ".STOCKpxVin01");
+		String vin02 = prop.getProperty(env + ".STOCKpxVin02");
+		String vehGUID01 = prop.getProperty(env + ".STOCKpxVin01GUID");
+		String vehGUID02 = prop.getProperty(env + ".STOCKpxVin02GUID");
+		String[] STOCKpxNewVINs = fetchOneDemArrayFromPropFile(env + ".STOCKpxNewVINs", prop);
+		String serverName = prop.getProperty(env + ".serverName");
+		String dbName = prop.getProperty(env + ".dbName");
+		String userName = prop.getProperty(env + ".userName");
+		String password = prop.getProperty(env + ".password");
+		String MaxVins = prop.getProperty(env + ".MaxVinsForPreview");
+		int MaxVinsForPreview = Integer.parseInt(MaxVins);
+		int MaxTimeForTemplatesPreview = Integer.parseInt(prop.getProperty(env + ".MaxTimeForTemplatesPreview"));
+		String displayTemplatesStatusOnPage = prop.getProperty("AUTOpx.displayTemplatesStatusOnPage");
+		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
+		// Initial
+		// final int wt_Secs = 6;
+		String TCnum;
+		// String ptitle;
+		String tempVIN = "";
+		String tempVehGUID = "";
+		Comlibs ac = new Comlibs();
+		ac.rwExcel("", "*********STOCKpx Templates TCs**********", "");
+		AUTOpxLogin loginP = new AUTOpxLogin(driver);
+		TCnum = "TC139659_7_STOCKpx";
+		loginP.verifyHeaderFooter(env, versionNum, TCnum);
+		TCnum = "TC141679_6_STOCKpx";
+
+		loginP.login(driver, accountEmail, accountPS);
+		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
+
+		// TCnum = "TC144867_vinpx";
+		// // acceptLicenseP.verifyAgreementTitle(driver, 1, "VINpx Agreement", true, TCnum); // VINpx Agreement, STOCKpx Agreement, LOTpx Agreement
+		//
+		// vinpxConent = acceptLicenseP.getFile("data/vinpxAgreement.txt");
+		// int vinpxAgreementTotalLines = acceptLicenseP.getLineNum();
+		// TCnum = "TC144867_5_vinpx";
+		// // acceptLicenseP.verifyPDF(driver, 1, "vinpx", vinpxConent, vinpxAgreementTotalLines, TCnum, envment);
+		//
+		// acceptLicenseP.clickAcceptBtn(driver);
+		ImageGallery igP = new ImageGallery(driver);
+		igP.clickDealerShipInfoBtn(driver);
+		DealerProfile dpP = new DealerProfile(driver);
+		// dpP.clickInventoryGalleryBtn(driver, TCnum);
+		// DealerProfile dpP = new DealerProfile(driver);
+		dpP.selectBand(driver, STOCKpxDealershipBrandName);
+		igP.clickTemplatesBtn(driver);
+		Templates tpP = new Templates(driver);
+		TCnum = "STOCKpx_Templates_01";
+		String checkboxName = "";
+		String checkboxSelectorID = "";
+		String checkboxCSSstyleID = "transform-origin";
+		String checkboxCSSstyleValue = "50% 50%";
+		boolean checkboxIsChecked = false;
+		String successfulMsg = "";
+		boolean MessageExist = false;
+		// *************************1. Header**************************************************************************
+		// // Header
+		// boolean set_Header = true;
+		// boolean set_Header_DealershipLogo = true;
+		// boolean set_Header_DealershipAddress = false;
+		// boolean set_Header_DealershipPhone = true;
+		// boolean set_Header_DealershipEmail = false;
+		// boolean set_Header_DealershipWebsite = true;
+		//
+		// boolean set_Footer = true;
+		// boolean set_Footer_BrandLog = false;
+		// boolean set_Footer_VehicleInfo = true;
+		// boolean set_Footer_Vin = false;
+		// boolean set_Footer_StockNumber = false;
+		//
+		// boolean set_MarketingMessageTop = false;
+		// boolean set_MarketingMessageBotton = true;
+		// boolean set_AddAdditionalOverlay = false;
+		//
+		// boolean set_TextImage_VDI = false;
+		// boolean set_TextImage_WCI = true;
+		// boolean set_TextImage_VBI = false;
+
+		// Header with random true or false
+		boolean set_Header = true;
+		boolean set_Header_DealershipLogo = igP.truefalseRandom();
+		boolean set_Header_DealershipAddress = igP.truefalseRandom();
+		boolean set_Header_DealershipPhone = igP.truefalseRandom();
+		boolean set_Header_DealershipEmail = igP.truefalseRandom();
+		boolean set_Header_DealershipWebsite = igP.truefalseRandom();
+
+		boolean set_Footer = true;
+		boolean set_Footer_BrandLog = igP.truefalseRandom();
+		boolean set_Footer_VehicleInfo = igP.truefalseRandom();
+		boolean set_Footer_Vin = igP.truefalseRandom();
+		boolean set_Footer_StockNumber = igP.truefalseRandom();
+
+		boolean set_MarketingMessageTop = false;
+		boolean set_MarketingMessageBotton = false;
+		set_MarketingMessageTop = igP.truefalseRandom();
+		if (!set_MarketingMessageTop) {
+			set_MarketingMessageBotton = igP.truefalseRandom();
+		}
+
+		boolean set_AddAdditionalOverlay = false;
+
+		boolean set_TextImage_VDI = igP.truefalseRandom();
+		boolean set_TextImage_WCI = igP.truefalseRandom();
+		boolean set_TextImage_VBI = igP.truefalseRandom();
+
+		boolean set_VisibleToDealer = igP.truefalseRandom();
+		boolean set_ForceStockpx = igP.truefalseRandom();
+
+		// *************************Angle Image**************************************************************************
+		if (envBrowser.equalsIgnoreCase("Chrome")) {  //Only works for Chrome. Firefox is not working. 
+		for (int i = 1; i <= 2; i++) {
+			tpP.scrollUp(driver, 450, TCnum);
+			TCnum = "Drap and drop_01" + i;
+			// drap from
+			int from = 6;
+			// drop to
+			int to = 1;
+			System.out.println("Start to Drag and drop angle image from " + from + " to " + to);
+			ac.Wait(wt);
+
+			tpP.drapHoldAndDropAngleImage4_2(driver, onScreen, from, to, TCnum);// Temproary solution - OK, need to move mouse to any location, it then drops.
+
+			System.out.println("Drag and drop angle image from " + from + " to " + to + "  is done!");
+
+			// Check msg b4 SAVE
+			TCnum = "Check msg B4 SAVE_0" + i;
+			String msgB4SAVEExpected = "Changes have not been saved! Click SAVE to save changes.";
+			tpP.checkMsgB4SAVE(driver, msgB4SAVEExpected, TCnum);
+
+			// Click SAVE
+			TCnum = "Click Angle Image SAVE_0" + i;
+			tpP.clickSaveAngleImageBtn(driver, TCnum);
+			//
+			// Check msg after SAVE
+			TCnum = "Check msg after SAVE_0" + i;
+			String msgAfterSAVEExpected = "data saved successfully.";
+			tpP.checkMsgAfterSAVE(driver, msgAfterSAVEExpected, TCnum);
+			tpP.scrollUp(driver, -450, TCnum);
+			tpP.clickInventoryGalleryBtn(driver, TCnum);
+			ac.Wait(wt*2);
+			igP.clickTemplatesBtn(driver);
+			int waitTime = 5;
+			System.out.println("Waiting for " + waitTime + " secs!");
+			ac.Wait(waitTime);
+		}}
+		// *************************End of Angle Image**************************************************************************
+		igP.clickLogout(driver);
+	}
 	public static void MultipleBGTC(WebDriver driver, String brw, String versionNum, String envment, String checkEmail)
 			throws Exception {
 		Properties prop = new Properties();
@@ -4007,9 +4180,13 @@ public class AUTOpxController extends Comlibs {
 			loadURL(driver, baseURL);
 			////// tempDebug(driver);// ***************************************Debug*****************************************
 			//// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
-
+			
+			////// 3.1 STOCKpx Angle images sorting - Templates - run this first to move mouse 2 times during the Angle Images testing in Templates
+			bc.rwExcel("", "-----STOCKpx Sorting in Templates Testing started-----" + (i + 1), "");
+			STOCKpxSortingOnlyTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
+			
 			////// 3. Templates - run this first to move mouse 3 times during the Angle Images testing in Templates
-			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
+			bc.rwExcel("", "-----Templates FCA Sorting Testing started-----" + (i + 1), "");
 			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
 			//// 0.General Inventory Gallery
@@ -4028,9 +4205,9 @@ public class AUTOpxController extends Comlibs {
 			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
 			STOCKpxInventoryTC(driver, tBrowser, env);
 
-//			////// 3. Templates
-//			bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
-//			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
+			// ////// 3. Templates - moved to fist run
+			// bc.rwExcel("", "-----Templates Testing started-----" + (i + 1), "");
+			// VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
 			//// bc.Wait(18*60);//wait 18 minutes;
 
