@@ -1358,10 +1358,12 @@ public class AUTOpxController extends Comlibs {
 		// Verify Rerender All Vehicles for VINpx dealer
 		// TC139709
 		TCnum = "TC139709_06";
-		System.out.println(
-				"Rerender All Vehicles for VINpx dealer. Re-render VIN number: " + igP.getReRenderNum(driver, TCnum));
+//		System.out.println(
+//				"Rerender All Vehicles for VINpx dealer. Re-render VIN number: " + igP.getReRenderNum(driver, TCnum));
 		igP.clickSelectAllBtn(driver, TCnum);
 		allVinNums = igP.getReRenderNum(driver, TCnum);
+		System.out.println(
+				"Rerender All Vehicles for VINpx dealer. Re-render VIN number: " + allVinNums);
 		igP.clickRerenderBtn(driver, render, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
@@ -1719,7 +1721,7 @@ public class AUTOpxController extends Comlibs {
 		igP.clickSelectNoneBtn(driver, TCnum);
 		// Verify Rerender All Vehicles for STOCKpx dealer TC139712
 		TCnum = "TC139712_06";
-//		System.out.println("Rerender All Vehicles for STOCKpx dealer. Re-render VIN number: " + igP.getReRenderNum(driver, TCnum));//Not show the number
+		// System.out.println("Rerender All Vehicles for STOCKpx dealer. Re-render VIN number: " + igP.getReRenderNum(driver, TCnum));//Not show the number
 		System.out.println("Rerender All Vehicles for STOCKpx dealer. Re-render VIN number: " + allVinNums);
 		if (allVinNums > 20) {
 			igP.clickShowAllBtn(driver, TCnum);
@@ -2479,6 +2481,9 @@ public class AUTOpxController extends Comlibs {
 		// String ptitle;
 		String tempVIN = "";
 		String tempVehGUID = "";
+		String fromName = "";
+		String toName = "";
+		String AngleImageNameStatus="";
 		Comlibs ac = new Comlibs();
 		ac.rwExcel("", "*********VINpx Templates TCs**********", "");
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
@@ -2567,7 +2572,7 @@ public class AUTOpxController extends Comlibs {
 		boolean set_VisibleToDealer = igP.truefalseRandom();
 		boolean set_ForceStockpx = igP.truefalseRandom();
 
-		// *************************Angle Image**************************************************************************
+		// *************************Angle Image Sorting**************************************************************************
 
 		// --------------------1st----doesn't work below drag and drop----------------------------------------------------
 
@@ -2644,44 +2649,85 @@ public class AUTOpxController extends Comlibs {
 		// ((JavascriptExecutor) driver).executeScript(java_script,source,target);//no error but nothing happened.
 		// ac.Wait(2);
 		// System.out.println("Stop here!");
-		if (envBrowser.equalsIgnoreCase("Chrome")) {  //Only works for Chrome. Firefox is not working. 
-		for (int i = 1; i <= 3; i++) {
-			tpP.scrollUp(driver, 450, TCnum);
-			TCnum = "Drap and drop_01" + i;
-			// drap from
-			int from = 6;
-			// drop to
-			int to = 1;
-			System.out.println("Start to Drag and drop angle image from " + from + " to " + to);
-			ac.Wait(wt);
+		if (envBrowser.equalsIgnoreCase("Chrome")) { // Only works for Chrome. Firefox is not working.
+			for (int i = 1; i <= 3; i++) {
+				tpP.scrollUp(driver, 450, TCnum);
+				TCnum = "Drap and drop_01" + i;
+				// drap from
+				int from = 6;
+				// drop to
+				int to = 1;
+				System.out.println("Start to Drag and drop angle image from " + from + " to " + to);
+				ac.Wait(wt);
 
-			tpP.drapHoldAndDropAngleImage4_2(driver, onScreen, from, to, TCnum);// Temproary solution - OK, need to move mouse to any location, it then drops.
+				fromName = tpP.getAngleImageName(driver, onScreen, from, TCnum);
 
-			System.out.println("Drag and drop angle image from " + from + " to " + to + "  is done!");
+				tpP.drapHoldAndDropAngleImage4_2(driver, onScreen, from, to, TCnum);// Temproary solution - OK, need to move mouse to any location, it then drops.
 
-			// Check msg b4 SAVE
-			TCnum = "Check msg B4 SAVE_0" + i;
-			String msgB4SAVEExpected = "Changes have not been saved! Click SAVE to save changes.";
-			tpP.checkMsgB4SAVE(driver, msgB4SAVEExpected, TCnum);
+				System.out.println("Drag and drop angle image from " + from + " to " + to + "  is done!");
 
-			// Click SAVE
-			TCnum = "Click Angle Image SAVE_0" + i;
-			tpP.clickSaveAngleImageBtn(driver, TCnum);
-			//
-			// Check msg after SAVE
-			TCnum = "Check msg after SAVE_0" + i;
-			String msgAfterSAVEExpected = "data saved successfully.";
-			tpP.checkMsgAfterSAVE(driver, msgAfterSAVEExpected, TCnum);
-			tpP.scrollUp(driver, -450, TCnum);
-			tpP.clickInventoryGalleryBtn(driver, TCnum);
-			ac.Wait(wt*2);
-			igP.clickTemplatesBtn(driver);
-			int waitTime = 5;
-			System.out.println("Waiting for " + waitTime + " secs!");
-			ac.Wait(waitTime);
+				// Check msg b4 SAVE
+				TCnum = "Check msg B4 SAVE_0" + i;
+				String msgB4SAVEExpected = "Changes have not been saved! Click SAVE to save changes.";
+				tpP.checkMsgB4SAVE(driver, msgB4SAVEExpected, TCnum);
+
+				// Click SAVE
+				TCnum = "Click Angle Image SAVE_0" + i;
+				tpP.clickSaveAngleImageBtn(driver, TCnum);
+				//
+				// Check msg after SAVE
+				TCnum = "Check msg after SAVE_0" + i;
+				String msgAfterSAVEExpected = "data saved successfully.";
+				tpP.checkMsgAfterSAVE(driver, msgAfterSAVEExpected, TCnum);
+				
+				tpP.clickInventoryGalleryBtn(driver);
+				igP.clickTemplatesBtn(driver);
+				
+				TCnum = "Check FCA Angle Image Name after SAVE_0" + i;
+				toName = tpP.getAngleImageName(driver, onScreen, to, TCnum);
+
+				if (toName.equalsIgnoreCase(fromName)) {
+					ac.rwExcel(TCnum, true, "FCA drag and drop angle name", "matches");
+				} else {
+					ac.rwExcel(TCnum, false, "FCA drag and drop angle name does not match",
+							"Before drag and drop, the name is \"" + fromName + "\". After drop, the name is \""
+									+ toName + "\"");
+				}
+
+				tpP.scrollUp(driver, -450, TCnum);
+				tpP.clickInventoryGalleryBtn(driver, TCnum);
+				
+				String empString="";
+				int subwt=1;
+				toName=toName.replace("\n", "");
+				toName=toName.replace("Apply Overlay", "");
+				AngleImageNameStatus = "<p style=\"color:red;LINE-HEIGHT:16px;font-size:20px;\">___FCA VINpx Angle Image: " + " "
+						+ ": -----------------------------------------"
+						+ (MaxTimeForTemplatesPreview-subwt)
+						+ " seconds to check----------------------------</p><p style=\"color:blue;LINE-HEIGHT:16px;font-size:16px;\">_____Round #"+i+": The fist Angle Image Name = "
+						+ toName 
+//						" (showing \"CHEVROLET\"), 2.Year = " + emp + ",3.Make = " + emp + ","
+//						+ emp + " " + emp + " " + emp
+//						+ ".</p>   <p style=\"color:red;LINE-HEIGHT:6px;font-size:10px;\">___Second vehicle = " + emp
+//						+ ": </p><p style=\"color:blue;LINE-HEIGHT:6px;font-size:10px;\">_____2.Background Name = "
+//						+ emp + ", (showing \"White/Black\") 2.Year = " + emp + ", 3.Make = " + emp + ","
+//						+ emp + " " + emp + " " + emp + " "
+//						+ emp + " " + emp + " " + emp + " "
+						+ empString + "</p>";
+				// String templatesStatus="Checking: HEADER:"+set_Header + ", 1.DealershipLogo=" + set_Header_DealershipLogo+", 2.DealershipAddress=" + set_Header_DealershipAddress + ",3.DealershipPhone="+set_Header_DealershipPhone + ", 4.DealershipEmail=" + set_Header_DealershipEmail+", 5.DealershipWebsite=" + set_Header_DealershipWebsite + ". FOOTER: "+set_Footer + ", 1.BrandLogo=" +set_Footer_BrandLog + ", 2.VehicleInfo="+set_Footer_VehicleInfo + ", 3.VIN=" + set_Footer_Vin+", 4.set_Footer_StockNumber=" + set_Footer_StockNumber+", MarketingMessageTop=" + set_MarketingMessageTop + ",MarketingMessageBotton="+set_MarketingMessageBotton + ", AddAdditionalOverlay=" +
+				// set_AddAdditionalOverlay+", Text Images: VDI=" + set_TextImage_VDI + ", WCI=" + set_TextImage_WCI+", VBI=" + set_TextImage_VBI +"";
+				igP.textDisplayOnPage(driver, AngleImageNameStatus, displayTemplatesStatusOnPage);
+				ac.Wait(MaxTimeForTemplatesPreview-subwt);
+				
+				
+				ac.Wait(wt * 2);
+				igP.clickTemplatesBtn(driver);
+				int waitTime = 5;
+				System.out.println("Waiting for " + waitTime + " secs!");
+				ac.Wait(waitTime);
+			}
 		}
-		}
-		// *************************End of Angle Image**************************************************************************
+		// *************************End of Angle Image Sorting**************************************************************************
 
 		/**
 		 * second run set_Header=true; set_Header_DealershipLogo=false; set_Header_DealershipAddress=true; set_Header_DealershipPhone=false; set_Header_DealershipEmail=true; set_Header_DealershipWebsite=false;
@@ -3272,6 +3318,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139684_06";
 		igP.clickLogout(driver);
 	}
+
 	public static void STOCKpxSortingOnlyTemplatesTC(WebDriver driver, String brw, String versionNum, String envment,
 			String checkEmail) throws Exception {
 
@@ -3316,6 +3363,9 @@ public class AUTOpxController extends Comlibs {
 		// String ptitle;
 		String tempVIN = "";
 		String tempVehGUID = "";
+		String fromName = "";
+		String toName = "";
+		String AngleImageNameStatus="";
 		Comlibs ac = new Comlibs();
 		ac.rwExcel("", "*********STOCKpx Templates TCs**********", "");
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
@@ -3351,99 +3401,111 @@ public class AUTOpxController extends Comlibs {
 		boolean checkboxIsChecked = false;
 		String successfulMsg = "";
 		boolean MessageExist = false;
-		// *************************1. Header**************************************************************************
-		// // Header
-		// boolean set_Header = true;
-		// boolean set_Header_DealershipLogo = true;
-		// boolean set_Header_DealershipAddress = false;
-		// boolean set_Header_DealershipPhone = true;
-		// boolean set_Header_DealershipEmail = false;
-		// boolean set_Header_DealershipWebsite = true;
-		//
-		// boolean set_Footer = true;
-		// boolean set_Footer_BrandLog = false;
-		// boolean set_Footer_VehicleInfo = true;
-		// boolean set_Footer_Vin = false;
-		// boolean set_Footer_StockNumber = false;
-		//
-		// boolean set_MarketingMessageTop = false;
-		// boolean set_MarketingMessageBotton = true;
-		// boolean set_AddAdditionalOverlay = false;
-		//
-		// boolean set_TextImage_VDI = false;
-		// boolean set_TextImage_WCI = true;
-		// boolean set_TextImage_VBI = false;
+		
+		
+		
+		
+		String set_Header = "First";
+		String set_Header_DealershipLogo = "Test_001";
+		String set_Header_DealershipAddress = "Test_002";
+		String set_Header_DealershipPhone = "Test_003";
+		String set_Header_DealershipEmail = " ";
+		String set_Header_DealershipWebsite = " ";
+		String set_ForceStockpx = " ";
+		String set_Footer = "Test_007";
+		String selectBGName02 = "vinpx stockpx";
+		String set_Footer_VehicleInfo = "Test_009";
+		String set_Footer_Vin = "Test_010";
+		String set_Footer_StockNumber = " ";
+		String set_MarketingMessageTop = " ";
+		String set_MarketingMessageBotton = " ";
+		String set_AddAdditionalOverlay = " ";
+		String set_TextImage_VDI = " ";
+		String set_TextImage_WCI = " ";
+		String set_TextImage_VBI = " ";
+		
 
-		// Header with random true or false
-		boolean set_Header = true;
-		boolean set_Header_DealershipLogo = igP.truefalseRandom();
-		boolean set_Header_DealershipAddress = igP.truefalseRandom();
-		boolean set_Header_DealershipPhone = igP.truefalseRandom();
-		boolean set_Header_DealershipEmail = igP.truefalseRandom();
-		boolean set_Header_DealershipWebsite = igP.truefalseRandom();
 
-		boolean set_Footer = true;
-		boolean set_Footer_BrandLog = igP.truefalseRandom();
-		boolean set_Footer_VehicleInfo = igP.truefalseRandom();
-		boolean set_Footer_Vin = igP.truefalseRandom();
-		boolean set_Footer_StockNumber = igP.truefalseRandom();
-
-		boolean set_MarketingMessageTop = false;
-		boolean set_MarketingMessageBotton = false;
-		set_MarketingMessageTop = igP.truefalseRandom();
-		if (!set_MarketingMessageTop) {
-			set_MarketingMessageBotton = igP.truefalseRandom();
-		}
-
-		boolean set_AddAdditionalOverlay = false;
-
-		boolean set_TextImage_VDI = igP.truefalseRandom();
-		boolean set_TextImage_WCI = igP.truefalseRandom();
-		boolean set_TextImage_VBI = igP.truefalseRandom();
-
-		boolean set_VisibleToDealer = igP.truefalseRandom();
-		boolean set_ForceStockpx = igP.truefalseRandom();
 
 		// *************************Angle Image**************************************************************************
-		if (envBrowser.equalsIgnoreCase("Chrome")) {  //Only works for Chrome. Firefox is not working. 
-		for (int i = 1; i <= 2; i++) {
-			tpP.scrollUp(driver, 450, TCnum);
-			TCnum = "Drap and drop_01" + i;
-			// drap from
-			int from = 6;
-			// drop to
-			int to = 1;
-			System.out.println("Start to Drag and drop angle image from " + from + " to " + to);
-			ac.Wait(wt);
+		if (envBrowser.equalsIgnoreCase("Chrome")) { // Only works for Chrome. Firefox is not working.
+			for (int i = 1; i <= 6; i++) {
+				tpP.scrollUp(driver, 450, TCnum);
+				TCnum = "Drap and drop_01" + i;
+				// drap from
+				int from = 6;
+				// drop to
+				int to = 1;
+				System.out.println("Start to Drag and drop angle image from " + from + " to " + to);
+				ac.Wait(wt);
 
-			tpP.drapHoldAndDropAngleImage4_2(driver, onScreen, from, to, TCnum);// Temproary solution - OK, need to move mouse to any location, it then drops.
+				fromName = tpP.getAngleImageName(driver, onScreen, from, TCnum);
 
-			System.out.println("Drag and drop angle image from " + from + " to " + to + "  is done!");
+				tpP.drapHoldAndDropAngleImage4_2(driver, onScreen, from, to, TCnum);// Temproary solution - OK, need to move mouse to any location, it then drops.
 
-			// Check msg b4 SAVE
-			TCnum = "Check msg B4 SAVE_0" + i;
-			String msgB4SAVEExpected = "Changes have not been saved! Click SAVE to save changes.";
-			tpP.checkMsgB4SAVE(driver, msgB4SAVEExpected, TCnum);
+				System.out.println("Drag and drop angle image from " + from + " to " + to + "  is done!");
 
-			// Click SAVE
-			TCnum = "Click Angle Image SAVE_0" + i;
-			tpP.clickSaveAngleImageBtn(driver, TCnum);
-			//
-			// Check msg after SAVE
-			TCnum = "Check msg after SAVE_0" + i;
-			String msgAfterSAVEExpected = "data saved successfully.";
-			tpP.checkMsgAfterSAVE(driver, msgAfterSAVEExpected, TCnum);
-			tpP.scrollUp(driver, -450, TCnum);
-			tpP.clickInventoryGalleryBtn(driver, TCnum);
-			ac.Wait(wt*2);
-			igP.clickTemplatesBtn(driver);
-			int waitTime = 5;
-			System.out.println("Waiting for " + waitTime + " secs!");
-			ac.Wait(waitTime);
-		}}
+				// Check msg b4 SAVE
+				TCnum = "Check msg B4 SAVE_0" + i;
+				String msgB4SAVEExpected = "Changes have not been saved! Click SAVE to save changes.";
+				tpP.checkMsgB4SAVE(driver, msgB4SAVEExpected, TCnum);
+
+				// Click SAVE
+				TCnum = "Click Angle Image SAVE_0" + i;
+				tpP.clickSaveAngleImageBtn(driver, TCnum);
+				//
+				// Check msg after SAVE
+				TCnum = "Check msg after SAVE_0" + i;
+				String msgAfterSAVEExpected = "data saved successfully.";
+				tpP.checkMsgAfterSAVE(driver, msgAfterSAVEExpected, TCnum);
+
+				tpP.clickInventoryGalleryBtn(driver);
+				igP.clickTemplatesBtn(driver);
+
+				TCnum = "Check STOCK Angle Image Name after SAVE_0" + i;
+				toName = tpP.getAngleImageName(driver, onScreen, to, TCnum);
+
+				if (toName.equalsIgnoreCase(fromName)) {
+					ac.rwExcel(TCnum, true, "STOCK drag and drop angle name", "matches");
+				} else {
+					ac.rwExcel(TCnum, false, "STOCK drag and drop angle name does not match",
+							"Before drag and drop, the name is \"" + fromName + "\". After drop, the name is \""
+									+ toName + "\"");
+				}
+
+				tpP.scrollUp(driver, -450, TCnum);
+				tpP.clickInventoryGalleryBtn(driver, TCnum);
+				
+				String empString="";
+				int subwt=1;
+				toName=toName.replace("\n", "");
+				toName=toName.replace("Apply Overlay", "");
+				AngleImageNameStatus = "<p style=\"color:red;LINE-HEIGHT:16px;font-size:20px;\">___STOCK Angle Image: " + " "
+						+ ": -----------------------------------------"
+						+ (MaxTimeForTemplatesPreview-subwt)
+						+ " seconds to check----------------------------</p><p style=\"color:blue;LINE-HEIGHT:16px;font-size:16px;\">_____Round #"+i+": The fist Angle Image Name = "
+						+ toName 
+//						" (showing \"CHEVROLET\"), 2.Year = " + emp + ",3.Make = " + emp + ","
+//						+ emp + " " + emp + " " + emp
+//						+ ".</p>   <p style=\"color:red;LINE-HEIGHT:6px;font-size:10px;\">___Second vehicle = " + emp
+//						+ ": </p><p style=\"color:blue;LINE-HEIGHT:6px;font-size:10px;\">_____2.Background Name = "
+//						+ emp + ", (showing \"White/Black\") 2.Year = " + emp + ", 3.Make = " + emp + ","
+//						+ emp + " " + emp + " " + emp + " "
+//						+ emp + " " + emp + " " + emp + " "
+						+ empString + "</p>";
+				// String templatesStatus="Checking: HEADER:"+set_Header + ", 1.DealershipLogo=" + set_Header_DealershipLogo+", 2.DealershipAddress=" + set_Header_DealershipAddress + ",3.DealershipPhone="+set_Header_DealershipPhone + ", 4.DealershipEmail=" + set_Header_DealershipEmail+", 5.DealershipWebsite=" + set_Header_DealershipWebsite + ". FOOTER: "+set_Footer + ", 1.BrandLogo=" +set_Footer_BrandLog + ", 2.VehicleInfo="+set_Footer_VehicleInfo + ", 3.VIN=" + set_Footer_Vin+", 4.set_Footer_StockNumber=" + set_Footer_StockNumber+", MarketingMessageTop=" + set_MarketingMessageTop + ",MarketingMessageBotton="+set_MarketingMessageBotton + ", AddAdditionalOverlay=" +
+				// set_AddAdditionalOverlay+", Text Images: VDI=" + set_TextImage_VDI + ", WCI=" + set_TextImage_WCI+", VBI=" + set_TextImage_VBI +"";
+				igP.textDisplayOnPage(driver, AngleImageNameStatus, displayTemplatesStatusOnPage);
+				ac.Wait(MaxTimeForTemplatesPreview-subwt);
+				igP.clickTemplatesBtn(driver);
+				System.out.println("Waiting for " + (MaxTimeForTemplatesPreview-15) + " secs!");
+				ac.Wait(MaxTimeForTemplatesPreview-subwt);
+			}
+		}
 		// *************************End of Angle Image**************************************************************************
 		igP.clickLogout(driver);
 	}
+
 	public static void MultipleBGTC(WebDriver driver, String brw, String versionNum, String envment, String checkEmail)
 			throws Exception {
 		Properties prop = new Properties();
@@ -4180,12 +4242,12 @@ public class AUTOpxController extends Comlibs {
 			loadURL(driver, baseURL);
 			////// tempDebug(driver);// ***************************************Debug*****************************************
 			//// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
-			
+
 			////// 5.1 STOCKpx Angle images sorting - Templates - run this first to move mouse 2 times during the Angle Images testing in Templates
 			bc.rwExcel("", "-----STOCKpx Sorting in Templates Testing started-----" + (i + 1), "");
 			STOCKpxSortingOnlyTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
-			
-			////// 5.2 VINpx Angle images sorting and Templates - run this first to move mouse 3 times during the Angle Images testing in Templates
+
+			////// 5.2 FCA VINpx Angle images sorting and Templates - run this first to move mouse 3 times during the Angle Images testing in Templates
 			bc.rwExcel("", "-----Templates FCA Sorting Testing started-----" + (i + 1), "");
 			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 

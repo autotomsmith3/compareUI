@@ -102,8 +102,8 @@ public class Templates extends Comlibs {
 
 	// *[@id="saveOverlayContentBtn"]/span
 
-//	By replaceTemplateWithOwnCheckBoxLocator = By.xpath("//*[@id=\"templateBuilder\"]/div[3]/label[5]/span");// Add Additional Overlay://b4 20191101
-	By replaceTemplateWithOwnCheckBoxLocator = By.xpath("//*[@id=\"templateBuilder\"]/div[2]/div[2]/label[5]/span");//											 //*[@id="templateBuilder"]/div[2]/div[2]/label[5]/span
+	// By replaceTemplateWithOwnCheckBoxLocator = By.xpath("//*[@id=\"templateBuilder\"]/div[3]/label[5]/span");// Add Additional Overlay://b4 20191101
+	By replaceTemplateWithOwnCheckBoxLocator = By.xpath("//*[@id=\"templateBuilder\"]/div[2]/div[2]/label[5]/span");// //*[@id="templateBuilder"]/div[2]/div[2]/label[5]/span
 	// *[@id="templateBuilder"]/div[2]/div[2]/label[5]/span
 	// *[@id="templateBuilder"]/div[3]/label[5]/span
 
@@ -122,7 +122,7 @@ public class Templates extends Comlibs {
 
 	By MessageDisplayedOnHead = By.xpath("//*[@id=\"successMessage\"]");
 	By saveAngleImageBtnLocator = By.xpath("//*[@id=\"tab6\"]/div[1]/div/button/span");
-	 By msgOfSAVELocator=By.xpath("//*[@id=\"tab6\"]/div[1]/div/span");
+	By msgOfSAVELocator = By.xpath("//*[@id=\"tab6\"]/div[1]/div/span");
 
 	public DealerProfile clickDealerShipInfoBtn(WebDriver driver) throws IOException {
 		elementExist(driver, dealerShipInfoBtnLocator, true, "clickDealerShipInfoBtn");
@@ -829,17 +829,18 @@ public class Templates extends Comlibs {
 				// These coordinates are screen coordinates
 				if (onScreen.equalsIgnoreCase("left")) {
 					xCoord = -900;
-					yCoord = 585;//552
+					yCoord = 585;// 552
 				} else {
 					xCoord = 400;
-					yCoord = 585;//552
+					yCoord = 585;// 552
 				}
 
 				// Move the cursor
 				Robot robot = new Robot();
 				robot.mouseMove(xCoord, yCoord);
 			} catch (AWTException e) {
-				rwExcel(tc, false, "Mouse move from xCoord" + xCoord + " and yCoord " + yCoord + "", "failed to move mouse.");
+				rwExcel(tc, false, "Mouse move from xCoord" + xCoord + " and yCoord " + yCoord + "",
+						"failed to move mouse.");
 			}
 
 			Action dragAndMove = builder.clickAndHold(From).moveToElement(To).release(To).build();
@@ -854,12 +855,12 @@ public class Templates extends Comlibs {
 			// dragAndMove.perform();// need to move mouse to any location then it drops
 			// Wait(2);
 
-//			Actions act = new Actions(driver);
-//			// Dragged and dropped.
-//			To.click();
-//			Wait(2);
-//			act.dragAndDrop(From, To).build().perform();// need to move mouse to any location then it drops
-//			Wait(2);
+			// Actions act = new Actions(driver);
+			// // Dragged and dropped.
+			// To.click();
+			// Wait(2);
+			// act.dragAndDrop(From, To).build().perform();// need to move mouse to any location then it drops
+			// Wait(2);
 
 			rwExcel(tc, true, "Drap from " + from + " to " + to + "", "working as expected.");
 		} catch (Exception e) {
@@ -868,6 +869,23 @@ public class Templates extends Comlibs {
 			Wait(2);
 		}
 
+	}
+
+	public String getAngleImageName(WebDriver driver, String onScreen, int from, String tc) throws IOException {
+		// from: https://www.guru99.com/drag-drop-selenium.html
+		By fromLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div[" + from + "]/div/div[2]");
+
+		String getName = "";
+		try {
+			getName=driver.findElement(fromLocation).getText();// ok
+			System.out.println("From Angle image number = "+from+".  Angle image name is \""+getName+"\"");
+		} catch (Exception e) {
+			System.out.println("catch an error!");
+			System.out.println("Get Angle Image Name from \"" + from + "\" failed to get Angle Image Name.");
+			rwExcel(tc, false, "Get Angle Image Name from \"" + from + "\"", "failed to get Angle Image Name.");
+			Wait(2);
+		}
+		return getName;
 	}
 
 	public void drapHoldAndMoveDropAngleImage5(WebDriver driver, int fromfrom, int toto, String tc) throws IOException {

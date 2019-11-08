@@ -1634,7 +1634,8 @@ public class ImageGallery extends Comlibs {
 				num = Integer.parseInt(temp);
 			}
 		} catch (Throwable e) {
-			rwExcel(tc, false, "getTileImageNum vehGUID =" + vehGUID, "try failed! may increase the search number in previous step?");
+			rwExcel(tc, false, "getTileImageNum vehGUID =" + vehGUID,
+					"try failed! may increase the search number in previous step?");
 		}
 		return num;
 	}
@@ -1654,34 +1655,44 @@ public class ImageGallery extends Comlibs {
 				+ ";password=" + password + ";database=" + dbName);
 		System.out.println("Delete VIN:" + sVin + " from DB");
 		Statement sta = conn.createStatement();
-		String Sql_1 = "delete from VT03_RenderedImage where VehGUID in (select vehguid from VT01_DealerVehicles where DlrGUID =   \'"
+		String Sql_1 = "delete from dbo.DT09_DealerUploadedVehicleImages where VehGUID in (select vehguid from VT01_DealerVehicles where DlrGUID =   \'"
 				+ dlrGuid + "\' AND (dbo.VT01_DealerVehicles.VIN in (\'" + sVin + "\')))";
-		String Sql_2 = "delete from VT02_VehicleMetadata where VehGUID in (select vehguid from VT01_DealerVehicles where DlrGUID = \'"
+		String Sql_2 = "delete from VT03_RenderedImage where VehGUID in (select vehguid from VT01_DealerVehicles where DlrGUID =   \'"
 				+ dlrGuid + "\' AND (dbo.VT01_DealerVehicles.VIN in (\'" + sVin + "\')))";
-		String Sql_3 = "delete from VT01_DealerVehicles where VehGUID in (select vehguid from VT01_DealerVehicles where DlrGUID =  \'"
+		String Sql_3 = "delete from VT02_VehicleMetadata where VehGUID in (select vehguid from VT01_DealerVehicles where DlrGUID = \'"
+				+ dlrGuid + "\' AND (dbo.VT01_DealerVehicles.VIN in (\'" + sVin + "\')))";
+		String Sql_4 = "delete from VT01_DealerVehicles where VehGUID in (select vehguid from VT01_DealerVehicles where DlrGUID =  \'"
 				+ dlrGuid + "\' AND (dbo.VT01_DealerVehicles.VIN in (\'" + sVin + "\')))";
 
 		// *********rs1****************
 		// ResultSet rs1 = sta.executeQuery(Sql_1); //Cannot use this since there is no return - ResultSet return.
-		// Delete a VIN from VT03
+
+		// Delete a VIN from DT09
 		try {
 			sta.execute(Sql_1);
-			rwExcel(tc, true, "Delete a VIN " + sVin + " from VT03 passed", Sql_1);
+			rwExcel(tc, true, "Delete a VIN " + sVin + " from DT09 passed", Sql_1);
 		} catch (Exception e) {
-			rwExcel(tc, false, "Delete a VIN " + sVin + " from VT03 failed", Sql_1);
+			rwExcel(tc, false, "Delete a VIN " + sVin + " from DT09 failed", Sql_1);
+		}
+		// Delete a VIN from VT03
+		try {
+			sta.execute(Sql_2);
+			rwExcel(tc, true, "Delete a VIN " + sVin + " from VT03 passed", Sql_2);
+		} catch (Exception e) {
+			rwExcel(tc, false, "Delete a VIN " + sVin + " from VT03 failed", Sql_2);
 		}
 		// Delete a VIN from VT02
 		try {
-			sta.execute(Sql_2);
-			rwExcel(tc, true, "Delete a VIN " + sVin + " from VT02 passed", Sql_2);
+			sta.execute(Sql_3);
+			rwExcel(tc, true, "Delete a VIN " + sVin + " from VT02 passed", Sql_3);
 		} catch (Exception e) {
-			rwExcel(tc, false, "Delete a VIN " + sVin + " from VT02 failed", Sql_2);
+			rwExcel(tc, false, "Delete a VIN " + sVin + " from VT02 failed", Sql_3);
 		}
 		try {
-			sta.execute(Sql_3);
-			rwExcel(tc, true, "Delete a VIN " + sVin + " from VT01 passed", Sql_3);
+			sta.execute(Sql_4);
+			rwExcel(tc, true, "Delete a VIN " + sVin + " from VT01 passed", Sql_4);
 		} catch (Exception e) {
-			rwExcel(tc, false, "Delete a VIN " + sVin + " from VT01 failed", Sql_3);
+			rwExcel(tc, false, "Delete a VIN " + sVin + " from VT01 failed", Sql_4);
 		}
 
 		sta.close();
@@ -1701,11 +1712,12 @@ public class ImageGallery extends Comlibs {
 		}
 		return truefalseResult;// return true or false;
 	}
+
 	public void textDisplayOnPage(WebDriver driver, String tempStatus, String displayingOnPage) {
 		if (displayingOnPage.equalsIgnoreCase("Yes")) {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			// String script = "return window.getComputedStyle(document.querySelector('" + pseudoElementSelectorID + "'),':after').getPropertyValue('" + cssStyle + "')"
-			String script = "document.querySelector('.page-header-navbar-brand').innerHTML = '" + tempStatus + "';";//use FF to get '.page-header-navbar-brand'
+			String script = "document.querySelector('.page-header-navbar-brand').innerHTML = '" + tempStatus + "';";// use FF to get '.page-header-navbar-brand'
 			js.executeScript(script);
 			System.out.println("Displaying all Templates Status on the page...");
 		}
