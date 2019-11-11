@@ -4247,34 +4247,34 @@ public class AUTOpxController extends Comlibs {
 			bc.rwExcel("", "-----STOCKpx Sorting in Templates Testing started-----" + (i + 1), "");
 			STOCKpxSortingOnlyTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
-			////// 5.2 FCA VINpx Angle images sorting and Templates - run this first to move mouse 3 times during the Angle Images testing in Templates
-			bc.rwExcel("", "-----Templates FCA Sorting Testing started-----" + (i + 1), "");
-			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
-
-			//// 0.General Inventory Gallery
-			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-			inventoryGalleryTC(driver, tBrowser, env, versionNum);
-			vehicleGallery(driver, tBrowser, env);
-			// verifyRerender(driver, tBrowser);
-
-			////// 1.VINpx:
-			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-
-			////// 2. STOCKpx
-			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			STOCKpxInventoryTC(driver, tBrowser, env);
-
-			//// bc.Wait(18*60);//wait 18 minutes;
-
-			// ////// 3. LOTpx
-			bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
-			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
-			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
-
-			// ////// 4. Multiple Backgrounds
-			bc.rwExcel("", "-----Multiple Backgrounds Testing started-----" + (i + 1), "");
-			MultipleBGTC(driver, tBrowser, versionNum, env, chkEmail); // All or LOTpx. This should be in the end of all testing
+//			////// 5.2 FCA VINpx Angle images sorting and Templates - run this first to move mouse 3 times during the Angle Images testing in Templates
+//			bc.rwExcel("", "-----Templates FCA Sorting Testing started-----" + (i + 1), "");
+//			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
+//
+//			//// 0.General Inventory Gallery
+//			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+//			inventoryGalleryTC(driver, tBrowser, env, versionNum);
+//			vehicleGallery(driver, tBrowser, env);
+//			// verifyRerender(driver, tBrowser);
+//
+//			////// 1.VINpx:
+//			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+//			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+//
+//			////// 2. STOCKpx
+//			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+//			STOCKpxInventoryTC(driver, tBrowser, env);
+//
+//			//// bc.Wait(18*60);//wait 18 minutes;
+//
+//			// ////// 3. LOTpx
+//			bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
+//			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
+//			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
+//
+//			// ////// 4. Multiple Backgrounds
+//			bc.rwExcel("", "-----Multiple Backgrounds Testing started-----" + (i + 1), "");
+//			MultipleBGTC(driver, tBrowser, versionNum, env, chkEmail); // All or LOTpx. This should be in the end of all testing
 
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();

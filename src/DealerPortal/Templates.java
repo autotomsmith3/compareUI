@@ -11,6 +11,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+
+import DealerPortal.threadExampleRunnalble.MoveMouseThread;
+
 import org.json.*;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -828,8 +831,8 @@ public class Templates extends Comlibs {
 			try {
 				// These coordinates are screen coordinates
 				if (onScreen.equalsIgnoreCase("left")) {
-					xCoord = -900;
-					yCoord = 585;// 552
+					xCoord = -900;//-900
+					yCoord = 585;// chrome=585;ff= 685
 				} else {
 					xCoord = 400;
 					yCoord = 585;// 552
@@ -842,6 +845,12 @@ public class Templates extends Comlibs {
 				rwExcel(tc, false, "Mouse move from xCoord" + xCoord + " and yCoord " + yCoord + "",
 						"failed to move mouse.");
 			}
+
+			Thread myThread = new Thread(new MoveMouseThread());
+			myThread.start();
+
+			// Wait(5);
+			System.out.println("Outside Thread, starting to drag and drop!!!");
 
 			Action dragAndMove = builder.clickAndHold(From).moveToElement(To).release(To).build();
 			Wait(2);
@@ -877,8 +886,8 @@ public class Templates extends Comlibs {
 
 		String getName = "";
 		try {
-			getName=driver.findElement(fromLocation).getText();// ok
-			System.out.println("From Angle image number = "+from+".  Angle image name is \""+getName+"\"");
+			getName = driver.findElement(fromLocation).getText();// ok
+			System.out.println("From Angle image number = " + from + ".  Angle image name is \"" + getName + "\"");
 		} catch (Exception e) {
 			System.out.println("catch an error!");
 			System.out.println("Get Angle Image Name from \"" + from + "\" failed to get Angle Image Name.");
@@ -954,6 +963,27 @@ public class Templates extends Comlibs {
 					"Website shows: \"" + msg + "\". Expected:\"" + expectedMsg + "\"");
 		}
 		;
+	}
+
+	public static class MoveMouseThread implements Runnable {
+		// http://tutorials.jenkov.com/java-concurrency/creating-and-starting-threads.html
+		@Override
+		public void run() {
+			System.out.println("Inside Thread, Starting to Move Mouse !");
+			int wt = 10;
+			Comlibs ac = new Comlibs();
+			ac.Wait(wt);
+			int xCoord = -950;// this doesn't matter for left or center
+			int yCoord = 585;//
+			// Move the cursor
+			try {
+				Robot robot = new Robot();
+				robot.mouseMove(xCoord, yCoord);
+			} catch (Exception e) {
+
+			}
+			System.out.println("Inside Thread, After waitted " + wt + " secs, . Move Mouse to left !");
+		}
 	}
 
 	public void jSONParse() {
