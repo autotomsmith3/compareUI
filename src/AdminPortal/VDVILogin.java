@@ -110,7 +110,7 @@ public class VDVILogin extends Comlibs {
 		versionText = driver.findElement(foot_02_VersionLocator).getText();
 		footerL1Text = disclaimer.equalsIgnoreCase(expectDisclaimer);
 		footerL2Text = versionText.equalsIgnoreCase(expectVersionNum);
-		rwExcel(tc, "Footer Version", "Footer and Version are displayed - "+footerL2Text);
+		rwExcel(tc, "Footer Version = "+versionNum, "Footer and Version are displayed - "+footerL2Text);
 		if (footerL1 && footerL2 && footerL1Text && footerL2Text) {
 			rwExcel(tc, true, "Verify Footer and Version", "Footer and Version are displayed - "+footerL2Text);
 		} else {

@@ -180,7 +180,8 @@ public class ExportTemplateList extends Comlibs {
 		System.out.println("Click O key!");
 	}
 	public ExportTemplateList clickDownload(WebDriver driver, String tc) throws IOException {
-		By downLoadicon= By.xpath("//*[@id=\"imageTypeTable\"]/tbody/tr[1]/td[7]/form/button/span"); //1,2,3...
+//		By downLoadicon= By.xpath("//*[@id=\"imageTypeTable\"]/tbody/tr[1]/td[7]/form/button/span"); //1,2,3... not working since 20191108
+		By downLoadicon= By.xpath("//*[@id=\"imageTypeTable\"]/tbody/tr/td[7]/form/button/span");		//new 20191108. only one row:    //*[@id="imageTypeTable"]/tbody/tr/td[7]/form/button/span
 		boolean elementExist = elementExist(driver, downLoadicon, true, tc);
 		if (elementExist) {
 			driver.findElement(downLoadicon).click();

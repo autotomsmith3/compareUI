@@ -263,13 +263,13 @@ public class AccountProfile extends Comlibs {
 
 	public String selectOneDealerFrAllDealers(WebDriver driver, int num, String tc) {
 		By oneDealerLocator = By.xpath("//*[@id='allDealers']/option[" + num + "]"); // 1,2,3...
-		By allDealerLocator = By.xpath("//*[@id='allDealers']/option"); // 1,2,3...
-		int allDealersNum = driver.findElements(allDealerLocator).size();
-		for (int i = 1; i <= allDealersNum; i++) {
-			oneDealerLocator = By.xpath("//*[@id='allDealers']/option[" + i + "]");
-			driver.findElement(oneDealerLocator).click();
-
-		}
+		// By allDealerLocator = By.xpath("//*[@id='allDealers']/option"); // 1,2,3...
+		// int allDealersNum = driver.findElements(allDealerLocator).size();
+		// for (int i = 1; i <= allDealersNum; i++) {
+		// oneDealerLocator = By.xpath("//*[@id='allDealers']/option[" + i + "]");
+		// driver.findElement(oneDealerLocator).click();
+		//
+		// }
 		oneDealerLocator = By.xpath("//*[@id='allDealers']/option[" + num + "]"); // 1,2,3...
 		boolean selected = driver.findElement(oneDealerLocator).isSelected();
 		driver.findElement(oneDealerLocator).click();

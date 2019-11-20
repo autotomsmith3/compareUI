@@ -29,9 +29,9 @@ public class DealerList extends Comlibs {
 	public DealerList(WebDriver driver) throws IOException {
 		this.driver = driver;
 		// String wh1=driver.getWindowHandle();
-		String sPageTitle = "Dealer List";//"User List";"Dealer List";//
+		String sPageTitle = "Dealer List";// "User List";"Dealer List";//
 		boolean existTitle = TitleDisplay(driver, sPageTitle);
-		if (existTitle) { 
+		if (existTitle) {
 			rwExcel("", true, "Page Title is displayed", sPageTitle);
 		} else {
 			rwExcel("", false, "Page title is NOT showing properly. Exceed time limit!",
@@ -71,11 +71,11 @@ public class DealerList extends Comlibs {
 	public DealerProfile clickEditBtn(WebDriver driver, String num) throws IOException {
 		// By editBtnLocator = By.xpath("//*[@id=\"listViewBtn\"]/span"); // //*[@id="listViewBtn"]/span or xpath=(//button[@id='listViewBtn'])[3]
 		// By editBtnLocator = By.xpath("(//button[@id='listViewBtn'])[3]"); //ok //*[@id="listViewBtn"]/span or xpath=(//button[@id='listViewBtn'])[3]
-		By editBtnLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");//1,2,3...
+		By editBtnLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");// 1,2,3...
 		try {
-		driver.findElement(editBtnLocator).click();
-		}catch(Exception e) {
-			checkEditBtnLocationAndScroll(driver,num);
+			driver.findElement(editBtnLocator).click();
+		} catch (Exception e) {
+			checkEditBtnLocationAndScroll(driver, num);
 			driver.findElement(editBtnLocator).click();
 		}
 		for (String winHandle : driver.getWindowHandles()) {
@@ -88,7 +88,7 @@ public class DealerList extends Comlibs {
 	public DealerList checkEditBtnLocationAndScroll(WebDriver driver, String num) throws IOException {
 		num = Integer.toString(Integer.parseInt(num) + 3);// Integer.parseInt(MaxVins)
 		By editBtnLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");
-//		boolean numShowInPage = elementExist(driver, editBtnLocator, true, "tc");
+		// boolean numShowInPage = elementExist(driver, editBtnLocator, true, "tc");
 		boolean numShowInPage = driver.findElement(editBtnLocator).isDisplayed();
 		if (numShowInPage) {
 			scrollUp(driver, 100, "ddd");
