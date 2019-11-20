@@ -124,8 +124,45 @@ public class Templates extends Comlibs {
 	// *[@id="main-container"]/div/div[4]/div[4]/label/span after 20190827
 
 	By MessageDisplayedOnHead = By.xpath("//*[@id=\"successMessage\"]");
+	By saveHeaderOverlayBtnLocator = By.xpath("//*[@id=\"tab1\"]/div[1]/div/button/span");
+	By saveFooterOverlayBtnLocator = By.xpath("//*[@id=\"tab2\"]/div[1]/div/button/span");
+	By saveMarketingMessagesOverlayBtnLocator = By.xpath("//*[@id=\"tab3\"]/div[1]/div/button/span");
+	By saveAdditionalOverlayBtnLocator = By.xpath("//*[@id=\"tab4\"]/div[1]/div/button/span");
+	By saveBackgroundImageBtnLocator = By.xpath("//*[@id=\"tab5\"]/div[1]/div/button/span");
 	By saveAngleImageBtnLocator = By.xpath("//*[@id=\"tab6\"]/div[1]/div/button/span");
-	By msgOfSAVELocator = By.xpath("//*[@id=\"tab6\"]/div[1]/div/span");
+	By msgOfSAVELocator6 = By.xpath("//*[@id=\"tab6\"]/div[1]/div/span");
+
+	//*[@id="angleImageRoot"]/div/aside/div/ul/li[6]/a
+	By angleImages = By.xpath("//*[@id=\"angleImageRoot\"]/div/aside/div/ul/li[6]/a");
+	By headerOverlay=By.xpath("//*[@id=\"angleImageRoot\"]/div/aside/div/ul/li[1]/a");
+	By enableHeaderOverlayCkbox=By.xpath("//*[@id=\"tab1\"]/div[2]/div/div[1]/label/span");
+	By dealershipLogoCkbox=By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[2]/label/span");
+	By dealerContactInfoCkbox=By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[4]/label/span");
+	By dealerContactInfo_Address=By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[4]/ul/li[2]/label/span");
+	By dealerContactInfo_PhoneNumber=By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[4]/ul/li[2]/label/span");
+	By dealerContactInfo_Email=By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[4]/ul/li[3]/label/span");
+	By dealerContactInfo_WebsiteURL=By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[4]/ul/li[4]/label/span");
+	
+	
+	By headerBackgroundTransparencyBar=By.xpath("//*[@id=\"headerAlpha\"]");// 
+	By footerBackgroundTransparencyBar=By.xpath("//*[@id=\"footerAlpha\"]");// //*[@id="footerAlpha"]
+	By backgroundTransparencyValue=By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[1]/div/label/span");
+		//     //*[@id="tab2"]/div[2]/div/ul/li[1]/div/label	
+	
+	
+	By footerOverlay=By.xpath("//*[@id=\"angleImageRoot\"]/div/aside/div/ul/li[2]/a");//  
+	By enableFooterOverlayckbox=By.xpath("//*[@id=\"tab2\"]/div[2]/div/div[1]/label/span");
+	By oEMLogoCkbox=By.xpath("//*[@id=\"tab2\"]/div[2]/div/ul/li[3]/label/span");
+	By footerConentCkbox=By.xpath("//*[@id=\"tab2\"]/div[2]/div/ul/li[4]/label/span");
+	By footerConent_VehicleInfo=By.xpath("//*[@id=\"tab2\"]/div[2]/div/ul/li[4]/ul/li[1]/label/span");
+	By footerConent_Vin=By.xpath("//*[@id=\"tab2\"]/div[2]/div/ul/li[4]/ul/li[2]/label/span");
+	By footerConent_StockNumber=By.xpath("//*[@id=\"tab2\"]/div[2]/div/ul/li[4]/ul/li[3]/label/span");
+	By xxx=By.xpath("");
+//	By xxx=By.xpath("");
+//	By xxx=By.xpath("");
+//	By xxx=By.xpath("");
+//	By xxx=By.xpath("");
+//	By xxx=By.xpath("");
 
 	public DealerProfile clickDealerShipInfoBtn(WebDriver driver) throws IOException {
 		elementExist(driver, dealerShipInfoBtnLocator, true, "clickDealerShipInfoBtn");
@@ -502,7 +539,110 @@ public class Templates extends Comlibs {
 		}
 		return this;
 	}
+	
+	public Templates clickHeaderOverlayBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, headerOverlay, true, tc);
+		driver.findElement(headerOverlay).click();
+		return this;
+	}
+	
+	public Templates clickFooterOverlayBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, footerOverlay, true, tc);
+		driver.findElement(footerOverlay).click();
+		return this;
+	}
+	
+	public Templates clickDealerShipLogoCkbox(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, dealershipLogoCkbox, true, tc);
+		driver.findElement(dealershipLogoCkbox).click();
+		return this;
+	}
+	
+	public Templates clickDealerContactInfoCkbox(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, dealerContactInfoCkbox, true, tc);
+		driver.findElement(dealerContactInfoCkbox).click();
+		return this;
+	}
+	
+	public Templates clickAddressOfDealerContactInfoCkbox(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, dealerContactInfo_Address, true, tc);
+		driver.findElement(dealerContactInfo_Address).click();
+		return this;
+	}
+	
+	public Templates clickPhoneNumbersOfDealerContactInfoCkbox(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, dealerContactInfo_PhoneNumber, true, tc);
+		driver.findElement(dealerContactInfo_PhoneNumber).click();
+		return this;
+	}
+	
+	public Templates clickEmailOfDealerContactInfoCkbox(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, dealerContactInfo_Email, true, tc);
+		driver.findElement(dealerContactInfo_Email).click();
+		return this;
+	}
+	
+	public Templates clickWebsiteURLOfDealerContactInfoCkbox(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, dealerContactInfo_WebsiteURL, true, tc);
+		driver.findElement(dealerContactInfo_WebsiteURL).click();
+		return this;
+	}
+	
+	public Templates slideHeaderBackgroundTransparencyBar(WebDriver driver, int x, String tc) throws IOException {
+		elementExist(driver, headerBackgroundTransparencyBar, true, tc);
+		WebElement slider = driver.findElement(headerBackgroundTransparencyBar);
+	    int width=slider.getSize().getWidth();
+	    Actions move = new Actions(driver);
+	    move.moveToElement(slider, ((width*x)/100), 0).click();
+	    move.build().perform();
+	    System.out.println("Slider moved");
+	
+//		Actions action = new Actions(driver); //not working
+//		
+//		action.click(backgroundTransparencyBar).build().perform();
+//		Wait(1);
+//		for (int i = 0; i < 10; i++) {
+//		    action.sendKeys(Keys.ARROW_LEFT).build().perform();
+//			Wait(1);
+//		}
 
+		return this;
+	}
+	public Templates slideFooterBackgroundTransparencyBar(WebDriver driver, int x, String tc) throws IOException {
+		elementExist(driver, footerBackgroundTransparencyBar, true, tc);
+		WebElement slider = driver.findElement(footerBackgroundTransparencyBar);
+	    int width=slider.getSize().getWidth();
+	    Actions move = new Actions(driver);
+	    move.moveToElement(slider, ((width*x)/100), 0).click();
+	    move.build().perform();
+	    System.out.println("Slider moved");
+		return this;
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public Templates clickAngleImagesBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, angleImages, true, tc);
+		driver.findElement(angleImages).click();
+		return this;
+	}
+	
 	public void acceptAlert(String tc, String alertType) throws IOException {
 		boolean alertPass = false;
 		Wait(1);
@@ -882,8 +1022,9 @@ public class Templates extends Comlibs {
 
 	public String getAngleImageName(WebDriver driver, String onScreen, int from, String tc) throws IOException {
 		// from: https://www.guru99.com/drag-drop-selenium.html
-		By fromLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div[" + from + "]/div/div[2]");
-
+		//By fromLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div[" + from + "]/div/div[2]"); // be 20191113
+		//						      //*[@id="tab6"]/div[2]/div[2]/div/div[1]/div/div[2] // sub text
+		By fromLocation =   By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+from+"]/div/div[2]");//    //*[@id="tab6"]/div[2]/div[2]/div/div[1]    //20191113
 		String getName = "";
 		try {
 			getName = driver.findElement(fromLocation).getText();// ok
@@ -896,7 +1037,25 @@ public class Templates extends Comlibs {
 		}
 		return getName;
 	}
+	public int getBackgroundTransparencyValue(WebDriver driver, int tab, String tc) throws IOException {
+		By backgroundTransparencyValue=By.xpath("//*[@id='tab"+tab+"']/div[2]/div/ul/li[1]/div/label/span");
 
+		String getName = "";
+		int valueNum=0;
+		try {
+			getName = driver.findElement(backgroundTransparencyValue).getText();// 
+			getName=getName.replace(" %", "");
+			valueNum=Integer.parseInt(getName);
+//			System.out.println("From Header Overlay Background Transparency value is \"" + getName + "\"");
+			
+		} catch (Exception e) {
+			System.out.println("catch an error!");
+			System.out.println("From Header Overlay Background Transparency value is \""+getName+"\"");
+			rwExcel(tc, false, "From Header Overlay Background Transparency value is ", "failed to get the value.");
+			Wait(2);
+		}
+		return valueNum;
+	}
 	public void drapHoldAndMoveDropAngleImage5(WebDriver driver, int fromfrom, int toto, String tc) throws IOException {
 		// from: https://www.guru99.com/drag-drop-selenium.html
 		// By fromLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+from+"]/div/div[1]");
@@ -934,14 +1093,41 @@ public class Templates extends Comlibs {
 		}
 
 	}
-
+	
+	public Templates clickSaveHeaderOverlayBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, saveHeaderOverlayBtnLocator, true, tc);
+		driver.findElement(saveHeaderOverlayBtnLocator).click();
+		return this;
+	}
+	public Templates clickSaveFooterOverlayBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, saveFooterOverlayBtnLocator, true, tc);
+		driver.findElement(saveFooterOverlayBtnLocator).click();
+		return this;
+	}
+	public Templates clickSaveMarketingMessagesOverlayBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, saveMarketingMessagesOverlayBtnLocator, true, tc);
+		driver.findElement(saveMarketingMessagesOverlayBtnLocator).click();
+		return this;
+	}
+	public Templates clickSaveAdditionalOverlayBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, saveAdditionalOverlayBtnLocator, true, tc);
+		driver.findElement(saveAdditionalOverlayBtnLocator).click();
+		return this;
+	}
+	public Templates clickSaveBackgroundImageBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, saveBackgroundImageBtnLocator, true, tc);
+		driver.findElement(saveBackgroundImageBtnLocator).click();
+		return this;
+	}
+	
 	public Templates clickSaveAngleImageBtn(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, saveAngleImageBtnLocator, true, tc);
 		driver.findElement(saveAngleImageBtnLocator).click();
 		return this;
 	}
 
-	public void checkMsgB4SAVE(WebDriver driver, String expectedMsg, String tc) throws IOException {
+	public void checkMsgB4SAVE(WebDriver driver, int Number, String expectedMsg, String tc) throws IOException {
+		By msgOfSAVELocator = By.xpath("//*[@id='tab"+Number+"']/div[1]/div/span");
 		elementExist(driver, msgOfSAVELocator, true, tc);
 		String msg = driver.findElement(msgOfSAVELocator).getText();
 		if (msg.equalsIgnoreCase(expectedMsg)) {
@@ -953,7 +1139,8 @@ public class Templates extends Comlibs {
 		;
 	}
 
-	public void checkMsgAfterSAVE(WebDriver driver, String expectedMsg, String tc) throws IOException {
+	public void checkMsgAfterSAVE(WebDriver driver,int Number, String expectedMsg, String tc) throws IOException {
+		By msgOfSAVELocator = By.xpath("//*[@id='tab"+Number+"']/div[1]/div/span");
 		elementExist(driver, msgOfSAVELocator, true, tc);
 		String msg = driver.findElement(msgOfSAVELocator).getText();
 		if (msg.equalsIgnoreCase(expectedMsg)) {

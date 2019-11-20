@@ -1374,7 +1374,7 @@ public class ImageGallery extends Comlibs {
 			rwExcel(tc, true, "Dealership name is displayed", expectedText);
 		} else {
 			rwExcel(tc, false, "Dealership name is NOT showing properly. Exceed time limit!",
-					"Dealership name is NOT - " + expectedText);
+					"Dealership name is NOT - " + expectedText+". The site shows name "+"\""+rs+"\"");
 		}
 
 	}
