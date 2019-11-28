@@ -1166,7 +1166,7 @@ public class Templates extends Comlibs {
 		return messageExist;
 	}
 
-	public void drapAndDropAngleImage1(WebDriver driver, int from, int to, String tc) throws IOException {
+	public void dragAndDropAngleImage1(WebDriver driver, int from, int to, String tc) throws IOException {
 		// from: https://www.guru99.com/drag-drop-selenium.html
 		By fromLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div[" + from + "]/div/div[1]");
 		By toLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div[" + to + "]/div/div[1]");
@@ -1183,16 +1183,16 @@ public class Templates extends Comlibs {
 			Wait(2);
 			act.dragAndDrop(From, To).build().perform();
 			Wait(2);
-			rwExcel(tc, true, "Drap from " + from + " to " + to + "", "working as expected.");
+			rwExcel(tc, true, "drag from " + from + " to " + to + "", "working as expected.");
 		} catch (Exception e) {
 			System.out.println("catch an error!");
-			rwExcel(tc, false, "Drap from " + from + " to " + to + "", "failed to drap and drop.");
+			rwExcel(tc, false, "drag from " + from + " to " + to + "", "failed to drag and drop.");
 			Wait(2);
 		}
 
 	}
 
-	public void drapAndDropAngleImageBypixel2(WebDriver driver, int from, int to1, int to2, String tc)
+	public void dragAndDropAngleImageBypixel2(WebDriver driver, int from, int to1, int to2, String tc)
 			throws IOException {
 		By fromLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div[" + from + "]/div/div[1]");
 		// By toLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+to+"]/div/div[1]");
@@ -1209,16 +1209,16 @@ public class Templates extends Comlibs {
 			Wait(2);
 			act.dragAndDropBy(From, to1, to2).build().perform();
 			Wait(2);
-			rwExcel(tc, true, "Drap from " + from + " to " + to1 + " " + " " + to2, "working as expected.");
+			rwExcel(tc, true, "drag from " + from + " to " + to1 + " " + " " + to2, "working as expected.");
 		} catch (Exception e) {
 			System.out.println("catch an error!");
-			rwExcel(tc, false, "Drap from " + from + " to " + to1 + " " + " " + to2, "failed to drap and drop.");
+			rwExcel(tc, false, "drag from " + from + " to " + to1 + " " + " " + to2, "failed to drag and drop.");
 			Wait(2);
 		}
 
 	}
 
-	public void drapAndDropConfigAngleImage3(WebDriver driver, int from, int to, String tc) throws IOException {
+	public void dragAndDropConfigAngleImage3(WebDriver driver, int from, int to, String tc) throws IOException {
 		// from: https://stackoverflow.com/questions/14210051/how-to-automate-drag-drop-functionality-using-selenium-webdriver-java
 		By fromLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div[" + from + "]/div/div[1]");
 		By toLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div[" + to + "]/div/div[1]");
@@ -1242,16 +1242,16 @@ public class Templates extends Comlibs {
 
 			// //Dragged and dropped.
 			// act.dragAndDrop(From, To).build().perform();
-			rwExcel(tc, true, "Drap from " + from + " to " + to + "", "working as expected.");
+			rwExcel(tc, true, "drag from " + from + " to " + to + "", "working as expected.");
 		} catch (Exception e) {
 			System.out.println("catch an error!");
-			rwExcel(tc, false, "Drap from " + from + " to " + to + "", "failed to drap and drop.");
+			rwExcel(tc, false, "drag from " + from + " to " + to + "", "failed to drag and drop.");
 			Wait(2);
 		}
 
 	}
 
-	public void drapHoldAndDropAngleImage4(WebDriver driver, int from, int to, String tc) throws IOException {
+	public void dragHoldAndDropAngleImage4(WebDriver driver, int from, int to, String tc) throws IOException {
 		// from: https://www.guru99.com/drag-drop-selenium.html
 		By fromLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div[" + from + "]/div/div[1]");
 		By toLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div[" + to + "]/div/div[1]");
@@ -1270,16 +1270,16 @@ public class Templates extends Comlibs {
 			Wait(2);
 			// //Dragged and dropped.
 			// act.dragAndDrop(From, To).build().perform();
-			rwExcel(tc, true, "Drap from " + from + " to " + to + "", "working as expected.");
+			rwExcel(tc, true, "drag from " + from + " to " + to + "", "working as expected.");
 		} catch (Exception e) {
 			System.out.println("catch an error!");
-			rwExcel(tc, false, "Drap from " + from + " to " + to + "", "failed to drap and drop.");
+			rwExcel(tc, false, "drag from " + from + " to " + to + "", "failed to drag and drop.");
 			Wait(2);
 		}
 
 	}
 
-	public void drapHoldAndDropAngleImage4_1(WebDriver driver, int from, int to, String tc) throws IOException {
+	public void dragHoldAndDropAngleImage4_1(WebDriver driver, int from, int to, String tc) throws IOException {
 		// from: https://www.guru99.com/drag-drop-selenium.html
 		By fromLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div[" + from + "]/div/div[1]");
 		By toLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div[" + to + "]/div/div[1]");
@@ -1304,16 +1304,16 @@ public class Templates extends Comlibs {
 			act.dragAndDrop(From, To).build().perform();// need to move mouse to any location then it drops
 			Wait(2);
 
-			rwExcel(tc, true, "Drap from " + from + " to " + to + "", "working as expected.");
+			rwExcel(tc, true, "drag from " + from + " to " + to + "", "working as expected.");
 		} catch (Exception e) {
 			System.out.println("catch an error!");
-			rwExcel(tc, false, "Drap from " + from + " to " + to + "", "failed to drap and drop.");
+			rwExcel(tc, false, "drag from " + from + " to " + to + "", "failed to drag and drop.");
 			Wait(2);
 		}
 
 	}
 
-	public void drapHoldAndDropAngleImage4_2(WebDriver driver, String onScreen, int from, int to, String tc)
+	public void dragHoldAndDropAngleImage4_2(WebDriver driver, String onScreen, int from, int to, String tc)
 			throws IOException {
 		// from: https://www.guru99.com/drag-drop-selenium.html
 		By fromLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div[" + from + "]/div/div[1]");
@@ -1331,7 +1331,7 @@ public class Templates extends Comlibs {
 				// These coordinates are screen coordinates
 				if (onScreen.equalsIgnoreCase("left")) {
 					xCoord = -900;// -900
-					yCoord = 585;// chrome=585;ff= 685
+					yCoord = 585;// chrome=585;ff= 500
 				} else {
 					xCoord = 400;
 					yCoord = 585;// 552
@@ -1370,10 +1370,10 @@ public class Templates extends Comlibs {
 			// act.dragAndDrop(From, To).build().perform();// need to move mouse to any location then it drops
 			// Wait(2);
 
-			rwExcel(tc, true, "Drap from " + from + " to " + to + "", "working as expected.");
+			rwExcel(tc, true, "drag from " + from + " to " + to + "", "working as expected.");
 		} catch (Exception e) {
 			System.out.println("catch an error!");
-			rwExcel(tc, false, "Drap from " + from + " to " + to + "", "failed to drap and drop.");
+			rwExcel(tc, false, "drag from " + from + " to " + to + "", "failed to drag and drop.");
 			Wait(2);
 		}
 
@@ -1417,7 +1417,7 @@ public class Templates extends Comlibs {
 		return valueNum;
 	}
 
-	public void drapHoldAndMoveDropAngleImage5(WebDriver driver, int fromfrom, int toto, String tc) throws IOException {
+	public void dragHoldAndMoveDropAngleImage5(WebDriver driver, int fromfrom, int toto, String tc) throws IOException {
 		// from: https://www.guru99.com/drag-drop-selenium.html
 		// By fromLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+from+"]/div/div[1]");
 		// By toLocation = By.xpath("//*[@id='tab6']/div[2]/div[2]/div/div["+to+"]/div/div[1]");
@@ -1446,10 +1446,10 @@ public class Templates extends Comlibs {
 			dragAndDrop.perform();
 			// //Dragged and dropped.
 			// act.dragAndDrop(From, To).build().perform();
-			rwExcel(tc, true, "Drap from " + fromfrom + " to " + toto + "", "working as expected.");
+			rwExcel(tc, true, "drag from " + fromfrom + " to " + toto + "", "working as expected.");
 		} catch (Exception e) {
 			System.out.println("catch an error!");
-			rwExcel(tc, false, "Drap from " + fromfrom + " to " + toto + "", "failed to drap and drop.");
+			rwExcel(tc, false, "drag from " + fromfrom + " to " + toto + "", "failed to drag and drop.");
 			Wait(2);
 		}
 

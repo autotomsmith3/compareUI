@@ -2656,30 +2656,30 @@ public class AUTOpxController extends Comlibs {
 
 		// --------------------1st----doesn't work below drag and drop----------------------------------------------------
 
-		// //drap from
+		// //drag from
 		// int from=6;
 		// //drop to
 		// int to=1;
 		// System.out.println("Start to Drag and drop angle image from "+from+" to "+to);
 		// ac.Wait(wt*2);
-		// tpP.drapAndDropConfigAngleImage3(driver, from, to, TCnum);//no error but nothing happened, not working
-		// tpP.drapHoldAndMoveDropAngleImage5(driver, from, to, TCnum);//catch an error
-		// tpP.drapHoldAndDropAngleImage4(driver, from, to, TCnum);// no error, drag is ok but can't drop,
-		// tpP.drapHoldAndDropAngleImage4_1(driver, from, to, TCnum);// need to move mouse to any location, it then drops.
-		// tpP.drapHoldAndDropAngleImage4_2(driver, onScreen, from, to, TCnum);//Temproary solution - OK, need to move mouse to any location, it then drops.
+		// tpP.dragAndDropConfigAngleImage3(driver, from, to, TCnum);//no error but nothing happened, not working
+		// tpP.dragHoldAndMoveDropAngleImage5(driver, from, to, TCnum);//catch an error
+		// tpP.dragHoldAndDropAngleImage4(driver, from, to, TCnum);// no error, drag is ok but can't drop,
+		// tpP.dragHoldAndDropAngleImage4_1(driver, from, to, TCnum);// need to move mouse to any location, it then drops.
+		// tpP.dragHoldAndDropAngleImage4_2(driver, onScreen, from, to, TCnum);//Temproary solution - OK, need to move mouse to any location, it then drops.
 		// int to1=228;//176;//228;//149
 		// int to2=252;//30;//252;//269 2-3 btw
-		// tpP.drapAndDropAngleImageBypixel2(driver, from, to1,to2, TCnum); //catch an error
-		//// tpP.drapAndDropAngleImage(driver, from, to, TCnum);//no error, drag is ok but can't drop, same as hold above
+		// tpP.dragAndDropAngleImageBypixel2(driver, from, to1,to2, TCnum); //catch an error
+		//// tpP.dragAndDropAngleImage(driver, from, to, TCnum);//no error, drag is ok but can't drop, same as hold above
 		// System.out.println("Drag and drop angle image from "+from+" to "+to+" is done!");
 		// ac.Wait(wt*2);
 		// from=7;
 		// to=3;
 		// System.out.println("Start to Drag and drop angle image from "+from+" to "+to);
 		// ac.Wait(wt*2);
-		// tpP.drapAndDropAngleImage1(driver, from, to, TCnum);// no error, drag is ok but can't drop,
+		// tpP.dragAndDropAngleImage1(driver, from, to, TCnum);// no error, drag is ok but can't drop,
 		// System.out.println("Drag and drop angle image from "+from+" to "+to+" is done!!");
-		// TCnum = "Drap and drop_02";
+		// TCnum = "drag and drop_02";
 		//
 
 		// //-------------2nd----doesn't work either------------------------------------------------------------------
@@ -2729,15 +2729,15 @@ public class AUTOpxController extends Comlibs {
 		// ((JavascriptExecutor) driver).executeScript(java_script,source,target);//no error but nothing happened.
 		// ac.Wait(2);
 		// System.out.println("Stop here!");
-		if (envBrowser.equalsIgnoreCase("Chromexxxxxx")) { // Angle sortings Only work for Chrome. Firefox is not working.
+		if (envBrowser.equalsIgnoreCase("Chrome")) { // Angle sortings Only work for Chrome. Firefox is not working.
 
 			for (int i = 1; i <= 3; i++) {
 				tpP.scrollUp(driver, 450, TCnum);
 				TCnum = "FCA_angle_images_sorting_01_" + i;
 				int menueNum = 6;
 				tpP.clickAngleImagesBtn(driver, TCnum);
-				TCnum = "Drap and drop_01" + i;
-				// drap from
+				TCnum = "drag and drop_01" + i;
+				// drag from
 				int from = 6;
 				// drop to
 				int to = 1;
@@ -2746,7 +2746,7 @@ public class AUTOpxController extends Comlibs {
 
 				fromName = tpP.getAngleImageName(driver, onScreen, from, TCnum);
 
-				tpP.drapHoldAndDropAngleImage4_2(driver, onScreen, from, to, TCnum);// Temproary solution - OK, need to move mouse to any location, it then drops.
+				tpP.dragHoldAndDropAngleImage4_2(driver, onScreen, from, to, TCnum);// Temproary solution - OK, need to move mouse to any location, it then drops.
 
 				System.out.println("Drag and drop angle image from " + from + " to " + to + "  is done!");
 
@@ -3699,8 +3699,8 @@ public class AUTOpxController extends Comlibs {
 				int menueNum = 6;
 				tpP.clickAngleImagesBtn(driver, TCnum);
 
-				TCnum = "Drap and drop_01" + i;
-				// drap from
+				TCnum = "drag and drop_01" + i;
+				// drag from
 				int from = 6;
 				// drop to
 				int to = 1;
@@ -3709,7 +3709,7 @@ public class AUTOpxController extends Comlibs {
 
 				fromName = tpP.getAngleImageName(driver, onScreen, from, TCnum);
 
-				tpP.drapHoldAndDropAngleImage4_2(driver, onScreen, from, to, TCnum);// Temproary solution - OK, need to move mouse to any location, it then drops.
+				tpP.dragHoldAndDropAngleImage4_2(driver, onScreen, from, to, TCnum);// Temproary solution - OK, need to move mouse to any location, it then drops.
 
 				System.out.println("Drag and drop angle image from " + from + " to " + to + "  is done!");
 
@@ -4517,7 +4517,7 @@ public class AUTOpxController extends Comlibs {
 			// bc.rwExcel("", "-----STOCKpx Sorting in Templates Testing started-----" + (i + 1), "");
 			// STOCKpxSortingOnlyTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 			//
-			// ////// 5.2 FCA VINpx Angle images sorting and Templates - run this first to move mouse 3 times during the Angle Images testing in Templates
+			//////// 5.2 FCA VINpx Angle images sorting and Templates - run this first to move mouse 3 times during the Angle Images testing in Templates
 			// bc.rwExcel("", "-----Templates FCA Sorting Testing started-----" + (i + 1), "");
 			// VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
