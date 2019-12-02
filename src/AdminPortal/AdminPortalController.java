@@ -1974,7 +1974,6 @@ public class AdminPortalController extends Comlibs {
 
 		//// *************************New Vehicle and WhiteListBtn******************************************************
 	}
-
 	public static void TriageVinStatus(WebDriver driver, String brw, String versionNum, String envment)
 			throws Exception {
 
@@ -2123,6 +2122,160 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 
 		//// *************************New Vehicle and WhiteListBtn******************************************************
+	}
+	public static void VehiclePreview(WebDriver driver, String brw, String versionNum, String envment)
+			throws Exception {
+
+		// Load environment parameters
+		Properties prop = new Properties();
+		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		try {
+			prop.load(AdminPortalController.class.getClassLoader()
+					.getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String tc = "";
+		String env = prop.getProperty("AUTOpx.environment");
+		String envBrowser = prop.getProperty("AUTOpx.browser");
+		String render = prop.getProperty("AUTOpx.render");
+		String addNewVIN = prop.getProperty("AUTOpx.addNewVIN");
+		String accountEmail = prop.getProperty(env + ".VINpxEmail");
+		String accountPS = prop.getProperty(env + ".VINpxPassword");
+		// String baseURL = prop.getProperty(env + ".VINpxDealerPortalBaseURL");
+		String dealershipName = prop.getProperty(env + ".VINpxDealershipname");
+		String dealerCode = prop.getProperty(env + ".VINpxDealerCode");
+		String vin01 = prop.getProperty(env + ".VINpxVin01");
+		String vin02 = prop.getProperty(env + ".VINpxVin02");
+		String vehGUID01 = prop.getProperty(env + ".VINpxVin01GUID");
+		String vehGUID02 = prop.getProperty(env + ".VINpxVin02GUID");
+		// String vinpxnewVin01 = prop.getProperty(env + ".VINpxNewVIN01");
+		String[] VINpxNewVINs = fetchOneDemArrayFromPropFile(env + ".VINpxNewVINs", prop);
+		String serverName = prop.getProperty(env + ".serverName");
+		String dbName = prop.getProperty(env + ".dbName");
+		String userName = prop.getProperty(env + ".userName");
+		String password = prop.getProperty(env + ".password");
+		String MaxVins = prop.getProperty(env + ".MaxVinsForPreview");
+		int MaxVinsForPreview = Integer.parseInt(MaxVins);
+		// dealership profile:
+		String OEM = prop.getProperty(env + ".OEM");
+		String[] Brands = fetchOneDemArrayFromPropFile(env + ".Brands", prop);
+		String AllProdDealerCode = prop.getProperty(env + ".AllProdDealerCode");
+		String AllProdEmail = prop.getProperty(env + ".AllProdEmail");
+		String DealershipID = prop.getProperty(env + ".DealershipID");
+		String DealershipName = prop.getProperty(env + ".DealershipName");
+		String[] Products = fetchOneDemArrayFromPropFile(env + ".Products", prop);
+		String MetadataValues = prop.getProperty(env + ".MetadataValues");
+		String Address = prop.getProperty(env + ".Address");
+		String AddressLine2 = prop.getProperty(env + ".AddressLine2");
+		String City = prop.getProperty(env + ".City");
+		int StateProvince = Integer.parseInt(prop.getProperty(env + ".StateProvince"));
+		int Country = Integer.parseInt(prop.getProperty(env + ".Country"));
+		String ZipPostalCode = prop.getProperty(env + ".ZipPostalCode");
+		String DealershipEmail = prop.getProperty(env + ".DealershipEmail");
+		String AccountEmail = prop.getProperty(env + ".AccountEmail");
+		String FirstName = prop.getProperty(env + ".FirstName");
+		String LastName = prop.getProperty(env + ".LastName");
+		String TagLineMarkingMsg = prop.getProperty(env + ".TagLineMarkingMsg");
+		String Website = prop.getProperty(env + ".Website");
+		String DealershipPhoneNumber = prop.getProperty(env + ".DealershipPhoneNumber");
+		int TemplateSettings = Integer.parseInt(prop.getProperty(env + ".TemplateSettings"));
+		int SelectBackgroundSet = Integer.parseInt(prop.getProperty(env + ".SelectBackgroundSet"));
+		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
+		String AddNewAccountEmail = prop.getProperty(env + ".AddNewAccountEmail");
+		String addNewDealerExtension = prop.getProperty(env + ".addNewDealerExtension");
+		String dealershipLogoPath = prop.getProperty("AUTOpx.dealershipLogoPath");
+		String addNewDealerShip = prop.getProperty("AUTOpx.addNewDealerShip");
+		String backgroundSetPath1 = prop.getProperty("AUTOpx.backgroundSetPath1");
+		String backgroundSetPath2 = prop.getProperty("AUTOpx.backgroundSetPath2");
+
+		// Initial
+		// final int wt_Secs = 6;
+		String TCnum;
+		// ====================
+		String tempVIN = "";
+		String tempVehGUID = "";
+		String ProductVINpx = "";
+		String ProductSTOCKpx = "";
+		String ProductLOTpx = "";
+		String Dealership_ID = "";
+		String Dealership_Name = "";
+		String Dealership_Email = "";
+		String Account_Email = "";
+		String Metadata = "";
+		String dlrGuid = "";
+		String alertmessage = "";
+		// ====================
+		Comlibs ac = new Comlibs();
+		ac.rwExcel("", "*********Vehicle Preview**********", "");
+		int count = 0;
+		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
+		String[] titleString = { "Env.", "S/N", "Dealership_ID", "Dealership_Name", "Account_Email", "Dealership_Email",
+				"ProductVINpx", "ProductSTOCKpx", "ProductLOTpx", "Metadata", "dlrGuid" };
+		// =================================================
+		ac.writeTitle(getMetadataSavePathFile, titleString);
+		int dataLength = 54;
+		String[] metadataValues = new String[dataLength + 1];
+		int datasize = metadataValues.length;
+
+		// =================================================
+		VDVILogin loginP = new VDVILogin(driver);
+		int dealerN = 0;
+		String dealerSN = "";
+		tc = "Vehicle Preview_01";
+		loginP.login(driver, accountEmail, accountPS, tc);
+		ac.Wait(wt);
+		String parentHandle = driver.getWindowHandle(); // get the current window handle
+
+		UserList UserListP = new UserList(driver);
+
+		//// *************************Vehicle PreviewBtn******************************************************
+		tc = "Vehicle Preview_02";
+
+		UserListP.clickVehiclePreview(driver, tc);
+		ac.Wait(wt);
+		VehiclePreview vpP = new VehiclePreview(driver);
+		tc = "Vehicle Preview_03";
+		
+		
+		
+//		String searchText = "1GKKNPLS4KZ142418"; // 1C6SRFHT4LN136212 (2020 RAM 1500), 1GKKNPLS4KZ142418 (GM Buick 2019)
+//		tc = "TC236128_01";
+//		TriageVinStatuP.inputSearch(driver, searchText, tc);
+//		TriageVinStatuP.clickSubmit(driver, tc);
+//		ac.Wait(wt * 5);
+//		String resoltData = TriageVinStatuP.retrieveResoltData(driver, tc);
+//		boolean getDataError1 = resoltData.contains("build data found");
+//		boolean getDataError2 = resoltData.contains("vin was found in VINpx database for the following dealers");
+//		boolean getDataError3 = resoltData.contains("Getting MV links");// FCA
+//		boolean getDataError4 = resoltData.contains("Possible Flik link");// GM
+//		if (getDataError1 && getDataError2 && (getDataError3 || getDataError4)) {
+//			// ok
+//			ac.rwExcel(tc, true, "Triage Vin Status Results GM Vin", "GM VIN Result data:" + resoltData);
+//		} else {
+//			ac.rwExcel(tc, false, "Triage Vin Status Results GM Vin", "GM VIN Result data:" + resoltData);
+//		}
+//		ac.Wait(wt);
+//		searchText = "1C6SRFHT4LN136212"; // 1C6SRFHT4LN136212 (2020 RAM 1500), 1GKKNPLS4KZ142418 (GM Buick 2019)
+//		tc = "TC236131_02";
+//		TriageVinStatuP.inputSearch(driver, searchText, tc);
+//		TriageVinStatuP.clickSubmit(driver, tc);
+//		ac.Wait(wt * 5);
+//		resoltData = TriageVinStatuP.retrieveResoltData(driver, tc);
+//		getDataError1 = resoltData.contains("build data found");
+//		getDataError2 = resoltData.contains("vin was found in VINpx database for the following dealers");
+//		getDataError3 = resoltData.contains("Getting MV links");// FCA
+//		getDataError4 = resoltData.contains("Possible Flik link");// GM
+//		if (getDataError1 && getDataError2 && (getDataError3 || getDataError4)) {
+//			// ok
+//			ac.rwExcel(tc, true, "Triage Vin Status Results FCA Vin", "FCA VIN Result data:" + resoltData);
+//		} else {
+//			ac.rwExcel(tc, false, "Triage Vin Status Results FCA Vin", "FCA VIN Result data:" + resoltData);
+//		}
+//		ac.Wait(wt);
+
+		//// *************************Vehicle PreviewBtn******************************************************
 	}
 
 	public static void ManageDealerShipsAddNewAccount(WebDriver driver, String brw, String versionNum, String envment,
@@ -2895,6 +3048,11 @@ public class AdminPortalController extends Comlibs {
 			loadURL(driver, baseURL, env);
 			TriageVinStatus(driver, tBrowser, versionNum, env);
 
+			//// 6. Vehicle Preview
+			loadURL(driver, baseURL, env);
+			VehiclePreview(driver, tBrowser, versionNum, env);
+			
+			
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
 			System.out.println("Test is complete!!!");

@@ -43,7 +43,7 @@ public class UserList extends Comlibs {
 	}
 
 	By acceptBtnLocator = By.xpath("//button[@type='submit']");
-	// By editBtnLocator = By.xpath("//*[@id=\"listViewBtn\"]/span"); // //*[@id="listViewBtn"]/span or xpath=(//button[@id='listViewBtn'])[3] 
+	// By editBtnLocator = By.xpath("//*[@id=\"listViewBtn\"]/span"); // //*[@id="listViewBtn"]/span or xpath=(//button[@id='listViewBtn'])[3]
 	By agreementTitles = By.xpath("//*[@id=\"tabs\"]/li");
 	By firstAgreementLocator = By.xpath("//*[@id=\"tabs\"]/li[1]/a");
 	By secondAgreementLocator = By.xpath("//*[@id=\"tabs\"]/li[2]/a");
@@ -59,13 +59,13 @@ public class UserList extends Comlibs {
 	By ManageExportTemplatesLocator = By.xpath("//*[@id=\"exportTemplateMenu\"]");
 	By ManageGlobalConfigLocator = By.xpath("//*[@id=\"configMenu\"]");
 	By AddAccountBtnLocator = By.xpath("//*[@id=\"addAccountButton\"]/span");
-	 By accountsLocator=By.xpath("//table[@id='dealerTable']/tbody");//xpath=//table[@id='dealerTable']/tbody
-	 By nextLocator=By.xpath("//*[@id=\"dealerTable_next\"]");
-	 By firstNameSortLocator=By.xpath("//*[@id=\"dealerTable\"]/thead/tr/th[4]");
-	 By EnableDisableVehiclesLocator=By.xpath("//*[@id=\"enableMenu\"]");
-	 By NewVehiclesAndWhiteList=By.xpath("//*[@id=\"whitelistMenu\"]");
-	 By triageVinStatus = By.xpath("//*[@id=\"vinStatus\"]/span");
-	// By Locator=By.xpath("");
+	By accountsLocator = By.xpath("//table[@id='dealerTable']/tbody");// xpath=//table[@id='dealerTable']/tbody
+	By nextLocator = By.xpath("//*[@id=\"dealerTable_next\"]");
+	By firstNameSortLocator = By.xpath("//*[@id=\"dealerTable\"]/thead/tr/th[4]");
+	By EnableDisableVehiclesLocator = By.xpath("//*[@id=\"enableMenu\"]");
+	By NewVehiclesAndWhiteList = By.xpath("//*[@id=\"whitelistMenu\"]");
+	By triageVinStatus = By.xpath("//*[@id=\"vinStatus\"]/span");
+	By vehiclePreview = By.xpath("//*[@id=\"vehiclePreviewMenu\"]");
 	// By Locator=
 	// By Locator=
 
@@ -116,11 +116,13 @@ public class UserList extends Comlibs {
 		driver.findElement(displayDropDownLocator).click();
 		return this;
 	}
-	public UserList clickDisplay(WebDriver driver,int num) throws IOException {
-		By DisplayDropDown = By.xpath("	//*[@id=\"dealerTable_length\"]/label/select/option["+num+"]");//1,2,3... 		//*[@id="dealerTable_length"]/label/select/option[3]
+
+	public UserList clickDisplay(WebDriver driver, int num) throws IOException {
+		By DisplayDropDown = By.xpath("	//*[@id=\"dealerTable_length\"]/label/select/option[" + num + "]");// 1,2,3... //*[@id="dealerTable_length"]/label/select/option[3]
 		driver.findElement(DisplayDropDown).click();
 		return this;
 	}
+
 	public DealerProfile clickAcceptPSBtn(WebDriver driver) throws IOException {
 		driver.findElement(acceptBtnLocator).click();
 		return new DealerProfile(driver);
@@ -182,8 +184,9 @@ public class UserList extends Comlibs {
 		}
 		return count;
 	}
+
 	public int getNumOfAccounts(WebDriver driver, int numOfpage, String tc) throws IOException {
-		By accountsLocator=By.xpath("//table[@id='dealerTable']/tbody/tr");//xpath=//table[@id='dealerTable']/tbody/tr
+		By accountsLocator = By.xpath("//table[@id='dealerTable']/tbody/tr");// xpath=//table[@id='dealerTable']/tbody/tr
 		int count = 0;
 		boolean exist;
 		exist = elementExist(driver, accountsLocator, true, tc);
@@ -192,9 +195,10 @@ public class UserList extends Comlibs {
 		}
 		return count;
 	}
+
 	public int getNumOfDealerships(WebDriver driver, int numOfpage, String tc) throws IOException {
-		By dealershipsLocator=By.xpath("//table[@id='dealerTable']");// ///*[@id="dealersTable"]/tbody/tr[2]
-		int count = 0;//  //*[@id="dealerTable"]/tbody/tr[1]
+		By dealershipsLocator = By.xpath("//table[@id='dealerTable']");// ///*[@id="dealersTable"]/tbody/tr[2]
+		int count = 0;// //*[@id="dealerTable"]/tbody/tr[1]
 		boolean exist;
 		exist = elementExist(driver, dealershipsLocator, true, tc);
 		if (exist) {
@@ -202,18 +206,19 @@ public class UserList extends Comlibs {
 		}
 		return count;
 	}
+
 	public String getAccountEmail(WebDriver driver, int num, String tc) throws IOException {
-		String accEmail="null";
-//		By accountEmail = By.xpath("//table[@id='dealerTable']/tbody/tr["+num+"]/td[2]");//xpath=//table[@id='dealerTable']/tbody/tr[3]/td[2]  --- [3].. 1,2,3...
-		//*[@id="dealerTable"]/tbody/tr[2]/td[2]  - //this is second one.
-		By accountEmail = By.xpath("//*[@id=\"dealerTable\"]/tbody/tr["+num+"]/td[2]");//2019-08-19
+		String accEmail = "null";
+		// By accountEmail = By.xpath("//table[@id='dealerTable']/tbody/tr["+num+"]/td[2]");//xpath=//table[@id='dealerTable']/tbody/tr[3]/td[2] --- [3].. 1,2,3...
+		// *[@id="dealerTable"]/tbody/tr[2]/td[2] - //this is second one.
+		By accountEmail = By.xpath("//*[@id=\"dealerTable\"]/tbody/tr[" + num + "]/td[2]");// 2019-08-19
 		boolean elementExist = elementExist(driver, accountEmail, true, tc);
 		if (elementExist) {
-			accEmail = driver.findElement(accountEmail).getText();//.getAttribute("src");
+			accEmail = driver.findElement(accountEmail).getText();// .getAttribute("src");
 		}
 		return accEmail;
 	}
-	
+
 	public boolean verifyFirstLeftAgreementTitle(WebDriver driver, int totalAgreement, String agreement,
 			boolean agreementExist, String tc) throws IOException {
 		String temp = "";
@@ -445,23 +450,26 @@ public class UserList extends Comlibs {
 		driver.findElement(searchLocator).sendKeys(dlrID);
 		return this;
 	}
+
 	public UserList clickManageAccounts(WebDriver driver, String tc) throws IOException {
-		
+
 		elementExist(driver, ManageAccountsLocator, true, tc);
 		driver.findElement(ManageAccountsLocator).click();
 		return this;
 	}
-//	public UserList clickManageDealerShips(WebDriver driver) throws IOException {
-//		driver.findElement(ManageDealerShipsLocator).click();
-//		Wait(3);
-//		return this;
-//	}
+
+	// public UserList clickManageDealerShips(WebDriver driver) throws IOException {
+	// driver.findElement(ManageDealerShipsLocator).click();
+	// Wait(3);
+	// return this;
+	// }
 	public DealerList clickManageDealerShips(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, ManageDealerShipsLocator, true, tc);
 		driver.findElement(ManageDealerShipsLocator).click();
 		Wait(3);
 		return new DealerList(driver);
 	}
+
 	public BackgroundSets clickManageBGSets(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, ManageBGSetsLocator, true, tc);
 		driver.findElement(ManageBGSetsLocator).click();
@@ -469,11 +477,11 @@ public class UserList extends Comlibs {
 	}
 
 	public ImageTypeList clickManageImageType(WebDriver driver, String tc) throws IOException {
-//		ManageImageTypesLocator=By.id("imagetypeMenu");
-//		WebElement we0 = driver.findElement(ManageImageTypesLocator);
-//		hoverOnWebElement(driver,we0);
-//		boolean existE=driver.findElement(ManageImageTypesLocator).isDisplayed();
-//		existE=elementExist(ManageImageTypesLocator);
+		// ManageImageTypesLocator=By.id("imagetypeMenu");
+		// WebElement we0 = driver.findElement(ManageImageTypesLocator);
+		// hoverOnWebElement(driver,we0);
+		// boolean existE=driver.findElement(ManageImageTypesLocator).isDisplayed();
+		// existE=elementExist(ManageImageTypesLocator);
 		elementExist(driver, ManageImageTypesLocator, true, tc);
 		driver.findElement(ManageImageTypesLocator).click();
 		return new ImageTypeList(driver);
@@ -496,11 +504,13 @@ public class UserList extends Comlibs {
 		driver.findElement(ManageGlobalConfigLocator).click();
 		return new GlobalConfig(driver);
 	}
+
 	public EnableDisableVehicles clickEnableDisableVehicles(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, EnableDisableVehiclesLocator, true, tc);
 		driver.findElement(EnableDisableVehiclesLocator).click();
 		return new EnableDisableVehicles(driver);
 	}
+
 	public DealerPortal.ImageGallery clickDealerViewBtn(WebDriver driver, int sn, String tc) throws IOException {
 		By dealerViewBtnLocator = By.xpath("(//button[@id='dealerViewBtn'])[" + sn + "]");// 1,2,3...
 		elementExist(driver, dealerViewBtnLocator, true, tc);
@@ -519,14 +529,16 @@ public class UserList extends Comlibs {
 		}
 		return new AccountProfile(driver);
 	}
-	public UserList clickExpandDealersArrow(WebDriver driver,int num, String tc) throws IOException {
-		By expandDealersArrowLocator = By.xpath("//*[@id='dealerTable']/tbody/tr/td["+num+"]");//1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
+
+	public UserList clickExpandDealersArrow(WebDriver driver, int num, String tc) throws IOException {
+		By expandDealersArrowLocator = By.xpath("//*[@id='dealerTable']/tbody/tr/td[" + num + "]");// 1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
 		elementExist(driver, expandDealersArrowLocator, true, tc);
 		driver.findElement(expandDealersArrowLocator).click();
 		return this;
 	}
-	public DealerProfile clickEditOnDealer(WebDriver driver,int num, String tc) throws IOException {
-		By editOnDealerLocator = By.xpath("(//button[@id='listViewBtn'])["+num+"]");//1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
+
+	public DealerProfile clickEditOnDealer(WebDriver driver, int num, String tc) throws IOException {
+		By editOnDealerLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");// 1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
 		elementExist(driver, editOnDealerLocator, true, tc);
 		driver.findElement(editOnDealerLocator).click();
 		for (String winHandle : driver.getWindowHandles()) {
@@ -534,28 +546,31 @@ public class UserList extends Comlibs {
 		}
 		return new DealerProfile(driver);
 	}
-	public DealerPortal.DealerProfile clickViewDealerPortal(WebDriver driver,int num, String tc) throws IOException {
-		By viewDealerPortalLocator = By.xpath("(//button[@id='dealerViewBtn'])["+num+"]");//1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
+
+	public DealerPortal.DealerProfile clickViewDealerPortal(WebDriver driver, int num, String tc) throws IOException {
+		By viewDealerPortalLocator = By.xpath("(//button[@id='dealerViewBtn'])[" + num + "]");// 1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
 		elementExist(driver, viewDealerPortalLocator, true, tc);
 		try {
 			driver.findElement(viewDealerPortalLocator).click();
-			rwExcel(tc, true, "Clicking on Go to Dealer Portal","Line goes to Dealer Portal.");
-		}catch (Exception e) {
-			rwExcel(tc, false, "Clicking on Go to Dealer Portal","Line goes to Dealer Portal.");
+			rwExcel(tc, true, "Clicking on Go to Dealer Portal", "Line goes to Dealer Portal.");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Clicking on Go to Dealer Portal", "Line goes to Dealer Portal.");
 		}
 		for (String winHandle : driver.getWindowHandles()) {
 			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
 		}
 		return new DealerPortal.DealerProfile(driver);
 	}
-	public UserList clickViewDealerships(WebDriver driver,int num, String tc) throws IOException {
-		By viewDealerships = By.xpath("//table[@id='dealerTable']/tbody/tr["+num+"]/td");//1,2,3... 	xpath=//table[@id='dealerTable']/tbody/tr[2]/td
+
+	public UserList clickViewDealerships(WebDriver driver, int num, String tc) throws IOException {
+		By viewDealerships = By.xpath("//table[@id='dealerTable']/tbody/tr[" + num + "]/td");// 1,2,3... xpath=//table[@id='dealerTable']/tbody/tr[2]/td
 		elementExist(driver, viewDealerships, true, tc);
 		driver.findElement(viewDealerships).click();
 		return this;
 	}
-	public DealerProfile clickEditOnDealership(WebDriver driver,int num, String tc) throws IOException {
-		By editOnDealerLocator = By.xpath("(//button[@id='listViewBtn'])["+num+"]");//1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
+
+	public DealerProfile clickEditOnDealership(WebDriver driver, int num, String tc) throws IOException {
+		By editOnDealerLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");// 1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
 		elementExist(driver, editOnDealerLocator, true, tc);
 		driver.findElement(editOnDealerLocator).click();
 		for (String winHandle : driver.getWindowHandles()) {
@@ -563,27 +578,37 @@ public class UserList extends Comlibs {
 		}
 		return new DealerProfile(driver);
 	}
+
 	public UserList clickNext(WebDriver driver, int num, String tc) throws IOException {
-//		By expandDealersArrowLocator = By.xpath("//*[@id='dealerTable']/tbody/tr/td["+num+"]");//1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
+		// By expandDealersArrowLocator = By.xpath("//*[@id='dealerTable']/tbody/tr/td["+num+"]");//1,2,3... //table[@id='dealerTable']/tbody/tr[1]/td
 		By expandDealersArrowLocator = By.xpath("//*[@id=\"dealerTable_next\"]");
 		elementExist(driver, expandDealersArrowLocator, true, tc);
-		//*[@id="dealerTable_next"]
+		// *[@id="dealerTable_next"]
 		driver.findElement(expandDealersArrowLocator).click();
 		return this;
 	}
+
 	public UserList clickFirstNameSort(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, firstNameSortLocator, true, tc);
 		driver.findElement(firstNameSortLocator).click();
 		return this;
 	}
+
 	public NewVehiclesAndWhiteList clickNewVehiclesAndWhiteList(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, NewVehiclesAndWhiteList, true, tc);
 		driver.findElement(NewVehiclesAndWhiteList).click();
 		return new NewVehiclesAndWhiteList(driver);
 	}
+
 	public TriageVinStatus clickTriageVinStatus(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, triageVinStatus, true, tc);
 		driver.findElement(triageVinStatus).click();
 		return new TriageVinStatus(driver);
+	}
+
+	public VehiclePreview clickVehiclePreview(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, vehiclePreview, true, tc);
+		driver.findElement(vehiclePreview).click();
+		return new VehiclePreview(driver);
 	}
 }
