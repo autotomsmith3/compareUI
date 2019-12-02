@@ -252,7 +252,7 @@ public class AdminPortalController extends Comlibs {
 		// =================================================
 		VDVILogin loginP = new VDVILogin(driver);
 		int dealerN = 0;
-		int total=0;
+		int total = 0;
 		String dealerSN = "";
 		loginP.login(driver, accountEmail, accountPS, "");
 		String parentHandle = driver.getWindowHandle(); // get the current window handle
@@ -276,7 +276,7 @@ public class AdminPortalController extends Comlibs {
 				}
 				dealerN = dealerN + 1;
 				dealerSN = String.valueOf(dealerN);
-				
+
 				total = total + 1;
 
 				try {
@@ -323,9 +323,10 @@ public class AdminPortalController extends Comlibs {
 
 				// =========================================
 				Account_Email = "";
-				System.out.println("\nS/N = " + (i + 1) + " of page " + (next + 1) + ". Dealer number = " + dealerN + ". Total = "+total+". \n");
-				System.out.println("VINpx = " + ProductVINpx + "\n" + "STOCKpx = " + ProductSTOCKpx + "\n" + "LOTpx_New = "
-						+ ProductLOTpx_01 + "\n" + "LOTpx_Used = " + ProductLOTpx_02 + "\n");
+				System.out.println("\nS/N = " + (i + 1) + " of page " + (next + 1) + ". Dealer number = " + dealerN
+						+ ". Total = " + total + ". \n");
+				System.out.println("VINpx = " + ProductVINpx + "\n" + "STOCKpx = " + ProductSTOCKpx + "\n"
+						+ "LOTpx_New = " + ProductLOTpx_01 + "\n" + "LOTpx_Used = " + ProductLOTpx_02 + "\n");
 				System.out.println("Dealership_ID: " + Dealership_ID + "\n" + "Dealership_Name: " + Dealership_Name
 						+ "\n" + "Dealership_Email: " + Dealership_Email + "\n" + "Account_Email: " + Account_Email
 						+ "\n" + "Metadata: " + Metadata + "\n" + "dlrGuid:" + dlrGuid + "\n");
@@ -1538,7 +1539,7 @@ public class AdminPortalController extends Comlibs {
 		BackgroundSets BackgroundSetsP = new BackgroundSets(driver);
 		// BackgroundSetsP.clickMapBackGrounds(driver, 3);
 		BackgroundSetsP.inputSearch(driver, AllProdDealerCode);
-		//************1st button**********************
+		// ************1st button**********************
 		try {
 			BackgroundSetsP.clickEditSetBtn(driver, 1);// wrong, get element for the first button
 			ac.Wait(wt);
@@ -1564,24 +1565,24 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		BackgroundSetsP.clickCancel(driver);
 		ac.Wait(wt);
-		//**************2nd button**********************
-		BackgroundSetsP.clickGetListOfDealersBtn(driver,1);
-//		ManageBackgrounds ManageBackgroundsP = new ManageBackgrounds(driver);
-//		ManageBackgroundsP.clickBackToManageSets(driver, tc);
-//		BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1, tc);
-//		ac.Wait(wt);
+		// **************2nd button**********************
+		BackgroundSetsP.clickGetListOfDealersBtn(driver, 1);
+		// ManageBackgrounds ManageBackgroundsP = new ManageBackgrounds(driver);
+		// ManageBackgroundsP.clickBackToManageSets(driver, tc);
+		// BackgroundSetsP.clickDealersUseBackGroundBtn(driver, 1, tc);
+		// ac.Wait(wt);
 		BackgroundSetsP.clickClose(driver, tc);
 		ac.Wait(wt);
-		//**************3rd button Delete BG**********************
-		//Todo: 
-		//1. Run backgroundImporter
-		//2. Get Set Name 
-		//3. Search the Set Name
-		//4. Delete the Set Name
-		//5. Fresh page F5
-		//6. Search the Set Name again
-		//7. Click the 1st button, if not exist, working as expected. Done.
-	
+		// **************3rd button Delete BG**********************
+		// Todo:
+		// 1. Run backgroundImporter
+		// 2. Get Set Name
+		// 3. Search the Set Name
+		// 4. Delete the Set Name
+		// 5. Fresh page F5
+		// 6. Search the Set Name again
+		// 7. Click the 1st button, if not exist, working as expected. Done.
+
 		// tc = "TC139447";
 		// BackgroundSetsP.clickCreateNewSet(driver);
 		// ac.Wait(wt);
@@ -1931,14 +1932,15 @@ public class AdminPortalController extends Comlibs {
 			tc = "TC236111_03_" + i;
 			NewVehicleAndWhiteListP.clickVehicleUsagePreViewLink(driver, i, tc);
 			ac.Wait(wt);
-			tc = "TC236111_4_"+i;
+			tc = "TC236111_4_" + i;
 			int vehicleCountFrLink = NewVehicleAndWhiteListP.returnDealersFrPopup(driver, tc);
 			if (vehicleCountFrLink == vehicleCountFrPage) {
-				ac.rwExcel(tc, true, "Verify Vehicle Usage. Row="+i, "Vehicle Usage matches the count in link");
+				ac.rwExcel(tc, true, "Verify Vehicle Usage. Row=" + i, "Vehicle Usage matches the count in link");
 			} else {
-				ac.rwExcel(tc, false, "Verify Dealer Usage. Row="+i+"; Vehicle Usage does not match the count in link",
+				ac.rwExcel(tc, false,
+						"Verify Dealer Usage. Row=" + i + "; Vehicle Usage does not match the count in link",
 						"Vehicle Usage on the page = " + vehicleCountFrPage + ". Vehicle Usage from link ="
-								+ vehicleCountFrLink+".  -- known issue, currently not implemented.");
+								+ vehicleCountFrLink + ".  -- known issue, currently not implemented.");
 			}
 
 			NewVehicleAndWhiteListP.clickXBtn(driver, tc);
@@ -1955,9 +1957,9 @@ public class AdminPortalController extends Comlibs {
 			tc = "TC236113_03_" + i;
 			int dealerCountFrLink = NewVehicleAndWhiteListP.returnDealersFrPopup(driver, tc);
 			if (dealerCountFrLink == dealerCountFrPage) {
-				ac.rwExcel(tc, true, "Verify Dealer Count. Row="+i, "Dealer Count matches the count in link");
+				ac.rwExcel(tc, true, "Verify Dealer Count. Row=" + i, "Dealer Count matches the count in link");
 			} else {
-				ac.rwExcel(tc, false, "Verify Dealer Count. Row="+i+"Dealer Count does not match the count in link",
+				ac.rwExcel(tc, false, "Verify Dealer Count. Row=" + i + "Dealer Count does not match the count in link",
 						"Dealer Count on the page = " + dealerCountFrPage + ". Dealer Count from link ="
 								+ dealerCountFrLink);
 			}
@@ -2861,37 +2863,37 @@ public class AdminPortalController extends Comlibs {
 			// tempDebug(driver);// ***************************************Debug*****************************************
 			// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
-			// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage:2019-12-02 Working fine.
-			 bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
-			 RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
+			// // 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage:2019-12-02 Working fine.
+			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			// RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
 
 			////// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page - not used any more 2019
 			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 			//// *****************************************************************************************************************
 
-//			 ////// 1.ManageDealerShipsAddNewAccount:
-//			 bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
-//			 ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-//			 ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
-//			
-//			 //// 2.ManageDealerShips and others (Manage Image Type, Manage Angle Mappings, Manage Export Templates and Manage Global Config):
-//			 loadURL(driver, baseURL, env);
-//			 bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
-//			 ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
-//			
-//			 //// 3. Enable/Disable Vehicles and ManageBackgroundSets:
-//			 loadURL(driver, baseURL, env);
-//			 bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
-//			 EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
-//
-//			 //// 4. NewVehicle and WhiteList:
-//			 loadURL(driver, baseURL, env);
-//			 NewVehiclesAndWhiteList(driver, tBrowser, versionNum, env, chkEmail);
-//
-//			//// 5. Triage Vin Status:
-//			loadURL(driver, baseURL, env);
-//			TriageVinStatus(driver, tBrowser, versionNum, env);
+			////// 1.ManageDealerShipsAddNewAccount:
+			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
+			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+
+			//// 2.ManageDealerShips and others (Manage Image Type, Manage Angle Mappings, Manage Export Templates and Manage Global Config):
+			loadURL(driver, baseURL, env);
+			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
+			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+
+			//// 3. Enable/Disable Vehicles and ManageBackgroundSets:
+			loadURL(driver, baseURL, env);
+			bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
+			EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
+
+			//// 4. NewVehicle and WhiteList:
+			loadURL(driver, baseURL, env);
+			NewVehiclesAndWhiteList(driver, tBrowser, versionNum, env, chkEmail);
+
+			//// 5. Triage Vin Status:
+			loadURL(driver, baseURL, env);
+			TriageVinStatus(driver, tBrowser, versionNum, env);
 
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
