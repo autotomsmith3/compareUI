@@ -66,7 +66,7 @@ public class UserList extends Comlibs {
 	By NewVehiclesAndWhiteList = By.xpath("//*[@id=\"whitelistMenu\"]");
 	By triageVinStatus = By.xpath("//*[@id=\"vinStatus\"]/span");
 	By vehiclePreview = By.xpath("//*[@id=\"vehiclePreviewMenu\"]");
-	// By Locator=
+    By whitelistDashboardLocator=By.xpath("//*[@id=\"whitelistDashboardMenu\"]");
 	// By Locator=
 
 	public DealerProfile clickEditBtnOld(WebDriver driver, String num) throws IOException {
@@ -610,5 +610,10 @@ public class UserList extends Comlibs {
 		elementExist(driver, vehiclePreview, true, tc);
 		driver.findElement(vehiclePreview).click();
 		return new VehiclePreview(driver);
+	}
+	public WhitelistDashboard clickWhitelistDashboard(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, whitelistDashboardLocator, true, tc);
+		driver.findElement(whitelistDashboardLocator).click();
+		return new WhitelistDashboard(driver);
 	}
 }
