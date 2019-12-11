@@ -27,9 +27,7 @@ public class WhitelistDashboard extends Comlibs {
 		}
 	}
 
-	By dealerShipName = By.cssSelector("span");
 	By searchField = By.cssSelector(".webix_ss_filter > input:nth-child(1)");
-
 
 	public WhitelistDashboard inputSearch(WebDriver driver, String searchText, String tc) throws IOException {
 		elementExist(driver, searchField, true, tc);
@@ -38,17 +36,11 @@ public class WhitelistDashboard extends Comlibs {
 	}
 
 	public WhitelistDashboard clickDeleteIcon(WebDriver driver, int num, String tc) throws IOException {
-		By deleteIcon = By.cssSelector("div.webix_column:nth-child(9) > div:nth-child("+num+")");
+		By deleteIcon = By.cssSelector("div.webix_column:nth-child(9) > div:nth-child(" + num + ")");//1,2,3...
 		elementExist(driver, deleteIcon, true, tc);
-//		driver.findElement(deleteIcon).click();  //Need to find a way to add record then this can be used
+		// driver.findElement(deleteIcon).click(); //Need to find a way to add record then this can be used
 		return this;
 
 	}
-
-	public WhitelistDashboard clickEditSet(WebDriver driver) throws IOException {
-		driver.findElement(dealerShipName).click();
-		return this;
-	}
-
 
 }

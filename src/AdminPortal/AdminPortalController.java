@@ -607,11 +607,6 @@ public class AdminPortalController extends Comlibs {
 		ac.rwExcel("", "*********ManageDealerShips**********", "");
 
 		int count = 0;
-		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
-		String[] titleString = { "Env.", "S/N", "Dealership_ID", "Dealership_Name", "Account_Email", "Dealership_Email",
-				"ProductVINpx", "ProductSTOCKpx", "ProductLOTpx", "Metadata", "dlrGuid" };
-		// =================================================
-		ac.writeTitle(getMetadataSavePathFile, titleString);
 		int dataLength = 54;
 		String[] metadataValues = new String[dataLength + 1];
 		int datasize = metadataValues.length;
@@ -1483,11 +1478,6 @@ public class AdminPortalController extends Comlibs {
 		// ac.rwExcel("", "*********ManageDealerShips**********", "");
 
 		int count = 0;
-		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
-		String[] titleString = { "Env.", "S/N", "Dealership_ID", "Dealership_Name", "Account_Email", "Dealership_Email",
-				"ProductVINpx", "ProductSTOCKpx", "ProductLOTpx", "Metadata", "dlrGuid" };
-		// =================================================
-		ac.writeTitle(getMetadataSavePathFile, titleString);
 		int dataLength = 54;
 		String[] metadataValues = new String[dataLength + 1];
 		int datasize = metadataValues.length;
@@ -1892,11 +1882,6 @@ public class AdminPortalController extends Comlibs {
 		Comlibs ac = new Comlibs();
 		ac.rwExcel("", "*********New Vehicle and WhiteListBtn**********", "");
 		int count = 0;
-		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
-		String[] titleString = { "Env.", "S/N", "Dealership_ID", "Dealership_Name", "Account_Email", "Dealership_Email",
-				"ProductVINpx", "ProductSTOCKpx", "ProductLOTpx", "Metadata", "dlrGuid" };
-		// =================================================
-		ac.writeTitle(getMetadataSavePathFile, titleString);
 		int dataLength = 54;
 		String[] metadataValues = new String[dataLength + 1];
 		int datasize = metadataValues.length;
@@ -2061,11 +2046,6 @@ public class AdminPortalController extends Comlibs {
 		Comlibs ac = new Comlibs();
 		ac.rwExcel("", "*********Triage Vin Status**********", "");
 		int count = 0;
-		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
-		String[] titleString = { "Env.", "S/N", "Dealership_ID", "Dealership_Name", "Account_Email", "Dealership_Email",
-				"ProductVINpx", "ProductSTOCKpx", "ProductLOTpx", "Metadata", "dlrGuid" };
-		// =================================================
-		ac.writeTitle(getMetadataSavePathFile, titleString);
 		int dataLength = 54;
 		String[] metadataValues = new String[dataLength + 1];
 		int datasize = metadataValues.length;
@@ -2210,11 +2190,6 @@ public class AdminPortalController extends Comlibs {
 		Comlibs ac = new Comlibs();
 		ac.rwExcel("", "*********Vehicle Preview**********", "");
 		int count = 0;
-		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
-		String[] titleString = { "Env.", "S/N", "Dealership_ID", "Dealership_Name", "Account_Email", "Dealership_Email",
-				"ProductVINpx", "ProductSTOCKpx", "ProductLOTpx", "Metadata", "dlrGuid" };
-		// =================================================
-		ac.writeTitle(getMetadataSavePathFile, titleString);
 		int dataLength = 54;
 		String[] metadataValues = new String[dataLength + 1];
 		int datasize = metadataValues.length;
@@ -2364,11 +2339,11 @@ public class AdminPortalController extends Comlibs {
 		Comlibs ac = new Comlibs();
 		ac.rwExcel("", "*********Whitelist Dashboard**********", "");
 		int count = 0;
-		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
-		String[] titleString = { "Env.", "S/N", "Dealership_ID", "Dealership_Name", "Account_Email", "Dealership_Email",
-				"ProductVINpx", "ProductSTOCKpx", "ProductLOTpx", "Metadata", "dlrGuid" };
-		// =================================================
-		ac.writeTitle(getMetadataSavePathFile, titleString);
+//		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
+//		String[] titleString = { "Env.", "S/N", "Dealership_ID", "Dealership_Name", "Account_Email", "Dealership_Email",
+//				"ProductVINpx", "ProductSTOCKpx", "ProductLOTpx", "Metadata", "dlrGuid" };
+//		// =================================================
+//		ac.writeTitle(getMetadataSavePathFile, titleString);
 		int dataLength = 54;
 		String[] metadataValues = new String[dataLength + 1];
 		int datasize = metadataValues.length;
@@ -3142,7 +3117,7 @@ public class AdminPortalController extends Comlibs {
 			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			// RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
 
-			////// 1.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page - not used any more since 2019
+			////// 0.RetriveValuesFrDealerSettingsPage: get Metadata values from ManageAccount page - not used any more since 2019
 			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 			//// *****************************************************************************************************************

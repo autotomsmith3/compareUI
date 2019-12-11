@@ -1362,7 +1362,8 @@ public class AUTOpxController extends Comlibs {
 		// "Rerender All Vehicles for VINpx dealer. Re-render VIN number: " + igP.getReRenderNum(driver, TCnum));
 		igP.clickSelectAllBtn(driver, TCnum);
 		allVinNums = igP.getReRenderNum(driver, TCnum);
-		System.out.println("Rerender All Vehicles for VINpx dealer. Re-render VIN number: " + allVinNums);
+		System.out.println(
+				"Rerender All Vehicles for VINpx dealer. Re-render VIN number: " + allVinNums);
 		igP.clickRerenderBtn(driver, render, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
@@ -3855,9 +3856,11 @@ public class AUTOpxController extends Comlibs {
 		ac.Wait(wt * browserWT);
 		TCnum = "Add GB_01_1";
 		int bgNum = 18; // Select 18 - Auto_ChangedTo_588_644
-		String selectBGName = "Auto_ChangedTo_588_644";
-		String originalBGName = "VINpx_STOCKpx_20190423";
-
+		String selectBGName = "3D Buick and GMC Dealership (Generic Option)";
+		String bgmark_01="Small unclear GMC";
+		String originalBGName = "GMVINpxSTOCKpx_20191203_01";
+		String bgmark_02="Update";
+		
 		bgNum = bgP.getBackgroundNumberFrPopup(driver, selectBGName, TCnum);
 		if (bgNum == -1) {
 			System.out.println("\n\nFailed to get number of background!!!\n\n");
@@ -4106,9 +4109,9 @@ public class AUTOpxController extends Comlibs {
 			TCnum = "MultipleBGs_11";
 			igP.verifyGoodMsgShowing(driver, TCnum);
 			TCnum = "MultipleBGs_11_vin01";
-			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID02, 1, TCnum);
+			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID02, igP.getReRenderNum(driver, TCnum), TCnum);
 			TCnum = "MultipleBGs_11_vin02";
-			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin02, vehGUID02, 1, TCnum);
+			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin02, vehGUID02, igP.getReRenderNum(driver, TCnum), TCnum);
 
 			System.out.println("\ni = " + (i) + " of " + tcs + ". First BG is vinpx_stockpx.  Year 1 = " + y1
 					+ ". Make = " + m1 + "");
@@ -4140,11 +4143,11 @@ public class AUTOpxController extends Comlibs {
 					+ ": ------------------------------------------------------------------------------------------"
 					+ MaxTimeForTemplatesPreview
 					+ " seconds to check---------------------------------------------</p><p style=\"color:blue;LINE-HEIGHT:6px;font-size:10px;\">_____1. Background Name = "
-					+ selectBGName + " (showing \"CHEVROLET\"), 2.Year = " + y2 + ",3.Make = " + m2 + ","
+					+ selectBGName + " (showing \""+bgmark_01+"\"), 2.Year = " + y2 + ",3.Make = " + m2 + ","
 					+ set_Header_DealershipEmail + " " + set_Header_DealershipWebsite + " " + set_ForceStockpx
 					+ ".</p>   <p style=\"color:red;LINE-HEIGHT:6px;font-size:10px;\">___Second vehicle = " + vin01
 					+ ": </p><p style=\"color:blue;LINE-HEIGHT:6px;font-size:10px;\">_____2.Background Name = "
-					+ selectBGName02 + ", (showing \"White/Black\") 2.Year = " + y1 + ", 3.Make = " + m1 + ","
+					+ originalBGName + ", (showing \""+bgmark_02+"\") 2.Year = " + y1 + ", 3.Make = " + m1 + ","
 					+ set_Footer_StockNumber + " " + set_MarketingMessageTop + " " + set_MarketingMessageBotton + " "
 					+ set_AddAdditionalOverlay + " " + set_TextImage_VDI + " " + set_TextImage_WCI + " "
 					+ set_TextImage_VBI + "</p>";

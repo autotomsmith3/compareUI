@@ -104,11 +104,6 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		rwExcel("", "*********ManageDealerShips**********", "");
 
 		int count = 0;
-		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
-		String[] titleString = { "Env.", "S/N", "Dealership_ID", "Dealership_Name", "Account_Email", "Dealership_Email",
-				"ProductVINpx", "ProductSTOCKpx", "ProductLOTpx", "Metadata", "dlrGuid" };
-		// =================================================
-		writeTitle(getMetadataSavePathFile, titleString);
 		int dataLength = 54;
 		String[] metadataValues = new String[dataLength + 1];
 		int datasize = metadataValues.length;
