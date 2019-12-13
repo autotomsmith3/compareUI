@@ -28,9 +28,24 @@ public class VehiclePreview extends Comlibs {
 	}
 
 	By dealerShipName = By.cssSelector("span");
-
-
-
+	By changeAngle = By.xpath("//*[@id=\"anglesToggle\"]");
+//	By xxxx =  By.xpath("");
+//	By xxxx =  By.xpath("");
+//	By xxxx =  By.xpath("");
+//	By xxxx =  By.xpath("");
+	
+	
+	public VehiclePreview clickChangeAngleDropDown(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, changeAngle, true, tc);
+		driver.findElement(changeAngle).click();
+		return this;
+	}
+	public VehiclePreview selectOneAngleFrChangeAngleDropDown(WebDriver driver, int num, String tc) throws IOException {
+		By changeAngleNum =  By.xpath("/html/body/div/div/div[2]/div/div/div/div[2]/ul/li["+num+"]");
+		elementExist(driver, changeAngleNum, true, tc);
+		driver.findElement(changeAngleNum).click();
+		return this;
+	}
 	public VehiclePreview clickCreateNewSet(WebDriver driver) throws IOException {
 		driver.findElement(dealerShipName).click();
 		return this;

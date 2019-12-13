@@ -4,7 +4,7 @@ package AdminPortal;
 * @author Zhoul
 * Initial date: 2019.05.01 based on AUTOPXOPS-1744
 * Created by Zhoul...modified by Zhoul...improved by Zhoul...updated by Zhoul...
-* 
+* * Runnable jar: java -jar AdminPortal.jar
 * https://watirmelon.blog/
 * e2e tests - end-to-end testing: 
 * 1. They test a complete user flow through an application from start to finish (end-to-end)
@@ -2209,46 +2209,52 @@ public class AdminPortalController extends Comlibs {
 		tc = "Vehicle Preview_02";
 
 		UserListP.clickVehiclePreview(driver, tc);
-		ac.Wait(wt);
+		ac.Wait(wt*2);
 		VehiclePreview vpP = new VehiclePreview(driver);
-		tc = "Vehicle Preview_03";
-		
-		
-		
-//		String searchText = "1GKKNPLS4KZ142418"; // 1C6SRFHT4LN136212 (2020 RAM 1500), 1GKKNPLS4KZ142418 (GM Buick 2019)
-//		tc = "TC236128_01";
-//		TriageVinStatuP.inputSearch(driver, searchText, tc);
-//		TriageVinStatuP.clickSubmit(driver, tc);
-//		ac.Wait(wt * 5);
-//		String resoltData = TriageVinStatuP.retrieveResoltData(driver, tc);
-//		boolean getDataError1 = resoltData.contains("build data found");
-//		boolean getDataError2 = resoltData.contains("vin was found in VINpx database for the following dealers");
-//		boolean getDataError3 = resoltData.contains("Getting MV links");// FCA
-//		boolean getDataError4 = resoltData.contains("Possible Flik link");// GM
-//		if (getDataError1 && getDataError2 && (getDataError3 || getDataError4)) {
-//			// ok
-//			ac.rwExcel(tc, true, "Triage Vin Status Results GM Vin", "GM VIN Result data:" + resoltData);
-//		} else {
-//			ac.rwExcel(tc, false, "Triage Vin Status Results GM Vin", "GM VIN Result data:" + resoltData);
-//		}
-//		ac.Wait(wt);
-//		searchText = "1C6SRFHT4LN136212"; // 1C6SRFHT4LN136212 (2020 RAM 1500), 1GKKNPLS4KZ142418 (GM Buick 2019)
-//		tc = "TC236131_02";
-//		TriageVinStatuP.inputSearch(driver, searchText, tc);
-//		TriageVinStatuP.clickSubmit(driver, tc);
-//		ac.Wait(wt * 5);
-//		resoltData = TriageVinStatuP.retrieveResoltData(driver, tc);
-//		getDataError1 = resoltData.contains("build data found");
-//		getDataError2 = resoltData.contains("vin was found in VINpx database for the following dealers");
-//		getDataError3 = resoltData.contains("Getting MV links");// FCA
-//		getDataError4 = resoltData.contains("Possible Flik link");// GM
-//		if (getDataError1 && getDataError2 && (getDataError3 || getDataError4)) {
-//			// ok
-//			ac.rwExcel(tc, true, "Triage Vin Status Results FCA Vin", "FCA VIN Result data:" + resoltData);
-//		} else {
-//			ac.rwExcel(tc, false, "Triage Vin Status Results FCA Vin", "FCA VIN Result data:" + resoltData);
-//		}
-//		ac.Wait(wt);
+		tc = "Click Change Angle button_01";
+		vpP.clickChangeAngleDropDown(driver, tc);
+		ac.Wait(wt);
+		tc = "Click Change Angle button_01";
+		vpP.selectOneAngleFrChangeAngleDropDown(driver, 1, tc);
+		ac.Wait(wt);
+		vpP.clickChangeAngleDropDown(driver, tc);
+		ac.Wait(wt);
+		tc = "Click Change Angle button_02";
+		vpP.selectOneAngleFrChangeAngleDropDown(driver, 2, tc);
+		ac.Wait(wt);
+		vpP.clickChangeAngleDropDown(driver, tc);
+		ac.Wait(wt);
+		tc = "Click Change Angle button_03";
+		vpP.selectOneAngleFrChangeAngleDropDown(driver, 3, tc);
+		ac.Wait(wt);
+		vpP.clickChangeAngleDropDown(driver, tc);
+		ac.Wait(wt);
+		tc = "Click Change Angle button_04";
+		vpP.selectOneAngleFrChangeAngleDropDown(driver, 4, tc);
+		ac.Wait(wt);
+		vpP.clickChangeAngleDropDown(driver, tc);
+		ac.Wait(wt);
+		tc = "Click Change Angle button_05";
+		vpP.selectOneAngleFrChangeAngleDropDown(driver, 5, tc);
+		ac.Wait(wt);
+		vpP.clickChangeAngleDropDown(driver, tc);
+		ac.Wait(wt);
+		tc = "Click Change Angle button_06";
+		vpP.selectOneAngleFrChangeAngleDropDown(driver, 6, tc);
+		ac.Wait(wt);
+		vpP.clickChangeAngleDropDown(driver, tc);
+		ac.Wait(wt);
+		tc = "Click Change Angle button_07";
+		vpP.selectOneAngleFrChangeAngleDropDown(driver, 7, tc);
+		ac.Wait(wt);
+		vpP.clickChangeAngleDropDown(driver, tc);
+		ac.Wait(wt);
+		tc = "Click Change Angle button_08";
+		vpP.selectOneAngleFrChangeAngleDropDown(driver, 8, tc);
+		ac.Wait(wt);
+		vpP.clickChangeAngleDropDown(driver, tc);
+		ac.Wait(wt);
+
 
 		//// *************************Vehicle PreviewBtn******************************************************
 	}
@@ -3079,6 +3085,7 @@ public class AdminPortalController extends Comlibs {
 		String versionNum = prop.getProperty("AUTOpx.versionNum");
 		String tBrowser = prop.getProperty("AUTOpx.browser");
 		String envDevice = prop.getProperty("AUTOpx.envDevice");
+		String onScreen = prop.getProperty("AUTOpx.onScreen");
 		String accountEmail = prop.getProperty(env + ".AllProdEmail");
 		// String accountPS = prop.getProperty(env + ".AllProdPassword");
 		String baseURL = prop.getProperty(env + ".AdminPortalBaseURL");
@@ -3100,7 +3107,7 @@ public class AdminPortalController extends Comlibs {
 
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			if (!tBrowser.equalsIgnoreCase("Chromexxxxxxxxx")) { // only Chrome doesn't work since Chrome updated on Jul, 2017, works on Dec 13,2017 webdriver ver3.8.5
-				bc.SelecBroswerResolution(driver, envDevice);
+				bc.SelecBroswerResolution(driver, envDevice, onScreen);
 			}
 			bc.rwExcel("", "****** Testing started ******" + (i + 1), "");
 			bc.rwExcel("", "Test Browser", tBrowser);
