@@ -1795,7 +1795,7 @@ public class AdminPortalController extends Comlibs {
 
 	}
 
-	public static void NewVehiclesAndWhiteList(WebDriver driver, String brw, String versionNum, String envment,
+	public static void NewVehicles(WebDriver driver, String brw, String versionNum, String envment,
 			String checkEmail) throws Exception {
 
 		// Load environment parameters
@@ -1899,9 +1899,9 @@ public class AdminPortalController extends Comlibs {
 		//// *************************New Vehicle and WhiteListBtn******************************************************
 		tc = "NewVehicleAndWhiteList_01";
 
-		UserListP.clickNewVehiclesAndWhiteList(driver, tc);
+		UserListP.clickNewVehicles(driver, tc);
 		ac.Wait(wt * 2);
-		NewVehiclesAndWhiteList NewVehicleAndWhiteListP = new NewVehiclesAndWhiteList(driver);
+		NewVehicles NewVehicleAndWhiteListP = new NewVehicles(driver);
 		String searchText = "camaro"; // "Silverado 3500HD ";// "camaro"
 		tc = "TC236111";
 		NewVehicleAndWhiteListP.inputSearch(driver, searchText, tc);
@@ -1952,11 +1952,35 @@ public class AdminPortalController extends Comlibs {
 			ac.Wait(wt);
 			NewVehicleAndWhiteListP.clickXBtn(driver, tc);
 			// -------------------------------------Dealers-----------------------------------
-
 		}
-
+		// -------------------------------------Completion button-----------------------------------
+		searchText = ""; // "Silverado 3500HD ";// "camaro"
+		tc = "TC237412_0";
+		UserListP.clickTriageVinStatus(driver, tc);
+		UserListP.clickNewVehicles(driver, tc);
+		tc = "TC237412_01";
 		ac.Wait(wt);
-
+		int recordRow=2;
+		int bgCol=2;
+		int bgRow=2;
+		NewVehicleAndWhiteListP.clickCompletionBtn(driver, recordRow, tc);
+		ac.Wait(wt*2);
+		NewVehicleAndWhiteListP.selectBackground(driver, bgCol, bgRow, tc);
+		NewVehicleAndWhiteListP.inputPattern(driver, "USD00BUS03[1-2][A-C][0]", tc);
+		NewVehicleAndWhiteListP.inputNotes(driver, "Selected bg "+bgCol+" Colnum "+bgRow+" Row.", tc);
+		NewVehicleAndWhiteListP.clickCancelBtn(driver, tc);
+		ac.Wait(wt);
+		recordRow=10;// ok, viewable
+		bgCol=1;
+		bgRow=2; //5 is not viewable. need to scroll mouse up to see that.
+		tc = "TC237412_02";
+		NewVehicleAndWhiteListP.clickCompletionBtn(driver, recordRow, tc);
+		ac.Wait(wt*2);
+		NewVehicleAndWhiteListP.selectBackground(driver, bgCol, bgRow, tc);
+		NewVehicleAndWhiteListP.inputPattern(driver, "USD00BUS03[1-2][A-C][0]", tc);
+		NewVehicleAndWhiteListP.inputNotes(driver, "Selected bg "+bgCol+" Colnum "+bgRow+" Row.", tc);
+		NewVehicleAndWhiteListP.clickCancelBtn(driver, tc);
+		ac.Wait(wt);
 		//// *************************New Vehicle and WhiteListBtn******************************************************
 	}
 	public static void TriageVinStatus(WebDriver driver, String brw, String versionNum, String envment)
@@ -3144,9 +3168,9 @@ public class AdminPortalController extends Comlibs {
 			bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
 			EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
 
-			//// 4. NewVehicle and WhiteList:
+			//// 4. NewVehicles:
 			loadURL(driver, baseURL, env);
-			NewVehiclesAndWhiteList(driver, tBrowser, versionNum, env, chkEmail);
+			NewVehicles(driver, tBrowser, versionNum, env, chkEmail);
 
 			//// 5. Triage Vin Status:
 			loadURL(driver, baseURL, env);

@@ -63,7 +63,7 @@ public class UserList extends Comlibs {
 	By nextLocator = By.xpath("//*[@id=\"dealerTable_next\"]");
 	By firstNameSortLocator = By.xpath("//*[@id=\"dealerTable\"]/thead/tr/th[4]");
 	By EnableDisableVehiclesLocator = By.xpath("//*[@id=\"enableMenu\"]");
-	By NewVehiclesAndWhiteList = By.xpath("//*[@id=\"whitelistMenu\"]");
+	By NewVehicles = By.xpath("//*[@id=\"whitelistMenu\"]");
 	By triageVinStatus = By.xpath("//*[@id=\"vinStatus\"]/span");
 	By vehiclePreview = By.xpath("//*[@id=\"vehiclePreviewMenu\"]");
     By whitelistDashboardLocator=By.xpath("//*[@id=\"whitelistDashboardMenu\"]");
@@ -594,10 +594,10 @@ public class UserList extends Comlibs {
 		return this;
 	}
 
-	public NewVehiclesAndWhiteList clickNewVehiclesAndWhiteList(WebDriver driver, String tc) throws IOException {
-		elementExist(driver, NewVehiclesAndWhiteList, true, tc);
-		driver.findElement(NewVehiclesAndWhiteList).click();
-		return new NewVehiclesAndWhiteList(driver);
+	public NewVehicles clickNewVehicles(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, NewVehicles, true, tc);
+		driver.findElement(NewVehicles).click();
+		return new NewVehicles(driver);
 	}
 
 	public TriageVinStatus clickTriageVinStatus(WebDriver driver, String tc) throws IOException {
