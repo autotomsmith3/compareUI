@@ -42,18 +42,26 @@ public class NewVehicles extends Comlibs {
 	// By delerCoiuntPreViewLink = By.xpath("//*[@id=\"previousDealers\"]");
 
 	By xBtn = By.xpath("/html/body/div[4]/div/div[1]/div/div[2]/div/button/span");// /html/body/div[4]/div/div[1]/div/div[2]/div/button
+	By editXBtn = By.xpath("/html/body/div[5]/div/div[1]/div/div[2]/div/button/span");
 	By popupElements = By.xpath("/html/body/div[4]/div/div[2]/div/div/div");// /html/body/div[4]/div/div[2]/div/div/div[1]/li
 	// By dealersCount = By.xpath("/html/body/div[1]/div/div[2]/div/div/div/div/div/div[2]/div[2]/div/div[5]/div[2]/text()");
 	By completionBtnOld = By.cssSelector("div.webix_column:nth-child(11) > div:nth-child(3)");
 
-	By patternField = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[1]/div/input");
+	By patternField = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[1]/div/input");// get the parent first, you will see sub table and input and get table one then replace table with input
 	By notesField = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[2]/div/input");
+	// /html/body/div[5]/div/div[2]/div/div[2]/div/div[2]/div/input
+	By editNotesField = By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div/div[2]/div/input");
+	By editCancelBtn = By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div/div[3]/div[1]/div/button");
+
+	By editSaveBtn = By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div/div[3]/div[2]");
+
 	By cancelBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[3]/div[1]/div/button");
-	 By saveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[3]/div[2]");
-	 
-	 By saveActiveBtn =  By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[3]/div[2]/div/button");
-	 By xxxx = By.xpath("");
-	// By xxxxxx = By.xpath("");
+
+	By saveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[3]/div[2]");
+	By editSaveActiveBtn = By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div/div[3]/div[2]/div/button");
+	By saveActiveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[3]/div[2]/div/button");
+	By assignedTo = By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div/div[1]/div/input");
+	By status = By.xpath("/html/body/div[5]/div/div[2]/div/div[1]/div/span");
 	// By xxxxxx = By.xpath("");
 	// By xxxxxx = By.xpath("");
 
@@ -89,36 +97,79 @@ public class NewVehicles extends Comlibs {
 		return this;
 	}
 
+	public NewVehicles clickStatus(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, status, true, tc);
+		driver.findElement(status).click();
+		return this;
+	}
+
+	public NewVehicles clickEditXBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, editXBtn, true, tc);
+		driver.findElement(editXBtn).click();
+		return this;
+	}
+
+	public NewVehicles clickEditBtn(WebDriver driver, int num, String tc) throws IOException {
+		By editBtn = By.cssSelector("div.webix_column:nth-child(11) > div:nth-child(" + num + ") > a:nth-child(1)");
+		elementExist(driver, editBtn, true, tc);
+		driver.findElement(editBtn).click();
+		return this;
+	}
+
 	public NewVehicles clickCompletionBtn(WebDriver driver, int num, String tc) throws IOException {
-		By completionBtn = By.cssSelector("div.webix_column:nth-child(11) > div:nth-child("+num+") > a:nth-child(1)");
+		By completionBtn = By
+				.cssSelector("div.webix_column:nth-child(11) > div:nth-child(" + num + ") > a:nth-child(2)");
+		// div.webix_column:nth-child(11) > div:nth-child(4) > a:nth-child(2)
 		elementExist(driver, completionBtn, true, tc);
 		driver.findElement(completionBtn).click();
 		return this;
 	}
 
-	public NewVehicles clickCancelBtn(WebDriver driver,  String tc) throws IOException {
+	public NewVehicles clickCancelBtn(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, cancelBtn, true, tc);
 		driver.findElement(cancelBtn).click();
 		return this;
 	}
 
-	public NewVehicles clickSaveBtn(WebDriver driver, String tc) throws IOException {
-		// check if SAVE button is active
-		//not active  /html/body/div[4]/div/div[2]/div/div[2]/div/div[3]/div[2]/div[1]/button
-		// active     /html/body/div[4]/div/div[2]/div/div[2]/div/div[3]/div[2]/div/button
+	public NewVehicles clickEditCancelBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, editCancelBtn, true, tc);
+		driver.findElement(editCancelBtn).click();
+		return this;
+	}
 
+	public NewVehicles clickSaveBtn(WebDriver driver, String tc) throws IOException {
 		if (elementExist(driver, saveActiveBtn, true, tc)) {
 			driver.findElement(saveActiveBtn).click();
-		}else{
+		} else {
 			rwExcel(tc, false, "Click on Save button", "it seems Save butoon is not active or does not exist.");
-		};
+		}
+		;
 
 		return this;
 	}
 
+	public NewVehicles clickEditSaveBtn(WebDriver driver, String tc) throws IOException {
+		if (elementExist(driver, editSaveActiveBtn, true, tc)) {
+			driver.findElement(editSaveActiveBtn).click();
+		} else {
+			rwExcel(tc, false, "Click on Save button", "it seems Save butoon is not active or does not exist.");
+		}
+		;
+
+		return this;
+	}
+
+	public NewVehicles selectStatus(WebDriver driver, int row, String tc) throws IOException {
+		By status = By.xpath("/html/body/div[4]/div/div[2]/div/div/div[" + row + "]"); /// html/body/div[4]/div/div[2]/div/div/div[4] = Flagged for Vendor to Fix, Stock applied.
+		elementExist(driver, status, true, tc);
+		driver.findElement(status).click();
+		return this;
+	}
+
 	public NewVehicles selectBackground(WebDriver driver, int col, int row, String tc) throws IOException {
-		By background = By.cssSelector(".webix_dataview > div:nth-child(1) > div:nth-child("+col+") > div:nth-child("+row+") > div:nth-child(1) > div:nth-child(1) > img:nth-child(1)");
-		//  .webix_dataview > div:nth-child(1) > div:nth-child(col) > div:nth-child(row) > div:nth-child(1) > div:nth-child(1) > img:nth-child(1)
+		By background = By.cssSelector(".webix_dataview > div:nth-child(1) > div:nth-child(" + col
+				+ ") > div:nth-child(" + row + ") > div:nth-child(1) > div:nth-child(1) > img:nth-child(1)");
+		// .webix_dataview > div:nth-child(1) > div:nth-child(col) > div:nth-child(row) > div:nth-child(1) > div:nth-child(1) > img:nth-child(1)
 		elementExist(driver, background, true, tc);
 		driver.findElement(background).click();
 		return this;
@@ -126,13 +177,31 @@ public class NewVehicles extends Comlibs {
 
 	public NewVehicles inputPattern(WebDriver driver, String anyText, String tc) throws IOException {
 		Wait(1);
+		elementExist(driver, patternField, true, tc);
 		driver.findElement(patternField).clear();
 		driver.findElement(patternField).sendKeys(anyText);
 		return this;
 	}
 
+	public NewVehicles inputAssignedTo(WebDriver driver, String anyText, String tc) throws IOException {
+		Wait(1);
+		elementExist(driver, assignedTo, true, tc);
+		driver.findElement(assignedTo).clear();
+		driver.findElement(assignedTo).sendKeys(anyText);
+		return this;
+	}
+
+	public NewVehicles inputEditNotes(WebDriver driver, String anyText, String tc) throws IOException {
+		Wait(1);
+		elementExist(driver, editNotesField, true, tc);
+		driver.findElement(editNotesField).clear();
+		driver.findElement(editNotesField).sendKeys(anyText);
+		return this;
+	}
+
 	public NewVehicles inputNotes(WebDriver driver, String anyText, String tc) throws IOException {
 		Wait(1);
+		elementExist(driver, notesField, true, tc);
 		driver.findElement(notesField).clear();
 		driver.findElement(notesField).sendKeys(anyText);
 		return this;

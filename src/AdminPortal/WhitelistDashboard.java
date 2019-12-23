@@ -28,6 +28,19 @@ public class WhitelistDashboard extends Comlibs {
 	}
 
 	By searchField = By.cssSelector(".webix_ss_filter > input:nth-child(1)");
+	By pattern = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[1]/div/input");
+	By notes = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[2]/div/input");
+	By xBtn = By.xpath("/html/body/div[4]/div/div[1]/div/div[2]/div/button/span");
+	By cancelBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[3]/div[1]/div/button");
+	By saveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[3]/div[2]");
+	By saveActiveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[3]/div[2]/div/button");
+	//
+
+	By xx = By.xpath("");
+	By xxx = By.xpath("");
+	By xxxx = By.xpath("");
+	By xxxxx = By.xpath("");
+	By xxxxxx = By.xpath("");
 
 	public WhitelistDashboard inputSearch(WebDriver driver, String searchText, String tc) throws IOException {
 		elementExist(driver, searchField, true, tc);
@@ -36,11 +49,78 @@ public class WhitelistDashboard extends Comlibs {
 	}
 
 	public WhitelistDashboard clickDeleteIcon(WebDriver driver, int num, String tc) throws IOException {
-		By deleteIcon = By.cssSelector("div.webix_column:nth-child(9) > div:nth-child(" + num + ")");//1,2,3...
+		By deleteIcon = By.cssSelector("div.webix_column:nth-child(9) > div:nth-child(" + num + ")");// 1,2,3...
 		elementExist(driver, deleteIcon, true, tc);
 		// driver.findElement(deleteIcon).click(); //Need to find a way to add record then this can be used
 		return this;
 
 	}
 
+	public WhitelistDashboard clickEditIcon(WebDriver driver, int num, String tc) throws IOException {
+		By editIcon = By.cssSelector("div.webix_column:nth-child(9) > div:nth-child(" + num + ") > a:nth-child(1)");// 1,2,3...
+		elementExist(driver, editIcon, true, tc);
+		driver.findElement(editIcon).click(); //
+		return this;
+
+	}
+
+	public WhitelistDashboard selectBackground(WebDriver driver, int col, int row, String tc) throws IOException {
+		By background = By.cssSelector(".webix_dataview > div:nth-child(1) > div:nth-child(" + col
+				+ ") > div:nth-child(" + row + ") > div:nth-child(1) > div:nth-child(1) > img:nth-child(1)");
+		// .webix_dataview > div:nth-child(1) > div:nth-child(col) > div:nth-child(row) > div:nth-child(1) > div:nth-child(1) > img:nth-child(1)
+		elementExist(driver, background, true, tc);
+		driver.findElement(background).click();
+		return this;
+	}
+
+	public WhitelistDashboard inputPattern(WebDriver driver, String anyText, String tc) throws IOException {
+		Wait(1);
+		elementExist(driver, pattern, true, tc);
+		driver.findElement(pattern).clear();
+		driver.findElement(pattern).sendKeys(anyText);
+		return this;
+	}
+
+	public String getPatternString(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, pattern, true, tc);
+		String patternS = "";
+		try {
+			patternS = driver.findElement(pattern).getText();
+		} catch (Exception e) {
+			rwExcel(tc, false, "Get Pattern from Whitelist Edit entery pop-up",
+					"it seems Pattern field showing empty!");
+		}
+
+		return patternS;
+	}
+
+	public WhitelistDashboard inputNotes(WebDriver driver, String anyText, String tc) throws IOException {
+		Wait(1);
+		driver.findElement(notes).clear();
+		driver.findElement(notes).sendKeys(anyText);
+		return this;
+	}
+
+	public WhitelistDashboard clickCancelBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, cancelBtn, true, tc);
+		driver.findElement(cancelBtn).click();
+		return this;
+	}
+
+	public WhitelistDashboard clickSaveBtn(WebDriver driver, String tc) throws IOException {
+		if (elementExist(driver, saveActiveBtn, true, tc)) {
+			driver.findElement(saveActiveBtn).click();
+		} else {
+			rwExcel(tc, false, "Click on Save button", "it seems Save butoon is not active or does not exist.");
+		}
+		;
+
+		return this;
+	}
+
+	public WhitelistDashboard clickXBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, xBtn, true, tc);
+		driver.findElement(xBtn).click();
+		return this;
+	}
 }

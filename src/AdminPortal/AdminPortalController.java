@@ -1795,8 +1795,8 @@ public class AdminPortalController extends Comlibs {
 
 	}
 
-	public static void NewVehicles(WebDriver driver, String brw, String versionNum, String envment,
-			String checkEmail) throws Exception {
+	public static void NewVehicles(WebDriver driver, String brw, String versionNum, String envment, String checkEmail)
+			throws Exception {
 
 		// Load environment parameters
 		Properties prop = new Properties();
@@ -1880,7 +1880,7 @@ public class AdminPortalController extends Comlibs {
 		String alertmessage = "";
 		// ====================
 		Comlibs ac = new Comlibs();
-		ac.rwExcel("", "*********New Vehicle and WhiteListBtn**********", "");
+		ac.rwExcel("", "*********New Vehicle **********", "");
 		int count = 0;
 		int dataLength = 54;
 		String[] metadataValues = new String[dataLength + 1];
@@ -1889,6 +1889,15 @@ public class AdminPortalController extends Comlibs {
 		// =================================================
 		VDVILogin loginP = new VDVILogin(driver);
 		int dealerN = 0;
+		int recordRow = 0;
+		int bgCol = 0;
+		int bgRow = 0;
+		int assigned = 0;
+		// 1 - "Received, Not Reviewed",
+		// 2 - "Under Review",
+		// 3 - "Flagged for Scale Update",
+		// 4 - "Flagged for Vendor to Fix, Stock applied",
+		// 5 - "Flagged for Vendor to Fix, Unable to use Stock".
 		String dealerSN = "";
 		loginP.login(driver, accountEmail, accountPS, tc);
 		ac.Wait(wt);
@@ -1896,29 +1905,29 @@ public class AdminPortalController extends Comlibs {
 
 		UserList UserListP = new UserList(driver);
 
-		//// *************************New Vehicle and WhiteListBtn******************************************************
-		tc = "NewVehicleAndWhiteList_01";
+		//// *************************New Vehicle Btn******************************************************
+		tc = "NewVehicle_01";
 
 		UserListP.clickNewVehicles(driver, tc);
 		ac.Wait(wt * 2);
-		NewVehicles NewVehicleAndWhiteListP = new NewVehicles(driver);
+		NewVehicles NewVehicleP = new NewVehicles(driver);
 		String searchText = "camaro"; // "Silverado 3500HD ";// "camaro"
 		tc = "TC236111";
-		NewVehicleAndWhiteListP.inputSearch(driver, searchText, tc);
+		NewVehicleP.inputSearch(driver, searchText, tc);
 
 		int testRows = 4;// 2017, 2018, 2019, 2020
 		for (int i = 1; i <= testRows; i++) {
 			// -------------------------------------Vehicles-----------------------------------
 			tc = "TC236111_01_" + i;
-			int records = NewVehicleAndWhiteListP.returnNewVehicleRecordsFrPage(driver, tc);
+			int records = NewVehicleP.returnNewVehicleRecordsFrPage(driver, tc);
 			tc = "TC236111_2_" + i;
-			int vehicleCountFrPage = NewVehicleAndWhiteListP.returnVehicleUsageFrPage(driver, i, tc);
+			int vehicleCountFrPage = NewVehicleP.returnVehicleUsageFrPage(driver, i, tc);
 
 			tc = "TC236111_03_" + i;
-			NewVehicleAndWhiteListP.clickVehicleUsagePreViewLink(driver, i, tc);
+			NewVehicleP.clickVehicleUsagePreViewLink(driver, i, tc);
 			ac.Wait(wt);
 			tc = "TC236111_4_" + i;
-			int vehicleCountFrLink = NewVehicleAndWhiteListP.returnDealersFrPopup(driver, tc);
+			int vehicleCountFrLink = NewVehicleP.returnDealersFrPopup(driver, tc);
 			if (vehicleCountFrLink == vehicleCountFrPage) {
 				ac.rwExcel(tc, true, "Verify Vehicle Usage. Row=" + i, "Vehicle Usage matches the count in link");
 			} else {
@@ -1928,19 +1937,19 @@ public class AdminPortalController extends Comlibs {
 								+ vehicleCountFrLink + ".  -- known issue, currently not implemented.");
 			}
 
-			NewVehicleAndWhiteListP.clickXBtn(driver, tc);
+			NewVehicleP.clickXBtn(driver, tc);
 			// -------------------------------------Vehicles-----------------------------------
 
 			// -------------------------------------Dealers-----------------------------------
 			tc = "TC236113_01_" + i;
-			int dealerCountFrPage = NewVehicleAndWhiteListP.returnDealersFrPage(driver, i, tc);
+			int dealerCountFrPage = NewVehicleP.returnDealersFrPage(driver, i, tc);
 
 			tc = "TC236113_02_" + i;
-			NewVehicleAndWhiteListP.clickDealerCountPreViewLink(driver, i, tc);
+			NewVehicleP.clickDealerCountPreViewLink(driver, i, tc);
 			ac.Wait(wt);
 
 			tc = "TC236113_03_" + i;
-			int dealerCountFrLink = NewVehicleAndWhiteListP.returnDealersFrPopup(driver, tc);
+			int dealerCountFrLink = NewVehicleP.returnDealersFrPopup(driver, tc);
 			if (dealerCountFrLink == dealerCountFrPage) {
 				ac.rwExcel(tc, true, "Verify Dealer Count. Row=" + i, "Dealer Count matches the count in link");
 			} else {
@@ -1950,9 +1959,75 @@ public class AdminPortalController extends Comlibs {
 			}
 
 			ac.Wait(wt);
-			NewVehicleAndWhiteListP.clickXBtn(driver, tc);
+			NewVehicleP.clickXBtn(driver, tc);
 			// -------------------------------------Dealers-----------------------------------
 		}
+
+		// -------------------------------------Edit button-----------------------------------
+		searchText = ""; // "Silverado 3500HD ";// "camaro"
+		tc = "NewVehicleEdit_0";
+		UserListP.clickTriageVinStatus(driver, tc);
+		UserListP.clickNewVehicles(driver, tc);
+		tc = "NewVehicleEdit_01";
+		ac.Wait(wt);
+		recordRow = 3;
+		assigned = 2;
+		// 1 - "Received, Not Reviewed",
+		// 2 - "Under Review",
+		// 3 - "Flagged for Scale Update",
+		// 4 - "Flagged for Vendor to Fix, Stock applied",
+		// 5 - "Flagged for Vendor to Fix, Unable to use Stock".
+		NewVehicleP.clickEditBtn(driver, recordRow, tc);
+		ac.Wait(wt * 2);
+		NewVehicleP.clickStatus(driver, tc);
+		NewVehicleP.selectStatus(driver, assigned, tc);
+		NewVehicleP.inputAssignedTo(driver, "Tester_01", tc);
+		NewVehicleP.inputEditNotes(driver, "Tester_Notes_01", tc);
+		NewVehicleP.clickEditCancelBtn(driver, tc);
+		ac.Wait(wt);
+		tc = "NewVehicleEdit_02";
+		NewVehicleP.clickEditBtn(driver, recordRow, tc);
+		ac.Wait(wt * 2);
+		assigned = 1;
+		NewVehicleP.clickStatus(driver, tc);
+		NewVehicleP.selectStatus(driver, assigned, tc);
+		NewVehicleP.inputAssignedTo(driver, "Tester_02", tc);
+		NewVehicleP.inputEditNotes(driver, "Tester_Notes_02", tc);
+		NewVehicleP.clickEditCancelBtn(driver, tc);
+		ac.Wait(wt);
+		tc = "NewVehicleEdit_03";
+		NewVehicleP.clickEditBtn(driver, recordRow, tc);
+		ac.Wait(wt * 2);
+		assigned = 5;
+		NewVehicleP.clickStatus(driver, tc);
+		NewVehicleP.selectStatus(driver, assigned, tc);
+		NewVehicleP.inputAssignedTo(driver, "Tester_03", tc);
+		NewVehicleP.inputEditNotes(driver, "Tester_Notes_03", tc);
+		NewVehicleP.clickEditCancelBtn(driver, tc);
+		ac.Wait(wt);
+		tc = "NewVehicleEdit_04";
+		NewVehicleP.clickEditBtn(driver, recordRow, tc);
+		ac.Wait(wt * 2);
+		assigned = 5;
+		NewVehicleP.clickStatus(driver, tc);
+		NewVehicleP.selectStatus(driver, assigned, tc);
+		NewVehicleP.inputAssignedTo(driver, "Tester_04", tc);
+		NewVehicleP.inputEditNotes(driver, "Tester_Notes_04", tc);
+		NewVehicleP.clickEditXBtn(driver, tc);
+		// NewVehicleP.clickEditSaveBtn(driver, tc);
+		ac.Wait(wt);
+		tc = "NewVehicleEdit_05";
+		NewVehicleP.clickEditBtn(driver, recordRow, tc);
+		ac.Wait(wt * 2);
+		assigned = 5;
+		NewVehicleP.clickStatus(driver, tc);
+		NewVehicleP.selectStatus(driver, assigned, tc);
+		NewVehicleP.inputAssignedTo(driver, "Tester_05", tc);
+		NewVehicleP.inputEditNotes(driver, "Tester_Notes_05", tc);
+		// NewVehicleP.clickEditXBtn(driver, tc);
+		NewVehicleP.clickEditSaveBtn(driver, tc);
+		ac.Wait(wt);
+
 		// -------------------------------------Completion button-----------------------------------
 		searchText = ""; // "Silverado 3500HD ";// "camaro"
 		tc = "TC237412_0";
@@ -1960,29 +2035,70 @@ public class AdminPortalController extends Comlibs {
 		UserListP.clickNewVehicles(driver, tc);
 		tc = "TC237412_01";
 		ac.Wait(wt);
-		int recordRow=2;
-		int bgCol=2;
-		int bgRow=2;
-		NewVehicleAndWhiteListP.clickCompletionBtn(driver, recordRow, tc);
-		ac.Wait(wt*2);
-		NewVehicleAndWhiteListP.selectBackground(driver, bgCol, bgRow, tc);
-		NewVehicleAndWhiteListP.inputPattern(driver, "USD00BUS03[1-2][A-C][0]", tc);
-		NewVehicleAndWhiteListP.inputNotes(driver, "Selected bg "+bgCol+" Colnum "+bgRow+" Row.", tc);
-		NewVehicleAndWhiteListP.clickCancelBtn(driver, tc);
+		// recordRow=2;
+		bgCol = 2;
+		bgRow = 2;
+		String pattern = "USD00BUS03[1-2][A-C][0]";
+		NewVehicleP.clickCompletionBtn(driver, recordRow, tc);
+		ac.Wait(wt * 2);
+		NewVehicleP.selectBackground(driver, bgCol, bgRow, tc);
+		NewVehicleP.inputPattern(driver, pattern, tc);
+		NewVehicleP.inputNotes(driver, "Selected bg " + bgCol + " Colnum " + bgRow + " Row.", tc);
+		NewVehicleP.clickCancelBtn(driver, tc);
 		ac.Wait(wt);
-		recordRow=10;// ok, viewable
-		bgCol=1;
-		bgRow=2; //5 is not viewable. need to scroll mouse up to see that.
+		recordRow = 10;// ok, viewable
+		bgCol = 1;
+		bgRow = 2; // 5 is not viewable. need to scroll mouse up to see that.
 		tc = "TC237412_02";
-		NewVehicleAndWhiteListP.clickCompletionBtn(driver, recordRow, tc);
-		ac.Wait(wt*2);
-		NewVehicleAndWhiteListP.selectBackground(driver, bgCol, bgRow, tc);
-		NewVehicleAndWhiteListP.inputPattern(driver, "USD00BUS03[1-2][A-C][0]", tc);
-		NewVehicleAndWhiteListP.inputNotes(driver, "Selected bg "+bgCol+" Colnum "+bgRow+" Row.", tc);
-		NewVehicleAndWhiteListP.clickCancelBtn(driver, tc);
+		NewVehicleP.clickCompletionBtn(driver, recordRow, tc);
+		ac.Wait(wt * 2);
+		NewVehicleP.selectBackground(driver, bgCol, bgRow, tc);
+		NewVehicleP.inputPattern(driver, pattern, tc);
+		NewVehicleP.inputNotes(driver, "Selected bg " + bgCol + " Colnum " + bgRow + " Row.", tc);
+		NewVehicleP.clickSaveBtn(driver, tc);
 		ac.Wait(wt);
-		//// *************************New Vehicle and WhiteListBtn******************************************************
+
+		// -------------------------------------Check completed record in whitelist page-----------------------------------
+		tc = "check complelted record in whitelist page_01";
+		UserListP.clickWhitelistDashboard(driver, tc);
+		WhitelistDashboard wlP = new WhitelistDashboard(driver);
+		tc = "Edit Whitelist Dashboard_01";
+		wlP.inputSearch(driver, pattern, tc);
+		wlP.clickEditIcon(driver, 1, tc);
+		bgCol = 1;
+		bgRow = 2; // 5 is not viewable. need to scroll mouse up to see that.
+		wlP.selectBackground(driver, bgCol, bgRow, tc);
+
+		String patternPre = wlP.getPatternString(driver, tc);
+		if (patternPre.equals(pattern)) {
+			ac.rwExcel(tc, true, "Get Pattern String from Edit Whitelist page", "Pattern shows");
+		} else {
+			ac.rwExcel(tc, false, "Get Pattern String from Edit Whitelist page", "Pattern does not show!");
+		}
+		wlP.inputPattern(driver, pattern + "_Edited", tc);
+		wlP.inputNotes(driver, "Edited", tc);
+		wlP.clickCancelBtn(driver, tc);
+		//
+		// UserListP.clickTriageVinStatus(driver, tc);
+		// UserListP.clickWhitelistDashboard(driver, tc);
+		tc = "Edit Whitelist Dashboard_02";
+		wlP.inputSearch(driver, pattern, tc);
+		wlP.clickEditIcon(driver, 1, tc);
+		bgCol = 2;
+		bgRow = 2; // 5 is not viewable. need to scroll mouse up to see that.
+		wlP.selectBackground(driver, bgCol, bgRow, tc);
+		wlP.inputPattern(driver, pattern + "_Edited", tc);
+		wlP.inputNotes(driver, "Edited", tc);
+		wlP.clickSaveBtn(driver, tc);
+		tc = "Edit Whitelist Dashboard_03";
+		wlP.inputSearch(driver, pattern, tc);
+		wlP.clickEditIcon(driver, 1, tc);
+
+		wlP.clickDeleteIcon(driver, 1, tc);
+
+		//// *************************New Vehicle Btn******************************************************
 	}
+
 	public static void TriageVinStatus(WebDriver driver, String brw, String versionNum, String envment)
 			throws Exception {
 
@@ -2127,6 +2243,7 @@ public class AdminPortalController extends Comlibs {
 
 		//// *************************New Vehicle and WhiteListBtn******************************************************
 	}
+
 	public static void VehiclePreview(WebDriver driver, String brw, String versionNum, String envment)
 			throws Exception {
 
@@ -2233,7 +2350,7 @@ public class AdminPortalController extends Comlibs {
 		tc = "Vehicle Preview_02";
 
 		UserListP.clickVehiclePreview(driver, tc);
-		ac.Wait(wt*2);
+		ac.Wait(wt * 2);
 		VehiclePreview vpP = new VehiclePreview(driver);
 		tc = "Click Change Angle button_01";
 		vpP.clickChangeAngleDropDown(driver, tc);
@@ -2279,9 +2396,9 @@ public class AdminPortalController extends Comlibs {
 		vpP.clickChangeAngleDropDown(driver, tc);
 		ac.Wait(wt);
 
-
 		//// *************************Vehicle PreviewBtn******************************************************
 	}
+
 	public static void WhitelistDashboard(WebDriver driver, String brw, String versionNum, String envment)
 			throws Exception {
 
@@ -2369,11 +2486,11 @@ public class AdminPortalController extends Comlibs {
 		Comlibs ac = new Comlibs();
 		ac.rwExcel("", "*********Whitelist Dashboard**********", "");
 		int count = 0;
-//		String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
-//		String[] titleString = { "Env.", "S/N", "Dealership_ID", "Dealership_Name", "Account_Email", "Dealership_Email",
-//				"ProductVINpx", "ProductSTOCKpx", "ProductLOTpx", "Metadata", "dlrGuid" };
-//		// =================================================
-//		ac.writeTitle(getMetadataSavePathFile, titleString);
+		// String getMetadataSavePathFile = "C:\\1\\Eclipse\\Test Results\\AUTOpx" + "\\Metadata_" + env + ".xls";
+		// String[] titleString = { "Env.", "S/N", "Dealership_ID", "Dealership_Name", "Account_Email", "Dealership_Email",
+		// "ProductVINpx", "ProductSTOCKpx", "ProductLOTpx", "Metadata", "dlrGuid" };
+		// // =================================================
+		// ac.writeTitle(getMetadataSavePathFile, titleString);
 		int dataLength = 54;
 		String[] metadataValues = new String[dataLength + 1];
 		int datasize = metadataValues.length;
@@ -2398,9 +2515,6 @@ public class AdminPortalController extends Comlibs {
 		tc = "Whitelist Dashboard_03";
 		wlP.inputSearch(driver, "Tahoe", tc);
 		wlP.clickDeleteIcon(driver, 2, tc);
-		
-		
-
 
 		//// *************************Whitelist Dashboard******************************************************
 	}
@@ -3153,20 +3267,20 @@ public class AdminPortalController extends Comlibs {
 			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 			//// *****************************************************************************************************************
 
-			////// 1.ManageDealerShipsAddNewAccount:
-			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
-			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
-
-			//// 2.ManageDealerShips and others (Manage Image Type, Manage Angle Mappings, Manage Export Templates and Manage Global Config):
-			loadURL(driver, baseURL, env);
-			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
-			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
-
-			//// 3. Enable/Disable Vehicles and ManageBackgroundSets:
-			loadURL(driver, baseURL, env);
-			bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
-			EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
+			 ////// 1.ManageDealerShipsAddNewAccount:
+			 bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
+			 ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+			 ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+			
+			 //// 2.ManageDealerShips and others (Manage Image Type, Manage Angle Mappings, Manage Export Templates and Manage Global Config):
+			 loadURL(driver, baseURL, env);
+			 bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
+			 ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+			
+			 //// 3. Enable/Disable Vehicles and ManageBackgroundSets:
+			 loadURL(driver, baseURL, env);
+			 bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
+			 EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
 
 			//// 4. NewVehicles:
 			loadURL(driver, baseURL, env);
@@ -3179,11 +3293,11 @@ public class AdminPortalController extends Comlibs {
 			//// 6. Vehicle Preview
 			loadURL(driver, baseURL, env);
 			VehiclePreview(driver, tBrowser, versionNum, env);
-			
+
 			//// 7. Whitelist Dashboard
 			loadURL(driver, baseURL, env);
 			WhitelistDashboard(driver, tBrowser, versionNum, env);
-			
+
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
 			System.out.println("Test is complete!!!");
