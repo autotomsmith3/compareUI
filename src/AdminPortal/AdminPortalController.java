@@ -2093,7 +2093,11 @@ public class AdminPortalController extends Comlibs {
 		tc = "Edit Whitelist Dashboard_03";
 		wlP.inputSearch(driver, pattern, tc);
 		wlP.clickEditIcon(driver, 1, tc);
-
+		wlP.clickCancelBtn(driver, tc);
+		
+		
+		tc = "Delete record in Whitelist Dashboard_04";
+		wlP.inputSearch(driver, pattern, tc);
 		wlP.clickDeleteIcon(driver, 1, tc);
 
 		//// *************************New Vehicle Btn******************************************************
