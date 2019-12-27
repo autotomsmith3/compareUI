@@ -2094,8 +2094,7 @@ public class AdminPortalController extends Comlibs {
 		wlP.inputSearch(driver, pattern, tc);
 		wlP.clickEditIcon(driver, 1, tc);
 		wlP.clickCancelBtn(driver, tc);
-		
-		
+
 		tc = "Delete record in Whitelist Dashboard_04";
 		wlP.inputSearch(driver, pattern, tc);
 		wlP.clickDeleteIcon(driver, 1, tc);
@@ -2351,55 +2350,68 @@ public class AdminPortalController extends Comlibs {
 		UserList UserListP = new UserList(driver);
 
 		//// *************************Vehicle PreviewBtn******************************************************
-		tc = "Vehicle Preview_02";
-
+		// =============Acode field====================================
+		tc = "Acode field_01";
 		UserListP.clickVehiclePreview(driver, tc);
-		ac.Wait(wt * 2);
+		ac.Wait(wt);
 		VehiclePreview vpP = new VehiclePreview(driver);
-		tc = "Click Change Angle button_01";
-		vpP.clickChangeAngleDropDown(driver, tc);
-		ac.Wait(wt);
-		tc = "Click Change Angle button_01";
-		vpP.selectOneAngleFrChangeAngleDropDown(driver, 1, tc);
-		ac.Wait(wt);
-		vpP.clickChangeAngleDropDown(driver, tc);
-		ac.Wait(wt);
-		tc = "Click Change Angle button_02";
-		vpP.selectOneAngleFrChangeAngleDropDown(driver, 2, tc);
-		ac.Wait(wt);
-		vpP.clickChangeAngleDropDown(driver, tc);
-		ac.Wait(wt);
-		tc = "Click Change Angle button_03";
-		vpP.selectOneAngleFrChangeAngleDropDown(driver, 3, tc);
-		ac.Wait(wt);
-		vpP.clickChangeAngleDropDown(driver, tc);
-		ac.Wait(wt);
-		tc = "Click Change Angle button_04";
-		vpP.selectOneAngleFrChangeAngleDropDown(driver, 4, tc);
-		ac.Wait(wt);
-		vpP.clickChangeAngleDropDown(driver, tc);
-		ac.Wait(wt);
-		tc = "Click Change Angle button_05";
-		vpP.selectOneAngleFrChangeAngleDropDown(driver, 5, tc);
-		ac.Wait(wt);
-		vpP.clickChangeAngleDropDown(driver, tc);
-		ac.Wait(wt);
-		tc = "Click Change Angle button_06";
-		vpP.selectOneAngleFrChangeAngleDropDown(driver, 6, tc);
-		ac.Wait(wt);
-		vpP.clickChangeAngleDropDown(driver, tc);
-		ac.Wait(wt);
-		tc = "Click Change Angle button_07";
-		vpP.selectOneAngleFrChangeAngleDropDown(driver, 7, tc);
-		ac.Wait(wt);
-		vpP.clickChangeAngleDropDown(driver, tc);
-		ac.Wait(wt);
-		tc = "Click Change Angle button_08";
-		vpP.selectOneAngleFrChangeAngleDropDown(driver, 8, tc);
-		ac.Wait(wt);
-		vpP.clickChangeAngleDropDown(driver, tc);
-		ac.Wait(wt);
+		String acodeString = "CAC80MAS062A0";// 2019 BMW 530e=USC90BMC831A0, 2018 Mazda CX5 = CAC80MAS062A0
+		vpP.inputAcode(driver, acodeString, tc);
+		tc = "Acode field_02";
+		vpP.clickAcodeSubmitBtn(driver, tc);
+		vpP.verifyLoadAngleImage(driver, 1, tc);
+		vpP.verifyLoadAngleImage(driver, 8, tc);
 
+		// =============YMM filtering====================================
+		tc = "YMM year filtering_01";
+		// UserListP.clickTriageVinStatus(driver, tc);
+		// UserListP.clickVehiclePreview(driver, tc);
+		ac.Wait(wt);
+		vpP.clickYearDropDown(driver, tc);
+		vpP.clickYearOne(driver, 2, tc);
+		ac.Wait(wt);
+		tc = "YMM make filtering_01";
+		vpP.clickMakeDropDown(driver, tc);
+		vpP.clickMakeOne(driver, 8, tc);// 8=BMW
+		ac.Wait(wt);
+		tc = "YMM model filtering_01";
+		vpP.clickModelDropDown(driver, tc);
+		vpP.clickModelOne(driver, 14, tc);// 14=530e
+		ac.Wait(wt);
+		tc = "YMM trim filtering_01";
+		vpP.clickTrimDropDown(driver, tc);
+		vpP.clickTrimOne(driver, 2, tc);// 2=iPerformance
+		ac.Wait(wt);
+		tc = "YMM sumbit filtering_01";
+		try {
+			vpP.clickYmmSubmit(driver, tc);
+			ac.rwExcel(tc, true, "Click Submit for YMM", "Submit passed!");
+			vpP.verifyLoadAngleImage(driver, 1, tc);
+			vpP.verifyLoadAngleImage(driver, 8, tc);
+		} catch (Exception e) {
+			ac.rwExcel(tc, false, "Click Submit for YMM", "Submit failed!");
+		}
+
+		// =============Angle Dropdown list====================================
+		tc = "Vehicle Preview_01";
+		// UserListP.clickTriageVinStatus(driver, tc);
+		// UserListP.clickVehiclePreview(driver, tc);
+		ac.Wait(wt);
+		// VehiclePreview vpP = new VehiclePreview(driver);
+		tc = "Click Change Angle button_0";
+		vpP.clickChangeAngleDropDown(driver, tc);
+		ac.Wait(wt);
+		// Verify 8 angle images
+		for (int i = 1; i <= 8; i++) {
+			tc = "Click Change Angle button_0" + i;
+			vpP.selectOneAngleFrChangeAngleDropDown(driver, i, tc);
+			ac.Wait(wt);
+			vpP.verifyLoadAngleImage(driver, i, tc);
+			vpP.clickChangeAngleDropDown(driver, tc);
+			ac.Wait(wt);
+
+		}
+		System.out.println("Vehicle Preview page is complete!");
 		//// *************************Vehicle PreviewBtn******************************************************
 	}
 
@@ -3271,20 +3283,20 @@ public class AdminPortalController extends Comlibs {
 			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 			//// *****************************************************************************************************************
 
-			 ////// 1.ManageDealerShipsAddNewAccount:
-			 bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
-			 ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-			 ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
-			
-			 //// 2.ManageDealerShips and others (Manage Image Type, Manage Angle Mappings, Manage Export Templates and Manage Global Config):
-			 loadURL(driver, baseURL, env);
-			 bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
-			 ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
-			
-			 //// 3. Enable/Disable Vehicles and ManageBackgroundSets:
-			 loadURL(driver, baseURL, env);
-			 bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
-			 EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
+			////// 1.ManageDealerShipsAddNewAccount:
+			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
+			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+
+			//// 2.ManageDealerShips and others (Manage Image Type, Manage Angle Mappings, Manage Export Templates and Manage Global Config):
+			loadURL(driver, baseURL, env);
+			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
+			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+
+			//// 3. Enable/Disable Vehicles and ManageBackgroundSets:
+			loadURL(driver, baseURL, env);
+			bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
+			EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
 
 			//// 4. NewVehicles:
 			loadURL(driver, baseURL, env);

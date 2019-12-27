@@ -195,9 +195,9 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		DealerPortal.DealerProfile dpP = new DealerProfile(driver);
 		tc = "TC139104-TC139105";
 		dpP.changePS(driver, accountPS, tc);
-		tc = "TC139105";
-		Wait(wt);
-		dpP.clickNOBtn(driver, tc);
+//		tc = "TC139105";
+//		Wait(wt);
+//		dpP.clickNOBtn(driver, tc); //This can be removed since Only change PS in separated pop-up, so no need to show re-render pop-up
 		tc = "TC139106";
 		Wait(wt);
 		dpP.clickInventoryGalleryBtn(driver, tc);
