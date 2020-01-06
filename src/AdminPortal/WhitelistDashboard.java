@@ -36,14 +36,21 @@ public class WhitelistDashboard extends Comlibs {
 	By saveActiveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[3]/div[2]/div/button");
 	//
 
-	By xx = By.xpath("");
-	By xxx = By.xpath("");
+//	By noBtnDel = By.xpath("/html/body/div[4]/div[3]/div[1]/div");//  /html/body/div[4]/div[3]/div[1]/div  - not good
+	By noBtnDel = By.cssSelector("body > div.webix_modal_box.webix_confirm > div.webix_popup_controls > div:nth-child(1) > div");
+	//							  body > div.webix_modal_box.webix_confirm > div.webix_popup_controls > div:nth-child(1) > div
+	By yesBtnDel = By.xpath("/html/body/div[4]/div[3]/div[2]");    // 
+
 	By xxxx = By.xpath("");
 	By xxxxx = By.xpath("");
 	By xxxxxx = By.xpath("");
+	By xxxxxdd = By.xpath("");
+	By xxxxxd = By.xpath("");
+	By xxxxxxd = By.xpath("");
 
 	public WhitelistDashboard inputSearch(WebDriver driver, String searchText, String tc) throws IOException {
 		elementExist(driver, searchField, true, tc);
+		driver.findElement(searchField).clear();
 		driver.findElement(searchField).sendKeys(searchText);
 		return this;
 	}
@@ -51,7 +58,7 @@ public class WhitelistDashboard extends Comlibs {
 	public WhitelistDashboard clickDeleteIcon(WebDriver driver, int num, String tc) throws IOException {
 		By deleteIcon = By.cssSelector("div.webix_column:nth-child(9) > div:nth-child(" + num + ")");// 1,2,3...
 		elementExist(driver, deleteIcon, true, tc);
-		// driver.findElement(deleteIcon).click(); //Need to find a way to add record then this can be used
+		driver.findElement(deleteIcon).click(); //Need to find a way to add record then this can be used
 		return this;
 
 	}
@@ -117,10 +124,19 @@ public class WhitelistDashboard extends Comlibs {
 
 		return this;
 	}
-
 	public WhitelistDashboard clickXBtn(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, xBtn, true, tc);
 		driver.findElement(xBtn).click();
+		return this;
+	}
+	public WhitelistDashboard clickNoBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, noBtnDel, true, tc);
+		driver.findElement(noBtnDel).click();
+		return this;
+	}
+	public WhitelistDashboard clickYesBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, yesBtnDel, true, tc);
+		driver.findElement(yesBtnDel).click();
 		return this;
 	}
 }

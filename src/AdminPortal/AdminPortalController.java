@@ -1921,23 +1921,23 @@ public class AdminPortalController extends Comlibs {
 			tc = "TC236111_01_" + i;
 			int records = NewVehicleP.returnNewVehicleRecordsFrPage(driver, tc);
 			tc = "TC236111_2_" + i;
-			int vehicleCountFrPage = NewVehicleP.returnVehicleUsageFrPage(driver, i, tc);
-
-			tc = "TC236111_03_" + i;
-			NewVehicleP.clickVehicleUsagePreViewLink(driver, i, tc);
-			ac.Wait(wt);
-			tc = "TC236111_4_" + i;
-			int vehicleCountFrLink = NewVehicleP.returnDealersFrPopup(driver, tc);
-			if (vehicleCountFrLink == vehicleCountFrPage) {
-				ac.rwExcel(tc, true, "Verify Vehicle Usage. Row=" + i, "Vehicle Usage matches the count in link");
-			} else {
-				ac.rwExcel(tc, false,
-						"Verify Dealer Usage. Row=" + i + "; Vehicle Usage does not match the count in link",
-						"Vehicle Usage on the page = " + vehicleCountFrPage + ". Vehicle Usage from link ="
-								+ vehicleCountFrLink + ".  -- known issue, currently not implemented.");
-			}
-
-			NewVehicleP.clickXBtn(driver, tc);
+			// int vehicleCountFrPage = NewVehicleP.returnVehicleUsageFrPage(driver, i, tc);
+			//
+			// tc = "TC236111_03_" + i;
+			// NewVehicleP.clickVehicleUsagePreViewLink(driver, i, tc);
+			// ac.Wait(wt);
+			// tc = "TC236111_4_" + i;
+			// int vehicleCountFrLink = NewVehicleP.returnDealersFrPopup(driver, tc);
+			// if (vehicleCountFrLink == vehicleCountFrPage) {
+			// ac.rwExcel(tc, true, "Verify Vehicle Usage. Row=" + i, "Vehicle Usage matches the count in link");
+			// } else {
+			// ac.rwExcel(tc,
+			// "Verify Dealer Usage. Row=" + i + "; Vehicle Usage does not match the count in link",
+			// "Vehicle Usage on the page = " + vehicleCountFrPage + ". Vehicle Usage from link ="
+			// + vehicleCountFrLink + ". -- known issue, currently not implemented.");
+			// }
+			//
+			// NewVehicleP.clickXBtn(driver, tc);
 			// -------------------------------------Vehicles-----------------------------------
 
 			// -------------------------------------Dealers-----------------------------------
@@ -2063,6 +2063,7 @@ public class AdminPortalController extends Comlibs {
 		UserListP.clickWhitelistDashboard(driver, tc);
 		WhitelistDashboard wlP = new WhitelistDashboard(driver);
 		tc = "Edit Whitelist Dashboard_01";
+		ac.Wait(wt);
 		wlP.inputSearch(driver, pattern, tc);
 		wlP.clickEditIcon(driver, 1, tc);
 		bgCol = 1;
@@ -2091,13 +2092,34 @@ public class AdminPortalController extends Comlibs {
 		wlP.inputNotes(driver, "Edited", tc);
 		wlP.clickSaveBtn(driver, tc);
 		tc = "Edit Whitelist Dashboard_03";
+		ac.Wait(wt*2);
 		wlP.inputSearch(driver, pattern, tc);
 		wlP.clickEditIcon(driver, 1, tc);
+		ac.Wait(wt);
 		wlP.clickCancelBtn(driver, tc);
 
 		tc = "Delete record in Whitelist Dashboard_04";
 		wlP.inputSearch(driver, pattern, tc);
 		wlP.clickDeleteIcon(driver, 1, tc);
+		ac.Wait(wt);
+		wlP.clickNoBtn(driver, tc);
+		wlP.clickDeleteIcon(driver, 1, tc);
+		ac.Wait(wt);
+		wlP.clickYesBtn(driver, tc);
+
+		tc = "Delete record in Whitelist Dashboard_05";
+		wlP.inputSearch(driver, pattern, tc);
+		try {
+			wlP.clickDeleteIcon(driver, 1, tc);
+			ac.rwExcel(tc, false, "Delete record from Whitelist", "It looks like failed to delete record or there are multiple same records with pattern: \""+pattern+"\"!");
+		} catch (Exception e) {
+			ac.rwExcel(tc, true, "Delete record from Whitelist", "Deleted Successfully!");
+		}
+
+		// Go to New Vehicle page to check it if it is back
+		ac.Wait(wt);// need to wait to see if the New Model is back or not
+		UserListP.clickNewVehicles(driver, tc);
+		NewVehicleP.inputSearch(driver, pattern, tc);// here pattern can be changed with ...
 
 		//// *************************New Vehicle Btn******************************************************
 	}
@@ -2376,7 +2398,7 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		tc = "YMM model filtering_01";
 		vpP.clickModelDropDown(driver, tc);
-		vpP.clickModelOne(driver, 14, tc);// 14=530e
+		vpP.clickModelOne(driver, 10, tc);// 10=530e
 		ac.Wait(wt);
 		tc = "YMM trim filtering_01";
 		vpP.clickTrimDropDown(driver, tc);
@@ -2386,6 +2408,7 @@ public class AdminPortalController extends Comlibs {
 		try {
 			vpP.clickYmmSubmit(driver, tc);
 			ac.rwExcel(tc, true, "Click Submit for YMM", "Submit passed!");
+			ac.Wait(wt*4);
 			vpP.verifyLoadAngleImage(driver, 1, tc);
 			vpP.verifyLoadAngleImage(driver, 8, tc);
 		} catch (Exception e) {

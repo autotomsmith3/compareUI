@@ -12,6 +12,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import com.beust.jcommander.Parameter;
+
 import DealerPortal.threadExampleRunnalble.MoveMouseThread;
 
 import org.json.*;
@@ -1331,10 +1333,10 @@ public class Templates extends Comlibs {
 				// These coordinates are screen coordinates
 				if (onScreen.equalsIgnoreCase("left")) {
 					xCoord = -900;// -900
-					yCoord = 585;// chrome=585;ff= 500
+					yCoord = 575;// chrome=585;ff= 500
 				} else {
 					xCoord = 400;
-					yCoord = 585;// 552
+					yCoord = 555;//Chrome= 555, 585
 				}
 
 				// Move the cursor
@@ -1345,7 +1347,7 @@ public class Templates extends Comlibs {
 						"failed to move mouse.");
 			}
 
-			Thread myThread = new Thread(new MoveMouseThread());
+			Thread myThread = new Thread(new MoveMouseThread(onScreen));
 			myThread.start();
 
 			// Wait(5);
@@ -1516,17 +1518,17 @@ public class Templates extends Comlibs {
 		}
 		;
 	}
-
-	public static class MoveMouseThread implements Runnable {
+	public static class MoveMouseThreadOriginalCenter implements Runnable {
 		// http://tutorials.jenkov.com/java-concurrency/creating-and-starting-threads.html
+		// https://stackoverflow.com/questions/877096/how-can-i-pass-a-parameter-to-a-java-thread
 		@Override
 		public void run() {
 			System.out.println("Inside Thread, Starting to Move Mouse !");
 			int wt = 10;
 			Comlibs ac = new Comlibs();
 			ac.Wait(wt);
-			int xCoord = -950;// this doesn't matter for left or center
-			int yCoord = 585;//
+			int xCoord = 400;// left=-950, center=400.  this doesn't matter for left or center. -950 works for Chrome left but not for center
+			int yCoord = 575;// left =585, center=575
 			// Move the cursor
 			try {
 				Robot robot = new Robot();
@@ -1537,7 +1539,42 @@ public class Templates extends Comlibs {
 			System.out.println("Inside Thread, After waitted " + wt + " secs, . Move Mouse to left !");
 		}
 	}
+	
+	public static class MoveMouseThread extends Thread {
+		// http://tutorials.jenkov.com/java-concurrency/creating-and-starting-threads.html
+		// https://stackoverflow.com/questions/877096/how-can-i-pass-a-parameter-to-a-java-thread
+		private String to;
+		
+		public MoveMouseThread(String to) {
+			// store parameter for later user
+			this.to=to;
+		}
+		@Override
+		public void run() {
+			System.out.println("Inside Thread, Starting to Move Mouse !");
+			int wt = 10;
+			Comlibs ac = new Comlibs();
+			ac.Wait(wt);
+			int xCoord = 0;// left=-950, center=400.  this doesn't matter for left or center. -950 works for Chrome left but not for center
+			int yCoord = 0;// left =585, center=575
+			if (to.equalsIgnoreCase("left")) {
+				xCoord = -950;// left=-950, center=400.  this doesn't matter for left or center. -950 works for Chrome left but not for center
+				yCoord = 585;// left =585, center=575
+			}else {
+				//center
+				xCoord = 400;// left=-950, center=400.  this doesn't matter for left or center. -950 works for Chrome left but not for center
+				yCoord = 565;// left =585, center=565
+			}
+				// Move the cursor
+			try {
+				Robot robot = new Robot();
+				robot.mouseMove(xCoord, yCoord);
+			} catch (Exception e) {
 
+			}
+			System.out.println("Inside Thread, After waitted " + wt + " secs, . Move Mouse to left !");
+		}
+	}
 	public void jSONParse() {
 		// String text = "{\"employees\":[{\"firstName\":\"John\",\"lastName\":\"Doe\" },{\"firstName\":\"Anna\",\"lastName\":\"Smith\" },{\"firstName\":\"Peter\",\"lastName\":\"Jones\" }]}";
 		// String text="{\"posts\": [{\"post_id\": \"123456789012_123456789012\",\"actor_id\": \"1234567890\",\"picOfPersonWhoPosted\": \"http://example.com/photo.jpg\",\"nameOfPersonWhoPosted\": \"Jane Doe\",\"message\": \"Sounds cool. Can't wait to see it!\",\"likesCount\": \"2\",\"comments\": [],\"timeOfPost\": \"1234567890\"} ]}";
