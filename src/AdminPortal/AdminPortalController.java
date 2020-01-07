@@ -2092,7 +2092,7 @@ public class AdminPortalController extends Comlibs {
 		wlP.inputNotes(driver, "Edited", tc);
 		wlP.clickSaveBtn(driver, tc);
 		tc = "Edit Whitelist Dashboard_03";
-		ac.Wait(wt*2);
+		ac.Wait(wt * 2);
 		wlP.inputSearch(driver, pattern, tc);
 		wlP.clickEditIcon(driver, 1, tc);
 		ac.Wait(wt);
@@ -2111,7 +2111,9 @@ public class AdminPortalController extends Comlibs {
 		wlP.inputSearch(driver, pattern, tc);
 		try {
 			wlP.clickDeleteIcon(driver, 1, tc);
-			ac.rwExcel(tc, false, "Delete record from Whitelist", "It looks like failed to delete record or there are multiple same records with pattern: \""+pattern+"\"!");
+			ac.rwExcel(tc, false, "Delete record from Whitelist",
+					"It looks like failed to delete record or there are multiple same records with pattern: \""
+							+ pattern + "\"!");
 		} catch (Exception e) {
 			ac.rwExcel(tc, true, "Delete record from Whitelist", "Deleted Successfully!");
 		}
@@ -2241,7 +2243,8 @@ public class AdminPortalController extends Comlibs {
 		boolean getDataError2 = resoltData.contains("vin was found in VINpx database for the following dealers");
 		boolean getDataError3 = resoltData.contains("Getting MV links");// FCA
 		boolean getDataError4 = resoltData.contains("Possible Flik link");// GM
-		if (getDataError1 && getDataError2 && (getDataError3 || getDataError4)) {
+		boolean getDataError5 = resoltData.contains("Vehicle options found, with descriptions:");// options descriptions
+		if (getDataError1 && getDataError2 && getDataError5 && (getDataError3 || getDataError4)) {
 			// ok
 			ac.rwExcel(tc, true, "Triage Vin Status Results GM Vin", "GM VIN Result data:" + resoltData);
 		} else {
@@ -2258,7 +2261,7 @@ public class AdminPortalController extends Comlibs {
 		getDataError2 = resoltData.contains("vin was found in VINpx database for the following dealers");
 		getDataError3 = resoltData.contains("Getting MV links");// FCA
 		getDataError4 = resoltData.contains("Possible Flik link");// GM
-		if (getDataError1 && getDataError2 && (getDataError3 || getDataError4)) {
+		if (getDataError1 && getDataError2 && getDataError5 && (getDataError3 || getDataError4)) {
 			// ok
 			ac.rwExcel(tc, true, "Triage Vin Status Results FCA Vin", "FCA VIN Result data:" + resoltData);
 		} else {
@@ -2408,7 +2411,7 @@ public class AdminPortalController extends Comlibs {
 		try {
 			vpP.clickYmmSubmit(driver, tc);
 			ac.rwExcel(tc, true, "Click Submit for YMM", "Submit passed!");
-			ac.Wait(wt*4);
+			ac.Wait(wt * 4);
 			vpP.verifyLoadAngleImage(driver, 1, tc);
 			vpP.verifyLoadAngleImage(driver, 8, tc);
 		} catch (Exception e) {
