@@ -2246,8 +2246,10 @@ public class AdminPortalController extends Comlibs {
 		boolean getDataError5 = resoltData.contains("Vehicle options found, with descriptions:");// options descriptions
 		if (getDataError1 && getDataError2 && getDataError5 && (getDataError3 || getDataError4)) {
 			// ok
+			System.out.println("Triage Vin Status Results GM Vin -- passed");
 			ac.rwExcel(tc, true, "Triage Vin Status Results GM Vin", "GM VIN Result data:" + resoltData);
 		} else {
+			System.out.println("Triage Vin Status Results GM Vin -- failed");
 			ac.rwExcel(tc, false, "Triage Vin Status Results GM Vin", "GM VIN Result data:" + resoltData);
 		}
 		ac.Wait(wt);
@@ -2263,8 +2265,10 @@ public class AdminPortalController extends Comlibs {
 		getDataError4 = resoltData.contains("Possible Flik link");// GM
 		if (getDataError1 && getDataError2 && getDataError5 && (getDataError3 || getDataError4)) {
 			// ok
+			System.out.println("Triage Vin Status Results FCA Vin -- passed");
 			ac.rwExcel(tc, true, "Triage Vin Status Results FCA Vin", "FCA VIN Result data:" + resoltData);
 		} else {
+			System.out.println("Triage Vin Status Results FCA Vin -- failed");
 			ac.rwExcel(tc, false, "Triage Vin Status Results FCA Vin", "FCA VIN Result data:" + resoltData);
 		}
 		ac.Wait(wt);
@@ -3309,36 +3313,36 @@ public class AdminPortalController extends Comlibs {
 			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env, chkEmail);
 			//// *****************************************************************************************************************
 
-			////// 1.ManageDealerShipsAddNewAccount:
-			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
-			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
-			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
-
-			//// 2.ManageDealerShips and others (Manage Image Type, Manage Angle Mappings, Manage Export Templates and Manage Global Config):
-			loadURL(driver, baseURL, env);
-			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
-			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
-
-			//// 3. Enable/Disable Vehicles and ManageBackgroundSets:
-			loadURL(driver, baseURL, env);
-			bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
-			EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
-
-			//// 4. NewVehicles:
-			loadURL(driver, baseURL, env);
-			NewVehicles(driver, tBrowser, versionNum, env, chkEmail);
+//			////// 1.ManageDealerShipsAddNewAccount:
+//			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
+//			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
+//			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
+//
+//			//// 2.ManageDealerShips and others (Manage Image Type, Manage Angle Mappings, Manage Export Templates and Manage Global Config):
+//			loadURL(driver, baseURL, env);
+//			bc.rwExcel("", "-----ManageDealerShips - Add An Dealership Testing started-----" + (i + 1), "");
+//			ManageDealerShips(driver, tBrowser, versionNum, env, chkEmail);
+//
+//			//// 3. Enable/Disable Vehicles and ManageBackgroundSets:
+//			loadURL(driver, baseURL, env);
+//			bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
+//			EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
+//
+//			//// 4. NewVehicles:
+//			loadURL(driver, baseURL, env);
+//			NewVehicles(driver, tBrowser, versionNum, env, chkEmail);
 
 			//// 5. Triage Vin Status:
 			loadURL(driver, baseURL, env);
 			TriageVinStatus(driver, tBrowser, versionNum, env);
 
-			//// 6. Vehicle Preview
-			loadURL(driver, baseURL, env);
-			VehiclePreview(driver, tBrowser, versionNum, env);
-
-			//// 7. Whitelist Dashboard
-			loadURL(driver, baseURL, env);
-			WhitelistDashboard(driver, tBrowser, versionNum, env);
+//			//// 6. Vehicle Preview
+//			loadURL(driver, baseURL, env);
+//			VehiclePreview(driver, tBrowser, versionNum, env);
+//
+//			//// 7. Whitelist Dashboard
+//			loadURL(driver, baseURL, env);
+//			WhitelistDashboard(driver, tBrowser, versionNum, env);
 
 			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
