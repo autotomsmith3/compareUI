@@ -58,35 +58,36 @@ public class ExportTemplateList extends Comlibs {
 	// By nameLocator= By.xpath("//tr[2]/td"); //1,2,3...
 	// By nameLocator= By.xpath("//tr[2]/td"); //1,2,3...
 
-	public ExportTemplateList clickAddExportTemplateBtn(WebDriver driver) throws IOException {
+	public ExportTemplateList clickAddExportTemplateBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, addExportTemplateBtnLocator, true, tc);
 		driver.findElement(addExportTemplateBtnLocator).click();
 		return this;
 	}
 
-	public ExportTemplateList inputSearch(WebDriver driver, String name) throws IOException {
+	public ExportTemplateList inputSearch(WebDriver driver, String name, String tc) throws IOException {
 		driver.findElement(searchLocator).clear();
 		driver.findElement(searchLocator).sendKeys(name);
 		return this;
 	}
 
-	public ExportTemplateList clickEditBtn(WebDriver driver, int num) throws IOException {
+	public ExportTemplateList clickEditBtn(WebDriver driver, int num, String tc) throws IOException {
 		By editLocator = By.xpath("(//button[@id='listViewBtn'])[" + num + "]");// 1,2,3....
 		driver.findElement(editLocator).click();
 		return this;
 	}
 
-	public ExportTemplateList clickDeleteBtn(WebDriver driver, int num) throws IOException {
+	public ExportTemplateList clickDeleteBtn(WebDriver driver, int num, String tc) throws IOException {
 		By deleteLocator = By.xpath("(//button[@id='dealerViewBtn'])[\"+num+\"]");// 1,2,3....
 		driver.findElement(deleteLocator).click();
 		return this;
 	}
 
-	public ExportTemplateList clickCancel(WebDriver driver) throws IOException {
+	public ExportTemplateList clickCancel(WebDriver driver, String tc) throws IOException {
 		driver.findElement(cancelBtnLocator).click();
 		return this;
 	}
 
-	public ExportTemplateList clickSubmit(WebDriver driver) throws IOException {
+	public ExportTemplateList clickSubmit(WebDriver driver, String tc) throws IOException {
 		driver.findElement(submitBtnLocator).click();
 		return this;
 	}
@@ -193,42 +194,42 @@ public class ExportTemplateList extends Comlibs {
 		return this;
 	}
 
-	public ExportTemplateList inputExportName(WebDriver driver, String exportName) throws IOException {
+	public ExportTemplateList inputExportName(WebDriver driver, String exportName, String tc) throws IOException {
 		Wait(1);
 		driver.findElement(exportNameLocator).clear();
 		driver.findElement(exportNameLocator).sendKeys(exportName);
 		return this;
 	}
 
-	public ExportTemplateList inputExportPrettyName(WebDriver driver, String fileName) throws IOException {
+	public ExportTemplateList inputExportPrettyName(WebDriver driver, String fileName, String tc) throws IOException {
 		driver.findElement(exportPrettyNameLocator).clear();
 		driver.findElement(exportPrettyNameLocator).sendKeys(fileName);
 		return this;
 	}
-	public ExportTemplateList inputFileName(WebDriver driver, String fileName) throws IOException {
+	public ExportTemplateList inputFileName(WebDriver driver, String fileName, String tc) throws IOException {
 		driver.findElement(fileNameLocator).clear();
 		driver.findElement(fileNameLocator).sendKeys(fileName);
 		return this;
 	}
-	public ExportTemplateList inputUser(WebDriver driver, String user) throws IOException {
+	public ExportTemplateList inputUser(WebDriver driver, String user, String tc) throws IOException {
 		driver.findElement(userLocator).clear();
 		driver.findElement(userLocator).sendKeys(user);
 		return this;
 	}
 
-	public ExportTemplateList inputPassword(WebDriver driver, String password) throws IOException {
+	public ExportTemplateList inputPassword(WebDriver driver, String password, String tc) throws IOException {
 		driver.findElement(passwordLocator).clear();
 		driver.findElement(passwordLocator).sendKeys(password);
 		return this;
 	}
 
-	public ExportTemplateList inputHost(WebDriver driver, String host) throws IOException {
+	public ExportTemplateList inputHost(WebDriver driver, String host, String tc) throws IOException {
 		driver.findElement(hostLocator).clear();
 		driver.findElement(hostLocator).sendKeys(host);
 		return this;
 	}
 
-	public ExportTemplateList inputTemplate(WebDriver driver, String template) throws IOException {
+	public ExportTemplateList inputTemplate(WebDriver driver, String template, String tc) throws IOException {
 		driver.findElement(templateLocator).clear();
 		driver.findElement(templateLocator).sendKeys(template);
 		return this;
@@ -244,7 +245,7 @@ public class ExportTemplateList extends Comlibs {
 		return this;
 	}
 
-	public String getNameString(WebDriver driver, int num) throws IOException {
+	public String getNameString(WebDriver driver, int num, String tc) throws IOException {
 		String nameS = "";
 		try {
 			By nameLocator = By.xpath("//tr[" + num + "]/td"); // 1,2,3...

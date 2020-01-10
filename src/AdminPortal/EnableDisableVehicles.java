@@ -31,6 +31,7 @@ public class EnableDisableVehicles extends Comlibs {
 	By disabledVehicles = By.xpath("//*[@id=\"configTable_filter\"]/label/input");
 	By searchField = By.xpath("//*[@id=\"configTable_filter\"]/label/input");
 	By disableCheckBox = By.xpath("//*[@id=\"newImageTypeModalBtn\"]");
+	By enableDisalbeAllLocator = By.xpath("//*[@id=\"addImportAngleMappingBtn\"]/span[1]");
 
 	public EnableDisableVehicles inputSearch(WebDriver driver, String regexPattern, String tc) throws IOException {
 		Wait(1);
@@ -39,33 +40,52 @@ public class EnableDisableVehicles extends Comlibs {
 		return this;
 	}
 
-	public boolean CheckDisabledCheckBoxStatus(WebDriver driver, String regexPattern, String tc)
-			throws IOException {
+	public boolean CheckDisabledCheckBoxStatus(WebDriver driver, String regexPattern, String tc) throws IOException {
 		By checkboxLocator = By.xpath("//*[@id=\"disable" + regexPattern + "\"]");
-		boolean selected=false;
+		boolean selected = false;
 		try {
-			selected=driver.findElement(checkboxLocator).isSelected();//works
+			selected = driver.findElement(checkboxLocator).isSelected();// works
 		} catch (Exception e) {
 			rwExcel(tc, false, "Enable/Disable Vehicles - Disable Check Box", "Check on Disable Check Box status.");
 		}
 		return selected;
 	}
+
 	public EnableDisableVehicles clickDisabledCheckBox(WebDriver driver, String regexPattern, String tc)
 			throws IOException {
 		// By editLocator = By.xpath("(//button[@id='editBtn'])[" + num + "]");
 		By checkboxLocator = By.xpath("//*[@id=\"disable" + regexPattern + "\"]");
-		boolean selected=false;
+		boolean selected = false;
 		try {
-			selected=driver.findElement(checkboxLocator).isSelected();//works
+			selected = driver.findElement(checkboxLocator).isSelected();// works
 			if (selected) {
 				driver.findElement(checkboxLocator).click();
-				rwExcel(tc, "Enable/Disable Vehicles - Disable Check Box", "Check Box is checked. Need to uncheck and try again.");
-			}else {
+				rwExcel(tc, "Enable/Disable Vehicles - Disable Check Box",
+						"Check Box is checked. Need to uncheck and try again.");
+			} else {
 				driver.findElement(checkboxLocator).click();
 			}
-//			rwExcel(tc, true, "Enable/Disable Vehicles - Disable Check Box", "Clicking on Disable Check Box.");
+			// rwExcel(tc, true, "Enable/Disable Vehicles - Disable Check Box", "Clicking on Disable Check Box.");
 		} catch (Exception e) {
 			rwExcel(tc, false, "Enable/Disable Vehicles - Disable Check Box", "Clicking on Disable Check Box.");
+		}
+		return this;
+	}
+
+	public EnableDisableVehicles ClickEnableDisableBTn(WebDriver driver, boolean deleteAll, String tc)
+			throws IOException {
+		elementExist(driver, enableDisalbeAllLocator, true, tc);
+		try {
+			driver.findElement(enableDisalbeAllLocator).click();
+			if (deleteAll) {
+				acceptAlert(driver, tc, "OK");
+
+			} else {
+				System.out.println("click cancel botton!");
+			}
+
+		} catch (Exception e) {
+			rwExcel(tc, false, "Click on Enable/Disable Vehicles botton", "Failed!");
 		}
 		return this;
 	}
