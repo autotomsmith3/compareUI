@@ -917,8 +917,8 @@ public class Comlibs {
 			// rwExcel(tc, true, "Alert showing, Accept the alert =" + alertType, "Accetped successfully.");
 		} catch (Throwable e) {
 			alertPass = false;
-			System.out.println("1. Failed to Accept the alert.");
-			rwExcel(tc, false, "Alert showing, Accept the alert =" + alertType, "failed to accetp.");
+			System.out.println("1. Alert pop-up maybe not showing, failed to accetp.");
+			rwExcel(tc, false, "Alert pop-up should show, Accept the alert =" + alertType, "Alert pop-up maybe not showing, failed to accetp.");
 		}
 		// return alertPass;
 	}
