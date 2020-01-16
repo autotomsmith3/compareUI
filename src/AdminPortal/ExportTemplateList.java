@@ -41,7 +41,7 @@ public class ExportTemplateList extends Comlibs {
 	By cancelBtnLocator = By.xpath("//*[@id=\"newImageTypeModal\"]/div/div/div[3]/button[2]");
 	By submitBtnLocator = By.xpath("//*[@id=\"newImageTypeModalBtn\"]");
 	By exportNameLocator = By.xpath("//*[@id=\"name\"]");
-	By exportPrettyNameLocator=By.xpath("//*[@id=\"prettyName\"]");
+	By exportPrettyNameLocator = By.xpath("//*[@id=\"prettyName\"]");
 	By fileNameLocator = By.xpath("//*[@id=\"filename\"]");
 	By userLocator = By.xpath("//*[@id=\"user\"]");
 	By passwordLocator = By.xpath("//*[@id=\"password\"]");
@@ -53,7 +53,7 @@ public class ExportTemplateList extends Comlibs {
 //	By runExporticon2= By.xpath("//button[@id='runExportBtn']/span"); //1,2,3...
 //	By runExporticon3= By.xpath("//td[7]/button/span"); //1,2,3...
 //	By runExporticon4= By.cssSelector(".odd:nth-child(1) #runExportBtn > .glyphicon");//1,2,3...
-	
+
 //	By downLoadicon= By.xpath("//*[@id=\"imageTypeTable\"]/tbody/tr[1]/td[7]/form/button/span"); //1,2,3...
 	// By nameLocator= By.xpath("//tr[2]/td"); //1,2,3...
 	// By nameLocator= By.xpath("//tr[2]/td"); //1,2,3...
@@ -91,9 +91,9 @@ public class ExportTemplateList extends Comlibs {
 		driver.findElement(submitBtnLocator).click();
 		return this;
 	}
-	
+
 	public ExportTemplateList clickRunExoprt(WebDriver driver, String tc) throws IOException {
-		By runExporticon= By.xpath("//*[@id='runExportBtn']/span"); //1,2,3...
+		By runExporticon = By.xpath("//*[@id='runExportBtn']/span"); // 1,2,3...
 //		By runExporticon2= By.xpath("//button[@id='runExportBtn']/span"); //1,2,3...
 //		By runExporticon3= By.xpath("//td[7]/button/span"); //1,2,3...
 //		By runExporticon4= By.cssSelector(".odd:nth-child(1) #runExportBtn > .glyphicon");//1,2,3...
@@ -104,9 +104,10 @@ public class ExportTemplateList extends Comlibs {
 //			driver.findElement(runExporticon3).click();
 //			driver.findElement(runExporticon4).click();
 		}
-		
+
 		return this;
 	}
+
 	public void clickOKwithWindowAlert() throws AWTException {
 		Wait(1);
 		// String vehicleImage="";
@@ -131,6 +132,7 @@ public class ExportTemplateList extends Comlibs {
 		Wait(1);
 		System.out.println("Click Accept!");
 	}
+
 	public void clickOKwithWindowAlert1() throws AWTException {
 		Wait(1);
 		// String vehicleImage="";
@@ -180,15 +182,15 @@ public class ExportTemplateList extends Comlibs {
 		Wait(3);
 		System.out.println("Click O key!");
 	}
+
 	public ExportTemplateList clickDownload(WebDriver driver, String tc) throws IOException {
 //		By downLoadicon= By.xpath("//*[@id=\"imageTypeTable\"]/tbody/tr[1]/td[7]/form/button/span"); //1,2,3... not working since 20191108
-		By downLoadicon= By.xpath("//*[@id=\"imageTypeTable\"]/tbody/tr/td[7]/form/button/span");		//new 20191108. only one row:    //*[@id="imageTypeTable"]/tbody/tr/td[7]/form/button/span
+		By downLoadicon = By.xpath("//*[@id=\"imageTypeTable\"]/tbody/tr/td[7]/form/button/span"); // new 20191108. only
+																									// one row:
+																									// //*[@id="imageTypeTable"]/tbody/tr/td[7]/form/button/span
 		boolean elementExist = elementExist(driver, downLoadicon, true, tc);
 		if (elementExist) {
 			driver.findElement(downLoadicon).click();
-//			driver.findElement(downLoadicon).click();
-//			driver.findElement(downLoadicon).click();
-//			driver.findElement(downLoadicon).click();
 		}
 
 		return this;
@@ -206,11 +208,13 @@ public class ExportTemplateList extends Comlibs {
 		driver.findElement(exportPrettyNameLocator).sendKeys(fileName);
 		return this;
 	}
+
 	public ExportTemplateList inputFileName(WebDriver driver, String fileName, String tc) throws IOException {
 		driver.findElement(fileNameLocator).clear();
 		driver.findElement(fileNameLocator).sendKeys(fileName);
 		return this;
 	}
+
 	public ExportTemplateList inputUser(WebDriver driver, String user, String tc) throws IOException {
 		driver.findElement(userLocator).clear();
 		driver.findElement(userLocator).sendKeys(user);
@@ -240,7 +244,8 @@ public class ExportTemplateList extends Comlibs {
 		return this;
 	}
 
-	public ExportTemplateList clickBrandedImagesCheckBox_removed_by_AUTOPXOPS_1816(WebDriver driver) throws IOException {
+	public ExportTemplateList clickBrandedImagesCheckBox_removed_by_AUTOPXOPS_1816(WebDriver driver)
+			throws IOException {
 		driver.findElement(brandedImagesLocator).click();
 		return this;
 	}
@@ -255,6 +260,7 @@ public class ExportTemplateList extends Comlibs {
 		}
 		return nameS;
 	}
+
 	public String timeString() {
 		String dateStamp, timeStamp;
 		Calendar cal = Calendar.getInstance();
@@ -269,5 +275,16 @@ public class ExportTemplateList extends Comlibs {
 		timeStamp = timeStamp.replace(":", "_");
 		timeStamp = timeStamp.replace(" ", "_");
 		return timeStamp;
+	}
+
+	public ExportTemplateList inputNameToAlertBox(WebDriver driver, String exportName, String tc) throws IOException {
+		driver.switchTo().alert().sendKeys(exportName); // The text is invisible after input but it works fine. The
+														// invisible issue belongs to Selenium driver: sendKeys
+		return this;
+	}
+
+	public ExportTemplateList clickOkOfAlertBox(WebDriver driver, String tc) throws IOException {
+		driver.switchTo().alert().accept();
+		return this;
 	}
 }

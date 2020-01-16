@@ -46,7 +46,7 @@ public class VehiclePreview extends Comlibs {
 	By trimDropDown = By.xpath("//*[@id=\"trimsDropdown\"]");
 	By ymmSubmitBtn = By.xpath("//*[@id=\"ymmtBtn\"]");
 	
-//	By year = By.xpath("");
+	By vehicleColor = By.xpath("//*[@id=\"colorsDropdown\"]");
 	// By xxxx = By.xpath("");
 
 	public VehiclePreview inputAcode(WebDriver driver, String acode, String tc) throws IOException {
@@ -99,7 +99,7 @@ public class VehiclePreview extends Comlibs {
 	public void verifyLoadAngleImage(WebDriver driver, int num, String tc) throws IOException {
 		// Verify angle image showing or not:
 		Wait(1);
-		By angleImage = By.xpath("//*[@id=\"wrapper\"]/div[" + num + "]/img[2]");
+		By angleImage = By.xpath("/html/body/div/div/div[2]/div/div/div/div[4]/div/div["+num+"]/img[2]");
 		elementExist(driver, angleImage, true, tc);
 		VerifyImageLoaded(driver, angleImage, tc);
 
@@ -172,10 +172,28 @@ public class VehiclePreview extends Comlibs {
 		return this;
 	}
 	
+	public VehiclePreview clickVehicleColorDropDown(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, vehicleColor, true, tc);
+		driver.findElement(vehicleColor).click();
+		return this;
+	}
 	
+	public VehiclePreview clickVehicleColorOne(WebDriver driver, int num, String tc) throws IOException {
+		By colorOne = By.xpath("/html/body/div/div/div[2]/div/div/div/div[2]/div/div/ul/li["+num+"]");// 1,2,....10
+		elementExist(driver, colorOne, true, tc);
+		driver.findElement(colorOne).click();
+		return this;
+	}	
 	
-	
-	
+	public int getColorCount(WebDriver driver, String tc) throws IOException {
+//		By vehicleColorX = By.xpath("/html/body/div/div/div[2]/div/div/div/div[2]/div/div/ul/li");// good as well
+		By vehicleColorsList = By.cssSelector("#colorsDropdownList > li");  // good
+		elementExist(driver, vehicleColorsList, true, tc);
+		int colorCount;
+//		colorCount=driver.findElements(vehicleColorX).size();// good to numbers	
+		colorCount=driver.findElements(vehicleColorsList).size(); //-- 17
+		return colorCount;
+	}	
 	
 	
 	

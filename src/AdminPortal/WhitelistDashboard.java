@@ -29,20 +29,25 @@ public class WhitelistDashboard extends Comlibs {
 
 	By searchField = By.cssSelector(".webix_ss_filter > input:nth-child(1)");
 	By pattern = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[1]/div/input");
-	By notes = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[2]/div/input");
+	By notes = By.xpath("/html/body/div[4]/div/div[2]/div/div[3]/div/div[1]/div/input");
+
 	By xBtn = By.xpath("/html/body/div[4]/div/div[1]/div/div[2]/div/button/span");
-	By cancelBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[3]/div[1]/div/button");
-	By saveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[3]/div[2]");
-	By saveActiveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[3]/div[2]/div/button");
-	//
+	By cancelBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[1]/div/button");
+
+	By saveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button");
+	//					   /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button
+	//			disable	   /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div[2]
+	By saveActiveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button");
+	//							 /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button
 
 //	By noBtnDel = By.xpath("/html/body/div[4]/div[3]/div[1]/div");//  /html/body/div[4]/div[3]/div[1]/div  - not good
 	By noBtnDel = By.cssSelector("body > div.webix_modal_box.webix_confirm > div.webix_popup_controls > div:nth-child(1) > div");
 	//							  body > div.webix_modal_box.webix_confirm > div.webix_popup_controls > div:nth-child(1) > div
 	By yesBtnDel = By.xpath("/html/body/div[4]/div[3]/div[2]");    // 
 
-	By xxxx = By.xpath("");
-	By xxxxx = By.xpath("");
+	By deselectedAll = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div[1]/div/button");
+	By selectedAll = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div[2]/div/button");
+	
 	By xxxxxx = By.xpath("");
 	By xxxxxdd = By.xpath("");
 	By xxxxxd = By.xpath("");
@@ -55,26 +60,30 @@ public class WhitelistDashboard extends Comlibs {
 		return this;
 	}
 
-	public WhitelistDashboard clickDeleteIcon(WebDriver driver, int num, String tc) throws IOException {
-		By deleteIcon = By.cssSelector("div.webix_column:nth-child(9) > div:nth-child(" + num + ")");// 1,2,3...
-		elementExist(driver, deleteIcon, true, tc);
-		driver.findElement(deleteIcon).click(); //Need to find a way to add record then this can be used
-		return this;
-
-	}
-
 	public WhitelistDashboard clickEditIcon(WebDriver driver, int num, String tc) throws IOException {
-		By editIcon = By.cssSelector("div.webix_column:nth-child(9) > div:nth-child(" + num + ") > a:nth-child(1)");// 1,2,3...
+		By editIcon = By.cssSelector("div.webix_column:nth-child(8) > div:nth-child(" + num + ") > a:nth-child(1)");// 1,2,3...
+		//							  div.webix_column:nth-child(8) > div:nth-child(1) > a:nth-child(1)
+		//                            div.webix_column:nth-child(8) > div:nth-child(3) > a:nth-child(2)
 		elementExist(driver, editIcon, true, tc);
 		driver.findElement(editIcon).click(); //
 		return this;
 
 	}
+	public WhitelistDashboard clickDeleteIcon(WebDriver driver, boolean delete, int num, String tc) throws IOException {
+		By editIcon = By.cssSelector("div.webix_column:nth-child(8) > div:nth-child(" + num + ") > a:nth-child(2)");// 1,2,3...
+		//                            div.webix_column:nth-child(8) > div:nth-child(3) > a:nth-child(2)
+		if (delete) {
+			elementExist(driver, editIcon, true, tc);
+		}
+		driver.findElement(editIcon).click(); //
+		return this;
 
-	public WhitelistDashboard selectBackground(WebDriver driver, int col, int row, String tc) throws IOException {
-		By background = By.cssSelector(".webix_dataview > div:nth-child(1) > div:nth-child(" + col
-				+ ") > div:nth-child(" + row + ") > div:nth-child(1) > div:nth-child(1) > img:nth-child(1)");
-		// .webix_dataview > div:nth-child(1) > div:nth-child(col) > div:nth-child(row) > div:nth-child(1) > div:nth-child(1) > img:nth-child(1)
+	}
+
+	public WhitelistDashboard selectBackground(WebDriver driver, int row, int col, String tc) throws IOException {
+		By background = By.cssSelector(".webix_dataview > div:nth-child(1) > div:nth-child(" + row + ") > div:nth-child(" + col + ") > div:nth-child(1)");
+		// .webix_dataview > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)
+									 // .webix_dataview > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)
 		elementExist(driver, background, true, tc);
 		driver.findElement(background).click();
 		return this;
@@ -103,6 +112,7 @@ public class WhitelistDashboard extends Comlibs {
 
 	public WhitelistDashboard inputNotes(WebDriver driver, String anyText, String tc) throws IOException {
 		Wait(1);
+		elementExist(driver, notes, true, tc);
 		driver.findElement(notes).clear();
 		driver.findElement(notes).sendKeys(anyText);
 		return this;
@@ -137,6 +147,16 @@ public class WhitelistDashboard extends Comlibs {
 	public WhitelistDashboard clickYesBtn(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, yesBtnDel, true, tc);
 		driver.findElement(yesBtnDel).click();
+		return this;
+	}
+	public WhitelistDashboard clickDeselectedAllBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, deselectedAll, true, tc);
+		driver.findElement(deselectedAll).click();
+		return this;
+	}
+	public WhitelistDashboard clickSelectedAllBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, selectedAll, true, tc);
+		driver.findElement(selectedAll).click();
 		return this;
 	}
 }

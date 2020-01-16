@@ -48,22 +48,24 @@ public class NewVehicles extends Comlibs {
 	By completionBtnOld = By.cssSelector("div.webix_column:nth-child(11) > div:nth-child(3)");
 
 	By patternField = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[1]/div/input");// get the parent first, you will see sub table and input and get table one then replace table with input
-	By notesField = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[2]/div/input");
-	// /html/body/div[5]/div/div[2]/div/div[2]/div/div[2]/div/input
+	By notesField = By.xpath("/html/body/div[4]/div/div[2]/div/div[3]/div/div[1]/div/input");
+
 	By editNotesField = By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div/div[2]/div/input");
 	By editCancelBtn = By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div/div[3]/div[1]/div/button");
 
 	By editSaveBtn = By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div/div[3]/div[2]");
 
-	By cancelBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[3]/div[1]/div/button");
+	By cancelBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[1]/div/button");
 
-	By saveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[3]/div[2]");
+	By saveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button");
+
 	By editSaveActiveBtn = By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div/div[3]/div[2]/div/button");
-	By saveActiveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div/div[3]/div[2]/div/button");
+	By saveActiveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button");
+	//							 /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button
 	By assignedTo = By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div/div[1]/div/input");
 	By status = By.xpath("/html/body/div[5]/div/div[2]/div/div[1]/div/span");
-	// By xxxxxx = By.xpath("");
-	// By xxxxxx = By.xpath("");
+	 By deselectedAll = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div[1]/div/button");
+	 By selectedAll = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div[2]/div/button");
 
 	// By xxxxxx = By.xpath("");
 	// By xxxxxx = By.xpath("");
@@ -158,7 +160,17 @@ public class NewVehicles extends Comlibs {
 
 		return this;
 	}
-
+	public NewVehicles clickDeselectedAllBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, deselectedAll, true, tc);
+		driver.findElement(deselectedAll).click();
+		return this;
+	}
+	public NewVehicles clickSelectedAllBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, selectedAll, true, tc);
+		driver.findElement(selectedAll).click();
+		return this;
+	}
+	
 	public NewVehicles selectStatus(WebDriver driver, int row, String tc) throws IOException {
 		By status = By.xpath("/html/body/div[4]/div/div[2]/div/div/div[" + row + "]"); /// html/body/div[4]/div/div[2]/div/div/div[4] = Flagged for Vendor to Fix, Stock applied.
 		elementExist(driver, status, true, tc);
@@ -167,8 +179,9 @@ public class NewVehicles extends Comlibs {
 	}
 
 	public NewVehicles selectBackground(WebDriver driver, int col, int row, String tc) throws IOException {
-		By background = By.cssSelector(".webix_dataview > div:nth-child(1) > div:nth-child(" + col
-				+ ") > div:nth-child(" + row + ") > div:nth-child(1) > div:nth-child(1) > img:nth-child(1)");
+//		By background = By.cssSelector(".webix_dataview > div:nth-child(1) > div:nth-child(" + col+ ") > div:nth-child(" + row + ") > div:nth-child(1) > div:nth-child(1) > img:nth-child(1)");
+		By background = By.cssSelector(".webix_dataview > div:nth-child(1) > div:nth-child(" + col+ ") > div:nth-child(" + row + ") > div:nth-child(1)");
+		// 							          	           .webix_dataview > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)
 		// .webix_dataview > div:nth-child(1) > div:nth-child(col) > div:nth-child(row) > div:nth-child(1) > div:nth-child(1) > img:nth-child(1)
 		elementExist(driver, background, true, tc);
 		driver.findElement(background).click();
