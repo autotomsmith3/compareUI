@@ -2062,7 +2062,7 @@ public class AdminPortalController extends Comlibs {
 
 		By moverElement = By.xpath("/html/body/div[1]/nav[2]/div/div");// chrome copy inside window bottom's bar from full xpath - works
 
-		ac.moveSliderBar(driver, "DOWN", moveTimes, moverElement, tc);
+//		ac.moveSliderBar(driver, "DOWN", moveTimes, moverElement, tc);
 		ac.moveSliderBar(driver, "RIGHT", moveTimes, moverElement, tc);
 
 		NewVehicleP.clickEditBtn(driver, recordRow, tc);
@@ -2128,7 +2128,7 @@ public class AdminPortalController extends Comlibs {
 		bgRow = 2;
 		String pattern = "USD00BUS03[1-2][A-C][0]";
 		String notesStr = "Selected bg ";// "USD00BUS03[1-2][A-C][0]";
-		ac.moveSliderBar(driver, "DOWN", moveTimes, moverElement, tc);
+//		ac.moveSliderBar(driver, "DOWN", moveTimes, moverElement, tc);
 		ac.moveSliderBar(driver, "RIGHT", moveTimes, moverElement, tc);
 
 		NewVehicleP.clickCompletionBtn(driver, recordRow, tc);
@@ -2161,7 +2161,7 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		wlP.inputSearch(driver, notesStr, tc);
 
-		ac.moveSliderBar(driver, "DOWN", moveTimes, moverElement, tc);
+//		ac.moveSliderBar(driver, "DOWN", moveTimes, moverElement, tc);
 		ac.moveSliderBar(driver, "RIGHT", moveTimes, moverElement, tc);
 
 		wlP.clickEditIcon(driver, 1, tc);
@@ -2179,7 +2179,7 @@ public class AdminPortalController extends Comlibs {
 		// UserListP.clickWhitelistDashboard(driver, tc);
 		tc = "Edit Whitelist Dashboard_02";
 		wlP.inputSearch(driver, notesStr, tc);
-		ac.moveSliderBar(driver, "DOWN", moveTimes, moverElement, tc);
+//		ac.moveSliderBar(driver, "DOWN", moveTimes, moverElement, tc);
 		ac.moveSliderBar(driver, "RIGHT", moveTimes, moverElement, tc);
 
 		wlP.clickEditIcon(driver, 1, tc);
@@ -2225,8 +2225,7 @@ public class AdminPortalController extends Comlibs {
 		NewVehicleP.inputSearch(driver, notesStr, tc);// here notesStr will be year, make, model, trim?
 
 		// TODO
-		// Check to see if it is back by calculating the time to int 10+1 and wait that
-		// time to check back
+		// Check to see if it is back by calculating the time to int 10+1 and wait that time to check back
 
 		//// *************************New Vehicle Btn******************************************************
 	}
@@ -2679,15 +2678,14 @@ public class AdminPortalController extends Comlibs {
 		tc = "Whitelist Deselect/SelectAll_Cancel_03";
 		bgCol = 1;
 		bgRow = 2;
-		wlP.inputSearch(driver, "Tahoe", tc);
+		String noteStr = "Selected bg";
+		wlP.inputSearch(driver, noteStr, tc);
 		// Move the bar to right side to make the icons visible
 		// wlP.move the bar to right. down, up, left...
 		By moverElement = By.xpath("/html/body/div[1]/nav[2]/div/div");// chrome copy inside window bottom's bar from full xpath - works
 
-		ac.moveSliderBar(driver, "DOWN", moveTimes, moverElement, tc);
+//		ac.moveSliderBar(driver, "DOWN", moveTimes, moverElement, tc);
 		ac.moveSliderBar(driver, "RIGHT", moveTimes, moverElement, tc);
-
-//		ac.moveSliderBar(driver, moverElement, "right", tc);
 
 		wlP.clickEditIcon(driver, 1, tc);
 		ac.Wait(wt);
@@ -2709,7 +2707,7 @@ public class AdminPortalController extends Comlibs {
 		tc = "Whitelist Delete_No_Yes_05 ";
 //		wlP.inputSearch(driver, "Tahoe", tc);
 
-		ac.moveSliderBar(driver, "DOWN", moveTimes, moverElement, tc);
+//		ac.moveSliderBar(driver, "DOWN", moveTimes, moverElement, tc);
 		ac.moveSliderBar(driver, "RIGHT", moveTimes, moverElement, tc);
 
 		wlP.clickDeleteIcon(driver, true, 2, tc);
@@ -2719,6 +2717,7 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);
 		wlP.clickYesBtn(driver, tc);
 		// TODO search to see if it is still in whitelist
+		wlP.inputSearch(driver, noteStr, tc);
 
 		//// *************************WhitelistDashboard******************************************************
 	}
