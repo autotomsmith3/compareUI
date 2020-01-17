@@ -5,8 +5,12 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 
 public class WhitelistDashboard extends Comlibs {
 	private final WebDriver driver;
@@ -35,19 +39,21 @@ public class WhitelistDashboard extends Comlibs {
 	By cancelBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[1]/div/button");
 
 	By saveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button");
-	//					   /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button
-	//			disable	   /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div[2]
+	// /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button
+	// disable /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div[2]
 	By saveActiveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button");
-	//							 /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button
+	// /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button
 
 //	By noBtnDel = By.xpath("/html/body/div[4]/div[3]/div[1]/div");//  /html/body/div[4]/div[3]/div[1]/div  - not good
-	By noBtnDel = By.cssSelector("body > div.webix_modal_box.webix_confirm > div.webix_popup_controls > div:nth-child(1) > div");
-	//							  body > div.webix_modal_box.webix_confirm > div.webix_popup_controls > div:nth-child(1) > div
-	By yesBtnDel = By.xpath("/html/body/div[4]/div[3]/div[2]");    // 
+	By noBtnDel = By.cssSelector(
+			"body > div.webix_modal_box.webix_confirm > div.webix_popup_controls > div:nth-child(1) > div");
+	// body > div.webix_modal_box.webix_confirm > div.webix_popup_controls >
+	// div:nth-child(1) > div
+	By yesBtnDel = By.xpath("/html/body/div[4]/div[3]/div[2]"); //
 
 	By deselectedAll = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div[1]/div/button");
 	By selectedAll = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div[2]/div/button");
-	
+
 	By xxxxxx = By.xpath("");
 	By xxxxxdd = By.xpath("");
 	By xxxxxd = By.xpath("");
@@ -61,17 +67,24 @@ public class WhitelistDashboard extends Comlibs {
 	}
 
 	public WhitelistDashboard clickEditIcon(WebDriver driver, int num, String tc) throws IOException {
-		By editIcon = By.cssSelector("div.webix_column:nth-child(8) > div:nth-child(" + num + ") > a:nth-child(1)");// 1,2,3...
-		//							  div.webix_column:nth-child(8) > div:nth-child(1) > a:nth-child(1)
-		//                            div.webix_column:nth-child(8) > div:nth-child(3) > a:nth-child(2)
+//		By editIcon = By.cssSelector("div.webix_column:nth-child(8) > div:nth-child("+num+") > a:nth-child(1)");// 1,2,3... FF works fine but Chrome
+		By editIcon = By.xpath("/html/body/div[1]/div/div[2]/div/div/div/div/div/div[2]/div[2]/div/div[8]/div[" + num + "]/a[1]");// 1,2,3... works?Yes and FF as well, but need to make it visible, copy from Chrome full xpath
+//		By editIcon = By.xpath("/html/body/div[1]/div/div[2]/div/div/div/div/div/div[2]/div[2]/div/div[8]/div["+num+"]/a[1]");// 1,2,3... works?, copy from Chrome full xpath
+
 		elementExist(driver, editIcon, true, tc);
 		driver.findElement(editIcon).click(); //
 		return this;
 
 	}
+
 	public WhitelistDashboard clickDeleteIcon(WebDriver driver, boolean delete, int num, String tc) throws IOException {
-		By editIcon = By.cssSelector("div.webix_column:nth-child(8) > div:nth-child(" + num + ") > a:nth-child(2)");// 1,2,3...
-		//                            div.webix_column:nth-child(8) > div:nth-child(3) > a:nth-child(2)
+//		By editIcon = By.cssSelector("div.webix_column:nth-child(8) > div:nth-child(" + num + ") > a:nth-child(2)");// 1,2,3... after moved window to right it wouldn't work.
+		By editIcon = By.xpath(
+				"/html/body/div[1]/div/div[2]/div/div/div/div/div/div[2]/div[2]/div/div[8]/div[" + num + "]/a[2]");// 1,2,3...copy full xpath
+		// div.webix_column:nth-child(8) > div:nth-child(3) > a:nth-child(2)
+		// /html/body/div[1]/div/div[2]/div/div/div/div/div/div[2]/div[2]/div/div[7]/div[2]/a[2] -- 2
+		// "/html/body/div[1]/div/div[2]/div/div/div/div/div/div[2]/div[2]/div/div[7]/div["+num+"]/a[2]"
+
 		if (delete) {
 			elementExist(driver, editIcon, true, tc);
 		}
@@ -81,9 +94,10 @@ public class WhitelistDashboard extends Comlibs {
 	}
 
 	public WhitelistDashboard selectBackground(WebDriver driver, int row, int col, String tc) throws IOException {
-		By background = By.cssSelector(".webix_dataview > div:nth-child(1) > div:nth-child(" + row + ") > div:nth-child(" + col + ") > div:nth-child(1)");
-		// .webix_dataview > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)
-									 // .webix_dataview > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)
+		By background = By.cssSelector(".webix_dataview > div:nth-child(1) > div:nth-child(" + row
+				+ ") > div:nth-child(" + col + ") > div:nth-child(1)");
+		//
+		//
 		elementExist(driver, background, true, tc);
 		driver.findElement(background).click();
 		return this;
@@ -134,29 +148,40 @@ public class WhitelistDashboard extends Comlibs {
 
 		return this;
 	}
+
 	public WhitelistDashboard clickXBtn(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, xBtn, true, tc);
 		driver.findElement(xBtn).click();
 		return this;
 	}
+
 	public WhitelistDashboard clickNoBtn(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, noBtnDel, true, tc);
 		driver.findElement(noBtnDel).click();
 		return this;
 	}
+
 	public WhitelistDashboard clickYesBtn(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, yesBtnDel, true, tc);
 		driver.findElement(yesBtnDel).click();
 		return this;
 	}
+
 	public WhitelistDashboard clickDeselectedAllBtn(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, deselectedAll, true, tc);
 		driver.findElement(deselectedAll).click();
 		return this;
 	}
+
 	public WhitelistDashboard clickSelectedAllBtn(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, selectedAll, true, tc);
 		driver.findElement(selectedAll).click();
 		return this;
 	}
+
+	public WhitelistDashboard clickYesOfAlertBox(WebDriver driver, String tc) throws IOException {
+		driver.switchTo().alert().accept();
+		return this;
+	}
+
 }

@@ -29,6 +29,7 @@ import org.apache.poi.hssf.util.HSSFColor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -38,6 +39,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.ProfilesIni;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.Select;
 
@@ -986,5 +988,35 @@ public class Comlibs {
 	// }
 	//
 	// }
+	public void moveSliderBar(WebDriver driver,String mover,int loopTime,By moveToLeftRightUpDown, String tc) throws Exception {
+//		action.click(webElement).build().perform();
+//		Thread.sleep(1000);
+//		for (int i = 0; i < 10; i++) {
+//		    action.sendKeys(Keys.ARROW_LEFT).build().perform();
+//		    Thread.sleep(200);
+//		}
+
+//		By moveToLeftRightUpDown = By.xpath("/html/body/div[1]/div/div[2]/div/div/div/div/div/div[3]");// chrome copy inside window bottom's bar from full xpath - works
+
+		Actions action = new Actions(driver);
+		WebElement slider = driver.findElement(moveToLeftRightUpDown);
+
+		action.click(slider).build().perform();
+		Thread.sleep(1000);
+		for (int i = 0; i < loopTime; i++) {
+			if (mover.equalsIgnoreCase("UP")) {
+				action.sendKeys(Keys.ARROW_UP).build().perform();// move browser's frame ok to uo
+			} else if (mover.equalsIgnoreCase("DOWN")) {
+				action.sendKeys(Keys.ARROW_DOWN).build().perform();// move browser's frame ok to down
+			} else if (mover.equalsIgnoreCase("RIGHT")) {
+				action.sendKeys(Keys.ARROW_RIGHT).build().perform();// move browser's frame ok to right
+			} else if (mover.equalsIgnoreCase("LEFT")) {
+				action.sendKeys(Keys.ARROW_LEFT).build().perform();// move browser's frame ok to left
+			}
+//			System.out.println("Move the slider bar TO "+mover+" , I= "+ i);
+			Thread.sleep(200);
+		}
+		System.out.println("Moved the slider bar to the " + mover);
+	}
 
 }
