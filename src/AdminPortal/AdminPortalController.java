@@ -2127,7 +2127,7 @@ public class AdminPortalController extends Comlibs {
 		bgCol = 2;
 		bgRow = 2;
 		String pattern = "USD00BUS03[1-2][A-C][0]";
-		String notesStr = "Selected bg ";// "USD00BUS03[1-2][A-C][0]";
+		String notesStr = "Selected bg";// "USD00BUS03[1-2][A-C][0]";
 //		ac.moveSliderBar(driver, "DOWN", moveTimes, moverElement, tc);
 		ac.moveSliderBar(driver, "RIGHT", moveTimes, moverElement, tc);
 
@@ -2243,9 +2243,9 @@ public class AdminPortalController extends Comlibs {
 			ac.moveSliderBar(driver, "RIGHT", moveTimes, moverElement, tc);
 			try {
 				NewVehicleP.clickEditBtn(driver,false, 1, tc);
-				ac.rwExcel(tc, false, "Verify deleted vehicle from Whitelist page by clicking the Edit icon in New Vehciles page", "Failed to change Notes. The vehicle's Notes seems still there. Try to change it again.");
+				ac.rwExcel(tc, false, "Verify deleted vehicle from Whitelist page by clicking the Edit icon in New Vehciles page", "Failed to change Notes. The vehicle's Notes seems still there or more same note. Try to change it again.");
 				NewVehicleP.inputEditNotes(driver,notesStr, tc);
-				NewVehicleP.clickSaveBtn(driver, tc);
+				NewVehicleP.clickEditSaveBtn(driver, tc);
 			}catch (Exception e) {
 				System.out.println("The Vehicle's Notes = "+notesStr+" is not showing. Passed!");
 			}
