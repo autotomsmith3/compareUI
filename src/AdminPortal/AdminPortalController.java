@@ -1984,7 +1984,7 @@ public class AdminPortalController extends Comlibs {
 		UserList UserListP = new UserList(driver);
 
 		//// *************************New Vehicle Btn******************************************************
-		tc = "NewVehicle_01";
+		tc = "TC237409";
 
 		UserListP.clickNewVehicles(driver, tc);
 		ac.Wait(wt * 2);
@@ -2022,15 +2022,15 @@ public class AdminPortalController extends Comlibs {
 			// -------------------------------------Vehicles-----------------------------------
 
 			// -------------------------------------Dealers-----------------------------------
-			tc = "TC236113_01_" + i;
+			tc = "TC237409_01_" + i;
 			ac.Wait(wt);
 			int dealerCountFrPage = NewVehicleP.returnDealersFrPage(driver, i, tc);
 			ac.Wait(wt);
-			tc = "TC236113_02_" + i;
+			tc = "TC237409_02_" + i;
 			NewVehicleP.clickDealerCountPreViewLink(driver, i, tc);
 			ac.Wait(wt);
 
-			tc = "TC236113_03_" + i;
+			tc = "TC237409_03_" + i;
 			int dealerCountFrLink = NewVehicleP.returnDealersFrPopup(driver, tc);
 			if (dealerCountFrLink == dealerCountFrPage) {
 				ac.rwExcel(tc, true, "Verify Dealer Count. Row=" + i, "Dealer Count matches the count in link");
@@ -2065,7 +2065,7 @@ public class AdminPortalController extends Comlibs {
 //		ac.moveSliderBar(driver, "DOWN", moveTimes, moverElement, tc);
 		ac.moveSliderBar(driver, "RIGHT", moveTimes, moverElement, tc);
 
-		NewVehicleP.clickEditBtn(driver, recordRow, tc);
+		NewVehicleP.clickEditBtn(driver,true, recordRow, tc);
 		ac.Wait(wt * 2);
 		NewVehicleP.clickStatus(driver, tc);
 		NewVehicleP.selectStatus(driver, assigned, tc);
@@ -2074,7 +2074,7 @@ public class AdminPortalController extends Comlibs {
 		NewVehicleP.clickEditCancelBtn(driver, tc);
 		ac.Wait(wt);
 		tc = "NewVehicleEdit_02";
-		NewVehicleP.clickEditBtn(driver, recordRow, tc);
+		NewVehicleP.clickEditBtn(driver,true, recordRow, tc);
 		ac.Wait(wt * 2);
 		assigned = 1;
 		NewVehicleP.clickStatus(driver, tc);
@@ -2084,7 +2084,7 @@ public class AdminPortalController extends Comlibs {
 		NewVehicleP.clickEditCancelBtn(driver, tc);
 		ac.Wait(wt);
 		tc = "NewVehicleEdit_03";
-		NewVehicleP.clickEditBtn(driver, recordRow, tc);
+		NewVehicleP.clickEditBtn(driver,true, recordRow, tc);
 		ac.Wait(wt * 2);
 		assigned = 5;
 		NewVehicleP.clickStatus(driver, tc);
@@ -2094,7 +2094,7 @@ public class AdminPortalController extends Comlibs {
 		NewVehicleP.clickEditCancelBtn(driver, tc);
 		ac.Wait(wt);
 		tc = "NewVehicleEdit_04";
-		NewVehicleP.clickEditBtn(driver, recordRow, tc);
+		NewVehicleP.clickEditBtn(driver,true, recordRow, tc);
 		ac.Wait(wt * 2);
 		assigned = 5;
 		NewVehicleP.clickStatus(driver, tc);
@@ -2105,7 +2105,7 @@ public class AdminPortalController extends Comlibs {
 		// NewVehicleP.clickEditSaveBtn(driver, tc);
 		ac.Wait(wt);
 		tc = "NewVehicleEdit_05";
-		NewVehicleP.clickEditBtn(driver, recordRow, tc);
+		NewVehicleP.clickEditBtn(driver,true, recordRow, tc);
 		ac.Wait(wt * 2);
 		assigned = 5;
 		NewVehicleP.clickStatus(driver, tc);
@@ -2223,9 +2223,35 @@ public class AdminPortalController extends Comlibs {
 		ac.Wait(wt);// need to wait to see if the New Model is back or not
 		UserListP.clickNewVehicles(driver, tc);
 		NewVehicleP.inputSearch(driver, notesStr, tc);// here notesStr will be year, make, model, trim?
-
-		// TODO
+		ac.moveSliderBar(driver, "RIGHT", moveTimes, moverElement, tc);
+		// -------------------------------------Check the record back in New Vehicles page-----------------------------------
 		// Check to see if it is back by calculating the time to int 10+1 and wait that time to check back
+		// verify if the status is back to Received, Not Reviewed?
+		tc = "Verify Status text_01";
+		String defalutText="Received, Not Reviewed";
+
+		try {
+			NewVehicleP.verifyStatus(driver, defalutText, 1, tc);
+//			 verifyStatus(WebDriver driver, String defalutStr, int num, String tc)
+			tc = "Delete record in Whitelist Dashboard_06";
+			NewVehicleP.clickEditBtn(driver,true, 1, tc);
+			ac.rwExcel(tc, true, "Verify deleted vehicle from Whitelist page", "The vehicle is back in New Vehicles page.");
+			String completedNotesStr="Completed by WL";
+			NewVehicleP.inputEditNotes(driver,completedNotesStr, tc);
+			NewVehicleP.clickEditSaveBtn(driver, tc);ac.Wait(wt);
+			NewVehicleP.inputSearch(driver, notesStr, tc);// 
+			ac.moveSliderBar(driver, "RIGHT", moveTimes, moverElement, tc);
+			try {
+				NewVehicleP.clickEditBtn(driver,false, 1, tc);
+				ac.rwExcel(tc, false, "Verify deleted vehicle from Whitelist page by clicking the Edit icon in New Vehciles page", "Failed to change Notes. The vehicle's Notes seems still there. Try to change it again.");
+				NewVehicleP.inputEditNotes(driver,notesStr, tc);
+				NewVehicleP.clickSaveBtn(driver, tc);
+			}catch (Exception e) {
+				System.out.println("The Vehicle's Notes = "+notesStr+" is not showing. Passed!");
+			}
+		}catch (Exception e) {
+			ac.rwExcel(tc, false, "Verify deleted vehicle from Whitelist page by clicking the Edit icon in New Vehciles page", "Failed to click the Edit icon. The vehicle seems NOT back in New Vehicles page.");
+		}
 
 		//// *************************New Vehicle Btn******************************************************
 	}

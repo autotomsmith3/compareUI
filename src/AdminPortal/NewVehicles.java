@@ -61,11 +61,11 @@ public class NewVehicles extends Comlibs {
 
 	By editSaveActiveBtn = By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div/div[3]/div[2]/div/button");
 	By saveActiveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button");
-	//							 /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button
+	// /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button
 	By assignedTo = By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div/div[1]/div/input");
 	By status = By.xpath("/html/body/div[5]/div/div[2]/div/div[1]/div/span");
-	 By deselectedAll = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div[1]/div/button");
-	 By selectedAll = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div[2]/div/button");
+	By deselectedAll = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div[1]/div/button");
+	By selectedAll = By.xpath("/html/body/div[4]/div/div[2]/div/div[2]/div[2]/div/button");
 
 	// By xxxxxx = By.xpath("");
 	// By xxxxxx = By.xpath("");
@@ -111,9 +111,9 @@ public class NewVehicles extends Comlibs {
 		return this;
 	}
 
-	public NewVehicles clickEditBtn(WebDriver driver, int num, String tc) throws IOException {
+	public NewVehicles clickEditBtn(WebDriver driver,boolean iconExist, int num, String tc) throws IOException {
 		By editBtn = By.cssSelector("div.webix_column:nth-child(11) > div:nth-child(" + num + ") > a:nth-child(1)");
-		elementExist(driver, editBtn, true, tc);
+		elementExist(driver, editBtn, iconExist, tc);
 		driver.findElement(editBtn).click();
 		return this;
 	}
@@ -160,17 +160,19 @@ public class NewVehicles extends Comlibs {
 
 		return this;
 	}
+
 	public NewVehicles clickDeselectedAllBtn(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, deselectedAll, true, tc);
 		driver.findElement(deselectedAll).click();
 		return this;
 	}
+
 	public NewVehicles clickSelectedAllBtn(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, selectedAll, true, tc);
 		driver.findElement(selectedAll).click();
 		return this;
 	}
-	
+
 	public NewVehicles selectStatus(WebDriver driver, int row, String tc) throws IOException {
 		By status = By.xpath("/html/body/div[4]/div/div[2]/div/div/div[" + row + "]"); /// html/body/div[4]/div/div[2]/div/div/div[4] = Flagged for Vendor to Fix, Stock applied.
 		elementExist(driver, status, true, tc);
@@ -180,8 +182,9 @@ public class NewVehicles extends Comlibs {
 
 	public NewVehicles selectBackground(WebDriver driver, int col, int row, String tc) throws IOException {
 //		By background = By.cssSelector(".webix_dataview > div:nth-child(1) > div:nth-child(" + col+ ") > div:nth-child(" + row + ") > div:nth-child(1) > div:nth-child(1) > img:nth-child(1)");
-		By background = By.cssSelector(".webix_dataview > div:nth-child(1) > div:nth-child(" + col+ ") > div:nth-child(" + row + ") > div:nth-child(1)");
-		// 							          	           .webix_dataview > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)
+		By background = By.cssSelector(".webix_dataview > div:nth-child(1) > div:nth-child(" + col
+				+ ") > div:nth-child(" + row + ") > div:nth-child(1)");
+		// .webix_dataview > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1)
 		// .webix_dataview > div:nth-child(1) > div:nth-child(col) > div:nth-child(row) > div:nth-child(1) > div:nth-child(1) > img:nth-child(1)
 		elementExist(driver, background, true, tc);
 		driver.findElement(background).click();
@@ -259,5 +262,21 @@ public class NewVehicles extends Comlibs {
 		int dealerSets = driver.findElements(popupElements).size();
 		return dealerSets;
 
+	}
+
+	public void verifyStatus(WebDriver driver, String defalutStr, int num, String tc) throws IOException {
+//		By sta? tus=By.xpath("/html/body/div[1]/div/div[2]/div/div/div/div/div/div[2]/div[2]/div/div[6]/div[3]");// 3
+		By status = By
+				.xpath("/html/body/div[1]/div/div[2]/div/div/div/div/div/div[2]/div[2]/div/div[6]/div[" + num + "]");// 4
+		elementExist(driver, status, true, tc);
+		String statusText = driver.findElement(status).getText();
+		if (statusText.equalsIgnoreCase(defalutStr)) {
+			rwExcel(tc, true, "Verify Status text which should be default: \"" + defalutStr + "\"",
+					"Page Status shows \"" + statusText + "\"");
+		} else {
+			// Failed
+			rwExcel(tc, false, "Verify Status text which should be default: \"" + defalutStr + "\"",
+					"Page Status shows \"" + statusText + "\"");
+		}
 	}
 }
