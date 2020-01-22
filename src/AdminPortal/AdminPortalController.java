@@ -2127,7 +2127,7 @@ public class AdminPortalController extends Comlibs {
 		bgCol = 2;
 		bgRow = 2;
 		String pattern = "USD00BUS03[1-2][A-C][0]";
-		String notesStr = "Selected bg";// "USD00BUS03[1-2][A-C][0]";
+		String notesStr = "Selected bg";//
 //		ac.moveSliderBar(driver, "DOWN", moveTimes, moverElement, tc);
 		ac.moveSliderBar(driver, "RIGHT", moveTimes, moverElement, tc);
 
@@ -2517,6 +2517,7 @@ public class AdminPortalController extends Comlibs {
 		vpP.inputAcode(driver, acodeString, tc);
 		tc = "Acode field_02";
 		vpP.clickAcodeSubmitBtn(driver, tc);
+		ac.Wait(wt);
 		vpP.verifyLoadAngleImage(driver, 1, tc);
 		vpP.verifyLoadAngleImage(driver, 8, tc);
 
