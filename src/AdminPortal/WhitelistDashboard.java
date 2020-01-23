@@ -42,6 +42,8 @@ public class WhitelistDashboard extends Comlibs {
 	// /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button
 	// disable /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div[2]
 	By saveActiveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button");
+					   //        /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div
+	By saveInactiveBtn=By.xpath("/html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div[2]");// disabled
 	// /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button
 
 //	By noBtnDel = By.xpath("/html/body/div[4]/div[3]/div[1]/div");//  /html/body/div[4]/div[3]/div[1]/div  - not good
@@ -102,6 +104,32 @@ public class WhitelistDashboard extends Comlibs {
 		driver.findElement(background).click();
 		return this;
 	}
+	public WhitelistDashboard selectBackgrounds(WebDriver driver, int row1, int col1,int row2, int col2, String tc) throws IOException {
+		By background1 = By.cssSelector(".webix_dataview > div:nth-child(1) > div:nth-child(" + row1
+				+ ") > div:nth-child(" + col1 + ") > div:nth-child(1)");
+		By background2 = By.cssSelector(".webix_dataview > div:nth-child(1) > div:nth-child(" + row2
+				+ ") > div:nth-child(" + col2 + ") > div:nth-child(1)");
+		//selected bg 1
+		elementExist(driver, background1, true, tc);
+		boolean selected=driver.findElement(background1).isSelected();
+		System.out.println("Selected = "+selected);
+		driver.findElement(background1).click();
+		selected=driver.findElement(background1).isSelected();
+		System.out.println("Selected Row ="+row1+", col ="+col1+".   "+selected);
+		
+		//selected bg 2
+		elementExist(driver, background2, true, tc);
+//		selected=driver.findElement(background2).isSelected();
+//		System.out.println("Selected = "+selected);
+		driver.findElement(background2).click();
+//		selected=driver.findElement(background1).isSelected();
+//		System.out.println("Selected Row ="+row2+", col ="+col2+".   "+selected);
+				
+		
+		
+		
+		return this;
+	}
 
 	public WhitelistDashboard inputPattern(WebDriver driver, String anyText, String tc) throws IOException {
 		Wait(1);
@@ -147,6 +175,21 @@ public class WhitelistDashboard extends Comlibs {
 		;
 
 		return this;
+	}
+	public boolean checkInactiveSaveBtn(WebDriver driver, String tc) throws IOException {
+		
+		boolean saveBth=elementExist(driver, saveInactiveBtn, false, tc);
+//				
+//				
+//				
+//		if (elementExist(driver, saveInactiveBtn, true, tc)) {
+//			driver.findElement(saveInactiveBtn).click();
+//		} else {
+//			rwExcel(tc, false, "Click on Save button", "it seems Save butoon is not active or does not exist.");
+//		}
+//		;
+
+		return saveBth;
 	}
 
 	public WhitelistDashboard clickXBtn(WebDriver driver, String tc) throws IOException {
