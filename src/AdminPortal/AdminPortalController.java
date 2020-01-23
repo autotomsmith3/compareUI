@@ -3497,7 +3497,7 @@ public class AdminPortalController extends Comlibs {
 
 		// String[] VINpxNewVIN01
 		// =fetchOneDemArrayFromPropFile(env+".VINpxNewVINs",prop);
-		for (int i = 0; i < 10; i++) {
+		for (int i = 1; i <= 1; i++) {
 			System.out.println("Testing is started in " + env + "\n");
 			// Initial
 			Comlibs bc = new Comlibs();
@@ -3512,7 +3512,7 @@ public class AdminPortalController extends Comlibs {
 																	// ver3.8.5
 				bc.SelecBroswerResolution(driver, envDevice, onScreen);
 			}
-			bc.rwExcel("", "****** Testing started ******" + (i + 1), "");
+			bc.rwExcel("", "****** Testing started ******" + i, "");
 			bc.rwExcel("", "Test Browser", tBrowser);
 			bc.rwExcel("", "Test Environment", env);
 
@@ -3572,9 +3572,9 @@ public class AdminPortalController extends Comlibs {
 			loadURL(driver, baseURL, env);
 			WhitelistDashboard(driver, tBrowser, versionNum, env);
 
-			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
+			bc.rwExcel("", "****** Testing is complete ****** " + i, "");
 			driver.close();
-			System.out.println("\nRound: " + (i + 1) + "; Test is complete!!!");
+			System.out.println("\nRound: " + i + "; Test is complete!!!");
 		}
 		return;
 	}
