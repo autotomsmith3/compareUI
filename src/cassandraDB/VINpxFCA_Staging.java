@@ -35,124 +35,137 @@ public class VINpxFCA_Staging {
 		}
 	}
 
-	public static void getBatch_Processing_Request(int stylenum, ResultSet res, int totalStyle, String pathfilename) {
-		String ColormappingTitle = "id,styleid,imageid,filename,ext1mfrfullcode,ext2mfrfullcode,ext1rgbhex,ext2rgbhex,type,angle,background,size,year,division,model,body,carryover,exactmatch,OEMTemp,country,lastmodified";
+//	public static void getBatch_Processing_Request(int stylenum, ResultSet res, int totalStyle, String pathfilename) {
+//		String FCAInventoryTitle = "dealercode,vin,bodystyle,exteriorcolorcode,exteriorcolordescription5,make,model,optioncodes,stocknum,trimdescription10,upperlevelpackage,vehtype,year13";
+//		UUID id;
+//		String dealercode                 =""; 
+//		String vin                        ="";
+//		String bodystyle                  ="";
+//		String exteriorcolorcode          ="";
+//		String exteriorcolordescription   ="";
+//		String make                       ="";
+//		String model                      ="";
+//		String optioncodes                ="";
+//		String stocknum                   ="";
+//		String trimdescription10          ="";
+//		String upperlevelpackage          ="";
+//		String vehtype                    ="";
+//		String year                       ="";
+//		if (stylenum == 1) {
+//			System.out.println("");
+//			System.out.println("Start:" + stylenum);
+//			System.out.println(FCAInventoryTitle);
+//			SaveScratch(pathfilename, FCAInventoryTitle);
+//		}
+//		for (Row row : res) {
+//			// Integer.toString(currentDynamicValue.getJSONObject(i).getInt("groupId"));
+//
+////			id=row.getUUID("batchguid");
+////			styleid=row.getString("endpoint");
+//			
+//			//			id = row.getUUID("id");
+////			styleid = Integer.toString(row.getInt("styleid"));
+////			imageid = row.getString("imageid");
+////			filename = row.getString("filename");
+////			ext1mfrfullcode = row.getString("ext1mfrfullcode");
+////			ext2mfrfullcode = row.getString("ext2mfrfullcode");
+////			ext1rgbhex = row.getString("ext1rgbhex");
+////			ext2rgbhex = row.getString("ext2rgbhex");
+////			type = row.getString("type");
+////			angle = row.getString("angle");
+////			background = row.getString("background");
+////			size = row.getString("size");
+////			year = Integer.toString(row.getInt("year"));
+////			division = row.getString("division");
+////			model = row.getString("model");
+////			body = row.getString("body");
+////			carryover = row.getString("carryover");
+////			// exactmatch = row.getString("exactmatch");
+////			// OEMTemp = row.getString("OEMTemp");
+////			country = row.getString("country");
+////			lastmodified = row.getTimestamp("lastmodified");
+////			rowString = id + "," + styleid + "," + imageid + "," + filename + "," + ext1mfrfullcode + ","
+////					+ ext2mfrfullcode + "," + ext1rgbhex + "," + ext2rgbhex + "," + type + "," + angle + ","
+////					+ background + "," + size + "," + year + "," + division + "," + model + "," + body + "," + carryover
+////					+ "," + exactmatch + "," + OEMTemp + "," + country + "," + lastmodified;
+//
+//			rowString=id+","+styleid;
+//			
+//			System.out.println(rowString);
+//			SaveScratch(pathfilename, rowString);
+//		}
+//		if (stylenum == totalStyle) {
+//			System.out.println("End!" + stylenum);
+//		}
+//	}
+
+	public static void getVehiclemappings(int stylenum, ResultSet res, int totalStyle, String pathfilename) {
+		String FCAInventoryTitle = "dealercode,vin,bodystyle,exteriorcolorcode,exteriorcolordescription5,make,model,optioncodes,stocknum,trimdescription10,upperlevelpackage,vehtype,year13";
 		UUID id;
-		String styleid = "";
-		String imageid = "";
-		String filename = "";
-		String ext1mfrfullcode = "";
-		String ext2mfrfullcode = "";
-		String ext1rgbhex = "";
-		String ext2rgbhex = "";
-		String type = "";
-		String angle = "";
-		String background = "";
-		String size = "";
-		String year = "";
-		String division = "";
-		String model = "";
-		String body = "";
-		String carryover = "";
-		String exactmatch = "";
-		String OEMTemp = "";
-		String country = "";
+		String dealercode                 =""; 
+		String vin                        ="";
+		String bodystyle                  ="";
+		String exteriorcolorcode          ="";
+		String exteriorcolordescription   ="";
+		String make                       ="";
+		String model                      ="";
+		String optioncodes                ="";
+		String stocknum                   ="";
+		String trimdescription          ="";
+		String upperlevelpackage          ="";
+		String vehtype                    ="";
+		String year                       ="";
+		
 		Date lastmodified;
 		String rowString = "";
 		if (stylenum == 1) {
 			System.out.println("");
 			System.out.println("Start:" + stylenum);
-			System.out.println(ColormappingTitle);
-			SaveScratch(pathfilename, ColormappingTitle);
+			System.out.println(FCAInventoryTitle);
+			SaveScratch(pathfilename, FCAInventoryTitle);
 		}
 		for (Row row : res) {
 			// Integer.toString(currentDynamicValue.getJSONObject(i).getInt("groupId"));
-
-			id=row.getUUID("batchguid");
-			styleid=row.getString("endpoint");
+//			id = row.getUUID("id");
+//			dealercode = Integer.toString(row.getInt("dealercode"));
+			dealercode =row.getString("dealercode");
+			vin =row.getString("vin");
+			bodystyle =row.getString("bodystyle");
+			exteriorcolorcode =row.getString("exteriorcolorcode");
+			exteriorcolordescription =row.getString("exteriorcolordescription");
+			make =row.getString("make");
+			model =row.getString("model");
+			optioncodes =row.getString("optioncodes");
+			stocknum =row.getString("stocknum");
+			trimdescription =row.getString("trimdescription");
+			upperlevelpackage =row.getString("upperlevelpackage");
+			vehtype =row.getString("vehtype");
+			year =row.getString("year");
+//			xxx =row.getString("xxx");
+//			xxx =row.getString("xxx");
 			
-			//			id = row.getUUID("id");
-//			styleid = Integer.toString(row.getInt("styleid"));
+			
+//			
+//			
 //			imageid = row.getString("imageid");
 //			filename = row.getString("filename");
-//			ext1mfrfullcode = row.getString("ext1mfrfullcode");
-//			ext2mfrfullcode = row.getString("ext2mfrfullcode");
-//			ext1rgbhex = row.getString("ext1rgbhex");
-//			ext2rgbhex = row.getString("ext2rgbhex");
 //			type = row.getString("type");
-//			angle = row.getString("angle");
 //			background = row.getString("background");
 //			size = row.getString("size");
+//			carryover = row.getString("carryover");
 //			year = Integer.toString(row.getInt("year"));
 //			division = row.getString("division");
 //			model = row.getString("model");
 //			body = row.getString("body");
-//			carryover = row.getString("carryover");
-//			// exactmatch = row.getString("exactmatch");
-//			// OEMTemp = row.getString("OEMTemp");
+////			exactmatch = row.getString("exactmatch");
+////			OEMTemp = row.getString("OEMTemp");
 //			country = row.getString("country");
 //			lastmodified = row.getTimestamp("lastmodified");
-//			rowString = id + "," + styleid + "," + imageid + "," + filename + "," + ext1mfrfullcode + ","
-//					+ ext2mfrfullcode + "," + ext1rgbhex + "," + ext2rgbhex + "," + type + "," + angle + ","
-//					+ background + "," + size + "," + year + "," + division + "," + model + "," + body + "," + carryover
-//					+ "," + exactmatch + "," + OEMTemp + "," + country + "," + lastmodified;
-
-			rowString=id+","+styleid;
 			
-			System.out.println(rowString);
-			SaveScratch(pathfilename, rowString);
-		}
-		if (stylenum == totalStyle) {
-			System.out.println("End!" + stylenum);
-		}
-	}
-
-	public static void getVehiclemappings(int stylenum, ResultSet res, int totalStyle, String pathfilename) {
-		String VehiclemappingTitle = "id,styleid,imageid,filename,type,background,size,carryover,year,division,model,body,exactmatch,OEMTemp,country,lastmodified";
-		UUID id;
-		String styleid = "";
-		String imageid = "";
-		String filename = "";
-		String type = "";
-		String background = "";
-		String size = "";
-		String carryover = "";
-		String year = "";
-		String division = "";
-		String model = "";
-		String body = "";
-		String exactmatch = "";
-		String OEMTemp = "";
-		String country = "";
-		Date lastmodified;
-		String rowString = "";
-		if (stylenum == 1) {
-			System.out.println("");
-			System.out.println("Start:" + stylenum);
-			System.out.println(VehiclemappingTitle);
-			SaveScratch(pathfilename, VehiclemappingTitle);
-		}
-		for (Row row : res) {
-			// Integer.toString(currentDynamicValue.getJSONObject(i).getInt("groupId"));
-			id = row.getUUID("id");
-			styleid = Integer.toString(row.getInt("styleid"));
-			imageid = row.getString("imageid");
-			filename = row.getString("filename");
-			type = row.getString("type");
-			background = row.getString("background");
-			size = row.getString("size");
-			carryover = row.getString("carryover");
-			year = Integer.toString(row.getInt("year"));
-			division = row.getString("division");
-			model = row.getString("model");
-			body = row.getString("body");
-//			exactmatch = row.getString("exactmatch");
-//			OEMTemp = row.getString("OEMTemp");
-			country = row.getString("country");
-			lastmodified = row.getTimestamp("lastmodified");
-			rowString = id + "," + styleid + "," + imageid + "," + filename + "," + type + "," + background + "," + size
-					+ "," + carryover + "," + year + "," + division + "," + model + "," + body + "," + exactmatch + ","
-					+ OEMTemp + "," + country + "," + lastmodified;
+			
+			rowString = row + "," + dealercode + "," + bodystyle + "," + exteriorcolorcode + "," + exteriorcolordescription + "," + make + "," + model
+					+ "," + optioncodes + "," + stocknum + "," + trimdescription + "," + model + "," + upperlevelpackage + "," + vehtype + ","
+					+ year;
 			System.out.println(rowString);
 			SaveScratch(pathfilename, rowString);
 		}
@@ -166,6 +179,7 @@ public class VINpxFCA_Staging {
 //		"172.16.150.11"  - nslookup LCOA-DVTP-XCA1.autodatacorp.org
 //		"172.16.150.12"  - nslookup LCOA-DVTP-XCA2.autodatacorp.org
 //		"172.16.150.13"  - nslookup LCOA-DVTP-XCA3.autodatacorp.org
+//		pcoc-stfi-xca2.autodata.org/10.100.64.64:9042 -- what's this? don't know
 //		Need to add below jars and dependency in porm.xml
 //		 <dependency>
 //         <groupId>com.datastax.cassandra</groupId>
@@ -198,6 +212,10 @@ public class VINpxFCA_Staging {
 //		Cluster cluster = Cluster.builder().addContactPoints(serverIp).build();
 		Cluster cluster = Cluster.builder().addContactPoints(serverIp).withCredentials("fcainventory_user", "password").build();//works
 		Session session = cluster.connect(keyspace);//20200123 passed
+		String cqlStatement = "select * from vi01_fcadigital_inventory where dealercode='45685' allow filtering";// 
+		ResultSet results = session.execute(cqlStatement);
+		
+		
 		String[] style = {"389544", "387896" };// { "389544", "387896","389544" };
 		String datestring = "20171124";
 		int styleLength = style.length;
@@ -207,9 +225,9 @@ public class VINpxFCA_Staging {
 				+ datestring + "_" + styleLength + ".txt";
 		// ***************************Colormappings**************************
 		 for (int i = 0; i < styleLength; i++) {
-		 String cqlStatement = "select * from batch_processing_request_qa.batchrequest";// + style[i];
-		 ResultSet results = session.execute(cqlStatement);
-		 getBatch_Processing_Request(i + 1, results, styleLength, colorpathfile);
+//		 String cqlStatement = "select * from batch_processing_request_qa.batchrequest";// + style[i];
+//		 ResultSet results = session.execute(cqlStatement);
+			 getVehiclemappings(i + 1, results, styleLength, colorpathfile);
 		 }
 		// ***************************Colormappings**************************
 
