@@ -30,7 +30,7 @@ public class VINpxFCA_Staging {
 			out2.write(ScratchText);
 			out2.newLine();
 			out2.close();
-		} catch (Exception e) {// Catch  exception if any
+		} catch (Exception e) {// Catch exception if any
 			System.err.println("Error: " + e.getMessage());
 		}
 	}
@@ -102,20 +102,20 @@ public class VINpxFCA_Staging {
 	public static void getVehiclemappings(int stylenum, ResultSet res, int totalStyle, String pathfilename) {
 		String FCAInventoryTitle = "dealercode,vin,bodystyle,exteriorcolorcode,exteriorcolordescription5,make,model,optioncodes,stocknum,trimdescription10,upperlevelpackage,vehtype,year13";
 		UUID id;
-		String dealercode                 =""; 
-		String vin                        ="";
-		String bodystyle                  ="";
-		String exteriorcolorcode          ="";
-		String exteriorcolordescription   ="";
-		String make                       ="";
-		String model                      ="";
-		String optioncodes                ="";
-		String stocknum                   ="";
-		String trimdescription          ="";
-		String upperlevelpackage          ="";
-		String vehtype                    ="";
-		String year                       ="";
-		
+		String dealercode = "";
+		String vin = "";
+		String bodystyle = "";
+		String exteriorcolorcode = "";
+		String exteriorcolordescription = "";
+		String make = "";
+		String model = "";
+		String optioncodes = "";
+		String stocknum = "";
+		String trimdescription = "";
+		String upperlevelpackage = "";
+		String vehtype = "";
+		String year = "";
+
 		Date lastmodified;
 		String rowString = "";
 		if (stylenum == 1) {
@@ -128,23 +128,22 @@ public class VINpxFCA_Staging {
 			// Integer.toString(currentDynamicValue.getJSONObject(i).getInt("groupId"));
 //			id = row.getUUID("id");
 //			dealercode = Integer.toString(row.getInt("dealercode"));
-			dealercode =row.getString("dealercode");
-			vin =row.getString("vin");
-			bodystyle =row.getString("bodystyle");
-			exteriorcolorcode =row.getString("exteriorcolorcode");
-			exteriorcolordescription =row.getString("exteriorcolordescription");
-			make =row.getString("make");
-			model =row.getString("model");
-			optioncodes =row.getString("optioncodes");
-			stocknum =row.getString("stocknum");
-			trimdescription =row.getString("trimdescription");
-			upperlevelpackage =row.getString("upperlevelpackage");
-			vehtype =row.getString("vehtype");
-			year =row.getString("year");
+			dealercode = row.getString("dealercode");
+			vin = row.getString("vin");
+			bodystyle = row.getString("bodystyle");
+			exteriorcolorcode = row.getString("exteriorcolorcode");
+			exteriorcolordescription = row.getString("exteriorcolordescription");
+			make = row.getString("make");
+			model = row.getString("model");
+			optioncodes = row.getString("optioncodes");
+			stocknum = row.getString("stocknum");
+			trimdescription = row.getString("trimdescription");
+			upperlevelpackage = row.getString("upperlevelpackage");
+			vehtype = row.getString("vehtype");
+			year = row.getString("year");
 //			xxx =row.getString("xxx");
 //			xxx =row.getString("xxx");
-			
-			
+
 //			
 //			
 //			imageid = row.getString("imageid");
@@ -161,11 +160,10 @@ public class VINpxFCA_Staging {
 ////			OEMTemp = row.getString("OEMTemp");
 //			country = row.getString("country");
 //			lastmodified = row.getTimestamp("lastmodified");
-			
-			
-			rowString = row + "," + dealercode + "," + bodystyle + "," + exteriorcolorcode + "," + exteriorcolordescription + "," + make + "," + model
-					+ "," + optioncodes + "," + stocknum + "," + trimdescription + "," + model + "," + upperlevelpackage + "," + vehtype + ","
-					+ year;
+
+			rowString = row + "," + dealercode + "," + bodystyle + "," + exteriorcolorcode + ","
+					+ exteriorcolordescription + "," + make + "," + model + "," + optioncodes + "," + stocknum + ","
+					+ trimdescription + "," + model + "," + upperlevelpackage + "," + vehtype + "," + year;
 			System.out.println(rowString);
 			SaveScratch(pathfilename, rowString);
 		}
@@ -175,10 +173,15 @@ public class VINpxFCA_Staging {
 	}
 
 	public static void main(String[] args) {
-		String serverIp = "172.16.150.11"; //nslookup LCOA-DVTP-XCA1.autodatacorp.org. Login: fcainventory_user, Ps: password,  //LCOA-DVTP-XCA1 keyspace: fcainventory_user 
+		String serverIp = "10.100.64.63"; // nslookup LCOA-DVTP-XCA1.autodatacorp.org. Login: fcainventory_user, Ps: password, //LCOA-DVTP-XCA1 keyspace: fcainventory_user
+//		String serverIp = "172.16.150.11"; //nslookup LCOA-DVTP-XCA1.autodatacorp.org. Login: fcainventory_user, Ps: password,  //LCOA-DVTP-XCA1 keyspace: fcainventory_user 
 //		"172.16.150.11"  - nslookup LCOA-DVTP-XCA1.autodatacorp.org
 //		"172.16.150.12"  - nslookup LCOA-DVTP-XCA2.autodatacorp.org
 //		"172.16.150.13"  - nslookup LCOA-DVTP-XCA3.autodatacorp.org
+//		"10.100.64.63" - nslookup pcoc-stfi-xca1.autodata.org
+//		"10.100.64.64" - nslookup pcoc-stfi-xca2.autodata.org
+//		
+//		
 //		pcoc-stfi-xca2.autodata.org/10.100.64.64:9042 -- what's this? don't know
 //		Need to add below jars and dependency in porm.xml
 //		 <dependency>
@@ -210,42 +213,25 @@ public class VINpxFCA_Staging {
 		String keyspace = "vdvi";
 //		CassandraConnection connection;
 //		Cluster cluster = Cluster.builder().addContactPoints(serverIp).build();
-		Cluster cluster = Cluster.builder().addContactPoints(serverIp).withCredentials("fcainventory_user", "password").build();//works
-		Session session = cluster.connect(keyspace);//20200123 passed
-		String cqlStatement = "select * from vi01_fcadigital_inventory where dealercode='45685' allow filtering";// 
+		Cluster cluster = Cluster.builder().addContactPoints(serverIp).withCredentials("fcainventory_user", "password")
+				.build();// works
+		Session session = cluster.connect(keyspace);// 20200123 passed
+		String cqlStatement = "select * from vi01_fcadigital_inventory where dealercode='45685' allow filtering";//
 		ResultSet results = session.execute(cqlStatement);
-		
-		
-		String[] style = {"389544", "387896" };// { "389544", "387896","389544" };
-		String datestring = "20171124";
+
+		String[] style = { "389544", "387896" };// { "389544", "387896","389544" };
+		String datestring = "20200127";
 		int styleLength = style.length;
-		String colorpathfile = "C:\\chrome\\loader\\CIG-MAPPING-IMPORT\\Test Results\\test\\JavaResults\\batchrequest_"
-				+ datestring + "_" + styleLength + ".txt";
-		String vehiclepathfile = "C:\\chrome\\loader\\CIG-MAPPING-IMPORT\\Test Results\\test\\JavaResults\\vehiclemapping_"
-				+ datestring + "_" + styleLength + ".txt";
+		String colorpathfile = "C:\\1\\Eclipse\\Test Results\\FCA_CassandraStaging\\Staging_FCA_Inventory_" + datestring
+				+ "_" + styleLength + ".txt";
+
 		// ***************************Colormappings**************************
-		 for (int i = 0; i < styleLength; i++) {
+		for (int i = 0; i < styleLength; i++) {
 //		 String cqlStatement = "select * from batch_processing_request_qa.batchrequest";// + style[i];
 //		 ResultSet results = session.execute(cqlStatement);
-			 getVehiclemappings(i + 1, results, styleLength, colorpathfile);
-		 }
-		// ***************************Colormappings**************************
+			getVehiclemappings(i + 1, results, styleLength, colorpathfile);
+		}
 
-//		// ***************************Vehiclemappings**************************
-//		for (int i = 0; i < styleLength; i++) {
-//			String cqlStatement = "select * from vehiclemappings where styleid=" + style[i];
-//			ResultSet results = session.execute(cqlStatement);
-//			getVehiclemappings(i + 1, results, styleLength, vehiclepathfile);
-//		}
-//		// ***************************Colormappings**************************
-
-		// for (Row row : results) {
-		// System.out.println(row.getUUID("id"));
-		// System.out.format("%s %s\n", row.getString("division"), row.getString("model"));
-		// }
-		// for (Row row : session.execute(cqlStatement)) {
-		// System.out.println(row.toString());
-		// }
 		cluster.close();
 	}
 }
