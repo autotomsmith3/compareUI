@@ -163,9 +163,9 @@ public class VINpxFCA_StagingSaveToSheet {
 //		
 		String keyspace = "vdvi";
 //		String dealerid="23871";//23871 =123456_FCA
-		boolean alldealers = true;
-		String datestring = "20200128";
-		String[] dealerids = { "23871", "45685" };
+		boolean alldealers = false;
+		String datestring = "20200129";
+		String[] dealerids = { "23871"};// "23871" - 123456_FCA, "45685"
 		int dealersLength = dealerids.length;
 //		CassandraConnection connection;
 //		Cluster cluster = Cluster.builder().addContactPoints(serverIp).build();
