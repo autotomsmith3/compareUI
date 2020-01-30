@@ -344,6 +344,11 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		UserListP.clickAddDealerShip(driver, tc);
 		Wait(wt);
 		AdminPortal.DealerProfile DealerProfieP = new AdminPortal.DealerProfile(driver);
+		tc = "Select/Unselect All OEM/Brands_01";
+		DealerProfieP.selectUnselectAllOEMBrands(driver, true, tc);
+		tc = "Select/Unselect All OEM/Brands_02";
+		DealerProfieP.selectUnselectAllOEMBrands(driver, false, tc);
+		tc = "TC228656_01";
 		DealerProfieP.selectOEM(driver, 13, tc);
 		// check Buick and Cadillac and Chevrolet and GMC
 		// DealerProfieP.selectOEMBrands(driver, 1); // check Buick
@@ -351,9 +356,9 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		// DealerProfieP.selectOEMBrands(driver, 3); // check Chevrolet
 		// DealerProfieP.selectOEMBrands(driver, 4); // check GMC
 		// DealerProfieP.selectOEMBrands(driver, 5); // check Hummer
-		for (String brand : Brands) {
-			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand), tc);
-		}
+//		for (String brand : Brands) {
+//			DealerProfieP.selectOEMBrands(driver, Integer.parseInt(brand), tc);
+//		}
 		DealerProfieP.inputDealersipID(driver, DealershipID, tc);
 		DealerProfieP.selectVINpxProd(driver, tc);
 		DealerProfieP.selectSTOCKpxProd(driver, tc);

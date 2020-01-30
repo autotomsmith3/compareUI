@@ -688,6 +688,11 @@ public class AdminPortalController extends Comlibs {
 		UserListP.clickAddDealerShip(driver, tc);
 
 		DealerProfile DealerProfieP = new DealerProfile(driver);
+		
+		tc = "Select/Unselect All OEM/Brands_01";
+		DealerProfieP.selectUnselectAllOEMBrands(driver, true, tc);
+		tc = "Select/Unselect All OEM/Brands_02";
+		DealerProfieP.selectUnselectAllOEMBrands(driver, false, tc);
 		DealerProfieP.selectOEM(driver, 13, tc);
 		// check Buick and Cadillac and Chevrolet and GMC
 		// DealerProfieP.selectOEMBrands(driver, 1); // check Buick
@@ -2560,7 +2565,7 @@ public class AdminPortalController extends Comlibs {
 			vincount++;
 			TriageVinStatuP.inputSearch(driver, searchVIN, tc);
 			TriageVinStatuP.clickSubmit(driver, tc);
-			ac.Wait(wt * 3);
+			ac.Wait(wt * 2);
 			resoltData = TriageVinStatuP.retrieveResoltData(driver, tc);
 			getDataError1 = resoltData.contains("build data found");
 //		getDataError2 = resoltData.contains("vin was found in VINpx database for the following dealers");
@@ -3693,7 +3698,7 @@ public class AdminPortalController extends Comlibs {
 			////// chkEmail);
 			//
 			//
-			////// 5. Vinstatus - get VinStatus only:
+			//// 5. Vinstatus - get VinStatus only:
 			// VinStatusOnly(driver, tBrowser, versionNum, env);
 			////// ************************************************************************************
 
