@@ -4253,7 +4253,6 @@ public class AUTOpxController extends Comlibs {
 		try {
 			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String env = prop.getProperty("AUTOpx.environment");
@@ -4339,7 +4338,6 @@ public class AUTOpxController extends Comlibs {
 			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
 			// propdata.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/vinpxAgreement.txt"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String env = prop.getProperty("AUTOpx.environment");
@@ -4373,7 +4371,6 @@ public class AUTOpxController extends Comlibs {
 			profileProp.load(AUTOpxController.class.getClassLoader()
 					.getResourceAsStream("data/dealerProfileSettings.properties"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String DealershipIDBrands = profileProp.getProperty(env + ".DealershipIDBrands");
@@ -4478,7 +4475,6 @@ public class AUTOpxController extends Comlibs {
 		try {
 			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String env = prop.getProperty("AUTOpx.environment");
