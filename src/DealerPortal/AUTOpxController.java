@@ -327,7 +327,7 @@ public class AUTOpxController extends Comlibs {
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
 		igP.verifyLoadPreviewTileImage(driver, ALL_VINS_RENDER_MAX_WT, vin01, vehGUID01, numbers, TCnum);
 
-		TCnum = "TC5123139";
+		TCnum = "TC5123139_ig";
 		igP.clickSelectAllBtn(driver, TCnum);
 		allVinNums = igP.getReRenderNum(driver, TCnum);
 		igP.clickSelectNoneBtn(driver, TCnum);
@@ -585,7 +585,7 @@ public class AUTOpxController extends Comlibs {
 		// igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		// vgP.verifyLoadPannelImage(driver, "TC5123xxx");
 
-		TCnum = "TC5123139";
+		TCnum = "TC5123139_vg";
 		igP.clickSelectAllBtn(driver, TCnum);
 		allVinNums = igP.getReRenderNum(driver, TCnum);
 		igP.clickSelectNoneBtn(driver, TCnum);
@@ -602,7 +602,7 @@ public class AUTOpxController extends Comlibs {
 		ac.Wait(wt);
 		igP.enterTextInSearch(vin01.substring(1, 9));// 20190830 igP.enterTextInSearch(vin01.substring(1, 5));, old: igP.enterTextInSearch(vin01.substring(1, 6));igP.enterTextInSearch(vin01);
 		ac.Wait(wt * 3);
-		allImageNums = igP.getTileImageNum(driver, vehGUID01, "");
+		allImageNums = igP.getTileImageNum(driver, vehGUID01, TCnum);
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		vgP.verifyLoadPannelImage(driver, TCnum);
 
@@ -1445,7 +1445,7 @@ public class AUTOpxController extends Comlibs {
 		// igP.enterTextInSearch(vin01); // This will make only one vehicle for the Next VIN.
 		// ac.Wait(wt);
 		try {
-			allImageNums = igP.getTileImageNum(driver, vehGUID01, "");
+			allImageNums = igP.getTileImageNum(driver, vehGUID01, TCnum);
 		} catch (Exception ex) {
 			System.out.println("error occurs!");
 			ac.rwExcel(TCnum, false, "getTileImageNum", "failed");
@@ -1805,7 +1805,7 @@ public class AUTOpxController extends Comlibs {
 			allVinNums = MaxVinsForPreview;
 		}
 		ac.Wait(wt);
-		allImageNums = igP.getTileImageNum(driver, vehGUID01, "");
+		allImageNums = igP.getTileImageNum(driver, vehGUID01, TCnum);
 
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		// VehicleGallery vgP = new VehicleGallery(driver);
@@ -2157,7 +2157,7 @@ public class AUTOpxController extends Comlibs {
 		if (allVinNums >= MaxVinsForPreview) {
 			allVinNums = MaxVinsForPreview;
 		}
-		allImageNums = igP.getTileImageNum(driver, vehGUID01, "");
+		allImageNums = igP.getTileImageNum(driver, vehGUID01, TCnum);
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		// VehicleGallery vgP = new VehicleGallery(driver);
 		vgP.verifyUplaodCustomPicsBtnExist(driver, true, TCnum);

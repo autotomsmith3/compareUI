@@ -1176,7 +1176,7 @@ public class ImageGallery extends Comlibs {
 					Wait((int) time_interval);
 					System.out.println("Total VINs=" + totalVINs + ".  Waiting for rerendering, time elapsed "
 							+ waitTime + " seconds = " + round(waitTime / 60, 1)
-							+ " minute(s). Please wait... is showing on the tile.");
+							+ " minute(s). \"Please wait...\" is showing on the tile.");
 
 				} else if (textString.equalsIgnoreCase("Unable to decode VIN. Images cannot be generated.")) {
 					// Unable to decode VIN...
@@ -1374,7 +1374,7 @@ public class ImageGallery extends Comlibs {
 			rwExcel(tc, true, "Dealership name is displayed", expectedText);
 		} else {
 			rwExcel(tc, false, "Dealership name is NOT showing properly. Exceed time limit!",
-					"Dealership name is NOT - " + expectedText+". The site shows name "+"\""+rs+"\"");
+					"Dealership name is NOT - " + expectedText + ". The site shows name " + "\"" + rs + "\"");
 		}
 
 	}
@@ -1631,6 +1631,14 @@ public class ImageGallery extends Comlibs {
 			if (temp.contains("Failed")) {
 				rwExcel(tc, false, "Get Tile ImageNumber", "GetTileImageNumber contains fail");
 			} else {
+				if (temp.contains("New")) {
+					temp = temp.replace("\nNew", "");
+				} else if (temp.contains("Used")) {
+					temp = temp.replace("\nUsed", "");
+				} else {
+					System.out.println("\"New\" or \"Used\" is not show on the tile. This is wrong!!!!");
+					rwExcel(tc, false, "Get Tile ImageNumber", "The tile does not contain \"New\" or \"Used\" text!");
+				}
 				num = Integer.parseInt(temp);
 			}
 		} catch (Throwable e) {

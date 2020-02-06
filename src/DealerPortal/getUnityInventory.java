@@ -88,9 +88,9 @@ public class getUnityInventory {
 		// String[] unityWorkDealerShipID = {"KTL1B32"};// 20191001-testing Buick Encore for 2008
 		// String[] unityWorkDealerShipID = {"GMRCHL5"};// 20191002-testing Chrysler for 2008
 		// String[] unityWorkDealerShipID = {"1WB6RYW"};// 20191002-testing Chrysler for 2008 1WB6RYW - jeep
-		String[] unityWorkDealerShipID = { "H5O4M8B", "275D2EQ", "27IBZXO", "27OE966", "2BDCDUA", "2CT1GBZ", "2D962HH",
-				"2FC1ZF6", "2FDCAJ5", "2FEASPJ", "2FFF58W", "2FHFIYI", "2FV5V6U" };// 20200130-testing select all OEM/Brands for 2388
-
+//		String[] unityWorkDealerShipID = { "H5O4M8B", "275D2EQ", "27IBZXO", "27OE966", "2BDCDUA", "2CT1GBZ", "2D962HH",
+//				"2FC1ZF6", "2FDCAJ5", "2FEASPJ", "2FFF58W", "2FHFIYI", "2FV5V6U" };// 20200130-20200203 testing select all OEM/Brands for 2388
+		String[] unityWorkDealerShipID = {"KHE7LSP"};//20200204 VW dealer
 		// Returning nothing: "","",
 		for (String id : unityWorkDealerShipID) {
 			String jsonTextFrUnityWork = cPP.com_libs.getSourceCode(unityWorkURL, id);
