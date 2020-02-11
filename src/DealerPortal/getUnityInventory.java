@@ -90,7 +90,8 @@ public class getUnityInventory {
 		// String[] unityWorkDealerShipID = {"1WB6RYW"};// 20191002-testing Chrysler for 2008 1WB6RYW - jeep
 //		String[] unityWorkDealerShipID = { "H5O4M8B", "275D2EQ", "27IBZXO", "27OE966", "2BDCDUA", "2CT1GBZ", "2D962HH",
 //				"2FC1ZF6", "2FDCAJ5", "2FEASPJ", "2FFF58W", "2FHFIYI", "2FV5V6U" };// 20200130-20200203 testing select all OEM/Brands for 2388
-		String[] unityWorkDealerShipID = {"KHE7LSP"};//20200204 VW dealer
+//		String[] unityWorkDealerShipID = {"KHE7LSP"};//20200204 VW dealer
+		String[] unityWorkDealerShipID = { "AME8TUM" };// 20200211 Kia dealer
 		// Returning nothing: "","",
 		for (String id : unityWorkDealerShipID) {
 			String jsonTextFrUnityWork = cPP.com_libs.getSourceCode(unityWorkURL, id);
@@ -112,6 +113,8 @@ public class getUnityInventory {
 		String exteriorColor = "";
 		String interiorColor = "";
 		String trim = "";
+		String bodyStyle = "";
+		String engine = "";
 		// System.out.println("S/N" + ", vehicleId:" + ", vin:" + ", stockNumber:" + ", used:" + ", certified:"
 		// + ", dateReceived:" + ", make:" + ", model:" + ", year:" + ", mileage:" + ", trim:" + ", bodyStyle:"
 		// + ", engine:" + ", transmission:" + ", exteriorColor:" + ", interiorColor:" + ", listPrice:"
@@ -134,8 +137,17 @@ public class getUnityInventory {
 				e.printStackTrace();
 				trim = "null";
 			}
-			String bodyStyle = jsonarray.getJSONObject(i).getString("bodyStyle");
-			String engine = jsonarray.getJSONObject(i).getString("engine");
+			try {
+				bodyStyle = jsonarray.getJSONObject(i).getString("bodyStyle");
+			} catch (Exception e) {
+				bodyStyle = "Failed to get \"bodyStyle\"";
+			}
+			try {
+				engine = jsonarray.getJSONObject(i).getString("engine");
+			} catch (Exception e) {
+				engine = "Failed to get \"engine\"";
+			}
+
 			String transmission = jsonarray.getJSONObject(i).getString("transmission");
 			try {
 				exteriorColor = jsonarray.getJSONObject(i).getString("exteriorColor");
