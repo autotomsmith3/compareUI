@@ -66,8 +66,9 @@ public class Templates extends Comlibs {
 	By enableHeaderOverlayCheckBoxLocator = By.xpath("//*[@id=\"tab1\"]/div[2]/div/div/label/span");
 	By headerOverlay_DealershipLogoCheckBox = By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[2]/label/span");
 	By headerOverlay_DealerContactInfoCheckBox = By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[3]/label/span");
-	By headerOverlay_DealerContactInfo_AddressCheckBox = By
-			.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[3]/ul/li[1]/label/span");
+	By headerOverlay_DealerContactInfo_AddressCheckBox = By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[3]/ul/li[1]/label/span");
+	//                       New                                      //*[@id=\"tab1\"]/div[2]/div/ul/li[3]/ul/li[1]/label/span
+	
 	By headerOverlay_DealerContactInfo_PhoneNumberCheckBox = By
 			.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[3]/ul/li[2]/label/span");
 	By headerOverlay_DealerContactInfo_EmailCheckBox = By
@@ -110,15 +111,36 @@ public class Templates extends Comlibs {
 	// By MarketingMessageTopCheckBoxLocator = By.xpath("//*[@id='templateBuilder']/div[3]/label[3]/span");// //*[@id="templateBuilder"]/div[3]/form/label[3]/span
 	By MarketingMessageTopCheckBoxLocator = By.xpath("//*[@id='templateBuilder']/div[2]/div[2]/label[3]/span");
 	By MarketingMessageTopEditLocator = By.xpath("//*[@id=\"overlayTopEditBtn\"]");// //*[@id="overlayTopEditBtn"]
-	By MarketingMessageTopContent_globleMSG_fieldLocator = By.xpath("//*[@id=\"overlayContent\"]/textarea");
+	By MarketingMessageTopContent_globleMSG_fieldLocator = By.xpath("//*[@id=\"marketingMessage\"]");//*[@id="marketingMessage"]
 	// By MarketingMessageBottomCheckBoxLocator = By.xpath("//*[@id='templateBuilder']/div[3]/label[4]/span");//
 	By MarketingMessageBottomCheckBoxLocator = By.xpath("//*[@id='templateBuilder']/div[2]/div[2]/label[4]/span");//
 	By MarketingMessageBottomEditLocator = By.xpath("//*[@id=\"overlayBottomEditBtn\"]");//
-	By MarketingMessageBottomContent_globleMSG_fieldLocator = By.xpath("//*[@id=\"gmm\"]");
+	By MarketingMessageBottomContent_globleMSG_fieldLocator = By.xpath("//*[@id=\"marketingMessage\"]");
 	By uploadOverlayImageBtn = By.xpath("//*[@id=\"uploadLogo\"]");
+	//*[@id="uploadLogo"]
+	
+	
+	
 	By dealershipTemplate = By.xpath("//*[@id=\"dealer-template\"]");
+	
 	By dealershipTemplateXbtn = By.xpath("//*[@id=\"removeLogo\"]/span");
-	// *[@id="templateBuilder"]/div[3]/label[5]/span //- AddAdditionalOverlay
+	By clickMarketingMessageOverlay=By.xpath("//*[@id=\"angleImageRoot\"]/div[2]/div/div/aside/div/ul/li[3]/a");
+	
+//	By clickMarketingMessageTopCheckbox=By.xpath("//*[@id=\"tab3\"]/div[2]/div/label[1]/span");
+										       //   //*[@id="tab3"]/div[2]/div/label[1]/span   //unchecked same
+	
+	By clickMarketingMessageTopCheckbox=By.cssSelector("#tab3 > div.tab-pane-body > div > label:nth-child(1) > span");//uncheck
+//	By clickMarketingMessageTopCheckbox=By.cssSelector("#tab3 > div.tab-pane-body > div > label:nth-child(1) > span");//check
+	
+	
+	By clickMarketingMessageBottomCheckbox=By.xpath("//*[@id=\"tab3\"]/div[2]/div/label[2]/span");
+												//     //*[@id="tab3"]/div[2]/div/label[2]/span    //checked same
+	By MarketingMessageContent_globleMSG_fieldLocator = By.xpath("//*[@id=\"marketingMessage\"]");
+	
+	
+	By additionalOvelayBtnLocator = By.xpath("//*[@id=\"angleImageRoot\"]/div[2]/div/div/aside/div/ul/li[4]/a");
+	
+	By backgroundImageBtnLocator=By.xpath("//*[@id=\"angleImageRoot\"]/div[2]/div/div/aside/div/ul/li[5]/a");
 
 	// *[@id="templateBuilder"]/div[3]/label[3]/span
 	// *[@id="overlayTopEditBtn"]
@@ -158,7 +180,10 @@ public class Templates extends Comlibs {
 
 	// *[@id="angleImageRoot"]/div/aside/div/ul/li[6]/a
 	By angleImages = By.xpath("//*[@id=\"angleImageRoot\"]/div/aside/div/ul/li[6]/a");
-	By headerOverlay = By.xpath("//*[@id=\"angleImageRoot\"]/div/aside/div/ul/li[1]/a");
+	By headerOverlay = By.xpath("//*[@id=\"angleImageRoot\"]/div[2]/div/div/aside/div/ul/li[1]/a");
+								
+	
+	
 	By enableHeaderOverlayCkbox = By.xpath("//*[@id=\"tab1\"]/div[2]/div/div[1]/label/span");
 	By dealershipLogoCkbox = By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[2]/label/span");
 	By dealerContactInfoCkbox = By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[4]/label/span");
@@ -172,7 +197,8 @@ public class Templates extends Comlibs {
 	By backgroundTransparencyValue = By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[1]/div/label/span");
 	// //*[@id="tab2"]/div[2]/div/ul/li[1]/div/label
 
-	By footerOverlay = By.xpath("//*[@id=\"angleImageRoot\"]/div/aside/div/ul/li[2]/a");//
+	By footerOverlay = By.xpath("//*[@id=\"angleImageRoot\"]/div[2]/div/div/aside/div/ul/li[2]/a");//
+	
 	By enableFooterOverlayckbox = By.xpath("//*[@id=\"tab2\"]/div[2]/div/div[1]/label/span");
 	By oEMLogoCkbox = By.xpath("//*[@id=\"tab2\"]/div[2]/div/ul/li[3]/label/span");
 	By footerConentCkbox = By.xpath("//*[@id=\"tab2\"]/div[2]/div/ul/li[4]/label/span");
@@ -837,6 +863,66 @@ public class Templates extends Comlibs {
 		return this;
 	}
 
+	public Templates clickMarketingMessageOverlayBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, clickMarketingMessageOverlay, true, tc);
+		driver.findElement(clickMarketingMessageOverlay).click();
+		return this;
+	}	
+	public boolean clickMarketingMessageTopCheckbox(WebDriver driver, boolean selectCheckbox, String tc) throws IOException {
+		elementExist(driver, clickMarketingMessageTopCheckbox, true, tc);
+		boolean anyOccur=false;
+		boolean checkboxisTrue=false;
+		String checkboxStr=driver.findElement(clickMarketingMessageTopCheckbox).getAttribute("class");//get "check-label check" or  "check-label uncheck"
+		if (checkboxStr.equalsIgnoreCase("check-label check")) {
+			checkboxisTrue=true;	
+		}else {
+			checkboxisTrue=false;	
+		}
+		
+		if (checkboxisTrue) {
+			if (!selectCheckbox) {
+				driver.findElement(clickMarketingMessageTopCheckbox).click();
+				anyOccur=true;
+			}
+		}else{
+			if (selectCheckbox) {
+				driver.findElement(clickMarketingMessageTopCheckbox).click();
+				inputGlbMsgIntoMarketingMSGTopContentField(driver, "Top_Global Message!");
+				anyOccur=true;
+			}
+		}
+
+		return anyOccur;
+	}	
+	
+	public boolean clickMarketingMessageBottomCheckbox(WebDriver driver, boolean selectCheckbox, String tc) throws IOException {
+		elementExist(driver, clickMarketingMessageBottomCheckbox, true, tc);
+		boolean anyOccur=false;
+		boolean checkboxisTrue=false;
+		String checkboxStr=driver.findElement(clickMarketingMessageBottomCheckbox).getAttribute("class");//get "check-label check" or  "check-label uncheck"
+		if (checkboxStr.equalsIgnoreCase("check-label check")) {
+			checkboxisTrue=true;	
+		}else {
+			checkboxisTrue=false;	
+		}
+		
+		if (checkboxisTrue) {
+			if (!selectCheckbox) {
+				driver.findElement(clickMarketingMessageTopCheckbox).click();
+				anyOccur=true;
+			}
+		}else{
+			if (selectCheckbox) {
+				driver.findElement(clickMarketingMessageTopCheckbox).click();
+				inputGlbMsgIntoMarketingMSGTopContentField(driver, "Bottom_Global Message!");	
+				anyOccur=true;
+			}
+		}
+
+		return anyOccur;
+	}
+	
+	
 	public Templates inputGlbMsgIntoMarketingMSGTopContentField(WebDriver driver, String glbMsg) throws IOException {
 		elementExist(driver, MarketingMessageTopContent_globleMSG_fieldLocator, true,
 				"inputGlbMsgIntoMarketingMSGTopContentField");
@@ -902,7 +988,16 @@ public class Templates extends Comlibs {
 		driver.findElement(replaceTemplateWithOwnCheckBoxLocator).click();
 		return this;
 	}
-
+	public Templates clickAdditionalOverlayBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, additionalOvelayBtnLocator, true, tc);
+		driver.findElement(additionalOvelayBtnLocator).click();
+		return this;
+	}
+	public Templates clickBackgroundImageBtn(WebDriver driver, String tc) throws IOException {
+		elementExist(driver, backgroundImageBtnLocator, true, tc);
+		driver.findElement(backgroundImageBtnLocator).click();
+		return this;
+	}
 	public Templates clickUploadBtn(WebDriver driver, String tc) throws IOException {
 		driver.findElement(uploadBtnLocator).click();
 		return this;
@@ -1068,6 +1163,72 @@ public class Templates extends Comlibs {
 		} catch (Exception e) {
 		}
 	}
+	public boolean checkboxWithPseudoElement_UsedGood(String checkboxName, WebDriver driver, boolean checked, boolean secondTime,
+			String pseudoElementSelectorID, String cssStyle, String cssStyleValue, String tc) throws IOException {
+
+		// ***************return window.getComputedStyle(document.querySelector***********************************************************************************************************
+		/**
+		 * How to use xpath to find pseudo-element ::after in side a div element with out any content? https://stackoverflow.com/questions/51992258/xpath-to-find-pseudo-element-after-in-side-a-div-element-with-out-any-content
+		 * 
+		 * 1. Pseudo-elements don't exist in the DOM tree (hence the name), therefore they cannot be selected with XPath 2. Unfortunately, that's not possible with XPath. As mentioned by Tomalak, Pseudo-elements don't exist in the DOM tree (hence the name), therefore they cannot be selected with XPath and Selenium does not expose them as well. In general, ::before and ::after pseudo-elements are used for styling of containing element. 3. My solution: a. get all styles b. find out what is different between checked and unchecked c. getPropertyValue to identify checked and unchecked - transform-origin=50% 50% (unchecked) or 2.5px 5px (checked)
+		 **/
+		boolean isTrue = false;
+		Wait(1);
+		try {
+
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			// String tt=js.executeScript("return document.title").toString();//ok to see title
+			// Dealership address: xpath://*[@id="headerContent"]/label[3]/span
+			// Dealership address: selecter: #headerContent > label:nth-child(6) > span . #headerContent > label:nth-child(6)
+
+			// window.getComputedStyle(document.querySelector('#element'),':after').getPropertyValue('content')
+
+			// String Xscript = "return window.getComputedStyle(document.querySelector('#headerContent > label:nth-child(6) > span'),':after').getPropertyValue('transform-origin')";
+			// //get all CSS styles
+			// String script = "return window.window.getComputedStyle(document.querySelector('#headerContent > label:nth-child(6) > span'), ':after')";// get all CSS styles only Firefox
+			// String script = "return window.getComputedStyle(document.querySelector('" + pseudoElementSelectorID
+			// + "'),':after')";// get all CSS styles only Firefox
+			String script = "return window.getComputedStyle(document.querySelector('" + pseudoElementSelectorID
+					+ "'),':after').getPropertyValue('" + cssStyle + "')";//// get only value of transform-origin style. returned styles on checkbox checked and unchecked. On unchecked it contains one "moz-transform-origin=50% 50%"
+			String xxchecked = js.executeScript(script).toString();
+			System.out.println("xxchecked:" + xxchecked);
+			Wait(1);
+			// String searchTxt = "50% 50%";// moz-transform-origin=50% 50% (unchecked) or 2.5px 5px (checked)
+			boolean siteChecked = xxchecked.contains(cssStyleValue);
+			if (siteChecked) {
+				if (!checked) {
+					isTrue = true;
+					/// write to excel pass; checkbox should not be checked
+					System.out.println("Passed." + checkboxName + "  is not checked!");
+					rwExcel(tc, true, "Verify " + checkboxName, "Checkbox is not checked");
+				} else {
+					isTrue = false;
+					if (secondTime) {
+						// write to excel failed; checkbox cannot be unchecked.
+						System.out.println("Failed," + checkboxName + "  is unchecked when should be checked!");
+						rwExcel(tc, false, "Verify " + checkboxName, "Checkbox is unchecked when should be checked!");
+					}
+				}
+				System.out.println("The " + checkboxName + "  is unchecked");
+			} else if (checked) {
+				isTrue = true;
+				System.out.println("Passed," + checkboxName + "  is checked");
+				// write to excel pass; checkbox should be checked
+				rwExcel(tc, true, "Verify " + checkboxName, "Checkbox is checked");
+			} else {
+				isTrue = false;
+				if (secondTime) {
+					// write to excel failed; checkbox cannot be unchecked.
+					System.out.println("Failed," + checkboxName + " is checked when should be unchecked!");
+					rwExcel(tc, false, "Verify " + checkboxName, "Checkbox is checked when should be unchecked!");
+				}
+			}
+		} catch (Exception e) {
+			isTrue = false;
+			rwExcel(tc, false, "Verify " + checkboxName, "Checkbox cannot be identified!");
+		}
+		return isTrue;
+	};
 
 	public boolean checkboxWithPseudoElement(String checkboxName, WebDriver driver, boolean checked, boolean secondTime,
 			String pseudoElementSelectorID, String cssStyle, String cssStyleValue, String tc) throws IOException {

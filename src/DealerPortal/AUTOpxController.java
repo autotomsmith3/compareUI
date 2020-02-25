@@ -734,7 +734,8 @@ public class AUTOpxController extends Comlibs {
 		dpP.clickInventoryGalleryBtn(driver, TCnum);
 
 		/**
-		 * // Help section TCnum = "TC139675_7_InventoryG"; // Help - Contact Support. email and tel no. igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, TCnum); TCnum = "TC139675_14_InventoryG"; igP.verifyHelpSystemHelp(driver, TCnum);// Help - System Help. TCnum = "TC139675_17_InventoryG"; // Help - Report Issue. email and tel no. igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, TCnum);
+		 * // Help section TCnum = "TC139675_7_InventoryG"; // Help - Contact Support. email and tel no. igP.verifyHelpContactSupport(driver, strHelpEmail, strHelpTel, TCnum); TCnum = "TC139675_14_InventoryG"; igP.verifyHelpSystemHelp(driver, TCnum);// Help - System
+		 * Help. TCnum = "TC139675_17_InventoryG"; // Help - Report Issue. email and tel no. igP.verifyHelpReportIssue(driver, strHelpEmail, strHelpTel, TCnum);
 		 **/
 		TCnum = "TC139691_5";
 		// Type
@@ -948,9 +949,12 @@ public class AUTOpxController extends Comlibs {
 		// Need to do. Verify Select and Sort Inventory [TC:139692
 
 		/**
-		 * TCnum = "TC139661_5"; igP.enterTextInSearch(" "); ac.Wait(wt); igP.enterTextInSearch(vin01); igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum); igP.enterTextInSearch(" "); igP.enterTextInSearch(vin01);// fake Stock Number igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum); igP.enterTextInSearch(" "); igP.enterTextInSearch(vin01); igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
+		 * TCnum = "TC139661_5"; igP.enterTextInSearch(" "); ac.Wait(wt); igP.enterTextInSearch(vin01); igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum); igP.enterTextInSearch(" "); igP.enterTextInSearch(vin01);// fake Stock
+		 * Number igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum); igP.enterTextInSearch(" "); igP.enterTextInSearch(vin01); igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 		 * 
-		 * TCnum = "TC139663_5"; igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum); igP.verifyRerenderBtnStatus(driver, true, TCnum); // removed on 2018-09-20 igP.verifyGenerateURLsBtnStatus(driver, true, TCnum); ac.rwExcel("", "------ Single VIN re-rendering ------", ""); igP.clickRerenderBtn(driver, render, TCnum); igP.verifyGoodMsgShowing(driver, TCnum); igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum); TCnum = "TC139663_8"; igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum); VehicleGallery vgP = new VehicleGallery(driver); vgP.verifyLoadPannelImage(driver, TCnum); vgP.clickBackToInventoryBtn(driver);
+		 * TCnum = "TC139663_5"; igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum); igP.verifyRerenderBtnStatus(driver, true, TCnum); // removed on 2018-09-20 igP.verifyGenerateURLsBtnStatus(driver, true, TCnum); ac.rwExcel("", "------ Single VIN re-rendering
+		 * ------", ""); igP.clickRerenderBtn(driver, render, TCnum); igP.verifyGoodMsgShowing(driver, TCnum); igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum); TCnum = "TC139663_8"; igP.clickViewDetailsBtn(driver, vin01,
+		 * vehGUID01, TCnum); VehicleGallery vgP = new VehicleGallery(driver); vgP.verifyLoadPannelImage(driver, TCnum); vgP.clickBackToInventoryBtn(driver);
 		 **/ // Need to do: click PREVIEW button, DELETE button, SELECT or DESELECT
 				//
 				// My Dealership Settings
@@ -1362,8 +1366,7 @@ public class AUTOpxController extends Comlibs {
 		// "Rerender All Vehicles for VINpx dealer. Re-render VIN number: " + igP.getReRenderNum(driver, TCnum));
 		igP.clickSelectAllBtn(driver, TCnum);
 		allVinNums = igP.getReRenderNum(driver, TCnum);
-		System.out.println(
-				"Rerender All Vehicles for VINpx dealer. Re-render VIN number: " + allVinNums);
+		System.out.println("Rerender All Vehicles for VINpx dealer. Re-render VIN number: " + allVinNums);
 		igP.clickRerenderBtn(driver, render, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
@@ -2445,7 +2448,7 @@ public class AUTOpxController extends Comlibs {
 		try {
 			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			//
 			e.printStackTrace();
 		}
 		String env = prop.getProperty("AUTOpx.environment");
@@ -2522,37 +2525,19 @@ public class AUTOpxController extends Comlibs {
 		int value = 0;
 		// *************************Header settings initial**************************************************************************
 		// // Header
-		// boolean set_Header = true;
-		// boolean set_Header_DealershipLogo = true;
-		// boolean set_Header_DealershipAddress = false;
-		// boolean set_Header_DealershipPhone = true;
-		// boolean set_Header_DealershipEmail = false;
-		// boolean set_Header_DealershipWebsite = true;
-		//
-		// boolean set_Footer = true;
-		// boolean set_Footer_BrandLog = false;
-		// boolean set_Footer_VehicleInfo = true;
-		// boolean set_Footer_Vin = false;
-		// boolean set_Footer_StockNumber = false;
-		//
-		// boolean set_MarketingMessageTop = false;
-		// boolean set_MarketingMessageBotton = true;
-		// boolean set_AddAdditionalOverlay = false;
-		//
-		// boolean set_TextImage_VDI = false;
-		// boolean set_TextImage_WCI = true;
-		// boolean set_TextImage_VBI = false;
 
 		// Header with random true or false
-		boolean set_Header = true;
+		boolean set_Header =igP.truefalseRandom();// true;
 		boolean set_Header_DealershipLogo = igP.truefalseRandom();
+		boolean set_Header_DealerContactInfo = igP.truefalseRandom();//true;
 		boolean set_Header_DealershipAddress = igP.truefalseRandom();
 		boolean set_Header_DealershipPhone = igP.truefalseRandom();
 		boolean set_Header_DealershipEmail = igP.truefalseRandom();
 		boolean set_Header_DealershipWebsite = igP.truefalseRandom();
 
-		boolean set_Footer = true;
+		boolean set_Footer =igP.truefalseRandom();// true;
 		boolean set_Footer_BrandLog = igP.truefalseRandom();
+		boolean set_FooterContent =igP.truefalseRandom();// true;
 		boolean set_Footer_VehicleInfo = igP.truefalseRandom();
 		boolean set_Footer_Vin = igP.truefalseRandom();
 		boolean set_Footer_StockNumber = igP.truefalseRandom();
@@ -2564,7 +2549,7 @@ public class AUTOpxController extends Comlibs {
 			set_MarketingMessageBotton = igP.truefalseRandom();
 		}
 
-		boolean set_AddAdditionalOverlay = false;
+		boolean set_AddAdditionalOverlay =igP.truefalseRandom();// false;
 
 		boolean set_TextImage_VDI = igP.truefalseRandom();
 		boolean set_TextImage_WCI = igP.truefalseRandom();
@@ -2653,7 +2638,7 @@ public class AUTOpxController extends Comlibs {
 		//
 		// // *************************End of Debug for Background Transparency**************************************************************************
 
-		// *************************Angle Image Sorting**************************************************************************
+		// *************************6. Angle Image Sorting**************************************************************************
 
 		// --------------------1st----doesn't work below drag and drop----------------------------------------------------
 
@@ -2730,7 +2715,7 @@ public class AUTOpxController extends Comlibs {
 		// ((JavascriptExecutor) driver).executeScript(java_script,source,target);//no error but nothing happened.
 		// ac.Wait(2);
 		// System.out.println("Stop here!");
-		if (envBrowser.equalsIgnoreCase("Chrome")) { // Angle sortings Only work for Chrome. Firefox is not working.
+		if (envBrowser.equalsIgnoreCase("Chromexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")) { // Angle sortings Only work for Chrome. Firefox is not working.
 
 			for (int i = 1; i <= 3; i++) {
 				tpP.scrollUp(driver, 450, TCnum);
@@ -2799,7 +2784,9 @@ public class AUTOpxController extends Comlibs {
 						// + emp + " " + emp + " " + emp + " "
 						// + emp + " " + emp + " " + emp + " "
 						+ empString + "</p>";
-				// String templatesStatus="Checking: HEADER:"+set_Header + ", 1.DealershipLogo=" + set_Header_DealershipLogo+", 2.DealershipAddress=" + set_Header_DealershipAddress + ",3.DealershipPhone="+set_Header_DealershipPhone + ", 4.DealershipEmail=" + set_Header_DealershipEmail+", 5.DealershipWebsite=" + set_Header_DealershipWebsite + ". FOOTER: "+set_Footer + ", 1.BrandLogo=" +set_Footer_BrandLog + ", 2.VehicleInfo="+set_Footer_VehicleInfo + ", 3.VIN=" + set_Footer_Vin+", 4.set_Footer_StockNumber=" + set_Footer_StockNumber+", MarketingMessageTop=" + set_MarketingMessageTop + ",MarketingMessageBotton="+set_MarketingMessageBotton + ", AddAdditionalOverlay=" +
+				// String templatesStatus="Checking: HEADER:"+set_Header + ", 1.DealershipLogo=" + set_Header_DealershipLogo+", 2.DealershipAddress=" + set_Header_DealershipAddress + ",3.DealershipPhone="+set_Header_DealershipPhone + ", 4.DealershipEmail=" +
+				// set_Header_DealershipEmail+", 5.DealershipWebsite=" + set_Header_DealershipWebsite + ". FOOTER: "+set_Footer + ", 1.BrandLogo=" +set_Footer_BrandLog + ", 2.VehicleInfo="+set_Footer_VehicleInfo + ", 3.VIN=" + set_Footer_Vin+", 4.set_Footer_StockNumber=" +
+				// set_Footer_StockNumber+", MarketingMessageTop=" + set_MarketingMessageTop + ",MarketingMessageBotton="+set_MarketingMessageBotton + ", AddAdditionalOverlay=" +
 				// set_AddAdditionalOverlay+", Text Images: VDI=" + set_TextImage_VDI + ", WCI=" + set_TextImage_WCI+", VBI=" + set_TextImage_VBI +"";
 				igP.textDisplayOnPage(driver, AngleImageNameStatus, displayTemplatesStatusOnPage);
 				ac.Wait(MaxTimeForTemplatesPreview - subwt);
@@ -2811,7 +2798,7 @@ public class AUTOpxController extends Comlibs {
 				ac.Wait(waitTime);
 			}
 		}
-		// *************************End of Angle Image Sorting**************************************************************************
+		// *************************End of 6. Angle Image Sorting**************************************************************************
 
 		/**
 		 * second run set_Header=true; set_Header_DealershipLogo=false; set_Header_DealershipAddress=true; set_Header_DealershipPhone=false; set_Header_DealershipEmail=true; set_Header_DealershipWebsite=false;
@@ -2837,6 +2824,7 @@ public class AUTOpxController extends Comlibs {
 		tpP.scrollUp(driver, -450, TCnum);
 		for (int i = 1; i <= 4; i++) {
 			ac.Wait(wt);
+//			// *************************1. Header Overlay*************************
 			// *************************Header Background Transparency**************************************************************************
 			table = 1;
 			slider = 0;
@@ -2864,25 +2852,26 @@ public class AUTOpxController extends Comlibs {
 			TCnum = "Slide Header bar to " + i + " = " + sliderPercent;
 			tpP.scrollUp(driver, 450, TCnum);
 			MenueNum = 1;// 1=Header Overlay,2=Footer Overaly, 3=Msg, 4, Additional Overlay, 5, Background Images, 6=Angle Images
-			tpP.clickHeaderOverlayBtn(driver, TCnum);
-
-			tpP.clickEnableHeaderOverlayCheckBox(driver, true, TCnum);
-			ac.Wait(wt);
-			tpP.clickDealershipLogoCheckBox(driver, set_Header_DealershipLogo, TCnum);// ???
-
-			tpP.clickDealerContactInfoCheckBox(driver, true, TCnum);
-
-			tpP.clickDealerContactInfo_AddressCheckBox(driver, set_Header_DealershipAddress, TCnum);
-
-			tpP.clickDealerContactInfo_PhoneNumberCheckBox(driver, set_Header_DealershipPhone, TCnum);
-
-			tpP.clickDealerContactInfo_EmailCheckBox(driver, set_Header_DealershipEmail, TCnum);
-
-			tpP.clickDealerContactInfo_WebsiteURLCheckBox(driver, set_Header_DealershipWebsite, TCnum);
+//			tpP.clickHeaderOverlayBtn(driver, TCnum);
+//
+//			tpP.clickEnableHeaderOverlayCheckBox(driver, true, TCnum);
+//			ac.Wait(wt);
+//			tpP.clickDealershipLogoCheckBox(driver, set_Header_DealershipLogo, TCnum);// ???
+//
+//			tpP.clickDealerContactInfoCheckBox(driver, true, TCnum);
+//
+//			tpP.clickDealerContactInfo_AddressCheckBox(driver, set_Header_DealershipAddress, TCnum);
+//
+//			tpP.clickDealerContactInfo_PhoneNumberCheckBox(driver, set_Header_DealershipPhone, TCnum);
+//
+//			tpP.clickDealerContactInfo_EmailCheckBox(driver, set_Header_DealershipEmail, TCnum);
+//
+//			tpP.clickDealerContactInfo_WebsiteURLCheckBox(driver, set_Header_DealershipWebsite, TCnum);
 
 			ac.Wait(wt);
 			tpP.scrollUp(driver, 450, TCnum);
-
+			TCnum = "Check clickEnableHeaderOverlayCheckBox";
+			tpP.clickEnableHeaderOverlayCheckBox(driver, false, TCnum);
 			tpP.clickEnableHeaderOverlayCheckBox(driver, true, TCnum);
 			// check bar value %
 			value = tpP.getBackgroundTransparencyValue(driver, table, TCnum);
@@ -2904,6 +2893,7 @@ public class AUTOpxController extends Comlibs {
 				ac.Wait(wt);
 				TCnum = "Click Template after SAVE_" + MenueNum + "_" + i;
 				tpP.clickTemplatesBtn(driver);
+				tpP.clickFooterOverlayBtn(driver, TCnum);
 				tpP.clickHeaderOverlayBtn(driver, TCnum);
 				TCnum = "Click HeaderOverlay after SAVE_" + MenueNum + "_" + i;
 				TCnum = "Back to check it after Slide Header bar to " + i + " = " + sliderPercent;
@@ -2926,11 +2916,81 @@ public class AUTOpxController extends Comlibs {
 				System.out.println("Slide Header to 0 % for Background Transparency Value =" + "\"" + value + " %\"");
 			}
 
+			
+			
+			
+			
 			// End of Slider Header bar to ************** 0, 30, 80, 100 % **************************
-			//
-
 			// *************************End of Header Background Transparency**************************************************************************
+			// add header info
+			if (set_Header) {
+				//
+				TCnum = "Set up Enable Header Overlay_" + i;
+				tpP.clickEnableHeaderOverlayCheckBox(driver, set_Header, TCnum);
+				// Dealer Logo
+				TCnum = "Dealer Logo_" + i;
+				tpP.clickDealershipLogoCheckBox(driver, set_Header_DealershipLogo, TCnum);
+				if (set_Header_DealerContactInfo) {
+					// Dealer Contact Info
+					TCnum = "Dealer Contact Info_" + i;
+					tpP.clickDealerContactInfoCheckBox(driver, false, TCnum);
+					tpP.clickDealerContactInfoCheckBox(driver, set_Header_DealerContactInfo, TCnum);
+					// Address
+					TCnum = "Address_" + i;
+					tpP.clickDealerContactInfo_AddressCheckBox(driver, set_Header_DealershipAddress, TCnum);
+					// Phone Number
+					TCnum = "Phone Number" + i;
+					tpP.clickDealerContactInfo_PhoneNumberCheckBox(driver, set_Header_DealershipPhone, TCnum);
+					// Eamil
+					TCnum = "Email_" + i;
+					tpP.clickDealerContactInfo_EmailCheckBox(driver, set_Header_DealershipEmail, TCnum);
+					// Website URL
+					TCnum = "Website_" + i;
+					tpP.clickDealerContactInfo_WebsiteURLCheckBox(driver, set_Header_DealershipWebsite, TCnum);
+				}else {
+					//1-4 false
+					TCnum = "Dealer Contact Info_" + i;
+					tpP.clickDealerContactInfoCheckBox(driver, true, TCnum);
+					tpP.clickDealerContactInfoCheckBox(driver, set_Header_DealerContactInfo, TCnum);
+					set_Header_DealershipAddress=false;
+					set_Header_DealershipPhone=false;
+					set_Header_DealershipEmail=false;
+					set_Header_DealershipWebsite=false;
+				}
+//				TCnum = "Header_msg_b4_save_" + i;
+//				// verify msg b4 save
+//				tpP.checkMsgB4SAVE(driver, MenueNum, msgB4SAVEExpected, TCnum);
+//				TCnum = "Header_SAVE_" + i;
+//				// Click SAVE
+//				tpP.clickSaveHeaderOverlayBtn(driver, TCnum);
+//				TCnum = "Header_msg_SAVE_" + i;
+//				// verify msg after save
+//				tpP.checkMsgAfterSAVE(driver, MenueNum, msgAfterSAVEExpected, TCnum);
+			}else {
+				//all false
+				TCnum = "Set up Enable Header Overlay_" + i;
+				tpP.clickEnableHeaderOverlayCheckBox(driver, true, TCnum);
+				tpP.clickEnableHeaderOverlayCheckBox(driver, set_Header, TCnum);
+				set_Header_DealershipLogo=false;
+				set_Header_DealerContactInfo=false;
+				set_Header_DealershipAddress=false;
+				set_Header_DealershipPhone=false;
+				set_Header_DealershipEmail=false;
+				set_Header_DealershipWebsite=false;
+			}
+			TCnum = "Header_msg_b4_save_" + i;
+			// verify msg b4 save
+			tpP.checkMsgB4SAVE(driver, MenueNum, msgB4SAVEExpected, TCnum);
+			TCnum = "Header_SAVE_" + i;
+			// Click SAVE
+			tpP.clickSaveHeaderOverlayBtn(driver, TCnum);
+			TCnum = "Headerl_msg_SAVE_" + i;
+			// verify msg after save
+			tpP.checkMsgAfterSAVE(driver, MenueNum, msgAfterSAVEExpected, TCnum);
 
+//			// *************************End of 1. Header Overlay*************************
+
+//			// *************************2. Footer Overlay*************************			
 			// *************************Footer Background Transparency**************************************************************************
 			ac.Wait(wt);
 			table = 2;
@@ -2962,12 +3022,14 @@ public class AUTOpxController extends Comlibs {
 			MenueNum = 2;// 1=Header Overlay,2=Footer Overaly, 3=Msg, 4, Additional Overlay, 5, Background Images, 6=Angle Images
 			tpP.clickFooterOverlayBtn(driver, TCnum);
 			ac.Wait(wt);
+			TCnum = "Check clickEnableFooterOverlayCheckBox";
+			tpP.clickEnableFooterOverlayCheckBox(driver, false, TCnum);//
 			tpP.clickEnableFooterOverlayCheckBox(driver, true, TCnum);// ??????
-			tpP.clickOEMLogoCheckBox(driver, set_Footer_BrandLog, TCnum);
-			tpP.clickFooterContentCheckBox(driver, true, TCnum);
-			tpP.clickFooterContent_VehicleInfoCheckBox(driver, set_Footer_VehicleInfo, TCnum);
-			tpP.clickFooterContent_VINCheckBox(driver, set_Footer_Vin, TCnum);
-			tpP.clickFooterContent_StockNumberCheckBox(driver, set_Footer_StockNumber, TCnum);
+//			tpP.clickOEMLogoCheckBox(driver, set_Footer_BrandLog, TCnum);
+//			tpP.clickFooterContentCheckBox(driver, true, TCnum);
+//			tpP.clickFooterContent_VehicleInfoCheckBox(driver, set_Footer_VehicleInfo, TCnum);
+//			tpP.clickFooterContent_VINCheckBox(driver, set_Footer_Vin, TCnum);
+//			tpP.clickFooterContent_StockNumberCheckBox(driver, set_Footer_StockNumber, TCnum);
 
 			// check bar value %
 			value = tpP.getBackgroundTransparencyValue(driver, table, TCnum);
@@ -2977,6 +3039,7 @@ public class AUTOpxController extends Comlibs {
 				ac.Wait(wt);
 				tpP.slideFooterBackgroundTransparencyBar(driver, slider, TCnum); // initial from left -50 =0, -40=5%
 				tpP.checkMsgB4SAVE(driver, MenueNum, msgB4SAVEExpected, TCnum);
+				ac.Wait(wt);
 				tpP.clickSaveFooterOverlayBtn(driver, TCnum);
 				value = tpP.getBackgroundTransparencyValue(driver, table, TCnum);
 				System.out.println("Slide Footer to \"" + sliderPercent + "\" for Background Transparency Value ="
@@ -3011,319 +3074,386 @@ public class AUTOpxController extends Comlibs {
 				System.out.println("Slide Footer to 0 % for Background Transparency Value =" + "\"" + value + " %\"");
 			}
 
-			// End of Slider Header bar to ************** 0, 30, 80, 100 % **************************
-			// }
-
-			// *************************End of Footer Background Transparency**************************************************************************
-
-			// *************************1. Header**************************************************************************
-			ac.Wait(wt);
-			tpP.scrollUp(driver, -450, TCnum);
-			// 1.Header checkbox;
-			TCnum = i + ": " + "Header Checkbox";
-			checkboxName = "HeaderCheckbox";
-			// checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(1) > span";// old copy selector
-			checkboxSelectorID = "#templateBuilder > div.movable-image-gallery.clearfix > div:nth-child(2) > label:nth-child(1) > span";
-			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header, false,
-					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-			if (!checkboxIsChecked) {
-				tpP.clickHeaderCheckBox(driver);
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header, true,
-						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-				if (!checkboxIsChecked) {
-					// Failed;
-					System.out.println("Failed to click the checkbox -" + checkboxName);
-				}
-			}
-			if (set_Header) {
-				tpP.clickHeaderEditBtn(driver);
-				ac.Wait(wt);
-				// Header Content checkboxes;
-				TCnum = i + ": " + "1.1. Check the checkbox for DealershipLogo";
-				checkboxName = "DealershipLogo";
-				checkboxSelectorID = "#headerContent > label:nth-child(4) > span";
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipLogo,
-						false, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-				if (!checkboxIsChecked) {
-					tpP.clickDealershipLogoCheckBox(driver);
-					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipLogo,
-							true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-					if (!checkboxIsChecked) {
-						// Failed;
-						System.out.println("Failed to click the checkbox -" + checkboxName);
-
-					}
-				}
-
-				TCnum = i + ": " + "1.2. Check the checkbox for DealershipAddress";
-				checkboxName = "DealershipAddress";
-				checkboxSelectorID = "#headerContent > label:nth-child(6) > span";
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipAddress,
-						false, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-				if (!checkboxIsChecked) {
-					tpP.clickDealershipAddressCheckBox(driver);
-					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver,
-							set_Header_DealershipAddress, true, checkboxSelectorID, checkboxCSSstyleID,
-							checkboxCSSstyleValue, TCnum);
-					if (!checkboxIsChecked) {
-						// Failed;
-						System.out.println("Failed to click the checkbox -" + checkboxName);
-
-					}
-				}
-
-				TCnum = i + ": " + "1.3. Check the checkbox for DealershipPhone";
-				checkboxName = "DealershipPhone";
-				checkboxSelectorID = "#headerContent > label:nth-child(8) > span";
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipPhone,
-						false, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-				if (!checkboxIsChecked) {
-					tpP.clickDealershipPhoneCheckBox(driver);
-					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipPhone,
-							true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-					if (!checkboxIsChecked) {
-						// Failed;
-						System.out.println("Failed to click the checkbox -" + checkboxName);
-
-					}
-				}
-
-				TCnum = i + ": " + "1.4. Check the checkbox for DealershipEmail";
-				checkboxName = "DealershipEmail";
-				checkboxSelectorID = "#headerContent > label:nth-child(10) > span";
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipEmail,
-						false, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-				if (!checkboxIsChecked) {
-					tpP.clickDealershipEmailCheckBox(driver);
-					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipEmail,
-							true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-					if (!checkboxIsChecked) {
-						// Failed;
-						System.out.println("Failed to click the checkbox -" + checkboxName);
-
-					}
-				}
-
-				TCnum = i + ": " + "1.5. Check the checkbox for DealershipWebsite";
-				checkboxName = "DealershipWebsite";
-				checkboxSelectorID = "#headerContent > label:nth-child(12) > span";
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipWebsite,
-						false, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-				if (!checkboxIsChecked) {
-					tpP.clickDealershipWebsiteCheckBox(driver);
-					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver,
-							set_Header_DealershipWebsite, true, checkboxSelectorID, checkboxCSSstyleID,
-							checkboxCSSstyleValue, TCnum);
-					if (!checkboxIsChecked) {
-						// Failed;
-						System.out.println("Failed to click the checkbox -" + checkboxName);
-
-					}
-				}
-				tpP.clickContentHeaderSaveBtn(driver);
-				ac.Wait(wt);
-				TCnum = i + ": " + "Templates-Click SAVE on Header Content box";
-				successfulMsg = "Your settings have been saved";// "Your settings have been saved"
-				MessageExist = tpP.checkMessageDisplayedHead(driver, successfulMsg, TCnum);
-				if (MessageExist) {
-					ac.rwExcel(TCnum, true, "Click on SAVE in Header Content box",
-							"Sucessful msg shows: Your settings have been saved");
-				} else {
-					ac.rwExcel(TCnum, false, "Click on SAVE in Header Content box",
-							"Failed to shows msg: Your settings have been saved.");
-				}
-
-				tpP.clickHeaderXBtn(driver);
-			}
-			// *************************End of 1. Header**************************************************************************
-
-			// *************************2. Footer**************************************************************************
-			// Footer
-			// try {
-			// tpP.clickHeaderEditBtn(driver);
-			// } catch (Exception e) {
-			// System.out.println(" Footer checkbox is not checked, click again to check it! ");
-			// tpP.clickFooterCheckBox(driver);
-			// tpP.clickSaveBtn(driver);
-			// tpP.clickFooterEditBtn(driver);
-			// }
-
-			// 2.Footer checkbox;
-			TCnum = i + ": " + "Footer Checkbox";
-			checkboxName = "FooterCheckbox";
-			// checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(4) > span";// before 20191101
-			checkboxSelectorID = "#templateBuilder > div.movable-image-gallery.clearfix > div:nth-child(2) > label:nth-child(4) > span";
-			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer, false,
-					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-			if (!checkboxIsChecked) {
-				tpP.clickFooterCheckBox(driver);
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer, true,
-						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-				if (!checkboxIsChecked) {
-					// Failed;
-					System.out.println("Failed to click the checkbox -" + checkboxName);
-				}
-			}
+			// End of Slider Footer bar to ************** 0, 30, 80, 100 % **************************
+			// *************************End of Footer Background Transparency******************************************************************
+			// TODO footer
+			TCnum = "Click on Footer Overlay_" + i;
+			tpP.clickFooterOverlayBtn(driver, TCnum);
 			if (set_Footer) {
-				tpP.clickFooterEditBtn(driver);
-				ac.Wait(wt);
-				// Footer Content checkboxes;
-				TCnum = i + ": " + "2.1. Check the checkbox for BrandLogo";
-				checkboxName = "BrandLogo";
-				checkboxSelectorID = "#footerContent > label:nth-child(4) > span";
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_BrandLog, false,
-						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-				if (!checkboxIsChecked) {
-					tpP.clickBrandLogoCheckBox(driver);
-					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_BrandLog, true,
-							checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-					if (!checkboxIsChecked) {
-						// Failed;
-						System.out.println("Failed to click the checkbox -" + checkboxName);
+				// Enable Header Overlay
+				TCnum = "Set up Enable Footer Overlay_" + i;
+				tpP.clickEnableFooterOverlayCheckBox(driver, false, TCnum);
+				tpP.clickEnableFooterOverlayCheckBox(driver, set_Footer, TCnum);
+				TCnum = "OEM Logo_" + i;
+				// OEM Logo
+				tpP.clickOEMLogoCheckBox(driver, set_Footer_BrandLog, TCnum);
 
-					}
+				if (set_FooterContent) {
+					TCnum = "Footer Conent_" + i;
+					// Footer Conent
+					tpP.clickFooterContentCheckBox(driver, false, TCnum);
+					tpP.clickFooterContentCheckBox(driver, set_FooterContent, TCnum);
+					// Vehicle Inof (year, make , model, trim
+					TCnum = "Vehicle Inof_" + i;
+					tpP.clickFooterContent_VehicleInfoCheckBox(driver, set_Footer_VehicleInfo, TCnum);
+					// VIN
+					TCnum = "VIN_" + i;
+					tpP.clickFooterContent_VINCheckBox(driver, set_Footer_Vin, TCnum);
+					// STOCK Number
+					TCnum = "STOCK Number_" + i;
+					tpP.clickFooterContent_StockNumberCheckBox(driver, set_Footer_StockNumber, TCnum);
+				}else {
+					//1-3 false
+					tpP.clickFooterContentCheckBox(driver, true, TCnum);
+					tpP.clickFooterContentCheckBox(driver, set_FooterContent, TCnum);
+					set_Footer_VehicleInfo=false;
+					set_Footer_Vin=false;
+					set_Footer_StockNumber=false;
+					
 				}
-
-				TCnum = i + ": " + "2.2. Check the checkbox for VehicleInfo";
-				checkboxName = "VehicleInfo";
-				checkboxSelectorID = "#vehInfoLabel > span";
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_VehicleInfo, false,
-						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-				if (!checkboxIsChecked) {
-					tpP.clickVehicleInfoCheckBox(driver);
-					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_VehicleInfo,
-							true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-					if (!checkboxIsChecked) {
-						// Failed;
-						System.out.println("Failed to click the checkbox -" + checkboxName);
-
-					}
-				}
-
-				TCnum = i + ": " + "2.3. Check the checkbox for VIN";
-				checkboxName = "VIN";
-				checkboxSelectorID = "#vinLabel > span";
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_Vin, false,
-						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-				if (!checkboxIsChecked) {
-					tpP.clickVINCheckBox(driver);
-					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_Vin, true,
-							checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-					if (!checkboxIsChecked) {
-						// Failed;
-						System.out.println("Failed to click the checkbox -" + checkboxName);
-
-					}
-				}
-
-				TCnum = i + ": " + "2.4. Check the checkbox for StockNumber";
-				checkboxName = "StockNumber";
-				checkboxSelectorID = "#stockLabel > span";
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_StockNumber, false,
-						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-				if (!checkboxIsChecked) {
-					tpP.clickStockNumberCheckBox(driver);
-					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_StockNumber,
-							true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-					if (!checkboxIsChecked) {
-						// Failed;
-						System.out.println("Failed to click the checkbox -" + checkboxName);
-
-					}
-				}
-				tpP.clickContentFooterSaveBtn(driver);
-				ac.Wait(wt);
-				TCnum = i + ": " + "Templates-Click SAVE on Footer Content box";
-				successfulMsg = "Your settings have been saved";// "Your settings have been saved"
-				MessageExist = tpP.checkMessageDisplayedHead(driver, successfulMsg, TCnum);
-				if (MessageExist) {
-					ac.rwExcel(TCnum, true, "Click on SAVE in Footer Content box",
-							"Sucessful msg shows: Your settings have been saved");
-				} else {
-					ac.rwExcel(TCnum, false, "Click on SAVE in Footer Content box",
-							"Failed to shows msg: Your settings have been saved.");
-				}
-				tpP.clickFooterXBtn(driver);
+				
+//				TCnum = "Footer_msg_b4_save_" + i;
+//				// verify msg b4 save
+//				tpP.checkMsgB4SAVE(driver, MenueNum, msgB4SAVEExpected, TCnum);
+//				TCnum = "Footer_SAVE_" + i;
+//				// Click SAVE
+//				tpP.clickSaveFooterOverlayBtn(driver, TCnum);
+//				TCnum = "Footer_msg_SAVE_" + i;
+//				// verify msg after save
+//				tpP.checkMsgAfterSAVE(driver, MenueNum, msgAfterSAVEExpected, TCnum);
+		
+			}else {
+				//all false  1-5
+				// Disable Header Overlay
+				TCnum = "Set up Enable Footer Overlay_" + i;
+				tpP.clickEnableFooterOverlayCheckBox(driver, true, TCnum);
+				tpP.clickEnableFooterOverlayCheckBox(driver, set_Footer, TCnum);
+				set_Footer_BrandLog=false;
+				set_FooterContent=false;
+				set_Footer_VehicleInfo=false;
+				set_Footer_Vin=false;
+				set_Footer_StockNumber=false;
+				
 			}
-			// *************************End of 2. Footer**************************************************************************
+			TCnum = "Footer_msg_b4_save_" + i;
+			// verify msg b4 save
+			tpP.checkMsgB4SAVE(driver, MenueNum, msgB4SAVEExpected, TCnum);
+			TCnum = "Footer_SAVE_" + i;
+			// Click SAVE
+			tpP.clickSaveFooterOverlayBtn(driver, TCnum);
+			TCnum = "Footer_msg_SAVE_" + i;
+			// verify msg after save
+			tpP.checkMsgAfterSAVE(driver, MenueNum, msgAfterSAVEExpected, TCnum);
+//			// *************************End of 2. Footer Overlay*************************	
 
-			// *************************3.MarketingMessageTop checkbox;*************************
-			TCnum = i + ": " + "MarketingMessageTop Checkbox";
-			checkboxName = "MarketingMessageTop";
-			// checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(7) > span";// before 20191101
-			checkboxSelectorID = "#templateBuilder > div.movable-image-gallery.clearfix > div:nth-child(2) > label:nth-child(7) > span";
-			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_MarketingMessageTop, false,
-					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-			if (!checkboxIsChecked) {
-				tpP.clickMarketingMessageTopCheckBox(driver);
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_MarketingMessageTop, true,
-						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-				if (!checkboxIsChecked) {
-					// Failed;
-					System.out.println("Failed to click the checkbox -" + checkboxName);
-
-				}
-			}
-			if (set_MarketingMessageTop) {
-				// tpP.clickOverlayXBtn(driver);
-				tpP.clickMarketingMessageTopEditBtn(driver);
-				tpP.inputGlbMsgIntoMarketingMSGTopContentField(driver, "Top_Global Message!");
-				tpP.clickContentOverlaySaveBtn(driver);
-				ac.Wait(wt);
-				tpP.clickOverlayXBtn(driver);
-				ac.Wait(wt);
-			}
-			// *************************4.MarketingMessageBotton checkbox;*************************
-			TCnum = i + ": " + "MarketingMessageBotton Checkbox";
-			checkboxName = "MarketingMessageBotton";
-			// checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(10) > span";// before 20191101
-			checkboxSelectorID = "#templateBuilder > div.movable-image-gallery.clearfix > div:nth-child(2) > label:nth-child(10) > span";
-			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_MarketingMessageBotton, false,
-					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-			if (!checkboxIsChecked) {
-				tpP.clickMarketingMessageBottomCheckBox(driver);// clickMarketingMessageBottomCheckBox
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_MarketingMessageBotton,
-						true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-				if (!checkboxIsChecked) {
-					// Failed;
-					System.out.println("Failed to click the checkbox -" + checkboxName);
-
-				}
-			}
-			if (set_MarketingMessageBotton) {
-				// tpP.clickOverlayXBtn(driver);
-				tpP.clickMarketingMessageBottomEditBtn(driver);
-				tpP.inputGlbMsgIntoMarketingMSGTopContentField(driver, "Bottom_Global Message!");
-				tpP.clickContentOverlaySaveBtn(driver);
-				ac.Wait(wt);
-				tpP.clickOverlayXBtn(driver);
-				ac.Wait(wt);
-			}
-
-			// ************************* 5.AddAdditionalOverlay checkbox;*************************
-			TCnum = i + ": " + "AddAdditionalOverlay Checkbox";
-			checkboxName = "AddAdditionalOverlay";
-			// checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(14) > span";// before 20191101
-			checkboxSelectorID = "#templateBuilder > div.movable-image-gallery.clearfix > div:nth-child(2) > label:nth-child(14) > span";
-			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_AddAdditionalOverlay, false,
-					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-			if (!checkboxIsChecked) {
-				tpP.clickAddAdditionalOverlayCheckBox(driver, TCnum);// clickMarketingMessageBottomCheckBox
-				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_AddAdditionalOverlay, true,
-						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
-				if (!checkboxIsChecked) {
-					// Failed;
-					System.out.println("Failed to click the checkbox -" + checkboxName);
-
-				}
-			}
-			if (set_AddAdditionalOverlay) {
-				tpP.uploadOverlayPicture(driver, overlayImage, TCnum);
-				tpP.verifyDealershipTemplate(driver, TCnum);
-				tpP.clickXonDealershipTemplate(driver, TCnum);
-				tpP.uploadOverlayPicture(driver, overlayImage, TCnum);
-				tpP.verifyDealershipTemplate(driver, TCnum);
-			}
+//			// *************************1. Header**************************************************************************
+//			ac.Wait(wt);
+//			tpP.scrollUp(driver, -450, TCnum);
+//			// 1.Header checkbox;
+//			TCnum = i + ": " + "Header Checkbox";
+//			checkboxName = "HeaderCheckbox";
+//			// checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(1) > span";// old copy selector
+//			checkboxSelectorID = "#templateBuilder > div.movable-image-gallery.clearfix > div:nth-child(2) > label:nth-child(1) > span";
+//			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header, false,
+//					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//			if (!checkboxIsChecked) {
+//				tpP.clickHeaderCheckBox(driver);
+//				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header, true,
+//						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//				if (!checkboxIsChecked) {
+//					// Failed;
+//					System.out.println("Failed to click the checkbox -" + checkboxName);
+//				}
+//			}
+//			if (set_Header) {
+//				tpP.clickHeaderEditBtn(driver);
+//				ac.Wait(wt);
+//				// Header Content checkboxes;
+//				TCnum = i + ": " + "1.1. Check the checkbox for DealershipLogo";
+//				checkboxName = "DealershipLogo";
+//				checkboxSelectorID = "#headerContent > label:nth-child(4) > span";
+//				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipLogo,
+//						false, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//				if (!checkboxIsChecked) {
+//					tpP.clickDealershipLogoCheckBox(driver);
+//					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipLogo,
+//							true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//					if (!checkboxIsChecked) {
+//						// Failed;
+//						System.out.println("Failed to click the checkbox -" + checkboxName);
+//
+//					}
+//				}
+//
+//				TCnum = i + ": " + "1.2. Check the checkbox for DealershipAddress";
+//				checkboxName = "DealershipAddress";
+//				checkboxSelectorID = "#headerContent > label:nth-child(6) > span";
+//				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipAddress,
+//						false, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//				if (!checkboxIsChecked) {
+//					tpP.clickDealershipAddressCheckBox(driver);
+//					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver,
+//							set_Header_DealershipAddress, true, checkboxSelectorID, checkboxCSSstyleID,
+//							checkboxCSSstyleValue, TCnum);
+//					if (!checkboxIsChecked) {
+//						// Failed;
+//						System.out.println("Failed to click the checkbox -" + checkboxName);
+//
+//					}
+//				}
+//
+//				TCnum = i + ": " + "1.3. Check the checkbox for DealershipPhone";
+//				checkboxName = "DealershipPhone";
+//				checkboxSelectorID = "#headerContent > label:nth-child(8) > span";
+//				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipPhone,
+//						false, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//				if (!checkboxIsChecked) {
+//					tpP.clickDealershipPhoneCheckBox(driver);
+//					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipPhone,
+//							true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//					if (!checkboxIsChecked) {
+//						// Failed;
+//						System.out.println("Failed to click the checkbox -" + checkboxName);
+//
+//					}
+//				}
+//
+//				TCnum = i + ": " + "1.4. Check the checkbox for DealershipEmail";
+//				checkboxName = "DealershipEmail";
+//				checkboxSelectorID = "#headerContent > label:nth-child(10) > span";
+//				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipEmail,
+//						false, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//				if (!checkboxIsChecked) {
+//					tpP.clickDealershipEmailCheckBox(driver);
+//					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipEmail,
+//							true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//					if (!checkboxIsChecked) {
+//						// Failed;
+//						System.out.println("Failed to click the checkbox -" + checkboxName);
+//
+//					}
+//				}
+//
+//				TCnum = i + ": " + "1.5. Check the checkbox for DealershipWebsite";
+//				checkboxName = "DealershipWebsite";
+//				checkboxSelectorID = "#headerContent > label:nth-child(12) > span";
+//				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Header_DealershipWebsite,
+//						false, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//				if (!checkboxIsChecked) {
+//					tpP.clickDealershipWebsiteCheckBox(driver);
+//					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver,
+//							set_Header_DealershipWebsite, true, checkboxSelectorID, checkboxCSSstyleID,
+//							checkboxCSSstyleValue, TCnum);
+//					if (!checkboxIsChecked) {
+//						// Failed;
+//						System.out.println("Failed to click the checkbox -" + checkboxName);
+//
+//					}
+//				}
+//				tpP.clickContentHeaderSaveBtn(driver);
+//				ac.Wait(wt);
+//				TCnum = i + ": " + "Templates-Click SAVE on Header Content box";
+//				successfulMsg = "Your settings have been saved";// "Your settings have been saved"
+//				MessageExist = tpP.checkMessageDisplayedHead(driver, successfulMsg, TCnum);
+//				if (MessageExist) {
+//					ac.rwExcel(TCnum, true, "Click on SAVE in Header Content box",
+//							"Sucessful msg shows: Your settings have been saved");
+//				} else {
+//					ac.rwExcel(TCnum, false, "Click on SAVE in Header Content box",
+//							"Failed to shows msg: Your settings have been saved.");
+//				}
+//
+//				tpP.clickHeaderXBtn(driver);
+//			}
+//			// *************************End of 1. Header**************************************************************************
+//
+//			// *************************2. Footer**************************************************************************
+//			// Footer
+//			// try {
+//			// tpP.clickHeaderEditBtn(driver);
+//			// } catch (Exception e) {
+//			// System.out.println(" Footer checkbox is not checked, click again to check it! ");
+//			// tpP.clickFooterCheckBox(driver);
+//			// tpP.clickSaveBtn(driver);
+//			// tpP.clickFooterEditBtn(driver);
+//			// }
+//
+//			// 2.Footer checkbox;
+//			TCnum = i + ": " + "Footer Checkbox";
+//			checkboxName = "FooterCheckbox";
+//			// checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(4) > span";// before 20191101
+//			checkboxSelectorID = "#templateBuilder > div.movable-image-gallery.clearfix > div:nth-child(2) > label:nth-child(4) > span";
+//			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer, false,
+//					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//			if (!checkboxIsChecked) {
+//				tpP.clickFooterCheckBox(driver);
+//				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer, true,
+//						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//				if (!checkboxIsChecked) {
+//					// Failed;
+//					System.out.println("Failed to click the checkbox -" + checkboxName);
+//				}
+//			}
+//			if (set_Footer) {
+//				tpP.clickFooterEditBtn(driver);
+//				ac.Wait(wt);
+//				// Footer Content checkboxes;
+//				TCnum = i + ": " + "2.1. Check the checkbox for BrandLogo";
+//				checkboxName = "BrandLogo";
+//				checkboxSelectorID = "#footerContent > label:nth-child(4) > span";
+//				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_BrandLog, false,
+//						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//				if (!checkboxIsChecked) {
+//					tpP.clickBrandLogoCheckBox(driver);
+//					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_BrandLog, true,
+//							checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//					if (!checkboxIsChecked) {
+//						// Failed;
+//						System.out.println("Failed to click the checkbox -" + checkboxName);
+//
+//					}
+//				}
+//
+//				TCnum = i + ": " + "2.2. Check the checkbox for VehicleInfo";
+//				checkboxName = "VehicleInfo";
+//				checkboxSelectorID = "#vehInfoLabel > span";
+//				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_VehicleInfo, false,
+//						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//				if (!checkboxIsChecked) {
+//					tpP.clickVehicleInfoCheckBox(driver);
+//					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_VehicleInfo,
+//							true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//					if (!checkboxIsChecked) {
+//						// Failed;
+//						System.out.println("Failed to click the checkbox -" + checkboxName);
+//
+//					}
+//				}
+//
+//				TCnum = i + ": " + "2.3. Check the checkbox for VIN";
+//				checkboxName = "VIN";
+//				checkboxSelectorID = "#vinLabel > span";
+//				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_Vin, false,
+//						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//				if (!checkboxIsChecked) {
+//					tpP.clickVINCheckBox(driver);
+//					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_Vin, true,
+//							checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//					if (!checkboxIsChecked) {
+//						// Failed;
+//						System.out.println("Failed to click the checkbox -" + checkboxName);
+//
+//					}
+//				}
+//
+//				TCnum = i + ": " + "2.4. Check the checkbox for StockNumber";
+//				checkboxName = "StockNumber";
+//				checkboxSelectorID = "#stockLabel > span";
+//				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_StockNumber, false,
+//						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//				if (!checkboxIsChecked) {
+//					tpP.clickStockNumberCheckBox(driver);
+//					checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_Footer_StockNumber,
+//							true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//					if (!checkboxIsChecked) {
+//						// Failed;
+//						System.out.println("Failed to click the checkbox -" + checkboxName);
+//
+//					}
+//				}
+//				tpP.clickContentFooterSaveBtn(driver);
+//				ac.Wait(wt);
+//				TCnum = i + ": " + "Templates-Click SAVE on Footer Content box";
+//				successfulMsg = "Your settings have been saved";// "Your settings have been saved"
+//				MessageExist = tpP.checkMessageDisplayedHead(driver, successfulMsg, TCnum);
+//				if (MessageExist) {
+//					ac.rwExcel(TCnum, true, "Click on SAVE in Footer Content box",
+//							"Sucessful msg shows: Your settings have been saved");
+//				} else {
+//					ac.rwExcel(TCnum, false, "Click on SAVE in Footer Content box",
+//							"Failed to shows msg: Your settings have been saved.");
+//				}
+//				tpP.clickFooterXBtn(driver);
+//			}
+//			// *************************End of 2. Footer**************************************************************************
+//
+//			// *************************3.MarketingMessageTop checkbox;*************************
+//			TCnum = i + ": " + "MarketingMessageTop Checkbox";
+//			checkboxName = "MarketingMessageTop";
+//			// checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(7) > span";// before 20191101
+//			checkboxSelectorID = "#templateBuilder > div.movable-image-gallery.clearfix > div:nth-child(2) > label:nth-child(7) > span";
+//			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_MarketingMessageTop, false,
+//					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//			if (!checkboxIsChecked) {
+//				tpP.clickMarketingMessageTopCheckBox(driver);
+//				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_MarketingMessageTop, true,
+//						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//				if (!checkboxIsChecked) {
+//					// Failed;
+//					System.out.println("Failed to click the checkbox -" + checkboxName);
+//
+//				}
+//			}
+//			if (set_MarketingMessageTop) {
+//				// tpP.clickOverlayXBtn(driver);
+//				tpP.clickMarketingMessageTopEditBtn(driver);
+//				tpP.inputGlbMsgIntoMarketingMSGTopContentField(driver, "Top_Global Message!");
+//				tpP.clickContentOverlaySaveBtn(driver);
+//				ac.Wait(wt);
+//				tpP.clickOverlayXBtn(driver);
+//				ac.Wait(wt);
+//			}
+//			// *************************4.MarketingMessageBotton checkbox;*************************
+//			TCnum = i + ": " + "MarketingMessageBotton Checkbox";
+//			checkboxName = "MarketingMessageBotton";
+//			// checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(10) > span";// before 20191101
+//			checkboxSelectorID = "#templateBuilder > div.movable-image-gallery.clearfix > div:nth-child(2) > label:nth-child(10) > span";
+//			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_MarketingMessageBotton, false,
+//					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//			if (!checkboxIsChecked) {
+//				tpP.clickMarketingMessageBottomCheckBox(driver);// clickMarketingMessageBottomCheckBox
+//				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_MarketingMessageBotton,
+//						true, checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//				if (!checkboxIsChecked) {
+//					// Failed;
+//					System.out.println("Failed to click the checkbox -" + checkboxName);
+//
+//				}
+//			}
+//			if (set_MarketingMessageBotton) {
+//				// tpP.clickOverlayXBtn(driver);
+//				tpP.clickMarketingMessageBottomEditBtn(driver);
+//				tpP.inputGlbMsgIntoMarketingMSGTopContentField(driver, "Bottom_Global Message!");
+//				tpP.clickContentOverlaySaveBtn(driver);
+//				ac.Wait(wt);
+//				tpP.clickOverlayXBtn(driver);
+//				ac.Wait(wt);
+//			}
+//
+//			// ************************* 5.AddAdditionalOverlay checkbox;*************************
+//			TCnum = i + ": " + "AddAdditionalOverlay Checkbox";
+//			checkboxName = "AddAdditionalOverlay";
+//			// checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(14) > span";// before 20191101
+//			checkboxSelectorID = "#templateBuilder > div.movable-image-gallery.clearfix > div:nth-child(2) > label:nth-child(14) > span";
+//			checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_AddAdditionalOverlay, false,
+//					checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//			if (!checkboxIsChecked) {
+//				tpP.clickAddAdditionalOverlayCheckBox(driver, TCnum);// clickMarketingMessageBottomCheckBox
+//				checkboxIsChecked = tpP.checkboxWithPseudoElement(checkboxName, driver, set_AddAdditionalOverlay, true,
+//						checkboxSelectorID, checkboxCSSstyleID, checkboxCSSstyleValue, TCnum);
+//				if (!checkboxIsChecked) {
+//					// Failed;
+//					System.out.println("Failed to click the checkbox -" + checkboxName);
+//
+//				}
+//			}
+//			if (set_AddAdditionalOverlay) {
+//				tpP.uploadOverlayPicture(driver, overlayImage, TCnum);
+//				tpP.verifyDealershipTemplate(driver, TCnum);
+//				tpP.clickXonDealershipTemplate(driver, TCnum);
+//				tpP.uploadOverlayPicture(driver, overlayImage, TCnum);
+//				tpP.verifyDealershipTemplate(driver, TCnum);
+//			}
 
 			// // ************************* 6.1 Features - VDI checkbox;*************************
 			// tpP.scrollUp(driver, 3000, TCnum);
@@ -3379,20 +3509,77 @@ public class AUTOpxController extends Comlibs {
 			// }
 			// }
 
+//			// *************************3.MarketingMessageTop checkbox;*************************
+			TCnum = i + ": " + "MarketingMessageOverlay";
+			tpP.clickMarketingMessageOverlayBtn(driver, TCnum);
+			TCnum = i + ": " + "MarketingMessageTop Checkbox";
+			boolean anychange1 = false;
+			boolean anychange2 = false;
+
+			anychange1 = tpP.clickMarketingMessageTopCheckbox(driver, set_MarketingMessageTop, TCnum);
+			TCnum = i + ": " + "MarketingMessageTop Checkbox";
+			anychange2 = tpP.clickMarketingMessageBottomCheckbox(driver, set_MarketingMessageBotton, TCnum);
+			TCnum = i + ": " + "Any change?";
+			if (anychange1 || anychange2) {
+				// there is a click happened
+				TCnum = i + "Changes Occur on Msg Top or Bottom";
+				// menueNum = 3;// Marketing Messages Overlay
+				tpP.checkMsgB4SAVE(driver, 3, msgB4SAVEExpected, TCnum);
+				tpP.clickSaveMarketingMessagesOverlayBtn(driver, TCnum);
+				tpP.checkMsgAfterSAVE(driver, 3, msgAfterSAVEExpected, TCnum);
+			}
+
+//			// *************************3.MarketingMessageTop checkbox;*************************
+
+//			// *************************4.Additional Overlay;*************************
+
+			TCnum = i + ": " + "AddAdditionalOverlay Checkbox";
+			checkboxName = "AddAdditionalOverlay";
+//			set_AddAdditionalOverlay = true;
+			tpP.clickAdditionalOverlayBtn(driver, TCnum);
+			if (set_AddAdditionalOverlay) {
+				TCnum = i + ": " + "Click Upload button";
+//				tpP.clickUploadBtn(driver, TCnum);
+
+				tpP.uploadOverlayPicture(driver, overlayImage, TCnum);
+				tpP.clickAdditionalOverlayBtn(driver, TCnum);
+				tpP.verifyDealershipTemplate(driver, TCnum);
+				ac.Wait(wt);
+				tpP.clickXonDealershipTemplate(driver, TCnum);
+				tpP.clickAdditionalOverlayBtn(driver, TCnum);
+				ac.Wait(wt);
+				tpP.uploadOverlayPicture(driver, overlayImage, TCnum);
+				tpP.clickAdditionalOverlayBtn(driver, TCnum);
+				tpP.verifyDealershipTemplate(driver, TCnum);
+			} else {
+				TCnum = i + ": " + "Click X button to remove the Additional Overlay";
+				tpP.clickXonDealershipTemplate(driver, TCnum);
+				ac.Wait(wt);
+				tpP.clickAdditionalOverlayBtn(driver, TCnum);
+				ac.Wait(wt);
+			}
+
+//			// *************************4.Additional Overlay;*************************			
+
+//			// *************************5.Background Image;*************************		
+			tpP.clickBackgroundImageBtn(driver, TCnum);
+			// TODO new feature
+
+//			// *************************5.Background Image;*************************
 			ac.Wait(wt);
 			tpP.scrollUp(driver, -3000, TCnum);
-			TCnum = i + ": " + "Templates-Click the up right SAVE";
-			tpP.clickSaveBtn(driver);
-			successfulMsg = "Your settings have been saved";// "Your settings have been saved"
-			MessageExist = tpP.checkMessageDisplayedHead(driver, successfulMsg, TCnum);
-			if (MessageExist) {
-				ac.rwExcel(TCnum, true, "Click on SAVE in Templates page",
-						"Sucessful msg shows: Your settings have been saved");
-			} else {
-				ac.rwExcel(TCnum, false, "Click on SAVE in Templates page",
-						"Failed to shows msg: Your settings have been saved.");
-			}
-			ac.Wait(wt);
+//			TCnum = i + ": " + "Templates-Click the up right SAVE";
+//			tpP.clickSaveBtn(driver);
+//			successfulMsg = "Your settings have been saved";// "Your settings have been saved"
+//			MessageExist = tpP.checkMessageDisplayedHead(driver, successfulMsg, TCnum);
+//			if (MessageExist) {
+//				ac.rwExcel(TCnum, true, "Click on SAVE in Templates page",
+//						"Sucessful msg shows: Your settings have been saved");
+//			} else {
+//				ac.rwExcel(TCnum, false, "Click on SAVE in Templates page",
+//						"Failed to shows msg: Your settings have been saved.");
+//			}
+//			ac.Wait(wt);
 			tpP.clickInventoryGalleryBtn(driver);
 
 			// Verify Re-render Single Vehicle 01 for VINpx dealer
@@ -3444,17 +3631,19 @@ public class AUTOpxController extends Comlibs {
 					+ ": ------------------------------------------------------------------------------------------"
 					+ MaxTimeForTemplatesPreview
 					+ " seconds to check---------------------------------------------</p><p style=\"color:blue;LINE-HEIGHT:6px;font-size:10px;\">1.Logo="
-					+ set_Header_DealershipLogo + ", 2.Address=" + set_Header_DealershipAddress + ",3.Phone="
-					+ set_Header_DealershipPhone + ", 4.Email=" + set_Header_DealershipEmail + ", 5.Website="
+					+ set_Header_DealershipLogo + ", 2.DealerContactInfo=" + set_Header_DealerContactInfo+ ", 3.Address=" + set_Header_DealershipAddress + ",4.Phone="
+					+ set_Header_DealershipPhone + ", 5.Email=" + set_Header_DealershipEmail + ", 6.Website="
 					+ set_Header_DealershipWebsite + ".___________Header & Footer BG Transparency=" + value
 					+ " %____________*****ForceSTOCKpx******=" + set_ForceStockpx
 					+ ".</p>   <p style=\"color:red;LINE-HEIGHT:6px;font-size:10px;\"> FOOTER=" + set_Footer
 					+ ": </p><p style=\"color:blue;LINE-HEIGHT:6px;font-size:10px;\">1.BrandLogo=" + set_Footer_BrandLog
-					+ ", 2.VehicleInfo=" + set_Footer_VehicleInfo + ", 3.VIN=" + set_Footer_Vin + ", 4.StockNumber="
+					+ ", 2.FooterContent=" + set_FooterContent+ ", 3.VehicleInfo=" + set_Footer_VehicleInfo + ", 4.VIN=" + set_Footer_Vin + ", 5.StockNumber="
 					+ set_Footer_StockNumber + ". MsgTop=" + set_MarketingMessageTop + ", MsgBotton="
 					+ set_MarketingMessageBotton + ", Overlay=" + set_AddAdditionalOverlay + ", VDI="
 					+ set_TextImage_VDI + ", WCI=" + set_TextImage_WCI + ", VBI=" + set_TextImage_VBI + "</p>";
-			// String templatesStatus="Checking: HEADER:"+set_Header + ", 1.DealershipLogo=" + set_Header_DealershipLogo+", 2.DealershipAddress=" + set_Header_DealershipAddress + ",3.DealershipPhone="+set_Header_DealershipPhone + ", 4.DealershipEmail=" + set_Header_DealershipEmail+", 5.DealershipWebsite=" + set_Header_DealershipWebsite + ". FOOTER: "+set_Footer + ", 1.BrandLogo=" +set_Footer_BrandLog + ", 2.VehicleInfo="+set_Footer_VehicleInfo + ", 3.VIN=" + set_Footer_Vin+", 4.set_Footer_StockNumber=" + set_Footer_StockNumber+", MarketingMessageTop=" + set_MarketingMessageTop + ",MarketingMessageBotton="+set_MarketingMessageBotton + ", AddAdditionalOverlay=" +
+			// String templatesStatus="Checking: HEADER:"+set_Header + ", 1.DealershipLogo=" + set_Header_DealershipLogo+", 2.DealershipAddress=" + set_Header_DealershipAddress + ",3.DealershipPhone="+set_Header_DealershipPhone + ", 4.DealershipEmail=" +
+			// set_Header_DealershipEmail+", 5.DealershipWebsite=" + set_Header_DealershipWebsite + ". FOOTER: "+set_Footer + ", 1.BrandLogo=" +set_Footer_BrandLog + ", 2.VehicleInfo="+set_Footer_VehicleInfo + ", 3.VIN=" + set_Footer_Vin+", 4.set_Footer_StockNumber=" +
+			// set_Footer_StockNumber+", MarketingMessageTop=" + set_MarketingMessageTop + ",MarketingMessageBotton="+set_MarketingMessageBotton + ", AddAdditionalOverlay=" +
 			// set_AddAdditionalOverlay+", Text Images: VDI=" + set_TextImage_VDI + ", WCI=" + set_TextImage_WCI+", VBI=" + set_TextImage_VBI +"";
 			vgP.textDisplayOnPage(driver, templatesStatus, displayTemplatesStatusOnPage);
 			tpP.scrollUp(driver, 1000, TCnum);
@@ -3468,12 +3657,12 @@ public class AUTOpxController extends Comlibs {
 				// + vin01 + "\n");
 				ac.Wait(MaxTimeForTemplatesPreview, true, "\nVIN #" + i + ". Waiting for " + MaxTimeForTemplatesPreview
 						+ " seconds, please check Templates settings:\n\nHeader: " + set_Header + "\n1.DealershipLogo="
-						+ set_Header_DealershipLogo + ", \n2.DealershipAddress=" + set_Header_DealershipAddress
-						+ ", \n3.DealershipPhone=" + set_Header_DealershipPhone + ", \n4.DealershipEmail="
-						+ set_Header_DealershipEmail + ", \n5.DealershipWebsite=" + set_Header_DealershipWebsite
+						+ set_Header_DealershipLogo + ", \n2.DealerContactInfo="+ set_Header_DealerContactInfo + ", \n3.DealershipAddress=" + set_Header_DealershipAddress
+						+ ", \n4.DealershipPhone=" + set_Header_DealershipPhone + ", \n5.DealershipEmail="
+						+ set_Header_DealershipEmail + ", \n6.DealershipWebsite=" + set_Header_DealershipWebsite
 						+ ".         *****ForceSTOCKpx********=" + set_ForceStockpx + "\n\nFooter: " + set_Footer
-						+ "\n1.BrandLogo=" + set_Footer_BrandLog + ", \n2.VehicleInfo=" + set_Footer_VehicleInfo
-						+ ", \n3.VIN=" + set_Footer_Vin + ", \n4.set_Footer_StockNumber=" + set_Footer_StockNumber
+						+ "\n1.FootVehicleInfo=" + set_Footer_VehicleInfo+ "\n2.BrandLogo=" + set_Footer_BrandLog + ", \n3.VehicleInfo=" + set_Footer_VehicleInfo
+						+ ", \n4.VIN=" + set_Footer_Vin + ", \n5.set_Footer_StockNumber=" + set_Footer_StockNumber
 						+ ", \n\nMarketingMessageTop=" + set_MarketingMessageTop + ", \nMarketingMessageBotton="
 						+ set_MarketingMessageBotton + ", \nAddAdditionalOverlay=" + set_AddAdditionalOverlay
 						+ ", \n\nText Images: \nVDI=" + set_TextImage_VDI + ",  \nWCI=" + set_TextImage_WCI
@@ -3487,12 +3676,12 @@ public class AUTOpxController extends Comlibs {
 				// + vin01 + "\n");
 				ac.Wait(noRenderWT, true, "\nVIN #" + i + ". Waiting for " + noRenderWT
 						+ " seconds, please check Templates settings:\n\nHeader: " + set_Header + "\n1.DealershipLogo="
-						+ set_Header_DealershipLogo + ", \n2.DealershipAddress=" + set_Header_DealershipAddress
-						+ ", \n3.DealershipPhone=" + set_Header_DealershipPhone + ", \n4.DealershipEmail="
+						+ set_Header_DealershipLogo+ ", \n2.DealerContactInfo="+ set_Header_DealerContactInfo + ", \n3.DealershipAddress=" + set_Header_DealershipAddress
+						+ ", \n4.DealershipPhone=" + set_Header_DealershipPhone + ", \n5.DealershipEmail="
 						+ set_Header_DealershipEmail + ", \n5.DealershipWebsite=" + set_Header_DealershipWebsite
 						+ "       *****ForceSTOCKpx********=" + set_ForceStockpx + "\n\nFooter: " + set_Footer
-						+ "\n1.BrandLogo=" + set_Footer_BrandLog + ", \n2.VehicleInfo=" + set_Footer_VehicleInfo
-						+ ", \n3.VIN=" + set_Footer_Vin + ", \n4.set_Footer_StockNumber=" + set_Footer_StockNumber
+						+ "\n1.FootVehicleInfo=" + set_Footer_VehicleInfo+ "\n2.BrandLogo=" + set_Footer_BrandLog + ", \n3.VehicleInfo=" + set_Footer_VehicleInfo
+						+ ", \n4.VIN=" + set_Footer_Vin + ", \n5.set_Footer_StockNumber=" + set_Footer_StockNumber
 						+ ", \n\nMarketingMessageTop=" + set_MarketingMessageTop + ", \nMarketingMessageBotton="
 						+ set_MarketingMessageBotton + ", \nAddAdditionalOverlay=" + set_AddAdditionalOverlay
 						+ ", \n\nText Images: \nVDI=" + set_TextImage_VDI + ",  \nWCI=" + set_TextImage_WCI
@@ -3506,6 +3695,7 @@ public class AUTOpxController extends Comlibs {
 			if (i == 1) {
 				set_Header = true;
 				set_Header_DealershipLogo = false;
+				set_Header_DealerContactInfo = true;
 				set_Header_DealershipAddress = true;
 				set_Header_DealershipPhone = false;
 				set_Header_DealershipEmail = true;
@@ -3513,6 +3703,7 @@ public class AUTOpxController extends Comlibs {
 
 				set_Footer = true;
 				set_Footer_BrandLog = true;
+				set_FooterContent = true;
 				set_Footer_VehicleInfo = false;
 				set_Footer_Vin = true;
 				set_Footer_StockNumber = true;
@@ -3531,6 +3722,7 @@ public class AUTOpxController extends Comlibs {
 			} else {
 				set_Header = false;
 				set_Header_DealershipLogo = false;
+				set_Header_DealerContactInfo = false;
 				set_Header_DealershipAddress = true;
 				set_Header_DealershipPhone = false;
 				set_Header_DealershipEmail = true;
@@ -3538,6 +3730,7 @@ public class AUTOpxController extends Comlibs {
 
 				set_Footer = false;
 				set_Footer_BrandLog = true;
+				set_FooterContent = true;
 				set_Footer_VehicleInfo = false;
 				set_Footer_Vin = true;
 				set_Footer_StockNumber = true;
@@ -3557,6 +3750,7 @@ public class AUTOpxController extends Comlibs {
 			if (i == 3) {// Re-assignment - No Header no Footer
 				set_Header = true;
 				set_Header_DealershipLogo = true;
+				set_Header_DealerContactInfo = true;
 				set_Header_DealershipAddress = false;
 				set_Header_DealershipPhone = true;
 				set_Header_DealershipEmail = false;
@@ -3564,6 +3758,7 @@ public class AUTOpxController extends Comlibs {
 
 				set_Footer = true;
 				set_Footer_BrandLog = true;
+				set_FooterContent = true;
 				set_Footer_VehicleInfo = true;
 				set_Footer_Vin = true;
 				set_Footer_StockNumber = true;
@@ -3764,7 +3959,9 @@ public class AUTOpxController extends Comlibs {
 						// + emp + " " + emp + " " + emp + " "
 						// + emp + " " + emp + " " + emp + " "
 						+ empString + "</p>";
-				// String templatesStatus="Checking: HEADER:"+set_Header + ", 1.DealershipLogo=" + set_Header_DealershipLogo+", 2.DealershipAddress=" + set_Header_DealershipAddress + ",3.DealershipPhone="+set_Header_DealershipPhone + ", 4.DealershipEmail=" + set_Header_DealershipEmail+", 5.DealershipWebsite=" + set_Header_DealershipWebsite + ". FOOTER: "+set_Footer + ", 1.BrandLogo=" +set_Footer_BrandLog + ", 2.VehicleInfo="+set_Footer_VehicleInfo + ", 3.VIN=" + set_Footer_Vin+", 4.set_Footer_StockNumber=" + set_Footer_StockNumber+", MarketingMessageTop=" + set_MarketingMessageTop + ",MarketingMessageBotton="+set_MarketingMessageBotton + ", AddAdditionalOverlay=" +
+				// String templatesStatus="Checking: HEADER:"+set_Header + ", 1.DealershipLogo=" + set_Header_DealershipLogo+", 2.DealershipAddress=" + set_Header_DealershipAddress + ",3.DealershipPhone="+set_Header_DealershipPhone + ", 4.DealershipEmail=" +
+				// set_Header_DealershipEmail+", 5.DealershipWebsite=" + set_Header_DealershipWebsite + ". FOOTER: "+set_Footer + ", 1.BrandLogo=" +set_Footer_BrandLog + ", 2.VehicleInfo="+set_Footer_VehicleInfo + ", 3.VIN=" + set_Footer_Vin+", 4.set_Footer_StockNumber=" +
+				// set_Footer_StockNumber+", MarketingMessageTop=" + set_MarketingMessageTop + ",MarketingMessageBotton="+set_MarketingMessageBotton + ", AddAdditionalOverlay=" +
 				// set_AddAdditionalOverlay+", Text Images: VDI=" + set_TextImage_VDI + ", WCI=" + set_TextImage_WCI+", VBI=" + set_TextImage_VBI +"";
 				igP.textDisplayOnPage(driver, AngleImageNameStatus, displayTemplatesStatusOnPage);
 				ac.Wait(MaxTimeForTemplatesPreview - subwt);
@@ -3856,11 +4053,12 @@ public class AUTOpxController extends Comlibs {
 		ac.Wait(wt * browserWT);
 		TCnum = "Add GB_01_1";
 		int bgNum = 18; // Select 18 - Auto_ChangedTo_588_644
-		String selectBGName = "3D Buick and GMC Dealership (Generic Option)";
-		String bgmark_01="Small unclear GMC";
+//		String selectBGName = "3D Buick and GMC Dealership (Generic Option)";// before 20200224
+		String selectBGName = "3D Dealership Wall (GM Generic Option)";
+		String bgmark_01 = "Blue sky & cloud";
 		String originalBGName = "GMVINpxSTOCKpx_20191203_01";
-		String bgmark_02="Update";
-		
+		String bgmark_02 = "Update";
+
 		bgNum = bgP.getBackgroundNumberFrPopup(driver, selectBGName, TCnum);
 		if (bgNum == -1) {
 			System.out.println("\n\nFailed to get number of background!!!\n\n");
@@ -4109,9 +4307,11 @@ public class AUTOpxController extends Comlibs {
 			TCnum = "MultipleBGs_11";
 			igP.verifyGoodMsgShowing(driver, TCnum);
 			TCnum = "MultipleBGs_11_vin01";
-			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID02, igP.getReRenderNum(driver, TCnum), TCnum);
+			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID02,
+					igP.getReRenderNum(driver, TCnum), TCnum);
 			TCnum = "MultipleBGs_11_vin02";
-			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin02, vehGUID02, igP.getReRenderNum(driver, TCnum), TCnum);
+			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin02, vehGUID02,
+					igP.getReRenderNum(driver, TCnum), TCnum);
 
 			System.out.println("\ni = " + (i) + " of " + tcs + ". First BG is vinpx_stockpx.  Year 1 = " + y1
 					+ ". Make = " + m1 + "");
@@ -4143,15 +4343,17 @@ public class AUTOpxController extends Comlibs {
 					+ ": ------------------------------------------------------------------------------------------"
 					+ MaxTimeForTemplatesPreview
 					+ " seconds to check---------------------------------------------</p><p style=\"color:blue;LINE-HEIGHT:6px;font-size:10px;\">_____1. Background Name = "
-					+ selectBGName + " (showing \""+bgmark_01+"\"), 2.Year = " + y2 + ",3.Make = " + m2 + ","
+					+ selectBGName + " (showing \"" + bgmark_01 + "\"), 2.Year = " + y2 + ",3.Make = " + m2 + ","
 					+ set_Header_DealershipEmail + " " + set_Header_DealershipWebsite + " " + set_ForceStockpx
 					+ ".</p>   <p style=\"color:red;LINE-HEIGHT:6px;font-size:10px;\">___Second vehicle = " + vin01
 					+ ": </p><p style=\"color:blue;LINE-HEIGHT:6px;font-size:10px;\">_____2.Background Name = "
-					+ originalBGName + ", (showing \""+bgmark_02+"\") 2.Year = " + y1 + ", 3.Make = " + m1 + ","
+					+ originalBGName + ", (showing \"" + bgmark_02 + "\") 2.Year = " + y1 + ", 3.Make = " + m1 + ","
 					+ set_Footer_StockNumber + " " + set_MarketingMessageTop + " " + set_MarketingMessageBotton + " "
 					+ set_AddAdditionalOverlay + " " + set_TextImage_VDI + " " + set_TextImage_WCI + " "
 					+ set_TextImage_VBI + "</p>";
-			// String templatesStatus="Checking: HEADER:"+set_Header + ", 1.DealershipLogo=" + set_Header_DealershipLogo+", 2.DealershipAddress=" + set_Header_DealershipAddress + ",3.DealershipPhone="+set_Header_DealershipPhone + ", 4.DealershipEmail=" + set_Header_DealershipEmail+", 5.DealershipWebsite=" + set_Header_DealershipWebsite + ". FOOTER: "+set_Footer + ", 1.BrandLogo=" +set_Footer_BrandLog + ", 2.VehicleInfo="+set_Footer_VehicleInfo + ", 3.VIN=" + set_Footer_Vin+", 4.set_Footer_StockNumber=" + set_Footer_StockNumber+", MarketingMessageTop=" + set_MarketingMessageTop + ",MarketingMessageBotton="+set_MarketingMessageBotton + ", AddAdditionalOverlay=" +
+			// String templatesStatus="Checking: HEADER:"+set_Header + ", 1.DealershipLogo=" + set_Header_DealershipLogo+", 2.DealershipAddress=" + set_Header_DealershipAddress + ",3.DealershipPhone="+set_Header_DealershipPhone + ", 4.DealershipEmail=" +
+			// set_Header_DealershipEmail+", 5.DealershipWebsite=" + set_Header_DealershipWebsite + ". FOOTER: "+set_Footer + ", 1.BrandLogo=" +set_Footer_BrandLog + ", 2.VehicleInfo="+set_Footer_VehicleInfo + ", 3.VIN=" + set_Footer_Vin+", 4.set_Footer_StockNumber=" +
+			// set_Footer_StockNumber+", MarketingMessageTop=" + set_MarketingMessageTop + ",MarketingMessageBotton="+set_MarketingMessageBotton + ", AddAdditionalOverlay=" +
 			// set_AddAdditionalOverlay+", Text Images: VDI=" + set_TextImage_VDI + ", WCI=" + set_TextImage_WCI+", VBI=" + set_TextImage_VBI +"";
 			igP.textDisplayOnPage(driver, backgroundsStatus, displayTemplatesStatusOnPage);
 
@@ -4491,7 +4693,7 @@ public class AUTOpxController extends Comlibs {
 
 		// String[] VINpxNewVIN01
 		// =fetchOneDemArrayFromPropFile(env+".VINpxNewVINs",prop);
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 2; i++) {
 			System.out.println("Testing is started in " + env + "\n");
 			// Initial
 			Comlibs bc = new Comlibs();
@@ -4520,34 +4722,34 @@ public class AUTOpxController extends Comlibs {
 			// bc.rwExcel("", "-----Templates FCA Sorting Testing started-----" + (i + 1), "");
 			// VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
-			//// 0.General Inventory Gallery
-			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-			inventoryGalleryTC(driver, tBrowser, env, versionNum);
-			vehicleGallery(driver, tBrowser, env);
-			// verifyRerender(driver, tBrowser);
-
-			////// 1.VINpx:
-			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-
-			////// 2. STOCKpx
-			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			STOCKpxInventoryTC(driver, tBrowser, env);
-
-			//// bc.Wait(18*60);//wait 18 minutes;
-
-			// ////// 3. LOTpx
-			bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
-			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
-			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
-
-			// ////// 4. Multiple Backgrounds
-			bc.rwExcel("", "-----Multiple Backgrounds Testing started-----" + (i + 1), "");
-			MultipleBGTC(driver, tBrowser, versionNum, env, chkEmail); // All or LOTpx. This should be in the end of all testing
-
-			////// 5.1 STOCKpx Angle images sorting - Templates - run this first to move mouse 2 times during the Angle Images testing in Templates
-			bc.rwExcel("", "-----STOCKpx Sorting in Templates Testing started-----" + (i + 1), "");
-			STOCKpxSortingOnlyTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
+//			//// 0.General Inventory Gallery
+//			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+//			inventoryGalleryTC(driver, tBrowser, env, versionNum);
+//			vehicleGallery(driver, tBrowser, env);
+//			// verifyRerender(driver, tBrowser);
+//
+//			////// 1.VINpx:
+//			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+//			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+//
+//			////// 2. STOCKpx
+//			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+//			STOCKpxInventoryTC(driver, tBrowser, env);
+//
+//			//// bc.Wait(18*60);//wait 18 minutes;
+//
+//			// ////// 3. LOTpx
+//			bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
+//			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
+//			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
+//
+//			// ////// 4. Multiple Backgrounds
+//			bc.rwExcel("", "-----Multiple Backgrounds Testing started-----" + (i + 1), "");
+//			MultipleBGTC(driver, tBrowser, versionNum, env, chkEmail); // All or LOTpx. This should be in the end of all testing
+//
+//			////// 5.1 STOCKpx Angle images sorting - Templates - run this first to move mouse 2 times during the Angle Images testing in Templates
+//			bc.rwExcel("", "-----STOCKpx Sorting in Templates Testing started-----" + (i + 1), "");
+//			STOCKpxSortingOnlyTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
 			////// 5.2 FCA VINpx Angle images sorting and Templates - run this first to move mouse 3 times during the Angle Images testing in Templates
 			bc.rwExcel("", "-----Templates FCA Sorting Testing started-----" + (i + 1), "");
