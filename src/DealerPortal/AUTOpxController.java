@@ -2527,17 +2527,17 @@ public class AUTOpxController extends Comlibs {
 		// // Header
 
 		// Header with random true or false
-		boolean set_Header =igP.truefalseRandom();// true;
+		boolean set_Header = igP.truefalseRandom();// true;
 		boolean set_Header_DealershipLogo = igP.truefalseRandom();
-		boolean set_Header_DealerContactInfo = igP.truefalseRandom();//true;
+		boolean set_Header_DealerContactInfo = igP.truefalseRandom();// true;
 		boolean set_Header_DealershipAddress = igP.truefalseRandom();
 		boolean set_Header_DealershipPhone = igP.truefalseRandom();
 		boolean set_Header_DealershipEmail = igP.truefalseRandom();
 		boolean set_Header_DealershipWebsite = igP.truefalseRandom();
 
-		boolean set_Footer =igP.truefalseRandom();// true;
+		boolean set_Footer = igP.truefalseRandom();// true;
 		boolean set_Footer_BrandLog = igP.truefalseRandom();
-		boolean set_FooterContent =igP.truefalseRandom();// true;
+		boolean set_FooterContent = igP.truefalseRandom();// true;
 		boolean set_Footer_VehicleInfo = igP.truefalseRandom();
 		boolean set_Footer_Vin = igP.truefalseRandom();
 		boolean set_Footer_StockNumber = igP.truefalseRandom();
@@ -2549,7 +2549,7 @@ public class AUTOpxController extends Comlibs {
 			set_MarketingMessageBotton = igP.truefalseRandom();
 		}
 
-		boolean set_AddAdditionalOverlay =igP.truefalseRandom();// false;
+		boolean set_AddAdditionalOverlay = igP.truefalseRandom();// false;
 
 		boolean set_TextImage_VDI = igP.truefalseRandom();
 		boolean set_TextImage_WCI = igP.truefalseRandom();
@@ -2843,10 +2843,6 @@ public class AUTOpxController extends Comlibs {
 				System.out.println("Slide Header to 0 % for Background Transparency Value =" + "\"" + value + " %\"");
 			}
 
-			
-			
-			
-			
 			// End of Slider Header bar to ************** 0, 30, 80, 100 % **************************
 			// *************************End of Header Background Transparency**************************************************************************
 			// add header info
@@ -2874,15 +2870,15 @@ public class AUTOpxController extends Comlibs {
 					// Website URL
 					TCnum = "Website_" + i;
 					tpP.clickDealerContactInfo_WebsiteURLCheckBox(driver, set_Header_DealershipWebsite, TCnum);
-				}else {
-					//1-4 false
+				} else {
+					// 1-4 false
 					TCnum = "Dealer Contact Info_" + i;
 					tpP.clickDealerContactInfoCheckBox(driver, true, TCnum);
 					tpP.clickDealerContactInfoCheckBox(driver, set_Header_DealerContactInfo, TCnum);
-					set_Header_DealershipAddress=false;
-					set_Header_DealershipPhone=false;
-					set_Header_DealershipEmail=false;
-					set_Header_DealershipWebsite=false;
+					set_Header_DealershipAddress = false;
+					set_Header_DealershipPhone = false;
+					set_Header_DealershipEmail = false;
+					set_Header_DealershipWebsite = false;
 				}
 //				TCnum = "Header_msg_b4_save_" + i;
 //				// verify msg b4 save
@@ -2893,17 +2889,17 @@ public class AUTOpxController extends Comlibs {
 //				TCnum = "Header_msg_SAVE_" + i;
 //				// verify msg after save
 //				tpP.checkMsgAfterSAVE(driver, MenueNum, msgAfterSAVEExpected, TCnum);
-			}else {
-				//all false
+			} else {
+				// all false
 				TCnum = "Set up Enable Header Overlay_" + i;
 				tpP.clickEnableHeaderOverlayCheckBox(driver, true, TCnum);
 				tpP.clickEnableHeaderOverlayCheckBox(driver, set_Header, TCnum);
-				set_Header_DealershipLogo=false;
-				set_Header_DealerContactInfo=false;
-				set_Header_DealershipAddress=false;
-				set_Header_DealershipPhone=false;
-				set_Header_DealershipEmail=false;
-				set_Header_DealershipWebsite=false;
+				set_Header_DealershipLogo = false;
+				set_Header_DealerContactInfo = false;
+				set_Header_DealershipAddress = false;
+				set_Header_DealershipPhone = false;
+				set_Header_DealershipEmail = false;
+				set_Header_DealershipWebsite = false;
 			}
 			TCnum = "Header_msg_b4_save_" + i;
 			// verify msg b4 save
@@ -3029,16 +3025,16 @@ public class AUTOpxController extends Comlibs {
 					// STOCK Number
 					TCnum = "STOCK Number_" + i;
 					tpP.clickFooterContent_StockNumberCheckBox(driver, set_Footer_StockNumber, TCnum);
-				}else {
-					//1-3 false
+				} else {
+					// 1-3 false
 					tpP.clickFooterContentCheckBox(driver, true, TCnum);
 					tpP.clickFooterContentCheckBox(driver, set_FooterContent, TCnum);
-					set_Footer_VehicleInfo=false;
-					set_Footer_Vin=false;
-					set_Footer_StockNumber=false;
-					
+					set_Footer_VehicleInfo = false;
+					set_Footer_Vin = false;
+					set_Footer_StockNumber = false;
+
 				}
-				
+
 //				TCnum = "Footer_msg_b4_save_" + i;
 //				// verify msg b4 save
 //				tpP.checkMsgB4SAVE(driver, MenueNum, msgB4SAVEExpected, TCnum);
@@ -3048,19 +3044,19 @@ public class AUTOpxController extends Comlibs {
 //				TCnum = "Footer_msg_SAVE_" + i;
 //				// verify msg after save
 //				tpP.checkMsgAfterSAVE(driver, MenueNum, msgAfterSAVEExpected, TCnum);
-		
-			}else {
-				//all false  1-5
+
+			} else {
+				// all false 1-5
 				// Disable Header Overlay
 				TCnum = "Set up Enable Footer Overlay_" + i;
 				tpP.clickEnableFooterOverlayCheckBox(driver, true, TCnum);
 				tpP.clickEnableFooterOverlayCheckBox(driver, set_Footer, TCnum);
-				set_Footer_BrandLog=false;
-				set_FooterContent=false;
-				set_Footer_VehicleInfo=false;
-				set_Footer_Vin=false;
-				set_Footer_StockNumber=false;
-				
+				set_Footer_BrandLog = false;
+				set_FooterContent = false;
+				set_Footer_VehicleInfo = false;
+				set_Footer_Vin = false;
+				set_Footer_StockNumber = false;
+
 			}
 			TCnum = "Footer_msg_b4_save_" + i;
 			// verify msg b4 save
@@ -3558,16 +3554,17 @@ public class AUTOpxController extends Comlibs {
 					+ ": ------------------------------------------------------------------------------------------"
 					+ MaxTimeForTemplatesPreview
 					+ " seconds to check---------------------------------------------</p><p style=\"color:blue;LINE-HEIGHT:6px;font-size:10px;\">1.Logo="
-					+ set_Header_DealershipLogo + ", 2.DealerContactInfo=" + set_Header_DealerContactInfo+ ", 3.Address=" + set_Header_DealershipAddress + ",4.Phone="
-					+ set_Header_DealershipPhone + ", 5.Email=" + set_Header_DealershipEmail + ", 6.Website="
-					+ set_Header_DealershipWebsite + ".___________Header & Footer BG Transparency=" + value
-					+ " %____________*****ForceSTOCKpx******=" + set_ForceStockpx
-					+ ".</p>   <p style=\"color:red;LINE-HEIGHT:6px;font-size:10px;\"> FOOTER=" + set_Footer
-					+ ": </p><p style=\"color:blue;LINE-HEIGHT:6px;font-size:10px;\">1.BrandLogo=" + set_Footer_BrandLog
-					+ ", 2.FooterContent=" + set_FooterContent+ ", 3.VehicleInfo=" + set_Footer_VehicleInfo + ", 4.VIN=" + set_Footer_Vin + ", 5.StockNumber="
-					+ set_Footer_StockNumber + ". MsgTop=" + set_MarketingMessageTop + ", MsgBotton="
-					+ set_MarketingMessageBotton + ", Overlay=" + set_AddAdditionalOverlay + ", VDI="
-					+ set_TextImage_VDI + ", WCI=" + set_TextImage_WCI + ", VBI=" + set_TextImage_VBI + "</p>";
+					+ set_Header_DealershipLogo + ", 2.DealerContactInfo=" + set_Header_DealerContactInfo
+					+ ", 3.Address=" + set_Header_DealershipAddress + ",4.Phone=" + set_Header_DealershipPhone
+					+ ", 5.Email=" + set_Header_DealershipEmail + ", 6.Website=" + set_Header_DealershipWebsite
+					+ ".___________Header & Footer BG Transparency=" + value + " %____________*****ForceSTOCKpx******="
+					+ set_ForceStockpx + ".</p>   <p style=\"color:red;LINE-HEIGHT:6px;font-size:10px;\"> FOOTER="
+					+ set_Footer + ": </p><p style=\"color:blue;LINE-HEIGHT:6px;font-size:10px;\">1.BrandLogo="
+					+ set_Footer_BrandLog + ", 2.FooterContent=" + set_FooterContent + ", 3.VehicleInfo="
+					+ set_Footer_VehicleInfo + ", 4.VIN=" + set_Footer_Vin + ", 5.StockNumber=" + set_Footer_StockNumber
+					+ ". MsgTop=" + set_MarketingMessageTop + ", MsgBotton=" + set_MarketingMessageBotton + ", Overlay="
+					+ set_AddAdditionalOverlay + ", VDI=" + set_TextImage_VDI + ", WCI=" + set_TextImage_WCI + ", VBI="
+					+ set_TextImage_VBI + "</p>";
 			// String templatesStatus="Checking: HEADER:"+set_Header + ", 1.DealershipLogo=" + set_Header_DealershipLogo+", 2.DealershipAddress=" + set_Header_DealershipAddress + ",3.DealershipPhone="+set_Header_DealershipPhone + ", 4.DealershipEmail=" +
 			// set_Header_DealershipEmail+", 5.DealershipWebsite=" + set_Header_DealershipWebsite + ". FOOTER: "+set_Footer + ", 1.BrandLogo=" +set_Footer_BrandLog + ", 2.VehicleInfo="+set_Footer_VehicleInfo + ", 3.VIN=" + set_Footer_Vin+", 4.set_Footer_StockNumber=" +
 			// set_Footer_StockNumber+", MarketingMessageTop=" + set_MarketingMessageTop + ",MarketingMessageBotton="+set_MarketingMessageBotton + ", AddAdditionalOverlay=" +
@@ -3584,16 +3581,18 @@ public class AUTOpxController extends Comlibs {
 				// + vin01 + "\n");
 				ac.Wait(MaxTimeForTemplatesPreview, true, "\nVIN #" + i + ". Waiting for " + MaxTimeForTemplatesPreview
 						+ " seconds, please check Templates settings:\n\nHeader: " + set_Header + "\n1.DealershipLogo="
-						+ set_Header_DealershipLogo + ", \n2.DealerContactInfo="+ set_Header_DealerContactInfo + ", \n3.DealershipAddress=" + set_Header_DealershipAddress
-						+ ", \n4.DealershipPhone=" + set_Header_DealershipPhone + ", \n5.DealershipEmail="
-						+ set_Header_DealershipEmail + ", \n6.DealershipWebsite=" + set_Header_DealershipWebsite
+						+ set_Header_DealershipLogo + ", \n2.DealerContactInfo=" + set_Header_DealerContactInfo
+						+ ", \n3.DealershipAddress=" + set_Header_DealershipAddress + ", \n4.DealershipPhone="
+						+ set_Header_DealershipPhone + ", \n5.DealershipEmail=" + set_Header_DealershipEmail
+						+ ", \n6.DealershipWebsite=" + set_Header_DealershipWebsite
 						+ ".         *****ForceSTOCKpx********=" + set_ForceStockpx + "\n\nFooter: " + set_Footer
-						+ "\n1.FootVehicleInfo=" + set_Footer_VehicleInfo+ "\n2.BrandLogo=" + set_Footer_BrandLog + ", \n3.VehicleInfo=" + set_Footer_VehicleInfo
-						+ ", \n4.VIN=" + set_Footer_Vin + ", \n5.set_Footer_StockNumber=" + set_Footer_StockNumber
-						+ ", \n\nMarketingMessageTop=" + set_MarketingMessageTop + ", \nMarketingMessageBotton="
-						+ set_MarketingMessageBotton + ", \nAddAdditionalOverlay=" + set_AddAdditionalOverlay
-						+ ", \n\nText Images: \nVDI=" + set_TextImage_VDI + ",  \nWCI=" + set_TextImage_WCI
-						+ ",  \nVBI=" + set_TextImage_VBI + ",  for vin=" + vin01 + "\n");
+						+ "\n1.FootVehicleInfo=" + set_Footer_VehicleInfo + "\n2.BrandLogo=" + set_Footer_BrandLog
+						+ ", \n3.VehicleInfo=" + set_Footer_VehicleInfo + ", \n4.VIN=" + set_Footer_Vin
+						+ ", \n5.set_Footer_StockNumber=" + set_Footer_StockNumber + ", \n\nMarketingMessageTop="
+						+ set_MarketingMessageTop + ", \nMarketingMessageBotton=" + set_MarketingMessageBotton
+						+ ", \nAddAdditionalOverlay=" + set_AddAdditionalOverlay + ", \n\nText Images: \nVDI="
+						+ set_TextImage_VDI + ",  \nWCI=" + set_TextImage_WCI + ",  \nVBI=" + set_TextImage_VBI
+						+ ",  for vin=" + vin01 + "\n");
 				// + set_TextImage_WCI + ", \nVBI=" + set_TextImage_VBI + ", for vin=" + vin01 + "\n");
 				// System.out.println("\n1. press Enter key to continue......");
 			} else {
@@ -3603,16 +3602,18 @@ public class AUTOpxController extends Comlibs {
 				// + vin01 + "\n");
 				ac.Wait(noRenderWT, true, "\nVIN #" + i + ". Waiting for " + noRenderWT
 						+ " seconds, please check Templates settings:\n\nHeader: " + set_Header + "\n1.DealershipLogo="
-						+ set_Header_DealershipLogo+ ", \n2.DealerContactInfo="+ set_Header_DealerContactInfo + ", \n3.DealershipAddress=" + set_Header_DealershipAddress
-						+ ", \n4.DealershipPhone=" + set_Header_DealershipPhone + ", \n5.DealershipEmail="
-						+ set_Header_DealershipEmail + ", \n5.DealershipWebsite=" + set_Header_DealershipWebsite
+						+ set_Header_DealershipLogo + ", \n2.DealerContactInfo=" + set_Header_DealerContactInfo
+						+ ", \n3.DealershipAddress=" + set_Header_DealershipAddress + ", \n4.DealershipPhone="
+						+ set_Header_DealershipPhone + ", \n5.DealershipEmail=" + set_Header_DealershipEmail
+						+ ", \n5.DealershipWebsite=" + set_Header_DealershipWebsite
 						+ "       *****ForceSTOCKpx********=" + set_ForceStockpx + "\n\nFooter: " + set_Footer
-						+ "\n1.FootVehicleInfo=" + set_Footer_VehicleInfo+ "\n2.BrandLogo=" + set_Footer_BrandLog + ", \n3.VehicleInfo=" + set_Footer_VehicleInfo
-						+ ", \n4.VIN=" + set_Footer_Vin + ", \n5.set_Footer_StockNumber=" + set_Footer_StockNumber
-						+ ", \n\nMarketingMessageTop=" + set_MarketingMessageTop + ", \nMarketingMessageBotton="
-						+ set_MarketingMessageBotton + ", \nAddAdditionalOverlay=" + set_AddAdditionalOverlay
-						+ ", \n\nText Images: \nVDI=" + set_TextImage_VDI + ",  \nWCI=" + set_TextImage_WCI
-						+ ",  \nVBI=" + set_TextImage_VBI + ",  for vin=" + vin01 + "\n");
+						+ "\n1.FootVehicleInfo=" + set_Footer_VehicleInfo + "\n2.BrandLogo=" + set_Footer_BrandLog
+						+ ", \n3.VehicleInfo=" + set_Footer_VehicleInfo + ", \n4.VIN=" + set_Footer_Vin
+						+ ", \n5.set_Footer_StockNumber=" + set_Footer_StockNumber + ", \n\nMarketingMessageTop="
+						+ set_MarketingMessageTop + ", \nMarketingMessageBotton=" + set_MarketingMessageBotton
+						+ ", \nAddAdditionalOverlay=" + set_AddAdditionalOverlay + ", \n\nText Images: \nVDI="
+						+ set_TextImage_VDI + ",  \nWCI=" + set_TextImage_WCI + ",  \nVBI=" + set_TextImage_VBI
+						+ ",  for vin=" + vin01 + "\n");
 			}
 			vgP.clickBackToInventoryBtn(driver);
 			ac.Wait(wt);
@@ -4649,34 +4650,34 @@ public class AUTOpxController extends Comlibs {
 			// bc.rwExcel("", "-----Templates FCA Sorting Testing started-----" + (i + 1), "");
 			// VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
-//			//// 0.General Inventory Gallery
-//			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-//			inventoryGalleryTC(driver, tBrowser, env, versionNum);
-//			vehicleGallery(driver, tBrowser, env);
-//			// verifyRerender(driver, tBrowser);
-//
-//			////// 1.VINpx:
-//			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-//			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-//
-//			////// 2. STOCKpx
-//			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-//			STOCKpxInventoryTC(driver, tBrowser, env);
-//
-//			//// bc.Wait(18*60);//wait 18 minutes;
-//
-//			// ////// 3. LOTpx
-//			bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
-//			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
-//			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
-//
-//			// ////// 4. Multiple Backgrounds
-//			bc.rwExcel("", "-----Multiple Backgrounds Testing started-----" + (i + 1), "");
-//			MultipleBGTC(driver, tBrowser, versionNum, env, chkEmail); // All or LOTpx. This should be in the end of all testing
-//
-//			////// 5.1 STOCKpx Angle images sorting - Templates - run this first to move mouse 2 times during the Angle Images testing in Templates
-//			bc.rwExcel("", "-----STOCKpx Sorting in Templates Testing started-----" + (i + 1), "");
-//			STOCKpxSortingOnlyTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
+			//// 0.General Inventory Gallery
+			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			inventoryGalleryTC(driver, tBrowser, env, versionNum);
+			vehicleGallery(driver, tBrowser, env);
+			// verifyRerender(driver, tBrowser);
+
+			////// 1.VINpx:
+			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+
+			////// 2. STOCKpx
+			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			STOCKpxInventoryTC(driver, tBrowser, env);
+
+			//// bc.Wait(18*60);//wait 18 minutes;
+
+			// ////// 3. LOTpx
+			bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
+			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
+			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
+
+			// ////// 4. Multiple Backgrounds
+			bc.rwExcel("", "-----Multiple Backgrounds Testing started-----" + (i + 1), "");
+			MultipleBGTC(driver, tBrowser, versionNum, env, chkEmail); // All or LOTpx. This should be in the end of all testing
+
+			////// 5.1 STOCKpx Angle images sorting - Templates - run this first to move mouse 2 times during the Angle Images testing in Templates
+			bc.rwExcel("", "-----STOCKpx Sorting in Templates Testing started-----" + (i + 1), "");
+			STOCKpxSortingOnlyTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
 			////// 5.2 FCA VINpx Angle images sorting and Templates - run this first to move mouse 3 times during the Angle Images testing in Templates
 			bc.rwExcel("", "-----Templates FCA Sorting Testing started-----" + (i + 1), "");

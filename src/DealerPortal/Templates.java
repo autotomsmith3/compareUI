@@ -178,11 +178,8 @@ public class Templates extends Comlibs {
 	By saveAngleImageBtnLocator = By.xpath("//*[@id=\"tab6\"]/div[1]/div/button/span");
 	By msgOfSAVELocator6 = By.xpath("//*[@id=\"tab6\"]/div[1]/div/span");
 
-	// *[@id="angleImageRoot"]/div/aside/div/ul/li[6]/a
-	By angleImages = By.xpath("//*[@id=\"angleImageRoot\"]/div/aside/div/ul/li[6]/a");
+	By angleImages = By.xpath("//*[@id=\"angleImageRoot\"]/div[2]/div/div/aside/div/ul/li[6]/a");
 	By headerOverlay = By.xpath("//*[@id=\"angleImageRoot\"]/div[2]/div/div/aside/div/ul/li[1]/a");
-								
-	
 	
 	By enableHeaderOverlayCkbox = By.xpath("//*[@id=\"tab1\"]/div[2]/div/div[1]/label/span");
 	By dealershipLogoCkbox = By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[2]/label/span");
