@@ -72,7 +72,6 @@ public class AUTOpxController extends Comlibs {
 					rwExcel("", true, "Page Title is displayed", sPageTitle);
 				}
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		else {
@@ -135,7 +134,6 @@ public class AUTOpxController extends Comlibs {
 		try {
 			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String env = prop.getProperty("AUTOpx.environment");
@@ -408,7 +406,6 @@ public class AUTOpxController extends Comlibs {
 		try {
 			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String env = prop.getProperty("AUTOpx.environment");
@@ -500,7 +497,6 @@ public class AUTOpxController extends Comlibs {
 		try {
 			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String env = prop.getProperty("AUTOpx.environment");
@@ -671,7 +667,6 @@ public class AUTOpxController extends Comlibs {
 		try {
 			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String env = prop.getProperty("AUTOpx.environment");
@@ -1123,7 +1118,6 @@ public class AUTOpxController extends Comlibs {
 		try {
 			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String env = prop.getProperty("AUTOpx.environment");
@@ -1561,7 +1555,6 @@ public class AUTOpxController extends Comlibs {
 		try {
 			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String env = prop.getProperty("AUTOpx.environment");
@@ -1917,7 +1910,6 @@ public class AUTOpxController extends Comlibs {
 		try {
 			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String env = prop.getProperty("AUTOpx.environment");
@@ -2527,7 +2519,7 @@ public class AUTOpxController extends Comlibs {
 		// // Header
 
 		// Header with random true or false
-		boolean set_Header = igP.truefalseRandom();// true;
+		boolean set_Header = igP.truefalseRandom();// true;------------------------
 		boolean set_Header_DealershipLogo = igP.truefalseRandom();
 		boolean set_Header_DealerContactInfo = igP.truefalseRandom();// true;
 		boolean set_Header_DealershipAddress = igP.truefalseRandom();
@@ -2535,7 +2527,7 @@ public class AUTOpxController extends Comlibs {
 		boolean set_Header_DealershipEmail = igP.truefalseRandom();
 		boolean set_Header_DealershipWebsite = igP.truefalseRandom();
 
-		boolean set_Footer = igP.truefalseRandom();// true;
+		boolean set_Footer = igP.truefalseRandom();// true;-------------------
 		boolean set_Footer_BrandLog = igP.truefalseRandom();
 		boolean set_FooterContent = igP.truefalseRandom();// true;
 		boolean set_Footer_VehicleInfo = igP.truefalseRandom();
@@ -2543,20 +2535,20 @@ public class AUTOpxController extends Comlibs {
 		boolean set_Footer_StockNumber = igP.truefalseRandom();
 
 		boolean set_MarketingMessageTop = false;
-		boolean set_MarketingMessageBotton = false;
-		set_MarketingMessageTop = igP.truefalseRandom();
+		boolean set_MarketingMessageBotton = false; // ----------------------
+		set_MarketingMessageTop = igP.truefalseRandom();// ----------------
 		if (!set_MarketingMessageTop) {
-			set_MarketingMessageBotton = igP.truefalseRandom();
+			set_MarketingMessageBotton = igP.truefalseRandom();// ----------------
 		}
 
-		boolean set_AddAdditionalOverlay = igP.truefalseRandom();// false;
+		boolean set_AddAdditionalOverlay = igP.truefalseRandom();// false;----------------
 
 		boolean set_TextImage_VDI = igP.truefalseRandom();
 		boolean set_TextImage_WCI = igP.truefalseRandom();
 		boolean set_TextImage_VBI = igP.truefalseRandom();
 
 		boolean set_VisibleToDealer = igP.truefalseRandom();
-		boolean set_ForceStockpx = igP.truefalseRandom();
+		boolean set_ForceStockpx = igP.truefalseRandom();// ----------------
 		String msgB4SAVEExpected = "Changes have not been saved! Click SAVE to save changes.";
 		String msgAfterSAVEExpected = "data saved successfully.";
 		int table = 0;
@@ -2999,7 +2991,6 @@ public class AUTOpxController extends Comlibs {
 
 			// End of Slider Footer bar to ************** 0, 30, 80, 100 % **************************
 			// *************************End of Footer Background Transparency******************************************************************
-			// TODO footer
 			TCnum = "Click on Footer Overlay_" + i;
 			tpP.clickFooterOverlayBtn(driver, TCnum);
 			if (set_Footer) {
@@ -3486,7 +3477,6 @@ public class AUTOpxController extends Comlibs {
 
 //			// *************************5.Background Image;*************************		
 			tpP.clickBackgroundImageBtn(driver, TCnum);
-			// TODO new feature
 
 //			// *************************5.Background Image;*************************
 			ac.Wait(wt);
@@ -3523,7 +3513,7 @@ public class AUTOpxController extends Comlibs {
 
 			// *******************************************************************
 			// *******************************************************************
-			ac.Wait(wt);
+			ac.Wait(wt * 2);
 			igP.enterTextInSearch(vin01);
 			ac.Wait(wt);
 			TCnum = i + ": " + "TC139706_8";
@@ -3718,7 +3708,6 @@ public class AUTOpxController extends Comlibs {
 		try {
 			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String env = prop.getProperty("AUTOpx.environment");
@@ -4621,7 +4610,7 @@ public class AUTOpxController extends Comlibs {
 
 		// String[] VINpxNewVIN01
 		// =fetchOneDemArrayFromPropFile(env+".VINpxNewVINs",prop);
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 1; i++) {
 			System.out.println("Testing is started in " + env + "\n");
 			// Initial
 			Comlibs bc = new Comlibs();
@@ -4650,34 +4639,34 @@ public class AUTOpxController extends Comlibs {
 			// bc.rwExcel("", "-----Templates FCA Sorting Testing started-----" + (i + 1), "");
 			// VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
-			//// 0.General Inventory Gallery
-			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
-			inventoryGalleryTC(driver, tBrowser, env, versionNum);
-			vehicleGallery(driver, tBrowser, env);
-			// verifyRerender(driver, tBrowser);
-
-			////// 1.VINpx:
-			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
-			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
-
-			////// 2. STOCKpx
-			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
-			STOCKpxInventoryTC(driver, tBrowser, env);
-
-			//// bc.Wait(18*60);//wait 18 minutes;
-
-			// ////// 3. LOTpx
-			bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
-			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
-			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
-
-			// ////// 4. Multiple Backgrounds
-			bc.rwExcel("", "-----Multiple Backgrounds Testing started-----" + (i + 1), "");
-			MultipleBGTC(driver, tBrowser, versionNum, env, chkEmail); // All or LOTpx. This should be in the end of all testing
-
-			////// 5.1 STOCKpx Angle images sorting - Templates - run this first to move mouse 2 times during the Angle Images testing in Templates
-			bc.rwExcel("", "-----STOCKpx Sorting in Templates Testing started-----" + (i + 1), "");
-			STOCKpxSortingOnlyTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
+//			//// 0.General Inventory Gallery
+//			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+//			inventoryGalleryTC(driver, tBrowser, env, versionNum);
+//			vehicleGallery(driver, tBrowser, env);
+//			// verifyRerender(driver, tBrowser);
+//
+//			////// 1.VINpx:
+//			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+//			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
+//
+//			////// 2. STOCKpx
+//			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+//			STOCKpxInventoryTC(driver, tBrowser, env);
+//
+//			//// bc.Wait(18*60);//wait 18 minutes;
+//
+//			// ////// 3. LOTpx
+//			bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
+//			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
+//			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
+//
+//			// ////// 4. Multiple Backgrounds
+//			bc.rwExcel("", "-----Multiple Backgrounds Testing started-----" + (i + 1), "");
+//			MultipleBGTC(driver, tBrowser, versionNum, env, chkEmail); // All or LOTpx. This should be in the end of all testing
+//
+//			////// 5.1 STOCKpx Angle images sorting - Templates - run this first to move mouse 2 times during the Angle Images testing in Templates
+//			bc.rwExcel("", "-----STOCKpx Sorting in Templates Testing started-----" + (i + 1), "");
+//			STOCKpxSortingOnlyTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
 			////// 5.2 FCA VINpx Angle images sorting and Templates - run this first to move mouse 3 times during the Angle Images testing in Templates
 			bc.rwExcel("", "-----Templates FCA Sorting Testing started-----" + (i + 1), "");

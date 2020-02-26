@@ -66,9 +66,10 @@ public class Templates extends Comlibs {
 	By enableHeaderOverlayCheckBoxLocator = By.xpath("//*[@id=\"tab1\"]/div[2]/div/div/label/span");
 	By headerOverlay_DealershipLogoCheckBox = By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[2]/label/span");
 	By headerOverlay_DealerContactInfoCheckBox = By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[3]/label/span");
-	By headerOverlay_DealerContactInfo_AddressCheckBox = By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[3]/ul/li[1]/label/span");
-	//                       New                                      //*[@id=\"tab1\"]/div[2]/div/ul/li[3]/ul/li[1]/label/span
-	
+	By headerOverlay_DealerContactInfo_AddressCheckBox = By
+			.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[3]/ul/li[1]/label/span");
+	// New //*[@id=\"tab1\"]/div[2]/div/ul/li[3]/ul/li[1]/label/span
+
 	By headerOverlay_DealerContactInfo_PhoneNumberCheckBox = By
 			.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[3]/ul/li[2]/label/span");
 	By headerOverlay_DealerContactInfo_EmailCheckBox = By
@@ -111,36 +112,32 @@ public class Templates extends Comlibs {
 	// By MarketingMessageTopCheckBoxLocator = By.xpath("//*[@id='templateBuilder']/div[3]/label[3]/span");// //*[@id="templateBuilder"]/div[3]/form/label[3]/span
 	By MarketingMessageTopCheckBoxLocator = By.xpath("//*[@id='templateBuilder']/div[2]/div[2]/label[3]/span");
 	By MarketingMessageTopEditLocator = By.xpath("//*[@id=\"overlayTopEditBtn\"]");// //*[@id="overlayTopEditBtn"]
-	By MarketingMessageTopContent_globleMSG_fieldLocator = By.xpath("//*[@id=\"marketingMessage\"]");//*[@id="marketingMessage"]
+	By MarketingMessageTopContent_globleMSG_fieldLocator = By.xpath("//*[@id=\"marketingMessage\"]");// *[@id="marketingMessage"]
 	// By MarketingMessageBottomCheckBoxLocator = By.xpath("//*[@id='templateBuilder']/div[3]/label[4]/span");//
 	By MarketingMessageBottomCheckBoxLocator = By.xpath("//*[@id='templateBuilder']/div[2]/div[2]/label[4]/span");//
 	By MarketingMessageBottomEditLocator = By.xpath("//*[@id=\"overlayBottomEditBtn\"]");//
 	By MarketingMessageBottomContent_globleMSG_fieldLocator = By.xpath("//*[@id=\"marketingMessage\"]");
 	By uploadOverlayImageBtn = By.xpath("//*[@id=\"uploadLogo\"]");
-	//*[@id="uploadLogo"]
-	
-	
-	
+	// *[@id="uploadLogo"]
+
 	By dealershipTemplate = By.xpath("//*[@id=\"dealer-template\"]");
-	
+
 	By dealershipTemplateXbtn = By.xpath("//*[@id=\"removeLogo\"]/span");
-	By clickMarketingMessageOverlay=By.xpath("//*[@id=\"angleImageRoot\"]/div[2]/div/div/aside/div/ul/li[3]/a");
-	
+	By clickMarketingMessageOverlay = By.xpath("//*[@id=\"angleImageRoot\"]/div[2]/div/div/aside/div/ul/li[3]/a");
+
 //	By clickMarketingMessageTopCheckbox=By.xpath("//*[@id=\"tab3\"]/div[2]/div/label[1]/span");
-										       //   //*[@id="tab3"]/div[2]/div/label[1]/span   //unchecked same
-	
-	By clickMarketingMessageTopCheckbox=By.cssSelector("#tab3 > div.tab-pane-body > div > label:nth-child(1) > span");//uncheck
+	// //*[@id="tab3"]/div[2]/div/label[1]/span //unchecked same
+
+	By clickMarketingMessageTopCheckbox = By.cssSelector("#tab3 > div.tab-pane-body > div > label:nth-child(1) > span");// uncheck
 //	By clickMarketingMessageTopCheckbox=By.cssSelector("#tab3 > div.tab-pane-body > div > label:nth-child(1) > span");//check
-	
-	
-	By clickMarketingMessageBottomCheckbox=By.xpath("//*[@id=\"tab3\"]/div[2]/div/label[2]/span");
-												//     //*[@id="tab3"]/div[2]/div/label[2]/span    //checked same
+
+	By clickMarketingMessageBottomCheckbox = By.xpath("//*[@id=\"tab3\"]/div[2]/div/label[2]/span");
+	// //*[@id="tab3"]/div[2]/div/label[2]/span //checked same
 	By MarketingMessageContent_globleMSG_fieldLocator = By.xpath("//*[@id=\"marketingMessage\"]");
-	
-	
+
 	By additionalOvelayBtnLocator = By.xpath("//*[@id=\"angleImageRoot\"]/div[2]/div/div/aside/div/ul/li[4]/a");
-	
-	By backgroundImageBtnLocator=By.xpath("//*[@id=\"angleImageRoot\"]/div[2]/div/div/aside/div/ul/li[5]/a");
+
+	By backgroundImageBtnLocator = By.xpath("//*[@id=\"angleImageRoot\"]/div[2]/div/div/aside/div/ul/li[5]/a");
 
 	// *[@id="templateBuilder"]/div[3]/label[3]/span
 	// *[@id="overlayTopEditBtn"]
@@ -180,7 +177,7 @@ public class Templates extends Comlibs {
 
 	By angleImages = By.xpath("//*[@id=\"angleImageRoot\"]/div[2]/div/div/aside/div/ul/li[6]/a");
 	By headerOverlay = By.xpath("//*[@id=\"angleImageRoot\"]/div[2]/div/div/aside/div/ul/li[1]/a");
-	
+
 	By enableHeaderOverlayCkbox = By.xpath("//*[@id=\"tab1\"]/div[2]/div/div[1]/label/span");
 	By dealershipLogoCkbox = By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[2]/label/span");
 	By dealerContactInfoCkbox = By.xpath("//*[@id=\"tab1\"]/div[2]/div/ul/li[4]/label/span");
@@ -195,7 +192,7 @@ public class Templates extends Comlibs {
 	// //*[@id="tab2"]/div[2]/div/ul/li[1]/div/label
 
 	By footerOverlay = By.xpath("//*[@id=\"angleImageRoot\"]/div[2]/div/div/aside/div/ul/li[2]/a");//
-	
+
 	By enableFooterOverlayckbox = By.xpath("//*[@id=\"tab2\"]/div[2]/div/div[1]/label/span");
 	By oEMLogoCkbox = By.xpath("//*[@id=\"tab2\"]/div[2]/div/ul/li[3]/label/span");
 	By footerConentCkbox = By.xpath("//*[@id=\"tab2\"]/div[2]/div/ul/li[4]/label/span");
@@ -282,9 +279,13 @@ public class Templates extends Comlibs {
 		/**
 		 * How to use Java script to get content from Span ::after //from: https://stackoverflow.com/questions/28244911/selenium-webdriver-get-text-from-css-property-content-on-a-before-pseudo-ele/28265738#28265738
 		 * 
-		 * headerCheckBoxLocator=By.cssSelector("#templateBuilder > div:nth-child(3) > label:nth-child(1) > span"); WebElement switchLabel = driver.findElement(headerCheckBoxLocator); // WebElement switchLabel = driver.findElement(headerCheckBoxLocator); // String colorRGB = ((JavascriptExecutor)driver).executeScript("return window.getComputedStyle(arguments[0], ':before').getPropertyValue('background-color');",switchLabel).toString(); String colorRGB = ((JavascriptExecutor)driver).executeScript("return window.getComputedStyle(arguments[0], ':after').getPropertyValue('background-color');",switchLabel).toString();
+		 * headerCheckBoxLocator=By.cssSelector("#templateBuilder > div:nth-child(3) > label:nth-child(1) > span"); WebElement switchLabel = driver.findElement(headerCheckBoxLocator); // WebElement switchLabel = driver.findElement(headerCheckBoxLocator); // String
+		 * colorRGB = ((JavascriptExecutor)driver).executeScript("return window.getComputedStyle(arguments[0], ':before').getPropertyValue('background-color');",switchLabel).toString(); String colorRGB = ((JavascriptExecutor)driver).executeScript("return
+		 * window.getComputedStyle(arguments[0], ':after').getPropertyValue('background-color');",switchLabel).toString();
 		 * 
-		 * System.out.println("1st test: "+colorRGB); headerCheckBoxLocator=By.cssSelector("#templateBuilder > div:nth-child(3) > label:nth-child(1) > span"); // switchLabel = driver.findElement(headerCheckBoxLocator); // String colorRGB = ((JavascriptExecutor)driver).executeScript("return window.getComputedStyle(arguments[0], ':before').getPropertyValue('background-color');",switchLabel).toString(); colorRGB = ((JavascriptExecutor)driver).executeScript("return window.getComputedStyle(arguments[0], ':after').getPropertyValue('background-color');",switchLabel).toString();
+		 * System.out.println("1st test: "+colorRGB); headerCheckBoxLocator=By.cssSelector("#templateBuilder > div:nth-child(3) > label:nth-child(1) > span"); // switchLabel = driver.findElement(headerCheckBoxLocator); // String colorRGB =
+		 * ((JavascriptExecutor)driver).executeScript("return window.getComputedStyle(arguments[0], ':before').getPropertyValue('background-color');",switchLabel).toString(); colorRGB = ((JavascriptExecutor)driver).executeScript("return
+		 * window.getComputedStyle(arguments[0], ':after').getPropertyValue('background-color');",switchLabel).toString();
 		 * 
 		 * System.out.println("2nd test: "+colorRGB);
 		 **/
@@ -864,62 +865,64 @@ public class Templates extends Comlibs {
 		elementExist(driver, clickMarketingMessageOverlay, true, tc);
 		driver.findElement(clickMarketingMessageOverlay).click();
 		return this;
-	}	
-	public boolean clickMarketingMessageTopCheckbox(WebDriver driver, boolean selectCheckbox, String tc) throws IOException {
+	}
+
+	public boolean clickMarketingMessageTopCheckbox(WebDriver driver, boolean selectCheckbox, String tc)
+			throws IOException {
 		elementExist(driver, clickMarketingMessageTopCheckbox, true, tc);
-		boolean anyOccur=false;
-		boolean checkboxisTrue=false;
-		String checkboxStr=driver.findElement(clickMarketingMessageTopCheckbox).getAttribute("class");//get "check-label check" or  "check-label uncheck"
+		boolean anyOccur = false;
+		boolean checkboxisTrue = false;
+		String checkboxStr = driver.findElement(clickMarketingMessageTopCheckbox).getAttribute("class");// get "check-label check" or "check-label uncheck"
 		if (checkboxStr.equalsIgnoreCase("check-label check")) {
-			checkboxisTrue=true;	
-		}else {
-			checkboxisTrue=false;	
+			checkboxisTrue = true;
+		} else {
+			checkboxisTrue = false;
 		}
-		
+
 		if (checkboxisTrue) {
 			if (!selectCheckbox) {
 				driver.findElement(clickMarketingMessageTopCheckbox).click();
-				anyOccur=true;
+				anyOccur = true;
 			}
-		}else{
+		} else {
 			if (selectCheckbox) {
 				driver.findElement(clickMarketingMessageTopCheckbox).click();
 				inputGlbMsgIntoMarketingMSGTopContentField(driver, "Top_Global Message!");
-				anyOccur=true;
-			}
-		}
-
-		return anyOccur;
-	}	
-	
-	public boolean clickMarketingMessageBottomCheckbox(WebDriver driver, boolean selectCheckbox, String tc) throws IOException {
-		elementExist(driver, clickMarketingMessageBottomCheckbox, true, tc);
-		boolean anyOccur=false;
-		boolean checkboxisTrue=false;
-		String checkboxStr=driver.findElement(clickMarketingMessageBottomCheckbox).getAttribute("class");//get "check-label check" or  "check-label uncheck"
-		if (checkboxStr.equalsIgnoreCase("check-label check")) {
-			checkboxisTrue=true;	
-		}else {
-			checkboxisTrue=false;	
-		}
-		
-		if (checkboxisTrue) {
-			if (!selectCheckbox) {
-				driver.findElement(clickMarketingMessageTopCheckbox).click();
-				anyOccur=true;
-			}
-		}else{
-			if (selectCheckbox) {
-				driver.findElement(clickMarketingMessageTopCheckbox).click();
-				inputGlbMsgIntoMarketingMSGTopContentField(driver, "Bottom_Global Message!");	
-				anyOccur=true;
+				anyOccur = true;
 			}
 		}
 
 		return anyOccur;
 	}
-	
-	
+
+	public boolean clickMarketingMessageBottomCheckbox(WebDriver driver, boolean selectCheckbox, String tc)
+			throws IOException {
+		elementExist(driver, clickMarketingMessageBottomCheckbox, true, tc);
+		boolean anyOccur = false;
+		boolean checkboxisTrue = false;
+		String checkboxStr = driver.findElement(clickMarketingMessageBottomCheckbox).getAttribute("class");// get "check-label check" or "check-label uncheck"
+		if (checkboxStr.equalsIgnoreCase("check-label check")) {
+			checkboxisTrue = true;
+		} else {
+			checkboxisTrue = false;
+		}
+
+		if (checkboxisTrue) {
+			if (!selectCheckbox) {
+				driver.findElement(clickMarketingMessageBottomCheckbox).click();
+				anyOccur = true;
+			}
+		} else {
+			if (selectCheckbox) {
+				driver.findElement(clickMarketingMessageBottomCheckbox).click();
+				inputGlbMsgIntoMarketingMSGTopContentField(driver, "Bottom_Global Message!");
+				anyOccur = true;
+			}
+		}
+
+		return anyOccur;
+	}
+
 	public Templates inputGlbMsgIntoMarketingMSGTopContentField(WebDriver driver, String glbMsg) throws IOException {
 		elementExist(driver, MarketingMessageTopContent_globleMSG_fieldLocator, true,
 				"inputGlbMsgIntoMarketingMSGTopContentField");
@@ -985,16 +988,19 @@ public class Templates extends Comlibs {
 		driver.findElement(replaceTemplateWithOwnCheckBoxLocator).click();
 		return this;
 	}
+
 	public Templates clickAdditionalOverlayBtn(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, additionalOvelayBtnLocator, true, tc);
 		driver.findElement(additionalOvelayBtnLocator).click();
 		return this;
 	}
+
 	public Templates clickBackgroundImageBtn(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, backgroundImageBtnLocator, true, tc);
 		driver.findElement(backgroundImageBtnLocator).click();
 		return this;
 	}
+
 	public Templates clickUploadBtn(WebDriver driver, String tc) throws IOException {
 		driver.findElement(uploadBtnLocator).click();
 		return this;
@@ -1160,14 +1166,18 @@ public class Templates extends Comlibs {
 		} catch (Exception e) {
 		}
 	}
-	public boolean checkboxWithPseudoElement_UsedGood(String checkboxName, WebDriver driver, boolean checked, boolean secondTime,
-			String pseudoElementSelectorID, String cssStyle, String cssStyleValue, String tc) throws IOException {
+
+	public boolean checkboxWithPseudoElement_UsedGood(String checkboxName, WebDriver driver, boolean checked,
+			boolean secondTime, String pseudoElementSelectorID, String cssStyle, String cssStyleValue, String tc)
+			throws IOException {
 
 		// ***************return window.getComputedStyle(document.querySelector***********************************************************************************************************
 		/**
 		 * How to use xpath to find pseudo-element ::after in side a div element with out any content? https://stackoverflow.com/questions/51992258/xpath-to-find-pseudo-element-after-in-side-a-div-element-with-out-any-content
 		 * 
-		 * 1. Pseudo-elements don't exist in the DOM tree (hence the name), therefore they cannot be selected with XPath 2. Unfortunately, that's not possible with XPath. As mentioned by Tomalak, Pseudo-elements don't exist in the DOM tree (hence the name), therefore they cannot be selected with XPath and Selenium does not expose them as well. In general, ::before and ::after pseudo-elements are used for styling of containing element. 3. My solution: a. get all styles b. find out what is different between checked and unchecked c. getPropertyValue to identify checked and unchecked - transform-origin=50% 50% (unchecked) or 2.5px 5px (checked)
+		 * 1. Pseudo-elements don't exist in the DOM tree (hence the name), therefore they cannot be selected with XPath 2. Unfortunately, that's not possible with XPath. As mentioned by Tomalak, Pseudo-elements don't exist in the DOM tree (hence the name), therefore
+		 * they cannot be selected with XPath and Selenium does not expose them as well. In general, ::before and ::after pseudo-elements are used for styling of containing element. 3. My solution: a. get all styles b. find out what is different between checked and
+		 * unchecked c. getPropertyValue to identify checked and unchecked - transform-origin=50% 50% (unchecked) or 2.5px 5px (checked)
 		 **/
 		boolean isTrue = false;
 		Wait(1);
@@ -1234,7 +1244,9 @@ public class Templates extends Comlibs {
 		/**
 		 * How to use xpath to find pseudo-element ::after in side a div element with out any content? https://stackoverflow.com/questions/51992258/xpath-to-find-pseudo-element-after-in-side-a-div-element-with-out-any-content
 		 * 
-		 * 1. Pseudo-elements don't exist in the DOM tree (hence the name), therefore they cannot be selected with XPath 2. Unfortunately, that's not possible with XPath. As mentioned by Tomalak, Pseudo-elements don't exist in the DOM tree (hence the name), therefore they cannot be selected with XPath and Selenium does not expose them as well. In general, ::before and ::after pseudo-elements are used for styling of containing element. 3. My solution: a. get all styles b. find out what is different between checked and unchecked c. getPropertyValue to identify checked and unchecked - transform-origin=50% 50% (unchecked) or 2.5px 5px (checked)
+		 * 1. Pseudo-elements don't exist in the DOM tree (hence the name), therefore they cannot be selected with XPath 2. Unfortunately, that's not possible with XPath. As mentioned by Tomalak, Pseudo-elements don't exist in the DOM tree (hence the name), therefore
+		 * they cannot be selected with XPath and Selenium does not expose them as well. In general, ::before and ::after pseudo-elements are used for styling of containing element. 3. My solution: a. get all styles b. find out what is different between checked and
+		 * unchecked c. getPropertyValue to identify checked and unchecked - transform-origin=50% 50% (unchecked) or 2.5px 5px (checked)
 		 **/
 		boolean isTrue = false;
 		Wait(1);
@@ -1494,7 +1506,7 @@ public class Templates extends Comlibs {
 					yCoord = 575;// chrome=585;ff= 500
 				} else {
 					xCoord = 400;
-					yCoord = 555;//Chrome= 555, 585
+					yCoord = 555;// Chrome= 555, 585
 				}
 
 				// Move the cursor
@@ -1676,6 +1688,7 @@ public class Templates extends Comlibs {
 		}
 		;
 	}
+
 	public static class MoveMouseThreadOriginalCenter implements Runnable {
 		// http://tutorials.jenkov.com/java-concurrency/creating-and-starting-threads.html
 		// https://stackoverflow.com/questions/877096/how-can-i-pass-a-parameter-to-a-java-thread
@@ -1685,7 +1698,7 @@ public class Templates extends Comlibs {
 			int wt = 10;
 			Comlibs ac = new Comlibs();
 			ac.Wait(wt);
-			int xCoord = 400;// left=-950, center=400.  this doesn't matter for left or center. -950 works for Chrome left but not for center
+			int xCoord = 400;// left=-950, center=400. this doesn't matter for left or center. -950 works for Chrome left but not for center
 			int yCoord = 575;// left =585, center=575
 			// Move the cursor
 			try {
@@ -1697,33 +1710,34 @@ public class Templates extends Comlibs {
 			System.out.println("Inside Thread, After waitted " + wt + " secs, . Move Mouse to left !");
 		}
 	}
-	
+
 	public static class MoveMouseThread extends Thread {
 		// http://tutorials.jenkov.com/java-concurrency/creating-and-starting-threads.html
 		// https://stackoverflow.com/questions/877096/how-can-i-pass-a-parameter-to-a-java-thread
 		private String to;
-		
+
 		public MoveMouseThread(String to) {
 			// store parameter for later user
-			this.to=to;
+			this.to = to;
 		}
+
 		@Override
 		public void run() {
 			System.out.println("Inside Thread, Starting to Move Mouse !");
 			int wt = 10;
 			Comlibs ac = new Comlibs();
 			ac.Wait(wt);
-			int xCoord = 0;// left=-950, center=400.  this doesn't matter for left or center. -950 works for Chrome left but not for center
+			int xCoord = 0;// left=-950, center=400. this doesn't matter for left or center. -950 works for Chrome left but not for center
 			int yCoord = 0;// left =585, center=575
 			if (to.equalsIgnoreCase("left")) {
-				xCoord = -950;// left=-950, center=400.  this doesn't matter for left or center. -950 works for Chrome left but not for center
+				xCoord = -950;// left=-950, center=400. this doesn't matter for left or center. -950 works for Chrome left but not for center
 				yCoord = 585;// left =585, center=575
-			}else {
-				//center
-				xCoord = 400;// left=-950, center=400.  this doesn't matter for left or center. -950 works for Chrome left but not for center
+			} else {
+				// center
+				xCoord = 400;// left=-950, center=400. this doesn't matter for left or center. -950 works for Chrome left but not for center
 				yCoord = 565;// left =585, center=565
 			}
-				// Move the cursor
+			// Move the cursor
 			try {
 				Robot robot = new Robot();
 				robot.mouseMove(xCoord, yCoord);
@@ -1733,9 +1747,11 @@ public class Templates extends Comlibs {
 			System.out.println("Inside Thread, After waitted " + wt + " secs, . Move Mouse to left !");
 		}
 	}
+
 	public void jSONParse() {
 		// String text = "{\"employees\":[{\"firstName\":\"John\",\"lastName\":\"Doe\" },{\"firstName\":\"Anna\",\"lastName\":\"Smith\" },{\"firstName\":\"Peter\",\"lastName\":\"Jones\" }]}";
-		// String text="{\"posts\": [{\"post_id\": \"123456789012_123456789012\",\"actor_id\": \"1234567890\",\"picOfPersonWhoPosted\": \"http://example.com/photo.jpg\",\"nameOfPersonWhoPosted\": \"Jane Doe\",\"message\": \"Sounds cool. Can't wait to see it!\",\"likesCount\": \"2\",\"comments\": [],\"timeOfPost\": \"1234567890\"} ]}";
+		// String text="{\"posts\": [{\"post_id\": \"123456789012_123456789012\",\"actor_id\": \"1234567890\",\"picOfPersonWhoPosted\": \"http://example.com/photo.jpg\",\"nameOfPersonWhoPosted\": \"Jane Doe\",\"message\": \"Sounds cool. Can't wait to see
+		// it!\",\"likesCount\": \"2\",\"comments\": [],\"timeOfPost\": \"1234567890\"} ]}";
 		String text = "{\"posts\": [{\"post_id\": \"123456789012_123456789012_1\",\"actor_id\": \"12345678901\",\"picOfPersonWhoPosted\": \"http://example.com/photo.jpg1\",\"nameOfPersonWhoPosted\": \"Jane Doe1\",\"message\": \"1Sounds cool. Can't wait to see it!\",\"likesCount\": \"1\",\"comments\": [],\"timeOfPost\": \"12345678901\"},{\"post_id\": \"123456789012_123456789012_2\",\"actor_id\": \"12345678902\",\"picOfPersonWhoPosted\": \"http://example.com/photo.jpg2\",\"nameOfPersonWhoPosted\": \"Jane Doe2\",\"message\": \"Sounds cool. Can't wait to see it!\",\"likesCount\": \"2\",\"comments\": [],\"timeOfPost\": \"12345678902\"},{\"post_id\": \"123456789012_123456789012_3\",\"actor_id\": \"12345678903\",\"picOfPersonWhoPosted\": \"http://example.com/photo.jpg3\",\"nameOfPersonWhoPosted\": \"Jane Doe3\",\"message\": \"Sounds cool. Can't wait to see it!\",\"likesCount\": \"3\",\"comments\": [],\"timeOfPost\": \"12345678903\"} ]}";
 		JSONObject obj = new JSONObject(text);
 		// String pageName = obj.getJSONObject("posts").getString("pageName");
