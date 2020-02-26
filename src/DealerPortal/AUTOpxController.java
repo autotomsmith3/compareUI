@@ -2564,79 +2564,6 @@ public class AUTOpxController extends Comlibs {
 		int slider = 0;
 		int tempSlider = 0;
 		String sliderPercent = "";
-		// // *************************Debug for Background Transparency**************************************************************************
-		// table=1;
-		// slider=0;
-		// tempSlider=0;
-		// sliderPercent="";
-		//
-		// for (int i = 1; i <= 4; i++) {
-		// // Slider Header bar to ************** 0, 30, 80, 100 % **************************
-		// if (i==1) {
-		// slider=-45; // set to 0 % for FF
-		// sliderPercent="0 %";
-		// }else if (i==2) {
-		// slider=-20; // set to 30 % for FF
-		// sliderPercent="30 %";
-		// }else if (i==3) {
-		// slider=30; // set to 80 % for FF
-		// sliderPercent="80 %";
-		// }else if (i==4) {
-		// slider=50; // set to 100 % for FF
-		// sliderPercent="100 %";
-		// }else {
-		// slider=-5; // set to 45 %
-		// sliderPercent="45 %";
-		// }
-		//
-		// TCnum = "Slide Header bar_0%_"+i;
-		// tpP.scrollUp(driver, 450, TCnum);
-		// MenueNum=1;//Header Overlay
-		// tpP.clickHeaderOverlayBtn(driver, TCnum);
-		// //check bar value %
-		// value = tpP.getBackgroundTransparencyValue(driver, table, TCnum);
-		// System.out.println("Original Header Background Transparency Value ="+"\""+value+" %\"");
-		// TCnum = "Slide Header bar_0%_" + i;
-		//
-		//
-		// // getName=getName.replace(" %", "");
-		// // valueNum=Integer.parseInt(getName);
-		// //
-		// // Integer.parseInt((value==sliderPercent.replace(" %", "")))
-		// // if (!(value==0 & i==1)||!(value==Integer.parseInt(sliderPercent.replace(" %", "")))) {
-		// if (!(value==0 & i==1)) {
-		// tpP.slideHeaderBackgroundTransparencyBar(driver,slider, TCnum); //initial from left -50 =0, -40=5%
-		// tpP.checkMsgB4SAVE(driver, MenueNum, msgB4SAVEExpected, TCnum);
-		// tpP.clickSaveHeaderOverlayBtn(driver, TCnum);
-		// value = tpP.getBackgroundTransparencyValue(driver, table, TCnum);
-		// System.out.println("Slide Header to \""+sliderPercent+"\" for Background Transparency Value ="+"\""+value+" %\"");
-		// TCnum = "Check msg after SAVE_"+MenueNum+"_" + i;
-		// tpP.checkMsgAfterSAVE(driver,MenueNum, msgAfterSAVEExpected, TCnum);
-		// tpP.scrollUp(driver, -450, TCnum);
-		// TCnum = "Click Inventory Gallery after SAVE_"+MenueNum+"_" + i;
-		// tpP.clickInventoryGalleryBtn(driver, TCnum);
-		// ac.Wait(wt);
-		// TCnum = "Click Template after SAVE_"+MenueNum+"_" + i;
-		// tpP.clickTemplatesBtn(driver);
-		// TCnum = "Back to check it after Slide Header bar_0%_"+i;
-		// tpP.scrollUp(driver, 450, TCnum);
-		// tempSlider=tpP.getBackgroundTransparencyValue(driver, table, TCnum);
-		// if (value==tempSlider){
-		// System.out.println("Verify Slide Header to set up to \""+sliderPercent+"\" for Background Transparency. Site shows Value = "+"\""+tempSlider+" %\"");
-		// }else{
-		// System.out.println("Verify Slide Header to set up to \""+sliderPercent+"\" for Background Transparency. Site shows Value = "+"\""+tempSlider+" %\"");
-		// ac.rwExcel(TCnum, false, "Verify Slider to set up to "+sliderPercent+" for Background Transparency","Site shows value = \""+tempSlider+" %\" " );
-		// };
-		//
-		// }else {
-		// value = tpP.getBackgroundTransparencyValue(driver, table, TCnum);
-		// System.out.println("Slide Header to 0 % for Background Transparency Value ="+"\""+value+" %\"");
-		// }
-		//
-		// // End of Slider Header bar to ************** 0, 30, 80, 100 % **************************
-		// }
-		//
-		// // *************************End of Debug for Background Transparency**************************************************************************
 
 		// *************************6. Angle Image Sorting**************************************************************************
 
@@ -2715,7 +2642,7 @@ public class AUTOpxController extends Comlibs {
 		// ((JavascriptExecutor) driver).executeScript(java_script,source,target);//no error but nothing happened.
 		// ac.Wait(2);
 		// System.out.println("Stop here!");
-		if (envBrowser.equalsIgnoreCase("Chromexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")) { // Angle sortings Only work for Chrome. Firefox is not working.
+		if (envBrowser.equalsIgnoreCase("Chrome")) { // Angle sortings Only work for Chrome. Firefox is not working.
 
 			for (int i = 1; i <= 3; i++) {
 				tpP.scrollUp(driver, 450, TCnum);
@@ -3146,7 +3073,7 @@ public class AUTOpxController extends Comlibs {
 			tpP.checkMsgAfterSAVE(driver, MenueNum, msgAfterSAVEExpected, TCnum);
 //			// *************************End of 2. Footer Overlay*************************	
 
-//			// *************************1. Header**************************************************************************
+//			// *************************1. Header for previous checkboxWithPseudoElement **************************************************************************
 //			ac.Wait(wt);
 //			tpP.scrollUp(driver, -450, TCnum);
 //			// 1.Header checkbox;
@@ -3267,7 +3194,7 @@ public class AUTOpxController extends Comlibs {
 //			}
 //			// *************************End of 1. Header**************************************************************************
 //
-//			// *************************2. Footer**************************************************************************
+//			// *************************2. Footer for previous checkboxWithPseudoElement **************************************************************************
 //			// Footer
 //			// try {
 //			// tpP.clickHeaderEditBtn(driver);
@@ -3377,7 +3304,7 @@ public class AUTOpxController extends Comlibs {
 //			}
 //			// *************************End of 2. Footer**************************************************************************
 //
-//			// *************************3.MarketingMessageTop checkbox;*************************
+//			// *************************3.MarketingMessageTop checkbox  for previous checkboxWithPseudoElement ;*************************
 //			TCnum = i + ": " + "MarketingMessageTop Checkbox";
 //			checkboxName = "MarketingMessageTop";
 //			// checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(7) > span";// before 20191101
@@ -3403,7 +3330,7 @@ public class AUTOpxController extends Comlibs {
 //				tpP.clickOverlayXBtn(driver);
 //				ac.Wait(wt);
 //			}
-//			// *************************4.MarketingMessageBotton checkbox;*************************
+//			// *************************4.MarketingMessageBotton checkbox  for previous checkboxWithPseudoElement ;*************************
 //			TCnum = i + ": " + "MarketingMessageBotton Checkbox";
 //			checkboxName = "MarketingMessageBotton";
 //			// checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(10) > span";// before 20191101
@@ -3430,7 +3357,7 @@ public class AUTOpxController extends Comlibs {
 //				ac.Wait(wt);
 //			}
 //
-//			// ************************* 5.AddAdditionalOverlay checkbox;*************************
+//			// ************************* 5.AddAdditionalOverlay checkbox for previous checkboxWithPseudoElement ;*************************
 //			TCnum = i + ": " + "AddAdditionalOverlay Checkbox";
 //			checkboxName = "AddAdditionalOverlay";
 //			// checkboxSelectorID = "#templateBuilder > div.col-lg-3.col-md-5.col-sm-12.col-xs-12 > label:nth-child(14) > span";// before 20191101
@@ -3455,7 +3382,7 @@ public class AUTOpxController extends Comlibs {
 //				tpP.verifyDealershipTemplate(driver, TCnum);
 //			}
 
-			// // ************************* 6.1 Features - VDI checkbox;*************************
+			// // ************************* 6.1 Features - VDI checkbox for previous checkboxWithPseudoElement ;*************************
 			// tpP.scrollUp(driver, 3000, TCnum);
 			// TCnum = i + ": " + "6.1 Check the checkbox for VDI";
 			// checkboxName = "VDI";
@@ -3473,7 +3400,7 @@ public class AUTOpxController extends Comlibs {
 			// }
 			// }
 			//
-			// // ************************* 6.2 What's Cool - WCI checkbox;*************************
+			// // ************************* 6.2 What's Cool - WCI checkbox for previous checkboxWithPseudoElement ;*************************
 			// TCnum = i + ": " + "6.2 Check the checkbox for WCI";
 			// checkboxName = "WCI";
 			// // checkboxSelectorID = "#main-container > div > div:nth-child(5) > div:nth-child(3) > label > span";// before 20190827
@@ -3491,7 +3418,7 @@ public class AUTOpxController extends Comlibs {
 			// }
 			// }
 			//
-			// // ************************* 6.3 Benefits - VBI checkbox;*************************
+			// // ************************* 6.3 Benefits - VBI checkbox for previous checkboxWithPseudoElement ;*************************
 			// TCnum = i + ": " + "6.3 Check the checkbox for VBI";
 			// checkboxName = "VBI";
 			// // checkboxSelectorID = "#main-container > div > div:nth-child(5) > div:nth-child(4) > label > span";// before 20190827
@@ -3692,7 +3619,7 @@ public class AUTOpxController extends Comlibs {
 			// *************************2nd**************************************************************************
 			igP.clickTemplatesBtn(driver);
 			ac.Wait(wt);
-			if (i == 1) {
+			if (i == 1) {// *************************2nd 30% Transparency of BG *************
 				set_Header = true;
 				set_Header_DealershipLogo = false;
 				set_Header_DealerContactInfo = true;
@@ -3719,7 +3646,7 @@ public class AUTOpxController extends Comlibs {
 				set_VisibleToDealer = true;
 				set_ForceStockpx = true;
 
-			} else {
+			} else {// **********3rd 80% *****************
 				set_Header = false;
 				set_Header_DealershipLogo = false;
 				set_Header_DealerContactInfo = false;
@@ -3747,7 +3674,7 @@ public class AUTOpxController extends Comlibs {
 				set_ForceStockpx = false;
 
 			}
-			if (i == 3) {// Re-assignment - No Header no Footer
+			if (i == 3) {// **********4th 100% *****************
 				set_Header = true;
 				set_Header_DealershipLogo = true;
 				set_Header_DealerContactInfo = true;
