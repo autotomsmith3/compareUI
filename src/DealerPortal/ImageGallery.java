@@ -1395,7 +1395,7 @@ public class ImageGallery extends Comlibs {
 		String expected_rs1 = "Contact Support";
 		String expected_rs2 = "We have captured this URL to forward to the Customer Support Team.";
 		String expected_rs3 = "Please briefly describe the issue you are having.";
-		String expected_rs4 = "For Immediate Assistance: contact@unityworks.com\n1-800-293-2056";
+		String expected_rs4 = "For Immediate Assistance: vinpxsupport@unityworks.com\n877-276-5520";
 		if (rs1.equals(expected_rs1)) {
 			rwExcel(tc, true, "Contact Support shows correctly", "Contact Support =" + rs1);
 		} else {
