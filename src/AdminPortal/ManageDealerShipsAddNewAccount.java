@@ -25,7 +25,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 			prop.load(AdminPortalController.class.getClassLoader()
 					.getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 		String tc = "ManageDealerShipBegin";
@@ -351,7 +351,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		tc = "TC228656_01";
 		DealerProfieP.selectOEM(driver, 13, tc);
 		// check Buick and Cadillac and Chevrolet and GMC
-		// DealerProfieP.selectOEMBrands(driver, 1); // check Buick
+		 DealerProfieP.selectOEMBrands(driver, 1,tc); // check Buick
 		// DealerProfieP.selectOEMBrands(driver, 2); // check Cadillac
 		// DealerProfieP.selectOEMBrands(driver, 3); // check Chevrolet
 		// DealerProfieP.selectOEMBrands(driver, 4); // check GMC
