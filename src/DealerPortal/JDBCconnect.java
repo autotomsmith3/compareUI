@@ -36,7 +36,7 @@ public class JDBCconnect {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
-			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("./data/autopxConf.properties"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

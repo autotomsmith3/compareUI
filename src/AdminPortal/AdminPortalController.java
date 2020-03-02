@@ -192,10 +192,10 @@ public class AdminPortalController extends Comlibs {
 
 		// Load environment parameters
 		Properties prop = new Properties();
-		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		// testprop.load(new FileInputStream("./data/autopxConf.properties"));
 		try {
 			prop.load(AdminPortalController.class.getClassLoader()
-					.getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
+					.getResourceAsStream("./AdminPortalData/adminPortalConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -355,10 +355,10 @@ public class AdminPortalController extends Comlibs {
 
 		// Load environment parameters
 		Properties prop = new Properties();
-		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		// testprop.load(new FileInputStream("./data/autopxConf.properties"));
 		try {
 			prop.load(AdminPortalController.class.getClassLoader()
-					.getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
+					.getResourceAsStream("./AdminPortalData/adminPortalConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -533,10 +533,10 @@ public class AdminPortalController extends Comlibs {
 
 		// Load environment parameters
 		Properties prop = new Properties();
-		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		// testprop.load(new FileInputStream("./data/autopxConf.properties"));
 		try {
 			prop.load(AdminPortalController.class.getClassLoader()
-					.getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
+					.getResourceAsStream("./AdminPortalData/adminPortalConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -1446,10 +1446,10 @@ public class AdminPortalController extends Comlibs {
 
 		// Load environment parameters
 		Properties prop = new Properties();
-		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		// testprop.load(new FileInputStream("./data/autopxConf.properties"));
 		try {
 			prop.load(AdminPortalController.class.getClassLoader()
-					.getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
+					.getResourceAsStream("./AdminPortalData/adminPortalConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -1884,10 +1884,10 @@ public class AdminPortalController extends Comlibs {
 
 		// Load environment parameters
 		Properties prop = new Properties();
-		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		// testprop.load(new FileInputStream("./data/autopxConf.properties"));
 		try {
 			prop.load(AdminPortalController.class.getClassLoader()
-					.getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
+					.getResourceAsStream("./AdminPortalData/adminPortalConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -2286,10 +2286,10 @@ public class AdminPortalController extends Comlibs {
 
 		// Load environment parameters
 		Properties prop = new Properties();
-		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		// testprop.load(new FileInputStream("./data/autopxConf.properties"));
 		try {
 			prop.load(AdminPortalController.class.getClassLoader()
-					.getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
+					.getResourceAsStream("./AdminPortalData/adminPortalConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -2435,10 +2435,10 @@ public class AdminPortalController extends Comlibs {
 
 		// Load environment parameters
 		Properties prop = new Properties();
-		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		// testprop.load(new FileInputStream("./data/autopxConf.properties"));
 		try {
 			prop.load(AdminPortalController.class.getClassLoader()
-					.getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
+					.getResourceAsStream("./AdminPortalData/adminPortalConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -2592,10 +2592,10 @@ public class AdminPortalController extends Comlibs {
 
 		// Load environment parameters
 		Properties prop = new Properties();
-		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		// testprop.load(new FileInputStream("./data/autopxConf.properties"));
 		try {
 			prop.load(AdminPortalController.class.getClassLoader()
-					.getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
+					.getResourceAsStream("./AdminPortalData/adminPortalConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -2772,10 +2772,10 @@ public class AdminPortalController extends Comlibs {
 
 		// Load environment parameters
 		Properties prop = new Properties();
-		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		// testprop.load(new FileInputStream("./data/autopxConf.properties"));
 		try {
 			prop.load(AdminPortalController.class.getClassLoader()
-					.getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
+					.getResourceAsStream("./AdminPortalData/adminPortalConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -2937,10 +2937,10 @@ public class AdminPortalController extends Comlibs {
 
 		// Load environment parameters
 		Properties prop = new Properties();
-		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		// testprop.load(new FileInputStream("./data/autopxConf.properties"));
 		try {
 			prop.load(AdminPortalController.class.getClassLoader()
-					.getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
+					.getResourceAsStream("./AdminPortalData/adminPortalConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -3635,10 +3635,10 @@ public class AdminPortalController extends Comlibs {
 	public static void main(String[] args) throws Exception {
 		// Load environment parameters
 		Properties prop = new Properties();
-		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		// testprop.load(new FileInputStream("./data/autopxConf.properties"));
 		try {
 			prop.load(AdminPortalController.class.getClassLoader()
-					.getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
+					.getResourceAsStream("./AdminPortalData/adminPortalConf.properties"));
 		} catch (IOException e) {
 
 			e.printStackTrace();

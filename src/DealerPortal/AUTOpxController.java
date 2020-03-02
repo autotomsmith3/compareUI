@@ -132,7 +132,7 @@ public class AUTOpxController extends Comlibs {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
-			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("./data/autopxConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -404,7 +404,7 @@ public class AUTOpxController extends Comlibs {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
-			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("./data/autopxConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -495,7 +495,7 @@ public class AUTOpxController extends Comlibs {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
-			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("./data/autopxConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -665,7 +665,7 @@ public class AUTOpxController extends Comlibs {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
-			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("./data/autopxConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -1116,7 +1116,7 @@ public class AUTOpxController extends Comlibs {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
-			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("./data/autopxConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -1553,7 +1553,7 @@ public class AUTOpxController extends Comlibs {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
-			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("./data/autopxConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -1908,7 +1908,7 @@ public class AUTOpxController extends Comlibs {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
-			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("./data/autopxConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -2255,7 +2255,7 @@ public class AUTOpxController extends Comlibs {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
-			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("./data/autopxConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -2438,7 +2438,7 @@ public class AUTOpxController extends Comlibs {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
-			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("./data/autopxConf.properties"));
 		} catch (IOException e) {
 			//
 			e.printStackTrace();
@@ -3706,7 +3706,7 @@ public class AUTOpxController extends Comlibs {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
-			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("./data/autopxConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -3895,7 +3895,7 @@ public class AUTOpxController extends Comlibs {
 			throws Exception {
 		Properties prop = new Properties();
 		try {
-			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("./data/autopxConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -4370,7 +4370,7 @@ public class AUTOpxController extends Comlibs {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
-			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("./data/autopxConf.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -4454,7 +4454,7 @@ public class AUTOpxController extends Comlibs {
 		Properties propdata = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
-			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("./data/autopxConf.properties"));
 			// propdata.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/vinpxAgreement.txt"));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -4592,7 +4592,7 @@ public class AUTOpxController extends Comlibs {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
-			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+			prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("./data/autopxConf.properties"));//"./main.properties";
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

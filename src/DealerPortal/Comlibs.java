@@ -46,7 +46,7 @@ public class Comlibs {
 
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
-		prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+		prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("./data/autopxConf.properties"));
 		String resultfile = prop.getProperty("AUTOpx.resutlPathFile");
 
 		int n = 0;
@@ -126,7 +126,7 @@ public class Comlibs {
 	public void rwExcel(String SpID, String functionality, String description) throws IOException {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
-		prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+		prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("./data/autopxConf.properties"));
 		String resultfile = prop.getProperty("AUTOpx.resutlPathFile");
 		int n = 0;
 		String sName, passOrfail, dateStamp, timeStamp;
@@ -174,7 +174,7 @@ public class Comlibs {
 	public void rwExcel(String SpID, int testStatus, String functionality, String description) throws IOException {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
-		prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("data/autopxConf.properties"));
+		prop.load(AUTOpxController.class.getClassLoader().getResourceAsStream("./data/autopxConf.properties"));
 		String resultfile = prop.getProperty("AUTOpx.resutlPathFile");
 		int n = 0;
 		String sName, passOrfail, dateStamp, timeStamp;

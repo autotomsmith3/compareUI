@@ -163,9 +163,9 @@ public class VINpxFCA_StagingSaveToSheet {
 //		
 		String keyspace = "vdvi";
 //		String dealerid="23871";//23871 =123456_FCA
-		boolean alldealers = false;
-		String datestring = "20200129";
-		String[] dealerids = { "23871"};// "23871" - 123456_FCA, "45685"
+		boolean alldealers = true;
+		String datestring = "20200214_Dodge";
+		String[] dealerids = { "23871","05475"};// "23871" - 123456_FCA, "45685"
 		int dealersLength = dealerids.length;
 //		CassandraConnection connection;
 //		Cluster cluster = Cluster.builder().addContactPoints(serverIp).build();
@@ -174,7 +174,8 @@ public class VINpxFCA_StagingSaveToSheet {
 		Session session = cluster.connect(keyspace);// 20200123 passed
 
 		if (alldealers) {
-			String cqlStatement = "select * from vi01_fcadigital_inventory";//
+//			String cqlStatement = "select * from vi01_fcadigital_inventory";//
+			String cqlStatement ="select * from vi01_fcadigital_inventory where make='Dodge' and year='2020' allow filtering";
 			ResultSet results = session.execute(cqlStatement);
 
 			String fcastagingpathfile = "C:\\1\\Eclipse\\Test Results\\FCA_CassandraStaging\\Staging_FCA_Inventory_"

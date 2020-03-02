@@ -23,7 +23,7 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
 			prop.load(AdminPortalController.class.getClassLoader()
-					.getResourceAsStream("AdminPortalData/adminPortalConf.properties"));
+					.getResourceAsStream("./AdminPortalData/adminPortalConf.properties"));
 		} catch (IOException e) {
 			// 
 			e.printStackTrace();
