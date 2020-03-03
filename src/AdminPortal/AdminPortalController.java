@@ -688,7 +688,7 @@ public class AdminPortalController extends Comlibs {
 		UserListP.clickAddDealerShip(driver, tc);
 
 		DealerProfile DealerProfieP = new DealerProfile(driver);
-		
+
 		tc = "Select/Unselect All OEM/Brands_01";
 		DealerProfieP.selectUnselectAllOEMBrands(driver, true, tc);
 		tc = "Select/Unselect All OEM/Brands_02";
@@ -2204,7 +2204,9 @@ public class AdminPortalController extends Comlibs {
 		notesStr = notesStr + "_Edited.";
 //		wlP.inputPattern(driver, notesStr + "_Edited", tc);
 		wlP.inputNotes(driver, notesStr, tc);
+		ac.Wait(wt);
 		wlP.selectBackground(driver, bgRow, bgCol, tc);// remove this if bug fixed
+		ac.Wait(wt);
 		if (wlP.checkInactiveSaveBtn(driver, tc)) {
 			wlP.selectBackground(driver, bgRow, bgCol, tc);
 		}
