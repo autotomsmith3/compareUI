@@ -157,8 +157,8 @@ public class AUTOpxController extends Comlibs {
 		final int wt_Secs = 6;
 		String TCnum;
 		String ptitle;
-		Comlibs ac = new Comlibs();
-		ac.rwExcel("", "*********Mixed Inventory Gallery**********", "");
+		Comlibs log = new Comlibs();
+		log.rwExcel("", "*********Mixed Inventory Gallery**********", "");
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 		TCnum = "TC139659_7_ig";
 		loginP.verifyHeaderFooter(env, ver, TCnum);
@@ -318,7 +318,7 @@ public class AUTOpxController extends Comlibs {
 		igP.clickSelectAllBtn(driver, TCnum);
 		// get the number of all vins here and adding to the below
 		numbers = igP.getReRenderNum(driver, TCnum);
-		ac.rwExcel("", "------ All VINs re-rendering ------", "");
+		log.rwExcel("", "------ All VINs re-rendering ------", "");
 		igP.clickRerenderBtn(driver, render, TCnum);
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		// igP.verifyErrorMsgShowing(driver, TCnum);
@@ -350,7 +350,7 @@ public class AUTOpxController extends Comlibs {
 		for (int x = 0; x < allImageNums; x++) { // 14
 			TCnum = "TC139930_ig";
 			System.out.println("Left next Image =" + x + "\n");
-			ac.rwExcel(TCnum, "Left next image", " next =" + x);
+			log.rwExcel(TCnum, "Left next image", " next =" + x);
 			vgP.clickLeftNextImageBtn(driver, TCnum);
 			vgP.verifyLoadPannelImage(driver, TCnum);
 		}
@@ -358,7 +358,7 @@ public class AUTOpxController extends Comlibs {
 		for (int x = 0; x < allImageNums; x++) { // 14
 			TCnum = "TC139929_ig";
 			System.out.println("Right next Image =" + x + "\n");
-			ac.rwExcel(TCnum, "Right next image", " next =" + x);
+			log.rwExcel(TCnum, "Right next image", " next =" + x);
 			vgP.clickRightNextImageBtn(driver, TCnum);
 			vgP.verifyLoadPannelImage(driver, TCnum);
 		}
@@ -368,7 +368,7 @@ public class AUTOpxController extends Comlibs {
 			TCnum = "TC139934_ig";
 			String currentVIN = vgP.retriveVIN(driver);
 			System.out.println("left arrow previous vehicle =" + x + "   - Current VIN = " + currentVIN + "\n");
-			ac.rwExcel(TCnum, "left arrow previous vehicle", " previous =" + x + "   - Current VIN = " + currentVIN);
+			log.rwExcel(TCnum, "left arrow previous vehicle", " previous =" + x + "   - Current VIN = " + currentVIN);
 			vgP.hoverOnLeftArrowPreviousVehicleBtn(driver, TCnum);
 			vgP.verifyLoadPreviousControlImage(driver, TCnum);
 			vgP.clickLeftNextVehicleBtn(driver, TCnum);
@@ -378,7 +378,7 @@ public class AUTOpxController extends Comlibs {
 			TCnum = "TC139933_ig";
 			String currentVIN = vgP.retriveVIN(driver);
 			System.out.println("Right arrow next vehicle =" + x + "   - Current VIN = " + currentVIN + "\n");
-			ac.rwExcel(TCnum, "Right arrow next vehicle", " next =" + x + "   - Current VIN = " + currentVIN);
+			log.rwExcel(TCnum, "Right arrow next vehicle", " next =" + x + "   - Current VIN = " + currentVIN);
 			vgP.hoverOnRightArrowNextVehicleBtn(driver, TCnum);
 			vgP.verifyLoadNextControlImage(driver, TCnum);
 			vgP.clickRightNextVehicleBtn(driver, TCnum);
@@ -426,8 +426,8 @@ public class AUTOpxController extends Comlibs {
 		String ptitle;
 		int numbers = 0;
 
-		Comlibs ac = new Comlibs();
-		ac.rwExcel("", "*********Mixed Verify Rerender**********", "");
+		Comlibs log =new Comlibs();
+		log.rwExcel("", "*********Mixed Verify Rerender**********", "");
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 		TCnum = "TC139659_7_render";
 		loginP.verifyHeaderFooter(env, versionNum, TCnum);
@@ -448,7 +448,7 @@ public class AUTOpxController extends Comlibs {
 		// Stop here!
 		// need to verify next vehicle hover image
 		TCnum = "TC139706_8";
-		ac.rwExcel("", "------ Single VIN re-rendering ------", "");
+		log.rwExcel("", "------ Single VIN re-rendering ------", "");
 		igP.clickRerenderBtn(driver, render, TCnum);
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		// igP.verifyErrorMsgShowing(driver, TCnum);
@@ -470,14 +470,14 @@ public class AUTOpxController extends Comlibs {
 		igP.clickSelectNoneBtn(driver, TCnum);
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.clickSelectAllBtn(driver, TCnum);
 		//// igP.clickSelectNoneBtn(driver, TCnum);
 		// igP.clickSelectAllBtn(driver, TCnum);
 
 		// get the number of all vins here and adding to the below
 		numbers = igP.getReRenderNum(driver, TCnum);
-		ac.rwExcel("", "------ All VINs re-rendering ------Total VINs selected=" + numbers, "");
+		log.rwExcel("", "------ All VINs re-rendering ------Total VINs selected=" + numbers, "");
 		igP.clickRerenderBtn(driver, render, TCnum);
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		// igP.verifyErrorMsgShowing(driver, TCnum);
@@ -518,8 +518,8 @@ public class AUTOpxController extends Comlibs {
 		// Initial
 		String TCnum;
 		String ptitle;
-		Comlibs ac = new Comlibs();
-		ac.rwExcel("", "*********Mixed Vehicle Gallery**********", "");
+		Comlibs log =new Comlibs();
+		log.rwExcel("", "*********Mixed Vehicle Gallery**********", "");
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 		TCnum = "TC139659_7_vg";
 		loginP.verifyHeaderFooter(env, versionNum, TCnum);
@@ -533,9 +533,9 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139502_12";
 
 		ImageGallery igP = new ImageGallery(driver);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.enterTextInSearch(vin01);
-		ac.Wait(wt * 3);
+		log.Wait(wt * 3);
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		VehicleGallery vgP = new VehicleGallery(driver);
 
@@ -545,11 +545,11 @@ public class AUTOpxController extends Comlibs {
 
 			if (vgP.clickURLLink(driver, brw, TCnum)) {
 				System.out.println("wait... 1");
-				ac.Wait(wt);
+				log.Wait(wt);
 				for (String winHandle : driver.getWindowHandles()) {
 					driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
 					System.out.println("wait... winHandle=" + winHandle);
-					ac.Wait(wt);
+					log.Wait(wt);
 				}
 				vgP.verifyLoadURLImage(driver, TCnum);
 				driver.close();
@@ -564,7 +564,7 @@ public class AUTOpxController extends Comlibs {
 			driver.get(urlLink);
 			urlLink = vgP.getURLLink(driver, TCnum);
 			vgP.verifyLoadURLImage(driver, TCnum);
-			ac.GoBack(driver);
+			log.GoBack(driver);
 		}
 
 		vgP.clickBackToInventoryBtn(driver);
@@ -595,9 +595,9 @@ public class AUTOpxController extends Comlibs {
 		if (allVinNums >= MaxVinsForPreview) {
 			allVinNums = MaxVinsForPreview;
 		}
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.enterTextInSearch(vin01.substring(1, 9));// 20190830 igP.enterTextInSearch(vin01.substring(1, 5));, old: igP.enterTextInSearch(vin01.substring(1, 6));igP.enterTextInSearch(vin01);
-		ac.Wait(wt * 3);
+		log.Wait(wt * 3);
 		allImageNums = igP.getTileImageNum(driver, vehGUID01, TCnum);
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		vgP.verifyLoadPannelImage(driver, TCnum);
@@ -607,7 +607,7 @@ public class AUTOpxController extends Comlibs {
 		for (int x = 0; x < allImageNums; x++) { // 14
 			TCnum = "TC51231111_vg";
 			System.out.println("Left next Image =" + x + "\n");
-			ac.rwExcel(TCnum, "Left next image", " next =" + x);
+			log.rwExcel(TCnum, "Left next image", " next =" + x);
 			vgP.clickLeftNextImageBtn(driver, TCnum);
 			vgP.verifyLoadPannelImage(driver, TCnum);
 		}
@@ -615,7 +615,7 @@ public class AUTOpxController extends Comlibs {
 		for (int x = 0; x < allImageNums; x++) { // 14
 			TCnum = "TC51231112_vg";
 			System.out.println("Right next Image =" + x + "\n");
-			ac.rwExcel(TCnum, "Right next image", " next =" + x);
+			log.rwExcel(TCnum, "Right next image", " next =" + x);
 			vgP.clickRightNextImageBtn(driver, TCnum);
 			vgP.verifyLoadPannelImage(driver, TCnum);
 		}
@@ -625,7 +625,7 @@ public class AUTOpxController extends Comlibs {
 			TCnum = "TC5123128_vg";
 			String currentVIN = vgP.retriveVIN(driver);
 			System.out.println("left arrow previous vehicle =" + x + "   - Current VIN = " + currentVIN + "\n");
-			ac.rwExcel(TCnum, "left arrow previous vehicle", " previous =" + x + "   - Current VIN = " + currentVIN);
+			log.rwExcel(TCnum, "left arrow previous vehicle", " previous =" + x + "   - Current VIN = " + currentVIN);
 			vgP.hoverOnLeftArrowPreviousVehicleBtn(driver, TCnum);
 			vgP.verifyLoadPreviousControlImage(driver, TCnum);
 			vgP.clickLeftNextVehicleBtn(driver, TCnum);
@@ -635,7 +635,7 @@ public class AUTOpxController extends Comlibs {
 			TCnum = "TC5123129_vg";
 			String currentVIN = vgP.retriveVIN(driver);
 			System.out.println("Right arrow next vehicle =" + x + "   - Current VIN = " + currentVIN + "\n");
-			ac.rwExcel(TCnum, "Right arrow next vehicle", " next =" + x + "   - Current VIN = " + currentVIN);
+			log.rwExcel(TCnum, "Right arrow next vehicle", " next =" + x + "   - Current VIN = " + currentVIN);
 			vgP.hoverOnRightArrowNextVehicleBtn(driver, TCnum);
 			vgP.verifyLoadNextControlImage(driver, TCnum);
 			vgP.clickRightNextVehicleBtn(driver, TCnum);
@@ -645,14 +645,14 @@ public class AUTOpxController extends Comlibs {
 		igP.clickBackToInventoryBtn(driver);
 		TCnum = "TC5123150";
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.enterTextInSearch(vin01);
-		ac.Wait(wt * 3);
+		log.Wait(wt * 3);
 		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
 		TCnum = "TC5123152";
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
 		igP.enterTextInSearch(vin01);
-		ac.Wait(wt * 3);
+		log.Wait(wt * 3);
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		igP.clickBackToInventoryBtn(driver);
 
@@ -687,8 +687,8 @@ public class AUTOpxController extends Comlibs {
 		String ptitle;
 		int allVinNums = 0;
 
-		Comlibs ac = new Comlibs();
-		ac.rwExcel("", "*********Inventory Gallery TCs**********", "");
+		Comlibs log =new Comlibs();
+		log.rwExcel("", "*********Inventory Gallery TCs**********", "");
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 		TCnum = "TC139659_7_igTC";
 		loginP.verifyHeaderFooter(env, ver, TCnum);
@@ -877,7 +877,7 @@ public class AUTOpxController extends Comlibs {
 		igP.clickTilesViewBtn(driver, TCnum);
 		igP.clickGridViewBtn(driver, TCnum);
 		igP.enterTextInSearch(vin01);
-		ac.Wait(wt * 4);
+		log.Wait(wt * 4);
 		igP.clickGridRowOnlyOneRecordToCheck(driver, TCnum);
 		igP.clickGridRowOnlyOneRecord(driver, TCnum);
 		VehicleGallery vgP = new VehicleGallery(driver);
@@ -887,7 +887,7 @@ public class AUTOpxController extends Comlibs {
 		igP.clickTilesViewBtn(driver, TCnum);
 		igP.clickGridViewBtn(driver, TCnum);
 		igP.enterTextInSearch("123");
-		ac.Wait(wt * 3);
+		log.Wait(wt * 3);
 		igP.clickGridRowOneRecordWithNumToCheck(driver, "3", TCnum);
 		igP.clickGridRowOneRecordWithNum(driver, "3", TCnum);
 		vgP.clickBackToInventoryBtn(driver);
@@ -905,7 +905,7 @@ public class AUTOpxController extends Comlibs {
 		if (allVinNums > 20) {
 			if (igP.verifyShowAllBtnStatus(driver, true, TCnum)) {
 				igP.clickShowAllBtn(driver, TCnum);
-				ac.Wait(wt);
+				log.Wait(wt);
 				igP.verifyLoadMoreVehicleBtnStatus(driver, false, TCnum);
 				igP.verifyShowAllBtnStatus(driver, false, TCnum);
 			}
@@ -918,7 +918,7 @@ public class AUTOpxController extends Comlibs {
 		igP.clickDealerShipInfoBtn(driver);
 		// igP.clickBackToInventoryBtn(driver);
 		igP.clickInventoryGalleryBtn(driver);
-		ac.Wait(wt);
+		log.Wait(wt);
 		// Verify Load More Vehicles button TC141795
 		TCnum = "TC141795_6";
 		if (allVinNums > 20) {
@@ -926,7 +926,7 @@ public class AUTOpxController extends Comlibs {
 				igP.verifyShowAllBtnStatus(driver, true, TCnum);
 				igP.scrollUp(driver, 650, TCnum);
 				igP.clickLoadMoreVehicleBtn(driver, TCnum);
-				ac.Wait(wt);
+				log.Wait(wt);
 				if (allVinNums > 40) {
 					igP.verifyLoadMoreVehicleBtnStatus(driver, true, TCnum);
 					igP.verifyShowAllBtnStatus(driver, true, TCnum);
@@ -944,10 +944,10 @@ public class AUTOpxController extends Comlibs {
 		// Need to do. Verify Select and Sort Inventory [TC:139692
 
 		/**
-		 * TCnum = "TC139661_5"; igP.enterTextInSearch(" "); ac.Wait(wt); igP.enterTextInSearch(vin01); igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum); igP.enterTextInSearch(" "); igP.enterTextInSearch(vin01);// fake Stock
+		 * TCnum = "TC139661_5"; igP.enterTextInSearch(" "); log.Wait(wt); igP.enterTextInSearch(vin01); igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum); igP.enterTextInSearch(" "); igP.enterTextInSearch(vin01);// fake Stock
 		 * Number igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum); igP.enterTextInSearch(" "); igP.enterTextInSearch(vin01); igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 		 * 
-		 * TCnum = "TC139663_5"; igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum); igP.verifyRerenderBtnStatus(driver, true, TCnum); // removed on 2018-09-20 igP.verifyGenerateURLsBtnStatus(driver, true, TCnum); ac.rwExcel("", "------ Single VIN re-rendering
+		 * TCnum = "TC139663_5"; igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum); igP.verifyRerenderBtnStatus(driver, true, TCnum); // removed on 2018-09-20 igP.verifyGenerateURLsBtnStatus(driver, true, TCnum); log.rwExcel("", "------ Single VIN re-rendering
 		 * ------", ""); igP.clickRerenderBtn(driver, render, TCnum); igP.verifyGoodMsgShowing(driver, TCnum); igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum); TCnum = "TC139663_8"; igP.clickViewDetailsBtn(driver, vin01,
 		 * vehGUID01, TCnum); VehicleGallery vgP = new VehicleGallery(driver); vgP.verifyLoadPannelImage(driver, TCnum); vgP.clickBackToInventoryBtn(driver);
 		 **/ // Need to do: click PREVIEW button, DELETE button, SELECT or DESELECT
@@ -957,7 +957,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139666_7";
 		igP.scrollUp(driver, -650, TCnum);
 		igP.clickDealerShipInfoBtn(driver);
-		ac.Wait(2);
+		log.Wait(2);
 		igP.clickDealerShipInfoBtn(driver);// click again as there is an issue with FF which stucks to two tabs.
 		System.out.println("passed...");
 
@@ -994,9 +994,9 @@ public class AUTOpxController extends Comlibs {
 		// Click on SAVE
 		TCnum = "TC139666_SAVE";
 		dpP.clickSAVE(driver, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 		dpP.clickNOBtn(driver, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.clickInventoryGalleryBtn(driver);// dpP.clickViewInventoryBtn(driver, TCnum);
 		igP.clickDealerShipInfoBtn(driver);
 		// Retrieve all field again
@@ -1020,49 +1020,49 @@ public class AUTOpxController extends Comlibs {
 
 		// Verify all fields
 		if (!Edited_ContactTitle.equals((ContactTitle + updatewith))) {
-			ac.rwExcel(TCnum, false, "Verify Edited ContactTitle", "Failed! Edited_ContactTitle =" + ContactTitle
+			log.rwExcel(TCnum, false, "Verify Edited ContactTitle", "Failed! Edited_ContactTitle =" + ContactTitle
 					+ updatewith + ".  But site shows =" + Edited_ContactTitle);
 		} else {
 			Edited_ContactTitle_Status = true;
 		}
 		if (!Edited_ContactName.equals((ContactName + updatewith))) {
-			ac.rwExcel(TCnum, false, "Verify Edited ContactName", "Failed! Edited_ContactName =" + ContactName
+			log.rwExcel(TCnum, false, "Verify Edited ContactName", "Failed! Edited_ContactName =" + ContactName
 					+ updatewith + ".  But site shows =" + Edited_ContactName);
 		} else {
 			Edited_ContactName_Status = true;
 		}
 		if (!Edited_ContactDepartment.equals((ContactDepartment + updatewith))) {
-			ac.rwExcel(TCnum, false, "Verify Edited ContactDepartment", "Failed! Edited_ContactDepartment ="
+			log.rwExcel(TCnum, false, "Verify Edited ContactDepartment", "Failed! Edited_ContactDepartment ="
 					+ ContactDepartment + updatewith + ".  But site shows =" + Edited_ContactDepartment);
 		} else {
 			Edited_ContactDepartment_Status = true;
 		}
 		if (!Edited_ContactPhone.equals((ContactPhone + updatewith))) {
-			ac.rwExcel(TCnum, false, "Verify Edited ContactPhone", "Failed! Edited_ContactPhone =" + ContactPhone
+			log.rwExcel(TCnum, false, "Verify Edited ContactPhone", "Failed! Edited_ContactPhone =" + ContactPhone
 					+ updatewith + ".  But site shows =" + Edited_ContactPhone);
 		} else {
 			Edited_ContactPhone_Status = true;
 		}
 		if (!Edited_DealershipName.equals((DealershipName + updatewith))) {
-			ac.rwExcel(TCnum, false, "Verify Edited DealershipName", "Failed! Edited_DealershipName =" + DealershipName
+			log.rwExcel(TCnum, false, "Verify Edited DealershipName", "Failed! Edited_DealershipName =" + DealershipName
 					+ updatewith + ".  But site shows =" + Edited_DealershipName);
 		} else {
 			Edited_DealershipName_Status = true;
 		}
 		if (!Edited_DealershipEmail.equals((DealershipEmail + updatewith + ".com"))) {
-			ac.rwExcel(TCnum, false, "Verify Edited DealershipEmail", "Failed! Edited_DealershipEmail ="
+			log.rwExcel(TCnum, false, "Verify Edited DealershipEmail", "Failed! Edited_DealershipEmail ="
 					+ DealershipEmail + updatewith + ".  But site shows =" + Edited_DealershipEmail);
 		} else {
 			Edited_DealershipEmail_Status = true;
 		}
 		if (!Edited_DealershipAddress1.equals((DealershipAddress1 + updatewith))) {
-			ac.rwExcel(TCnum, false, "Verify Edited DealershipAddress1", "Failed! Edited_DealershipAddress1 ="
+			log.rwExcel(TCnum, false, "Verify Edited DealershipAddress1", "Failed! Edited_DealershipAddress1 ="
 					+ DealershipAddress1 + updatewith + ".  But site shows =" + Edited_DealershipAddress1);
 		} else {
 			Edited_DealershipAddress1_Status = true;
 		}
 		if (!Edited_DealershipAddress2.equals((DealershipAddress2 + updatewith))) {
-			ac.rwExcel(TCnum, false, "Verify Edited DealershipAddress2", "Failed! Edited_DealershipAddress2 ="
+			log.rwExcel(TCnum, false, "Verify Edited DealershipAddress2", "Failed! Edited_DealershipAddress2 ="
 					+ DealershipAddress2 + updatewith + ".  But site shows =" + Edited_DealershipAddress2);
 		} else {
 			Edited_DealershipAddress2_Status = true;
@@ -1070,7 +1070,7 @@ public class AUTOpxController extends Comlibs {
 		if (Edited_ContactTitle_Status && Edited_ContactName_Status && Edited_ContactDepartment_Status
 				&& Edited_ContactPhone_Status && Edited_DealershipName_Status && Edited_DealershipEmail_Status
 				&& Edited_DealershipAddress1_Status && Edited_DealershipAddress2_Status) {
-			ac.rwExcel(TCnum, true, "Verify Edited Most feilds of Dealership Info", "All passed.");
+			log.rwExcel(TCnum, true, "Verify Edited Most feilds of Dealership Info", "All passed.");
 		}
 
 		// Re-enter all dealership info
@@ -1084,9 +1084,9 @@ public class AUTOpxController extends Comlibs {
 		dpP.enter_Address1(driver, DealershipAddress1, TCnum);
 		dpP.enter_Address2(driver, DealershipAddress2, TCnum);
 		dpP.clickSAVE(driver, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 		dpP.clickNOBtn(driver, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 
 		igP.clickInventoryGalleryBtn(driver);// dpP.clickViewInventoryBtn(driver, TCnum);
 
@@ -1105,7 +1105,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC141679_6_ig";
 		igP.verifyDealershipname(dealershipName, TCnum);
 		TCnum = "TC139684_06";
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.clickLogout(driver);
 	}
 
@@ -1153,8 +1153,8 @@ public class AUTOpxController extends Comlibs {
 		// String ptitle;
 		String tempVIN = "";
 		String tempVehGUID = "";
-		Comlibs ac = new Comlibs();
-		ac.rwExcel("", "*********VINpx Inventory TCs**********", "");
+		Comlibs log = new Comlibs();
+		log.rwExcel("", "*********VINpx Inventory TCs**********", "");
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 		TCnum = "TC139659_7_vinpx";
 		loginP.verifyHeaderFooter(env, versionNum, TCnum);
@@ -1164,7 +1164,7 @@ public class AUTOpxController extends Comlibs {
 		loginP.login(driver, "invalid" + accountEmail, accountPS, TCnum, "Invalid Username or Password");
 		TCnum = "TC171253";
 		loginP.login(driver, accountEmail, accountPS + "invalid", TCnum, "Invalid Username or Password");
-		ac.Wait(wt);// wait 20 secs here because we have a perfomance issue when login. Remove it once issue fixed. 2019-01-14
+		log.Wait(wt);// wait 20 secs here because we have a perfomance issue when login. Remove it once issue fixed. 2019-01-14
 		loginP.login(driver, accountEmail, accountPS);
 		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
 		// acceptLicenseP.clickCancelBtn(driver);
@@ -1206,16 +1206,16 @@ public class AUTOpxController extends Comlibs {
 			TCnum = "TC139674";
 			dpP.changePS(driver, accountPS, TCnum);
 			TCnum = "TC139686_02_NoBtn";
-			ac.Wait(wt);
+			log.Wait(wt);
 			// dpP.clickNOBtn(driver, TCnum);//The re-render pop-up does not show for changePS since 20191008
 			TCnum = "TC139686_02_Inv";
-			ac.Wait(wt);
+			log.Wait(wt);
 			dpP.clickInventoryGalleryBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			dpP.clickLogout(driver);
 		} else {
 			TCnum = "TC139686_02";
-			ac.rwExcel(TCnum, false, "Cannot test Forgot Password test procedure",
+			log.rwExcel(TCnum, false, "Cannot test Forgot Password test procedure",
 					"Since the account email is not gmail email. Account Email=" + accountEmail);
 		}
 		// End of Verify Forgot Password process
@@ -1255,28 +1255,28 @@ public class AUTOpxController extends Comlibs {
 		}
 		tempVIN = "6";
 		igP.enterTextInSearch(tempVIN);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.verifyDealershipname(dealershipName, TCnum);
 		tempVIN = " ";
 		igP.enterTextInSearch(tempVIN);
-		ac.Wait(wt);
+		log.Wait(wt);
 		if (addNewVIN.equalsIgnoreCase("Yes") && render.equalsIgnoreCase("Yes") && (!env.equalsIgnoreCase("Prod"))) {
 			// *********************Add VIN for VINpx*******************************************************
 			// Add VIN
 			// Verify Add A New Vehicle to Inventory on VINpx
 			// dealer...TC139695
 			TCnum = "TC139695_5";
-			ac.rwExcel(TCnum, "------ Add VIN for VINpx ------", "");
+			log.rwExcel(TCnum, "------ Add VIN for VINpx ------", "");
 			igP.clickAddInventoryBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			igP.clickAddInventoryCancelBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			igP.clickAddInventoryBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			igP.clickAddInventoryXBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			igP.clickAddInventoryBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			for (String vin : VINpxNewVINs) {
 				igP.inputVinInAddInventoryField(driver, vin, TCnum);
 				igP.clickAddBtn(driver, TCnum);
@@ -1288,14 +1288,14 @@ public class AUTOpxController extends Comlibs {
 			}
 			igP.clickAddInventoryXBtn(driver, TCnum);
 			igP.clickRefleshF5Btn(driver, TCnum); // Remove this after VDVDIIMG-687 fixed
-			ac.Wait(wt);
+			log.Wait(wt);
 			igP.enterTextInSearch(tempVIN);
-			ac.Wait(wt * 2);
+			log.Wait(wt * 2);
 			// get VehGUID with vin, dlrdoce
 			tempVehGUID = igP.getVehGUID(dealerCode, tempVIN, serverName, dbName, userName, password);
 			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, tempVIN, tempVehGUID, 1, TCnum);
 			igP.clickRefleshF5Btn(driver, TCnum);
-			ac.Wait(wt * 15);
+			log.Wait(wt * 15);
 			igP.removeVINfrDealer(VINpxdlrGuid, tempVIN, serverName, dbName, userName, password, TCnum);
 			igP.clickRefleshF5Btn(driver, TCnum);
 			System.out.println("\nAdding a new VIN and removing it from the dealer processes are completed!\n");
@@ -1312,13 +1312,13 @@ public class AUTOpxController extends Comlibs {
 		// Verify Rerender Single Vehicle 01 for VINpx dealer
 		TCnum = "TC139706_8";
 		igP.enterTextInSearch(vin01);
-		ac.Wait(wt * 2);
+		log.Wait(wt * 2);
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
-		ac.rwExcel("", "------ Single VIN re-rendering ------", "");
+		log.rwExcel("", "------ Single VIN re-rendering ------", "");
 		igP.clickRerenderBtn(driver, render, TCnum);
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
@@ -1333,9 +1333,9 @@ public class AUTOpxController extends Comlibs {
 
 		// Verify Rerender Single Vehicle 02 for VINpx dealer
 		TCnum = "TC139706_8_vin02";
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.enterTextInSearch(vin02);
-		ac.Wait(wt * 2);
+		log.Wait(wt * 2);
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 		igP.clickSelectBtn(driver, vin02, vehGUID02, TCnum);
@@ -1365,13 +1365,13 @@ public class AUTOpxController extends Comlibs {
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		igP.verifyGoodMsgShowing(driver, TCnum);
-		ac.Wait(wt * 5);
+		log.Wait(wt * 5);
 		igP.enterTextInSearch(vin01);
-		ac.Wait(wt * 2);
+		log.Wait(wt * 2);
 		igP.verifyLoadPreviewTileImage(driver, ALL_VINS_RENDER_MAX_WT, vin01, vehGUID01, allVinNums, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.enterTextInSearch(vin02);
-		ac.Wait(wt * 2);
+		log.Wait(wt * 2);
 		igP.verifyLoadPreviewTileImage(driver, ALL_VINS_RENDER_MAX_WT, vin02, vehGUID02, allVinNums / 2, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
@@ -1393,7 +1393,7 @@ public class AUTOpxController extends Comlibs {
 		vgP.clickBackToInventoryBtn(driver);
 		TCnum = "TC139904_vinpx_msg_12";
 		igP.enterTextInSearch(vin02);
-		ac.Wait(wt * 2);
+		log.Wait(wt * 2);
 		igP.clickViewDetailsBtn(driver, vin02, vehGUID02, TCnum);
 		TCnum = "TC139904_vinpx_msg_13";
 		vgP.verifyVinMsg(driver, vin02, vinMSG, filedMaxLength, TCnum);
@@ -1406,7 +1406,7 @@ public class AUTOpxController extends Comlibs {
 		vgP.acceptAlert(TCnum, "OK");
 		vgP.clickBackToInventoryBtn(driver);
 		igP.enterTextInSearch(vin02);
-		ac.Wait(wt * 2);
+		log.Wait(wt * 2);
 		TCnum = "TC139713_11";
 		igP.clickViewDetailsBtn(driver, vin02, vehGUID02, TCnum);
 		TCnum = "TC139713_12";
@@ -1417,14 +1417,14 @@ public class AUTOpxController extends Comlibs {
 		vgP.acceptAlert(TCnum, "OK");
 		vgP.clickBackToInventoryBtn(driver);
 		igP.enterTextInSearch(vin02);
-		ac.Wait(wt * 3);
+		log.Wait(wt * 3);
 		igP.clickViewDetailsBtn(driver, vin02, vehGUID02, TCnum);
 		vgP.verifyNewVehicleCheckBox(driver, vin02, true, TCnum);
 
 		vgP.clickBackToInventoryBtn(driver);
 		// Verify No Upload New Picture function for VINpx de... TC139919
 		TCnum = "TC139919_05";
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.clickSelectAllBtn(driver, TCnum);
 		allVinNums = igP.getReRenderNum(driver, TCnum);
 		igP.clickSelectNoneBtn(driver, TCnum);
@@ -1438,16 +1438,16 @@ public class AUTOpxController extends Comlibs {
 		if (allVinNums >= MaxVinsForPreview) {
 			allVinNums = MaxVinsForPreview;
 		}
-		ac.Wait(wt);
+		log.Wait(wt);
 		// igP.enterTextInSearch(vin01); // This will make only one vehicle for the Next VIN.
-		// ac.Wait(wt);
+		// log.Wait(wt);
 		try {
 			allImageNums = igP.getTileImageNum(driver, vehGUID01, TCnum);
 		} catch (Exception ex) {
 			System.out.println("error occurs!");
-			ac.rwExcel(TCnum, false, "getTileImageNum", "failed");
+			log.rwExcel(TCnum, false, "getTileImageNum", "failed");
 		}
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
 		// VehicleGallery vgP = new VehicleGallery(driver);
 		vgP.verifyUplaodCustomPicsBtnExist(driver, false, TCnum);
@@ -1457,7 +1457,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139930_4";
 		for (int x = 0; x < allImageNums; x++) { // 15
 			System.out.println("Left next Image =" + x + "\n");
-			ac.rwExcel(TCnum, "Left next image", " next =" + x);
+			log.rwExcel(TCnum, "Left next image", " next =" + x);
 			vgP.clickLeftNextImageBtn(driver, TCnum);
 			vgP.verifyLoadPannelImage(driver, TCnum);
 		}
@@ -1465,7 +1465,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139929_4";
 		for (int x = 0; x < allImageNums; x++) { // 15
 			System.out.println("Right next Image =" + x + "\n");
-			ac.rwExcel(TCnum, "Right next image", " next =" + x);
+			log.rwExcel(TCnum, "Right next image", " next =" + x);
 			vgP.clickRightNextImageBtn(driver, TCnum);
 			vgP.verifyLoadPannelImage(driver, TCnum);
 		}
@@ -1481,7 +1481,7 @@ public class AUTOpxController extends Comlibs {
 		for (int x = 0; x < allVinNums; x++) { // 4
 			String currentVIN = vgP.retriveVIN(driver);
 			System.out.println("left arrow previous vehicle =" + x + "   - Current VIN = " + currentVIN + "\n");
-			ac.rwExcel(TCnum, "left arrow previous vehicle", " previous =" + x + "   - Current VIN = " + currentVIN);
+			log.rwExcel(TCnum, "left arrow previous vehicle", " previous =" + x + "   - Current VIN = " + currentVIN);
 			vgP.hoverOnLeftArrowPreviousVehicleBtn(driver, TCnum);
 			vgP.verifyLoadPreviousControlImage(driver, TCnum);
 			vgP.clickLeftNextVehicleBtn(driver, TCnum);
@@ -1493,7 +1493,7 @@ public class AUTOpxController extends Comlibs {
 		for (int x = 0; x < allVinNums; x++) { // 4
 			String currentVIN = vgP.retriveVIN(driver);
 			System.out.println("Right arrow next vehicle =" + x + "   - Current VIN = " + currentVIN + "\n");
-			ac.rwExcel(TCnum, "Right arrow next vehicle", " next =" + x + "   - Current VIN = " + currentVIN);
+			log.rwExcel(TCnum, "Right arrow next vehicle", " next =" + x + "   - Current VIN = " + currentVIN);
 			vgP.hoverOnRightArrowNextVehicleBtn(driver, TCnum);
 			vgP.verifyLoadNextControlImage(driver, TCnum);
 			vgP.clickRightNextVehicleBtn(driver, TCnum);
@@ -1521,10 +1521,10 @@ public class AUTOpxController extends Comlibs {
 		if (newLink) {
 			String parentHandle = driver.getWindowHandle(); // get the current window handle
 			vgP.clickURLLink(driver, brw, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			for (String winHandle : driver.getWindowHandles()) {
 				driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
-				ac.Wait(wt);
+				log.Wait(wt);
 			}
 			vgP.verifyLoadURLImage(driver, TCnum);
 			driver.close();
@@ -1533,7 +1533,7 @@ public class AUTOpxController extends Comlibs {
 			driver.get(urlLink);
 			urlLink = vgP.getURLLink(driver, TCnum);
 			vgP.verifyLoadURLImage(driver, TCnum);
-			ac.GoBack(driver);
+			log.GoBack(driver);
 		}
 		vgP.clickBackToInventoryBtn(driver);
 
@@ -1591,8 +1591,8 @@ public class AUTOpxController extends Comlibs {
 		String tempVIN = "";
 		String tempVehGUID = "";
 		int allVinNums = 0;
-		Comlibs ac = new Comlibs();
-		ac.rwExcel("", "*********STOCKpx Inventory TCs**********", "");
+		Comlibs log =new Comlibs();
+		log.rwExcel("", "*********STOCKpx Inventory TCs**********", "");
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 		TCnum = "TC139659_7_stockpx";
 		loginP.verifyHeaderFooter(env, versionNum, TCnum);
@@ -1636,17 +1636,17 @@ public class AUTOpxController extends Comlibs {
 			// Verify Add A New Vehicle to Inventory on STOCKpx d...
 			// TC139704
 			TCnum = "TC139704_5";
-			ac.rwExcel(TCnum, "------ Add VIN for STOCKpx ------", "");
+			log.rwExcel(TCnum, "------ Add VIN for STOCKpx ------", "");
 			igP.clickAddInventoryBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			igP.clickAddInventoryCancelBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			igP.clickAddInventoryBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			igP.clickAddInventoryXBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			igP.clickAddInventoryBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			for (String vin : STOCKpxNewVINs) {
 				igP.inputVinInAddInventoryField(driver, vin, TCnum);
 				igP.clickAddBtn(driver, TCnum);
@@ -1658,14 +1658,14 @@ public class AUTOpxController extends Comlibs {
 			}
 			igP.clickAddInventoryXBtn(driver, TCnum);
 			igP.clickRefleshF5Btn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			igP.enterTextInSearch(tempVIN);
-			ac.Wait(wt);
+			log.Wait(wt);
 			// get VehGUID with vin, dlrdoce
 			tempVehGUID = igP.getVehGUID(dealerCode, tempVIN, serverName, dbName, userName, password);
 			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, tempVIN, tempVehGUID, 1, TCnum);
 			igP.clickRefleshF5Btn(driver, TCnum);
-			ac.Wait(wt * 15);
+			log.Wait(wt * 15);
 			igP.removeVINfrDealer(STOCKpxdlrGuid, tempVIN, serverName, dbName, userName, password, TCnum);
 			igP.clickRefleshF5Btn(driver, TCnum);
 			System.out.println("\nAdding a new Stock VIN and removing it from the dealer processes are complete!\n");
@@ -1676,7 +1676,7 @@ public class AUTOpxController extends Comlibs {
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 		igP.enterTextInSearch(vin01);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
@@ -1695,9 +1695,9 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139707_8_vin02";
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.enterTextInSearch(vin02);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.clickSelectBtn(driver, vin02, vehGUID02, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
@@ -1727,13 +1727,13 @@ public class AUTOpxController extends Comlibs {
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		igP.verifyGoodMsgShowing(driver, TCnum);
-		ac.Wait(wt * 5);
+		log.Wait(wt * 5);
 		igP.enterTextInSearch(vin01);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.verifyLoadPreviewTileImage(driver, ALL_VINS_RENDER_MAX_WT, vin01, vehGUID01, allVinNums, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.enterTextInSearch(vin02);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.verifyLoadPreviewTileImage(driver, ALL_VINS_RENDER_MAX_WT, vin02, vehGUID02, allVinNums / 2, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
@@ -1755,7 +1755,7 @@ public class AUTOpxController extends Comlibs {
 		vgP.clickBackToInventoryBtn(driver);
 		TCnum = "TC139908_stockpx_msg_12";
 		igP.enterTextInSearch(vin02);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.clickViewDetailsBtn(driver, vin02, vehGUID02, TCnum);
 		TCnum = "TC139908_stockpx_msg_13";
 		vgP.verifyVinMsg(driver, vin02, vinMSG, filedMaxLength, TCnum);
@@ -1767,7 +1767,7 @@ public class AUTOpxController extends Comlibs {
 		vgP.acceptAlert(TCnum, "OK");
 		vgP.clickBackToInventoryBtn(driver);
 		igP.enterTextInSearch(vin02);
-		ac.Wait(wt);
+		log.Wait(wt);
 		TCnum = "TC139909_11";
 		igP.clickViewDetailsBtn(driver, vin02, vehGUID02, TCnum);
 		TCnum = "TC139909_12";
@@ -1778,7 +1778,7 @@ public class AUTOpxController extends Comlibs {
 		vgP.acceptAlert(TCnum, "OK");
 		vgP.clickBackToInventoryBtn(driver);
 		igP.enterTextInSearch(vin02);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.clickViewDetailsBtn(driver, vin02, vehGUID02, TCnum);
 		vgP.verifyNewVehicleCheckBox(driver, vin02, true, TCnum);
 
@@ -1786,7 +1786,7 @@ public class AUTOpxController extends Comlibs {
 
 		// Verify No Upload New Picture Function for STOCKpx ... TC139920
 		TCnum = "TC139920_05";
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.clickSelectAllBtn(driver, TCnum);
 		allVinNums = igP.getReRenderNum(driver, TCnum);
 		igP.clickSelectNoneBtn(driver, TCnum);
@@ -1800,7 +1800,7 @@ public class AUTOpxController extends Comlibs {
 		if (allVinNums >= MaxVinsForPreview) {
 			allVinNums = MaxVinsForPreview;
 		}
-		ac.Wait(wt);
+		log.Wait(wt);
 		allImageNums = igP.getTileImageNum(driver, vehGUID01, TCnum);
 
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
@@ -1812,7 +1812,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139948_4";
 		for (int x = 0; x < allImageNums; x++) { // 15
 			System.out.println("Left next Image =" + x + "\n");
-			ac.rwExcel(TCnum, "Left next image", " next =" + x);
+			log.rwExcel(TCnum, "Left next image", " next =" + x);
 			vgP.clickLeftNextImageBtn(driver, TCnum);
 			vgP.verifyLoadPannelImage(driver, TCnum);
 		}
@@ -1820,7 +1820,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139947_4";
 		for (int x = 0; x < allImageNums; x++) { // 15
 			System.out.println("Right next Image =" + x + "\n");
-			ac.rwExcel(TCnum, "Right next image", " next =" + x);
+			log.rwExcel(TCnum, "Right next image", " next =" + x);
 			vgP.clickRightNextImageBtn(driver, TCnum);
 			vgP.verifyLoadPannelImage(driver, TCnum);
 		}
@@ -1834,7 +1834,7 @@ public class AUTOpxController extends Comlibs {
 		for (int x = 0; x < allVinNums; x++) { // 4
 			String currentVIN = vgP.retriveVIN(driver);
 			System.out.println("left arrow previous vehicle =" + x + "   - Current VIN = " + currentVIN + "\n");
-			ac.rwExcel(TCnum, "left arrow previous vehicle", " previous =" + x + "   - Current VIN = " + currentVIN);
+			log.rwExcel(TCnum, "left arrow previous vehicle", " previous =" + x + "   - Current VIN = " + currentVIN);
 			vgP.hoverOnLeftArrowPreviousVehicleBtn(driver, TCnum);
 			vgP.verifyLoadPreviousControlImage(driver, TCnum);
 			vgP.clickLeftNextVehicleBtn(driver, TCnum);
@@ -1845,7 +1845,7 @@ public class AUTOpxController extends Comlibs {
 		for (int x = 0; x < allVinNums; x++) { // 4
 			String currentVIN = vgP.retriveVIN(driver);
 			System.out.println("Right arrow next vehicle =" + x + "   - Current VIN = " + currentVIN + "\n");
-			ac.rwExcel(TCnum, "Right arrow next vehicle", " next =" + x + "   - Current VIN = " + currentVIN);
+			log.rwExcel(TCnum, "Right arrow next vehicle", " next =" + x + "   - Current VIN = " + currentVIN);
 			vgP.hoverOnRightArrowNextVehicleBtn(driver, TCnum);
 			vgP.verifyLoadNextControlImage(driver, TCnum);
 			vgP.clickRightNextVehicleBtn(driver, TCnum);
@@ -1873,10 +1873,10 @@ public class AUTOpxController extends Comlibs {
 		if (newLink) {
 			String parentHandle = driver.getWindowHandle(); // get the current window handle
 			vgP.clickURLLink(driver, brw, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			for (String winHandle : driver.getWindowHandles()) {
 				driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
-				ac.Wait(wt);
+				log.Wait(wt);
 			}
 			vgP.verifyLoadURLImage(driver, TCnum);
 			driver.close();
@@ -1886,7 +1886,7 @@ public class AUTOpxController extends Comlibs {
 			driver.get(urlLink);
 			urlLink = vgP.getURLLink(driver, TCnum);
 			vgP.verifyLoadURLImage(driver, TCnum);
-			ac.GoBack(driver);
+			log.GoBack(driver);
 		}
 		vgP.clickBackToInventoryBtn(driver);
 
@@ -1947,8 +1947,8 @@ public class AUTOpxController extends Comlibs {
 		String tempVIN = "";
 		String tempVehGUID = "";
 		int allVinNums = 0;
-		Comlibs ac = new Comlibs();
-		ac.rwExcel("", "*********LOTpx Inventory TCs**********", "");
+		Comlibs log =new Comlibs();
+		log.rwExcel("", "*********LOTpx Inventory TCs**********", "");
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 		TCnum = "TC139659_7_lotpx";
 		loginP.verifyHeaderFooter(env, versionNum, TCnum);
@@ -1996,17 +1996,17 @@ public class AUTOpxController extends Comlibs {
 			// Verify Add A New Vehicle to Inventory on LOTpx d...
 			// TC139705
 			TCnum = "TC139705_5";
-			ac.rwExcel(TCnum, "------ Add VIN for LOTpx ------", "");
+			log.rwExcel(TCnum, "------ Add VIN for LOTpx ------", "");
 			igP.clickAddInventoryBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			igP.clickAddInventoryCancelBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			igP.clickAddInventoryBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			igP.clickAddInventoryXBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			igP.clickAddInventoryBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			for (String vin : LOTpxNewVINs) {
 
 				igP.inputVinInAddInventoryField(driver, vin, TCnum);
@@ -2037,12 +2037,12 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC147966_8";
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.enterTextInSearch(vin01);
 		igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
-		ac.rwExcel("", "------ Single VIN re-rendering ------", "");
+		log.rwExcel("", "------ Single VIN re-rendering ------", "");
 		igP.clickRerenderBtn(driver, render, TCnum);
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
@@ -2058,7 +2058,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC147966_8_vin02";
 		igP.verifyRerenderBtnStatus(driver, false, TCnum);
 		// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.enterTextInSearch(vin02);
 		igP.clickSelectBtn(driver, vin02, vehGUID02, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
@@ -2084,10 +2084,10 @@ public class AUTOpxController extends Comlibs {
 		// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
 		igP.verifyGoodMsgShowing(driver, TCnum);
 		TCnum = "TC147967_10";
-		ac.Wait(wt * 5);
+		log.Wait(wt * 5);
 		igP.enterTextInSearch(vin01);
 		igP.verifyLoadPreviewTileImage(driver, ALL_VINS_RENDER_MAX_WT, vin01, vehGUID01, allVinNums, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.enterTextInSearch(vin02);
 		igP.verifyLoadPreviewTileImage(driver, ALL_VINS_RENDER_MAX_WT, vin02, vehGUID02, allVinNums / 2, TCnum);
 		igP.verifyRerenderBtnStatus(driver, true, TCnum);
@@ -2162,7 +2162,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139956_22";
 		for (int x = 0; x < allImageNums; x++) { // 15
 			System.out.println("Left next Image =" + x + "\n");
-			ac.rwExcel(TCnum, "Left next image", " next =" + x);
+			log.rwExcel(TCnum, "Left next image", " next =" + x);
 			vgP.clickLeftNextImageBtn(driver, TCnum);
 			vgP.verifyLoadPannelImage(driver, TCnum);
 		}
@@ -2170,7 +2170,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "TC139955_10";
 		for (int x = 0; x < allImageNums; x++) { // 15
 			System.out.println("Right next Image =" + x + "\n");
-			ac.rwExcel(TCnum, "Right next image", " next =" + x);
+			log.rwExcel(TCnum, "Right next image", " next =" + x);
 			vgP.clickRightNextImageBtn(driver, TCnum);
 			vgP.verifyLoadPannelImage(driver, TCnum);
 		}
@@ -2184,7 +2184,7 @@ public class AUTOpxController extends Comlibs {
 		for (int x = 0; x < allVinNums; x++) { // 4
 			String currentVIN = vgP.retriveVIN(driver);
 			System.out.println("left arrow previous vehicle =" + x + "   - Current VIN = " + currentVIN + "\n");
-			ac.rwExcel(TCnum, "left arrow previous vehicle", " previous =" + x + "   - Current VIN = " + currentVIN);
+			log.rwExcel(TCnum, "left arrow previous vehicle", " previous =" + x + "   - Current VIN = " + currentVIN);
 			vgP.hoverOnLeftArrowPreviousVehicleBtn(driver, TCnum);
 			vgP.verifyLoadPreviousControlImage(driver, TCnum);
 			vgP.clickLeftNextVehicleBtn(driver, TCnum);
@@ -2195,7 +2195,7 @@ public class AUTOpxController extends Comlibs {
 		for (int x = 0; x < allVinNums; x++) { // 4
 			String currentVIN = vgP.retriveVIN(driver);
 			System.out.println("Right arrow next vehicle =" + x + "   - Current VIN = " + currentVIN + "\n");
-			ac.rwExcel(TCnum, "Right arrow next vehicle", " next =" + x + "   - Current VIN = " + currentVIN);
+			log.rwExcel(TCnum, "Right arrow next vehicle", " next =" + x + "   - Current VIN = " + currentVIN);
 			vgP.hoverOnRightArrowNextVehicleBtn(driver, TCnum);
 			vgP.verifyLoadNextControlImage(driver, TCnum);
 			vgP.clickRightNextVehicleBtn(driver, TCnum);
@@ -2223,10 +2223,10 @@ public class AUTOpxController extends Comlibs {
 		if (newLink) {
 			String parentHandle = driver.getWindowHandle(); // get the current window handle
 			vgP.clickURLLink(driver, brw, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			for (String winHandle : driver.getWindowHandles()) {
 				driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
-				ac.Wait(wt);
+				log.Wait(wt);
 			}
 			vgP.verifyLoadURLImage(driver, TCnum);
 			driver.close();
@@ -2235,7 +2235,7 @@ public class AUTOpxController extends Comlibs {
 			driver.get(urlLink);
 			urlLink = vgP.getURLLink(driver, TCnum);
 			vgP.verifyLoadURLImage(driver, TCnum);
-			ac.GoBack(driver);
+			log.GoBack(driver);
 		}
 		vgP.clickBackToInventoryBtn(driver);
 
@@ -2299,8 +2299,8 @@ public class AUTOpxController extends Comlibs {
 		String baseURL = prop.getProperty(env + ".DealerPortalBaseURL");
 		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
 		String TCnum = "Debug01";
-		Comlibs ac = new Comlibs();
-		ac.rwExcel("", "*********LOPpx Upload Custom Picture TCs**********", "");
+		Comlibs log =new Comlibs();
+		log.rwExcel("", "*********LOPpx Upload Custom Picture TCs**********", "");
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 		loginP.login(driver, accountEmail, accountPS);
 		// AcceptLicenseAgreementtoContinue acceptLicenseP = new AcceptLicenseAgreementtoContinue(driver);
@@ -2321,7 +2321,7 @@ public class AUTOpxController extends Comlibs {
 		VehicleGallery vgP = new VehicleGallery(driver);
 		String tempDateTime = vgP.getCurrentDateTime(4, serverName, dbName, userName, password);
 		vgP.uploadCustomPicture(driver, img);
-		ac.Wait(wt * 6);
+		log.Wait(wt * 6);
 		boolean alertPass = false;
 		try {
 			driver.switchTo().alert().accept();// on the “Ok” button as soon as the pop up window appears.
@@ -2333,30 +2333,30 @@ public class AUTOpxController extends Comlibs {
 			}
 			alertPass = true;
 			System.out.println("1. Accept the alert.");
-			ac.rwExcel(TCnum, true, "Upload Custom Picture", "Alerts showing, accetped.");
+			log.rwExcel(TCnum, true, "Upload Custom Picture", "Alerts showing, accetped.");
 		} catch (Throwable e) {
 			alertPass = false;
 			System.out.println("1. Failed to Accept the alert.");
-			ac.rwExcel(TCnum, false, "Upload Custom Picture", "Alerts not showing properly, failed to accetp.");
+			log.rwExcel(TCnum, false, "Upload Custom Picture", "Alerts not showing properly, failed to accetp.");
 		}
 		if (alertPass) {
 			vgP.clickBackToInventoryBtn(driver);
-			ac.Wait(wt * 4);
+			log.Wait(wt * 4);
 			igP.clickTemplatesBtn(driver);
-			ac.Wait(wt * 4);
+			log.Wait(wt * 4);
 			Templates tpP = new Templates(driver);
 			tpP.clickInventoryGalleryBtn(driver);
-			ac.Wait(wt * 4);
+			log.Wait(wt * 4);
 			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 			// System.out.println("\nPlease wait at least 60 seconds, vin: "+vin01+" is re-rendering...\n");
-			// ac.Wait(60);
+			// log.Wait(60);
 		} else {
-			driver = reLogin(driver, ac, tBrowser, envDevice, env, baseURL, accountEmail, accountPS, onScreen);
+			driver = reLogin(driver, log, tBrowser, envDevice, env, baseURL, accountEmail, accountPS, onScreen);
 		}
 		TCnum = "TC139922_11";
 		// igP.clickRefleshF5Btn(driver, TCnum);
 		// TCnum = "TC139922_12";
-		// ac.Wait(wt);
+		// log.Wait(wt);
 		// igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
 		// TCnum = "TC139922_13";
 		// igP.clickRerenderBtn(driver, "Yes", TCnum);
@@ -2366,15 +2366,15 @@ public class AUTOpxController extends Comlibs {
 				userName, password);
 		TCnum = "TC139497";
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
-		ac.Wait(2);
+		log.Wait(2);
 		vgP.clickRightNextImageBtn(driver, TCnum);
-		ac.Wait(2);
+		log.Wait(2);
 		// Window scroll down to make the custom image visible.
 		igP.scrollUp(driver, 650, TCnum);
 		vgP.clickPreviewBtn(driver, imageGUIDString, vin01, TCnum);
 		TCnum = "TC139922_14_1";
 		igP.scrollUp(driver, -650, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 		TCnum = "TC139922_14_2";
 		vgP.verifyLoadPannelImage(driver, TCnum);
 		TCnum = "TC139922_14_3";
@@ -2386,48 +2386,48 @@ public class AUTOpxController extends Comlibs {
 		if (newLink) {
 			String parentHandle = driver.getWindowHandle(); // get the current window handle
 			if (vgP.clickURLLink(driver, brw, TCnum)) {
-				ac.Wait(wt);
+				log.Wait(wt);
 				for (String winHandle : driver.getWindowHandles()) {
 					driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
-					ac.Wait(wt);
+					log.Wait(wt);
 				}
 				vgP.verifyLoadURLImage(driver, TCnum);
 				driver.close();
 				driver.switchTo().window(parentHandle); // switch back to the original window
 			} else {
-				ac.rwExcel(TCnum, false, "Click URL link in " + env + " with " + tBrowser, "not working properly.");
+				log.rwExcel(TCnum, false, "Click URL link in " + env + " with " + tBrowser, "not working properly.");
 			}
 		} else {
 			driver.get(urlLink);
 			urlLink = vgP.getURLLink(driver, TCnum);
 			vgP.verifyLoadURLImage(driver, TCnum);
-			ac.GoBack(driver);
+			log.GoBack(driver);
 		}
 		TCnum = "TC139922_17";
 		igP.scrollUp(driver, 650, TCnum);
-		ac.Wait(2);
+		log.Wait(2);
 		vgP.clickRightNextImageBtn(driver, TCnum);
-		ac.Wait(2);
+		log.Wait(2);
 		vgP.clickDeleteBtn(driver, imageGUIDString, vehGUID01, TCnum);// Testing now. need to clear up the code
-		ac.Wait(wt);
+		log.Wait(wt);
 		TCnum = "TC139922_18";
 		try {
 			driver.switchTo().alert().accept();
-			ac.Wait(wt);
+			log.Wait(wt);
 			driver.switchTo().alert().accept();
 			// driver.switchTo().alert().dismiss();
 			driver.switchTo().defaultContent();
 			System.out.println("2. Accept the alert.");
-			ac.rwExcel(TCnum, true, "Delete Custom Picture", "Alerts showing, accetped.");
+			log.rwExcel(TCnum, true, "Delete Custom Picture", "Alerts showing, accetped.");
 		} catch (Throwable e) {
 			System.out.println("2. Failed to Accept the alert.");
-			ac.rwExcel(TCnum, false, "Delete Custom Picture", "Alerts not showing properly, failed to accetp.");
+			log.rwExcel(TCnum, false, "Delete Custom Picture", "Alerts not showing properly, failed to accetp.");
 		}
 		// If second browser opened
 		if (!alertPass) {
 			driver.close();
 		}
-		ac.Wait(wt);
+		log.Wait(wt);
 		vgP.clickLogout(driver);
 	}
 
@@ -2479,8 +2479,8 @@ public class AUTOpxController extends Comlibs {
 		String fromName = "";
 		String toName = "";
 		String AngleImageNameStatus = "";
-		Comlibs ac = new Comlibs();
-		ac.rwExcel("", "*********VINpx Templates TCs**********", "");
+		Comlibs log =new Comlibs();
+		log.rwExcel("", "*********VINpx Templates TCs**********", "");
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 		TCnum = "TC139659_7_vinpx";
 		loginP.verifyHeaderFooter(env, versionNum, TCnum);
@@ -2566,7 +2566,7 @@ public class AUTOpxController extends Comlibs {
 		// //drop to
 		// int to=1;
 		// System.out.println("Start to Drag and drop angle image from "+from+" to "+to);
-		// ac.Wait(wt*2);
+		// log.Wait(wt*2);
 		// tpP.dragAndDropConfigAngleImage3(driver, from, to, TCnum);//no error but nothing happened, not working
 		// tpP.dragHoldAndMoveDropAngleImage5(driver, from, to, TCnum);//catch an error
 		// tpP.dragHoldAndDropAngleImage4(driver, from, to, TCnum);// no error, drag is ok but can't drop,
@@ -2577,11 +2577,11 @@ public class AUTOpxController extends Comlibs {
 		// tpP.dragAndDropAngleImageBypixel2(driver, from, to1,to2, TCnum); //catch an error
 		//// tpP.dragAndDropAngleImage(driver, from, to, TCnum);//no error, drag is ok but can't drop, same as hold above
 		// System.out.println("Drag and drop angle image from "+from+" to "+to+" is done!");
-		// ac.Wait(wt*2);
+		// log.Wait(wt*2);
 		// from=7;
 		// to=3;
 		// System.out.println("Start to Drag and drop angle image from "+from+" to "+to);
-		// ac.Wait(wt*2);
+		// log.Wait(wt*2);
 		// tpP.dragAndDropAngleImage1(driver, from, to, TCnum);// no error, drag is ok but can't drop,
 		// System.out.println("Drag and drop angle image from "+from+" to "+to+" is done!!");
 		// TCnum = "drag and drop_02";
@@ -2632,7 +2632,7 @@ public class AUTOpxController extends Comlibs {
 		// String target = "#tab6 > div.tab-pane-body > div.visible-images > div > div:nth-child(5)";// > div";
 		// java_script = java_script+"simulateHTML5DragAndDrop(arguments[0], arguments[1])";
 		// ((JavascriptExecutor) driver).executeScript(java_script,source,target);//no error but nothing happened.
-		// ac.Wait(2);
+		// log.Wait(2);
 		// System.out.println("Stop here!");
 		if (envBrowser.equalsIgnoreCase("Chrome")) { // Angle sortings Only work for Chrome. Firefox is not working.
 
@@ -2647,7 +2647,7 @@ public class AUTOpxController extends Comlibs {
 				// drop to
 				int to = 1;
 				System.out.println("Start to Drag and drop angle image from " + from + " to " + to);
-				ac.Wait(wt);
+				log.Wait(wt);
 
 				fromName = tpP.getAngleImageName(driver, onScreen, from, TCnum);
 
@@ -2677,13 +2677,13 @@ public class AUTOpxController extends Comlibs {
 				toName = tpP.getAngleImageName(driver, onScreen, to, TCnum);
 
 				if (toName.equalsIgnoreCase(fromName)) {
-					ac.rwExcel(TCnum, true, "FCA drag and drop angle name", "matches");
+					log.rwExcel(TCnum, true, "FCA drag and drop angle name", "matches");
 				} else {
-					ac.rwExcel(TCnum, false, "FCA drag and drop angle name does not match",
+					log.rwExcel(TCnum, false, "FCA drag and drop angle name does not match",
 							"Before drag and drop, the name is \"" + fromName + "\". After drop, the name is \""
 									+ toName + "\"");
 				}
-				ac.Wait(wt);
+				log.Wait(wt);
 				tpP.scrollUp(driver, -450, TCnum);
 				tpP.clickInventoryGalleryBtn(driver, TCnum);
 
@@ -2708,13 +2708,13 @@ public class AUTOpxController extends Comlibs {
 				// set_Footer_StockNumber+", MarketingMessageTop=" + set_MarketingMessageTop + ",MarketingMessageBotton="+set_MarketingMessageBotton + ", AddAdditionalOverlay=" +
 				// set_AddAdditionalOverlay+", Text Images: VDI=" + set_TextImage_VDI + ", WCI=" + set_TextImage_WCI+", VBI=" + set_TextImage_VBI +"";
 				igP.textDisplayOnPage(driver, AngleImageNameStatus, displayTemplatesStatusOnPage);
-				ac.Wait(MaxTimeForTemplatesPreview - subwt);
+				log.Wait(MaxTimeForTemplatesPreview - subwt);
 
-				ac.Wait(wt * 2);
+				log.Wait(wt * 2);
 				igP.clickTemplatesBtn(driver);
 				int waitTime = 5;
 				System.out.println("Waiting for " + waitTime + " secs!");
-				ac.Wait(waitTime);
+				log.Wait(waitTime);
 			}
 		}
 		// *************************End of 6. Angle Image Sorting**************************************************************************
@@ -2739,10 +2739,10 @@ public class AUTOpxController extends Comlibs {
 		// tpP.clickHeaderEditBtn(driver);
 		// }
 		System.out.println("Stop here! Wait 5 mins...  Footer need to update xpath...");
-		// ac.Wait(60*5);
+		// log.Wait(60*5);
 		tpP.scrollUp(driver, -450, TCnum);
 		for (int i = 1; i <= 4; i++) {
-			ac.Wait(wt);
+			log.Wait(wt);
 //			// *************************1. Header Overlay*************************
 			// *************************Header Background Transparency**************************************************************************
 			table = 1;
@@ -2774,7 +2774,7 @@ public class AUTOpxController extends Comlibs {
 //			tpP.clickHeaderOverlayBtn(driver, TCnum);
 //
 //			tpP.clickEnableHeaderOverlayCheckBox(driver, true, TCnum);
-//			ac.Wait(wt);
+//			log.Wait(wt);
 //			tpP.clickDealershipLogoCheckBox(driver, set_Header_DealershipLogo, TCnum);// ???
 //
 //			tpP.clickDealerContactInfoCheckBox(driver, true, TCnum);
@@ -2787,7 +2787,7 @@ public class AUTOpxController extends Comlibs {
 //
 //			tpP.clickDealerContactInfo_WebsiteURLCheckBox(driver, set_Header_DealershipWebsite, TCnum);
 
-			ac.Wait(wt);
+			log.Wait(wt);
 			tpP.scrollUp(driver, 450, TCnum);
 			TCnum = "Check clickEnableHeaderOverlayCheckBox";
 			tpP.clickEnableHeaderOverlayCheckBox(driver, false, TCnum);
@@ -2797,7 +2797,7 @@ public class AUTOpxController extends Comlibs {
 			System.out.println("Original Header Background Transparency Value =" + "\"" + value + " %\"");
 
 			if (!(value == 0 & i == 1)) {
-				ac.Wait(wt);
+				log.Wait(wt);
 				tpP.slideHeaderBackgroundTransparencyBar(driver, slider, TCnum); // initial from left -50 =0, -40=5%
 				tpP.checkMsgB4SAVE(driver, MenueNum, msgB4SAVEExpected, TCnum);
 				tpP.clickSaveHeaderOverlayBtn(driver, TCnum);
@@ -2809,7 +2809,7 @@ public class AUTOpxController extends Comlibs {
 				tpP.scrollUp(driver, -450, TCnum);
 				TCnum = "Click Inventory Gallery after SAVE_" + MenueNum + "_" + i;
 				tpP.clickInventoryGalleryBtn(driver, TCnum);
-				ac.Wait(wt);
+				log.Wait(wt);
 				TCnum = "Click Template after SAVE_" + MenueNum + "_" + i;
 				tpP.clickTemplatesBtn(driver);
 				tpP.clickFooterOverlayBtn(driver, TCnum);
@@ -2824,7 +2824,7 @@ public class AUTOpxController extends Comlibs {
 				} else {
 					System.out.println("Verify Slider Header to set up to \"" + sliderPercent
 							+ "\" for Background Transparency. Site shows Value = " + "\"" + tempSlider + " %\"");
-					ac.rwExcel(TCnum, false,
+					log.rwExcel(TCnum, false,
 							"Verify Slider to set up to " + sliderPercent + " for Background Transparency",
 							"Site shows value = \"" + tempSlider + " %\"  ");
 				}
@@ -2907,7 +2907,7 @@ public class AUTOpxController extends Comlibs {
 
 //			// *************************2. Footer Overlay*************************			
 			// *************************Footer Background Transparency**************************************************************************
-			ac.Wait(wt);
+			log.Wait(wt);
 			table = 2;
 			slider = 0;
 			tempSlider = 0;
@@ -2936,7 +2936,7 @@ public class AUTOpxController extends Comlibs {
 			tpP.scrollUp(driver, 450, TCnum);
 			MenueNum = 2;// 1=Header Overlay,2=Footer Overaly, 3=Msg, 4, Additional Overlay, 5, Background Images, 6=Angle Images
 			tpP.clickFooterOverlayBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			TCnum = "Check clickEnableFooterOverlayCheckBox";
 			tpP.clickEnableFooterOverlayCheckBox(driver, false, TCnum);//
 			tpP.clickEnableFooterOverlayCheckBox(driver, true, TCnum);// ??????
@@ -2951,10 +2951,10 @@ public class AUTOpxController extends Comlibs {
 			System.out.println("Original Footer Background Transparency Value =" + "\"" + value + " %\"");
 
 			if (!(value == 0 & i == 1)) {
-				ac.Wait(wt);
+				log.Wait(wt);
 				tpP.slideFooterBackgroundTransparencyBar(driver, slider, TCnum); // initial from left -50 =0, -40=5%
 				tpP.checkMsgB4SAVE(driver, MenueNum, msgB4SAVEExpected, TCnum);
-				ac.Wait(wt);
+				log.Wait(wt);
 				tpP.clickSaveFooterOverlayBtn(driver, TCnum);
 				value = tpP.getBackgroundTransparencyValue(driver, table, TCnum);
 				System.out.println("Slide Footer to \"" + sliderPercent + "\" for Background Transparency Value ="
@@ -2964,7 +2964,7 @@ public class AUTOpxController extends Comlibs {
 				tpP.scrollUp(driver, -450, TCnum);
 				TCnum = "Click Inventory Gallery after SAVE_" + MenueNum + "_" + i;
 				tpP.clickInventoryGalleryBtn(driver, TCnum);
-				ac.Wait(wt);
+				log.Wait(wt);
 				TCnum = "Click Template after SAVE_" + MenueNum + "_" + i;
 				tpP.clickTemplatesBtn(driver);
 				TCnum = "Click FooterOverlay after SAVE_" + MenueNum + "_" + i;
@@ -2978,7 +2978,7 @@ public class AUTOpxController extends Comlibs {
 				} else {
 					System.out.println("Verify Slider Footer to set up to \"" + sliderPercent
 							+ "\" for Background Transparency. Site shows Value = " + "\"" + tempSlider + " %\"");
-					ac.rwExcel(TCnum, false,
+					log.rwExcel(TCnum, false,
 							"Verify Slider Footer to set up to " + sliderPercent + " for Background Transparency",
 							"Site shows value = \"" + tempSlider + " %\"  ");
 				}
@@ -3061,7 +3061,7 @@ public class AUTOpxController extends Comlibs {
 //			// *************************End of 2. Footer Overlay*************************	
 
 //			// *************************1. Header for previous checkboxWithPseudoElement **************************************************************************
-//			ac.Wait(wt);
+//			log.Wait(wt);
 //			tpP.scrollUp(driver, -450, TCnum);
 //			// 1.Header checkbox;
 //			TCnum = i + ": " + "Header Checkbox";
@@ -3081,7 +3081,7 @@ public class AUTOpxController extends Comlibs {
 //			}
 //			if (set_Header) {
 //				tpP.clickHeaderEditBtn(driver);
-//				ac.Wait(wt);
+//				log.Wait(wt);
 //				// Header Content checkboxes;
 //				TCnum = i + ": " + "1.1. Check the checkbox for DealershipLogo";
 //				checkboxName = "DealershipLogo";
@@ -3165,15 +3165,15 @@ public class AUTOpxController extends Comlibs {
 //					}
 //				}
 //				tpP.clickContentHeaderSaveBtn(driver);
-//				ac.Wait(wt);
+//				log.Wait(wt);
 //				TCnum = i + ": " + "Templates-Click SAVE on Header Content box";
 //				successfulMsg = "Your settings have been saved";// "Your settings have been saved"
 //				MessageExist = tpP.checkMessageDisplayedHead(driver, successfulMsg, TCnum);
 //				if (MessageExist) {
-//					ac.rwExcel(TCnum, true, "Click on SAVE in Header Content box",
+//					log.rwExcel(TCnum, true, "Click on SAVE in Header Content box",
 //							"Sucessful msg shows: Your settings have been saved");
 //				} else {
-//					ac.rwExcel(TCnum, false, "Click on SAVE in Header Content box",
+//					log.rwExcel(TCnum, false, "Click on SAVE in Header Content box",
 //							"Failed to shows msg: Your settings have been saved.");
 //				}
 //
@@ -3210,7 +3210,7 @@ public class AUTOpxController extends Comlibs {
 //			}
 //			if (set_Footer) {
 //				tpP.clickFooterEditBtn(driver);
-//				ac.Wait(wt);
+//				log.Wait(wt);
 //				// Footer Content checkboxes;
 //				TCnum = i + ": " + "2.1. Check the checkbox for BrandLogo";
 //				checkboxName = "BrandLogo";
@@ -3276,15 +3276,15 @@ public class AUTOpxController extends Comlibs {
 //					}
 //				}
 //				tpP.clickContentFooterSaveBtn(driver);
-//				ac.Wait(wt);
+//				log.Wait(wt);
 //				TCnum = i + ": " + "Templates-Click SAVE on Footer Content box";
 //				successfulMsg = "Your settings have been saved";// "Your settings have been saved"
 //				MessageExist = tpP.checkMessageDisplayedHead(driver, successfulMsg, TCnum);
 //				if (MessageExist) {
-//					ac.rwExcel(TCnum, true, "Click on SAVE in Footer Content box",
+//					log.rwExcel(TCnum, true, "Click on SAVE in Footer Content box",
 //							"Sucessful msg shows: Your settings have been saved");
 //				} else {
-//					ac.rwExcel(TCnum, false, "Click on SAVE in Footer Content box",
+//					log.rwExcel(TCnum, false, "Click on SAVE in Footer Content box",
 //							"Failed to shows msg: Your settings have been saved.");
 //				}
 //				tpP.clickFooterXBtn(driver);
@@ -3313,9 +3313,9 @@ public class AUTOpxController extends Comlibs {
 //				tpP.clickMarketingMessageTopEditBtn(driver);
 //				tpP.inputGlbMsgIntoMarketingMSGTopContentField(driver, "Top_Global Message!");
 //				tpP.clickContentOverlaySaveBtn(driver);
-//				ac.Wait(wt);
+//				log.Wait(wt);
 //				tpP.clickOverlayXBtn(driver);
-//				ac.Wait(wt);
+//				log.Wait(wt);
 //			}
 //			// *************************4.MarketingMessageBotton checkbox  for previous checkboxWithPseudoElement ;*************************
 //			TCnum = i + ": " + "MarketingMessageBotton Checkbox";
@@ -3339,9 +3339,9 @@ public class AUTOpxController extends Comlibs {
 //				tpP.clickMarketingMessageBottomEditBtn(driver);
 //				tpP.inputGlbMsgIntoMarketingMSGTopContentField(driver, "Bottom_Global Message!");
 //				tpP.clickContentOverlaySaveBtn(driver);
-//				ac.Wait(wt);
+//				log.Wait(wt);
 //				tpP.clickOverlayXBtn(driver);
-//				ac.Wait(wt);
+//				log.Wait(wt);
 //			}
 //
 //			// ************************* 5.AddAdditionalOverlay checkbox for previous checkboxWithPseudoElement ;*************************
@@ -3458,19 +3458,19 @@ public class AUTOpxController extends Comlibs {
 				tpP.uploadOverlayPicture(driver, overlayImage, TCnum);
 				tpP.clickAdditionalOverlayBtn(driver, TCnum);
 				tpP.verifyDealershipTemplate(driver, TCnum);
-				ac.Wait(wt);
+				log.Wait(wt);
 				tpP.clickXonDealershipTemplate(driver, TCnum);
 				tpP.clickAdditionalOverlayBtn(driver, TCnum);
-				ac.Wait(wt);
+				log.Wait(wt);
 				tpP.uploadOverlayPicture(driver, overlayImage, TCnum);
 				tpP.clickAdditionalOverlayBtn(driver, TCnum);
 				tpP.verifyDealershipTemplate(driver, TCnum);
 			} else {
 				TCnum = i + ": " + "Click X button to remove the Additional Overlay";
 				tpP.clickXonDealershipTemplate(driver, TCnum);
-				ac.Wait(wt);
+				log.Wait(wt);
 				tpP.clickAdditionalOverlayBtn(driver, TCnum);
-				ac.Wait(wt);
+				log.Wait(wt);
 			}
 
 //			// *************************4.Additional Overlay;*************************			
@@ -3479,20 +3479,20 @@ public class AUTOpxController extends Comlibs {
 			tpP.clickBackgroundImageBtn(driver, TCnum);
 
 //			// *************************5.Background Image;*************************
-			ac.Wait(wt);
+			log.Wait(wt);
 			tpP.scrollUp(driver, -3000, TCnum);
 //			TCnum = i + ": " + "Templates-Click the up right SAVE";
 //			tpP.clickSaveBtn(driver);
 //			successfulMsg = "Your settings have been saved";// "Your settings have been saved"
 //			MessageExist = tpP.checkMessageDisplayedHead(driver, successfulMsg, TCnum);
 //			if (MessageExist) {
-//				ac.rwExcel(TCnum, true, "Click on SAVE in Templates page",
+//				log.rwExcel(TCnum, true, "Click on SAVE in Templates page",
 //						"Sucessful msg shows: Your settings have been saved");
 //			} else {
-//				ac.rwExcel(TCnum, false, "Click on SAVE in Templates page",
+//				log.rwExcel(TCnum, false, "Click on SAVE in Templates page",
 //						"Failed to shows msg: Your settings have been saved.");
 //			}
-//			ac.Wait(wt);
+//			log.Wait(wt);
 			tpP.clickInventoryGalleryBtn(driver);
 
 			// Verify Re-render Single Vehicle 01 for VINpx dealer
@@ -3513,19 +3513,19 @@ public class AUTOpxController extends Comlibs {
 
 			// *******************************************************************
 			// *******************************************************************
-			ac.Wait(wt * 2);
+			log.Wait(wt * 2);
 			igP.enterTextInSearch(vin01);
-			ac.Wait(wt);
+			log.Wait(wt);
 			TCnum = i + ": " + "TC139706_8";
 			igP.verifyRerenderBtnStatus(driver, false, TCnum);
 			// igP.verifyGenerateURLsBtnStatus(driver, false, TCnum);
 			igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
 			igP.verifyRerenderBtnStatus(driver, true, TCnum);
 			// igP.verifyGenerateURLsBtnStatus(driver, true, TCnum);
-			ac.rwExcel("", "------ Single VIN re-rendering ------", "");
+			log.rwExcel("", "------ Single VIN re-rendering ------", "");
 			igP.clickRerenderBtn(driver, render, TCnum);
 			System.out.println("\n\n 1st time. Please check images once rendering is complete.....\n\n");
-			ac.Wait(wt);
+			log.Wait(wt);
 			igP.verifyGoodMsgShowing(driver, TCnum);
 			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 			igP.verifyRerenderBtnStatus(driver, true, TCnum);
@@ -3561,15 +3561,15 @@ public class AUTOpxController extends Comlibs {
 			// set_AddAdditionalOverlay+", Text Images: VDI=" + set_TextImage_VDI + ", WCI=" + set_TextImage_WCI+", VBI=" + set_TextImage_VBI +"";
 			vgP.textDisplayOnPage(driver, templatesStatus, displayTemplatesStatusOnPage);
 			tpP.scrollUp(driver, 1000, TCnum);
-			ac.Wait(wt * 2);
+			log.Wait(wt * 2);
 			tpP.scrollUp(driver, -1000, TCnum);
 			if (render.equalsIgnoreCase("Yes")) {
 				System.out.println(
 						"\nVIN #" + i + ". Waiting for " + MaxTimeForTemplatesPreview + ", check Templates settings");
-				// ac.Wait(MaxTimeForTemplatesPreview, true,
+				// log.Wait(MaxTimeForTemplatesPreview, true,
 				// "\nVIN #1. Waiting for 60 seconds, please check Templates settings:\n\nHeader:\nDealership Logo, Dealership Phone, Dealership Website, \nFooter:\n+Vehicle Info (year, make, model, trim, Glb MSG Top, Text Images:WCI for vin: "
 				// + vin01 + "\n");
-				ac.Wait(MaxTimeForTemplatesPreview, true, "\nVIN #" + i + ". Waiting for " + MaxTimeForTemplatesPreview
+				log.Wait(MaxTimeForTemplatesPreview, true, "\nVIN #" + i + ". Waiting for " + MaxTimeForTemplatesPreview
 						+ " seconds, please check Templates settings:\n\nHeader: " + set_Header + "\n1.DealershipLogo="
 						+ set_Header_DealershipLogo + ", \n2.DealerContactInfo=" + set_Header_DealerContactInfo
 						+ ", \n3.DealershipAddress=" + set_Header_DealershipAddress + ", \n4.DealershipPhone="
@@ -3587,10 +3587,10 @@ public class AUTOpxController extends Comlibs {
 				// System.out.println("\n1. press Enter key to continue......");
 			} else {
 				System.out.println("\nVIN #\"+i+\". Waiting for " + noRenderWT + ", check Templates settings");
-				// ac.Wait(10, true,
+				// log.Wait(10, true,
 				// "\nVIN #1. Waiting for 0 seconds, please check Templates settings:\n\nHeader:\nDealership Logo, Dealership Phone, Dealership Website, \nFooter:\n+Vehicle Info (year, make, model, trim, Glb MSG Top, Text Images:WCI for vin: "
 				// + vin01 + "\n");
-				ac.Wait(noRenderWT, true, "\nVIN #" + i + ". Waiting for " + noRenderWT
+				log.Wait(noRenderWT, true, "\nVIN #" + i + ". Waiting for " + noRenderWT
 						+ " seconds, please check Templates settings:\n\nHeader: " + set_Header + "\n1.DealershipLogo="
 						+ set_Header_DealershipLogo + ", \n2.DealerContactInfo=" + set_Header_DealerContactInfo
 						+ ", \n3.DealershipAddress=" + set_Header_DealershipAddress + ", \n4.DealershipPhone="
@@ -3606,10 +3606,10 @@ public class AUTOpxController extends Comlibs {
 						+ ",  for vin=" + vin01 + "\n");
 			}
 			vgP.clickBackToInventoryBtn(driver);
-			ac.Wait(wt);
+			log.Wait(wt);
 			// *************************2nd**************************************************************************
 			igP.clickTemplatesBtn(driver);
-			ac.Wait(wt);
+			log.Wait(wt);
 			if (i == 1) {// *************************2nd 30% Transparency of BG *************
 				set_Header = true;
 				set_Header_DealershipLogo = false;
@@ -3745,8 +3745,8 @@ public class AUTOpxController extends Comlibs {
 		String fromName = "";
 		String toName = "";
 		String AngleImageNameStatus = "";
-		Comlibs ac = new Comlibs();
-		ac.rwExcel("", "*********STOCKpx Templates TCs**********", "");
+		Comlibs log =new Comlibs();
+		log.rwExcel("", "*********STOCKpx Templates TCs**********", "");
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 		TCnum = "TC139659_7_STOCKpx";
 		loginP.verifyHeaderFooter(env, versionNum, TCnum);
@@ -3818,7 +3818,7 @@ public class AUTOpxController extends Comlibs {
 				// drop to
 				int to = 1;
 				System.out.println("Start to Drag and drop angle image from " + from + " to " + to);
-				ac.Wait(wt);
+				log.Wait(wt);
 
 				fromName = tpP.getAngleImageName(driver, onScreen, from, TCnum);
 
@@ -3850,13 +3850,13 @@ public class AUTOpxController extends Comlibs {
 				toName = tpP.getAngleImageName(driver, onScreen, to, TCnum);
 
 				if (toName.equalsIgnoreCase(fromName)) {
-					ac.rwExcel(TCnum, true, "STOCK drag and drop angle name", "matches");
+					log.rwExcel(TCnum, true, "STOCK drag and drop angle name", "matches");
 				} else {
-					ac.rwExcel(TCnum, false, "STOCK drag and drop angle name does not match",
+					log.rwExcel(TCnum, false, "STOCK drag and drop angle name does not match",
 							"Before drag and drop, the name is \"" + fromName + "\". After drop, the name is \""
 									+ toName + "\"");
 				}
-				ac.Wait(wt);
+				log.Wait(wt);
 				tpP.scrollUp(driver, -450, TCnum);
 				tpP.clickInventoryGalleryBtn(driver, TCnum);
 
@@ -3881,10 +3881,10 @@ public class AUTOpxController extends Comlibs {
 				// set_Footer_StockNumber+", MarketingMessageTop=" + set_MarketingMessageTop + ",MarketingMessageBotton="+set_MarketingMessageBotton + ", AddAdditionalOverlay=" +
 				// set_AddAdditionalOverlay+", Text Images: VDI=" + set_TextImage_VDI + ", WCI=" + set_TextImage_WCI+", VBI=" + set_TextImage_VBI +"";
 				igP.textDisplayOnPage(driver, AngleImageNameStatus, displayTemplatesStatusOnPage);
-				ac.Wait(MaxTimeForTemplatesPreview - subwt);
+				log.Wait(MaxTimeForTemplatesPreview - subwt);
 				igP.clickTemplatesBtn(driver);
 				System.out.println("Waiting for " + (MaxTimeForTemplatesPreview - 15) + " secs!");
-				ac.Wait(MaxTimeForTemplatesPreview - subwt);
+				log.Wait(MaxTimeForTemplatesPreview - subwt);
 			}
 		}
 		// *************************End of Angle Image**************************************************************************
@@ -3931,7 +3931,7 @@ public class AUTOpxController extends Comlibs {
 		// String ptitle;
 		String tempVIN = "";
 		String tempVehGUID = "";
-		Comlibs ac = new Comlibs();
+		Comlibs log =new Comlibs();
 		String y1 = "2019";
 		String m1 = "GMC";
 		String y2 = "2019";
@@ -3942,7 +3942,7 @@ public class AUTOpxController extends Comlibs {
 			browserWT = 11;
 		}
 		String backgroundsStatus = "";
-		ac.rwExcel("", "*********Multiple Background TCs**********", "");
+		log.rwExcel("", "*********Multiple Background TCs**********", "");
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 		TCnum = "multiple_BG_01";
 		loginP.verifyHeaderFooter(env, versionNum, TCnum);
@@ -3967,7 +3967,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "MultipleBGs_01";
 		Backgrounds bgP = new Backgrounds(driver);
 		bgP.clickAddBackgrounds(driver, TCnum);
-		ac.Wait(wt * browserWT);
+		log.Wait(wt * browserWT);
 		TCnum = "Add GB_01_1";
 		int bgNum = 18; // Select 18 - Auto_ChangedTo_588_644
 //		String selectBGName = "3D Buick and GMC Dealership (Generic Option)";// before 20200224
@@ -3983,7 +3983,7 @@ public class AUTOpxController extends Comlibs {
 		String bgName = bgP.getBackgroundNameFrPopup(driver, bgNum, TCnum);
 		if (!bgName.equalsIgnoreCase(selectBGName)) {
 			TCnum = "Select BG";
-			ac.rwExcel(TCnum, false, "Select background does not match the original one",
+			log.rwExcel(TCnum, false, "Select background does not match the original one",
 					"Real web BG name is:\" " + bgName + "\". Expected BG name is: \" " + selectBGName + "\"");
 		}
 
@@ -3992,24 +3992,24 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "Add GB_01_3";
 		// bgP.scrollUp(driver, 1000, TCnum);
 		bgP.clickAddBtn(driver, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 
 		int addNew = 5;
 		for (int i = 1; i <= addNew; i++) {
 			TCnum = "Test Run to Add New BGs_" + i;
 			bgP.clickAddBackgrounds(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 			bgP.clickBackground(driver, bgNum, TCnum);
 			// bgP.scrollUp(driver, 1000, TCnum);
 			bgP.clickAddBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 		}
 
 		TCnum = "MultipleBGs_04";
 		// bgP.selectYear(driver, 1, TCnum);
 		TCnum = "MultipleBGs_05";
 		System.out.println("Added " + (addNew + 1) + " same backgrounds");
-		ac.Wait(wt);
+		log.Wait(wt);
 		TCnum = "MultipleBGs_06_01";
 		int bgSetTotalRows = bgP.getBGSetTotalRows(driver, TCnum);
 		TCnum = "MultipleBGs_06_02";
@@ -4039,14 +4039,14 @@ public class AUTOpxController extends Comlibs {
 		if (bgSetTotalRows02 == bgSetTotalRows) {
 			System.out.println("Pass. Match! Before going to Inventory page Total =" + bgSetTotalRows
 					+ ".  After back to Backgrounds page Total =" + bgSetTotalRows02 + "\n");
-			ac.rwExcel(TCnum, true, "Compare Backgrounds before and after going to Inventory Gallary Page",
+			log.rwExcel(TCnum, true, "Compare Backgrounds before and after going to Inventory Gallary Page",
 					"Before going to Inventory page Total =" + bgSetTotalRows
 							+ ".  After back to Backgrounds page Total =" + bgSetTotalRows02);
 
 		} else {
 			System.out.println("Failed to match new added BGs. Before going to Inventory page Total =" + bgSetTotalRows
 					+ ".  After back to Backgrounds page Total =" + bgSetTotalRows02 + "\n");
-			ac.rwExcel(TCnum, false, "Compare Backgrounds before and after going to Inventory Gallary Page",
+			log.rwExcel(TCnum, false, "Compare Backgrounds before and after going to Inventory Gallary Page",
 					"BGs lost! Before going to Inventory page Total =" + bgSetTotalRows
 							+ ".  After back to Backgrounds page Total =" + bgSetTotalRows02);
 		}
@@ -4076,7 +4076,7 @@ public class AUTOpxController extends Comlibs {
 			bgP.scrollUp(driver, 1000, TCnum);
 			if (duplicateBG[i]) {
 				bgP.clickXButton(driver, i, TCnum + "_" + i);
-				ac.Wait(wt - 1);
+				log.Wait(wt - 1);
 			}
 		}
 		System.out.println("\nAll New Added BGs are deleted\n");
@@ -4087,7 +4087,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "Check_BG_name_01";
 		String getBGNameFrSite = bgP.getBackgroundSetName(driver, 1, TCnum);
 		if (!getBGNameFrSite.equalsIgnoreCase(originalBGName)) {
-			ac.rwExcel(TCnum, false, "Verify only one BG (original BG name)", "Site showing Set Name is \""
+			log.rwExcel(TCnum, false, "Verify only one BG (original BG name)", "Site showing Set Name is \""
 					+ bgSetTotalRows + "\".  Expected Set Name is \"" + originalBGName + "\". Please change the BG!");
 		}
 
@@ -4097,15 +4097,15 @@ public class AUTOpxController extends Comlibs {
 			TCnum = "Add New BG_" + i;
 			bgP.clickAddBackgrounds(driver, TCnum);
 			if (i == 1) {
-				ac.Wait(wt * browserWT);
+				log.Wait(wt * browserWT);
 			} else {
-				ac.Wait(wt * 1);
+				log.Wait(wt * 1);
 			}
-			ac.Wait(wt * browserWT);
+			log.Wait(wt * browserWT);
 			bgP.clickBackground(driver, bgNum, TCnum);
 			// bgP.scrollUp(driver, 1000, TCnum);
 			bgP.clickAddBtn(driver, TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 		}
 		for (int i = 0; i < bgSetTotalRows; i++) {
 			duplicateBG[i] = false;
@@ -4154,7 +4154,7 @@ public class AUTOpxController extends Comlibs {
 				m1 = "Cadillac";
 				bgP.selectYearValue(driver, newDuplicateBGsRow[i], y1, TCnum);
 				bgP.selectMakeValue(driver, newDuplicateBGsRow[i], m1, TCnum);
-				ac.Wait(wt);
+				log.Wait(wt);
 			} else if (i == 3) {
 				y1 = "2020";
 				m1 = "GMC";
@@ -4193,7 +4193,7 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "MultipleBGs_06_03";
 		bgP.selectYearValue(driver, bgSetNum, "2020", TCnum);
 		bgP.selectMakeValue(driver, bgSetNum, "Chevrolet", TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 		TCnum = "MultipleBGs_07";
 		y1 = "2019";
 		m1 = "Buick";
@@ -4201,10 +4201,10 @@ public class AUTOpxController extends Comlibs {
 		m2 = "GMC";
 		bgP.selectYearValue(driver, 1, y1, TCnum);
 		bgP.selectMakeValue(driver, 1, m1, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 		bgP.selectYearValue(driver, bgSetNum, y2, TCnum);
 		bgP.selectMakeValue(driver, bgSetNum, m2, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 		// Go to Inventory page and select vin01 and vin02 to render
 		TCnum = "MultipleBGs_09";
 
@@ -4212,7 +4212,7 @@ public class AUTOpxController extends Comlibs {
 		for (int i = 1; i < tcs; i++) {
 
 			bgP.clickInventoryGalleryBtn(driver);
-			ac.Wait(wt);
+			log.Wait(wt);
 			igP.enterTextInSearch("72");
 			igP.clickSelectBtn(driver, vin01, vehGUID01, TCnum);
 			igP.clickSelectBtn(driver, vin02, vehGUID02, TCnum);
@@ -4274,7 +4274,7 @@ public class AUTOpxController extends Comlibs {
 			// set_AddAdditionalOverlay+", Text Images: VDI=" + set_TextImage_VDI + ", WCI=" + set_TextImage_WCI+", VBI=" + set_TextImage_VBI +"";
 			igP.textDisplayOnPage(driver, backgroundsStatus, displayTemplatesStatusOnPage);
 
-			ac.Wait(wt * wtime);
+			log.Wait(wt * wtime);
 			TCnum = "MultipleBGs_11";
 			igP.clickBackgroundsBtn(driver, TCnum);
 
@@ -4283,31 +4283,31 @@ public class AUTOpxController extends Comlibs {
 			TCnum = "MultipleBGs_AddToAny_" + i;
 			bgP.selectYearValue(driver, i, "Any", TCnum);
 			bgP.selectMakeValue(driver, i, "Any", TCnum);
-			ac.Wait(wt);
+			log.Wait(wt);
 		}
 
 		// TCnum = "MultipleBGs_09";
 		// bgP.selectYearValue(driver, 1, "Any", TCnum);
 		// bgP.selectMakeValue(driver, 1, "Any", TCnum);
-		// ac.Wait(wt);
+		// log.Wait(wt);
 		// TCnum = "MultipleBGs_10";
 		// bgP.selectYearValue(driver, 2, "Any", TCnum);
 		// bgP.selectMakeValue(driver, 2, "Any", TCnum);
-		// ac.Wait(wt);
+		// log.Wait(wt);
 		// TCnum = "MultipleBGs_11";
 		// bgP.selectYearValue(driver, 3, "Any", TCnum);
 		// bgP.selectMakeValue(driver, 3, "Any", TCnum);
-		// ac.Wait(wt);
+		// log.Wait(wt);
 		// TCnum = "MultipleBGs_12";
 		// bgP.selectYearValue(driver, 4, "Any", TCnum);
 		// bgP.selectMakeValue(driver, 4, "Any", TCnum);
-		// ac.Wait(wt);
+		// log.Wait(wt);
 		System.out.println("2nd stop");
 
-		ac.Wait(wt);
+		log.Wait(wt);
 		TCnum = "MultipleBGs_11";
 		// bgP.clickXButton(driver, 1, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 		TCnum = "MultipleBGs_12";
 		bgP.clickInventoryGalleryBtn(driver, TCnum);
 		TCnum = "MultipleBGs_13";
@@ -4392,8 +4392,8 @@ public class AUTOpxController extends Comlibs {
 		String TCnum;
 		String tempVIN = "";
 		String tempVehGUID = "";
-		Comlibs ac = new Comlibs();
-		ac.rwExcel("", "*********Add VINs**********", "");
+		Comlibs log =new Comlibs();
+		log.rwExcel("", "*********Add VINs**********", "");
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 		TCnum = "";
 		loginP.login(driver, accountEmail, accountPS);
@@ -4414,13 +4414,13 @@ public class AUTOpxController extends Comlibs {
 		TCnum = "Add VIN";
 		igP.clickAddInventoryBtn(driver, TCnum);
 		igP.clickAddInventoryCancelBtn(driver, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.clickAddInventoryBtn(driver, TCnum);
 		igP.clickAddInventoryXBtn(driver, TCnum);
-		ac.Wait(wt);
+		log.Wait(wt);
 		igP.clickAddInventoryBtn(driver, TCnum);
 		int total = VINpxNewVINs.length;
-		// ac.rwExcel("", "VINs Total=" + total, "");
+		// log.rwExcel("", "VINs Total=" + total, "");
 		int c = 0;
 		for (String vin : VINpxNewVINs) {
 			c++;
@@ -4430,13 +4430,13 @@ public class AUTOpxController extends Comlibs {
 			// if (igP.verifyGoodOrBadMsgShowing(driver, TCnum)) {
 			// // good msg shows
 			// tempVIN = vin;
-			//// ac.rwExcel("VIN#= " + c, true, "VIN= " + vin,
+			//// log.rwExcel("VIN#= " + c, true, "VIN= " + vin,
 			//// "VIN added, good message is showing under My Inventory Gallery");
 			// // break;
 			// } else {
 			// // error msg shows
 			// tempVIN = vin;
-			// ac.rwExcel("VIN#= " + c, false, "VIN= " + vin, "error message is showing under My Inventory Gallery");
+			// log.rwExcel("VIN#= " + c, false, "VIN= " + vin, "error message is showing under My Inventory Gallery");
 			//
 			// }
 		}
@@ -4528,8 +4528,8 @@ public class AUTOpxController extends Comlibs {
 		String tempVIN = "";
 		String tempVehGUID = "";
 		int allVinNums = 0;
-		Comlibs ac = new Comlibs();
-		ac.rwExcel("", "*********VINpx Inventory TCs**********", "");
+		Comlibs log =new Comlibs();
+		log.rwExcel("", "*********VINpx Inventory TCs**********", "");
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 
 		// **********************************Debug Area**************************************************************
@@ -4565,17 +4565,17 @@ public class AUTOpxController extends Comlibs {
 		// // ********************************End of Debug Area*****************************************************************
 	}
 
-	public static WebDriver reLogin(WebDriver driver, Comlibs bc, String tBrowser, String envDevice, String env,
+	public static WebDriver reLogin(WebDriver driver, Comlibs log, String tBrowser, String envDevice, String env,
 			String baseURL, String accountEmail, String accountPS, String screenview) throws IOException {
-		driver = bc.drivers(tBrowser);// Firefox, Chrome
+		driver = log.drivers(tBrowser);// Firefox, Chrome
 		driver.manage().deleteAllCookies();
 		System.out.println("Test Browser = " + tBrowser + "\n");
 
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		bc.SelecBroswerResolution(driver, envDevice, screenview);
-		bc.rwExcel("", "****** Load Login Again******", "");
-		bc.rwExcel("", "Test Browser", tBrowser);
-		bc.rwExcel("", "Test Environment", env);
+		log.SelecBroswerResolution(driver, envDevice, screenview);
+		log.rwExcel("", "****** Load Login Again******", "");
+		log.rwExcel("", "Test Browser", tBrowser);
+		log.rwExcel("", "Test Environment", env);
 		loadURL(driver, baseURL);
 		AUTOpxLogin loginP = new AUTOpxLogin(driver);
 		loginP.login(driver, accountEmail, accountPS);
@@ -4613,66 +4613,66 @@ public class AUTOpxController extends Comlibs {
 		for (int i = 0; i < 1; i++) {
 			System.out.println("Testing is started in " + env + "\n");
 			// Initial
-			Comlibs bc = new Comlibs();
+			Comlibs log = new Comlibs();
 			final WebDriver driver;
-			driver = bc.drivers(tBrowser);// Firefox, Chrome
+			driver = log.drivers(tBrowser);// Firefox, Chrome
 			driver.manage().deleteAllCookies();
 			System.out.println("Test Browser = " + tBrowser + "\n");
 
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			if (!tBrowser.equalsIgnoreCase("Chromexxxxxxxxx")) { // only Chrome doesn't work since Chrome updated on Jul, 2017, works on Dec 13,2017 webdriver ver3.8.5
-				bc.SelecBroswerResolution(driver, envDevice, onScreen);
+				log.SelecBroswerResolution(driver, envDevice, onScreen);
 			}
-			bc.rwExcel("", "****** Testing started ******" + (i + 1), "");
-			bc.rwExcel("", "Test Browser", tBrowser);
-			bc.rwExcel("", "Test Environment", env);
+			log.rwExcel("", "****** Testing started ******" + (i + 1), "");
+			log.rwExcel("", "Test Browser", tBrowser);
+			log.rwExcel("", "Test Environment", env);
 
 			loadURL(driver, baseURL);
 			////// tempDebug(driver);// ***************************************Debug*****************************************
 			//// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
 			// ////// 5.1 STOCKpx Angle images sorting - Templates - run this first to move mouse 2 times during the Angle Images testing in Templates
-			// bc.rwExcel("", "-----STOCKpx Sorting in Templates Testing started-----" + (i + 1), "");
+			// log.rwExcel("", "-----STOCKpx Sorting in Templates Testing started-----" + (i + 1), "");
 			// STOCKpxSortingOnlyTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 			//
 			//////// 5.2 FCA VINpx Angle images sorting and Templates - run this first to move mouse 3 times during the Angle Images testing in Templates
-			// bc.rwExcel("", "-----Templates FCA Sorting Testing started-----" + (i + 1), "");
+			// log.rwExcel("", "-----Templates FCA Sorting Testing started-----" + (i + 1), "");
 			// VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
 			//// 0.General Inventory Gallery
-			bc.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
+			log.rwExcel("", "-----General Inventory Gallery Testing started-----" + (i + 1), "");
 			inventoryGalleryTC(driver, tBrowser, env, versionNum);
 			vehicleGallery(driver, tBrowser, env);
 			// verifyRerender(driver, tBrowser);
 
 			////// 1.VINpx:
-			bc.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
+			log.rwExcel("", "-----VINpx Testing started-----" + (i + 1), "");
 			VINpxInventoryTC(driver, tBrowser, versionNum, env, chkEmail);
 
 			////// 2. STOCKpx
-			bc.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
+			log.rwExcel("", "-----STOCKpx Testing started-----" + (i + 1), "");
 			STOCKpxInventoryTC(driver, tBrowser, env);
 
-			//// bc.Wait(18*60);//wait 18 minutes;
+			//// log.Wait(18*60);//wait 18 minutes;
 
 			// ////// 3. LOTpx
-			bc.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
+			log.rwExcel("", "-----LOTpx Testing started-----" + (i + 1), "");
 			//// LOTpxInventoryTC(driver, tBrowser, env);// Need to update since there are lots of changes
 			LOTpxUploadCustomPic(driver, tBrowser, "LOTpx"); // All or LOTpx. This should be in the end of all testing
 
 			// ////// 4. Multiple Backgrounds
-			bc.rwExcel("", "-----Multiple Backgrounds Testing started-----" + (i + 1), "");
+			log.rwExcel("", "-----Multiple Backgrounds Testing started-----" + (i + 1), "");
 			MultipleBGTC(driver, tBrowser, versionNum, env, chkEmail); // All or LOTpx. This should be in the end of all testing
 
 			////// 5.1 STOCKpx Angle images sorting - Templates - run this first to move mouse 2 times during the Angle Images testing in Templates
-			bc.rwExcel("", "-----STOCKpx Sorting in Templates Testing started-----" + (i + 1), "");
+			log.rwExcel("", "-----STOCKpx Sorting in Templates Testing started-----" + (i + 1), "");
 			STOCKpxSortingOnlyTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
 			////// 5.2 FCA VINpx Angle images sorting and Templates - run this first to move mouse 3 times during the Angle Images testing in Templates
-			bc.rwExcel("", "-----Templates FCA Sorting Testing started-----" + (i + 1), "");
+			log.rwExcel("", "-----Templates FCA Sorting Testing started-----" + (i + 1), "");
 			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
-			bc.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
+			log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
 			System.out.println("Test is complete!!!   i = " + (i + 1));
 		}

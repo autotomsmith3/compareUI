@@ -153,7 +153,7 @@ public class AdminPortalController extends Comlibs {
 
 	public static String getVehGUIDfromDealerCodeAndVIN(String dlrCode, String sVin)
 			throws ClassNotFoundException, SQLException {
-		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		Class.forName("com.microsoft.sqlserver.jdlog.SQLServerDriver");
 		Connection conn = DriverManager.getConnection(
 				"jdbc:sqlserver://LNOC-Q13V-MSQ2.autodata.org;user=VDVIWebServicesUserQA;password=HDuMy873JRFpkkU9;database=VDVI_Master");
 
@@ -3663,9 +3663,9 @@ public class AdminPortalController extends Comlibs {
 		for (int i = 1; i <= 1; i++) {
 			System.out.println("Testing is started in " + env + "\n");
 			// Initial
-			Comlibs bc = new Comlibs();
+			Comlibs log = new Comlibs();
 			final WebDriver driver;
-			driver = bc.drivers(tBrowser);// Firefox, Chrome
+			driver = log.drivers(tBrowser);// Firefox, Chrome
 			driver.manage().deleteAllCookies();
 			System.out.println("Test Browser = " + tBrowser + "\n");
 
@@ -3673,11 +3673,11 @@ public class AdminPortalController extends Comlibs {
 			if (!tBrowser.equalsIgnoreCase("Chromexxxxxxxxx")) { // only Chrome doesn't work since Chrome updated on
 																	// Jul, 2017, works on Dec 13,2017 webdriver
 																	// ver3.8.5
-				bc.SelecBroswerResolution(driver, envDevice, onScreen);
+				log.SelecBroswerResolution(driver, envDevice, onScreen);
 			}
-			bc.rwExcel("", "****** Testing started ******" + i, "");
-			bc.rwExcel("", "Test Browser", tBrowser);
-			bc.rwExcel("", "Test Environment", env);
+			log.rwExcel("", "****** Testing started ******" + i, "");
+			log.rwExcel("", "Test Browser", tBrowser);
+			log.rwExcel("", "Test Environment", env);
 
 			loadURL(driver, baseURL, env);
 			// Alert alert =driver.switchTo().alert();
@@ -3689,12 +3689,12 @@ public class AdminPortalController extends Comlibs {
 			// properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
 			//// 0.RetriveValuesFrDealerSettingsPageFrNewDealerListPage:2019-12-02 Working fine.
-			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
+			// log.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----" + (i + 1), "");
 			// RetriveValuesFrDealerSettingsPageFrNewDealerListPage(driver, tBrowser, versionNum, env, chkEmail);
 
 			////// 0.RetriveValuesFrDealerSettingsPage: get Metadata values from
 			////// ManageAccount page - not used any more since 2019
-			// bc.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----"
+			// log.rwExcel("", "-----RetriveValuesFrDealerSettingsPage Testing started-----"
 			////// + (i + 1), "");
 			// RetriveValuesFrDealerSettingsPage(driver, tBrowser, versionNum, env,
 			////// chkEmail);
@@ -3705,7 +3705,7 @@ public class AdminPortalController extends Comlibs {
 			////// ************************************************************************************
 
 			////// 1.ManageDealerShipsAddNewAccount:
-			bc.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
+			log.rwExcel("", "-----ManageAccounts - Add An New Account Testing started-----" + (i + 1), "");
 			ManageDealerShipsAddNewAccount ManageDealerShips = new ManageDealerShipsAddNewAccount();
 			ManageDealerShips.AddNewAccount(driver, tBrowser, versionNum, env, chkEmail);
 
@@ -3716,7 +3716,7 @@ public class AdminPortalController extends Comlibs {
 			//
 			//// 3. Enable/Disable Vehicles and ManageBackgroundSets:
 			loadURL(driver, baseURL, env);
-			bc.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
+			log.rwExcel("", "-----ManageBackgroundSets - Testing started-----" + (i + 1), "");
 			EnableDisalbeVehicles_ManageBackgroundSets(driver, tBrowser, versionNum, env, chkEmail);
 
 			//// 4. NewVehicles:
@@ -3735,7 +3735,7 @@ public class AdminPortalController extends Comlibs {
 			loadURL(driver, baseURL, env);
 			WhitelistDashboard(driver, tBrowser, versionNum, env);
 
-			bc.rwExcel("", "****** Testing is complete ****** " + i, "");
+			log.rwExcel("", "****** Testing is complete ****** " + i, "");
 			driver.close();
 			System.out.println("\nRound: " + i + "; Test is complete!!!");
 		}
