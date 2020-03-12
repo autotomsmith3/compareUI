@@ -344,10 +344,10 @@ public class ManageDealerShipsAddNewAccount extends Comlibs {
 		UserListP.clickAddDealerShip(driver, tc);
 		Wait(wt);
 		AdminPortal.DealerProfile DealerProfieP = new AdminPortal.DealerProfile(driver);
-		tc = "Select/Unselect All OEM/Brands_01";
-		DealerProfieP.selectUnselectAllOEMBrands(driver, true, tc);
-		tc = "Select/Unselect All OEM/Brands_02";
-		DealerProfieP.selectUnselectAllOEMBrands(driver, false, tc);
+//		tc = "Select/Unselect All OEM/Brands_01";
+//		DealerProfieP.selectUnselectAllOEMBrands(driver, true, tc);
+//		tc = "Select/Unselect All OEM/Brands_02";
+//		DealerProfieP.selectUnselectAllOEMBrands(driver, false, tc);
 		tc = "TC228656_01";
 		DealerProfieP.selectOEM(driver, 13, tc);
 		// check Buick and Cadillac and Chevrolet and GMC

@@ -586,12 +586,23 @@ public class Comlibs {
 		}
 		// 5: IE8, Chrome, FF work fine!
 		if (device.equalsIgnoreCase("PC")) {
-			driver.manage().window().setSize(new Dimension(1300, 990));  //Original one before Nov 09, 2018
+			if (screen.equalsIgnoreCase("left")) {
+//			driver.manage().window().setSize(new Dimension(1920, 990));  //Test for vehicle preview page scaling
+			driver.manage().window().setSize(new Dimension(1300, 990));  //Original one before March 05, 2020
 //			driver.manage().window().setSize(new Dimension(1080, 990));  //Original one before May 04, 2017
 //			driver.manage().window().setSize(new Dimension(1180, 1040));  //After Dec 13, 2017. 2018-08-22: 1080, 1040
 //			driver.manage().window().setSize(new Dimension(1920, 1040));  // (width, high)
 			dim = driver.manage().window().getSize();
 			rwExcel("", true, "Set up browser resolution for device = " + device, "  " + dim);
+			}else {// center
+				driver.manage().window().setSize(new Dimension(1920, 990));  //Test for vehicle preview page scaling
+//				driver.manage().window().setSize(new Dimension(1300, 990));  //Original one before March 05, 2020
+//				driver.manage().window().setSize(new Dimension(1080, 990));  //Original one before May 04, 2017
+//				driver.manage().window().setSize(new Dimension(1180, 1040));  //After Dec 13, 2017. 2018-08-22: 1080, 1040
+//				driver.manage().window().setSize(new Dimension(1920, 1040));  // (width, high)
+				dim = driver.manage().window().getSize();
+				rwExcel("", true, "Set up browser resolution for device = " + device, "  " + dim);
+			}
 		} else if (device.equalsIgnoreCase("Tablet")) {
 			// driver.manage().window().setSize(new Dimension(764, 660));
 			driver.manage().window().setSize(new Dimension(990, 660));

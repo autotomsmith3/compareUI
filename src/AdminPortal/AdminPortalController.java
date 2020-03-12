@@ -689,10 +689,10 @@ public class AdminPortalController extends Comlibs {
 
 		DealerProfile DealerProfieP = new DealerProfile(driver);
 
-		tc = "Select/Unselect All OEM/Brands_01";
-		DealerProfieP.selectUnselectAllOEMBrands(driver, true, tc);
-		tc = "Select/Unselect All OEM/Brands_02";
-		DealerProfieP.selectUnselectAllOEMBrands(driver, false, tc);
+//		tc = "Select/Unselect All OEM/Brands_01";
+//		DealerProfieP.selectUnselectAllOEMBrands(driver, true, tc);
+//		tc = "Select/Unselect All OEM/Brands_02";
+//		DealerProfieP.selectUnselectAllOEMBrands(driver, false, tc);
 		DealerProfieP.selectOEM(driver, 13, tc);
 		// check Buick and Cadillac and Chevrolet and GMC
 		// DealerProfieP.selectOEMBrands(driver, 1); // check Buick
@@ -1994,7 +1994,7 @@ public class AdminPortalController extends Comlibs {
 		UserListP.clickNewVehicles(driver, tc);
 		ac.Wait(wt * 2);
 		NewVehicles NewVehicleP = new NewVehicles(driver);
-		String searchText = "camaro"; // "Silverado 3500HD ";// "camaro"
+		String searchText = "camaro";//"camaro"; "3500" // "Silverado 3500HD ";// "camaro"
 		tc = "TC236111";
 		NewVehicleP.inputSearch(driver, searchText, tc);
 
@@ -2588,7 +2588,6 @@ public class AdminPortalController extends Comlibs {
 		}
 		//// *************************New Vehicle and WhiteListBtn******************************************************
 	}
-
 	public static void VehiclePreview(WebDriver driver, String brw, String versionNum, String envment)
 			throws Exception {
 
@@ -2701,6 +2700,7 @@ public class AdminPortalController extends Comlibs {
 		tc = "Acode field_02";
 		vpP.clickAcodeSubmitBtn(driver, tc);
 		ac.Wait(wt);
+		//TODO here
 		vpP.verifyLoadAngleImage(driver, 1, tc);
 		vpP.verifyLoadAngleImage(driver, 8, tc);
 
@@ -2729,6 +2729,7 @@ public class AdminPortalController extends Comlibs {
 			vpP.clickYmmSubmit(driver, tc);
 			ac.rwExcel(tc, true, "Click Submit for YMM", "Submit passed!");
 			ac.Wait(wt * 4);
+			//TODO here
 			vpP.verifyLoadAngleImage(driver, 1, tc);
 			vpP.verifyLoadAngleImage(driver, 8, tc);
 		} catch (Exception e) {
@@ -2742,6 +2743,226 @@ public class AdminPortalController extends Comlibs {
 			vpP.clickVehicleColorDropDown(driver, tc);
 			vpP.clickVehicleColorOne(driver, i, tc);
 			ac.Wait(wt);
+			//TODO here
+//			vpP.verifyLoadAngleImage(driver, 1, tc);
+//			vpP.verifyLoadAngleImage(driver, 8, tc);
+		}
+
+		// =============Angle Dropdown list====================================
+		tc = "Vehicle Preview_01";
+		// UserListP.clickTriageVinStatus(driver, tc);
+		// UserListP.clickVehiclePreview(driver, tc);
+		ac.Wait(wt);
+		// VehiclePreview vpP = new VehiclePreview(driver);
+		tc = "Click Change Angle button_0";
+		vpP.clickChangeAngleDropDown(driver, tc);
+		ac.Wait(wt);
+		// Verify 8 angle images
+		for (int i = 1; i <= 8; i++) {
+			tc = "Click Change Angle button_0" + i;
+			vpP.selectOneAngleFrChangeAngleDropDown(driver, i, tc);
+			ac.Wait(wt);
+			//TODO here
+			vpP.verifyLoadAngleImage(driver, i, tc);
+			vpP.clickChangeAngleDropDown(driver, tc);
+			ac.Wait(wt);
+
+		}
+		System.out.println("Vehicle Preview page is complete!");
+		//// *************************Vehicle PreviewBtn******************************************************
+	}
+	public static void VehiclePreview_ScalingOnly(WebDriver driver, String brw, String versionNum, String envment)
+			throws Exception {
+
+		// AUTOPXOPS-2427.  Load environment parameters
+		Properties prop = new Properties();
+		// testprop.load(new FileInputStream("./data/autopxConf.properties"));
+		try {
+			prop.load(AdminPortalController.class.getClassLoader()
+					.getResourceAsStream("./AdminPortalData/adminPortalConf.properties"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String tc = "";
+		String env = prop.getProperty("AUTOpx.environment");
+		String envBrowser = prop.getProperty("AUTOpx.browser");
+		String render = prop.getProperty("AUTOpx.render");
+		String addNewVIN = prop.getProperty("AUTOpx.addNewVIN");
+		String accountEmail = prop.getProperty(env + ".VINpxEmail");
+		String accountPS = prop.getProperty(env + ".VINpxPassword");
+		// String baseURL = prop.getProperty(env + ".VINpxDealerPortalBaseURL");
+		String dealershipName = prop.getProperty(env + ".VINpxDealershipname");
+		String dealerCode = prop.getProperty(env + ".VINpxDealerCode");
+		String vin01 = prop.getProperty(env + ".VINpxVin01");
+		String vin02 = prop.getProperty(env + ".VINpxVin02");
+		String vehGUID01 = prop.getProperty(env + ".VINpxVin01GUID");
+		String vehGUID02 = prop.getProperty(env + ".VINpxVin02GUID");
+		// String vinpxnewVin01 = prop.getProperty(env + ".VINpxNewVIN01");
+		String[] VINpxNewVINs = fetchOneDemArrayFromPropFile(env + ".VINpxNewVINs", prop);
+		String serverName = prop.getProperty(env + ".serverName");
+		String dbName = prop.getProperty(env + ".dbName");
+		String userName = prop.getProperty(env + ".userName");
+		String password = prop.getProperty(env + ".password");
+		String MaxVins = prop.getProperty(env + ".MaxVinsForPreview");
+		int MaxVinsForPreview = Integer.parseInt(MaxVins);
+		// dealership profile:
+		String OEM = prop.getProperty(env + ".OEM");
+		String[] Brands = fetchOneDemArrayFromPropFile(env + ".Brands", prop);
+		String AllProdDealerCode = prop.getProperty(env + ".AllProdDealerCode");
+		String AllProdEmail = prop.getProperty(env + ".AllProdEmail");
+		String DealershipID = prop.getProperty(env + ".DealershipID");
+		String DealershipName = prop.getProperty(env + ".DealershipName");
+		String[] Products = fetchOneDemArrayFromPropFile(env + ".Products", prop);
+		String MetadataValues = prop.getProperty(env + ".MetadataValues");
+		String Address = prop.getProperty(env + ".Address");
+		String AddressLine2 = prop.getProperty(env + ".AddressLine2");
+		String City = prop.getProperty(env + ".City");
+		int StateProvince = Integer.parseInt(prop.getProperty(env + ".StateProvince"));
+		int Country = Integer.parseInt(prop.getProperty(env + ".Country"));
+		String ZipPostalCode = prop.getProperty(env + ".ZipPostalCode");
+		String DealershipEmail = prop.getProperty(env + ".DealershipEmail");
+		String AccountEmail = prop.getProperty(env + ".AccountEmail");
+		String FirstName = prop.getProperty(env + ".FirstName");
+		String LastName = prop.getProperty(env + ".LastName");
+		String TagLineMarkingMsg = prop.getProperty(env + ".TagLineMarkingMsg");
+		String Website = prop.getProperty(env + ".Website");
+		String DealershipPhoneNumber = prop.getProperty(env + ".DealershipPhoneNumber");
+		int TemplateSettings = Integer.parseInt(prop.getProperty(env + ".TemplateSettings"));
+		int SelectBackgroundSet = Integer.parseInt(prop.getProperty(env + ".SelectBackgroundSet"));
+		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
+		String AddNewAccountEmail = prop.getProperty(env + ".AddNewAccountEmail");
+		String addNewDealerExtension = prop.getProperty(env + ".addNewDealerExtension");
+		String dealershipLogoPath = prop.getProperty("AUTOpx.dealershipLogoPath");
+		String addNewDealerShip = prop.getProperty("AUTOpx.addNewDealerShip");
+		String backgroundSetPath1 = prop.getProperty("AUTOpx.backgroundSetPath1");
+		String backgroundSetPath2 = prop.getProperty("AUTOpx.backgroundSetPath2");
+		String[] Acodes = fetchOneDemArrayFromPropFile(env + ".acodes", prop);
+		// Initial
+		// final int wt_Secs = 6;
+		String TCnum;
+		// ====================
+		String tempVIN = "";
+		String tempVehGUID = "";
+		String ProductVINpx = "";
+		String ProductSTOCKpx = "";
+		String ProductLOTpx = "";
+		String Dealership_ID = "";
+		String Dealership_Name = "";
+		String Dealership_Email = "";
+		String Account_Email = "";
+		String Metadata = "";
+		String dlrGuid = "";
+		String alertmessage = "";
+		// ====================
+		Comlibs ac = new Comlibs();
+		ac.rwExcel("", "*********Vehicle Preview**********", "");
+		int count = 0;
+		int dataLength = 54;
+		String[] metadataValues = new String[dataLength + 1];
+		int datasize = metadataValues.length;
+
+		// =================================================
+		VDVILogin loginP = new VDVILogin(driver);
+		int dealerN = 0;
+		String dealerSN = "";
+		tc = "Vehicle Preview_01";
+		loginP.login(driver, accountEmail, accountPS, tc);
+		ac.Wait(wt);
+		String parentHandle = driver.getWindowHandle(); // get the current window handle
+
+		UserList UserListP = new UserList(driver);
+
+		//// *************************Vehicle PreviewBtn******************************************************
+		// =============Acode field====================================
+		tc = "Acode field_01";
+		UserListP.clickVehiclePreview(driver, tc);
+		ac.Wait(wt);
+		VehiclePreview vpP = new VehiclePreview(driver);
+		String [] Acodes2 = {"USD00ACC051A0","USD00ACC141E0","USD00ACC161A0"};// 2019 BMW 530e=USC90BMC831A0, 2018 Mazda CX5 = CAC80MAS062A0
+		int countAcode=0;
+		int wtime=1;
+		boolean noAngle=false;
+		for (String acode: Acodes2){
+			countAcode++;
+			System.out.println("Acode# = "+countAcode);
+			vpP.inputAcode(driver, acode, tc);
+			tc = "Acode field_02";
+			vpP.clickAcodeSubmitBtn(driver, tc);
+			
+			ac.Wait(wt*wtime);
+			try {
+				UserListP.scrollUp(driver, 600, "Vehicle Preview");
+				ac.Wait(wt*wtime);
+				UserListP.scrollUp(driver, 600, "Vehicle Preview");
+				ac.Wait(wt*wtime);
+				UserListP.scrollUp(driver, -1200, "Vehicle Preview");
+				for (int i=1;i<=8;i++) {
+					vpP.clickChangeAngleDropDown(driver, tc);
+					vpP.selectOneAngleFrChangeAngleDropDown(driver, i, tc);
+					System.out.println("                       Angle# = "+i);
+					ac.Wait(wt*wtime);
+					UserListP.scrollUp(driver, 600, "Vehicle Preview");
+					ac.Wait(wt*wtime);
+					UserListP.scrollUp(driver, 600, "Vehicle Preview");
+					ac.Wait(wt*wtime);
+					UserListP.scrollUp(driver, -1200, "Vehicle Preview");
+				}
+				
+			}catch (Exception e) {
+				ac.acceptAlert(driver, tc, "OK");
+				ac.rwExcel(acode, false,"No Angle","Count ="+countAcode);
+				System.out.println("Acode# = "+countAcode+". Failed acode = "+acode);
+			}
+
+
+		}
+		
+		
+		
+		//TODO here
+		vpP.verifyLoadAngleImage(driver, 1, tc);
+		vpP.verifyLoadAngleImage(driver, 8, tc);
+
+		// =============YMM filtering====================================
+		tc = "YMM year filtering_01";
+		// UserListP.clickTriageVinStatus(driver, tc);
+		// UserListP.clickVehiclePreview(driver, tc);
+		ac.Wait(wt);
+		vpP.clickYearDropDown(driver, tc);
+		vpP.clickYearOne(driver, 2, tc);// 2=2019
+		ac.Wait(wt);
+		tc = "YMM make filtering_01";
+		vpP.clickMakeDropDown(driver, tc);
+		vpP.clickMakeOne(driver, 8, tc);// 8=BMW
+		ac.Wait(wt);
+		tc = "YMM model filtering_01";
+		vpP.clickModelDropDown(driver, tc);
+		vpP.clickModelOne(driver, 10, tc);// 10=530e
+		ac.Wait(wt);
+		tc = "YMM trim filtering_01";
+		vpP.clickTrimDropDown(driver, tc);
+		vpP.clickTrimOne(driver, 2, tc);// 2=xDriver iPerformance (USC90BMC831A0)
+		ac.Wait(wt);
+		tc = "YMM sumbit filtering_01";
+		try {
+			vpP.clickYmmSubmit(driver, tc);
+			ac.rwExcel(tc, true, "Click Submit for YMM", "Submit passed!");
+			ac.Wait(wt * 4);
+			//TODO here
+			vpP.verifyLoadAngleImage(driver, 1, tc);
+			vpP.verifyLoadAngleImage(driver, 8, tc);
+		} catch (Exception e) {
+			ac.rwExcel(tc, false, "Click Submit for YMM", "Submit failed!");
+		}
+		// =============Vehicle Color====================================
+		tc = "Vehicle Color filtering_01";
+		int colorlistNum = vpP.getColorCount(driver, tc);
+		for (int i = 1; i <= colorlistNum / 2; i++) {
+			tc = "Vehicle Color filtering_" + i;
+			vpP.clickVehicleColorDropDown(driver, tc);
+			vpP.clickVehicleColorOne(driver, i, tc);
+			ac.Wait(wt);
+			//TODO here
 			vpP.verifyLoadAngleImage(driver, 1, tc);
 			vpP.verifyLoadAngleImage(driver, 8, tc);
 		}
@@ -2760,6 +2981,7 @@ public class AdminPortalController extends Comlibs {
 			tc = "Click Change Angle button_0" + i;
 			vpP.selectOneAngleFrChangeAngleDropDown(driver, i, tc);
 			ac.Wait(wt);
+			//TODO here
 			vpP.verifyLoadAngleImage(driver, i, tc);
 			vpP.clickChangeAngleDropDown(driver, tc);
 			ac.Wait(wt);
@@ -2994,7 +3216,7 @@ public class AdminPortalController extends Comlibs {
 		int SelectBackgroundSet = Integer.parseInt(prop.getProperty(env + ".SelectBackgroundSet"));
 		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
 		String AddNewAccountEmail = prop.getProperty(env + ".AddNewAccountEmail");
-
+		
 		// Initial
 		// final int wt_Secs = 6;
 		String TCnum;
@@ -3730,7 +3952,10 @@ public class AdminPortalController extends Comlibs {
 			//// 6. Vehicle Preview
 			loadURL(driver, baseURL, env);
 			VehiclePreview(driver, tBrowser, versionNum, env);
-
+			//// 6.1 Vehicle Preview Scaling only
+			//loadURL(driver, baseURL, env);
+			//VehiclePreview_ScalingOnly(driver, tBrowser, versionNum, env);
+			
 			//// 7. Whitelist Dashboard
 			loadURL(driver, baseURL, env);
 			WhitelistDashboard(driver, tBrowser, versionNum, env);
