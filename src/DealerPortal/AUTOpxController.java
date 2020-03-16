@@ -4668,7 +4668,7 @@ public class AUTOpxController extends Comlibs {
 			log.rwExcel("", "-----STOCKpx Sorting in Templates Testing started-----" + (i + 1), "");
 			STOCKpxSortingOnlyTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
-			////// 5.2 FCA VINpx Angle images sorting and Templates - run this first to move mouse 3 times during the Angle Images testing in Templates
+			/////// 5.2 FCA VINpx Angle images sorting and Templates - run this first to move mouse 3 times during the Angle Images testing in Templates
 			log.rwExcel("", "-----Templates FCA Sorting Testing started-----" + (i + 1), "");
 			VINpxTemplatesTC(driver, tBrowser, versionNum, env, chkEmail);
 
