@@ -90,6 +90,7 @@ public class Backgrounds extends Comlibs {
 	public Backgrounds clickBackground(WebDriver driver, int num, String tc) throws IOException {
 		By selectBackground = By
 				.xpath("/html/body/div[2]/div[2]/div/div/div[2]/div/div/div/div[1]/div[" + num + "]/div/div[1]/img");// 1,2,3....level count
+		
 		elementExist(driver, selectBackground, true, tc);
 		driver.findElement(selectBackground).click();
 		return this;

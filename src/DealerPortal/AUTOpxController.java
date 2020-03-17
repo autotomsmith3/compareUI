@@ -3988,6 +3988,10 @@ public class AUTOpxController extends Comlibs {
 		}
 
 		TCnum = "Add GB_01_2";
+		int t=wt*80;
+		System.out.println("\nWaiting "+t+" secs for loading the bg images!\n");
+		log.Wait(t);	
+		System.out.println("\nDone!\n");
 		bgP.clickBackground(driver, bgNum, TCnum);
 		TCnum = "Add GB_01_3";
 		// bgP.scrollUp(driver, 1000, TCnum);
@@ -4098,10 +4102,14 @@ public class AUTOpxController extends Comlibs {
 			bgP.clickAddBackgrounds(driver, TCnum);
 			if (i == 1) {
 				log.Wait(wt * browserWT);
+				System.out.println("\nWaiting "+t+" secs for loading the bg images!\n");
+				log.Wait(t);
+				System.out.println("\nDone!\n");
 			} else {
 				log.Wait(wt * 1);
 			}
 			log.Wait(wt * browserWT);
+
 			bgP.clickBackground(driver, bgNum, TCnum);
 			// bgP.scrollUp(driver, 1000, TCnum);
 			bgP.clickAddBtn(driver, TCnum);
@@ -4628,8 +4636,8 @@ public class AUTOpxController extends Comlibs {
 			log.rwExcel("", "Test Environment", env);
 
 			loadURL(driver, baseURL);
-			////// tempDebug(driver);// ***************************************Debug*****************************************
-			//// AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
+			//// tempDebug(driver);// ***************************************Debug*****************************************
+			////AddAllVINs(driver, tBrowser, env); //works, need to execlude #VINpx only in properties file, and include ##Add All VINs to VINpx - Add all New VIN
 
 			// ////// 5.1 STOCKpx Angle images sorting - Templates - run this first to move mouse 2 times during the Angle Images testing in Templates
 			// log.rwExcel("", "-----STOCKpx Sorting in Templates Testing started-----" + (i + 1), "");
