@@ -595,7 +595,8 @@ public class Comlibs {
 			dim = driver.manage().window().getSize();
 			rwExcel("", true, "Set up browser resolution for device = " + device, "  " + dim);
 			}else {// center
-				driver.manage().window().setSize(new Dimension(1920, 990));  //Test for vehicle preview page scaling
+				driver.manage().window().setSize(new Dimension(1720, 990));  //Center for home screen
+//				driver.manage().window().setSize(new Dimension(1920, 990));  //Test for vehicle preview page scaling
 //				driver.manage().window().setSize(new Dimension(1300, 990));  //Original one before March 05, 2020
 //				driver.manage().window().setSize(new Dimension(1080, 990));  //Original one before May 04, 2017
 //				driver.manage().window().setSize(new Dimension(1180, 1040));  //After Dec 13, 2017. 2018-08-22: 1080, 1040

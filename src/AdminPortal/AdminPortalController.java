@@ -689,10 +689,10 @@ public class AdminPortalController extends Comlibs {
 
 		DealerProfile DealerProfieP = new DealerProfile(driver);
 
-//		tc = "Select/Unselect All OEM/Brands_01";
-//		DealerProfieP.selectUnselectAllOEMBrands(driver, true, tc);
-//		tc = "Select/Unselect All OEM/Brands_02";
-//		DealerProfieP.selectUnselectAllOEMBrands(driver, false, tc);
+		tc = "Select/Unselect All OEM/Brands_01";
+		DealerProfieP.selectUnselectAllOEMBrands(driver, true, tc);
+		tc = "Select/Unselect All OEM/Brands_02";
+		DealerProfieP.selectUnselectAllOEMBrands(driver, false, tc);
 		DealerProfieP.selectOEM(driver, 13, tc);
 		// check Buick and Cadillac and Chevrolet and GMC
 		// DealerProfieP.selectOEMBrands(driver, 1); // check Buick
@@ -1998,7 +1998,7 @@ public class AdminPortalController extends Comlibs {
 		tc = "TC236111";
 		NewVehicleP.inputSearch(driver, searchText, tc);
 
-		int testRows = 3;// 2017, 2018, 2019, 2020, if 3 - no 2018
+		int testRows = 2;// 2017, 2018, 2019, 2020, if 3 - no 2018
 		for (int i = 1; i <= testRows; i++) {
 			// -------------------------------------Vehicles-----------------------------------
 //			tc = "TC236111_01_" + i;
@@ -3139,7 +3139,7 @@ public class AdminPortalController extends Comlibs {
 
 		tc = "Whitelist Delete_No_Yes_05 ";
 //		wlP.inputSearch(driver, "Tahoe", tc);
-
+		ac.Wait(wt);
 //		ac.moveSliderBar(driver, "DOWN", moveTimes, moverElement, tc);
 		ac.moveSliderBar(driver, "RIGHT", moveTimes, moverElement, tc);
 
@@ -3892,7 +3892,7 @@ public class AdminPortalController extends Comlibs {
 			System.out.println("Test Browser = " + tBrowser + "\n");
 
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-			if (!tBrowser.equalsIgnoreCase("Chromexxxxxxxxx")) { // only Chrome doesn't work since Chrome updated on
+			if (!tBrowser.equalsIgnoreCase("Chrome")) { // only Chrome doesn't work since Chrome updated on
 																	// Jul, 2017, works on Dec 13,2017 webdriver
 																	// ver3.8.5
 				log.SelecBroswerResolution(driver, envDevice, onScreen);

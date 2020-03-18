@@ -99,9 +99,13 @@ public class VehiclePreview extends Comlibs {
 	public void verifyLoadAngleImage(WebDriver driver, int num, String tc) throws IOException {
 		// Verify angle image showing or not:
 		Wait(1);
-		By angleImage = By.xpath("/html/body/div/div/div[2]/div/div/div/div[4]/div/div["+num+"]/img[2]");
+//		By angleImage = By.xpath("/html/body/div/div/div[2]/div/div/div/div[4]/div/div["+num+"]/img[2]");// old before 2020.03.18
+		By angleImage = By.xpath("/html/body/div/div/div[2]/div/div/div/div[4]/div/div["+num+"]/canvas");// not working 20200318
+		//                        /html/body/div/div/div[2]/div/div/div/div[4]/div/div[1]/canvas
+		//						  /html/body/div/div/div[2]/div/div/div/div[4]/div/div[2]
+		
 		elementExist(driver, angleImage, true, tc);
-		VerifyImageLoaded(driver, angleImage, tc);
+		//VerifyImageLoaded(driver, angleImage, tc);
 
 	}
 
