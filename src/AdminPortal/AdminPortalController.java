@@ -1994,7 +1994,7 @@ public class AdminPortalController extends Comlibs {
 		UserListP.clickNewVehicles(driver, tc);
 		ac.Wait(wt * 2);
 		NewVehicles NewVehicleP = new NewVehicles(driver);
-		String searchText = "camaro";//"camaro"; "3500" // "Silverado 3500HD ";// "camaro"
+		String searchText = "camaro";// "camaro"; "3500" // "Silverado 3500HD ";// "camaro"
 		tc = "TC236111";
 		NewVehicleP.inputSearch(driver, searchText, tc);
 
@@ -2588,6 +2588,7 @@ public class AdminPortalController extends Comlibs {
 		}
 		//// *************************New Vehicle and WhiteListBtn******************************************************
 	}
+
 	public static void VehiclePreview(WebDriver driver, String brw, String versionNum, String envment)
 			throws Exception {
 
@@ -2700,7 +2701,7 @@ public class AdminPortalController extends Comlibs {
 		tc = "Acode field_02";
 		vpP.clickAcodeSubmitBtn(driver, tc);
 		ac.Wait(wt);
-		//TODO here
+		// TODO here verify image loading for canvas image - not working
 		vpP.verifyLoadAngleImage(driver, 1, tc);
 		vpP.verifyLoadAngleImage(driver, 8, tc);
 
@@ -2729,7 +2730,6 @@ public class AdminPortalController extends Comlibs {
 			vpP.clickYmmSubmit(driver, tc);
 			ac.rwExcel(tc, true, "Click Submit for YMM", "Submit passed!");
 			ac.Wait(wt * 4);
-			//TODO here
 			vpP.verifyLoadAngleImage(driver, 1, tc);
 			vpP.verifyLoadAngleImage(driver, 8, tc);
 		} catch (Exception e) {
@@ -2743,9 +2743,8 @@ public class AdminPortalController extends Comlibs {
 			vpP.clickVehicleColorDropDown(driver, tc);
 			vpP.clickVehicleColorOne(driver, i, tc);
 			ac.Wait(wt);
-			//TODO here
-//			vpP.verifyLoadAngleImage(driver, 1, tc);
-//			vpP.verifyLoadAngleImage(driver, 8, tc);
+			vpP.verifyLoadAngleImage(driver, 1, tc);
+			vpP.verifyLoadAngleImage(driver, 8, tc);
 		}
 
 		// =============Angle Dropdown list====================================
@@ -2762,7 +2761,6 @@ public class AdminPortalController extends Comlibs {
 			tc = "Click Change Angle button_0" + i;
 			vpP.selectOneAngleFrChangeAngleDropDown(driver, i, tc);
 			ac.Wait(wt);
-			//TODO here
 			vpP.verifyLoadAngleImage(driver, i, tc);
 			vpP.clickChangeAngleDropDown(driver, tc);
 			ac.Wait(wt);
@@ -2771,10 +2769,11 @@ public class AdminPortalController extends Comlibs {
 		System.out.println("Vehicle Preview page is complete!");
 		//// *************************Vehicle PreviewBtn******************************************************
 	}
+
 	public static void VehiclePreview_ScalingOnly(WebDriver driver, String brw, String versionNum, String envment)
 			throws Exception {
 
-		// AUTOPXOPS-2427.  Load environment parameters
+		// AUTOPXOPS-2427. Load environment parameters
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("./data/autopxConf.properties"));
 		try {
@@ -2878,48 +2877,43 @@ public class AdminPortalController extends Comlibs {
 		UserListP.clickVehiclePreview(driver, tc);
 		ac.Wait(wt);
 		VehiclePreview vpP = new VehiclePreview(driver);
-		String [] Acodes2 = {"USD00ACC051A0","USD00ACC141E0","USD00ACC161A0"};// 2019 BMW 530e=USC90BMC831A0, 2018 Mazda CX5 = CAC80MAS062A0
-		int countAcode=0;
-		int wtime=1;
-		boolean noAngle=false;
-		for (String acode: Acodes2){
+		String[] Acodes2 = { "USD00ACC051A0", "USD00ACC141E0", "USD00ACC161A0" };// 2019 BMW 530e=USC90BMC831A0, 2018 Mazda CX5 = CAC80MAS062A0
+		int countAcode = 0;
+		int wtime = 1;
+		boolean noAngle = false;
+		for (String acode : Acodes2) {
 			countAcode++;
-			System.out.println("Acode# = "+countAcode);
+			System.out.println("Acode# = " + countAcode);
 			vpP.inputAcode(driver, acode, tc);
 			tc = "Acode field_02";
 			vpP.clickAcodeSubmitBtn(driver, tc);
-			
-			ac.Wait(wt*wtime);
+
+			ac.Wait(wt * wtime);
 			try {
 				UserListP.scrollUp(driver, 600, "Vehicle Preview");
-				ac.Wait(wt*wtime);
+				ac.Wait(wt * wtime);
 				UserListP.scrollUp(driver, 600, "Vehicle Preview");
-				ac.Wait(wt*wtime);
+				ac.Wait(wt * wtime);
 				UserListP.scrollUp(driver, -1200, "Vehicle Preview");
-				for (int i=1;i<=8;i++) {
+				for (int i = 1; i <= 8; i++) {
 					vpP.clickChangeAngleDropDown(driver, tc);
 					vpP.selectOneAngleFrChangeAngleDropDown(driver, i, tc);
-					System.out.println("                       Angle# = "+i);
-					ac.Wait(wt*wtime);
+					System.out.println("                       Angle# = " + i);
+					ac.Wait(wt * wtime);
 					UserListP.scrollUp(driver, 600, "Vehicle Preview");
-					ac.Wait(wt*wtime);
+					ac.Wait(wt * wtime);
 					UserListP.scrollUp(driver, 600, "Vehicle Preview");
-					ac.Wait(wt*wtime);
+					ac.Wait(wt * wtime);
 					UserListP.scrollUp(driver, -1200, "Vehicle Preview");
 				}
-				
-			}catch (Exception e) {
+
+			} catch (Exception e) {
 				ac.acceptAlert(driver, tc, "OK");
-				ac.rwExcel(acode, false,"No Angle","Count ="+countAcode);
-				System.out.println("Acode# = "+countAcode+". Failed acode = "+acode);
+				ac.rwExcel(acode, false, "No Angle", "Count =" + countAcode);
+				System.out.println("Acode# = " + countAcode + ". Failed acode = " + acode);
 			}
-
-
 		}
-		
-		
-		
-		//TODO here
+
 		vpP.verifyLoadAngleImage(driver, 1, tc);
 		vpP.verifyLoadAngleImage(driver, 8, tc);
 
@@ -2948,7 +2942,6 @@ public class AdminPortalController extends Comlibs {
 			vpP.clickYmmSubmit(driver, tc);
 			ac.rwExcel(tc, true, "Click Submit for YMM", "Submit passed!");
 			ac.Wait(wt * 4);
-			//TODO here
 			vpP.verifyLoadAngleImage(driver, 1, tc);
 			vpP.verifyLoadAngleImage(driver, 8, tc);
 		} catch (Exception e) {
@@ -2962,7 +2955,6 @@ public class AdminPortalController extends Comlibs {
 			vpP.clickVehicleColorDropDown(driver, tc);
 			vpP.clickVehicleColorOne(driver, i, tc);
 			ac.Wait(wt);
-			//TODO here
 			vpP.verifyLoadAngleImage(driver, 1, tc);
 			vpP.verifyLoadAngleImage(driver, 8, tc);
 		}
@@ -2981,7 +2973,6 @@ public class AdminPortalController extends Comlibs {
 			tc = "Click Change Angle button_0" + i;
 			vpP.selectOneAngleFrChangeAngleDropDown(driver, i, tc);
 			ac.Wait(wt);
-			//TODO here
 			vpP.verifyLoadAngleImage(driver, i, tc);
 			vpP.clickChangeAngleDropDown(driver, tc);
 			ac.Wait(wt);
@@ -3216,7 +3207,7 @@ public class AdminPortalController extends Comlibs {
 		int SelectBackgroundSet = Integer.parseInt(prop.getProperty(env + ".SelectBackgroundSet"));
 		int wt = Integer.parseInt(prop.getProperty("AUTOpx.waitTime"));
 		String AddNewAccountEmail = prop.getProperty(env + ".AddNewAccountEmail");
-		
+
 		// Initial
 		// final int wt_Secs = 6;
 		String TCnum;
@@ -3893,8 +3884,8 @@ public class AdminPortalController extends Comlibs {
 
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			if (!tBrowser.equalsIgnoreCase("Chrome")) { // only Chrome doesn't work since Chrome updated on
-																	// Jul, 2017, works on Dec 13,2017 webdriver
-																	// ver3.8.5
+														// Jul, 2017, works on Dec 13,2017 webdriver
+														// ver3.8.5
 				log.SelecBroswerResolution(driver, envDevice, onScreen);
 			}
 			log.rwExcel("", "****** Testing started ******" + i, "");
@@ -3953,9 +3944,9 @@ public class AdminPortalController extends Comlibs {
 			loadURL(driver, baseURL, env);
 			VehiclePreview(driver, tBrowser, versionNum, env);
 			//// 6.1 Vehicle Preview Scaling only
-			//loadURL(driver, baseURL, env);
-			//VehiclePreview_ScalingOnly(driver, tBrowser, versionNum, env);
-			
+			// loadURL(driver, baseURL, env);
+			// VehiclePreview_ScalingOnly(driver, tBrowser, versionNum, env);
+
 			//// 7. Whitelist Dashboard
 			loadURL(driver, baseURL, env);
 			WhitelistDashboard(driver, tBrowser, versionNum, env);
