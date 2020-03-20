@@ -2341,12 +2341,12 @@ public class AUTOpxController extends Comlibs {
 		}
 		if (alertPass) {
 			vgP.clickBackToInventoryBtn(driver);
-			log.Wait(wt * 4);
+			log.Wait(wt * 6);
 			igP.clickTemplatesBtn(driver);
-			log.Wait(wt * 4);
+			log.Wait(wt * 6);
 			Templates tpP = new Templates(driver);
 			tpP.clickInventoryGalleryBtn(driver);
-			log.Wait(wt * 4);
+			log.Wait(wt * 6);
 			igP.verifyLoadPreviewTileImage(driver, SINGLE_VIN_RENDER_MAX_WT, vin01, vehGUID01, 1, TCnum);
 			// System.out.println("\nPlease wait at least 60 seconds, vin: "+vin01+" is re-rendering...\n");
 			// log.Wait(60);
@@ -2366,9 +2366,9 @@ public class AUTOpxController extends Comlibs {
 				userName, password);
 		TCnum = "TC139497";
 		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
-		log.Wait(2);
+		log.Wait(wt);
 		vgP.clickRightNextImageBtn(driver, TCnum);
-		log.Wait(2);
+		log.Wait(wt);
 		// Window scroll down to make the custom image visible.
 		igP.scrollUp(driver, 650, TCnum);
 		vgP.clickPreviewBtn(driver, imageGUIDString, vin01, TCnum);
@@ -2405,9 +2405,9 @@ public class AUTOpxController extends Comlibs {
 		}
 		TCnum = "TC139922_17";
 		igP.scrollUp(driver, 650, TCnum);
-		log.Wait(2);
+		log.Wait(wt);
 		vgP.clickRightNextImageBtn(driver, TCnum);
-		log.Wait(2);
+		log.Wait(wt);
 		vgP.clickDeleteBtn(driver, imageGUIDString, vehGUID01, TCnum);// Testing now. need to clear up the code
 		log.Wait(wt);
 		TCnum = "TC139922_18";
@@ -3988,7 +3988,7 @@ public class AUTOpxController extends Comlibs {
 		}
 
 		TCnum = "Add GB_01_2";
-		int t=wt*1;
+		int t=wt*5;
 		System.out.println("\nWaiting "+t+" secs for loading the bg images!\n");
 		log.Wait(t);	
 		System.out.println("\nDone!\n");
@@ -4289,6 +4289,7 @@ public class AUTOpxController extends Comlibs {
 		}
 		for (int i = 1; i <= (addNew + 1); i++) {
 			TCnum = "MultipleBGs_AddToAny_" + i;
+			log.Wait(wt);
 			bgP.selectYearValue(driver, i, "Any", TCnum);
 			bgP.selectMakeValue(driver, i, "Any", TCnum);
 			log.Wait(wt);
