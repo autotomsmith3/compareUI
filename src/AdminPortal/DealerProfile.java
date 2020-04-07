@@ -457,7 +457,14 @@ public class DealerProfile extends Comlibs {
 	}
 	
 	public DealerProfile clickReRenderALLImagesNow(WebDriver driver, String tc) throws Exception {
-		elementExist(driver, reRenderALLImagesNowBtn, true, tc);
+		try {
+			elementExist(driver, reRenderALLImagesNowBtn, true, tc);
+		}catch(Exception e) {
+			System.out.println("\nreRenderALLImagesNowBtn does not exist!\n");
+			Wait(3);
+			elementExist(driver, reRenderALLImagesNowBtn, true, tc);
+		}
+
 		driver.findElement(reRenderALLImagesNowBtn).click();
 		return this;
 	}
