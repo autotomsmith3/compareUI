@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -69,7 +71,17 @@ public class DealerProfile extends Comlibs {
 	// *[@id="dealerListBtn"]/span
 	By MessageDisplayedOnHead = By.xpath("//*[@id=\"header\"]/div/div[2]/span");
 	By popupOkayBtn = By.xpath("//*[@id=\"alertModal\"]/div/div/div[3]/button");
-
+    By reRenderALLImagesNowBtn=By.xpath("//*[@id=\"btnRerender\"]");
+    By completeLocator=By.xpath("//*[@id=\"main-container\"]/div/div[2]/div/div[3]/div[2]/div[1]");
+    By completeNumLocator=By.xpath("//*[@id=\"badgeComplete\"]");
+    By renderingLocator=By.xpath("//*[@id=\"main-container\"]/div/div[2]/div/div[3]/div[2]/div[2]");
+	By renderingNumLocator=By.xpath("//*[@id=\"badgeRendering\"]");
+	
+	
+	
+	
+	
+	
 	public String getDealershipID(WebDriver driver, String tc) throws IOException {
 		elementExist(driver, DealershipIDLocator, true, tc);
 		String dealershipip = driver.findElement(DealershipIDLocator).getAttribute("value");
@@ -443,4 +455,60 @@ public class DealerProfile extends Comlibs {
 		}
 
 	}
+	
+	public DealerProfile clickReRenderALLImagesNow(WebDriver driver, String tc) throws Exception {
+		elementExist(driver, reRenderALLImagesNowBtn, true, tc);
+		driver.findElement(reRenderALLImagesNowBtn).click();
+		return this;
+	}
+	
+	public int getCompleteNumber(WebDriver driver, String tc) throws Exception {
+		elementExist(driver, completeNumLocator, true, tc);
+		String completeNum=driver.findElement(completeNumLocator).getText();
+		return Integer.parseInt(completeNum);
+	}
+	
+	public int getRenderingNumber(WebDriver driver, String tc) throws Exception {
+		elementExist(driver, renderingNumLocator, true, tc);
+		String renderingNum=driver.findElement(renderingNumLocator).getText();
+		return Integer.parseInt(renderingNum);
+	}	
+	public DealerProfile inputRenderAllField(WebDriver driver, String text, String tc) throws Exception {
+		try {
+		Alert alert =driver.switchTo().alert();
+		Wait(2);
+//		alert.sendKeys(Keys.TAB+"1"+Keys.TAB+"2"+Keys.TAB+"3"+Keys.TAB+"4"+Keys.TAB+"render all");//not wokring
+		driver.switchTo().alert().sendKeys(text);//works even it is not showing in the input field in Chrome browser. 
+        driver.switchTo().alert().accept();
+		}catch (Exception e) {
+			rwExcel(tc, false, "Input text: \""+text+"\", in popup feild", "failed to input.");
+		}
+		return this;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

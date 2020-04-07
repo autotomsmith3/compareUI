@@ -562,7 +562,8 @@ public class Comlibs {
 		// driver.manage().window().setSize(new Dimension(320, 640)); //iPhone
 		// 5: IE8, Chrome, FF work fine!
 		if (device.equalsIgnoreCase("PC")) {
-			driver.manage().window().setSize(new Dimension(1300, 1040)); // Original one Nov 09, 2018 Full size of the left monitor
+//			driver.manage().window().setSize(new Dimension(1720, 990));  //Center for home screen 20200323
+			driver.manage().window().setSize(new Dimension(1300, 1040)); // Original one before March 23, 2020 Full size of the left monitor
 			// driver.manage().window().setSize(new Dimension(1080, 1040)); // Original one before Oct 17, 2018
 			// driver.manage().window().setSize(new Dimension(1480, 1040)); //After Oct 17, 2018 (1480, 1040)
 			// driver.manage().window().setSize(new Dimension(1920, 1040)); // (width, high)
@@ -578,7 +579,7 @@ public class Comlibs {
 			dim = driver.manage().window().getSize();
 			rwExcel("", true, "Set up browser resolution for device = " + device, "  " + dim);
 		} else {
-			driver.manage().window().setSize(new Dimension(1080, 990)); // PC
+			driver.manage().window().setSize(new Dimension(1080, 990)); // PC  - 
 			dim = driver.manage().window().getSize();
 			System.out.println(device + " is a wrong device name. Current browser is setting to " + dim);
 			rwExcel("", false, "Set up browser resolution for device = " + device + " is not available. ",

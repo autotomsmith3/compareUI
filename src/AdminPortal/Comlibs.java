@@ -26,6 +26,7 @@ import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.util.HSSFColor;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -936,6 +937,23 @@ public class Comlibs {
 		}
 		// return alertPass;
 	}
+	  public void verifyGetAlertText(WebDriver driver,String text, String tc) throws Exception {
+		  String alertText="";
+		    try {
+		      Alert alert = driver.switchTo().alert();
+		      alertText = alert.getText();
+				if (alertText.contains(text)) {
+					System.out.println("get alert text: \""+alertText+"\"");
+					rwExcel(tc, true, "Verify Alert text message, should contains: \""+text+"\"", "Alert message is: \""+alertText+"\"");
+				}else {
+					rwExcel(tc, false, "Verify Alert text message, should contains: \""+text+"\"", "Alert message is: \""+alertText+"\"");
+				}
+		    } catch (Throwable e) {
+			  rwExcel(tc, false, "Alert pop-up should show", "Alert pop-up maybe not showing, failed to get the alert message.");
+		    }
+		    
+
+		  }
 	public void clickRefleshF5Btn(WebDriver driver, String tc) throws IOException {
 		// driver.findElement(addInventoryBtn).sendKeys(Keys.F5);
 		try {driver.navigate().to(driver.getCurrentUrl()); rwExcel(tc, true, "Click on F5 to fresh the page", "Working fine."); }catch (Exception e) {rwExcel(tc, false, "Click on F5 to fresh the page", "Not Working."); };

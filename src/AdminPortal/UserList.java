@@ -447,6 +447,7 @@ public class UserList extends Comlibs {
 
 	public UserList inputSearch(WebDriver driver, String dlrID, String tc) throws IOException {
 		elementExist(driver, searchLocator, true, tc);
+		driver.findElement(searchLocator).clear();
 		driver.findElement(searchLocator).sendKeys(dlrID);
 		return this;
 	}
