@@ -460,7 +460,7 @@ public class DealerProfile extends Comlibs {
 		try {
 			elementExist(driver, reRenderALLImagesNowBtn, true, tc);
 		}catch(Exception e) {
-			System.out.println("\nreRenderALLImagesNowBtn does not exist!\n");
+			System.out.println("\nreRenderALLImagesNowBtn does not exist! Wait 3 secs and try again!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 			Wait(3);
 			elementExist(driver, reRenderALLImagesNowBtn, true, tc);
 		}
