@@ -82,7 +82,7 @@ public class WhitelistDashboard extends Comlibs {
 				}
 			}
 		};
-		elementExist(driver, editIcon, true, tc);
+		elementExist(driver, editIcon,  true, tc);
 		driver.findElement(editIcon).click(); //
 		return this;
 
