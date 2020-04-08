@@ -42,8 +42,8 @@ public class WhitelistDashboard extends Comlibs {
 	// /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button
 	// disable /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div[2]
 	By saveActiveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button");
-					   //        /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div
-	By saveInactiveBtn=By.xpath("/html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div[2]");// disabled
+	// /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div
+	By saveInactiveBtn = By.xpath("/html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div[2]");// disabled
 	// /html/body/div[4]/div/div[2]/div/div[3]/div/div[2]/div[2]/div/button
 
 //	By noBtnDel = By.xpath("/html/body/div[4]/div[3]/div[1]/div");//  /html/body/div[4]/div[3]/div[1]/div  - not good
@@ -70,9 +70,18 @@ public class WhitelistDashboard extends Comlibs {
 
 	public WhitelistDashboard clickEditIcon(WebDriver driver, int num, String tc) throws IOException {
 //		By editIcon = By.cssSelector("div.webix_column:nth-child(8) > div:nth-child("+num+") > a:nth-child(1)");// 1,2,3... FF works fine but Chrome
-		By editIcon = By.xpath("/html/body/div[1]/div/div[2]/div/div/div/div/div/div[2]/div[2]/div/div[8]/div[" + num + "]/a[1]");// 1,2,3... works?Yes and FF as well, but need to make it visible, copy from Chrome full xpath
+		By editIcon = By.xpath(
+				"/html/body/div[1]/div/div[2]/div/div/div/div/div/div[2]/div[2]/div/div[8]/div[" + num + "]/a[1]");// 1,2,3... works?Yes and FF as well, but need to make it visible, copy from Chrome full xpath
 //		By editIcon = By.xpath("/html/body/div[1]/div/div[2]/div/div/div/div/div/div[2]/div[2]/div/div[8]/div["+num+"]/a[1]");// 1,2,3... works?, copy from Chrome full xpath
-
+		if (!elementExist(driver, editIcon, false, tc)) {
+			for (int i = 1; i < 10; i++) {
+				Wait(2);
+				System.out.println("\nFailed to identify element!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+				if (elementExist(driver, editIcon, false, tc)) {
+					break;
+				}
+			}
+		};
 		elementExist(driver, editIcon, true, tc);
 		driver.findElement(editIcon).click(); //
 		return this;
@@ -98,36 +107,43 @@ public class WhitelistDashboard extends Comlibs {
 	public WhitelistDashboard selectBackground(WebDriver driver, int row, int col, String tc) throws IOException {
 		By background = By.cssSelector(".webix_dataview > div:nth-child(1) > div:nth-child(" + row
 				+ ") > div:nth-child(" + col + ") > div:nth-child(1)");
-		//
-		//
+
+		if (!elementExist(driver, background, false, tc)) {
+			for (int i = 1; i < 10; i++) {
+				Wait(10);
+				if (elementExist(driver, background, false, tc)) {
+					break;
+				}
+			}
+		}
+		;
 		elementExist(driver, background, true, tc);
 		driver.findElement(background).click();
 		return this;
 	}
-	public WhitelistDashboard selectBackgrounds(WebDriver driver, int row1, int col1,int row2, int col2, String tc) throws IOException {
+
+	public WhitelistDashboard selectBackgrounds(WebDriver driver, int row1, int col1, int row2, int col2, String tc)
+			throws IOException {
 		By background1 = By.cssSelector(".webix_dataview > div:nth-child(1) > div:nth-child(" + row1
 				+ ") > div:nth-child(" + col1 + ") > div:nth-child(1)");
 		By background2 = By.cssSelector(".webix_dataview > div:nth-child(1) > div:nth-child(" + row2
 				+ ") > div:nth-child(" + col2 + ") > div:nth-child(1)");
-		//selected bg 1
+		// selected bg 1
 		elementExist(driver, background1, true, tc);
-		boolean selected=driver.findElement(background1).isSelected();
-		System.out.println("Selected = "+selected);
+		boolean selected = driver.findElement(background1).isSelected();
+		System.out.println("Selected = " + selected);
 		driver.findElement(background1).click();
-		selected=driver.findElement(background1).isSelected();
-		System.out.println("Selected Row ="+row1+", col ="+col1+".   "+selected);
-		
-		//selected bg 2
+		selected = driver.findElement(background1).isSelected();
+		System.out.println("Selected Row =" + row1 + ", col =" + col1 + ".   " + selected);
+
+		// selected bg 2
 		elementExist(driver, background2, true, tc);
 //		selected=driver.findElement(background2).isSelected();
 //		System.out.println("Selected = "+selected);
 		driver.findElement(background2).click();
 //		selected=driver.findElement(background1).isSelected();
 //		System.out.println("Selected Row ="+row2+", col ="+col2+".   "+selected);
-				
-		
-		
-		
+
 		return this;
 	}
 
@@ -161,6 +177,15 @@ public class WhitelistDashboard extends Comlibs {
 	}
 
 	public WhitelistDashboard clickCancelBtn(WebDriver driver, String tc) throws IOException {
+		if (!elementExist(driver, cancelBtn, false, tc)) {
+			for (int i = 1; i < 10; i++) {
+				Wait(10);
+				if (elementExist(driver, cancelBtn, false, tc)) {
+					break;
+				}
+			}
+		}
+		;
 		elementExist(driver, cancelBtn, true, tc);
 		driver.findElement(cancelBtn).click();
 		return this;
@@ -176,9 +201,10 @@ public class WhitelistDashboard extends Comlibs {
 
 		return this;
 	}
+
 	public boolean checkInactiveSaveBtn(WebDriver driver, String tc) throws IOException {
-		
-		boolean saveBth=elementExist(driver, saveInactiveBtn, false, tc);
+
+		boolean saveBth = elementExist(driver, saveInactiveBtn, false, tc);
 //				
 //				
 //				
