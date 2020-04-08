@@ -1,7 +1,7 @@
 package AdminPortal;
 
 /**
-* @author Zhoul 20200408-01
+* @author Zhoul 20200408-10:55 am
 * Initial date: 2019.05.01 based on AUTOPXOPS-1744
 * Created by Zhoul...modified by Zhoul...improved by Zhoul...updated by Zhoul...
 * * Runnable jar: java -jar AdminPortal.jar
