@@ -168,8 +168,8 @@ public class StudyPriceDemoUIController extends Comlibs {
 		conn.close();
 		return vGUID;
 	}
-	public static void StudyPriceDemoUITC(WebDriver driver, String brw, String envment)
-			throws IOException, InterruptedException {
+	public static void StudyPriceDemoUITCs(WebDriver driver, String brw, String envment) 
+			throws Exception {
 		// Load environment parameters
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
@@ -188,22 +188,42 @@ public class StudyPriceDemoUIController extends Comlibs {
 		String baseURL1 = StudyPriceDemoUIURLEnv+baseURL;
 		int wt = Integer.parseInt(prop.getProperty("StudyPrice.waitTime"));
 		// Initial
-		String TCnum;
+		String tc;
 		String ptitle;
 		Comlibs log =new Comlibs();
 		log.rwExcel("", "*********Study Price Demo UI**********", "");
-		StudyPRICEDemo loginP = new StudyPRICEDemo(driver);
-		TCnum = "TC139659_7_vg";
+		StudyPRICEDemo studyPriceDemoP = new StudyPRICEDemo(driver);
+		tc = "TCxxxx_01";
+		studyPriceDemoP.clickVehicleInfoBtn(driver, tc);
+		tc = "TCxxxx_021";
+		studyPriceDemoP.clickVinBtn(driver, tc);
+		studyPriceDemoP.verifyGoInActiveBtn(driver, tc);
+		tc = "TCxxxx_03";
+		studyPriceDemoP.clickVinArrow(driver, tc);
+		tc = "TCxxxx_02";
+		int vinCount=studyPriceDemoP.getVinCountFromVinDropList(driver, tc);
+		for (int i=1;i<=vinCount;i++) {
+			tc = "TCxxxx_03_"+i;
+			studyPriceDemoP.selectVinFromDropList(driver, i, tc);
+			log.Wait(wt);
+			studyPriceDemoP.clickGoActiveBtn(driver, tc);
+			log.Wait(wt);
+			log.GoBack(driver);
+			studyPriceDemoP.clickVinArrow(driver, tc);
+		}
 
+//		tc = "TCxxxx_03";
+//		studyPriceDemoP
+//		tc = "TCxxxx_03";
+//		studyPriceDemoP
+//		tc = "TCxxxx_03";
+//		studyPriceDemoP
+//		tc = "TCxxxx_03";
+//		studyPriceDemoP
+//		tc = "TCxxxx_03";
+//		studyPriceDemoP
+//		tc = "TCxxxx_03";
 
-		TCnum = "TC139502_12";
-
-//		ImageGallery igP = new ImageGallery(driver);
-//		log.Wait(wt);
-//		igP.enterTextInSearch(vin01);
-//		log.Wait(wt * 3);
-//		igP.clickViewDetailsBtn(driver, vin01, vehGUID01, TCnum);
-//		VehicleGallery vgP = new VehicleGallery(driver);
 
 
 
@@ -246,8 +266,8 @@ public class StudyPriceDemoUIController extends Comlibs {
 
 			//// 1. Study Price Demo UI Home page
 			log.rwExcel("", "-----Study Price Demo UI Home page Testing started-----" + (i + 1), "");
-			StudyPriceDemoUITC(driver, tBrowser, env);
-//			StudyPriceDemoUITC(driver, tBrowser, env, versionNum);
+			StudyPriceDemoUITCs(driver, tBrowser, env);
+
 			
 
 			log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
