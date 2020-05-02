@@ -70,7 +70,7 @@ public class StudyPriceDemoUIController extends Comlibs {
 		if (existTitle)
 			try {
 				{
-					rwExcel("", true, "Page Title is displayed.", sPageTitle);
+					rwExcel("", true, "Page Title is displayed!", sPageTitle);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
