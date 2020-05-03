@@ -41,15 +41,29 @@ public class StudyPRICEDemo extends Comlibs {
 	By getVehicleCount = By.xpath("/html/body/div/div/div[2]/div/div/article/div/div[2]/div[2]/div/div/div/div/div");
 	By yearArrow = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[1]/div/div[2]/span");
 	By yearArrowVehicleList = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[1]/div[2]/div");
-	By xxxxxx 			    = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[1]/div[2]/div[3]");
+//	By xxxxxx 			    = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[1]/div[2]/div[3]");
 	By MakeArrow = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[2]/div/div[2]/span");
 	By MakeArrowVehicleList = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[2]/div[2]/div");
-//	By xxxxxx = By.xpath("");
-//	By xxxxxx = By.xpath("");
-//	By xxxxxx = By.xpath("");
-//	
 	
+	By ModelArrow = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[3]/div/div[2]/span");
+	By ModelArrowVehicleList = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[3]/div[2]/div");
+	By goActiveBtn2 = By.xpath("//*[@id=\"App\"]/div/div[2]/div/div/article/div/div[2]/div[2]/div/div/form/div[2]/div/input");
 	
+	By TrimArrow=By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[4]/div/div[2]/span");
+	//				        //*[@id="react-tabs-1"]/div[2]/div[4]/div/div[2]/span
+	By TrimArrowVehicleList = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[4]/div[2]/div");	
+	//									//*[@id="react-tabs-9"]/div[2]/div[4]/div[2]/div[4]
+//	By xxxxxx = By.xpath("");	
+//	By xxxxxx = By.xpath("");	
+//	By xxxxxx = By.xpath("");	
+//	By xxxxxx = By.xpath("");	
+//	By xxxxxx = By.xpath("");	
+//	By xxxxxx = By.xpath("");	
+//	By xxxxxx = By.xpath("");	
+//	By xxxxxx = By.xpath("");	
+//	By xxxxxx = By.xpath("");	
+//	By xxxxxx = By.xpath("");	
+//	By xxxxxx = By.xpath("");	
 	
 	
 	public StudyPRICEDemo inputUername(WebDriver driver, String un) {
@@ -90,7 +104,11 @@ public class StudyPRICEDemo extends Comlibs {
 		driver.findElement(goActiveBtn).click();
 		return this;
 	}	
-	
+	public StudyPRICEDemo verifyGoActiveBtn(WebDriver driver, String tc) throws Exception {
+		elementExist(driver, goActiveBtn, true, tc);
+//		driver.findElement(goActiveBtn).click();
+		return this;
+	}	
 	public StudyPRICEDemo verifyGoInActiveBtn(WebDriver driver, String tc) throws Exception {
 		elementExist(driver, goInActiveBtn, true, tc);
 
@@ -134,7 +152,7 @@ public class StudyPRICEDemo extends Comlibs {
 		Wait(8);
 		return this;
 	}
-	
+//Year
 	public int  getVehicleCountFromVehicleList(WebDriver driver, String tc) throws Exception {
 		int vinC=0;
 		elementExist(driver, getVehicleCount, true, tc);
@@ -164,6 +182,8 @@ public class StudyPRICEDemo extends Comlibs {
 		return this;
 	}
 	
+//Make
+	
 	public StudyPRICEDemo clickMakeArrow(WebDriver driver, String tc) throws Exception {
 		elementExist(driver, MakeArrow, true, tc);
 		driver.findElement(MakeArrow).click();
@@ -188,10 +208,50 @@ public class StudyPRICEDemo extends Comlibs {
 		return this;
 	}
 	
+// Model
+	public StudyPRICEDemo clickModelArrow(WebDriver driver, String tc) throws Exception {
+		elementExist(driver, ModelArrow, true, tc);
+		driver.findElement(ModelArrow).click();
+		return this;
+	}	
 	
+	public int  getModelCountFromModelList(WebDriver driver, String tc) throws Exception {
+		int vinC=0;
+		elementExist(driver, ModelArrowVehicleList, true, tc);
+		vinC=driver.findElements(ModelArrowVehicleList).size();
+//		vinC=Integer.parseInt(vinCount);
+		return vinC;
+	}	
 	
+	public StudyPRICEDemo selectModelFromModelArrowList(WebDriver driver, int num, String tc) throws Exception {
+		By ModelArrowVehicleListNum = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[3]/div[2]/div["+num+"]");
+		elementExist(driver, ModelArrowVehicleListNum, true, tc);
+		driver.findElement(ModelArrowVehicleListNum).click();
+		return this;
+	}
 	
-	
+	// Trim
+		public StudyPRICEDemo clickTrimArrow(WebDriver driver, String tc) throws Exception {
+			elementExist(driver, TrimArrow, true, tc);
+			driver.findElement(TrimArrow).click();
+			return this;
+		}	
+		
+		public int  getTrimCountFromTrimList(WebDriver driver, String tc) throws Exception {
+			int vinC=0;
+			elementExist(driver, TrimArrowVehicleList, true, tc);
+			vinC=driver.findElements(TrimArrowVehicleList).size();
+//			vinC=Integer.parseInt(vinCount);
+			return vinC;
+		}	
+		
+		public StudyPRICEDemo selectTrimFromTrimArrowList(WebDriver driver, int num, String tc) throws Exception {
+			By TrimArrowVehicleListNum = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[4]/div[2]/div["+num+"]");
+			elementExist(driver, TrimArrowVehicleListNum, true, tc);
+			driver.findElement(TrimArrowVehicleListNum).click();
+			return this;
+		}
+			
 	
 	
 	
