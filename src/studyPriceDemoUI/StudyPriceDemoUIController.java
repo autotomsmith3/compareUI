@@ -201,15 +201,15 @@ public class StudyPriceDemoUIController extends Comlibs {
 		int vinCount = studyPriceDemoP.getVinCountFromVinDropList(driver, tc);
 		// ********************change here to large number***********************
 		vinCount = 2;
-//		for (int i=1;i<=vinCount;i++) {
-//			tc = "TCxxxx_03_"+i;
-//			studyPriceDemoP.selectVinFromDropList(driver, i, tc);
-//			log.Wait(wt);
-//			studyPriceDemoP.clickGoActiveBtn(driver, tc);
-//			log.Wait(wt);
-//			log.GoBack(driver);
-//			studyPriceDemoP.clickVinArrow(driver, tc);
-//		}
+		for (int i = 1; i <= vinCount; i++) {
+			tc = "TCxxxx_03_" + i;
+			studyPriceDemoP.selectVinFromDropList(driver, i, tc);
+			log.Wait(wt);
+			studyPriceDemoP.clickGoActiveBtn(driver, tc);
+			log.Wait(wt);
+			log.GoBack(driver);
+			studyPriceDemoP.clickVinArrow(driver, tc);
+		}
 
 		studyPriceDemoP.clickVehicleInfoBtn(driver, tc);
 		String hintString = "Enter Year Make Model";
