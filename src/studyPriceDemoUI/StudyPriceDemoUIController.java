@@ -252,12 +252,12 @@ public class StudyPriceDemoUIController extends Comlibs {
 				}
 //				studyPriceDemoP.clickModelArrow(driver, tc);
 //				studyPriceDemoP.clickTrimArrow(driver, tc);
-//				studyPriceDemoP.clickMakeArrow(driver, tc);
+				studyPriceDemoP.clickMakeArrow(driver, tc);
 			}
 //			studyPriceDemoP.clickMakeArrow(driver, tc);
 //			studyPriceDemoP.clickYearArrow(driver, tc);
 			studyPriceDemoP.clickYearArrow(driver, tc);
-		}			
+		}
 //		studyPriceDemoP.clickYearArrow(driver, tc);
 //			studyPriceDemoP
 //			studyPriceDemoP
