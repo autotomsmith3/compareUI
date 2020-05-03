@@ -36,10 +36,14 @@ public class StudyPRICEDemo extends Comlibs {
 	By vinDropListSize = By.xpath("//*[@id=\"App\"]/div/div[2]/div/div/article/div/div[2]/div[2]/div/div/form/div[1]/div[2]/div/div[2]/div");
 	By goActiveBtn = By.xpath("//*[@id=\"App\"]/div/div[2]/div/div/article/div/div[2]/div[2]/div/div/form/div[2]/div/input");
 	By goInActiveBtn = By.xpath("//*[@id=\"App\"]/div/div[2]/div/div/article/div/div[2]/div[2]/div/div/form/div[2]/div/input");
-//	By xxxxxx = By.xpath("");
-//	By xxxxxx = By.xpath("");
-//	By xxxxxx = By.xpath("");
-//	By xxxxxx = By.xpath("");
+	By searchYMM     = By.xpath("//*[@id=\"App\"]/div/div[2]/div/div/article/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]");
+	By searchYMMInput = By.xpath("//*[@id=\"App\"]/div/div[2]/div/div/article/div/div[2]/div[2]/div/div/div/div/div/div/div[1]");
+	By getVehicleCount = By.xpath("/html/body/div/div/div[2]/div/div/article/div/div[2]/div[2]/div/div/div/div/div");
+	By yearArrow = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[1]/div/div[2]/span");
+	By yearArrowVehicleList = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[1]/div[2]/div");
+	By xxxxxx 			    = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[1]/div[2]/div[3]");
+	By MakeArrow = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[2]/div/div[2]/span");
+	By MakeArrowVehicleList = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[2]/div[2]/div");
 //	By xxxxxx = By.xpath("");
 //	By xxxxxx = By.xpath("");
 //	By xxxxxx = By.xpath("");
@@ -92,5 +96,103 @@ public class StudyPRICEDemo extends Comlibs {
 
 		return this;
 	}
+	
+	public StudyPRICEDemo verifySearchHintText(WebDriver driver, String hintText, String tc) throws Exception {
+		elementExist(driver, searchYMM, true, tc);
+		String hintS=driver.findElement(searchYMM).getText();
+		if (hintS.equalsIgnoreCase(hintText)) {
+			rwExcel(tc, true, "Search hint text", " Match");
+		}else {
+			rwExcel(tc, false, "Search hint text", " Does NOT Match!"+". Expected is "+hintText+", site shows "+hintS);
+		}
+		return this;
+	}	
+	
+	public StudyPRICEDemo inputYMM(WebDriver driver, String ymm, String tc) throws Exception {
+//		By searchYMMINput=By.xpath("//*[@id=\"App\"]/div/div[2]/div/div/article/div/div[2]/div[2]/div/div/div");
+//		By searchYMMINput=By.xpath("//*[@id=\"App\"]/div/div[2]/div/div/article/div/div[2]/div[2]/div/div/div/div"); // - 1 - no padding col
+//		By searchYMMINput=By.xpath("//*[@id=\"App\"]/div/div[2]/div/div/article/div/div[2]/div[2]/div/div/div/div/div"); // - 2
+//		By searchYMMINput=By.xpath("//*[@id=\"App\"]/div/div[2]/div/div/article/div/div[2]/div[2]/div/div/div/div/div/div"); // - 3
+//		By searchYMMINput=By.xpath("//*[@id=\"App\"]/div/div[2]/div/div/article/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[1]"); // - 4
+//		By searchYMMINput=By.xpath("//*[@id=\"App\"]/div/div[2]/div/div/article/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[2]"); // - 5 - css-lg6gooi
+//		By searchYMMINput=By.xpath("//*[@id=\"App\"]/div/div[2]/div/div/article/div/div[2]/div[2]/div/div/div/div/div/div/div[1]/div[2]/div"); // - 6
+		
+		//css
+//		By searchYMMINput=By.cssSelector("#App > div > div.container > div > div > article > div > div.greyContainer > div:nth-child(2) > div > div > div > div > div"); // - 7  FF searchRow row
+//		By searchYMMINput=By.cssSelector("#App > div > div.container > div > div > article > div > div.greyContainer > div:nth-child(2) > div > div > div > div > div > div"); // - 8
+//		By searchYMMINput=By.cssSelector("#App > div > div.container > div > div > article > div > div.greyContainer > div:nth-child(2) > div > div > div > div > div > div > div.react-select__value-container.css-1hwfws3"); // - 9
+//		By searchYMMINput=By.cssSelector("#App > div > div.container > div > div > article > div > div.greyContainer > div:nth-child(2) > div > div > div > div > div > div > div.react-select__value-container.css-1hwfws3 > div.react-select__placeholder.css-1wa3eu0-placeholder"); // - 10  click ok above
+//		By searchYMMINput=By.cssSelector("#App > div > div.container > div > div > article > div > div.greyContainer > div:nth-child(2) > div > div > div > div > div > div > div.react-select__value-container.css-1hwfws3 > div.css-1g6gooi"); // - 11
+//		By searchYMMINput=By.cssSelector("#App > div > div.container > div > div > article > div > div.greyContainer > div:nth-child(2) > div > div > div > div > div > div > div.react-select__value-container.css-1hwfws3 > div.css-1g6gooi > div"); // - 12
+		By searchYMMINput=By.cssSelector("#react-select-3-input"); // - 13 good for input 2020
+//		By searchYMMINput=By.cssSelector("#react-select-3-input"); // - 114
+////		By searchYMMINput=By.cssSelector(""); // - 114
+	
+		elementExist(driver, searchYMMINput, true, tc);
+//		driver.findElement(searchYMMInput).clear();
+		driver.findElement(searchYMMINput).sendKeys(ymm);// input ok but no options showing
+		Wait(8);
+		return this;
+	}
+	
+	public int  getVehicleCountFromVehicleList(WebDriver driver, String tc) throws Exception {
+		int vinC=0;
+		elementExist(driver, getVehicleCount, true, tc);
+		vinC=driver.findElements(getVehicleCount).size();
+//		vinC=Integer.parseInt(vinCount);
+		return vinC;
+	}
+	
+	public StudyPRICEDemo clickYearArrow(WebDriver driver, String tc) throws Exception {
+		elementExist(driver, yearArrow, true, tc);
+		driver.findElement(yearArrow).click();
+		return this;
+	}	
+	
+	public int  getYearCountFromYearList(WebDriver driver, String tc) throws Exception {
+		int vinC=0;
+		elementExist(driver, yearArrowVehicleList, true, tc);
+		vinC=driver.findElements(yearArrowVehicleList).size();
+//		vinC=Integer.parseInt(vinCount);
+		return vinC;
+	}	
+	
+	public StudyPRICEDemo selectYearFromYearArrowList(WebDriver driver, int num, String tc) throws Exception {
+		By yearArrowVehicleListNum = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[1]/div[2]/div["+num+"]");
+		elementExist(driver, yearArrowVehicleListNum, true, tc);
+		driver.findElement(yearArrowVehicleListNum).click();
+		return this;
+	}
+	
+	public StudyPRICEDemo clickMakeArrow(WebDriver driver, String tc) throws Exception {
+		elementExist(driver, MakeArrow, true, tc);
+		driver.findElement(MakeArrow).click();
+		return this;
+	}	
+	
+	public int  getMakeCountFromMakeList(WebDriver driver, String tc) throws Exception {
+		int vinC=0;
+		elementExist(driver, MakeArrowVehicleList, true, tc);
+		vinC=driver.findElements(MakeArrowVehicleList).size();
+//		vinC=Integer.parseInt(vinCount);
+		return vinC;
+	}	
+	
+	public StudyPRICEDemo selectMakeFromMakeArrowList(WebDriver driver, int num, String tc) throws Exception {
+//		By MakeArrowVehicleListNum = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[1]/div[2]/div["+num+"]");
+		By MakeArrowVehicleListNum = By.xpath("//*[@id=\"react-tabs-9\"]/div[2]/div[2]/div[2]/div["+num+"]");
+		
+		//  
+		elementExist(driver, MakeArrowVehicleListNum, true, tc);
+		driver.findElement(MakeArrowVehicleListNum).click();
+		return this;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 }

@@ -202,16 +202,58 @@ public class StudyPriceDemoUIController extends Comlibs {
 		studyPriceDemoP.clickVinArrow(driver, tc);
 		tc = "TCxxxx_02";
 		int vinCount=studyPriceDemoP.getVinCountFromVinDropList(driver, tc);
-		for (int i=1;i<=vinCount;i++) {
-			tc = "TCxxxx_03_"+i;
-			studyPriceDemoP.selectVinFromDropList(driver, i, tc);
-			log.Wait(wt);
-			studyPriceDemoP.clickGoActiveBtn(driver, tc);
-			log.Wait(wt);
-			log.GoBack(driver);
-			studyPriceDemoP.clickVinArrow(driver, tc);
+		//********************change here to large number***********************
+		vinCount=2;
+//		for (int i=1;i<=vinCount;i++) {
+//			tc = "TCxxxx_03_"+i;
+//			studyPriceDemoP.selectVinFromDropList(driver, i, tc);
+//			log.Wait(wt);
+//			studyPriceDemoP.clickGoActiveBtn(driver, tc);
+//			log.Wait(wt);
+//			log.GoBack(driver);
+//			studyPriceDemoP.clickVinArrow(driver, tc);
+//		}
+
+		studyPriceDemoP.clickVehicleInfoBtn(driver, tc);
+		String hintString="Enter Year Make Model";
+		studyPriceDemoP.verifySearchHintText(driver, hintString, tc);
+		tc = "TCxxxx_04";
+//		studyPriceDemoP.inputYMM(driver, "2020", tc);// input ok, but no options showing
+//		studyPriceDemoP.getVehicleCountFromVehicleList(driver, tc);// not ready.
+		
+		studyPriceDemoP.clickYearArrow(driver, tc);
+		int yearListCount=studyPriceDemoP.getYearCountFromYearList(driver, tc);
+		for (int i=3;i<=yearListCount;i++) {
+			studyPriceDemoP.selectYearFromYearArrowList(driver, i, tc);
+			studyPriceDemoP.clickMakeArrow(driver,tc);
+			
+			int makeListCount=studyPriceDemoP.getMakeCountFromMakeList(driver,tc);
+			for (int j=1;j<=makeListCount;j++) {
+				studyPriceDemoP.selectMakeFromMakeArrowList(driver, j, tc);
+				studyPriceDemoP.clickMakeArrow(driver,tc);
+//				//Model
+//				studyPriceDemoP.clickModelArrow(driver,tc);
+//				int modelListCount=studyPriceDemoP.getModelCountFromModelList(driver, tc);
+//				for (int k=1;k<=modelListCount;k++) {
+//				    studyPriceDemoP
+//				    studyPriceDemoP
+//				    studyPriceDemoP
+				}
+
+			}
+//			studyPriceDemoP
+//			studyPriceDemoP
+//			studyPriceDemoP
+			
 		}
 
+//		studyPriceDemoP
+//		studyPriceDemoP
+//		studyPriceDemoP
+//		studyPriceDemoP
+//		studyPriceDemoP
+//		studyPriceDemoP
+		
 //		tc = "TCxxxx_03";
 //		studyPriceDemoP
 //		tc = "TCxxxx_03";
@@ -223,11 +265,7 @@ public class StudyPriceDemoUIController extends Comlibs {
 //		tc = "TCxxxx_03";
 //		studyPriceDemoP
 //		tc = "TCxxxx_03";
-
-
-
-
-	}
+	
 	public static void main(String[] args) throws Exception {
 		// Load environment parameters
 		Properties prop = new Properties();
