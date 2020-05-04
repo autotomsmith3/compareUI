@@ -207,6 +207,40 @@ public class StudyPriceDemoUIController extends Comlibs {
 			log.Wait(wt);
 			studyPriceDemoP.clickGoActiveBtn(driver, tc);
 			log.Wait(wt);
+
+			// Check Safety Active
+			// TODO
+//			studyPriceDemoP.verifySafetyActiveInactive(driver, tc);
+//			studyPriceDemoP.verifySafetyActiveInactive(driver, tc);
+			studyPriceDemoP.clickSafetyActive(driver, tc);
+			log.Wait(wt);
+			
+			// Check Safty Passisve
+			studyPriceDemoP.clickSafetyPassive(driver, tc);
+			log.Wait(wt);
+			
+			// Check Theft Prevention
+			studyPriceDemoP.clickTheftPrevention(driver, tc);
+			log.Wait(wt);
+			
+			// Check High Value
+			studyPriceDemoP.clickHighValue(driver, tc);
+			log.Wait(wt);
+			
+			// Check Powertrain & Machnical
+			studyPriceDemoP.clickPowertrain(driver, tc);
+			log.Wait(wt);
+			
+			// Check All Features
+			studyPriceDemoP.clickAllFeatures(driver, tc);
+			log.Wait(wt);
+			
+			// Check Safety Active
+			studyPriceDemoP.clickSafetyActive(driver, tc);
+			log.Wait(wt);
+			
+			// TODO
+
 			log.GoBack(driver);
 			studyPriceDemoP.clickVinArrow(driver, tc);
 		}
@@ -220,49 +254,66 @@ public class StudyPriceDemoUIController extends Comlibs {
 
 		studyPriceDemoP.clickYearArrow(driver, tc);
 		log.Wait(wt);
+		tc = "TCxxxx_05";
 		int yearListCount = studyPriceDemoP.getYearCountFromYearList(driver, tc);
 		for (int i = 1; i <= yearListCount; i++) {
+			tc = "TCxxxx_06_" + i;
 			studyPriceDemoP.selectYearFromYearArrowList(driver, i, tc);
+			tc = "TCxxxx_07_" + i;
 			studyPriceDemoP.clickMakeArrow(driver, tc);
+			tc = "TCxxxx_08_" + i;
 			log.Wait(wt);
 			int makeListCount = studyPriceDemoP.getMakeCountFromMakeList(driver, tc);
 			for (int j = 1; j <= makeListCount; j++) {
+				tc = "TCxxxx_09_" + j;
 				studyPriceDemoP.selectMakeFromMakeArrowList(driver, j, tc);
+				tc = "TCxxxx_10_" + j;
 				studyPriceDemoP.clickMakeArrow(driver, tc);
 				// Model
+				tc = "TCxxxx_11_" + j;
 				studyPriceDemoP.clickModelArrow(driver, tc);
 				log.Wait(wt);
+				tc = "TCxxxx_12_" + j;
 				int modelListCount = studyPriceDemoP.getModelCountFromModelList(driver, tc);
 				for (int k = 1; k <= modelListCount; k++) {
+					tc = "TCxxxx_13_" + k;
 					studyPriceDemoP.selectModelFromModelArrowList(driver, k, tc);
 //				    studyPriceDemoP.clickGoActiveBtn(driver, tc);
+					tc = "TCxxxx_14_" + k;
 					studyPriceDemoP.verifyGoActiveBtn(driver, tc);
+					tc = "TCxxxx_15_" + k;
 					studyPriceDemoP.clickTrimArrow(driver, tc);
 					log.Wait(wt);
+					tc = "TCxxxx_16_" + k;
 					int trimListCount = studyPriceDemoP.getTrimCountFromTrimList(driver, tc);
 					for (int l = 1; l <= trimListCount; l++) {
+						tc = "TCxxxx_17_" + l;
 						studyPriceDemoP.selectTrimFromTrimArrowList(driver, l, tc);
+						tc = "TCxxxx_18_" + l;
 						studyPriceDemoP.verifyGoActiveBtn(driver, tc);
 						log.Wait(wt);
+						tc = "TCxxxx_19_" + l;
 						studyPriceDemoP.clickTrimArrow(driver, tc);
 //					    studyPriceDemoP.clickGoActiveBtn(driver, tc);
 					}
-
+					tc = "TCxxxx_20";
 					studyPriceDemoP.clickTrimArrow(driver, tc);
 				}
+				tc = "TCxxxx_21";
 //				studyPriceDemoP.clickModelArrow(driver, tc);
 //				studyPriceDemoP.clickTrimArrow(driver, tc);
 				studyPriceDemoP.clickMakeArrow(driver, tc);
 			}
+			tc = "TCxxxx_22";
 //			studyPriceDemoP.clickMakeArrow(driver, tc);
 //			studyPriceDemoP.clickYearArrow(driver, tc);
 			studyPriceDemoP.clickYearArrow(driver, tc);
 		}
+		tc = "TCxxxx_23";
 //		studyPriceDemoP.clickYearArrow(driver, tc);
 //			studyPriceDemoP
 //			studyPriceDemoP
 //			studyPriceDemoP
-
 	}
 
 //		studyPriceDemoP
