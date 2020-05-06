@@ -534,7 +534,8 @@ public class Comlibs {
 		// 5: IE8, Chrome, FF work fine!
 		if (device.equalsIgnoreCase("PC")) {
 //			driver.manage().window().setSize(new Dimension(1720, 990));  //Center for home screen 20200323
-			driver.manage().window().setSize(new Dimension(1300, 1040)); // Original one before March 23, 2020 Full size of the left monitor
+			driver.manage().window().setSize(new Dimension(1672, 990));  //Center for home screen 20200506
+//			driver.manage().window().setSize(new Dimension(1300, 1040)); // Original one before March 23, 2020 Full size of the left monitor
 			// driver.manage().window().setSize(new Dimension(1080, 1040)); // Original one before Oct 17, 2018
 			// driver.manage().window().setSize(new Dimension(1480, 1040)); //After Oct 17, 2018 (1480, 1040)
 			// driver.manage().window().setSize(new Dimension(1920, 1040)); // (width, high)
