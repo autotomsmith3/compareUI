@@ -1,4 +1,4 @@
-package studyPriceDemoUI;
+package compareUI;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -47,8 +47,8 @@ public class Comlibs {
 
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/studyPriceDemoUI.properties"));
-		prop.load(StudyPriceDemoUIController.class.getClassLoader().getResourceAsStream("./data/studyPriceDemoUI.properties"));
-		String resultfile = prop.getProperty("StudyPrice.resutlPathFile");
+		prop.load(vinCompareUIController.class.getClassLoader().getResourceAsStream("./data/compare.properties"));
+		String resultfile = prop.getProperty("Compare.resutlPathFile");
 
 		int n = 0;
 		String sName, passOrfail, dateStamp, timeStamp;
@@ -127,8 +127,8 @@ public class Comlibs {
 	public void rwExcel(String SpID, String functionality, String description) throws IOException {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/studyPriceDemoUI.properties"));
-		prop.load(StudyPriceDemoUIController.class.getClassLoader().getResourceAsStream("./data/studyPriceDemoUI.properties"));
-		String resultfile = prop.getProperty("StudyPrice.resutlPathFile");
+		prop.load(vinCompareUIController.class.getClassLoader().getResourceAsStream("./data/compare.properties"));
+		String resultfile = prop.getProperty("Compare.resutlPathFile");
 		int n = 0;
 		String sName, passOrfail, dateStamp, timeStamp;
 		Calendar cal = Calendar.getInstance();
@@ -175,8 +175,8 @@ public class Comlibs {
 	public void rwExcel(String SpID, int testStatus, String functionality, String description) throws IOException {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/studyPriceDemoUI.properties"));
-		prop.load(StudyPriceDemoUIController.class.getClassLoader().getResourceAsStream("./data/studyPriceDemoUI.properties"));
-		String resultfile = prop.getProperty("StudyPrice.resutlPathFile");
+		prop.load(vinCompareUIController.class.getClassLoader().getResourceAsStream("./data/compare.properties"));
+		String resultfile = prop.getProperty("Compare.resutlPathFile");
 		int n = 0;
 		String sName, passOrfail, dateStamp, timeStamp;
 		Calendar cal = Calendar.getInstance();
@@ -525,7 +525,8 @@ public class Comlibs {
 		// driver.manage().window().setPosition(new Point(0, 0)); // launch at right screen (main screen)
 
 		if (screen.equalsIgnoreCase("left")) {
-			driver.manage().window().setPosition(new Point(-1300, 10)); // launch at left screen
+//			driver.manage().window().setPosition(new Point(-1300, 10)); // launch at left screen - original
+			driver.manage().window().setPosition(new Point(-1925, 90)); // launch at left screen
 		} else {
 			driver.manage().window().setPosition(new Point(0, 0)); // launch at right screen (main screen)
 		}
