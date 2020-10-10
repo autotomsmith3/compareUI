@@ -98,8 +98,6 @@ public class vinCompareUIController extends Comlibs {
 		return new Vin2VinCompare(driver);
 	}
 
-
-
 	private static String[] fetchOneDemArrayFromPropFile(String propertyName, Properties propFile) {
 
 		// get array split up by the colin
@@ -107,38 +105,47 @@ public class vinCompareUIController extends Comlibs {
 
 		return a;
 	}
+
 	public static void Vin2VinCompareTcs(WebDriver driver, String brw, String envment) throws Exception {
 		// Load environment parameters
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
-			prop.load(vinCompareUIController.class.getClassLoader()
-					.getResourceAsStream("./data/compare.properties"));// "./main.properties";
+			prop.load(vinCompareUIController.class.getClassLoader().getResourceAsStream("./data/compare.properties"));// "./main.properties";
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		String env = envment;
 		String tBrowser = brw;
 		String envDevice = prop.getProperty("Compare.envDevice");
 		String onScreen = prop.getProperty("Compare.onScreen");
-		String VinCompareUIURL = prop.getProperty(env+".VinCompareUIURL");
-		
-		String CompareScriptURL=prop.getProperty(env+".CompareScriptURL");
-		
-		String CompareAPIBaseURL=prop.getProperty(env+".CompareAPIBaseURL");
-		
-		String AccessToken=prop.getProperty(env+".AccessToken");
-		
-		String Profile=prop.getProperty(env+".Profile");		
-		String ProductKey=prop.getProperty(env+".ProductKey");
-		String Locale=prop.getProperty(env+".Locale");
-		
-		
-		
-		
-		String vins[]=fetchOneDemArrayFromPropFile(env+".CompareVINs",prop);
+		String VinCompareUIURL = prop.getProperty(env + ".VinCompareUIURL");
+
+		String CompareScriptURL = prop.getProperty(env + ".CompareScriptURL");
+
+		String CompareAPIBaseURL = prop.getProperty(env + ".CompareAPIBaseURL");
+
+		String AccessToken = prop.getProperty(env + ".AccessToken");
+
+		String Profile = prop.getProperty(env + ".Profile");
+		String ProductKey = prop.getProperty(env + ".ProductKey");
+		String Locale = prop.getProperty(env + ".Locale");
+
+		String vins[] = fetchOneDemArrayFromPropFile(env + ".CompareVINs", prop);
+		int numOfVins = vins.length;
+
+		String DealerPrices[] = fetchOneDemArrayFromPropFile(env + ".DealerPrices", prop);
+		int numOfDealerPrices = vins.length;
+
+		String Image1 = prop.getProperty(env + ".Image1");
+		String Image2 = prop.getProperty(env + ".Image2");
+		String Image3 = prop.getProperty(env + ".Image3");
+		String Image4 = prop.getProperty(env + ".Image4");
+		String Image5 = prop.getProperty(env + ".Image5");
+		String Image6 = prop.getProperty(env + ".Image6");
+
+		String[] Images = { Image1, Image2, Image3, Image4, Image5, Image6 };
 
 		int wt = Integer.parseInt(prop.getProperty("Compare.waitTime"));
 		// Initial
@@ -149,52 +156,49 @@ public class vinCompareUIController extends Comlibs {
 		Vin2VinCompare Vin2VinComparePage = new Vin2VinCompare(driver);
 		tc = "TCxxxx_01";
 		Vin2VinComparePage.clickConfigurealeParameters(driver, tc);
-		
+
 		tc = "TCxxxx_021";
 		Vin2VinComparePage.inputCompareScriptURL(driver, CompareScriptURL, tc);
 		tc = "TCxxxx_022";
-		Vin2VinComparePage.inputCompareAPIBaseURL(driver, CompareAPIBaseURL,tc);
+		Vin2VinComparePage.inputCompareAPIBaseURL(driver, CompareAPIBaseURL, tc);
 
-		
 		tc = "TCxxxx_023";
 		Vin2VinComparePage.inputAccessToken(driver, AccessToken, tc);
-		
-		tc = "TCxxxx_024";
-		Vin2VinComparePage.inputProfile(driver, Profile,tc);
-		tc = "TCxxxx_025";
-		Vin2VinComparePage.inputProductKey(driver, ProductKey,tc);	
-		
-		tc = "TCxxxx_026";
-		Vin2VinComparePage.inputLocale(driver, Locale,tc);
-		
-//		tc = "TCxxxx_027";
-//		Vin2VinComparePage(driver, xx,tc);
-//		
-//		
-//		tc = "TCxxxx_028";
-//		Vin2VinComparePage(driver, xx,tc);
-//		
-//		tc = "TCxxxx_028";
-//		Vin2VinComparePage(driver, xx,tc);
-		
-					
-		
-		
-		for (int i = 1; i <= 6; i++) {}
-		tc = "TCxxxx_23";
-//		studyPriceDemoP.clickYearArrow(driver, tc);
-//			studyPriceDemoP
-//			studyPriceDemoP
-//			studyPriceDemoP
-	}
 
+		tc = "TCxxxx_024";
+		Vin2VinComparePage.inputProfile(driver, Profile, tc);
+		tc = "TCxxxx_025";
+		Vin2VinComparePage.inputProductKey(driver, ProductKey, tc);
+
+		tc = "TCxxxx_026";
+		Vin2VinComparePage.inputLocale(driver, Locale, tc);
+
+		tc = "Enter VINS_027";
+
+		Vin2VinComparePage.inputVins(driver, vins, tc);
+
+		tc = "Enter DealerPrices_028";
+		Vin2VinComparePage.inputDealerPrices(driver, vins, DealerPrices, Images, tc);// (driver,vins, DealerPrices, Images, tc);
+//		
+		tc = "Click on Compare button_029";
+		Vin2VinComparePage.clickCompareBtn(driver, tc);
+
+		tc = "Click on Edit Configuration button_030";
+		Vin2VinComparePage.clickEditConfigurationBtn(driver, tc);
+		log.Wait(5);
+		tc = "Click on Compare button_0291";
+		Vin2VinComparePage.clickCompareBtn(driver, tc);
+		log.Wait(5);
+		tc = "Click on New Configuration button_031";
+		Vin2VinComparePage.clickNewConfigurationBtn(driver, tc);
+
+	}
 
 	public static void main(String[] args) throws Exception {
 		// Load environment parameters
 		Properties prop = new Properties();
 		try {
-			prop.load(vinCompareUIController.class.getClassLoader()
-					.getResourceAsStream("./data/compare.properties"));// "./main.properties";
+			prop.load(vinCompareUIController.class.getClassLoader().getResourceAsStream("./data/compare.properties"));// "./main.properties";
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -202,8 +206,8 @@ public class vinCompareUIController extends Comlibs {
 		String tBrowser = prop.getProperty("Compare.browser");
 		String envDevice = prop.getProperty("Compare.envDevice");
 		String onScreen = prop.getProperty("Compare.onScreen");
-		String VinCompareUIURL = prop.getProperty(env+".VinCompareUIURL");
-		String vins[]=fetchOneDemArrayFromPropFile(env+".CompareVINs",prop);
+		String VinCompareUIURL = prop.getProperty(env + ".VinCompareUIURL");
+		String vins[] = fetchOneDemArrayFromPropFile(env + ".CompareVINs", prop);
 		for (int i = 0; i < 1; i++) {
 			System.out.println("Testing is started in " + env + "\n");
 			// Initial
@@ -222,16 +226,13 @@ public class vinCompareUIController extends Comlibs {
 			log.rwExcel("", "Test Environment", env);
 
 			loadURL(driver, VinCompareUIURL);
-			String vin1=vins[0];
+			String vin1 = vins[0];
 			//// 1. Study Price Demo UI Home page
 			log.rwExcel("", "-----VIN Compare Tester Tool UI page Testing started-----" + (i + 1), "");
 //			1. ***********VIN Compare**************
 			Vin2VinCompareTcs(driver, tBrowser, env);
 //			 ***********VIN Compare**************
-			
-			
-			
-			
+
 			log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
 			System.out.println("Test is complete!!!   i = " + (i + 1));
