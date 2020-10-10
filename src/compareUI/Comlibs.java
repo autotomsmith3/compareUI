@@ -547,8 +547,9 @@ public class Comlibs {
 			driver.manage().window().setSize(new Dimension(990, 660));
 			dim = driver.manage().window().getSize();
 			rwExcel("", true, "Set up browser resolution for device = " + device, "  " + dim);
-		} else if (device.equalsIgnoreCase("Smartphone-iphone4s")) {
-			driver.manage().window().setSize(new Dimension(320, 640));
+		} else if (device.equalsIgnoreCase("Smartphone")) {
+//			driver.manage().window().setSize(new Dimension(320, 640));//Original iphone 4s
+			driver.manage().window().setSize(new Dimension(400, 760));//Original iphone 7, best for Edge
 			dim = driver.manage().window().getSize();
 			rwExcel("", true, "Set up browser resolution for device = " + device, "  " + dim);
 		} else {

@@ -3,7 +3,7 @@ package compareUI;
 //Moved from perforce:1666..
 /**
 * @author Zhoul
-* Initial date:  -2020-05-02
+* Initial date:  -2020-10-09
 * Modified by ...
 * In case of broken, update may needed:
 *  1. Selenium Webdriver
@@ -50,10 +50,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import studyPriceDemoUI.Comlibs;
-import studyPriceDemoUI.StudyPRICEDemo;
-import studyPriceDemoUI.StudyPriceDemoUIController;
 
 public class vinCompareUIController extends Comlibs {
 	private final WebDriver driver;
@@ -229,9 +225,13 @@ public class vinCompareUIController extends Comlibs {
 			String vin1=vins[0];
 			//// 1. Study Price Demo UI Home page
 			log.rwExcel("", "-----VIN Compare Tester Tool UI page Testing started-----" + (i + 1), "");
-//			StudyPriceDemoUITCs(driver, tBrowser, env);
+//			1. ***********VIN Compare**************
 			Vin2VinCompareTcs(driver, tBrowser, env);
-
+//			 ***********VIN Compare**************
+			
+			
+			
+			
 			log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
 			System.out.println("Test is complete!!!   i = " + (i + 1));
