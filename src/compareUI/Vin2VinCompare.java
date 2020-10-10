@@ -33,33 +33,94 @@ public class Vin2VinCompare extends Comlibs {
 			.xpath("//*[@id=\"App\"]/div/div[2]/div/div/article/div/div[2]/div[2]/div/div/form/div[1]/div[2]/div/div");
 
 	By ConfigurableParameters = By.xpath("/html/body/div[1]/form/div/div[1]/div[1]/h4/a");	
-	By xxxxxx = By.xpath("/html/body/div[1]/form/div/div[1]/div[1]/h4/a");	
+	By CompareScriptURL=By.xpath("//*[@id=\"compare-script-url\"]");
+	By CompareAPIBaseURL = By.xpath("//*[@id=\"data-compare-url\"]");	
+	By AccessToken = By.xpath("//*[@id=\"data-access-token\"]");	
+	By Profile = By.xpath("//*[@id=\"data-profile\"]");	
+	By ProductKey = By.xpath("//*[@id=\"data-product-key\"]");	
+	By Locale = By.xpath("//*[@id=\"data-locale\"]");	
+	By VIN1 = By.xpath("//*[@id='vin-1']");	
+	By PlusBtn1 = By.xpath("//*[@id='custom-vin-button-1']");	
+	By DealerPrice1 = By.xpath("//*[@id='vin-dealer-price-1']");	
+	By Image1 = By.xpath("//*[@id='vin-image-1']");	
+	
+	By VIN2 = By.xpath("//*[@id='vin-2']");		
+	By PlusBtn2 = By.xpath("//*[@id='custom-vin-button-2']");	
+	By DealerPrice2 = By.xpath("//*[@id='vin-dealer-price-2']");	
+	By Image2 = By.xpath("//*[@id='vin-image-2']");	
+	
+	By VIN3 = By.xpath("//*[@id='vin-3']");	
+	
+	
+	By VIN4 = By.xpath("//*[@id='vin-4']");	
+	
+	
+	By VIN5 = By.xpath("//*[@id='vin-5']");	
+	
+	
+	By VIN6 = By.xpath("//*[@id='vin-5']");		
+	
+	
+//	By xxxxxx = By.xpath("");	
+//	By xxxxxx = By.xpath("");	
+//	By xxxxxx = By.xpath("");
 //	By xxxxxx = By.xpath("");	
 //	By xxxxxx = By.xpath("");	
 //	By xxxxxx = By.xpath("");	
-//	By xxxxxx = By.xpath("");	
-//	By xxxxxx = By.xpath("");	
-//	
+//	By xxxxxx = By.xpath("");
 	
 	public Vin2VinCompare clickConfigurealeParameters(WebDriver driver, String tc) throws Exception {
 		elementExist(driver, ConfigurableParameters, true, tc);
 		driver.findElement(ConfigurableParameters).click();
 		return this;
 	}
-
-	public Vin2VinCompare inputUername(WebDriver driver, String un) {
-		driver.findElement(vehicleInfoBtn).clear();
-		driver.findElement(vehicleInfoBtn).sendKeys(un);
+	public Vin2VinCompare inputCompareScriptURL(WebDriver driver, String un,String tc)throws Exception  {
+		elementExist(driver, CompareScriptURL, true, tc);
+		driver.findElement(CompareScriptURL).clear();
+		driver.findElement(CompareScriptURL).sendKeys(un);
 		return this;
 	}
-
-
-
-	public Vin2VinCompare clickVinBtn(WebDriver driver, String tc) throws Exception {
-		elementExist(driver, vinBtn, true, tc);
-		driver.findElement(vinBtn).click();
+	
+	public Vin2VinCompare inputCompareAPIBaseURL(WebDriver driver, String un,String tc)throws Exception  {
+		elementExist(driver, CompareAPIBaseURL, true, tc);
+		driver.findElement(CompareAPIBaseURL).clear();
+		driver.findElement(CompareAPIBaseURL).sendKeys(un);
 		return this;
 	}
-
+	
+	public Vin2VinCompare inputAccessToken(WebDriver driver, String un,String tc)throws Exception  {
+		elementExist(driver, AccessToken, true, tc);
+		driver.findElement(AccessToken).clear();
+		driver.findElement(AccessToken).sendKeys(un);
+		return this;
+	}
+	
+	public Vin2VinCompare inputProfile(WebDriver driver, String un,String tc)throws Exception  {
+		elementExist(driver, Profile, true, tc);
+		driver.findElement(Profile).clear();
+		driver.findElement(Profile).sendKeys(un);
+		return this;
+	}
+	
+	
+	public Vin2VinCompare inputProductKey(WebDriver driver, String un,String tc)throws Exception  {
+		elementExist(driver, ProductKey, true, tc);
+		driver.findElement(ProductKey).clear();
+		driver.findElement(ProductKey).sendKeys(un);
+		return this;
+	}
+	
+	public Vin2VinCompare inputLocale(WebDriver driver, String un,String tc)throws Exception  {
+		elementExist(driver, Locale, true, tc);
+		driver.findElement(Locale).clear();
+		driver.findElement(Locale).sendKeys(un);
+		return this;
+	}
+	
+	
+	
+	
+	
+	
 
 }

@@ -128,6 +128,20 @@ public class vinCompareUIController extends Comlibs {
 		String envDevice = prop.getProperty("Compare.envDevice");
 		String onScreen = prop.getProperty("Compare.onScreen");
 		String VinCompareUIURL = prop.getProperty(env+".VinCompareUIURL");
+		
+		String CompareScriptURL=prop.getProperty(env+".CompareScriptURL");
+		
+		String CompareAPIBaseURL=prop.getProperty(env+".CompareAPIBaseURL");
+		
+		String AccessToken=prop.getProperty(env+".AccessToken");
+		
+		String Profile=prop.getProperty(env+".Profile");		
+		String ProductKey=prop.getProperty(env+".ProductKey");
+		String Locale=prop.getProperty(env+".Locale");
+		
+		
+		
+		
 		String vins[]=fetchOneDemArrayFromPropFile(env+".CompareVINs",prop);
 
 		int wt = Integer.parseInt(prop.getProperty("Compare.waitTime"));
@@ -139,10 +153,35 @@ public class vinCompareUIController extends Comlibs {
 		Vin2VinCompare Vin2VinComparePage = new Vin2VinCompare(driver);
 		tc = "TCxxxx_01";
 		Vin2VinComparePage.clickConfigurealeParameters(driver, tc);
+		
 		tc = "TCxxxx_021";
+		Vin2VinComparePage.inputCompareScriptURL(driver, CompareScriptURL, tc);
+		tc = "TCxxxx_022";
+		Vin2VinComparePage.inputCompareAPIBaseURL(driver, CompareAPIBaseURL,tc);
+
 		
+		tc = "TCxxxx_023";
+		Vin2VinComparePage.inputAccessToken(driver, AccessToken, tc);
 		
+		tc = "TCxxxx_024";
+		Vin2VinComparePage.inputProfile(driver, Profile,tc);
+		tc = "TCxxxx_025";
+		Vin2VinComparePage.inputProductKey(driver, ProductKey,tc);	
 		
+		tc = "TCxxxx_026";
+		Vin2VinComparePage.inputLocale(driver, Locale,tc);
+		
+//		tc = "TCxxxx_027";
+//		Vin2VinComparePage(driver, xx,tc);
+//		
+//		
+//		tc = "TCxxxx_028";
+//		Vin2VinComparePage(driver, xx,tc);
+//		
+//		tc = "TCxxxx_028";
+//		Vin2VinComparePage(driver, xx,tc);
+		
+					
 		
 		
 		for (int i = 1; i <= 6; i++) {}
