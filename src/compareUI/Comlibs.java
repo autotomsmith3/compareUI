@@ -279,7 +279,7 @@ public class Comlibs {
 			cell0.setCellStyle(hdstyle);
 
 			Cell cell1 = r1.createCell(1);
-			cell1.setCellValue("SpiraID");
+			cell1.setCellValue("JamaID");
 			cell1.setCellStyle(hdstyle);
 
 			Cell cell2 = r1.createCell(2);

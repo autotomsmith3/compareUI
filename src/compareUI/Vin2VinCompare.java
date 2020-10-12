@@ -165,4 +165,78 @@ public class Vin2VinCompare extends Comlibs {
 		return this;
 	}
 
+	public void verifyDealerPriceWhichIsNot0(WebDriver driver, String dealerPrice, String tc) throws Exception {
+		By dealerPrice1 = By.xpath("/html/body/div[2]/div/div[2]/div[2]/div[2]/div/div[4]/div[2]/div/span");
+		By dealerPrice2 = By.xpath("/html/body/div[2]/div/div[2]/div[2]/div[2]/div/div[4]/div[3]/span");
+		By dealerPrice3 = By.xpath("/html/body/div[2]/div/div[2]/div[2]/div[2]/div/div[4]/div[4]/div/span");
+		
+		int dp1=Integer.parseInt(dealerPrice);
+		if (dp1==0) {
+			rwExcel(tc, false, "Verify Deapler Price for VIN1", "Dealer Price is 0 which cannot be verify in this test case. Change the deapler price in properties file to make this test valid!");
+			return;
+		}
+		elementExist(driver, dealerPrice1, true, tc);
+		String dp1String =driver.findElement(dealerPrice1).getText();
+		dp1String=dp1String.replace("$","");
+		dp1String=dp1String.replace(",","");
+		int dp1Int=Integer.parseInt(dp1String);
+		
+		if (dp1==dp1Int) {
+			rwExcel(tc, true, "Verify Deapler Price for VIN1", "Dealer Price 1="+dp1String);
+			
+		}else {
+			rwExcel(tc, false, "Verify Deapler Price for VIN1", "Dealer Price from page shows:"+dp1Int+". Expected Dealer Price 1="+dealerPrice1);
+		}
+	}
+	public void verifyDealerPriceWhichIs0(WebDriver driver, String dealerPrice, String tc) throws Exception {
+		By dealerPrice2 = By.xpath("/html/body/div[2]/div/div[2]/div[2]/div[2]/div/div[4]/div[3]/span");
+		By dealerPrice3 = By.xpath("/html/body/div[2]/div/div[2]/div[2]/div[2]/div/div[4]/div[4]/div/span");
+		String dp2="Contact Dealer";
+		int dp1=Integer.parseInt(dealerPrice);//0
+		if (!(dp1==0)) {
+			rwExcel(tc, false, "Verify Deapler Price for VIN1 which is 0", "Dealer Price is not 0 which cannot be verify in this test case. Change the deapler price in properties file to make this test valid!");
+			return;
+		}else {
+			
+		}
+		elementExist(driver, dealerPrice2, true, tc);
+		String dp1String =driver.findElement(dealerPrice2).getText();
+		if (dp1String.equalsIgnoreCase(dp2)) {
+			rwExcel(tc, true, "Verify Deapler Price for VIN2", "Dealer Price 2 = "+dealerPrice+". Page shows: "+dp2);
+		}else {
+			rwExcel(tc, false, "Verify Deapler Price for VIN2 which is 0", "Dealer Price from page shows:"+"\""+dp1String+"\""+". Expected Dealer Price 2 = "+"\""+dp2+"\"");
+		}
+		
+//		int dp1frPage=
+//		dp1String =driver.findElement(dealerPrice1).getCssValue("span");
+//		dp1String =driver.findElement(dealerPrice1).getTagName();
+		
+	}
+
+	public void verifyVin1Image(WebDriver driver, String tc) throws Exception {
+		
+		By Vin1imageLocator=By.xpath("/html/body/div[2]/div/div[1]/div[2]/div[2]/div[2]/div[1]/span/img");
+		VerifyImageLoaded(driver, Vin1imageLocator, tc);
+	}
+	public void verifyVin2Image(WebDriver driver, String tc) throws Exception {
+		
+		By Vin1imageLocator=By.xpath("/html/body/div[2]/div/div[1]/div[2]/div[2]/div[2]/div[2]/span/img");
+		VerifyImageLoaded(driver, Vin1imageLocator, tc);
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

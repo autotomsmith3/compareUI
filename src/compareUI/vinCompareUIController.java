@@ -178,20 +178,35 @@ public class vinCompareUIController extends Comlibs {
 		Vin2VinComparePage.inputVins(driver, vins, tc);
 
 		tc = "Enter DealerPrices_028";
-		Vin2VinComparePage.inputDealerPrices(driver, vins, DealerPrices, Images, tc);// (driver,vins, DealerPrices, Images, tc);
+		Vin2VinComparePage.inputDealerPrices(driver, vins, DealerPrices, Images, tc);//
 //		
 		tc = "Click on Compare button_029";
 		Vin2VinComparePage.clickCompareBtn(driver, tc);
 		log.Wait(wt*2);
+//	*********************************************************
 		tc = "Click on Edit Configuration button_030";
 		Vin2VinComparePage.clickEditConfigurationBtn(driver, tc);
 		log.Wait(wt*2);
 		tc = "Click on Compare button_0291";
 		Vin2VinComparePage.clickCompareBtn(driver, tc);
 		log.Wait(wt*2);
+
 		tc = "Click on New Configuration button_031";
 		Vin2VinComparePage.clickNewConfigurationBtn(driver, tc);
-
+		log.Wait(wt*2);
+//		Check others
+		tc = "Click on Compare button_032";
+		Vin2VinComparePage.clickCompareBtn(driver, tc);
+		log.Wait(wt*2);
+//		*********************************************************
+		tc = "Verify Dealer Price Vin1 01";
+		Vin2VinComparePage.verifyDealerPriceWhichIsNot0(driver, DealerPrices[0], tc);
+		tc = "Verify Dealer Price Vin2 02";
+		Vin2VinComparePage.verifyDealerPriceWhichIs0(driver, DealerPrices[1], tc);
+		tc = "Verify VIN 1 image 01";
+		Vin2VinComparePage.verifyVin1Image(driver, tc);
+		tc = "Verify VIN 2 image 02";
+		Vin2VinComparePage.verifyVin2Image(driver, tc);
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -208,7 +223,28 @@ public class vinCompareUIController extends Comlibs {
 		String onScreen = prop.getProperty("Compare.onScreen");
 		String VinCompareUIURL = prop.getProperty(env + ".VinCompareUIURL");
 		String vins[] = fetchOneDemArrayFromPropFile(env + ".CompareVINs", prop);
-		for (int i = 0; i < 1; i++) {
+		String [] Devices=new String[3];
+		
+		if (envDevice.equalsIgnoreCase("PC")) {
+			Devices[0]= "PC";
+			Devices[1]= "Tablet";
+			Devices[2]= "Smartphone";
+		}else if (envDevice.equalsIgnoreCase("Tablet")) {
+			Devices[0]= "Tablet";
+			Devices[1]= "Smartphone";
+			Devices[2]= "PC";
+		}else if (envDevice.equalsIgnoreCase("Smartphone")) {
+			Devices[0]= "Smartphone";
+			Devices[1]= "PC";
+			Devices[2]= "Tablet";
+		}else {
+			Devices[0]= "PC";
+			Devices[1]= "Tablet";
+			Devices[2]= "Smartphone";
+		}
+		
+		// i=3: all 3 devices
+		for (int i = 0; i < 3; i++) {
 			System.out.println("Testing is started in " + env + "\n");
 			// Initial
 			Comlibs log = new Comlibs();
@@ -216,15 +252,17 @@ public class vinCompareUIController extends Comlibs {
 			driver = log.drivers(tBrowser);// Firefox, Chrome
 			driver.manage().deleteAllCookies();
 			System.out.println("Test Browser = " + tBrowser + "\n");
+			System.out.println("Test Device = " + Devices[i] + "\n");
 
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			if (!tBrowser.equalsIgnoreCase("Chromexxxxxxxxx")) {
-				log.SelecBroswerResolution(driver, envDevice, onScreen);
+				log.SelecBroswerResolution(driver,  Devices[i], onScreen);
 			}
 			log.rwExcel("", "****** Testing started ******" + (i + 1), "");
 			log.rwExcel("", "Test Browser", tBrowser);
 			log.rwExcel("", "Test Environment", env);
-
+			log.rwExcel("", "Test Devicer",  Devices[i] );
+			
 			loadURL(driver, VinCompareUIURL);
 			String vin1 = vins[0];
 			//// 1. Study Price Demo UI Home page
@@ -235,8 +273,9 @@ public class vinCompareUIController extends Comlibs {
 
 			log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
-			System.out.println("Test is complete!!!   i = " + (i + 1));
+			System.out.println("Test is complete!!!   i = " + (i + 1)+"\n");
 		}
+		System.out.println("*****************All Tests are done!!!*****************"+"\n");
 		return;
 	}
 }
