@@ -279,7 +279,7 @@ public class Comlibs {
 			cell0.setCellStyle(hdstyle);
 
 			Cell cell1 = r1.createCell(1);
-			cell1.setCellValue("JamaID");
+			cell1.setCellValue("TestID");
 			cell1.setCellStyle(hdstyle);
 
 			Cell cell2 = r1.createCell(2);
@@ -544,7 +544,7 @@ public class Comlibs {
 			rwExcel("", true, "Set up browser resolution for device = " + device, "  " + dim);
 		} else if (device.equalsIgnoreCase("Tablet")) {
 			// driver.manage().window().setSize(new Dimension(764, 660));
-			driver.manage().window().setSize(new Dimension(890, 660));
+			driver.manage().window().setSize(new Dimension(890, 1030));//Heri: 890,660, Verti: 890, 1030
 			dim = driver.manage().window().getSize();
 			rwExcel("", true, "Set up browser resolution for device = " + device, "  " + dim);
 		} else if (device.equalsIgnoreCase("Smartphone")) {
