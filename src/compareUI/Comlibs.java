@@ -544,7 +544,7 @@ public class Comlibs {
 			rwExcel("", true, "Set up browser resolution for device = " + device, "  " + dim);
 		} else if (device.equalsIgnoreCase("Tablet")) {
 			// driver.manage().window().setSize(new Dimension(764, 660));
-			driver.manage().window().setSize(new Dimension(990, 660));
+			driver.manage().window().setSize(new Dimension(890, 660));
 			dim = driver.manage().window().getSize();
 			rwExcel("", true, "Set up browser resolution for device = " + device, "  " + dim);
 		} else if (device.equalsIgnoreCase("Smartphone")) {
