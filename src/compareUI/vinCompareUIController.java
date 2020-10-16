@@ -111,7 +111,7 @@ public class vinCompareUIController extends Comlibs {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
-			prop.load(vinCompareUIController.class.getClassLoader().getResourceAsStream("./data/compare.properties"));// "./main.properties";
+			prop.load(vinCompareUIController.class.getClassLoader().getResourceAsStream("./data/vinCompare.properties"));// "./main.properties";
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -213,7 +213,7 @@ public class vinCompareUIController extends Comlibs {
 		// Load environment parameters
 		Properties prop = new Properties();
 		try {
-			prop.load(vinCompareUIController.class.getClassLoader().getResourceAsStream("./data/compare.properties"));// "./main.properties";
+			prop.load(vinCompareUIController.class.getClassLoader().getResourceAsStream("./data/vinCompare.properties"));// "./main.properties";
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
