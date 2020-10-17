@@ -155,7 +155,7 @@ public class competitiveCompareUIController extends Comlibs {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		String brand = "Kia";
+		String brand = "Mazda";
 		String env = prop.getProperty("CompetitiveCompare.environment");
 		String tBrowser = prop.getProperty("CompetitiveCompare.browser");
 		String envDevice = prop.getProperty("CompetitiveCompare.envDevice");

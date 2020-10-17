@@ -747,7 +747,7 @@ public class Comlibs {
 	public void waitElementToShow(WebDriver driver, By elemt) throws IOException {
 		boolean im = elementExist(driver, elemt);
 		int i = 0;
-		while ((!im) && (i < 20)) {
+		while ((!im) && (i < 90)) {
 			System.out.println("i=" + i + ", waiting for image to show! " + elemt);
 			im = elementExist(driver, elemt);
 			i++;
