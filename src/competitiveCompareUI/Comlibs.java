@@ -47,7 +47,7 @@ public class Comlibs {
 
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/studyPriceDemoUI.properties"));
-		prop.load(vinCompareUIController.class.getClassLoader()
+		prop.load(competitiveCompareUIController.class.getClassLoader()
 				.getResourceAsStream("./data/competitiveCompare.properties"));
 		String resultfile = prop.getProperty("CompetitiveCompare.resutlPathFile");
 
@@ -128,7 +128,7 @@ public class Comlibs {
 	public void rwExcel(String SpID, String functionality, String description) throws IOException {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/studyPriceDemoUI.properties"));
-		prop.load(vinCompareUIController.class.getClassLoader()
+		prop.load(competitiveCompareUIController.class.getClassLoader()
 				.getResourceAsStream("./data/competitiveCompare.properties"));
 		String resultfile = prop.getProperty("CompetitiveCompare.resutlPathFile");
 		int n = 0;
@@ -177,7 +177,7 @@ public class Comlibs {
 	public void rwExcel(String SpID, int testStatus, String functionality, String description) throws IOException {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/studyPriceDemoUI.properties"));
-		prop.load(vinCompareUIController.class.getClassLoader()
+		prop.load(competitiveCompareUIController.class.getClassLoader()
 				.getResourceAsStream("./data/competitiveCompare.properties"));
 		String resultfile = prop.getProperty("CompetitiveCompare.resutlPathFile");
 		int n = 0;
