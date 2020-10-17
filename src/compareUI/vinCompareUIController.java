@@ -265,7 +265,7 @@ public class vinCompareUIController extends Comlibs {
 			
 			loadURL(driver, VinCompareUIURL);
 			String vin1 = vins[0];
-			//// 1. Study Price Demo UI Home page
+			//// 1. VIN Compare Tester Tool UI page
 			log.rwExcel("", "-----VIN Compare Tester Tool UI page Testing started-----" + (i + 1), "");
 //			1. ***********VIN Compare**************
 			Vin2VinCompareTcs(driver, tBrowser, env);
