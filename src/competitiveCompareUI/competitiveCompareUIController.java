@@ -1,9 +1,9 @@
 package competitiveCompareUI;
 
-//Moved from perforce:1666..
+//
 /**
 * @author Zhoul
-* Initial date:  -2020-10-09
+* Initial date:  -2020-10-16
 * Modified by ...
 * In case of broken, update may needed:
 *  1. Selenium Webdriver
@@ -99,14 +99,12 @@ public class competitiveCompareUIController extends Comlibs {
 	}
 
 	private static String[] fetchOneDemArrayFromPropFile(String propertyName, Properties propFile) {
-
 		// get array split up by the colin
 		String a[] = propFile.getProperty(propertyName).split(",");
-
 		return a;
 	}
 
-	public static void CompetitiveCompareTcs(WebDriver driver, String brw, String envment, String brand)
+	public static void CompetitiveCompareMonitor(WebDriver driver, String brw, String envment, String brand)
 			throws Exception {
 		// Load environment parameters
 		Properties prop = new Properties();
@@ -143,7 +141,10 @@ public class competitiveCompareUIController extends Comlibs {
 		SelectVehiclePage.clickOnTrim(driver, "1", tc);
 
 		Compare ComparePage = new Compare(driver);
-		ComparePage.verifyPrimaryImage(driver, tc);
+		tc = brand + " - TC_VerifyPrimaryImage_03";
+		log.Wait(wt * 3);
+		ComparePage.verifyPrimaryImage(driver, env, brand, tc);
+
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -155,65 +156,70 @@ public class competitiveCompareUIController extends Comlibs {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		String brand = "Mazda";
 		String env = prop.getProperty("CompetitiveCompare.environment");
 		String tBrowser = prop.getProperty("CompetitiveCompare.browser");
 		String envDevice = prop.getProperty("CompetitiveCompare.envDevice");
 		String onScreen = prop.getProperty("CompetitiveCompare.onScreen");
-		String competitiveCompareUIUR = prop.getProperty(env + "." + brand + ".competitiveCompareUIURL");
-		String[] Devices = new String[3];
 
-//		String vins[] = fetchOneDemArrayFromPropFile(env + ".CompareVINs", prop);
+		String Clients[] = fetchOneDemArrayFromPropFile(env + ".Clients", prop);
 
-		if (envDevice.equalsIgnoreCase("PC")) {
-			Devices[0] = "PC";
-			Devices[1] = "Tablet";
-			Devices[2] = "Smartphone";
-		} else if (envDevice.equalsIgnoreCase("Tablet")) {
-			Devices[0] = "Tablet";
-			Devices[1] = "Smartphone";
-			Devices[2] = "PC";
-		} else if (envDevice.equalsIgnoreCase("Smartphone")) {
-			Devices[0] = "Smartphone";
-			Devices[1] = "PC";
-			Devices[2] = "Tablet";
-		} else {
-			Devices[0] = "PC";
-			Devices[1] = "Tablet";
-			Devices[2] = "Smartphone";
-		}
+		for (String brand : Clients) {
 
-		// i=3: all 3 devices
-		for (int i = 0; i < 1; i++) {
-			System.out.println("Testing is started in " + env + "\n");
-			// Initial
-			Comlibs log = new Comlibs();
-			final WebDriver driver;
-			driver = log.drivers(tBrowser);// Firefox, Chrome
-			driver.manage().deleteAllCookies();
-			System.out.println("Test Browser = " + tBrowser + "\n");
-			System.out.println("Test Device = " + Devices[i] + "\n");
+			String competitiveCompareUIUR = prop.getProperty(env + "." + brand + ".competitiveCompareUIURL");
+			String[] Devices = new String[3];
 
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-			if (!tBrowser.equalsIgnoreCase("Chromexxxxxxxxx")) {
-				log.SelecBroswerResolution(driver, Devices[i], onScreen);
+			if (envDevice.equalsIgnoreCase("PC")) {
+				Devices[0] = "PC";
+				Devices[1] = "Tablet";
+				Devices[2] = "Smartphone";
+			} else if (envDevice.equalsIgnoreCase("Tablet")) {
+				Devices[0] = "Tablet";
+				Devices[1] = "Smartphone";
+				Devices[2] = "PC";
+			} else if (envDevice.equalsIgnoreCase("Smartphone")) {
+				Devices[0] = "Smartphone";
+				Devices[1] = "PC";
+				Devices[2] = "Tablet";
+			} else {
+				Devices[0] = "PC";
+				Devices[1] = "Tablet";
+				Devices[2] = "Smartphone";
 			}
-			log.rwExcel("", "****** Testing started ******" + (i + 1), "");
-			log.rwExcel("", "Test Browser", tBrowser);
-			log.rwExcel("", "Test Environment", env);
-			log.rwExcel("", "Test Devicer", Devices[i]);
 
-			loadURL(driver, competitiveCompareUIUR);
+			// i=3: all 3 devices
+			for (int i = 0; i < 1; i++) {
 
-			//// 1.Competitive Compare page
-			log.rwExcel("", "-----" + brand + " Competitive Compare page Testing started-----" + (i + 1), "");
-//			1. ***********VIN Compare**************
-			CompetitiveCompareTcs(driver, tBrowser, env, brand);
-//			 ***********VIN Compare**************
+				System.out.println("Testing is started in " + env + "\n");
+				// Initial
+				Comlibs log = new Comlibs();
+				final WebDriver driver;
+				driver = log.drivers(tBrowser);// Firefox, Chrome
+				driver.manage().deleteAllCookies();
+				System.out.println("Test Client = " + brand + "\n");
+				System.out.println("Test Browser = " + tBrowser + "\n");
+				System.out.println("Test Device = " + Devices[i] + "\n");
 
-			log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
-			driver.close();
-			System.out.println("Test is complete!!!   i = " + (i + 1) + "\n");
+				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+				if (!tBrowser.equalsIgnoreCase("Chromexxxxxxxxx")) {
+					log.SelecBroswerResolution(driver, Devices[i], onScreen);
+				}
+				log.rwExcel("", "****** Testing started ******" + (i + 1), "");
+				log.rwExcel("", "Test Browser", tBrowser);
+				log.rwExcel("", "Test Environment", env);
+				log.rwExcel("", "Test Devicer", Devices[i]);
+
+				loadURL(driver, competitiveCompareUIUR);
+
+				//// 1.Competitive Compare page
+				log.rwExcel("", "-----" + brand + " Competitive Compare page Testing started-----" + (i + 1), "");
+//			1. ***********Competitive Compare**************
+				CompetitiveCompareMonitor(driver, tBrowser, env, brand);
+//			 ***********Competitive Compare**************
+
+				log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
+				driver.close();
+				System.out.println("Test is complete!!!   i = " + (i + 1) + "\n");
+			}
 		}
 		System.out.println("*****************All Tests are done!!!*****************" + "\n");
 		return;

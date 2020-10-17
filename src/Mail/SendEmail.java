@@ -1,5 +1,6 @@
 package Mail;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
@@ -11,6 +12,8 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import competitiveCompareUI.competitiveCompareUIController;
 
 public class SendEmail {
 	public static void sendEmails(String gmailUsername, String gmailPassword, String[] toEmails, String Subject,
@@ -30,8 +33,6 @@ public class SendEmail {
 			}
 		});
 		int emailNumber = toEmails.length;
-		// Integer.toString(emailNumber)
-
 		try {
 			for (int i = 0; i <= emailNumber - 1; i++) {
 				Message message = new MimeMessage(session);
@@ -48,16 +49,37 @@ public class SendEmail {
 		}
 	}
 
-	public static void main(String[] args) {
-		String gmailUsername = "sautotomsmithjj@gmail.com";
-		String gmailPassword = "Autodata1";
-		String[] sendEmailsList = { "lucas.zhou@autodatasolutions.com" };// "lucas.zhou@autodatasolutions.com", "sautotomsmithjj@gmail.com"
-//		int emailNumber = emails.length;
-		String Subject = "Application Failure Alert Testing...ignore please.";
-		String content = "Hello,\n\n Please ignore this email. This is testing alert from monitor application!";
-
-		sendEmails(gmailUsername, gmailPassword, sendEmailsList, Subject, content);
-		System.out.println("\n\n*****************Complete!*******************\n");
+	public void SendAlertEmail(String env, String brand, String tc) {
+		Properties prop = new Properties();
+		try {
+			prop.load(competitiveCompareUIController.class.getClassLoader()
+					.getResourceAsStream("./data/competitiveCompare.properties"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String gmailUsername = prop.getProperty(env + ".gmailUsername");
+		String gmailPassword = prop.getProperty(env + ".gmailPassword");
+		String sendEmailsList[] = fetchOneDemArrayFromPropFile(env + ".sendEmailsList", prop);
+		String Subject = prop.getProperty(env + ".Subject");
+		String content = prop.getProperty(env + ".content");
+		sendEmails(gmailUsername, gmailPassword, sendEmailsList, env+" - "+brand + " - " + Subject, content);
+		System.out.println("\n\n*****************Sending Email is Complete!*******************\n");
 	}
+
+	private static String[] fetchOneDemArrayFromPropFile(String propertyName, Properties propFile) {
+		// get array split up by the colin
+		String a[] = propFile.getProperty(propertyName).split(",");
+		return a;
+	}
+
+//	public static void main(String[] args) {
+//		String gmailUsername = "sautotomsmithjj@gmail.com";
+//		String gmailPassword = "Autodata1";
+//		String[] sendEmailsList = { "lucas.zhou@autodatasolutions.com" };
+//		String Subject = "Application Failure Alert Testing...ignore please.";
+//		String content = "Hello,\n\n Please ignore this email. This is testing alert from monitor application!";
+//		sendEmails(gmailUsername, gmailPassword, sendEmailsList, Subject, content);
+//		System.out.println("\n\n*****************Complete!*******************\n");
+//	}
 
 }
