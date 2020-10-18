@@ -38,6 +38,8 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import javax.mail.MessagingException;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -50,6 +52,8 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import Mail.SendEmail;
 
 public class competitiveCompareUIController extends Comlibs {
 	private final WebDriver driver;
@@ -185,40 +189,60 @@ public class competitiveCompareUIController extends Comlibs {
 				Devices[1] = "Tablet";
 				Devices[2] = "Smartphone";
 			}
-
+			Comlibs log = new Comlibs();
+			final WebDriver driver;
+			driver = log.drivers(tBrowser);// Firefox, Chrome
+			driver.manage().deleteAllCookies();
 			// i=3: all 3 devices
 			for (int i = 0; i < 1; i++) {
+				try {
+					System.out.println("Testing is started in " + env + "\n");
+					// Initial
+//					Comlibs log = new Comlibs();
+//					final WebDriver driver;
+//					driver = log.drivers(tBrowser);// Firefox, Chrome
+//					driver.manage().deleteAllCookies();
+					System.out.println("Test Client = " + brand + "\n");
+					System.out.println("Test Browser = " + tBrowser + "\n");
+					System.out.println("Test Device = " + Devices[i] + "\n");
 
-				System.out.println("Testing is started in " + env + "\n");
-				// Initial
-				Comlibs log = new Comlibs();
-				final WebDriver driver;
-				driver = log.drivers(tBrowser);// Firefox, Chrome
-				driver.manage().deleteAllCookies();
-				System.out.println("Test Client = " + brand + "\n");
-				System.out.println("Test Browser = " + tBrowser + "\n");
-				System.out.println("Test Device = " + Devices[i] + "\n");
+					driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+					if (!tBrowser.equalsIgnoreCase("Chromexxxxxxxxx")) {
+						log.SelecBroswerResolution(driver, Devices[i], onScreen);
+					}
+					log.rwExcel("", "****** Testing started ******" + (i + 1), "");
+					log.rwExcel("", "Test Browser", tBrowser);
+					log.rwExcel("", "Test Environment", env);
+					log.rwExcel("", "Test Devicer", Devices[i]);
 
-				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-				if (!tBrowser.equalsIgnoreCase("Chromexxxxxxxxx")) {
-					log.SelecBroswerResolution(driver, Devices[i], onScreen);
-				}
-				log.rwExcel("", "****** Testing started ******" + (i + 1), "");
-				log.rwExcel("", "Test Browser", tBrowser);
-				log.rwExcel("", "Test Environment", env);
-				log.rwExcel("", "Test Devicer", Devices[i]);
+					loadURL(driver, competitiveCompareUIUR);
 
-				loadURL(driver, competitiveCompareUIUR);
-
-				//// 1.Competitive Compare page
-				log.rwExcel("", "-----" + brand + " Competitive Compare page Testing started-----" + (i + 1), "");
+					//// 1.Competitive Compare page
+					log.rwExcel("", "-----" + brand + " Competitive Compare page Testing started-----" + (i + 1), "");
 //			1. ***********Competitive Compare**************
-				CompetitiveCompareMonitor(driver, tBrowser, env, brand);
+					CompetitiveCompareMonitor(driver, tBrowser, env, brand);
 //			 ***********Competitive Compare**************
 
-				log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
-				driver.close();
-				System.out.println("Test is complete!!!   i = " + (i + 1) + "\n");
+					log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
+					driver.close();
+					System.out.println("Test is complete!!!   i = " + (i + 1) + "\n");
+				} catch (Exception e) {
+					System.out.println("Test Client = " + brand + "\n");
+					System.out.println("Test Browser = " + tBrowser + "\n");
+					System.out.println("Test Device = " + Devices[i] + "\n");
+					System.out.println("\n\nAlert!!!!\n\n");
+					System.out.println("\n\nSite is not loaded properly or down!\n\n");
+					log.rwExcel(brand, false, brand + " - Site is not loaded properly",
+							brand + " site maybe is showing error or down.");
+					SendEmail alertEmail = new SendEmail();
+					alertEmail.SendAlertEmail(env, brand, "Site is not loaded properly or down!");
+					try {
+						driver.close();
+					} catch (Exception ee) {
+						System.out.println("\n\nAlert!!!!\n\n");
+						System.out.println("\nBrowser cannot be closed!\n");
+					}
+				}
 			}
 		}
 		System.out.println("*****************All Tests are done!!!*****************" + "\n");

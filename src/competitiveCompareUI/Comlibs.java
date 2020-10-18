@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -56,11 +58,14 @@ public class Comlibs {
 		Calendar cal = Calendar.getInstance();
 		cal.getTime();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		SimpleDateFormat sdfmt = new SimpleDateFormat("yyyy-MM-dd");
 		timeStamp = sdf.format(cal.getTime());
 		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
 		Date d = new Date();
 		dateStamp = df.format(d);
 		timeStamp = dateStamp + "  " + timeStamp;
+		resultfile = resultfile.replace(".xls", "");
+		resultfile = resultfile + "_" + sdfmt.format(d) + ".xls";
 		writeTitle(resultfile);
 
 		FileInputStream file = new FileInputStream(new File(resultfile));
@@ -136,11 +141,14 @@ public class Comlibs {
 		Calendar cal = Calendar.getInstance();
 		cal.getTime();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		SimpleDateFormat sdfmt = new SimpleDateFormat("yyyy-MM-dd");
 		timeStamp = sdf.format(cal.getTime());
 		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
 		Date d = new Date();
 		dateStamp = df.format(d);
 		timeStamp = dateStamp + "  " + timeStamp;
+		resultfile = resultfile.replace(".xls", "");
+		resultfile = resultfile + "_" + sdfmt.format(d) + ".xls";
 		writeTitle(resultfile);
 
 		FileInputStream file = new FileInputStream(new File(resultfile));
@@ -185,13 +193,15 @@ public class Comlibs {
 		Calendar cal = Calendar.getInstance();
 		cal.getTime();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		SimpleDateFormat sdfmt = new SimpleDateFormat("yyyy-MM-dd");
 		timeStamp = sdf.format(cal.getTime());
 		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
 		Date d = new Date();
 		dateStamp = df.format(d);
 		timeStamp = dateStamp + "  " + timeStamp;
+		resultfile = resultfile.replace(".xls", "");
+		resultfile = resultfile + "_" + sdfmt.format(d) + ".xls";
 		writeTitle(resultfile);
-
 		FileInputStream file = new FileInputStream(new File(resultfile));
 
 		// Get the workbook instance for XLS file
@@ -747,8 +757,8 @@ public class Comlibs {
 	public void waitElementToShow(WebDriver driver, By elemt) throws IOException {
 		boolean im = elementExist(driver, elemt);
 		int i = 0;
-		int totalWT=20;
-		System.out.println("Waiting for element to show. Total wait time = "+totalWT);
+		int totalWT = 20;
+		System.out.println("Waiting for element to show. Total wait time = " + totalWT);
 		while ((!im) && (i < totalWT)) {
 			System.out.println("i=" + i + ", waiting for image to show! " + elemt);
 			im = elementExist(driver, elemt);
