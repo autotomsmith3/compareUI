@@ -99,6 +99,20 @@ public class competitiveCompareUIController extends Comlibs {
 
 	public static SelectVehicle loadURL(WebDriver driver, String bURL) throws IOException {
 		driver.get(bURL);
+		// Below to accept authentication only works for Firefox, Chrome scripts are not
+		// ready yet. 2018-11-06.
+		// Don't need below anymore since username and password embeded into the bURL
+		// that works. 2019-03-19.
+		// if (env.equalsIgnoreCase("Prod")) {
+		// Thread.sleep(2 * 1000);
+		// driver.switchTo().alert().sendKeys("admin" + Keys.TAB + "g4TT73Xy!");
+		// driver.switchTo().alert().accept();//.dismiss()
+//		driver.switchTo().alert().accept();//.dismiss()
+		// }
+		if (bURL.contains("mitsubishi")) {
+			driver.switchTo().alert().dismiss();
+		}
+
 		return new SelectVehicle(driver);
 	}
 
@@ -148,7 +162,7 @@ public class competitiveCompareUIController extends Comlibs {
 		tc = brand + " - TC_VerifyPrimaryImage_03";
 		log.Wait(wt * 3);
 		ComparePage.verifyPrimaryImage(driver, env, brand, tc);
-
+		log.Wait(wt);
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -216,6 +230,7 @@ public class competitiveCompareUIController extends Comlibs {
 					log.rwExcel("", "Test Devicer", Devices[i]);
 
 					loadURL(driver, competitiveCompareUIUR);
+					log.Wait(10);
 
 					//// 1.Competitive Compare page
 					log.rwExcel("", "-----" + brand + " Competitive Compare page Testing started-----" + (i + 1), "");

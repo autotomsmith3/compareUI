@@ -71,6 +71,9 @@ public class SelectVehicle extends Comlibs {
 		By trim01 = By.xpath("//*[@id=\"vehicle-select-radio\"]");
 		elementExist(driver, trim01, true, tc);
 		driver.findElement(trim01).click();
+//		if (un.contains("Mitsubishi")) {
+//			driver.switchTo().alert().dismiss();
+//		}
 		return new Compare(driver);
 	}
 
