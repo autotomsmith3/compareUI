@@ -71,17 +71,41 @@ public class SelectVehicle extends Comlibs {
 		By trim01 = By.xpath("//*[@id=\"vehicle-select-radio\"]");
 		elementExist(driver, trim01, true, tc);
 		driver.findElement(trim01).click();
+		Wait(5);
 //		if (un.contains("Mitsubishi")) {
 //			driver.switchTo().alert().dismiss();
 //		}
 		return new Compare(driver);
 	}
 
-	public void verifyPrimaryVehicleImageLoading(WebDriver driver, String tc) {
-		By primaryImage = By.xpath("");
-		elementExist(driver, primaryImage, true, tc);
-		driver.
-		
+	public void selectYear(WebDriver driver, String year, String tc) throws Exception {
+
+		String y = "";
+		By allYears = By.xpath("/html/body/div[1]/div[2]/div/nav/div/div/div[2]/ul/li");
+		By curretTestYear = By.xpath("/html/body/div[1]/div[2]/div/nav/div/div/div[2]/ul/li[1]/button");
+		elementExist(driver, allYears, true, tc);
+		int totalYears = driver.findElements(allYears).size();
+
+		for (int i = 1; i <= totalYears - 2; i++) {
+			curretTestYear = By.xpath("/html/body/div[1]/div[2]/div/nav/div/div/div[2]/ul/li[" + i + "]/button");
+			y = driver.findElement(curretTestYear).getText();
+			if (y.equalsIgnoreCase(year)) {
+				curretTestYear = By.xpath("/html/body/div[1]/div[2]/div/nav/div/div/div[2]/ul/li[" + i + "]/button");
+				System.out.println("Year = " + y + " \n");
+				break;
+			} else if (i == (totalYears - 2)) {
+				curretTestYear = null;
+			}
+		}
+
+		if (curretTestYear == null) {
+			System.out.println("Year = " + year + " cannot be found!\n");
+			rwExcel(tc, "Select Year = " + year + "", year + " cannot be found in the site");
+		} else {
+			driver.findElement(curretTestYear).click();
+			Wait(2);
+		}
+
 	}
 
 }

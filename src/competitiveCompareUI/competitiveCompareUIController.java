@@ -109,7 +109,7 @@ public class competitiveCompareUIController extends Comlibs {
 		// driver.switchTo().alert().accept();//.dismiss()
 //		driver.switchTo().alert().accept();//.dismiss()
 		// }
-		if (bURL.contains("mitsubishi")) {
+		if (bURL.contains("mitsubishi") && !(bURL.contains("compare.autodatadirect.com"))) {//compare.autodatadirect.com is Prod URL
 			driver.switchTo().alert().dismiss();
 		}
 
@@ -152,14 +152,20 @@ public class competitiveCompareUIController extends Comlibs {
 		tc = brand + " - TCxxxx_00";
 		SelectVehiclePage.clickOnGotIt(driver, tc);
 
+		tc = brand + " - Select year_01";
+		String Year="2020";
+		SelectVehiclePage.selectYear(driver,Year,tc);	
+		
+		
 		tc = brand + " - TCxxxx_01";
+		//Select first type and first vehicle: 1,1. Select second type and first vehicle 2,1		
 		SelectVehiclePage.clickOnVehicle(driver, 1, 1, tc);
 		tc = brand + " - TCxxxx_02";
 		log.Wait(wt * 2);
 		SelectVehiclePage.clickOnTrim(driver, "1", tc);
 
 		Compare ComparePage = new Compare(driver);
-		tc = brand + " - TC_VerifyPrimaryImage_03";
+		tc = env+" - "+brand + " - TC_VerifyPrimaryImage_03";
 		log.Wait(wt * 3);
 		ComparePage.verifyPrimaryImage(driver, env, brand, tc);
 		log.Wait(wt);
@@ -205,17 +211,12 @@ public class competitiveCompareUIController extends Comlibs {
 			}
 			Comlibs log = new Comlibs();
 			final WebDriver driver;
-			driver = log.drivers(tBrowser);// Firefox, Chrome
+			driver = log.drivers(tBrowser);
 			driver.manage().deleteAllCookies();
 			// i=3: all 3 devices
 			for (int i = 0; i < 1; i++) {
 				try {
 					System.out.println("Testing is started in " + env + "\n");
-					// Initial
-//					Comlibs log = new Comlibs();
-//					final WebDriver driver;
-//					driver = log.drivers(tBrowser);// Firefox, Chrome
-//					driver.manage().deleteAllCookies();
 					System.out.println("Test Client = " + brand + "\n");
 					System.out.println("Test Browser = " + tBrowser + "\n");
 					System.out.println("Test Device = " + Devices[i] + "\n");
@@ -230,24 +231,24 @@ public class competitiveCompareUIController extends Comlibs {
 					log.rwExcel("", "Test Devicer", Devices[i]);
 
 					loadURL(driver, competitiveCompareUIUR);
-					log.Wait(10);
+					log.Wait(5);
 
 					//// 1.Competitive Compare page
 					log.rwExcel("", "-----" + brand + " Competitive Compare page Testing started-----" + (i + 1), "");
-//			1. ***********Competitive Compare**************
+					//1. ***********Competitive Compare**************
 					CompetitiveCompareMonitor(driver, tBrowser, env, brand);
-//			 ***********Competitive Compare**************
+					// ***********Competitive Compare**************
 
 					log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 					driver.close();
-					System.out.println("Test is complete!!!   i = " + (i + 1) + "\n");
+					System.out.println(env+" - "+brand+" - Test is complete!!!   i = " + (i + 1) + "\n");
 				} catch (Exception e) {
 					System.out.println("Test Client = " + brand + "\n");
 					System.out.println("Test Browser = " + tBrowser + "\n");
 					System.out.println("Test Device = " + Devices[i] + "\n");
 					System.out.println("\n\nAlert!!!!\n\n");
-					System.out.println("\n\nSite is not loaded properly or down!\n\n");
-					log.rwExcel(brand, false, brand + " - Site is not loaded properly",
+					System.out.println("\n\n"+env+" - "+brand+" - Site is not loaded properly or down!\n\n");
+					log.rwExcel(env+" - "+brand, false, brand + " - Site is not loaded properly",
 							brand + " site maybe is showing error or down.");
 					SendEmail alertEmail = new SendEmail();
 					alertEmail.SendAlertEmail(env, brand, "Site is not loaded properly or down!");
@@ -263,9 +264,4 @@ public class competitiveCompareUIController extends Comlibs {
 		System.out.println("*****************All Tests are done!!!*****************" + "\n");
 		return;
 	}
-
-//	private static void CompetitiveCompareTcs(WebDriver driver2, String tBrowser, String env, String brand) {
-//		// TODO Auto-generated method stub
-//		
-//	}
 }
