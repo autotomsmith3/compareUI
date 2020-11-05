@@ -49,7 +49,7 @@ public class Compare extends Comlibs {
 //	By xxx = By.xpath("");
 //	By xxx = By.xpath("");
 
-	public void verifyPrimaryImage(WebDriver driver, String env, String brand, String tc) throws Exception {
+	public void verifyPrimaryImage(WebDriver driver, String env, String brand, String urlString, String tc) throws Exception {
 		try {
 			By PrimaryIageLocator = By.xpath("//*[@id=\"primary-vehicle\"]/div/div/div[1]/div[1]/div/img");
 			VerifyImageLoaded(driver, PrimaryIageLocator, tc);
@@ -57,7 +57,7 @@ public class Compare extends Comlibs {
 			rwExcel(tc, false, brand + " - Primary Image is not showing",
 					brand + " site maybe is showing error or down.");
 			SendEmail alertEmail = new SendEmail();
-			alertEmail.SendAlertEmail(env, brand, tc);
+			alertEmail.SendAlertEmail(env, brand, urlString, tc);
 			System.out.println("\n\n*****************Verify Primary Image Is Complete!*******************\n");
 
 		}

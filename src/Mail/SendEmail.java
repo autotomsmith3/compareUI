@@ -49,7 +49,7 @@ public class SendEmail {
 		}
 	}
 
-	public void SendAlertEmail(String env, String brand, String tc) {
+	public void SendAlertEmail(String env, String brand, String urlString, String tc) {
 		Properties prop = new Properties();
 		try {
 			prop.load(competitiveCompareUIController.class.getClassLoader()
@@ -62,7 +62,7 @@ public class SendEmail {
 		String sendEmailsList[] = fetchOneDemArrayFromPropFile(env + ".sendEmailsList", prop);
 		String Subject = prop.getProperty(env + ".Subject");
 		String content = prop.getProperty(env + ".content");
-		sendEmails(gmailUsername, gmailPassword, sendEmailsList, env+" - "+brand + " - " + Subject, content);
+		sendEmails(gmailUsername, gmailPassword, sendEmailsList, env+" - "+brand + " - " + Subject, content+"\n\n\n URL: "+urlString);
 		System.out.println("\n\n*****************Sending Email is Complete!*******************\n");
 	}
 
@@ -72,14 +72,15 @@ public class SendEmail {
 		return a;
 	}
 
-//	public static void main(String[] args) {
-//		String gmailUsername = "sautotomsmithjj@gmail.com";
-//		String gmailPassword = "Autodata1";
-//		String[] sendEmailsList = { "lucas.zhou@autodatasolutions.com" };
-//		String Subject = "Application Failure Alert Testing...ignore please.";
-//		String content = "Hello,\n\n Please ignore this email. This is testing alert from monitor application!";
-//		sendEmails(gmailUsername, gmailPassword, sendEmailsList, Subject, content);
-//		System.out.println("\n\n*****************Complete!*******************\n");
-//	}
+	public static void main(String[] args) {
+		String gmailUsername = "sautotomsmithjj@gmail.com";
+		String gmailPassword = "Autodata1";
+		String[] sendEmailsList = { "lucas.zhou@autodatasolutions.com" };
+		String Subject = "Application Failure Alert Testing...ignore please.";
+		String content = "Hello,\n\n Please ignore this email. This is testing alert from monitor application!";
+		String urlString="http://qa1-compare.gm-test.autodata.tech/kia/ca/vehicle/#/select/primary/compare";
+		sendEmails(gmailUsername, gmailPassword, sendEmailsList, Subject, content+"\n\n\n URL: "+urlString);
+		System.out.println("\n\n*****************Complete!*******************\n");
+	}
 
 }

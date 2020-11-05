@@ -109,7 +109,7 @@ public class competitiveCompareUIController extends Comlibs {
 		// driver.switchTo().alert().accept();//.dismiss()
 //		driver.switchTo().alert().accept();//.dismiss()
 		// }
-		if (bURL.contains("mitsubishi") && !(bURL.contains("compare.autodatadirect.com"))) {//compare.autodatadirect.com is Prod URL
+		if (bURL.contains("mitsubishi") && !(bURL.contains("compare.autodatadirect.com"))) {// compare.autodatadirect.com is Prod URL
 			driver.switchTo().alert().dismiss();
 		}
 
@@ -153,21 +153,20 @@ public class competitiveCompareUIController extends Comlibs {
 		SelectVehiclePage.clickOnGotIt(driver, tc);
 
 		tc = brand + " - Select year_01";
-		String Year="2020";
-		SelectVehiclePage.selectYear(driver,Year,tc);	
-		
-		
+		String Year = "2021";
+		SelectVehiclePage.selectYear(driver, Year, tc);
+
 		tc = brand + " - TCxxxx_01";
-		//Select first type and first vehicle: 1,1. Select second type and first vehicle 2,1		
+		// Select first type and first vehicle: 1,1. Select second type and first vehicle 2,1
 		SelectVehiclePage.clickOnVehicle(driver, 1, 1, tc);
 		tc = brand + " - TCxxxx_02";
 		log.Wait(wt * 2);
-		SelectVehiclePage.clickOnTrim(driver, "1", tc);
-
+		SelectVehiclePage.clickOnTrim(driver, env, brand, tc);
+		String urlString = driver.getCurrentUrl();
 		Compare ComparePage = new Compare(driver);
-		tc = env+" - "+brand + " - TC_VerifyPrimaryImage_03";
+		tc = env + " - " + brand + " - TC_VerifyPrimaryImage_03";
 		log.Wait(wt * 3);
-		ComparePage.verifyPrimaryImage(driver, env, brand, tc);
+		ComparePage.verifyPrimaryImage(driver, env, brand, urlString, tc);
 		log.Wait(wt);
 	}
 
@@ -180,83 +179,89 @@ public class competitiveCompareUIController extends Comlibs {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		String env = prop.getProperty("CompetitiveCompare.environment");
+//		String env = prop.getProperty("CompetitiveCompare.environment");
+		String envs[] = fetchOneDemArrayFromPropFile("CompetitiveCompare.environment", prop);// prop.getProperty("CompetitiveCompare.environment");
 		String tBrowser = prop.getProperty("CompetitiveCompare.browser");
 		String envDevice = prop.getProperty("CompetitiveCompare.envDevice");
 		String onScreen = prop.getProperty("CompetitiveCompare.onScreen");
 
-		String Clients[] = fetchOneDemArrayFromPropFile(env + ".Clients", prop);
+		for (String env : envs) {
 
-		for (String brand : Clients) {
+			String Clients[] = fetchOneDemArrayFromPropFile(env + ".Clients", prop);
 
-			String competitiveCompareUIUR = prop.getProperty(env + "." + brand + ".competitiveCompareUIURL");
-			String[] Devices = new String[3];
+			for (String brand : Clients) {
 
-			if (envDevice.equalsIgnoreCase("PC")) {
-				Devices[0] = "PC";
-				Devices[1] = "Tablet";
-				Devices[2] = "Smartphone";
-			} else if (envDevice.equalsIgnoreCase("Tablet")) {
-				Devices[0] = "Tablet";
-				Devices[1] = "Smartphone";
-				Devices[2] = "PC";
-			} else if (envDevice.equalsIgnoreCase("Smartphone")) {
-				Devices[0] = "Smartphone";
-				Devices[1] = "PC";
-				Devices[2] = "Tablet";
-			} else {
-				Devices[0] = "PC";
-				Devices[1] = "Tablet";
-				Devices[2] = "Smartphone";
-			}
-			Comlibs log = new Comlibs();
-			final WebDriver driver;
-			driver = log.drivers(tBrowser);
-			driver.manage().deleteAllCookies();
-			// i=3: all 3 devices
-			for (int i = 0; i < 1; i++) {
-				try {
-					System.out.println("Testing is started in " + env + "\n");
-					System.out.println("Test Client = " + brand + "\n");
-					System.out.println("Test Browser = " + tBrowser + "\n");
-					System.out.println("Test Device = " + Devices[i] + "\n");
+				String competitiveCompareUIUR = prop.getProperty(env + "." + brand + ".competitiveCompareUIURL");
+				String[] Devices = new String[3];
 
-					driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-					if (!tBrowser.equalsIgnoreCase("Chromexxxxxxxxx")) {
-						log.SelecBroswerResolution(driver, Devices[i], onScreen);
-					}
-					log.rwExcel("", "****** Testing started ******" + (i + 1), "");
-					log.rwExcel("", "Test Browser", tBrowser);
-					log.rwExcel("", "Test Environment", env);
-					log.rwExcel("", "Test Devicer", Devices[i]);
-
-					loadURL(driver, competitiveCompareUIUR);
-					log.Wait(5);
-
-					//// 1.Competitive Compare page
-					log.rwExcel("", "-----" + brand + " Competitive Compare page Testing started-----" + (i + 1), "");
-					//1. ***********Competitive Compare**************
-					CompetitiveCompareMonitor(driver, tBrowser, env, brand);
-					// ***********Competitive Compare**************
-
-					log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
-					driver.close();
-					System.out.println(env+" - "+brand+" - Test is complete!!!   i = " + (i + 1) + "\n");
-				} catch (Exception e) {
-					System.out.println("Test Client = " + brand + "\n");
-					System.out.println("Test Browser = " + tBrowser + "\n");
-					System.out.println("Test Device = " + Devices[i] + "\n");
-					System.out.println("\n\nAlert!!!!\n\n");
-					System.out.println("\n\n"+env+" - "+brand+" - Site is not loaded properly or down!\n\n");
-					log.rwExcel(env+" - "+brand, false, brand + " - Site is not loaded properly",
-							brand + " site maybe is showing error or down.");
-					SendEmail alertEmail = new SendEmail();
-					alertEmail.SendAlertEmail(env, brand, "Site is not loaded properly or down!");
+				if (envDevice.equalsIgnoreCase("PC")) {
+					Devices[0] = "PC";
+					Devices[1] = "Tablet";
+					Devices[2] = "Smartphone";
+				} else if (envDevice.equalsIgnoreCase("Tablet")) {
+					Devices[0] = "Tablet";
+					Devices[1] = "Smartphone";
+					Devices[2] = "PC";
+				} else if (envDevice.equalsIgnoreCase("Smartphone")) {
+					Devices[0] = "Smartphone";
+					Devices[1] = "PC";
+					Devices[2] = "Tablet";
+				} else {
+					Devices[0] = "PC";
+					Devices[1] = "Tablet";
+					Devices[2] = "Smartphone";
+				}
+				Comlibs log = new Comlibs();
+				final WebDriver driver;
+				driver = log.drivers(tBrowser);
+				driver.manage().deleteAllCookies();
+				// i=3: run all 3 devices
+				for (int i = 0; i < 1; i++) {
 					try {
+						System.out.println("Testing is started in " + env + "\n");
+						System.out.println("Test Client = " + brand + "\n");
+						System.out.println("Test Browser = " + tBrowser + "\n");
+						System.out.println("Test Device = " + Devices[i] + "\n");
+
+						driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+						if (!tBrowser.equalsIgnoreCase("Chromexxxxxxxxx")) {
+							log.SelecBroswerResolution(driver, Devices[i], onScreen);
+						}
+						log.rwExcel("", "****** Testing started ******" + (i + 1), "");
+						log.rwExcel("", "Test Browser", tBrowser);
+						log.rwExcel("", "Test Environment", env);
+						log.rwExcel("", "Test Devicer", Devices[i]);
+
+						loadURL(driver, competitiveCompareUIUR);
+						log.Wait(5);
+
+						//// 1.Competitive Compare page
+						log.rwExcel("", "-----" + brand + " Competitive Compare page Testing started-----" + (i + 1),
+								"");
+						// 1. ***********Competitive Compare**************
+						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
+						// ***********Competitive Compare**************
+
+						log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 						driver.close();
-					} catch (Exception ee) {
+						System.out.println(env + " - " + brand + " - Test is complete!!!   i = " + (i + 1) + "\n");
+					} catch (Exception e) {
+						System.out.println("Test Client = " + brand + "\n");
+						System.out.println("Test Browser = " + tBrowser + "\n");
+						System.out.println("Test Device = " + Devices[i] + "\n");
 						System.out.println("\n\nAlert!!!!\n\n");
-						System.out.println("\nBrowser cannot be closed!\n");
+						System.out
+								.println("\n\n" + env + " - " + brand + " - Site is not loaded properly or down!\n\n");
+						log.rwExcel(env + " - " + brand, false, brand + " - Site is not loaded properly",
+								brand + " site maybe is showing error or down.");
+						SendEmail alertEmail = new SendEmail();
+						alertEmail.SendAlertEmail(env, brand,competitiveCompareUIUR, "Site is not loaded properly or down!");
+						try {
+							driver.close();
+						} catch (Exception ee) {
+							System.out.println("\n\nAlert!!!!\n\n");
+							System.out.println("\nBrowser cannot be closed!\n");
+						}
 					}
 				}
 			}

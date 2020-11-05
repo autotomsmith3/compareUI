@@ -67,14 +67,14 @@ public class SelectVehicle extends Comlibs {
 
 	}
 
-	public Compare clickOnTrim(WebDriver driver, String un, String tc) throws Exception {
+	public Compare clickOnTrim(WebDriver driver, String env, String brand, String tc) throws Exception {
 		By trim01 = By.xpath("//*[@id=\"vehicle-select-radio\"]");
 		elementExist(driver, trim01, true, tc);
 		driver.findElement(trim01).click();
 		Wait(5);
-//		if (un.contains("Mitsubishi")) {
-//			driver.switchTo().alert().dismiss();
-//		}
+		if (brand.contains("Mitsubishi")&&((env.equalsIgnoreCase("QA"))|(env.equalsIgnoreCase("Staging")))) {
+			driver.switchTo().alert().dismiss();
+		}
 		return new Compare(driver);
 	}
 
@@ -85,7 +85,10 @@ public class SelectVehicle extends Comlibs {
 		By curretTestYear = By.xpath("/html/body/div[1]/div[2]/div/nav/div/div/div[2]/ul/li[1]/button");
 		elementExist(driver, allYears, true, tc);
 		int totalYears = driver.findElements(allYears).size();
-
+		if (totalYears<=9) {
+			Wait(5);
+			totalYears = driver.findElements(allYears).size();
+		}
 		for (int i = 1; i <= totalYears - 2; i++) {
 			curretTestYear = By.xpath("/html/body/div[1]/div[2]/div/nav/div/div/div[2]/ul/li[" + i + "]/button");
 			y = driver.findElement(curretTestYear).getText();
