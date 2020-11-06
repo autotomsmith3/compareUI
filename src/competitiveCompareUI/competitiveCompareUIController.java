@@ -107,7 +107,7 @@ public class competitiveCompareUIController extends Comlibs {
 		// Thread.sleep(2 * 1000);
 		// driver.switchTo().alert().sendKeys("admin" + Keys.TAB + "g4TT73Xy!");
 		// driver.switchTo().alert().accept();//.dismiss()
-//		driver.switchTo().alert().accept();//.dismiss()
+//		driver.switchTo().alert().accept();//.dismiss() 
 		// }
 		if (bURL.contains("mitsubishi") && !(bURL.contains("compare.autodatadirect.com"))) {// compare.autodatadirect.com is Prod URL
 			driver.switchTo().alert().dismiss();
