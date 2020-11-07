@@ -175,7 +175,7 @@ public class competitiveCompareUIController extends Comlibs {
 	}
 
 	public static void main(String[] args) throws Exception {
-		// Load environment parameters
+		// Load environment parameters 
 		Properties prop = new Properties();
 		try {
 			prop.load(competitiveCompareUIController.class.getClassLoader()
