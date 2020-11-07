@@ -135,12 +135,13 @@ public class competitiveCompareUIController extends Comlibs {
 		}
 
 		String env = envment;
-		String tBrowser = brw;
-		String envDevice = prop.getProperty("competitiveCompare.envDevice");
-		String onScreen = prop.getProperty("competitiveCompare.onScreen");
-
-		String CompetitiveCompareUIURL = prop.getProperty(env + brand + ".competitiveCompareUIURL");
-
+//		String tBrowser = brw;
+//		String envDevice = prop.getProperty("competitiveCompare.envDevice");
+//		String onScreen = prop.getProperty("competitiveCompare.onScreen");
+//
+//		String CompetitiveCompareUIURL = prop.getProperty(env + brand + ".competitiveCompareUIURL");
+		String Year = prop.getProperty(env + ".Year");
+		String expectedPrimaryPrices = prop.getProperty(env + "." + brand + ".expectedPrimaryPrices");
 		int wt = Integer.parseInt(prop.getProperty("CompetitiveCompare.waitTime"));
 		// Initial
 		String tc;
@@ -151,11 +152,9 @@ public class competitiveCompareUIController extends Comlibs {
 
 		tc = brand + " - TCxxxx_00";
 		SelectVehiclePage.clickOnGotIt(driver, tc);
-
+//		String Year=2021;
 		tc = brand + " - Select year_01";
-		String Year = "2021";
 		SelectVehiclePage.selectYear(driver, Year, tc);
-
 		tc = brand + " - TCxxxx_01";
 		// Select first type and first vehicle: 1,1. Select second type and first vehicle 2,1
 		SelectVehiclePage.clickOnVehicle(driver, 1, 1, tc);
@@ -164,14 +163,19 @@ public class competitiveCompareUIController extends Comlibs {
 		SelectVehiclePage.clickOnTrim(driver, env, brand, tc);
 		String urlString = driver.getCurrentUrl();
 		Compare ComparePage = new Compare(driver);
-		tc = env + " - " + brand + " - TC_VerifyPrimaryImage_03";
+		tc = env + " - " + brand + " - VerifyPrimaryImage";
 		log.Wait(wt * 3);
-		ComparePage.verifyPrimaryImage(driver, env, brand, urlString, tc);
+		ComparePage.verifyPrimaryImage(driver, env, brand, urlString + "\n\n" + tc, tc);
+		log.Wait(wt);
+		tc = env + " - " + brand + " - VerifyPrimaryStaringFromPrice";
+
+		ComparePage.verifyPrimaryStaringFromPrice(driver, env, brand, urlString + "\n\n" + tc, expectedPrimaryPrices,
+				tc);
 		log.Wait(wt);
 	}
 
 	public static void main(String[] args) throws Exception {
-		// Load environment parameters 
+		// Load environment parameters
 		Properties prop = new Properties();
 		try {
 			prop.load(competitiveCompareUIController.class.getClassLoader()
@@ -255,7 +259,8 @@ public class competitiveCompareUIController extends Comlibs {
 						log.rwExcel(env + " - " + brand, false, brand + " - Site is not loaded properly",
 								brand + " site maybe is showing error or down.");
 						SendEmail alertEmail = new SendEmail();
-						alertEmail.SendAlertEmail(env, brand,competitiveCompareUIUR, "Site is not loaded properly or down!");
+						alertEmail.SendAlertEmail(env, brand, competitiveCompareUIUR,
+								"Site is not loaded properly or down!");
 						try {
 							driver.close();
 						} catch (Exception ee) {

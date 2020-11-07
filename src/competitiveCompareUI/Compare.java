@@ -49,7 +49,8 @@ public class Compare extends Comlibs {
 //	By xxx = By.xpath("");
 //	By xxx = By.xpath("");
 
-	public void verifyPrimaryImage(WebDriver driver, String env, String brand, String urlString, String tc) throws Exception {
+	public void verifyPrimaryImage(WebDriver driver, String env, String brand, String urlString, String tc)
+			throws Exception {
 		try {
 			By PrimaryIageLocator = By.xpath("//*[@id=\"primary-vehicle\"]/div/div/div[1]/div[1]/div/img");
 			VerifyImageLoaded(driver, PrimaryIageLocator, tc);
@@ -59,6 +60,44 @@ public class Compare extends Comlibs {
 			SendEmail alertEmail = new SendEmail();
 			alertEmail.SendAlertEmail(env, brand, urlString, tc);
 			System.out.println("\n\n*****************Verify Primary Image Is Complete!*******************\n");
+
+		}
+	}
+
+	public void verifyPrimaryStaringFromPrice(WebDriver driver, String env, String brand, String urlString,
+			String expectedPrimaryPrices, String tc) throws Exception {
+		String PrimaryStaringFromPriceString = "";
+		String errorMsg = "";
+		try {
+			By PrimaryStaringFromPrice = By
+					.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[1]/div/div[2]/div/ul[1]/li[2]/div[2]/span");
+			PrimaryStaringFromPriceString = driver.findElement(PrimaryStaringFromPrice).getText();
+			if (PrimaryStaringFromPriceString.equalsIgnoreCase(expectedPrimaryPrices)) {
+				System.out.println("\n\nPrimaryStaringFromPriceString matches!*****");
+				rwExcel(tc, true, brand + " - Verify PrimaryStaringFromPriceString",
+						brand + " PrimaryStaringFromPrice is showing and matching.");
+
+			} else {
+				System.out.println("\n\nPrimaryStaringFromPriceString does not match!*****");
+				errorMsg = brand + " - Primary Vehicle Staringfrom Price does not match!" + "\n\n" + brand
+						+ " Web Site Primary Staringfrom Price shows \"" + PrimaryStaringFromPriceString
+						+ "\" and expected price is " + "\"" + expectedPrimaryPrices + "\"\n";
+				rwExcel(tc, false, brand + " - Verify PrimaryStaringFromPrice", errorMsg);
+				SendEmail alertEmail = new SendEmail();
+				alertEmail.SendAlertEmail(env, brand, urlString+"\n"+errorMsg, tc);
+
+			}
+
+			System.out.println("\n\n*****");
+
+		} catch (Exception e) {
+			errorMsg= brand + " - Primary Vehicle Staringfrom Price does not match!" + "\n\n" + brand
+					+ " Web Site Primary Staringfrom Price shows \"" + PrimaryStaringFromPriceString
+					+ "\" and expected price is " + "\"" + expectedPrimaryPrices + "\"\n";;
+			rwExcel(tc, false, brand + " - PrimaryStaringFromPrice is not showing properly",errorMsg);
+			SendEmail alertEmail = new SendEmail();
+			alertEmail.SendAlertEmail(env, brand, urlString+"\n"+errorMsg, tc);
+			System.out.println("\n\n*****************Verify PrimaryStaringFromPrice Is Complete!*******************\n");
 
 		}
 	}
