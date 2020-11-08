@@ -141,7 +141,7 @@ public class competitiveCompareUIController extends Comlibs {
 //
 //		String CompetitiveCompareUIURL = prop.getProperty(env + brand + ".competitiveCompareUIURL");
 		String Year = prop.getProperty(env + ".Year");
-		String expectedPrimaryPrices = prop.getProperty(env + "." + brand + ".expectedPrimaryPrices");
+		String expectedPrimaryPrice = prop.getProperty(env + "." + brand + ".expectedPrimaryPrice");
 		int wt = Integer.parseInt(prop.getProperty("CompetitiveCompare.waitTime"));
 		// Initial
 		String tc;
@@ -169,7 +169,7 @@ public class competitiveCompareUIController extends Comlibs {
 		log.Wait(wt);
 		tc = env + " - " + brand + " - VerifyPrimaryStaringFromPrice";
 
-		ComparePage.verifyPrimaryStaringFromPrice(driver, env, brand, urlString + "\n\n" + tc, expectedPrimaryPrices,
+		ComparePage.verifyPrimaryStaringFromPrice(driver, env, brand, urlString + "\n\n" + tc, expectedPrimaryPrice,
 				tc);
 		log.Wait(wt);
 	}
