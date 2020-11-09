@@ -43,7 +43,8 @@ public class Compare extends Comlibs {
 	By trim02 = By.xpath("//*[@id=\"vehicle-select-radio\"]");// //*[@id="vehicle-select-radio"]
 	By trim03 = By.xpath("");
 	By trim04 = By.xpath("");
-//	By xxx = By.xpath("");
+	By newCompare = By.xpath("/html/body/div[1]/div[3]/div/nav/div/div/div[3]/ul/li[1]/a/button");
+	By closeError = By.xpath("/html/body/div[1]/div/div/div[3]/button");
 //	By xxx = By.xpath("");
 
 //	By xxx = By.xpath("");
@@ -68,11 +69,20 @@ public class Compare extends Comlibs {
 			String expectedPrimaryPrices, String tc) throws Exception {
 		String PrimaryStaringFromPriceString = "";
 		String errorMsg = "";
+		int PMSRP = 0;
 		try {
 			By PrimaryStaringFromPrice = By
 					.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[1]/div/div[2]/div/ul[1]/li[2]/div[2]/span");
 			PrimaryStaringFromPriceString = driver.findElement(PrimaryStaringFromPrice).getText();
-			if (PrimaryStaringFromPriceString.equalsIgnoreCase(expectedPrimaryPrices)) {
+			// $44,995
+			if (!PrimaryStaringFromPriceString.equals("")) {
+				PrimaryStaringFromPriceString = PrimaryStaringFromPriceString.replace("$", "");
+				PrimaryStaringFromPriceString = PrimaryStaringFromPriceString.replace(",", "");
+				PMSRP = Integer.parseInt(PrimaryStaringFromPriceString);
+			}
+
+//			if (PrimaryStaringFromPriceString.equalsIgnoreCase(expectedPrimaryPrices)) {
+			if (PMSRP >= 10000) {
 				System.out.println("\n\nPrimaryStaringFromPriceString matches!*****");
 				rwExcel(tc, true, brand + " - Verify PrimaryStaringFromPriceString",
 						brand + " PrimaryStaringFromPrice is showing and matching.");
@@ -84,19 +94,20 @@ public class Compare extends Comlibs {
 						+ "\" and expected price is " + "\"" + expectedPrimaryPrices + "\"\n";
 				rwExcel(tc, false, brand + " - Verify PrimaryStaringFromPrice", errorMsg);
 				SendEmail alertEmail = new SendEmail();
-				alertEmail.SendAlertEmail(env, brand, urlString+"\n"+errorMsg, tc);
+				alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
 
 			}
 
 			System.out.println("\n\n*****");
 
 		} catch (Exception e) {
-			errorMsg= brand + " - Primary Vehicle Staringfrom Price does not match!" + "\n\n" + brand
+			errorMsg = brand + " - Primary Vehicle Staringfrom Price does not match!" + "\n\n" + brand
 					+ " Web Site Primary Staringfrom Price shows \"" + PrimaryStaringFromPriceString
-					+ "\" and expected price is " + "\"" + expectedPrimaryPrices + "\"\n";;
-			rwExcel(tc, false, brand + " - PrimaryStaringFromPrice is not showing properly",errorMsg);
+					+ "\" and expected price is " + "\"" + expectedPrimaryPrices + "\"\n";
+			;
+			rwExcel(tc, false, brand + " - PrimaryStaringFromPrice is not showing properly", errorMsg);
 			SendEmail alertEmail = new SendEmail();
-			alertEmail.SendAlertEmail(env, brand, urlString+"\n"+errorMsg, tc);
+			alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
 			System.out.println("\n\n*****************Verify PrimaryStaringFromPrice Is Complete!*******************\n");
 
 		}
@@ -123,4 +134,14 @@ public class Compare extends Comlibs {
 		return this;
 	}
 
+	public SelectVehicle clickOnNewCompare(WebDriver driver, String tc) throws Exception {
+		elementExist(driver, newCompare, true, tc);
+		driver.findElement(newCompare).click();
+		return new SelectVehicle(driver);
+	}
+	public Compare clickOnCloseError(WebDriver driver, String tc) throws Exception {
+		elementExist(driver, closeError, true, tc);
+		driver.findElement(closeError).click();
+		return this;
+	}
 }

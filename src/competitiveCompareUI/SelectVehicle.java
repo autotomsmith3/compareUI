@@ -43,17 +43,91 @@ public class SelectVehicle extends Comlibs {
 //	By xxx = By.xpath("");
 
 //	By xxx = By.xpath("");
-//	By xxx = By.xpath("");
+//	By xxx = By.xpath("");  /html/body/div[1]/div/div/div[2]
+
+	public String getTrimName(WebDriver driver, String tc) throws Exception {
+		By trimName = By.xpath("/html/body/div[1]/div/div/div[2]");
+		String trimNameString = "";
+		elementExist(driver, trimName, true, tc);
+		trimNameString = driver.findElement(trimName).getText();
+		System.out.println("\n Trim Name = " + trimNameString);
+
+		return trimNameString;
+	}
+
+	public int[] countVehicleArray(WebDriver driver, String tc) throws Exception {
+		int vehiclesArray[];
+		int group1;
+		int group2;
+		int group3;
+		int group4;
+		int group1_vehs;
+		int group2_vehs;
+		int group3_vehs;
+		int group4_vehs;
+
+		By vehicle11 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[1]/div/div[1]/img");
+		By vehicle12 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[2]/div/div[1]/img");
+		By vehicle13 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[3]/div/div[1]/img");
+		By vehicle14 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[4]/div/div[1]/img");
+
+		By vehicle21 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[2]/div[1]/div/div[3]/div/div[1]/div/div[1]/img");
+		By vehicle22 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[2]/div[1]/div/div[3]/div/div[2]/div/div[1]/img");
+		By vehicle23 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[2]/div[1]/div/div[3]/div/div[3]/div/div[1]/img");
+
+		By vehicle31 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[3]/div[1]/div/div[3]/div/div[1]/div/div[1]/img");
+		By vehicle32 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[3]/div[1]/div/div[3]/div/div[2]/div/div[1]/img");
+		// ....
+		By vehicle36 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[3]/div[1]/div/div[3]/div/div[6]/div/div[1]/img");
+
+		By vehicle41 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[4]/div[1]/div/div[3]/div/div/div/div[1]/img");
+		By vehicle42 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[4]/div[1]/div/div[3]/div/div/div/div[1]/img");
+		By vehicle43 = By.xpath("");
+
+		By groupCount = By.xpath("/html/body/div[1]/div[3]/div[1]/div");
+		elementExist(driver, groupCount, true, tc);
+		int groupCounts = driver.findElements(groupCount).size();
+		vehiclesArray = new int[groupCounts];
+		int oneArray = vehiclesArray.length;
+		for (int i = 0; i <= (oneArray - 1); i++) {
+
+			By vehicleCount = By
+					.xpath("/html/body/div[1]/div[3]/div[1]/div[" + (i + 1) + "]/div[1]/div/div[3]/div/div");
+			elementExist(driver, vehicleCount, true, tc);
+			int vehicleCounts = driver.findElements(vehicleCount).size();
+			vehiclesArray[i] = vehicleCounts;
+			System.out.println("\nArray [" + i + "] = " + vehiclesArray[i]);
+
+		}
+		System.out.println("\nArray 1= " + vehiclesArray[0]);
+		System.out.println("Array 2= " + vehiclesArray[1]);
+		System.out.println("Array 3= " + vehiclesArray[2]);
+		System.out.println("Array 4= " + vehiclesArray[3]);
+		System.out.println("\n");
+		return vehiclesArray;
+	}
 
 	public SelectVehicle clickOnVehicle(WebDriver driver, int vehicleTypeNumber, int vehicleNum, String tc)
 			throws Exception {
 		By vehicle01 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[" + vehicleTypeNumber
 				+ "]/div[1]/div/div[3]/div/div[" + vehicleNum + "]/div/div[1]/img");
+		By vehicle11 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[1]/div/div[1]/img");
+		By vehicle12 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[2]/div/div[1]/img");
+		By vehicle13 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[3]/div/div[1]/img");
+		By vehicle14 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[4]/div/div[1]/img");
 
-		By vehicle02 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[2]/div/div[1]/img");
-		By vehicle03 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[3]/div/div[1]/img");
+		By vehicle21 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[2]/div[1]/div/div[3]/div/div[1]/div/div[1]/img");
+		By vehicle22 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[2]/div[1]/div/div[3]/div/div[2]/div/div[1]/img");
+		By vehicle23 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[2]/div[1]/div/div[3]/div/div[3]/div/div[1]/img");
 
-		By vehicle04 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[2]/div[1]/div/div[3]/div/div[1]/div/div[1]/img");
+		By vehicle31 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[3]/div[1]/div/div[3]/div/div[1]/div/div[1]/img");
+		By vehicle32 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[3]/div[1]/div/div[3]/div/div[2]/div/div[1]/img");
+		// ....
+		By vehicle36 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[3]/div[1]/div/div[3]/div/div[6]/div/div[1]/img");
+
+		By vehicle41 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[4]/div[1]/div/div[3]/div/div/div/div[1]/img");
+		By vehicle42 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[4]/div[1]/div/div[3]/div/div/div/div[1]/img");
+		By vehicle43 = By.xpath("");
 
 		elementExist(driver, vehicle01, true, tc);
 		driver.findElement(vehicle01).click();
@@ -72,7 +146,7 @@ public class SelectVehicle extends Comlibs {
 		elementExist(driver, trim01, true, tc);
 		driver.findElement(trim01).click();
 		Wait(5);
-		if (brand.contains("Mitsubishi")&&((env.equalsIgnoreCase("QA"))|(env.equalsIgnoreCase("Staging")))) {
+		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("Staging")))) {
 			driver.switchTo().alert().dismiss();
 		}
 		return new Compare(driver);
@@ -85,7 +159,7 @@ public class SelectVehicle extends Comlibs {
 		By curretTestYear = By.xpath("/html/body/div[1]/div[2]/div/nav/div/div/div[2]/ul/li[1]/button");
 		elementExist(driver, allYears, true, tc);
 		int totalYears = driver.findElements(allYears).size();
-		if (totalYears<=9) {
+		if (totalYears <= 9) {
 			Wait(5);
 			totalYears = driver.findElements(allYears).size();
 		}
@@ -103,7 +177,7 @@ public class SelectVehicle extends Comlibs {
 
 		if (curretTestYear == null) {
 			System.out.println("Year = " + year + " cannot be found!\n");
-			rwExcel(tc, "Select Year = " + year + "", year + " cannot be found in the site");
+			rwExcel(tc, false, "Select Year = " + year + "", year + " cannot be found in the site");
 		} else {
 			driver.findElement(curretTestYear).click();
 			Wait(2);

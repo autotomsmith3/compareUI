@@ -145,7 +145,7 @@ public class competitiveCompareUIController extends Comlibs {
 		int wt = Integer.parseInt(prop.getProperty("CompetitiveCompare.waitTime"));
 		// Initial
 		String tc;
-		String ptitle;
+		String trimNameS = "";
 		Comlibs log = new Comlibs();
 		log.rwExcel("", "********* " + brand + " Competitive Compare UI**********", "");
 		SelectVehicle SelectVehiclePage = new SelectVehicle(driver);
@@ -157,25 +157,57 @@ public class competitiveCompareUIController extends Comlibs {
 		SelectVehiclePage.selectYear(driver, Year, tc);
 		tc = brand + " - TCxxxx_01";
 		// Select first type and first vehicle: 1,1. Select second type and first vehicle 2,1
-		SelectVehiclePage.clickOnVehicle(driver, 1, 1, tc);
-		tc = brand + " - TCxxxx_02";
-		log.Wait(wt * 2);
-		SelectVehiclePage.clickOnTrim(driver, env, brand, tc);
-		String urlString = driver.getCurrentUrl();
-		Compare ComparePage = new Compare(driver);
-		tc = env + " - " + brand + " - VerifyPrimaryImage";
-		log.Wait(wt * 3);
-		ComparePage.verifyPrimaryImage(driver, env, brand, urlString + "\n\n" + tc, tc);
-		log.Wait(wt);
-		tc = env + " - " + brand + " - VerifyPrimaryStaringFromPrice";
+		int vehicleArry[];
+		vehicleArry = SelectVehiclePage.countVehicleArray(driver, tc);
+		int groupArray = vehicleArry.length;
 
-		ComparePage.verifyPrimaryStaringFromPrice(driver, env, brand, urlString + "\n\n" + tc, expectedPrimaryPrice,
-				tc);
-		log.Wait(wt);
+		System.out.println("Vehicle Array = \n\n");
+
+		for (int i = 1; i <= groupArray; i++) {
+			for (int v = 1; v <= vehicleArry[i - 1]; v++) {
+////				//Debug
+//				i = 1;
+//				v = 2;
+				SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
+				tc = brand + " - getTrimName";
+				trimNameS = SelectVehiclePage.getTrimName(driver, tc);
+				tc = brand + " - TCxxxx_02";
+				log.Wait(wt * 2);
+				SelectVehiclePage.clickOnTrim(driver, env, brand, tc);
+				String urlString = driver.getCurrentUrl() + " \n\n " + " group = " + i + ". vehicle = " + v + "\n "
+						+ trimNameS;
+				Compare ComparePage = new Compare(driver);
+				tc = env + " - " + brand + " - VerifyPrimaryImage - " + trimNameS;
+				log.Wait(wt * 3);
+				ComparePage.verifyPrimaryImage(driver, env, brand, urlString + "\n\n" + tc, tc);
+				log.Wait(wt);
+				try {
+				} catch (Exception e) {
+				}
+				;
+				tc = env + " - " + brand + " - VerifyPrimaryStaringFromPrice - " + trimNameS;
+
+				ComparePage.verifyPrimaryStaringFromPrice(driver, env, brand, urlString + "\n\n" + tc,
+						expectedPrimaryPrice, tc);
+				log.Wait(wt);
+				tc = env + " - " + brand + " - Click on Newe Compare";
+				try {
+					ComparePage.clickOnNewCompare(driver, tc);
+				} catch (Exception e) {
+					ComparePage.clickOnCloseError(driver, tc);
+					ComparePage.clickOnNewCompare(driver, tc);
+				}
+				;
+				tc = env + " - " + brand + " - Select Year = " + Year;
+				SelectVehiclePage.selectYear(driver, Year, tc);
+				;
+				log.Wait(wt);
+			}
+		}
 	}
 
 	public static void main(String[] args) throws Exception {
-		// Load environment parameters 
+		// Load environment parameters
 		Properties prop = new Properties();
 		try {
 			prop.load(competitiveCompareUIController.class.getClassLoader()
