@@ -158,10 +158,11 @@ public class competitiveCompareUIController extends Comlibs {
 		tc = brand + " - TCxxxx_01";
 		// Select first type and first vehicle: 1,1. Select second type and first vehicle 2,1
 		int vehicleArry[];
+		log.Wait(wt);
 		vehicleArry = SelectVehiclePage.countVehicleArray(driver, tc);
 		int groupArray = vehicleArry.length;
 
-		System.out.println("Vehicle Array = \n\n");
+		System.out.println("Vehicle Array \n\n");
 
 		for (int i = 1; i <= groupArray; i++) {
 			for (int v = 1; v <= vehicleArry[i - 1]; v++) {
@@ -170,10 +171,10 @@ public class competitiveCompareUIController extends Comlibs {
 //				v = 2;
 				SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
 				tc = brand + " - getTrimName";
-				log.Wait(wt);
+				log.Wait(wt * 2);
 				trimNameS = SelectVehiclePage.getTrimName(driver, tc);
 				tc = brand + " - TCxxxx_02";
-				log.Wait(wt * 2);
+				log.Wait(wt);
 				SelectVehiclePage.clickOnTrim(driver, env, brand, tc);
 				String urlString = driver.getCurrentUrl() + " \n\n " + "group = " + i + ". vehicle = " + v + "\n "
 						+ trimNameS;

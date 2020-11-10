@@ -54,7 +54,7 @@ public class Compare extends Comlibs {
 			throws Exception {
 		try {
 			By PrimaryIageLocator = By.xpath("//*[@id=\"primary-vehicle\"]/div/div/div[1]/div[1]/div/img");
-			VerifyImageLoaded(driver, PrimaryIageLocator, tc);
+			VerifyImageLoaded(driver, PrimaryIageLocator, false, tc);
 		} catch (Exception e) {
 			rwExcel(tc, false, brand + " - Primary Image is not showing",
 					brand + " site maybe is showing error or down.");
@@ -82,7 +82,7 @@ public class Compare extends Comlibs {
 			}
 
 //			if (PrimaryStaringFromPriceString.equalsIgnoreCase(expectedPrimaryPrices)) {
-			if (PMSRP >= 10000) {
+			if (PMSRP >= 10000 && PMSRP <= 200000) {
 				System.out.println("\n\nPrimaryStaringFromPriceString matches!*****");
 				rwExcel(tc, true, brand + " - Verify PrimaryStaringFromPriceString",
 						brand + " PrimaryStaringFromPrice is showing and matching.");

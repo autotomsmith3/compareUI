@@ -85,25 +85,54 @@ public class SelectVehicle extends Comlibs {
 		By vehicle43 = By.xpath("");
 
 		By groupCount = By.xpath("/html/body/div[1]/div[3]/div[1]/div");
+
 		elementExist(driver, groupCount, true, tc);
 		int groupCounts = driver.findElements(groupCount).size();
 		vehiclesArray = new int[groupCounts];
 		int oneArray = vehiclesArray.length;
-		for (int i = 0; i <= (oneArray - 1); i++) {
+		try {
+			for (int i = 0; i <= (oneArray - 1); i++) {
 
-			By vehicleCount = By
-					.xpath("/html/body/div[1]/div[3]/div[1]/div[" + (i + 1) + "]/div[1]/div/div[3]/div/div");
-			elementExist(driver, vehicleCount, true, tc);
-			int vehicleCounts = driver.findElements(vehicleCount).size();
-			vehiclesArray[i] = vehicleCounts;
-			System.out.println("\nArray [" + i + "] = " + vehiclesArray[i]);
+				By vehicleCount = By
+						.xpath("/html/body/div[1]/div[3]/div[1]/div[" + (i + 1) + "]/div[1]/div/div[3]/div/div");
+				elementExist(driver, vehicleCount, true, tc);
+				int vehicleCounts = driver.findElements(vehicleCount).size();
+				vehiclesArray[i] = vehicleCounts;
+				System.out.println("\nArray [" + i + "] = " + vehiclesArray[i]);
+
+			}
+			if (oneArray == 1) {
+				System.out.println("\nArray 1= " + vehiclesArray[0]);
+				System.out.println("\n");
+			} else if (oneArray == 2) {
+				System.out.println("\nArray 1= " + vehiclesArray[0]);
+				System.out.println("Array 2= " + vehiclesArray[1]);
+				System.out.println("\n");
+			} else if (oneArray == 3) {
+				System.out.println("\nArray 1= " + vehiclesArray[0]);
+				System.out.println("Array 2= " + vehiclesArray[1]);
+				System.out.println("Array 3= " + vehiclesArray[2]);
+				System.out.println("\n");
+			} else if (oneArray == 4) {
+				System.out.println("\nArray 1= " + vehiclesArray[0]);
+				System.out.println("Array 2= " + vehiclesArray[1]);
+				System.out.println("Array 3= " + vehiclesArray[2]);
+				System.out.println("Array 4= " + vehiclesArray[3]);
+				System.out.println("\n");
+			} else if (oneArray == 5) {
+				System.out.println("\nArray 1= " + vehiclesArray[0]);
+				System.out.println("Array 2= " + vehiclesArray[1]);
+				System.out.println("Array 3= " + vehiclesArray[2]);
+				System.out.println("Array 4= " + vehiclesArray[3]);
+				System.out.println("Array 5= " + vehiclesArray[4]);
+				System.out.println("\n");
+			}
+
+		} catch (Exception ee) {
+			rwExcel(tc, false, "Count Vehicle Array", "Failed; site maybe is showing error or down.");
 
 		}
-		System.out.println("\nArray 1= " + vehiclesArray[0]);
-		System.out.println("Array 2= " + vehiclesArray[1]);
-		System.out.println("Array 3= " + vehiclesArray[2]);
-		System.out.println("Array 4= " + vehiclesArray[3]);
-		System.out.println("\n");
+
 		return vehiclesArray;
 	}
 

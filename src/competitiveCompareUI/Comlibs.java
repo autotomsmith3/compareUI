@@ -673,6 +673,36 @@ public class Comlibs {
 		}
 	}
 
+	public boolean elementExist(WebDriver driver, boolean writeToSheet, By elementLocator) throws IOException {
+		// Agree with this answer but there's an implicit 3 second wait if no
+		// elements are
+		// found which can be switched on/off which is useful if you're
+		// performing this action a lot:
+		// driver.manage().timeouts().implicitlyWait(0, TimeUnit.MILLISECONDS);
+		driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
+		boolean exists = driver.findElements(elementLocator).size() != 0;
+		// driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
+		// Putting that into a utility method should improve performance if
+		// you're running a lot of tests
+		if (writeToSheet) {
+			if (exists) {
+				rwExcel("", true, "Element" + elementLocator, " exists");
+				return true;
+			} else {
+				rwExcel("", false, "Element" + elementLocator, " does NOT exist");
+				return false;
+			}
+		} else {
+			if (exists) {
+				rwExcel("", "Element" + elementLocator, " exists");
+				return true;
+			} else {
+				rwExcel("", "Element" + elementLocator, " does NOT exist");
+				return false;
+			}
+		}
+	}
+
 	public boolean elementExist(WebDriver driver, By elementLocator, boolean rw, String tc) throws IOException {
 		driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
 		boolean exists = driver.findElements(elementLocator).size() != 0;
@@ -734,8 +764,9 @@ public class Comlibs {
 	// System.out.println("Found broken image: "element.getAttribute("src"))
 	// }
 
-	public void VerifyImageLoaded(WebDriver driver, By imageLocator, String tc) throws IOException {
-		waitElementToShow(driver, imageLocator);
+	public void VerifyImageLoaded(WebDriver driver, By imageLocator, boolean writeToSheet, String tc)
+			throws IOException {
+		waitElementToShow(driver, writeToSheet, imageLocator);
 		WebElement image1 = driver.findElement(imageLocator);
 		boolean imageLoaded1 = (boolean) ((JavascriptExecutor) driver).executeScript(
 				"return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0",
@@ -754,14 +785,14 @@ public class Comlibs {
 		}
 	}
 
-	public void waitElementToShow(WebDriver driver, By elemt) throws IOException {
-		boolean im = elementExist(driver, elemt);
+	public void waitElementToShow(WebDriver driver, boolean writeToSheet, By elemt) throws IOException {
+		boolean im = elementExist(driver, writeToSheet, elemt);
 		int i = 0;
 		int totalWT = 2; // =12
 		System.out.println("Waiting for element to show. Total wait time = " + totalWT);
 		while ((!im) && (i < totalWT)) {
 			System.out.println("i=" + i + ", waiting for image to show! " + elemt);
-			im = elementExist(driver, elemt);
+			im = elementExist(driver, writeToSheet, elemt);
 			i++;
 		}
 	}
