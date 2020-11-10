@@ -170,11 +170,12 @@ public class competitiveCompareUIController extends Comlibs {
 //				v = 2;
 				SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
 				tc = brand + " - getTrimName";
+				log.Wait(wt);
 				trimNameS = SelectVehiclePage.getTrimName(driver, tc);
 				tc = brand + " - TCxxxx_02";
 				log.Wait(wt * 2);
 				SelectVehiclePage.clickOnTrim(driver, env, brand, tc);
-				String urlString = driver.getCurrentUrl() + " \n\n " + " group = " + i + ". vehicle = " + v + "\n "
+				String urlString = driver.getCurrentUrl() + " \n\n " + "group = " + i + ". vehicle = " + v + "\n "
 						+ trimNameS;
 				Compare ComparePage = new Compare(driver);
 				tc = env + " - " + brand + " - VerifyPrimaryImage - " + trimNameS;

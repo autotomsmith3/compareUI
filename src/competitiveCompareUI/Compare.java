@@ -60,7 +60,7 @@ public class Compare extends Comlibs {
 					brand + " site maybe is showing error or down.");
 			SendEmail alertEmail = new SendEmail();
 			alertEmail.SendAlertEmail(env, brand, urlString, tc);
-			System.out.println("\n\n*****************Verify Primary Image Is Complete!*******************\n");
+			System.out.println("\n\n*****************Verify Primary Image Is Complete!*******************\n"+urlString);
 
 		}
 	}
