@@ -115,6 +115,10 @@ public class competitiveCompareUIController extends Comlibs {
 
 		return new SelectVehicle(driver);
 	}
+	public static SelectVehicle loadURLOld(WebDriver driver, String bURL) throws IOException {
+		driver.get(bURL);
+		return new SelectVehicle(driver);
+	}
 
 	private static String[] fetchOneDemArrayFromPropFile(String propertyName, Properties propFile) {
 		// get array split up by the colin
@@ -146,6 +150,8 @@ public class competitiveCompareUIController extends Comlibs {
 		// Initial
 		String tc;
 		String trimNameS = "";
+		String urlString="";
+		String currentClientURL="";
 		Comlibs log = new Comlibs();
 		log.rwExcel("", "********* " + brand + " Competitive Compare UI**********", "");
 		SelectVehicle SelectVehiclePage = new SelectVehicle(driver);
@@ -169,6 +175,10 @@ public class competitiveCompareUIController extends Comlibs {
 ////				//Debug
 //				i = 1;
 //				v = 2;
+				currentClientURL=driver.getCurrentUrl();
+				tc = env + " - " + brand + " - Select Year = " + Year;
+				SelectVehiclePage.selectYear(driver, Year, tc);
+				log.Wait(wt);
 				SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
 				tc = brand + " - getTrimName";
 				log.Wait(wt * 2);
@@ -176,17 +186,17 @@ public class competitiveCompareUIController extends Comlibs {
 				tc = brand + " - Click on Trim - "+trimNameS;
 				log.Wait(wt);
 				SelectVehiclePage.clickOnTrim(driver, env, brand, tc);
-				String urlString = driver.getCurrentUrl() + " \n\n " + "group = " + i + ". vehicle = " + v + "\n "
+				urlString = driver.getCurrentUrl() + " \n\n " + "group = " + i + ". vehicle = " + v + "\n "
 						+ trimNameS;
 				Compare ComparePage = new Compare(driver);
 				tc = env + " - " + brand + " - VerifyPrimaryImage - " + trimNameS;
 				log.Wait(wt * 3);
 				ComparePage.verifyPrimaryImage(driver, env, brand, urlString + "\n\n" + tc, tc);
 				log.Wait(wt);
-				try {
-				} catch (Exception e) {
-				}
-				;
+//				try {
+//				} catch (Exception e) {
+//				}
+//				;
 				tc = env + " - " + brand + " - VerifyPrimaryStaringFromPrice - " + trimNameS;
 
 				ComparePage.verifyPrimaryStaringFromPrice(driver, env, brand, urlString + "\n\n" + tc,
@@ -196,14 +206,15 @@ public class competitiveCompareUIController extends Comlibs {
 				try {
 					ComparePage.clickOnNewCompare(driver, tc);
 				} catch (Exception e) {
-					ComparePage.clickOnCloseError(driver, tc);
-					ComparePage.clickOnNewCompare(driver, tc);
+//					ComparePage.clickOnCloseError(driver, tc);
+//					ComparePage.clickOnNewCompare(driver, tc);
+					loadURLOld(driver, currentClientURL);
+					log.Wait(wt*4);
 				}
-				;
-				tc = env + " - " + brand + " - Select Year = " + Year;
-				SelectVehiclePage.selectYear(driver, Year, tc);
-				;
-				log.Wait(wt);
+//				tc = env + " - " + brand + " - Select Year = " + Year;
+//				SelectVehiclePage.selectYear(driver, Year, tc);
+//				log.Wait(wt);
+//				loadURL(driver, competitiveCompareUIUR);
 			}
 		}
 	}

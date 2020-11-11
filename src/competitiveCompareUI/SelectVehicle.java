@@ -176,7 +176,11 @@ public class SelectVehicle extends Comlibs {
 		driver.findElement(trim01).click();
 		Wait(5);
 		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("Staging")))) {
+			try {
 			driver.switchTo().alert().dismiss();
+			}catch(Exception e) {
+				System.out.println("Tomcat credential fields pop-up NOT showing! This is expected when running after first Mitisubishi model!\n");
+			}
 		}
 		return new Compare(driver);
 	}
