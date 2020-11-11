@@ -150,12 +150,12 @@ public class competitiveCompareUIController extends Comlibs {
 		log.rwExcel("", "********* " + brand + " Competitive Compare UI**********", "");
 		SelectVehicle SelectVehiclePage = new SelectVehicle(driver);
 
-		tc = brand + " - TCxxxx_00";
+		tc = brand + " - Click On Got It";
 		SelectVehiclePage.clickOnGotIt(driver, tc);
 //		String Year=2021;
 		tc = brand + " - Select year_01";
 		SelectVehiclePage.selectYear(driver, Year, tc);
-		tc = brand + " - TCxxxx_01";
+		tc = brand + " - CountVehicleArray";
 		// Select first type and first vehicle: 1,1. Select second type and first vehicle 2,1
 		int vehicleArry[];
 		log.Wait(wt);
@@ -173,7 +173,7 @@ public class competitiveCompareUIController extends Comlibs {
 				tc = brand + " - getTrimName";
 				log.Wait(wt * 2);
 				trimNameS = SelectVehiclePage.getTrimName(driver, tc);
-				tc = brand + " - TCxxxx_02";
+				tc = brand + " - Click on Trim - "+trimNameS;
 				log.Wait(wt);
 				SelectVehiclePage.clickOnTrim(driver, env, brand, tc);
 				String urlString = driver.getCurrentUrl() + " \n\n " + "group = " + i + ". vehicle = " + v + "\n "
