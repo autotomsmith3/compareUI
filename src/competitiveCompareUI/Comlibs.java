@@ -43,6 +43,8 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.Select;
 
+import Mail.SendEmail;
+
 public class Comlibs {
 
 	public void rwExcel(String SpID, Boolean testStatus, String functionality, String description) throws IOException {
@@ -779,6 +781,10 @@ public class Comlibs {
 		if (!imageLoaded1) {
 			System.out.println("Image is not present");
 			rwExcel(tc, false, "ImageLocator = " + imageLocator, "Image is NOT loaded properly");
+			SendEmail alertEmail = new SendEmail();
+			alertEmail.SendAlertEmail(tc, tc, tc + "\n" + tc, tc);//This does not work. It exits VerifyImageLoaded. 
+//			alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
+			System.out.println("Image is not showing!\n\n");
 		} else {
 			System.out.println("Image loaded!  -  " + imageLocator);
 			rwExcel(tc, true, "ImageLocator = " + imageLocator, "Image is loaded");

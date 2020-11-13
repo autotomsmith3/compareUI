@@ -169,7 +169,7 @@ public class competitiveCompareUIController extends Comlibs {
 		vehicleArry = SelectVehiclePage.countVehicleArray(driver, tc);
 		int groupArray = vehicleArry.length;
 
-		System.out.println("Vehicle Array \n\n");
+		System.out.println("Vehicle Array length = "+groupArray+" \n\n");
 
 		for (int i = 1; i <= groupArray; i++) {
 			for (int v = 1; v <= vehicleArry[i - 1]; v++) {
