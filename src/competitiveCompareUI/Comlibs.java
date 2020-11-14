@@ -768,6 +768,7 @@ public class Comlibs {
 
 	public void VerifyImageLoaded(WebDriver driver, By imageLocator, boolean writeToSheet, String tc)
 			throws IOException {
+		By wrongXpath = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[3]/div/div[10001]/img");
 		waitElementToShow(driver, writeToSheet, imageLocator);
 		WebElement image1 = driver.findElement(imageLocator);
 		boolean imageLoaded1 = (boolean) ((JavascriptExecutor) driver).executeScript(
@@ -781,10 +782,7 @@ public class Comlibs {
 		if (!imageLoaded1) {
 			System.out.println("Image is not present");
 			rwExcel(tc, false, "ImageLocator = " + imageLocator, "Image is NOT loaded properly");
-			SendEmail alertEmail = new SendEmail();
-			alertEmail.SendAlertEmail(tc, tc, tc + "\n" + tc, tc);//This does not work. It exits VerifyImageLoaded. 
-//			alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
-			System.out.println("Image is not showing!\n\n");
+			driver.findElement(wrongXpath).click();//it exits out of "try block" of parent.
 		} else {
 			System.out.println("Image loaded!  -  " + imageLocator);
 			rwExcel(tc, true, "ImageLocator = " + imageLocator, "Image is loaded");
