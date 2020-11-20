@@ -1,4 +1,4 @@
-package compareUI;
+package vinCompareUI;
 
 //Moved from perforce:1666..
 /**
@@ -244,7 +244,7 @@ public class vinCompareUIController extends Comlibs {
 		}
 		
 		// i=3: all 3 devices
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 1; i++) {
 			System.out.println("Testing is started in " + env + "\n");
 			// Initial
 			Comlibs log = new Comlibs();

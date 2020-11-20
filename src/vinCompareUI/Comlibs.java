@@ -1,4 +1,4 @@
-package compareUI;
+package vinCompareUI;
 
 import java.io.BufferedWriter;
 import java.io.File;
