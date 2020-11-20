@@ -160,6 +160,7 @@ public class vinCompareDemoUIController extends Comlibs {
 
 		tc = "TCxxxx_021";
 		VinComparePage.clickChevrolet(driver, tc);
+		log.Wait(wt);
 		tc = "TCxxxx_022";
 		VinComparePage.clickManuallyEnterVinsLink(driver, tc);
 
@@ -185,6 +186,13 @@ public class vinCompareDemoUIController extends Comlibs {
 		tc = "Click on Compare button_029";
 		VinComparePage.clickStartCompare(driver, tc);
 		log.Wait(wt * 2);
+		
+		tc = "TCxxxx_026";
+		VinComparePage.clickNewCompare(driver, tc);
+		log.Wait(wt * 2);
+		
+		
+		
 ////	*********************************************************
 //		tc = "Click on Edit Configuration button_030";
 //		VinComparePage.clickEditConfigurationBtn(driver, tc);

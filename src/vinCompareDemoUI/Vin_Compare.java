@@ -51,7 +51,7 @@ public class Vin_Compare extends Comlibs {
 	By vinField = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/form/input[1]");
 	By AddBtn = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/form/input[2]");
 	By StartCompare = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[3]/div/div[2]/button");
-//	By xxxxxx = By.xpath("");	
+	By NewCompare = By.xpath("/html/body/div[3]/div/div/button");	
 //	By xxxxxx = By.xpath("");	
 
 	public Vin_Compare clickGM(WebDriver driver, String tc) throws Exception {
@@ -108,7 +108,11 @@ public class Vin_Compare extends Comlibs {
 		driver.findElement(StartCompare).click();
 		return this;
 	}
-
+	public Vin_Compare clickNewCompare(WebDriver driver, String tc) throws Exception {
+		elementExist(driver, NewCompare, true, tc);
+		driver.findElement(NewCompare).click();
+		return this;
+	}
 //	
 //	public Vin_Compare inputVins(WebDriver driver, String vins[], String tc) throws Exception {
 //		int n = vins.length;
