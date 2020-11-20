@@ -106,12 +106,13 @@ public class vinCompareDemoUIController extends Comlibs {
 		return a;
 	}
 
-	public static void Vin2VinCompareTcs(WebDriver driver, String brw, String envment) throws Exception {
+	public static void VinCompareDemoTcs(WebDriver driver, String brw, String envment) throws Exception {
 		// Load environment parameters
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
-			prop.load(vinCompareDemoUIController.class.getClassLoader().getResourceAsStream("./data/vinCompare.properties"));// "./main.properties";
+			prop.load(vinCompareDemoUIController.class.getClassLoader()
+					.getResourceAsStream("./data/vinCompareDemo.properties"));// "./main.properties";
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -153,67 +154,69 @@ public class vinCompareDemoUIController extends Comlibs {
 		String ptitle;
 		Comlibs log = new Comlibs();
 		log.rwExcel("", "*********VIN Compare Tester Tool UI**********", "");
-		Vin_Compare Vin2VinComparePage = new Vin_Compare(driver);
+		Vin_Compare VinComparePage = new Vin_Compare(driver);
 		tc = "TCxxxx_01";
-		Vin2VinComparePage.clickConfigurealeParameters(driver, tc);
+		VinComparePage.clickGM(driver, tc);
 
 		tc = "TCxxxx_021";
-		Vin2VinComparePage.inputCompareScriptURL(driver, CompareScriptURL, tc);
+		VinComparePage.clickChevrolet(driver, tc);
 		tc = "TCxxxx_022";
-		Vin2VinComparePage.inputCompareAPIBaseURL(driver, CompareAPIBaseURL, tc);
+		VinComparePage.clickManuallyEnterVinsLink(driver, tc);
 
 		tc = "TCxxxx_023";
-		Vin2VinComparePage.inputAccessToken(driver, AccessToken, tc);
+		VinComparePage.inputVin(driver, vins[0], tc);
+
+		tc = "TCxxxx_023_1";
+		VinComparePage.clickAdd(driver, tc);
 
 		tc = "TCxxxx_024";
-		Vin2VinComparePage.inputProfile(driver, Profile, tc);
+		VinComparePage.inputVin(driver, vins[1], tc);
+
+		tc = "TCxxxx_024_1";
+		VinComparePage.clickAdd(driver, tc);
+
 		tc = "TCxxxx_025";
-		Vin2VinComparePage.inputProductKey(driver, ProductKey, tc);
+		VinComparePage.inputVin(driver, vins[2], tc);
 
-		tc = "TCxxxx_026";
-		Vin2VinComparePage.inputLocale(driver, Locale, tc);
+		tc = "TCxxxx_025_1";
+		VinComparePage.clickAdd(driver, tc);
 
-		tc = "Enter VINS_027";
-
-		Vin2VinComparePage.inputVins(driver, vins, tc);
-
-		tc = "Enter DealerPrices_028";
-		Vin2VinComparePage.inputDealerPrices(driver, vins, DealerPrices, Images, tc);//
-//		
+		//
 		tc = "Click on Compare button_029";
-		Vin2VinComparePage.clickCompareBtn(driver, tc);
-		log.Wait(wt*2);
-//	*********************************************************
-		tc = "Click on Edit Configuration button_030";
-		Vin2VinComparePage.clickEditConfigurationBtn(driver, tc);
-		log.Wait(wt*2);
-		tc = "Click on Compare button_0291";
-		Vin2VinComparePage.clickCompareBtn(driver, tc);
-		log.Wait(wt*2);
-
-		tc = "Click on New Configuration button_031";
-		Vin2VinComparePage.clickNewConfigurationBtn(driver, tc);
-		log.Wait(wt*2);
-//		Check others
-		tc = "Click on Compare button_032";
-		Vin2VinComparePage.clickCompareBtn(driver, tc);
-		log.Wait(wt*2);
-//		*********************************************************
-		tc = "Verify Dealer Price Vin1 01";
-		Vin2VinComparePage.verifyDealerPriceWhichIsNot0(driver, DealerPrices[0], tc);
-		tc = "Verify Dealer Price Vin2 02";
-		Vin2VinComparePage.verifyDealerPriceWhichIs0(driver, DealerPrices[1], tc);
-		tc = "Verify VIN 1 image 01";
-		Vin2VinComparePage.verifyVin1Image(driver, tc);
-		tc = "Verify VIN 2 image 02";
-		Vin2VinComparePage.verifyVin2Image(driver, tc);
+		VinComparePage.clickStartCompare(driver, tc);
+		log.Wait(wt * 2);
+////	*********************************************************
+//		tc = "Click on Edit Configuration button_030";
+//		VinComparePage.clickEditConfigurationBtn(driver, tc);
+//		log.Wait(wt * 2);
+//		tc = "Click on Compare button_0291";
+//		VinComparePage.clickCompareBtn(driver, tc);
+//		log.Wait(wt * 2);
+//
+//		tc = "Click on New Configuration button_031";
+//		VinComparePage.clickNewConfigurationBtn(driver, tc);
+//		log.Wait(wt * 2);
+////		Check others
+//		tc = "Click on Compare button_032";
+//		VinComparePage.clickCompareBtn(driver, tc);
+//		log.Wait(wt * 2);
+////		*********************************************************
+//		tc = "Verify Dealer Price Vin1 01";
+//		VinComparePage.verifyDealerPriceWhichIsNot0(driver, DealerPrices[0], tc);
+//		tc = "Verify Dealer Price Vin2 02";
+//		VinComparePage.verifyDealerPriceWhichIs0(driver, DealerPrices[1], tc);
+//		tc = "Verify VIN 1 image 01";
+//		VinComparePage.verifyVin1Image(driver, tc);
+//		tc = "Verify VIN 2 image 02";
+//		VinComparePage.verifyVin2Image(driver, tc);
 	}
 
 	public static void main(String[] args) throws Exception {
 		// Load environment parameters
 		Properties prop = new Properties();
 		try {
-			prop.load(vinCompareDemoUIController.class.getClassLoader().getResourceAsStream("./data/vinCompare.properties"));// "./main.properties";
+			prop.load(vinCompareDemoUIController.class.getClassLoader()
+					.getResourceAsStream("./data/vinCompareDemo.properties"));// "./main.properties";
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -221,28 +224,28 @@ public class vinCompareDemoUIController extends Comlibs {
 		String tBrowser = prop.getProperty("Compare.browser");
 		String envDevice = prop.getProperty("Compare.envDevice");
 		String onScreen = prop.getProperty("Compare.onScreen");
-		String VinCompareUIURL = prop.getProperty(env + ".VinCompareUIURL");
+		String VinCompareDemoUIURL = prop.getProperty(env + ".VinCompareDemoUIURL");
 		String vins[] = fetchOneDemArrayFromPropFile(env + ".CompareVINs", prop);
-		String [] Devices=new String[3];
-		
+		String[] Devices = new String[3];
+
 		if (envDevice.equalsIgnoreCase("PC")) {
-			Devices[0]= "PC";
-			Devices[1]= "Tablet";
-			Devices[2]= "Smartphone";
-		}else if (envDevice.equalsIgnoreCase("Tablet")) {
-			Devices[0]= "Tablet";
-			Devices[1]= "Smartphone";
-			Devices[2]= "PC";
-		}else if (envDevice.equalsIgnoreCase("Smartphone")) {
-			Devices[0]= "Smartphone";
-			Devices[1]= "PC";
-			Devices[2]= "Tablet";
-		}else {
-			Devices[0]= "PC";
-			Devices[1]= "Tablet";
-			Devices[2]= "Smartphone";
+			Devices[0] = "PC";
+			Devices[1] = "Tablet";
+			Devices[2] = "Smartphone";
+		} else if (envDevice.equalsIgnoreCase("Tablet")) {
+			Devices[0] = "Tablet";
+			Devices[1] = "Smartphone";
+			Devices[2] = "PC";
+		} else if (envDevice.equalsIgnoreCase("Smartphone")) {
+			Devices[0] = "Smartphone";
+			Devices[1] = "PC";
+			Devices[2] = "Tablet";
+		} else {
+			Devices[0] = "PC";
+			Devices[1] = "Tablet";
+			Devices[2] = "Smartphone";
 		}
-		
+
 		// i=3: all 3 devices
 		for (int i = 0; i < 1; i++) {
 			System.out.println("Testing is started in " + env + "\n");
@@ -256,26 +259,26 @@ public class vinCompareDemoUIController extends Comlibs {
 
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			if (!tBrowser.equalsIgnoreCase("Chromexxxxxxxxx")) {
-				log.SelecBroswerResolution(driver,  Devices[i], onScreen);
+				log.SelecBroswerResolution(driver, Devices[i], onScreen);
 			}
 			log.rwExcel("", "****** Testing started ******" + (i + 1), "");
 			log.rwExcel("", "Test Browser", tBrowser);
 			log.rwExcel("", "Test Environment", env);
-			log.rwExcel("", "Test Devicer",  Devices[i] );
-			
-			loadURL(driver, VinCompareUIURL);
+			log.rwExcel("", "Test Devicer", Devices[i]);
+
+			loadURL(driver, VinCompareDemoUIURL);
 			String vin1 = vins[0];
 			//// 1. VIN Compare Tester Tool UI page
 			log.rwExcel("", "-----VIN Compare Tester Tool UI page Testing started-----" + (i + 1), "");
 //			1. ***********VIN Compare**************
-			Vin2VinCompareTcs(driver, tBrowser, env);
+			VinCompareDemoTcs(driver, tBrowser, env);
 //			 ***********VIN Compare**************
 
 			log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.close();
-			System.out.println("Test is complete!!!   i = " + (i + 1)+"\n");
+			System.out.println("Test is complete!!!   i = " + (i + 1) + "\n");
 		}
-		System.out.println("*****************All Tests are done!!!*****************"+"\n");
+		System.out.println("*****************All Tests are done!!!*****************" + "\n");
 		return;
 	}
 }
