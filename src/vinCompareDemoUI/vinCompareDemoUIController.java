@@ -51,7 +51,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class vinCompareUIController extends Comlibs {
+public class vinCompareDemoUIController extends Comlibs {
 	private final WebDriver driver;
 	final int wt_Secs = 0;
 	static String[] vinpxConent = new String[200];
@@ -60,7 +60,7 @@ public class vinCompareUIController extends Comlibs {
 	final static int SINGLE_VIN_RENDER_MAX_WT = 10;
 	final static int ALL_VINS_RENDER_MAX_WT = 20;
 
-	public vinCompareUIController(WebDriver driver, String myId) throws IOException {
+	public vinCompareDemoUIController(WebDriver driver, String myId) throws IOException {
 		this.driver = driver;
 		// String wh1=driver.getWindowHandle();
 
@@ -93,9 +93,9 @@ public class vinCompareUIController extends Comlibs {
 
 	static String urlLink;
 
-	public static Vin2VinCompare loadURL(WebDriver driver, String bURL) throws IOException {
+	public static Vin_Compare loadURL(WebDriver driver, String bURL) throws IOException {
 		driver.get(bURL);
-		return new Vin2VinCompare(driver);
+		return new Vin_Compare(driver);
 	}
 
 	private static String[] fetchOneDemArrayFromPropFile(String propertyName, Properties propFile) {
@@ -111,7 +111,7 @@ public class vinCompareUIController extends Comlibs {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
-			prop.load(vinCompareUIController.class.getClassLoader().getResourceAsStream("./data/vinCompare.properties"));// "./main.properties";
+			prop.load(vinCompareDemoUIController.class.getClassLoader().getResourceAsStream("./data/vinCompare.properties"));// "./main.properties";
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -153,7 +153,7 @@ public class vinCompareUIController extends Comlibs {
 		String ptitle;
 		Comlibs log = new Comlibs();
 		log.rwExcel("", "*********VIN Compare Tester Tool UI**********", "");
-		Vin2VinCompare Vin2VinComparePage = new Vin2VinCompare(driver);
+		Vin_Compare Vin2VinComparePage = new Vin_Compare(driver);
 		tc = "TCxxxx_01";
 		Vin2VinComparePage.clickConfigurealeParameters(driver, tc);
 
@@ -213,7 +213,7 @@ public class vinCompareUIController extends Comlibs {
 		// Load environment parameters
 		Properties prop = new Properties();
 		try {
-			prop.load(vinCompareUIController.class.getClassLoader().getResourceAsStream("./data/vinCompare.properties"));// "./main.properties";
+			prop.load(vinCompareDemoUIController.class.getClassLoader().getResourceAsStream("./data/vinCompare.properties"));// "./main.properties";
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

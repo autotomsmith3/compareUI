@@ -8,10 +8,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class Vin2VinCompare extends Comlibs {
+public class Vin_Compare extends Comlibs {
 	private final WebDriver driver;
 
-	public Vin2VinCompare(WebDriver driver) throws IOException {
+	public Vin_Compare(WebDriver driver) throws IOException {
 		this.driver = driver;
 		// String wh1=driver.getWindowHandle();
 		String sPageTitle = "VIN 2 VIN Compare";
@@ -47,48 +47,48 @@ public class Vin2VinCompare extends Comlibs {
 //	By xxxxxx = By.xpath("");	
 //	By xxxxxx = By.xpath("");
 
-	public Vin2VinCompare clickConfigurealeParameters(WebDriver driver, String tc) throws Exception {
+	public Vin_Compare clickConfigurealeParameters(WebDriver driver, String tc) throws Exception {
 		elementExist(driver, ConfigurableParameters, true, tc);
 		driver.findElement(ConfigurableParameters).click();
 		return this;
 	}
 
-	public Vin2VinCompare inputCompareScriptURL(WebDriver driver, String un, String tc) throws Exception {
+	public Vin_Compare inputCompareScriptURL(WebDriver driver, String un, String tc) throws Exception {
 		elementExist(driver, CompareScriptURL, true, tc);
 		driver.findElement(CompareScriptURL).clear();
 		driver.findElement(CompareScriptURL).sendKeys(un);
 		return this;
 	}
 
-	public Vin2VinCompare inputCompareAPIBaseURL(WebDriver driver, String un, String tc) throws Exception {
+	public Vin_Compare inputCompareAPIBaseURL(WebDriver driver, String un, String tc) throws Exception {
 		elementExist(driver, CompareAPIBaseURL, true, tc);
 		driver.findElement(CompareAPIBaseURL).clear();
 		driver.findElement(CompareAPIBaseURL).sendKeys(un);
 		return this;
 	}
 
-	public Vin2VinCompare inputAccessToken(WebDriver driver, String un, String tc) throws Exception {
+	public Vin_Compare inputAccessToken(WebDriver driver, String un, String tc) throws Exception {
 		elementExist(driver, AccessToken, true, tc);
 		driver.findElement(AccessToken).clear();
 		driver.findElement(AccessToken).sendKeys(un);
 		return this;
 	}
 
-	public Vin2VinCompare inputProfile(WebDriver driver, String un, String tc) throws Exception {
+	public Vin_Compare inputProfile(WebDriver driver, String un, String tc) throws Exception {
 		elementExist(driver, Profile, true, tc);
 		driver.findElement(Profile).clear();
 		driver.findElement(Profile).sendKeys(un);
 		return this;
 	}
 
-	public Vin2VinCompare inputProductKey(WebDriver driver, String un, String tc) throws Exception {
+	public Vin_Compare inputProductKey(WebDriver driver, String un, String tc) throws Exception {
 		elementExist(driver, ProductKey, true, tc);
 		driver.findElement(ProductKey).clear();
 		driver.findElement(ProductKey).sendKeys(un);
 		return this;
 	}
 
-	public Vin2VinCompare inputLocale(WebDriver driver, String un, String tc) throws Exception {
+	public Vin_Compare inputLocale(WebDriver driver, String un, String tc) throws Exception {
 		elementExist(driver, Locale, true, tc);
 		driver.findElement(Locale).clear();
 		driver.findElement(Locale).sendKeys(un);
@@ -104,7 +104,7 @@ public class Vin2VinCompare extends Comlibs {
 //		driver.findElement(Locale).sendKeys(un);
 //		return this;
 //	}
-	public Vin2VinCompare inputVins(WebDriver driver, String vins[], String tc) throws Exception {
+	public Vin_Compare inputVins(WebDriver driver, String vins[], String tc) throws Exception {
 		int n = vins.length;
 
 		for (int i = 1; i <= n; i++) {
@@ -119,7 +119,7 @@ public class Vin2VinCompare extends Comlibs {
 		return this;
 	}
 
-	public Vin2VinCompare inputDealerPrices(WebDriver driver, String vins[], String DealerPrices[], String Images[],
+	public Vin_Compare inputDealerPrices(WebDriver driver, String vins[], String DealerPrices[], String Images[],
 			String tc) throws Exception {
 		int n = vins.length;
 
@@ -146,20 +146,20 @@ public class Vin2VinCompare extends Comlibs {
 		return this;
 	}
 
-	public Vin2VinCompare clickCompareBtn(WebDriver driver, String tc) throws Exception {
+	public Vin_Compare clickCompareBtn(WebDriver driver, String tc) throws Exception {
 		elementExist(driver, CompareBtn, true, tc);
 		driver.findElement(CompareBtn).click();
 		return this;
 	}
 
-	public Vin2VinCompare clickEditConfigurationBtn(WebDriver driver, String tc) throws Exception {
+	public Vin_Compare clickEditConfigurationBtn(WebDriver driver, String tc) throws Exception {
 		elementExist(driver, EditConfiguration, true, tc);
 		driver.findElement(EditConfiguration).click();
 		return this;
 
 	}
 
-	public Vin2VinCompare clickNewConfigurationBtn(WebDriver driver, String tc) throws Exception {
+	public Vin_Compare clickNewConfigurationBtn(WebDriver driver, String tc) throws Exception {
 		elementExist(driver, NewConfiguration, true, tc);
 		driver.findElement(NewConfiguration).click();
 		return this;
