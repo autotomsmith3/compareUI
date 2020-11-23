@@ -48,8 +48,11 @@ public class Vin_Compare extends Comlibs {
 	By GMCLocator = By.xpath("//*[@id=\"root\"]/div/div/div[2]/div/div[2]/div[2]/div[3]/div/img");
 	By CadillacLocator = By.xpath("//*[@id=\"root\"]/div/div/div[2]/div/div[2]/div[2]/div[4]/div/img");
 	By ManuallyEnterVins = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[1]/span");
-	By vinField = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/form/input[1]");
-	By AddBtn = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/form/input[2]");
+	By vinField = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/form/div/div[1]/input");
+	By customImageField = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/form/div/div[2]/input[1]");	
+	By customDealerPriceField = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/form/div/div[2]/input[2]");	
+	By xxxxxx = By.xpath("");	
+	By AddBtn = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/form/div/div[3]/input");
 	By StartCompare = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[3]/div/div[2]/button");
 	By NewCompare = By.xpath("/html/body/div[3]/div/div/button");	
 //	By xxxxxx = By.xpath("");	
@@ -94,6 +97,18 @@ public class Vin_Compare extends Comlibs {
 		elementExist(driver, vinField, true, tc);
 		driver.findElement(vinField).clear();
 		driver.findElement(vinField).sendKeys(vin);
+		return this;
+	}
+	public Vin_Compare inputCustomImage(WebDriver driver, String imageURL, String tc) throws Exception {
+		elementExist(driver, customImageField, true, tc);
+		driver.findElement(customImageField).clear();
+		driver.findElement(customImageField).sendKeys(imageURL);
+		return this;
+	}
+	public Vin_Compare inputCustomDealerPrice(WebDriver driver, String dealerPrice, String tc) throws Exception {
+		elementExist(driver, customDealerPriceField, true, tc);
+		driver.findElement(customDealerPriceField).clear();
+		driver.findElement(customDealerPriceField).sendKeys(dealerPrice);
 		return this;
 	}
 
