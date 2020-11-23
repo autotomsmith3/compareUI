@@ -164,24 +164,33 @@ public class vinCompareDemoUIController extends Comlibs {
 		tc = "TCxxxx_022";
 		VinComparePage.clickManuallyEnterVinsLink(driver, tc);
 
-		tc = "TCxxxx_023";
+		tc = "TCxxxx_vin_01";
 		VinComparePage.inputVin(driver, vins[0], tc);
-
-		tc = "TCxxxx_023_1";
+		tc = "TCxxxx_image_01";
+		VinComparePage.inputCustomImage(driver, Image1, tc);
+		tc = "TCxxxx_dealerPrice_01";
+		VinComparePage.inputCustomDealerPrice(driver, DealerPrices[0], tc);
+		tc = "TCxxxx_Add_02";
 		VinComparePage.clickAdd(driver, tc);
 
-		tc = "TCxxxx_024";
+		tc = "TCxxxx_vin_02";
 		VinComparePage.inputVin(driver, vins[1], tc);
-
-		tc = "TCxxxx_024_1";
+		tc = "TCxxxx_image_02";
+		VinComparePage.inputCustomImage(driver, Image2, tc);
+		tc = "TCxxxx_dealerPrice_02";
+		VinComparePage.inputCustomDealerPrice(driver, DealerPrices[1], tc);
+		tc = "TCxxxx_Add_02";
 		VinComparePage.clickAdd(driver, tc);
 
-		tc = "TCxxxx_025";
+		tc = "TCxxxx_vin_03";
 		VinComparePage.inputVin(driver, vins[2], tc);
-
-		tc = "TCxxxx_025_1";
+		tc = "TCxxxx_image_03";
+		VinComparePage.inputCustomImage(driver, Image3, tc);
+		tc = "TCxxxx_dealerPrice_03";
+		VinComparePage.inputCustomDealerPrice(driver, DealerPrices[2], tc);
+		tc = "TCxxxx_Add_03";
 		VinComparePage.clickAdd(driver, tc);
-
+		log.Wait(wt * 2);
 		//
 		tc = "Click on Compare button_029";
 		VinComparePage.clickStartCompare(driver, tc);
