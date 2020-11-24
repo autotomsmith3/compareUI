@@ -155,77 +155,34 @@ public class vinCompareDemoUIController extends Comlibs {
 		Comlibs log = new Comlibs();
 		log.rwExcel("", "*********VIN Compare Tester Tool UI**********", "");
 		Vin_Compare VinComparePage = new Vin_Compare(driver);
-		tc = "TCxxxx_01";
+		tc = "TC_ClickGM";
 		VinComparePage.clickGM(driver, tc);
-
-		tc = "TCxxxx_021";
+		log.Wait(wt);
+		tc = "TC_ClickChevrolet";
 		VinComparePage.clickChevrolet(driver, tc);
 		log.Wait(wt);
-		tc = "TCxxxx_022";
+		tc = "TC_click_ManuallyEnterVinsLik";
 		VinComparePage.clickManuallyEnterVinsLink(driver, tc);
 
-		tc = "TCxxxx_vin_01";
-		VinComparePage.inputVin(driver, vins[0], tc);
-		tc = "TCxxxx_image_01";
-		VinComparePage.inputCustomImage(driver, Image1, tc);
-		tc = "TCxxxx_dealerPrice_01";
-		VinComparePage.inputCustomDealerPrice(driver, DealerPrices[0], tc);
-		tc = "TCxxxx_Add_02";
-		VinComparePage.clickAdd(driver, tc);
+		for (int i = 0; i < numOfVins; i++) {
+			tc = "TC_input_vin_0" + (i + 1);
+			VinComparePage.inputVin(driver, vins[i], tc);
+			tc = "TC_input_url_image_0" + (i + 1);
+			VinComparePage.inputCustomImage(driver, Images[i], tc);
+			tc = "TC_input_dealerPrice_0" + (i + 1);
+			VinComparePage.inputCustomDealerPrice(driver, DealerPrices[i], tc);
+			tc = "TC_click_Add_0" + (i + 1);
+			VinComparePage.clickAdd(driver, tc);
+		}
 
-		tc = "TCxxxx_vin_02";
-		VinComparePage.inputVin(driver, vins[1], tc);
-		tc = "TCxxxx_image_02";
-		VinComparePage.inputCustomImage(driver, Image2, tc);
-		tc = "TCxxxx_dealerPrice_02";
-		VinComparePage.inputCustomDealerPrice(driver, DealerPrices[1], tc);
-		tc = "TCxxxx_Add_02";
-		VinComparePage.clickAdd(driver, tc);
-
-		tc = "TCxxxx_vin_03";
-		VinComparePage.inputVin(driver, vins[2], tc);
-		tc = "TCxxxx_image_03";
-		VinComparePage.inputCustomImage(driver, Image3, tc);
-		tc = "TCxxxx_dealerPrice_03";
-		VinComparePage.inputCustomDealerPrice(driver, DealerPrices[2], tc);
-		tc = "TCxxxx_Add_03";
-		VinComparePage.clickAdd(driver, tc);
 		log.Wait(wt * 2);
-		//
-		tc = "Click on Compare button_029";
+
+		tc = "TC_ClickStartCompare";
 		VinComparePage.clickStartCompare(driver, tc);
 		log.Wait(wt * 2);
-		
-		tc = "TCxxxx_026";
+		tc = "TC_ClickNewCompare";
 		VinComparePage.clickNewCompare(driver, tc);
 		log.Wait(wt * 2);
-		
-		
-		
-////	*********************************************************
-//		tc = "Click on Edit Configuration button_030";
-//		VinComparePage.clickEditConfigurationBtn(driver, tc);
-//		log.Wait(wt * 2);
-//		tc = "Click on Compare button_0291";
-//		VinComparePage.clickCompareBtn(driver, tc);
-//		log.Wait(wt * 2);
-//
-//		tc = "Click on New Configuration button_031";
-//		VinComparePage.clickNewConfigurationBtn(driver, tc);
-//		log.Wait(wt * 2);
-////		Check others
-//		tc = "Click on Compare button_032";
-//		VinComparePage.clickCompareBtn(driver, tc);
-//		log.Wait(wt * 2);
-////		*********************************************************
-//		tc = "Verify Dealer Price Vin1 01";
-//		VinComparePage.verifyDealerPriceWhichIsNot0(driver, DealerPrices[0], tc);
-//		tc = "Verify Dealer Price Vin2 02";
-//		VinComparePage.verifyDealerPriceWhichIs0(driver, DealerPrices[1], tc);
-//		tc = "Verify VIN 1 image 01";
-//		VinComparePage.verifyVin1Image(driver, tc);
-//		tc = "Verify VIN 2 image 02";
-//		VinComparePage.verifyVin2Image(driver, tc);
 	}
 
 	public static void main(String[] args) throws Exception {
