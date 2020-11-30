@@ -145,7 +145,8 @@ public class competitiveCompareUIController extends Comlibs {
 //		String onScreen = prop.getProperty("competitiveCompare.onScreen");
 //
 //		String CompetitiveCompareUIURL = prop.getProperty(env + brand + ".competitiveCompareUIURL");
-		String Year = prop.getProperty(env + ".Year");
+//		String Year = prop.getProperty(env + ".Year");
+		String Years[] = fetchOneDemArrayFromPropFile(env + ".Years", prop);
 		String expectedPrimaryPrice = prop.getProperty(env + "." + brand + ".expectedPrimaryPrice");
 		int wt = Integer.parseInt(prop.getProperty("CompetitiveCompare.waitTime"));
 		// Initial
@@ -160,57 +161,59 @@ public class competitiveCompareUIController extends Comlibs {
 		tc = brand + " - Click On Got It";
 		SelectVehiclePage.clickOnGotIt(driver, tc);
 //		String Year=2021;
-		tc = brand + " - Select year_01";
-		SelectVehiclePage.selectYear(driver, Year, tc);
-		tc = brand + " - CountVehicleArray";
-		// Select first type and first vehicle: 1,1. Select second type and first vehicle 2,1
-		int vehicleArry[];
-		log.Wait(wt);
-		vehicleArry = SelectVehiclePage.countVehicleArray(driver, tc);
-		int groupArray = vehicleArry.length;
-
-		System.out.println("Vehicle Array length = "+groupArray+" \n\n");
-
-		for (int i = 1; i <= groupArray; i++) {
-			for (int v = 1; v <= vehicleArry[i - 1]; v++) {
+		for (String Year : Years) {
+			tc = env + " - " + brand + " - Select year: " + Year;
+			SelectVehiclePage.selectYear(driver, Year, tc);
+			tc = brand + " - CountVehicleArray";
+			// Select first type and first vehicle: 1,1. Select second type and first vehicle 2,1
+			int vehicleArry[];
+			log.Wait(wt);
+			vehicleArry = SelectVehiclePage.countVehicleArray(driver, tc);
+			int groupArray = vehicleArry.length;
+			System.out.println("Vehicle Array length = " + groupArray + " \n\n");
+			for (int i = 1; i <= groupArray; i++) {
+				for (int v = 1; v <= vehicleArry[i - 1]; v++) {
 ////				//Debug
 //				i = 1;
 //				v = 2;
-				currentClientURL = driver.getCurrentUrl();
-				tc = env + " - " + brand + " - Select Year = " + Year;
-				SelectVehiclePage.selectYear(driver, Year, tc);
-				log.Wait(wt);
-				SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
-				tc = brand + " - getTrimName";
-				log.Wait(wt * 2);
-				trimNameS = SelectVehiclePage.getTrimName(driver, tc);
-				tc = brand + " - Click on Trim - " + trimNameS;
-				log.Wait(wt);
-				SelectVehiclePage.clickOnTrim(driver, env, brand, tc);
-				urlString = driver.getCurrentUrl() + " \n\n " + "group = " + i + ". vehicle = " + v + "\n " + trimNameS;
-				Compare ComparePage = new Compare(driver);
-				tc = env + " - " + brand + " - VerifyPrimaryImage - " + trimNameS;
-				log.Wait(wt * 3);
-				ComparePage.verifyPrimaryImage(driver, env, brand, urlString + "\n\n" + tc, tc);
-				log.Wait(wt);
-				tc = env + " - " + brand + " - VerifyPrimaryStaringFromPrice - " + trimNameS;
+					currentClientURL = driver.getCurrentUrl();
+					tc = env + " - " + brand + " - Select Year = " + Year;
+					SelectVehiclePage.selectYear(driver, Year, tc);
+					log.Wait(wt);
+					SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
+					tc = brand + " - getTrimName";
+					log.Wait(wt * 2);
+					trimNameS = SelectVehiclePage.getTrimName(driver, tc);
+					tc = brand + " - Click on Trim - " + trimNameS;
+					log.Wait(wt);
+					SelectVehiclePage.clickOnTrim(driver, env, brand, tc);
+					urlString = driver.getCurrentUrl() + " \n\n " + "group = " + i + ". vehicle = " + v + "\n "
+							+ trimNameS;
+					Compare ComparePage = new Compare(driver);
+					tc = env + " - " + brand + " - VerifyPrimaryImage - " + trimNameS;
+					log.Wait(wt * 3);
+					ComparePage.verifyPrimaryImage(driver, env, brand, urlString + "\n\n" + tc, tc);
+					log.Wait(wt);
+					tc = env + " - " + brand + " - VerifyPrimaryStaringFromPrice - " + trimNameS;
 
-				ComparePage.verifyPrimaryStaringFromPrice(driver, env, brand, urlString + "\n\n" + tc,
-						expectedPrimaryPrice, tc);
-				log.Wait(wt);
-				tc = env + " - " + brand + " - Click on Newe Compare";
-				try {
-					ComparePage.clickOnNewCompare(driver, tc);
-				} catch (Exception e) {
-					loadURLOld(driver, currentClientURL);
-					SelectVehicle SelectVehiclePageAgain = new SelectVehicle(driver);
-					tc = brand + " - Click On Got It Again after loading the URL!";
+					ComparePage.verifyPrimaryStaringFromPrice(driver, env, brand, urlString + "\n\n" + tc,
+							expectedPrimaryPrice, tc);
+					log.Wait(wt);
+					tc = env + " - " + brand + " - Click on Newe Compare";
 					try {
-						SelectVehiclePageAgain.clickOnGotIt(driver, tc);
-					} catch (Exception ee) {
-						System.out.println(brand + " - Click On Got It Button does not show after loading the URL!");
+						ComparePage.clickOnNewCompare(driver, tc);
+					} catch (Exception e) {
+						loadURLOld(driver, currentClientURL);
+						SelectVehicle SelectVehiclePageAgain = new SelectVehicle(driver);
+						tc = brand + " - Click On Got It Again after loading the URL!";
+						try {
+							SelectVehiclePageAgain.clickOnGotIt(driver, tc);
+						} catch (Exception ee) {
+							System.out
+									.println(brand + " - Click On Got It Button does not show after loading the URL!");
+						}
+						log.Wait(wt * 4);
 					}
-					log.Wait(wt * 4);
 				}
 			}
 		}
