@@ -272,7 +272,7 @@ public class vinCompareUIController extends Comlibs {
 //			 ***********VIN Compare**************
 
 			log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
-			driver.close();
+			driver.quit();
 			System.out.println("Test is complete!!!   i = " + (i + 1)+"\n");
 		}
 		System.out.println("*****************All Tests are done!!!*****************"+"\n");

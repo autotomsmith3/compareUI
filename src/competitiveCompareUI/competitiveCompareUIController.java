@@ -292,7 +292,7 @@ public class competitiveCompareUIController extends Comlibs {
 						// ***********Competitive Compare**************
 
 						log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
-						driver.close();
+						driver.quit();
 						System.out.println(env + " - " + brand + " - Test is complete!!!   i = " + (i + 1) + "\n");
 					} catch (Exception e) {
 						System.out.println("Test Client = " + brand + "\n");
@@ -307,7 +307,7 @@ public class competitiveCompareUIController extends Comlibs {
 						alertEmail.SendAlertEmail(env, brand, competitiveCompareUIUR,
 								"Site is not loaded properly or down!");
 						try {
-							driver.close();
+							driver.quit();
 						} catch (Exception ee) {
 							System.out.println("\n\nAlert!!!!\n\n");
 							System.out.println("\nBrowser cannot be closed!\n");

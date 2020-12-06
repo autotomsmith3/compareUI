@@ -106,7 +106,7 @@ public class vinCompareDemoUIController extends Comlibs {
 		return a;
 	}
 
-	public static void VinCompareDemoTcs(WebDriver driver, String brw, String envment) throws Exception {
+	public static void VinCompareDemoManulEntryVinTcs(WebDriver driver, String brw, String envment) throws Exception {
 		// Load environment parameters
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
@@ -165,6 +165,7 @@ public class vinCompareDemoUIController extends Comlibs {
 		VinComparePage.clickManuallyEnterVinsLink(driver, tc);
 
 		for (int i = 0; i < numOfVins; i++) {
+			log.Wait(wt);
 			tc = "TC_input_vin_0" + (i + 1);
 			VinComparePage.inputVin(driver, vins[i], tc);
 			tc = "TC_input_url_image_0" + (i + 1);
@@ -179,6 +180,84 @@ public class vinCompareDemoUIController extends Comlibs {
 
 		tc = "TC_ClickStartCompare";
 		VinComparePage.clickStartCompare(driver, tc);
+		log.Wait(wt * 2);
+		tc = "TC_ClickNewCompare";
+		VinComparePage.clickNewCompare(driver, tc);
+		log.Wait(wt * 2);
+	}
+
+	public static void VinCompareDemoVehicleTcs(WebDriver driver, String brw, String envment) throws Exception {
+		// Load environment parameters
+		Properties prop = new Properties();
+		// testprop.load(new FileInputStream("data/autopxConf.properties"));
+		try {
+			prop.load(vinCompareDemoUIController.class.getClassLoader()
+					.getResourceAsStream("./data/vinCompareDemo.properties"));// "./main.properties";
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		String env = envment;
+		String tBrowser = brw;
+		String envDevice = prop.getProperty("Compare.envDevice");
+		String onScreen = prop.getProperty("Compare.onScreen");
+		String VinCompareUIURL = prop.getProperty(env + ".VinCompareUIURL");
+
+		String CompareScriptURL = prop.getProperty(env + ".CompareScriptURL");
+
+		String CompareAPIBaseURL = prop.getProperty(env + ".CompareAPIBaseURL");
+
+		String AccessToken = prop.getProperty(env + ".AccessToken");
+
+		String Profile = prop.getProperty(env + ".Profile");
+		String ProductKey = prop.getProperty(env + ".ProductKey");
+		String Locale = prop.getProperty(env + ".Locale");
+
+		String vins[] = fetchOneDemArrayFromPropFile(env + ".CompareVINs", prop);
+		int numOfVins = vins.length;
+
+		String DealerPrices[] = fetchOneDemArrayFromPropFile(env + ".DealerPrices", prop);
+		int numOfDealerPrices = vins.length;
+
+		String Image1 = prop.getProperty(env + ".Image1");
+		String Image2 = prop.getProperty(env + ".Image2");
+		String Image3 = prop.getProperty(env + ".Image3");
+		String Image4 = prop.getProperty(env + ".Image4");
+		String Image5 = prop.getProperty(env + ".Image5");
+		String Image6 = prop.getProperty(env + ".Image6");
+
+		String[] Images = { Image1, Image2, Image3, Image4, Image5, Image6 };
+
+		int wt = Integer.parseInt(prop.getProperty("Compare.waitTime"));
+		// Initial
+		String tc;
+		String ptitle;
+		Comlibs log = new Comlibs();
+		log.rwExcel("", "*********VIN Compare Tester Tool UI**********", "");
+		Vin_Compare VinComparePage = new Vin_Compare(driver);
+		tc = "TC_ClickGM";
+		VinComparePage.clickGM(driver, tc);
+		log.Wait(wt);
+		tc = "TC_ClickChevrolet";
+		VinComparePage.clickChevrolet(driver, tc);
+		log.Wait(wt);
+		tc = "TC_getCompareNumbers";
+		int vehicles = VinComparePage.countVehicleNumber(driver, tc);
+
+		for (int i = 1; i <= vehicles; i++) {
+			log.Wait(wt);
+			tc = "TC_Select vehicle " + i;
+			VinComparePage.clickVehicle(driver, i, tc);
+			tc = "TC_click Show More " + i;
+			VinComparePage.clickVehicleShowMore(driver, i, tc);
+			tc = "TC_click Show Less " + i;
+			VinComparePage.clickVehicleShowMore(driver, i, tc);
+		}
+
+		log.Wait(wt);
+
+		tc = "TC_ClickStartCompare";
+		VinComparePage.clickStartCompareWithVehicle(driver, tc);
 		log.Wait(wt * 2);
 		tc = "TC_ClickNewCompare";
 		VinComparePage.clickNewCompare(driver, tc);
@@ -221,7 +300,7 @@ public class vinCompareDemoUIController extends Comlibs {
 		}
 
 		// i=3: all 3 devices
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 3; i++) {
 			System.out.println("Testing is started in " + env + "\n");
 			// Initial
 			Comlibs log = new Comlibs();
@@ -244,12 +323,20 @@ public class vinCompareDemoUIController extends Comlibs {
 			String vin1 = vins[0];
 			//// 1. VIN Compare Tester Tool UI page
 			log.rwExcel("", "-----VIN Compare Tester Tool UI page Testing started-----" + (i + 1), "");
-//			1. ***********VIN Compare**************
-			VinCompareDemoTcs(driver, tBrowser, env);
-//			 ***********VIN Compare**************
-
+//			*******1 or 2 **************			
+			int run = 1;
+//			*******1 or 2 **************
+			if (run == 1) {
+//			1. ***********1. VinCompareDemoManulEntryVinTcs**************
+				VinCompareDemoManulEntryVinTcs(driver, tBrowser, env);
+//			 *************1. VinCompareDemoManulEntryVinTcs**************
+			} else {
+//			2. ***********2. VinCompareDemoManulEntryVinTcs**************
+				VinCompareDemoVehicleTcs(driver, tBrowser, env);
+//			 *************2. VinCompareDemoManulEntryVinTcs**************
+			}
 			log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
-			driver.close();
+			driver.quit();
 			System.out.println("Test is complete!!!   i = " + (i + 1) + "\n");
 		}
 		System.out.println("*****************All Tests are done!!!*****************" + "\n");

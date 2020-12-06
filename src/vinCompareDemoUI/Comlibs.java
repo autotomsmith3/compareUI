@@ -343,9 +343,8 @@ public class Comlibs {
 			// 1. IE browser - Original one: //Working in XP IE8
 			// File file = new File(
 			// "C:/1/Eclipse/RefLibraris/IEDriverServer_x64_2.43.0/IEDriverServer.exe");
-//			System.setProperty("webdriver.internetexplorer.driver",
-//					"C:\\eclipse\\RefLibraris\\IEDriverServer_x64\\IEDriverServer.exe");
-//			WebDriver driver = new InternetExplorerDriver();
+			System.setProperty("webdriver.edge.driver",
+					"C:\\1\\Eclipse\\RefLibraris\\msEdgeWin\\msedgedriver.exe");
 //			Edge browser
 			WebDriver driver = new EdgeDriver();
 			return driver;

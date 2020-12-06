@@ -49,12 +49,25 @@ public class Vin_Compare extends Comlibs {
 	By CadillacLocator = By.xpath("//*[@id=\"root\"]/div/div/div[2]/div/div[2]/div[2]/div[4]/div/img");
 	By ManuallyEnterVins = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[1]/span");
 	By vinField = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/form/div/div[1]/input");
-	By customImageField = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/form/div/div[2]/input[1]");	
-	By customDealerPriceField = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/form/div/div[2]/input[2]");	
-	By xxxxxx = By.xpath("");	
+	By customImageField = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/form/div/div[2]/input[1]");
+	By customDealerPriceField = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/form/div/div[2]/input[2]");
+	By xxxxxx = By.xpath("");
 	By AddBtn = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/form/div/div[3]/input");
-	By StartCompare = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[3]/div/div[2]/button");
-	By NewCompare = By.xpath("/html/body/div[3]/div/div/button");	
+	By StartCompare =		 By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[3]/div/div[2]/button");
+	By StartCompareVehicle = By.xpath("/html/body/div[1]/div/div/div[3]/div[2]/div[2]/div/div/div[2]/button");
+	//						
+	By NewCompare = By.xpath("/html/body/div[3]/div/div/button");
+	By vehicle01 = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div[1]/div[1]/img");	
+	By vehicle02 = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div[2]/div[1]/img");	
+	By vehicle03 = By.xpath("");	
+	By vehicle04 = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div[4]/div[1]/img");	
+	By vehicle05 = By.xpath("");	
+	By vehicle06 = By.xpath("");	
+//	By xxxxxx = By.xpath("");	
+//	By xxxxxx = By.xpath("");	
+//	By xxxxxx = By.xpath("");	
+//	By xxxxxx = By.xpath("");	
+//	By xxxxxx = By.xpath("");	
 //	By xxxxxx = By.xpath("");	
 
 	public Vin_Compare clickGM(WebDriver driver, String tc) throws Exception {
@@ -99,12 +112,14 @@ public class Vin_Compare extends Comlibs {
 		driver.findElement(vinField).sendKeys(vin);
 		return this;
 	}
+
 	public Vin_Compare inputCustomImage(WebDriver driver, String imageURL, String tc) throws Exception {
 		elementExist(driver, customImageField, true, tc);
 		driver.findElement(customImageField).clear();
 		driver.findElement(customImageField).sendKeys(imageURL);
 		return this;
 	}
+
 	public Vin_Compare inputCustomDealerPrice(WebDriver driver, String dealerPrice, String tc) throws Exception {
 		elementExist(driver, customDealerPriceField, true, tc);
 		driver.findElement(customDealerPriceField).clear();
@@ -123,10 +138,41 @@ public class Vin_Compare extends Comlibs {
 		driver.findElement(StartCompare).click();
 		return this;
 	}
+	public Vin_Compare clickStartCompareWithVehicle(WebDriver driver, String tc) throws Exception {
+		elementExist(driver, StartCompareVehicle, true, tc);
+		driver.findElement(StartCompareVehicle).click();
+		return this;
+	}
+
 	public Vin_Compare clickNewCompare(WebDriver driver, String tc) throws Exception {
 		elementExist(driver, NewCompare, true, tc);
 		driver.findElement(NewCompare).click();
 		return this;
+	}
+	
+
+	
+	public Vin_Compare clickVehicle(WebDriver driver, int num, String tc) throws Exception {
+		By vehicle = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div["+num+"]/div[1]/img");
+		elementExist(driver, vehicle, true, tc);
+		driver.findElement(vehicle).click();
+		return this;
+	}
+	public Vin_Compare clickVehicleShowMore(WebDriver driver, int num, String tc) throws Exception {
+		//*[@id="root"]/div/div/div[3]/div[2]/div[1]/div[2]/div[2]/button   - 2
+		//*[@id="root"]/div/div/div[3]/div[2]/div[1]/div[5]/div[2]/button   - 5
+		//*[@id="root"]/div/div/div[3]/div[2]/div[1]/div[7]/div[2]/button  - 7
+		By showMore = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div["+num+"]/div[2]/button");
+		elementExist(driver, showMore, true, tc);
+		driver.findElement(showMore).click();
+		return this;
+	}
+
+	public int countVehicleNumber(WebDriver driver, String tc) throws Exception {
+		By vehicles = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div");
+		elementExist(driver, vehicles, true, tc);
+		int vehicleNum=driver.findElements(vehicles).size();
+		return vehicleNum;
 	}
 
 }
