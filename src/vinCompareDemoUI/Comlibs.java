@@ -820,6 +820,12 @@ public class Comlibs {
 		}
 
 	}
+	public void scrollUp(WebDriver driver, int scrollNum, String tc) {
+
+		// Window scroll down to make the custom image visible.
+		JavascriptExecutor jsx = (JavascriptExecutor) driver;
+		jsx.executeScript("window.scrollBy(0," + scrollNum + ")", "");
+	}
 
 	public void hoverOnWebElement(WebDriver driver, WebElement we0) {
 		String javaScript = "var evObj = document.createEvent('MouseEvents');"

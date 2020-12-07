@@ -174,5 +174,12 @@ public class Vin_Compare extends Comlibs {
 		int vehicleNum=driver.findElements(vehicles).size();
 		return vehicleNum;
 	}
-
+	public Vin_Compare clickXbtn(WebDriver driver, String tc) throws Exception {
+		By xBtn = By.xpath("/html/body/div[3]/div/div/span/svg");
+		//                  /html/body/div[3]/div/div/span/svg/path   
+		//					/html/body/div[3]/div/div/span/svg 
+		elementExist(driver, xBtn, true, tc);
+		driver.findElement(xBtn).click();
+		return this;
+	}
 }

@@ -249,13 +249,23 @@ public class vinCompareDemoUIController extends Comlibs {
 			tc = "TC_Select vehicle " + i;
 			VinComparePage.clickVehicle(driver, i, tc);
 			tc = "TC_click Show More " + i;
+			log.Wait(wt);
+			log.scrollUp(driver, -500, tc);
 			VinComparePage.clickVehicleShowMore(driver, i, tc);
+			log.Wait(wt);
 			tc = "TC_click Show Less " + i;
 			VinComparePage.clickVehicleShowMore(driver, i, tc);
+			
+//			log.scrollUp(driver, 500, tc);
+//			tc = "TC_ClickStartCompare";
+//			VinComparePage.clickStartCompareWithVehicle(driver, tc);
+//			log.Wait(wt);
+//			tc = "TC_click X to close " + i;
+//			VinComparePage.clickXbtn(driver, tc);
 		}
 
 		log.Wait(wt);
-
+		log.scrollUp(driver, 500, tc);
 		tc = "TC_ClickStartCompare";
 		VinComparePage.clickStartCompareWithVehicle(driver, tc);
 		log.Wait(wt * 2);
@@ -324,7 +334,7 @@ public class vinCompareDemoUIController extends Comlibs {
 			//// 1. VIN Compare Tester Tool UI page
 			log.rwExcel("", "-----VIN Compare Tester Tool UI page Testing started-----" + (i + 1), "");
 //			*******1 or 2 **************			
-			int run = 1;
+			int run = 2;
 //			*******1 or 2 **************
 			if (run == 1) {
 //			1. ***********1. VinCompareDemoManulEntryVinTcs**************
