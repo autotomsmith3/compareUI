@@ -364,9 +364,7 @@ public class Vin_Compare extends Comlibs {
 		if (OverLayOrPageScrollSwitch.equalsIgnoreCase("1")) {
 			// OverLay
 			PageScrollSwitch = By
-					.xpath("/html/body/div[1]/div/div/div[3]/div[2]/div[2]/div/div/div[1]/div[2]/form/label[2]");
-			// /html/body/div[1]/div/div/div[3]/div[2]/div[2]/div/div/div[1]/div[2]/form/label[2]
-			// /html/body/div[1]/div/div/div[3]/div[2]/div[3]/div/div[1]/div[2]/form/label[2]
+					.xpath("/html/body/div[1]/div/div/div[3]/div[2]/div[2]/div/div/div[1]/div[2]/form/label[1]");
 		} else {
 
 			if (VinEnteyOrVehicle.equalsIgnoreCase("1")) {
