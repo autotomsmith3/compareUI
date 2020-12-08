@@ -121,6 +121,7 @@ public class vinCompareDemoUIController extends Comlibs {
 		String tBrowser = brw;
 		String envDevice = prop.getProperty("Compare.envDevice");
 		String onScreen = prop.getProperty("Compare.onScreen");
+		String OverLayOrPageScrollSwitch = prop.getProperty("Compare.OverLayOrPageScrollSwitch");
 		String VinCompareUIURL = prop.getProperty(env + ".VinCompareUIURL");
 
 		String CompareScriptURL = prop.getProperty(env + ".CompareScriptURL");
@@ -177,13 +178,34 @@ public class vinCompareDemoUIController extends Comlibs {
 		}
 
 		log.Wait(wt * 2);
+		if (OverLayOrPageScrollSwitch.equalsIgnoreCase("2")) {
+			// PageScroll
+			tc = "TC_ClickPageScrollSwitch";
+			VinComparePage.clickPageScrollSwitch(driver, OverLayOrPageScrollSwitch, "1", tc);
 
-		tc = "TC_ClickStartCompare";
-		VinComparePage.clickStartCompare(driver, tc);
-		log.Wait(wt * 2);
-		tc = "TC_ClickNewCompare";
-		VinComparePage.clickNewCompare(driver, tc);
-		log.Wait(wt * 2);
+			tc = "TC_ClickStartCompare";
+			VinComparePage.clickStartCompare(driver, tc);
+			log.Wait(wt * 2);
+
+			tc = "TC_ClickNewCompare";
+			VinComparePage.verifyPrimaryAsConfiguredPriceFrPageScroll(driver, envDevice, "PageScroll", "10000", tc);
+
+			tc = "TC_ClickNewCompare";
+			VinComparePage.clickNewComparePageScroll(driver, tc);
+			log.Wait(wt * 2);
+		} else {
+			tc = "TC_ClickStartCompare";
+			VinComparePage.clickStartCompare(driver, tc);
+			log.Wait(wt * 2);
+
+//			tc = "TC_ClickNewCompare";
+//			Not ready:
+//			VinComparePage.verifyPrimaryAsConfiguredPriceFrOverLay(driver, envDevice, "OverLay", "10000", tc);
+
+			tc = "TC_ClickNewCompare";
+			VinComparePage.clickNewCompareOverLay(driver, tc);
+			log.Wait(wt * 2);
+		}
 	}
 
 	public static void VinCompareDemoVehicleTcs(WebDriver driver, String brw, String envment) throws Exception {
@@ -200,6 +222,8 @@ public class vinCompareDemoUIController extends Comlibs {
 		String env = envment;
 		String tBrowser = brw;
 		String envDevice = prop.getProperty("Compare.envDevice");
+		String OverLayOrPageScrollSwitch = prop.getProperty("Compare.OverLayOrPageScrollSwitch");
+
 		String onScreen = prop.getProperty("Compare.onScreen");
 		String VinCompareUIURL = prop.getProperty(env + ".VinCompareUIURL");
 
@@ -238,40 +262,72 @@ public class vinCompareDemoUIController extends Comlibs {
 		tc = "TC_ClickGM";
 		VinComparePage.clickGM(driver, tc);
 		log.Wait(wt);
-		tc = "TC_ClickChevrolet";
-		VinComparePage.clickChevrolet(driver, tc);
-		log.Wait(wt);
-		tc = "TC_getCompareNumbers";
-		int vehicles = VinComparePage.countVehicleNumber(driver, tc);
+		tc = "TC_getBrandNumbers";
+		int brands = VinComparePage.countBrandNumber(driver, tc);
+		for (int b = 1; b <= brands; b++) {
+			tc = "TC_ClickGM - " + b;
+			VinComparePage.clickGM(driver, tc);
+			log.Wait(wt);
+			tc = "TC_Click Brand = " + b;
+			VinComparePage.clickBrand(driver, b, tc);
+			log.Wait(wt);
+			tc = "TC_getVehicleNumbers";
+			int vehicles = VinComparePage.countVehicleNumber(driver, tc);
 
-		for (int i = 1; i <= vehicles; i++) {
-			log.Wait(wt);
-			tc = "TC_Select vehicle " + i;
-			VinComparePage.clickVehicle(driver, i, tc);
-			tc = "TC_click Show More " + i;
-			log.Wait(wt);
-			log.scrollUp(driver, -500, tc);
-			VinComparePage.clickVehicleShowMore(driver, i, tc);
-			log.Wait(wt);
-			tc = "TC_click Show Less " + i;
-			VinComparePage.clickVehicleShowMore(driver, i, tc);
-			
-//			log.scrollUp(driver, 500, tc);
-//			tc = "TC_ClickStartCompare";
-//			VinComparePage.clickStartCompareWithVehicle(driver, tc);
-//			log.Wait(wt);
-//			tc = "TC_click X to close " + i;
-//			VinComparePage.clickXbtn(driver, tc);
+			for (int i = 1; i <= vehicles; i++) {
+				tc = "TC_ClickGM - " + b;
+				VinComparePage.clickGM(driver, tc);
+				log.Wait(wt);
+				tc = "TC_Click Brand = " + b;
+				VinComparePage.clickBrand(driver, b, tc);
+				log.Wait(wt);
+				tc = "TC_Select vehicle " + i;
+				VinComparePage.clickVehicle(driver, i, tc);
+				tc = "TC_click Show More " + i;
+				log.Wait(wt);
+				log.scrollUp(driver, -500, tc);
+				VinComparePage.clickVehicleShowMore(driver, i, tc);
+				log.Wait(wt);
+				tc = "TC_click Show Less " + i;
+				VinComparePage.clickVehicleShowMore(driver, i, tc);
+				log.Wait(wt);
+				log.scrollUp(driver, 500, tc);
+
+				tc = "TC_click PageScrollSwitch " + i;
+				VinComparePage.clickPageScrollSwitch(driver, OverLayOrPageScrollSwitch, "2", tc);
+
+				tc = "TC_ClickStartCompare" + i;
+				VinComparePage.clickStartCompareWithVehicle(driver, tc);
+				log.Wait(wt * 2);
+
+				if (OverLayOrPageScrollSwitch.equalsIgnoreCase("1")) {
+					// OverLay: check first As Configured Price
+//					tc = "TC_clickIdenticalSpecsSwitch" + i;
+//					VinComparePage.clickIdenticalSpecsSwitch(driver, tc);
+//					tc = "TC_verifyPrimaryImageFrOverLay" + i;
+//					VinComparePage.verifyPrimaryImageOverLay(driver,envDevice,"brand="+b,"urlString",tc);
+
+//					tc = "TC_verifyPrimaryAsConfiguredPriceFrOverLay" + i;
+//					VinComparePage.verifyPrimaryAsConfiguredPriceFrOverLay(driver,envDevice,"brand="+b,"10000",tc);
+					tc = "TC_clickNewCompareOverLay" + i;
+					VinComparePage.clickNewCompareOverLay(driver, tc);
+				} else {
+					// PageScroll: check first As Configured Price
+					// OverLay: check first As Configured Price
+					tc = "TC_verifyPrimaryAsConfiguredPriceFrPageScroll" + i;
+					VinComparePage.verifyPrimaryAsConfiguredPriceFrPageScroll(driver, envDevice, "brand=" + b, "10000",
+							tc);// ok
+					tc = "TC_clickNewComparePageScroll" + i;
+					try {
+						VinComparePage.clickNewComparePageScroll(driver, tc);// ok
+					} catch (Exception e) {
+						log.scrollUp(driver, -10000, tc);
+					}
+				}
+
+				log.Wait(wt * 2);
+			}
 		}
-
-		log.Wait(wt);
-		log.scrollUp(driver, 500, tc);
-		tc = "TC_ClickStartCompare";
-		VinComparePage.clickStartCompareWithVehicle(driver, tc);
-		log.Wait(wt * 2);
-		tc = "TC_ClickNewCompare";
-		VinComparePage.clickNewCompare(driver, tc);
-		log.Wait(wt * 2);
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -334,16 +390,19 @@ public class vinCompareDemoUIController extends Comlibs {
 			//// 1. VIN Compare Tester Tool UI page
 			log.rwExcel("", "-----VIN Compare Tester Tool UI page Testing started-----" + (i + 1), "");
 //			*******1 or 2 **************			
-			int run = 2;
+			int run = 1;
 //			*******1 or 2 **************
 			if (run == 1) {
 //			1. ***********1. VinCompareDemoManulEntryVinTcs**************
 				VinCompareDemoManulEntryVinTcs(driver, tBrowser, env);
 //			 *************1. VinCompareDemoManulEntryVinTcs**************
-			} else {
-//			2. ***********2. VinCompareDemoManulEntryVinTcs**************
+//			2. ***********2. VinCompareDemoVehiclesTcs**************
 				VinCompareDemoVehicleTcs(driver, tBrowser, env);
-//			 *************2. VinCompareDemoManulEntryVinTcs**************
+//			 *************2. VinCompareDemoVehiclesTcs**************				
+			} else {
+//			2. ***********2. VinCompareDemoVehiclesTcs**************
+				VinCompareDemoVehicleTcs(driver, tBrowser, env);
+//			 *************2. VinCompareDemoVehiclesTcs**************
 			}
 			log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 			driver.quit();

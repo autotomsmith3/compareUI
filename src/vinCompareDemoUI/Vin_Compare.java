@@ -8,6 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import Mail.SendEmail;
+
 public class Vin_Compare extends Comlibs {
 	private final WebDriver driver;
 
@@ -53,16 +55,18 @@ public class Vin_Compare extends Comlibs {
 	By customDealerPriceField = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/form/div/div[2]/input[2]");
 	By xxxxxx = By.xpath("");
 	By AddBtn = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/form/div/div[3]/input");
-	By StartCompare =		 By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[3]/div/div[2]/button");
+	By StartCompare = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[3]/div/div[2]/button");
 	By StartCompareVehicle = By.xpath("/html/body/div[1]/div/div/div[3]/div[2]/div[2]/div/div/div[2]/button");
-	//						
-	By NewCompare = By.xpath("/html/body/div[3]/div/div/button");
-	By vehicle01 = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div[1]/div[1]/img");	
-	By vehicle02 = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div[2]/div[1]/img");	
-	By vehicle03 = By.xpath("");	
-	By vehicle04 = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div[4]/div[1]/img");	
-	By vehicle05 = By.xpath("");	
-	By vehicle06 = By.xpath("");	
+	//
+	By NewCompareOverLay = By.xpath("/html/body/div[3]/div/div/button");
+	By NewComparePageScroll = By.xpath("//*[@id=\"root\"]/div/div/div[4]/button");
+
+	By vehicle01 = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div[1]/div[1]/img");
+	By vehicle02 = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div[2]/div[1]/img");
+	By vehicle03 = By.xpath("");
+	By vehicle04 = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div[4]/div[1]/img");
+	By vehicle05 = By.xpath("");
+	By vehicle06 = By.xpath("");
 //	By xxxxxx = By.xpath("");	
 //	By xxxxxx = By.xpath("");	
 //	By xxxxxx = By.xpath("");	
@@ -138,46 +142,256 @@ public class Vin_Compare extends Comlibs {
 		driver.findElement(StartCompare).click();
 		return this;
 	}
+
 	public Vin_Compare clickStartCompareWithVehicle(WebDriver driver, String tc) throws Exception {
 		elementExist(driver, StartCompareVehicle, true, tc);
 		driver.findElement(StartCompareVehicle).click();
 		return this;
 	}
 
-	public Vin_Compare clickNewCompare(WebDriver driver, String tc) throws Exception {
-		elementExist(driver, NewCompare, true, tc);
-		driver.findElement(NewCompare).click();
+	public Vin_Compare clickNewCompareOverLay(WebDriver driver, String tc) throws Exception {
+		elementExist(driver, NewCompareOverLay, true, tc);
+		driver.findElement(NewCompareOverLay).click();
 		return this;
 	}
-	
 
-	
+	public Vin_Compare clickNewComparePageScroll(WebDriver driver, String tc) throws Exception {
+		elementExist(driver, NewComparePageScroll, true, tc);
+		driver.findElement(NewComparePageScroll).click();
+		return this;
+	}
+
+	public Vin_Compare clickBrand(WebDriver driver, int num, String tc) throws Exception {
+		By brand = By.xpath("//*[@id=\"root\"]/div/div/div[2]/div/div[2]/div[2]/div[" + num + "]/div/img");
+		// //*[@id="root"]/div/div/div[2]/div/div[2]/div[2]/div[2]/div/img - 2nd
+		elementExist(driver, brand, true, tc);
+		driver.findElement(brand).click();
+		return this;
+	}
+
 	public Vin_Compare clickVehicle(WebDriver driver, int num, String tc) throws Exception {
-		By vehicle = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div["+num+"]/div[1]/img");
+		By vehicle = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div[" + num + "]/div[1]/img");
 		elementExist(driver, vehicle, true, tc);
 		driver.findElement(vehicle).click();
 		return this;
 	}
+
 	public Vin_Compare clickVehicleShowMore(WebDriver driver, int num, String tc) throws Exception {
-		//*[@id="root"]/div/div/div[3]/div[2]/div[1]/div[2]/div[2]/button   - 2
-		//*[@id="root"]/div/div/div[3]/div[2]/div[1]/div[5]/div[2]/button   - 5
-		//*[@id="root"]/div/div/div[3]/div[2]/div[1]/div[7]/div[2]/button  - 7
-		By showMore = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div["+num+"]/div[2]/button");
+		// *[@id="root"]/div/div/div[3]/div[2]/div[1]/div[2]/div[2]/button - 2
+		// *[@id="root"]/div/div/div[3]/div[2]/div[1]/div[5]/div[2]/button - 5
+		// *[@id="root"]/div/div/div[3]/div[2]/div[1]/div[7]/div[2]/button - 7
+		By showMore = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div[" + num + "]/div[2]/button");
 		elementExist(driver, showMore, true, tc);
 		driver.findElement(showMore).click();
 		return this;
 	}
 
+	public int countBrandNumber(WebDriver driver, String tc) throws Exception {
+		By brands = By.xpath("//*[@id=\"root\"]/div/div/div[2]/div/div[2]/div[2]/div");
+		// //*[@id="root"]/div/div/div[2]/div/div[2]/div[2]/div[2]/div/img - 2nd
+		elementExist(driver, brands, true, tc);
+		int vehicleNum = driver.findElements(brands).size();
+		return vehicleNum;
+	}
+
 	public int countVehicleNumber(WebDriver driver, String tc) throws Exception {
 		By vehicles = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div");
 		elementExist(driver, vehicles, true, tc);
-		int vehicleNum=driver.findElements(vehicles).size();
+		int vehicleNum = driver.findElements(vehicles).size();
 		return vehicleNum;
 	}
+
 	public Vin_Compare clickXbtn(WebDriver driver, String tc) throws Exception {
 		By xBtn = By.xpath("/html/body/div[3]/div/div/span/svg");
-		//                  /html/body/div[3]/div/div/span/svg/path   
-		//					/html/body/div[3]/div/div/span/svg 
+		// /html/body/div[3]/div/div/span/svg/path
+		// /html/body/div[3]/div/div/span/svg
+		elementExist(driver, xBtn, true, tc);
+		driver.findElement(xBtn).click();
+		return this;
+	}
+
+	public Vin_Compare clickIdenticalSpecsSwitch(WebDriver driver, String tc) throws Exception {
+		// not working since the page is a Flex page. Need to find work around solution
+		By IdenticalSpecsSwitch = By
+				.xpath("/html/body/div/div/div[1]/div[1]/div/div/div[2]/div/div/div[1]/div/div[2]/div");
+		//
+		//
+		elementExist(driver, IdenticalSpecsSwitch, true, tc);
+		driver.findElement(IdenticalSpecsSwitch).click();
+		return this;
+	}
+
+	public void verifyPrimaryAsConfiguredPriceFrPageScroll(WebDriver driver, String env, String brand,
+			String expectedAsConfiguredPrice, String tc) throws Exception {
+		String PrimaryAsConfiguredPriceString = "";
+		String errorMsg = "";
+		int PMSRP = 0;
+		try {
+			By PrimaryAsConfiguredPrice = By
+					.xpath("//*[@id=\"root\"]/div/div/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/span");
+			// /html/body/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/span
+			// //*[@id="root"]/div/div/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/span
+			// /html/body/div/div/div/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/span
+//			PrimaryAsConfiguredPriceString = driver.findElement(PrimaryAsConfiguredPrice).getCssValue("vc-compare-cell-text");//<span class="vc-compare-cell-text">$48,525</span>
+//			PrimaryAsConfiguredPriceString = driver.findElement(PrimaryAsConfiguredPrice).getTagName();
+			PrimaryAsConfiguredPriceString = driver.findElement(PrimaryAsConfiguredPrice).getText();
+			// $44,995
+			if (!PrimaryAsConfiguredPriceString.equals("")) {
+				PrimaryAsConfiguredPriceString = PrimaryAsConfiguredPriceString.replace("$", "");
+				PrimaryAsConfiguredPriceString = PrimaryAsConfiguredPriceString.replace(",", "");
+				PMSRP = Integer.parseInt(PrimaryAsConfiguredPriceString);
+			}
+
+//			if (PrimaryStaringFromPriceString.equalsIgnoreCase(expectedPrimaryPrices)) {
+			if (PMSRP >= 10000 && PMSRP <= 200000) {
+				System.out.println("\n\nPrimaryAsConfiguredPrice matches!*****");
+				rwExcel(tc, true, brand + " - Verify PrimaryAsConfiguredPriceString",
+						brand + " PrimaryAsConfiguredPrice is showing and matching.");
+
+			} else {
+				System.out.println("\n\nPrimaryAsConfiguredPriceString does not match!*****");
+				errorMsg = brand + " - Primary Vehicle As Configured Price does not match!" + "\n\n" + brand
+						+ " Web Site Primary As Configured Price shows \"" + PrimaryAsConfiguredPriceString
+						+ "\" and expected price is " + "\"" + expectedAsConfiguredPrice + "\"\n";
+				rwExcel(tc, false, brand + " - Verify PrimaryAsConfiguredPrice", errorMsg);
+				SendEmail alertEmail = new SendEmail();
+				alertEmail.SendAlertEmail(env, brand, errorMsg, tc);
+
+			}
+
+			System.out.println("\n\n*****");
+
+		} catch (Exception e) {
+			errorMsg = brand + " - Primary As Configured Price does not match!" + "\n\n" + brand
+					+ " Web Site Primary As Configured Price shows \"" + PrimaryAsConfiguredPriceString
+					+ "\" and expected price is " + "\"" + expectedAsConfiguredPrice + "\"\n";
+			;
+			rwExcel(tc, false, brand + " - PrimaryAsConfiguredPriceString is not showing properly", errorMsg);
+//			SendEmail alertEmail = new SendEmail();
+//			alertEmail.SendAlertEmail(env, brand, errorMsg, tc);
+			System.out.println(
+					"\n\n*****************Verify PrimaryAsConfiguredPriceString Is Complete!*******************\n");
+
+		}
+	}
+
+	// /html/body/div/div/div[1]/div[2]/div[2]/div[2]/div[1]/span/img
+	public void verifyPrimaryImageOverLay(WebDriver driver, String env, String brand, String urlString, String tc)
+			throws Exception {
+		// not working since the page is a Flex page. Need to find work around solution
+		try {
+			By PrimaryIageLocator = By.xpath("/html/body/div/div/div[1]/div[2]/div[2]/div[2]/div[1]/span/img");
+			VerifyImageLoaded(driver, PrimaryIageLocator, tc);
+		} catch (Exception e) {
+			rwExcel(tc, false, brand + " - Primary Image is not showing",
+					brand + " site maybe is showing error or down.");
+			SendEmail alertEmail = new SendEmail();
+			alertEmail.SendAlertEmail(env, brand, urlString, tc);
+			System.out
+					.println("\n\n*****************Verify Primary Image Is Complete!*******************\n" + urlString);
+
+		}
+	}
+
+	public void verifyPrimaryAsConfiguredPriceFrOverLay(WebDriver driver, String env, String brand,
+			String expectedAsConfiguredPrice, String tc) throws Exception {
+		// not working since the page is a Flex page. Need to find work around solution
+		String PrimaryAsConfiguredPriceString = "";
+		String errorMsg = "";
+		int PMSRP = 0;
+		try {
+			By PrimaryAsConfiguredPrice = By
+					.cssSelector("div.vc-comparison-cell-as-configured-price:nth-child(2) > span:nth-child(1)");
+			// /html/body/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/span
+			// //*[@id="root"]/div/div/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/span
+			// /html/body/div/div/div/div[4]/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/span
+			// FF /html/body/div/div/div[2]/div[2]/div[2]/div/div[3]/div[2]/span
+			// FF CSS Path html body div.vc-compare.cleanslate div.vc-root div.vc-categories div.vc-category div.collapse.in div.vc-features div.vc-feature div.vc-comparison-cell.vc-comparison-cell-as-configured-price span.vc-compare-cell-text
+//			PrimaryAsConfiguredPriceString = driver.findElement(PrimaryAsConfiguredPrice).getCssValue("vc-compare-cell-text");//<span class="vc-compare-cell-text">$48,525</span>
+//			PrimaryAsConfiguredPriceString = driver.findElement(PrimaryAsConfiguredPrice).getTagName();
+			try {
+				PrimaryAsConfiguredPriceString = driver.findElement(PrimaryAsConfiguredPrice)
+						.getAttribute("vc-compare-cell-text");
+				PrimaryAsConfiguredPriceString = driver.findElement(PrimaryAsConfiguredPrice).getText();
+			} catch (Exception e) {
+				PrimaryAsConfiguredPriceString = driver.findElement(PrimaryAsConfiguredPrice)
+						.getCssValue("vc-compare-cell-text");
+			}
+			// $44,995
+			if (!PrimaryAsConfiguredPriceString.equals("")) {
+				PrimaryAsConfiguredPriceString = PrimaryAsConfiguredPriceString.replace("$", "");
+				PrimaryAsConfiguredPriceString = PrimaryAsConfiguredPriceString.replace(",", "");
+				PMSRP = Integer.parseInt(PrimaryAsConfiguredPriceString);
+			}
+
+//			if (PrimaryStaringFromPriceString.equalsIgnoreCase(expectedPrimaryPrices)) {
+			if (PMSRP >= 10000 && PMSRP <= 200000) {
+				System.out.println("\n\nPrimaryStaringFromPriceString matches!*****");
+				rwExcel(tc, true, brand + " - Verify PrimaryStaringFromPriceString",
+						brand + " PrimaryStaringFromPrice is showing and matching.");
+
+			} else {
+				System.out.println("\n\nPrimaryStaringFromPriceString does not match!*****");
+				errorMsg = brand + " - Primary Vehicle Staringfrom Price does not match!" + "\n\n" + brand
+						+ " Web Site Primary Staringfrom Price shows \"" + PrimaryAsConfiguredPriceString
+						+ "\" and expected price is " + "\"" + expectedAsConfiguredPrice + "\"\n";
+				rwExcel(tc, false, brand + " - Verify PrimaryStaringFromPrice", errorMsg);
+				SendEmail alertEmail = new SendEmail();
+				alertEmail.SendAlertEmail(env, brand, errorMsg, tc);
+
+			}
+
+			System.out.println("\n\n*****");
+
+		} catch (Exception e) {
+			errorMsg = brand + " - Primary As Configured Price does not match!" + "\n\n" + brand
+					+ " Web Site Primary As Configured Price shows \"" + PrimaryAsConfiguredPriceString
+					+ "\" and expected price is " + "\"" + expectedAsConfiguredPrice + "\"\n";
+			;
+			rwExcel(tc, false, brand + " - PrimaryAsConfiguredPriceString is not showing properly", errorMsg);
+//			SendEmail alertEmail = new SendEmail();
+//			alertEmail.SendAlertEmail(env, brand, errorMsg, tc);
+			System.out.println(
+					"\n\n*****************Verify PrimaryAsConfiguredPriceString Is Complete!*******************\n");
+
+		}
+	}
+
+	public Vin_Compare clickPageScrollSwitch(WebDriver driver, String OverLayOrPageScrollSwitch,
+			String VinEnteyOrVehicle, String tc) throws IOException {
+		By PageScrollSwitch = By.xpath("");
+
+		if (OverLayOrPageScrollSwitch.equalsIgnoreCase("1")) {
+			// OverLay
+			PageScrollSwitch = By
+					.xpath("/html/body/div[1]/div/div/div[3]/div[2]/div[2]/div/div/div[1]/div[2]/form/label[2]");
+			// /html/body/div[1]/div/div/div[3]/div[2]/div[2]/div/div/div[1]/div[2]/form/label[2]
+			// /html/body/div[1]/div/div/div[3]/div[2]/div[3]/div/div[1]/div[2]/form/label[2]
+		} else {
+
+			if (VinEnteyOrVehicle.equalsIgnoreCase("1")) {
+				// PageScroll from Manual Entery;
+				PageScrollSwitch = By
+						.xpath("/html/body/div[1]/div/div/div[3]/div[2]/div[3]/div/div[1]/div[2]/form/label[2]");
+				// /html/body/div[1]/div/div/div[3]/div[2]/div[2]/div/div/div[1]/div[2]/form/label[2]
+				// /html/body/div[1]/div/div/div[3]/div[2]/div[3]/div/div[1]/div[2]/form/label[2]
+			} else {
+				// Page Scroll from Vehicles selected
+				// /html/body/div[1]/div/div/div[3]/div[2]/div[2]/div/div/div[1]/div[2]/form/label[2]
+				PageScrollSwitch = By
+						.xpath("/html/body/div[1]/div/div/div[3]/div[2]/div[2]/div/div/div[1]/div[2]/form/label[2]");
+			} // /html/body/div[1]/div/div/div[3]/div[2]/div[3]/div/div[1]/div[2]/form/label[2]
+
+		}
+		elementExist(driver, PageScrollSwitch, true, tc);
+		driver.findElement(PageScrollSwitch).click();
+		return this;
+	}
+
+	public Vin_Compare clickXxxxxbtn(WebDriver driver, String tc) throws Exception {
+		By xBtn = By.xpath("/html/body/div[3]/div/div/span/svg");
+		// /html/body/div[3]/div/div/span/svg/path
+		// /html/body/div[3]/div/div/span/svg
 		elementExist(driver, xBtn, true, tc);
 		driver.findElement(xBtn).click();
 		return this;

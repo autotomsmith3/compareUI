@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;				   									  
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -49,7 +49,8 @@ public class Comlibs {
 
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/studyPriceDemoUI.properties"));
-		prop.load(vinCompareDemoUIController.class.getClassLoader().getResourceAsStream("./data/vinCompare.properties"));
+		prop.load(vinCompareDemoUIController.class.getClassLoader()
+				.getResourceAsStream("./data/vinCompareDemo.properties"));
 		String resultfile = prop.getProperty("Compare.resutlPathFile");
 
 		int n = 0;
@@ -57,14 +58,14 @@ public class Comlibs {
 		Calendar cal = Calendar.getInstance();
 		cal.getTime();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-		SimpleDateFormat sdfmt = new SimpleDateFormat("yyyy-MM-dd");															  
+		SimpleDateFormat sdfmt = new SimpleDateFormat("yyyy-MM-dd");
 		timeStamp = sdf.format(cal.getTime());
 		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
 		Date d = new Date();
 		dateStamp = df.format(d);
 		timeStamp = dateStamp + "  " + timeStamp;
 		resultfile = resultfile.replace(".xls", "");
-		resultfile = resultfile + "_" + sdfmt.format(d) + ".xls";											  														   
+		resultfile = resultfile + "_" + sdfmt.format(d) + ".xls";
 		writeTitle(resultfile);
 
 		FileInputStream file = new FileInputStream(new File(resultfile));
@@ -132,21 +133,22 @@ public class Comlibs {
 	public void rwExcel(String SpID, String functionality, String description) throws IOException {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/studyPriceDemoUI.properties"));
-		prop.load(vinCompareDemoUIController.class.getClassLoader().getResourceAsStream("./data/vinCompareDemo.properties"));
+		prop.load(vinCompareDemoUIController.class.getClassLoader()
+				.getResourceAsStream("./data/vinCompareDemo.properties"));
 		String resultfile = prop.getProperty("Compare.resutlPathFile");
 		int n = 0;
 		String sName, passOrfail, dateStamp, timeStamp;
 		Calendar cal = Calendar.getInstance();
 		cal.getTime();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-		SimpleDateFormat sdfmt = new SimpleDateFormat("yyyy-MM-dd");		
+		SimpleDateFormat sdfmt = new SimpleDateFormat("yyyy-MM-dd");
 		timeStamp = sdf.format(cal.getTime());
 		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
 		Date d = new Date();
 		dateStamp = df.format(d);
 		timeStamp = dateStamp + "  " + timeStamp;
 		resultfile = resultfile.replace(".xls", "");
-		resultfile = resultfile + "_" + sdfmt.format(d) + ".xls";											  												   
+		resultfile = resultfile + "_" + sdfmt.format(d) + ".xls";
 		writeTitle(resultfile);
 
 		FileInputStream file = new FileInputStream(new File(resultfile));
@@ -183,21 +185,22 @@ public class Comlibs {
 	public void rwExcel(String SpID, int testStatus, String functionality, String description) throws IOException {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/studyPriceDemoUI.properties"));
-		prop.load(vinCompareDemoUIController.class.getClassLoader().getResourceAsStream("./data/vinCompare.properties"));
+		prop.load(
+				vinCompareDemoUIController.class.getClassLoader().getResourceAsStream("./data/vinCompare.properties"));
 		String resultfile = prop.getProperty("Compare.resutlPathFile");
 		int n = 0;
 		String sName, passOrfail, dateStamp, timeStamp;
 		Calendar cal = Calendar.getInstance();
 		cal.getTime();
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-		SimpleDateFormat sdfmt = new SimpleDateFormat("yyyy-MM-dd");														  
+		SimpleDateFormat sdfmt = new SimpleDateFormat("yyyy-MM-dd");
 		timeStamp = sdf.format(cal.getTime());
 		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
 		Date d = new Date();
 		dateStamp = df.format(d);
 		timeStamp = dateStamp + "  " + timeStamp;
 		resultfile = resultfile.replace(".xls", "");
-		resultfile = resultfile + "_" + sdfmt.format(d) + ".xls";											  											   
+		resultfile = resultfile + "_" + sdfmt.format(d) + ".xls";
 		writeTitle(resultfile);
 
 		FileInputStream file = new FileInputStream(new File(resultfile));
@@ -343,8 +346,7 @@ public class Comlibs {
 			// 1. IE browser - Original one: //Working in XP IE8
 			// File file = new File(
 			// "C:/1/Eclipse/RefLibraris/IEDriverServer_x64_2.43.0/IEDriverServer.exe");
-			System.setProperty("webdriver.edge.driver",
-					"C:\\1\\Eclipse\\RefLibraris\\msEdgeWin\\msedgedriver.exe");
+			System.setProperty("webdriver.edge.driver", "C:\\1\\Eclipse\\RefLibraris\\msEdgeWin\\msedgedriver.exe");
 //			Edge browser
 			WebDriver driver = new EdgeDriver();
 			return driver;
@@ -545,7 +547,7 @@ public class Comlibs {
 		// 5: IE8, Chrome, FF work fine!
 		if (device.equalsIgnoreCase("PC")) {
 //			driver.manage().window().setSize(new Dimension(1720, 990));  //Center for home screen 20200323
-			driver.manage().window().setSize(new Dimension(1672, 990));  //Center for home screen 20200506
+			driver.manage().window().setSize(new Dimension(1672, 990)); // Center for home screen 20200506
 //			driver.manage().window().setSize(new Dimension(1300, 1040)); // Original one before March 23, 2020 Full size of the left monitor
 			// driver.manage().window().setSize(new Dimension(1080, 1040)); // Original one before Oct 17, 2018
 			// driver.manage().window().setSize(new Dimension(1480, 1040)); //After Oct 17, 2018 (1480, 1040)
@@ -554,16 +556,16 @@ public class Comlibs {
 			rwExcel("", true, "Set up browser resolution for device = " + device, "  " + dim);
 		} else if (device.equalsIgnoreCase("Tablet")) {
 			// driver.manage().window().setSize(new Dimension(764, 660));
-			driver.manage().window().setSize(new Dimension(890, 1030));//Heri: 890,660, Verti: 890, 1030
+			driver.manage().window().setSize(new Dimension(890, 1030));// Heri: 890,660, Verti: 890, 1030
 			dim = driver.manage().window().getSize();
 			rwExcel("", true, "Set up browser resolution for device = " + device, "  " + dim);
 		} else if (device.equalsIgnoreCase("Smartphone")) {
 //			driver.manage().window().setSize(new Dimension(320, 640));//Original iphone 4s
-			driver.manage().window().setSize(new Dimension(400, 760));//Original iphone 7, best for Edge
+			driver.manage().window().setSize(new Dimension(400, 760));// Original iphone 7, best for Edge
 			dim = driver.manage().window().getSize();
 			rwExcel("", true, "Set up browser resolution for device = " + device, "  " + dim);
 		} else {
-			driver.manage().window().setSize(new Dimension(1080, 990)); // PC  - 
+			driver.manage().window().setSize(new Dimension(1080, 990)); // PC -
 			dim = driver.manage().window().getSize();
 			System.out.println(device + " is a wrong device name. Current browser is setting to " + dim);
 			rwExcel("", false, "Set up browser resolution for device = " + device + " is not available. ",
@@ -820,6 +822,7 @@ public class Comlibs {
 		}
 
 	}
+
 	public void scrollUp(WebDriver driver, int scrollNum, String tc) {
 
 		// Window scroll down to make the custom image visible.
