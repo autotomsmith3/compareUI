@@ -167,13 +167,13 @@ public class vinCompareDemoUIController extends Comlibs {
 
 		for (int i = 0; i < numOfVins; i++) {
 			log.Wait(wt);
-			tc = "TC_input_vin_0" + (i + 1);
+			tc = "TC_input_vin_0 - " + (i + 1);
 			VinComparePage.inputVin(driver, vins[i], tc);
-			tc = "TC_input_url_image_0" + (i + 1);
+			tc = "TC_input_url_image_0 - " + (i + 1);
 			VinComparePage.inputCustomImage(driver, Images[i], tc);
-			tc = "TC_input_dealerPrice_0" + (i + 1);
+			tc = "TC_input_dealerPrice_0 - " + (i + 1);
 			VinComparePage.inputCustomDealerPrice(driver, DealerPrices[i], tc);
-			tc = "TC_click_Add_0" + (i + 1);
+			tc = "TC_click_Add_0 - " + (i + 1);
 			VinComparePage.clickAdd(driver, tc);
 		}
 
@@ -204,6 +204,7 @@ public class vinCompareDemoUIController extends Comlibs {
 
 			tc = "TC_ClickNewCompare";
 			VinComparePage.clickNewCompareOverLay(driver, tc);
+			System.out.println("\nVinCompareDemoManulEntryVin is complete!!!\n");
 			log.Wait(wt * 2);
 		}
 	}
@@ -281,25 +282,26 @@ public class vinCompareDemoUIController extends Comlibs {
 				tc = "TC_Click Brand = " + b;
 				VinComparePage.clickBrand(driver, b, tc);
 				log.Wait(wt);
-				tc = "TC_Select vehicle " + i;
+				tc = "TC_Select vehicle - " + i;
 				VinComparePage.clickVehicle(driver, i, tc);
-				tc = "TC_click Show More " + i;
+				tc = "TC_click Show More - " + i;
 				log.Wait(wt);
 				log.scrollUp(driver, -500, tc);
 				VinComparePage.clickVehicleShowMore(driver, i, tc);
 				log.Wait(wt);
-				tc = "TC_click Show Less " + i;
+				tc = "TC_click Show Less - " + i;
 				VinComparePage.clickVehicleShowMore(driver, i, tc);
 				log.Wait(wt);
 				log.scrollUp(driver, 500, tc);
 
-				tc = "TC_click PageScrollSwitch " + i;
+				tc = "TC_click PageScrollSwitch - " + i;
 				VinComparePage.clickPageScrollSwitch(driver, OverLayOrPageScrollSwitch, "2", tc);
 
-				tc = "TC_ClickStartCompare" + i;
+				tc = "TC_ClickStartCompare - " + i;
 				VinComparePage.clickStartCompareWithVehicle(driver, tc);
 				log.Wait(wt * 2);
-
+				System.out.println("Brand number = "+b+". Vehicle = "+i+"\n");
+				System.out.println("This VinCompareDemoVehicle is complete!!!\n");
 				if (OverLayOrPageScrollSwitch.equalsIgnoreCase("1")) {
 					// OverLay: check first As Configured Price
 //					tc = "TC_clickIdenticalSpecsSwitch" + i;
@@ -309,12 +311,12 @@ public class vinCompareDemoUIController extends Comlibs {
 
 //					tc = "TC_verifyPrimaryAsConfiguredPriceFrOverLay" + i;
 //					VinComparePage.verifyPrimaryAsConfiguredPriceFrOverLay(driver,envDevice,"brand="+b,"10000",tc);
-					tc = "TC_clickNewCompareOverLay" + i;
+					tc = "TC_clickNewCompareOverLay - " + i;
 					VinComparePage.clickNewCompareOverLay(driver, tc);
 				} else {
 					// PageScroll: check first As Configured Price
 					// OverLay: check first As Configured Price
-					tc = "TC_verifyPrimaryAsConfiguredPriceFrPageScroll" + i;
+					tc = "TC_verifyPrimaryAsConfiguredPriceFrPageScroll - " + i;
 					VinComparePage.verifyPrimaryAsConfiguredPriceFrPageScroll(driver, envDevice, "brand=" + b, "10000",
 							tc);// ok
 					tc = "TC_clickNewComparePageScroll" + i;
