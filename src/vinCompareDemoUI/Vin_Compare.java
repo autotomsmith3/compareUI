@@ -165,15 +165,50 @@ public class Vin_Compare extends Comlibs {
 		By brand = By.xpath("//*[@id=\"root\"]/div/div/div[2]/div/div[2]/div[2]/div[" + num + "]/div/img");
 		// //*[@id="root"]/div/div/div[2]/div/div[2]/div[2]/div[2]/div/img - 2nd
 		elementExist(driver, brand, true, tc);
+		getkBrandName(driver,num,tc);
 		driver.findElement(brand).click();
 		return this;
 	}
 
+	public String getkBrandName(WebDriver driver, int num, String tc) throws Exception {
+		By brand = By.xpath("//*[@id=\"root\"]/div/div/div[2]/div/div[2]/div[2]/div[" + num + "]/div/img");
+		// //*[@id="root"]/div/div/div[2]/div/div[2]/div[2]/div[2]/div/img - 2nd
+		elementExist(driver, brand, true, tc);
+		String BrandName = "";
+		try {
+			BrandName = driver.findElement(brand).getAttribute("alt");
+			BrandName=BrandName.replace("Logo", "");
+		} catch (Exception e) {
+			BrandName = driver.findElement(brand).getCssValue("alt");
+		}
+
+		return BrandName;
+	}
+
 	public Vin_Compare clickVehicle(WebDriver driver, int num, String tc) throws Exception {
-		By vehicle = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div[" + num + "]/div[1]/img");
+//		By vehicle = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div[" + num + "]/div[1]/img");
+		By vehicle = By.xpath("/html/body/div[1]/div/div/div[3]/div[2]/div[1]/div["+num+"]/div[1]/h3");
+		//                    /html/body/div[1]/div/div/div[3]/div[2]/div[1]/div[1]/div[1]/h3
+		//					  /html/body/div[1]/div/div/div[3]/div[2]/div[1]/div[2]/div[1]/h3
+		//						
 		elementExist(driver, vehicle, true, tc);
 		driver.findElement(vehicle).click();
 		return this;
+	}
+	public String getVehicleName(WebDriver driver, int num, String tc) throws Exception {
+		String VehicleName="";
+//		By vehicle = By.xpath("//*[@id=\"root\"]/div/div/div[3]/div[2]/div[1]/div[" + num + "]/div[1]/img");
+		By vehicle = By.xpath("/html/body/div[1]/div/div/div[3]/div[2]/div[1]/div["+num+"]/div[1]/h3");
+		//                    /html/body/div[1]/div/div/div[3]/div[2]/div[1]/div[1]/div[1]/h3
+		//					  /html/body/div[1]/div/div/div[3]/div[2]/div[1]/div[2]/div[1]/h3
+		//						
+		elementExist(driver, vehicle, true, tc);
+		try {
+		VehicleName=driver.findElement(vehicle).getText();
+		}catch(Exception e) {
+			VehicleName=driver.findElement(vehicle).getCssValue("h3");
+		}
+		return VehicleName;
 	}
 
 	public Vin_Compare clickVehicleShowMore(WebDriver driver, int num, String tc) throws Exception {
