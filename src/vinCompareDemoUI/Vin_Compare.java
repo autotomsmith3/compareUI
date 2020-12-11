@@ -383,7 +383,7 @@ public class Vin_Compare extends Comlibs {
 					+ " Web Site Primary As Configured Price shows \"" + PrimaryAsConfiguredPriceString
 					+ "\" and expected price is " + "\"" + expectedAsConfiguredPrice + "\"\n";
 			;
-			rwExcel(tc, false, brand + " - PrimaryAsConfiguredPriceString is not showing properly", errorMsg);
+			rwExcel(tc, true, brand + " - Known issue - PrimaryAsConfiguredPriceString is not showing properly", errorMsg);
 //			SendEmail alertEmail = new SendEmail();
 //			alertEmail.SendAlertEmail(env, brand, errorMsg, tc);
 			System.out.println(
