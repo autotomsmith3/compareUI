@@ -67,32 +67,32 @@ public class Compare extends Comlibs {
 
 	public void verifyPrimaryStartingFromPrice(WebDriver driver, String env, String brand, String urlString,
 			String expectedPrimaryPrices, String tc) throws Exception {
-		String PrimaryStaringFromPriceString = "";
+		String PrimaryStartingFromPriceString = "";
 		String errorMsg = "";
 		int PMSRP = 0;
 		try {
-			By PrimaryStaringFromPrice = By
+			By PrimaryStartingFromPrice = By
 					.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[1]/div/div[2]/div/ul[1]/li[2]/div[2]/span");
-			PrimaryStaringFromPriceString = driver.findElement(PrimaryStaringFromPrice).getText();
+			PrimaryStartingFromPriceString = driver.findElement(PrimaryStartingFromPrice).getText();
 			// $44,995
-			if (!PrimaryStaringFromPriceString.equals("")) {
-				PrimaryStaringFromPriceString = PrimaryStaringFromPriceString.replace("$", "");
-				PrimaryStaringFromPriceString = PrimaryStaringFromPriceString.replace(",", "");
-				PMSRP = Integer.parseInt(PrimaryStaringFromPriceString);
+			if (!PrimaryStartingFromPriceString.equals("")) {
+				PrimaryStartingFromPriceString = PrimaryStartingFromPriceString.replace("$", "");
+				PrimaryStartingFromPriceString = PrimaryStartingFromPriceString.replace(",", "");
+				PMSRP = Integer.parseInt(PrimaryStartingFromPriceString);
 			}
 
-//			if (PrimaryStaringFromPriceString.equalsIgnoreCase(expectedPrimaryPrices)) {
+//			if (PrimaryStartingFromPriceString.equalsIgnoreCase(expectedPrimaryPrices)) {
 			if (PMSRP >= 10000 && PMSRP <= 200000) {
-				System.out.println("\n\nPrimaryStaringFromPriceString matches!*****");
-				rwExcel(tc, true, brand + " - Verify PrimaryStaringFromPriceString",
-						brand + " PrimaryStaringFromPrice is showing and matching.");
+				System.out.println("\n\nPrimaryStartingFromPriceString matches!*****");
+				rwExcel(tc, true, brand + " - Verify PrimaryStartingFromPriceString",
+						brand + " PrimaryStartingFromPrice is showing and matching.");
 
 			} else {
-				System.out.println("\n\nPrimaryStaringFromPriceString does not match!*****");
+				System.out.println("\n\nPrimaryStartingFromPriceString does not match!*****");
 				errorMsg = brand + " - Primary Vehicle Startingfrom Price does not match!" + "\n\n" + brand
-						+ " Web Site Primary Startingfrom Price shows \"" + PrimaryStaringFromPriceString
+						+ " Web Site Primary Startingfrom Price shows \"" + PrimaryStartingFromPriceString
 						+ "\" and expected price is " + "\"" + expectedPrimaryPrices + "\"\n";
-				rwExcel(tc, false, brand + " - Verify PrimaryStaringFromPrice", errorMsg);
+				rwExcel(tc, false, brand + " - Verify PrimaryStartingFromPrice", errorMsg);
 				SendEmail alertEmail = new SendEmail();
 				alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
 
@@ -102,13 +102,13 @@ public class Compare extends Comlibs {
 
 		} catch (Exception e) {
 			errorMsg = brand + " - Primary Vehicle Startingfrom Price does not match!" + "\n\n" + brand
-					+ " Web Site Primary Startingfrom Price shows \"" + PrimaryStaringFromPriceString
+					+ " Web Site Primary Startingfrom Price shows \"" + PrimaryStartingFromPriceString
 					+ "\" and expected price is " + "\"" + expectedPrimaryPrices + "\"\n";
 			;
-			rwExcel(tc, false, brand + " - PrimaryStaringFromPrice is not showing properly", errorMsg);
+			rwExcel(tc, false, brand + " - PrimaryStartingFromPrice is not showing properly", errorMsg);
 			SendEmail alertEmail = new SendEmail();
 			alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
-			System.out.println("\n\n*****************Verify PrimaryStaringFromPrice Is Complete!*******************\n");
+			System.out.println("\n\n*****************Verify PrimaryStartingFromPrice Is Complete!*******************\n");
 
 		}
 	}
