@@ -186,7 +186,7 @@ public class competitiveCompareUIController extends Comlibs {
 					trimNameS = SelectVehiclePage.getTrimName(driver, tc);
 					tc = brand + " - Click on Trim - " + trimNameS;
 					log.Wait(wt);
-					SelectVehiclePage.clickOnTrim(driver, env, brand, tc);
+					SelectVehiclePage.clickOnTrim(driver, env, brand, 1, tc);
 					urlString = driver.getCurrentUrl() + " \n\n " + "group = " + i + ". vehicle = " + v + "\n "
 							+ trimNameS;
 					Compare ComparePage = new Compare(driver);
