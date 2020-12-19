@@ -65,7 +65,7 @@ public class Compare extends Comlibs {
 		}
 	}
 
-	public void verifyPrimaryStaringFromPrice(WebDriver driver, String env, String brand, String urlString,
+	public void verifyPrimaryStartingFromPrice(WebDriver driver, String env, String brand, String urlString,
 			String expectedPrimaryPrices, String tc) throws Exception {
 		String PrimaryStaringFromPriceString = "";
 		String errorMsg = "";
@@ -89,8 +89,8 @@ public class Compare extends Comlibs {
 
 			} else {
 				System.out.println("\n\nPrimaryStaringFromPriceString does not match!*****");
-				errorMsg = brand + " - Primary Vehicle Staringfrom Price does not match!" + "\n\n" + brand
-						+ " Web Site Primary Staringfrom Price shows \"" + PrimaryStaringFromPriceString
+				errorMsg = brand + " - Primary Vehicle Startingfrom Price does not match!" + "\n\n" + brand
+						+ " Web Site Primary Startingfrom Price shows \"" + PrimaryStaringFromPriceString
 						+ "\" and expected price is " + "\"" + expectedPrimaryPrices + "\"\n";
 				rwExcel(tc, false, brand + " - Verify PrimaryStaringFromPrice", errorMsg);
 				SendEmail alertEmail = new SendEmail();
@@ -101,8 +101,8 @@ public class Compare extends Comlibs {
 			System.out.println("\n\n*****");
 
 		} catch (Exception e) {
-			errorMsg = brand + " - Primary Vehicle Staringfrom Price does not match!" + "\n\n" + brand
-					+ " Web Site Primary Staringfrom Price shows \"" + PrimaryStaringFromPriceString
+			errorMsg = brand + " - Primary Vehicle Startingfrom Price does not match!" + "\n\n" + brand
+					+ " Web Site Primary Startingfrom Price shows \"" + PrimaryStaringFromPriceString
 					+ "\" and expected price is " + "\"" + expectedPrimaryPrices + "\"\n";
 			;
 			rwExcel(tc, false, brand + " - PrimaryStaringFromPrice is not showing properly", errorMsg);

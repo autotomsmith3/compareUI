@@ -192,11 +192,11 @@ public class competitiveCompareUIController extends Comlibs {
 					Compare ComparePage = new Compare(driver);
 					tc = env + " - " + brand + " - VerifyPrimaryImage - " + trimNameS;
 					log.Wait(wt * 3);
-					ComparePage.verifyPrimaryImage(driver, env, brand, urlString + "\n\n" + tc, tc);
+//					ComparePage.verifyPrimaryImage(driver, env, brand, urlString + "\n\n" + tc, tc);
 					log.Wait(wt);
-					tc = env + " - " + brand + " - VerifyPrimaryStaringFromPrice - " + trimNameS;
+					tc = env + " - " + brand + " - VerifyPrimaryStartingFromPrice - " + trimNameS;
 
-					ComparePage.verifyPrimaryStaringFromPrice(driver, env, brand, urlString + "\n\n" + tc,
+					ComparePage.verifyPrimaryStartingFromPrice(driver, env, brand, urlString + "\n\n" + tc,
 							expectedPrimaryPrice, tc);
 					log.Wait(wt);
 					tc = env + " - " + brand + " - Click on Newe Compare";
