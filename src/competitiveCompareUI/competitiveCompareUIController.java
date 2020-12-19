@@ -164,7 +164,7 @@ public class competitiveCompareUIController extends Comlibs {
 		for (String Year : Years) {
 			tc = env + " - " + brand + " - Select year: " + Year;
 			SelectVehiclePage.selectYear(driver, Year, tc);
-			tc = brand + " - CountVehicleArray";
+			tc = Year + " - " + brand + " - CountVehicleArray";
 			// Select first type and first vehicle: 1,1. Select second type and first vehicle 2,1
 			int vehicleArry[];
 			log.Wait(wt);

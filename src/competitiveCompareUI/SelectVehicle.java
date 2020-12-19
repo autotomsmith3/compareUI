@@ -95,7 +95,7 @@ public class SelectVehicle extends Comlibs {
 
 				By vehicleCount = By
 						.xpath("/html/body/div[1]/div[3]/div[1]/div[" + (i + 1) + "]/div[1]/div/div[3]/div/div");
-				elementExist(driver, vehicleCount, true, tc);
+				elementExist(driver, vehicleCount, true, tc + " - [" + (i) + "]");
 				int vehicleCounts = driver.findElements(vehicleCount).size();
 				vehiclesArray[i] = vehicleCounts;
 				System.out.println("\nArray [" + i + "] = " + vehiclesArray[i]);
@@ -125,6 +125,14 @@ public class SelectVehicle extends Comlibs {
 				System.out.println("Array 3= " + vehiclesArray[2]);
 				System.out.println("Array 4= " + vehiclesArray[3]);
 				System.out.println("Array 5= " + vehiclesArray[4]);
+				System.out.println("\n");
+			} else if (oneArray == 6) {
+				System.out.println("\nArray 1= " + vehiclesArray[0]);
+				System.out.println("Array 2= " + vehiclesArray[1]);
+				System.out.println("Array 3= " + vehiclesArray[2]);
+				System.out.println("Array 4= " + vehiclesArray[3]);
+				System.out.println("Array 5= " + vehiclesArray[4]);
+				System.out.println("Array 6= " + vehiclesArray[5]);
 				System.out.println("\n");
 			}
 
@@ -177,9 +185,10 @@ public class SelectVehicle extends Comlibs {
 		Wait(5);
 		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("Staging")))) {
 			try {
-			driver.switchTo().alert().dismiss();
-			}catch(Exception e) {
-				System.out.println("Tomcat credential fields pop-up NOT showing! This is expected when running after first Mitisubishi model!\n");
+				driver.switchTo().alert().dismiss();
+			} catch (Exception e) {
+				System.out.println(
+						"Tomcat credential fields pop-up NOT showing! This is expected when running after first Mitisubishi model!\n");
 			}
 		}
 		return new Compare(driver);
