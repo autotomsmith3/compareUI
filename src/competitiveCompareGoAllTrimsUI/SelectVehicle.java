@@ -202,13 +202,14 @@ public class SelectVehicle extends Comlibs {
 //2		.trim-overlay > div:nth-child(3) > div:nth-child(1) > label:nth-child(1)
 //3		.trim-overlay > div:nth-child(4) > div:nth-child(1) > label:nth-child(1)
 		By trim = By.cssSelector("");
-		if (num==1) {
+		if (num == 1) {
 			num = num + 1;
 			trim = By.cssSelector(".trim-overlay > div:nth-child(" + num + ") > div:nth-child(1) > label:nth-child(1)");
-			boolean firstTrim=elementExist(driver, trim, false, tc);
+			boolean firstTrim = elementExist(driver, trim, false, tc);
 			if (!firstTrim) {
 				num = num + 1;
-				trim = By.cssSelector(".trim-overlay > div:nth-child(" + num + ") > div:nth-child(1) > label:nth-child(1)");
+				trim = By.cssSelector(
+						".trim-overlay > div:nth-child(" + num + ") > div:nth-child(1) > label:nth-child(1)");
 				elementExist(driver, trim, true, tc);
 			}
 		}
@@ -238,10 +239,10 @@ public class SelectVehicle extends Comlibs {
 		By trim = By.cssSelector(".trim-overlay > div:nth-child(" + num + ") > div:nth-child(1) > label:nth-child(1)");
 		elementExist(driver, trim, true, tc);
 		try {
-		trimName = driver.findElement(trim).getText();
-		Wait(1);
-		}catch(Exception e) {
-			trimName="TrimName=Empty";
+			trimName = driver.findElement(trim).getText();
+			Wait(1);
+		} catch (Exception e) {
+			trimName = "TrimName=Empty";
 		}
 		return trimName;
 	}

@@ -54,9 +54,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import Mail.SendEmail;
-import competitiveCompareUI.Comlibs;
-import competitiveCompareUI.Compare;
-import competitiveCompareUI.SelectVehicle;
 
 public class competitiveCompareUIController extends Comlibs {
 	private final WebDriver driver;
@@ -155,7 +152,7 @@ public class competitiveCompareUIController extends Comlibs {
 		// Initial
 		String tc;
 		String modelNameS = "";
-		int trimNumber =0;
+		int trimNumber = 0;
 		String trimNameS = "";
 		String urlString = "";
 		String currentClientURL = "";
@@ -177,15 +174,12 @@ public class competitiveCompareUIController extends Comlibs {
 			int groupArray = vehicleArry.length;
 			System.out.println("Vehicle Array length = " + groupArray + " \n\n");
 			for (int i = 1; i <= groupArray; i++) {
-								
+
 				for (int v = 1; v <= vehicleArry[i - 1]; v++) {
 ////				//Debug
 //				i = 1;
 //				v = 2;
-					
-					
-					
-					
+
 					currentClientURL = driver.getCurrentUrl();
 					tc = env + " - " + brand + " - Select Year = " + Year;
 					SelectVehiclePage.selectYear(driver, Year, tc);
@@ -193,90 +187,78 @@ public class competitiveCompareUIController extends Comlibs {
 					SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
 					tc = brand + " - getModleName";
 					log.Wait(wt * 2);
-					trimNumber=SelectVehiclePage.getTrimNumber(driver, env, brand, tc);
+					trimNumber = SelectVehiclePage.getTrimNumber(driver, env, brand, tc);
 					SelectVehiclePage.clickOnTrimOld_1st_OK(driver, env, brand, currentClientURL);
 					Compare ComparePage = new Compare(driver);
 					log.Wait(wt);
 					ComparePage.clickOnNewCompare(driver, currentClientURL);
-					
-					
-					
+
 //					//Go through only 1 trim
 //					trimNumber=1;
-					for (int trim=1;trim<=trimNumber;trim++) {
-					try {
-					currentClientURL = driver.getCurrentUrl();
-					tc = env + " - " + brand + " - Select Year = " + Year;
-					SelectVehiclePage.selectYear(driver, Year, tc);
-					log.Wait(wt);
-					SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
-					tc = brand + " - getModleName";
-					log.Wait(wt * 2);
-					
-					
-					
-					modelNameS = SelectVehiclePage.getModleName(driver, tc);
-					tc = brand + " - ModleName "+modelNameS;
+					for (int trim = 1; trim <= trimNumber; trim++) {
+						try {
+							currentClientURL = driver.getCurrentUrl();
+							tc = env + " - " + brand + " - Select Year = " + Year;
+							SelectVehiclePage.selectYear(driver, Year, tc);
+							log.Wait(wt);
+							SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
+							tc = brand + " - getModleName";
+							log.Wait(wt * 2);
+
+							modelNameS = SelectVehiclePage.getModleName(driver, tc);
+							tc = brand + " - ModleName " + modelNameS;
 //					trimNumber=SelectVehiclePage.getTrimNumber(driver, env, brand, tc);
 //					for (int trim=1;trim<=trimNumber;trim++) {
-						tc =tc+" - getTrimName ";
-						if (trim==1) {
-							trimNameS=SelectVehiclePage.getTrimName(driver, env, brand, trim, tc);//take 2nd which is wrong
-							tc =tc+" - "+trimNameS;
-							SelectVehiclePage.clickOnTrimOld_1st_OK(driver, env, brand, currentClientURL);
-						}else {
-							trimNameS=SelectVehiclePage.getTrimName(driver, env, brand, trim, tc);
-							tc =tc+" - "+trimNameS;
-							SelectVehiclePage.clickOnTrim(driver, env, brand, trim, currentClientURL);
-						}
+							tc = tc + " - getTrimName ";
+							if (trim == 1) {
+								trimNameS = SelectVehiclePage.getTrimName(driver, env, brand, trim, tc);// take 2nd which is wrong
+								tc = tc + " - " + trimNameS;
+								SelectVehiclePage.clickOnTrimOld_1st_OK(driver, env, brand, currentClientURL);
+							} else {
+								trimNameS = SelectVehiclePage.getTrimName(driver, env, brand, trim, tc);
+								tc = tc + " - " + trimNameS;
+								SelectVehiclePage.clickOnTrim(driver, env, brand, trim, currentClientURL);
+							}
 //						tc =tc+" - "+trimNameS;
 //					}
-				
-					
-					
-					
-					tc = brand + " - Click on Trim - " + modelNameS;
-					log.Wait(wt);
+
+							tc = brand + " - Click on Trim - " + modelNameS;
+							log.Wait(wt);
 //					SelectVehiclePage.clickOnTrim(driver, env, brand, 1, tc);
-					urlString = driver.getCurrentUrl() + " \n\n " + "group = " + i + ". vehicle = " + v + "\n "
-							+ trimNameS;
+							urlString = driver.getCurrentUrl() + " \n\n " + "group = " + i + ". vehicle = " + v + "\n "
+									+ trimNameS;
 //					Compare ComparePage = new Compare(driver);
-					tc = env + " - " + brand + " - VerifyPrimaryImage - " + trimNameS;
-					log.Wait(wt * 3);
+							tc = env + " - " + brand + " - VerifyPrimaryImage - " + trimNameS;
+							log.Wait(wt * 3);
 //					ComparePage.verifyPrimaryImage(driver, env, brand, urlString + "\n\n" + tc, tc);
 //					log.Wait(wt);
-					tc = env + " - " + brand + " - VerifyPrimaryStartingFromPrice - " + trimNameS;
+							tc = env + " - " + brand + " - VerifyPrimaryStartingFromPrice - " + trimNameS;
 
-					ComparePage.verifyPrimaryStartingFromPrice(driver, env, brand, urlString + "\n\n" + tc,
-							expectedPrimaryPrice, tc);
-					log.Wait(wt);
-					tc = env + " - " + brand + " - Click on Newe Compare";
-					try {
-						ComparePage.clickOnNewCompare(driver, tc);
-					} catch (Exception e) {
-						loadURLOld(driver, currentClientURL);
-						SelectVehicle SelectVehiclePageAgain = new SelectVehicle(driver);
-						tc = brand + " - Click On Got It Again after loading the URL!";
-						try {
-							SelectVehiclePageAgain.clickOnGotIt(driver, tc);
-						} catch (Exception ee) {
-							System.out
-									.println(brand + " - Click On Got It Button does not show after loading the URL!");
+							ComparePage.verifyPrimaryStartingFromPrice(driver, env, brand, urlString + "\n\n" + tc,
+									expectedPrimaryPrice, tc);
+							log.Wait(wt);
+							tc = env + " - " + brand + " - Click on Newe Compare";
+							try {
+								ComparePage.clickOnNewCompare(driver, tc);
+							} catch (Exception e) {
+								loadURLOld(driver, currentClientURL);
+								SelectVehicle SelectVehiclePageAgain = new SelectVehicle(driver);
+								tc = brand + " - Click On Got It Again after loading the URL!";
+								try {
+									SelectVehiclePageAgain.clickOnGotIt(driver, tc);
+								} catch (Exception ee) {
+									System.out.println(
+											brand + " - Click On Got It Button does not show after loading the URL!");
+								}
+								log.Wait(wt * 4);
+							}
+							// trim catch
+						} catch (Exception e) {
+							loadURLOld(driver, currentClientURL);
 						}
-						log.Wait(wt * 4);
+
 					}
-					//trim catch
-					}catch (Exception e) {
-						loadURLOld(driver, currentClientURL);
-					}
-					
-					}
-					
-					
-					
-					
-					
-					
+
 				}
 			}
 		}
