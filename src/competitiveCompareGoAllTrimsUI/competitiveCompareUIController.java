@@ -162,7 +162,7 @@ public class competitiveCompareUIController extends Comlibs {
 
 		tc = brand + " - Click On Got It";
 		SelectVehiclePage.clickOnGotIt(driver, tc);
-//		String Year=2021;
+
 		for (String Year : Years) {
 			tc = env + " - " + brand + " - Select year: " + Year;
 			SelectVehiclePage.selectYear(driver, Year, tc);
