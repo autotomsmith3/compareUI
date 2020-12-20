@@ -43,9 +43,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.Select;
 
-import Mail.SendEmail;
-import competitiveCompareUI.competitiveCompareUIController;
-
 public class Comlibs {
 
 	public void rwExcel(String SpID, Boolean testStatus, String functionality, String description) throws IOException {
@@ -53,7 +50,7 @@ public class Comlibs {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/studyPriceDemoUI.properties"));
 		prop.load(competitiveCompareUIController.class.getClassLoader()
-				.getResourceAsStream("./data/competitiveCompare.properties"));
+				.getResourceAsStream("./data/competitiveCompareGoAllTrims.properties"));
 		String resultfile = prop.getProperty("CompetitiveCompare.resutlPathFile");
 
 		int n = 0;
@@ -137,7 +134,7 @@ public class Comlibs {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/studyPriceDemoUI.properties"));
 		prop.load(competitiveCompareUIController.class.getClassLoader()
-				.getResourceAsStream("./data/competitiveCompare.properties"));
+				.getResourceAsStream("./data/competitiveCompareGoAllTrims.properties"));
 		String resultfile = prop.getProperty("CompetitiveCompare.resutlPathFile");
 		int n = 0;
 		String sName, passOrfail, dateStamp, timeStamp;
@@ -189,7 +186,7 @@ public class Comlibs {
 		Properties prop = new Properties();
 		// testprop.load(new FileInputStream("data/studyPriceDemoUI.properties"));
 		prop.load(competitiveCompareUIController.class.getClassLoader()
-				.getResourceAsStream("./data/competitiveCompare.properties"));
+				.getResourceAsStream("./data/competitiveCompareGoAllTrims.properties"));
 		String resultfile = prop.getProperty("CompetitiveCompare.resutlPathFile");
 		int n = 0;
 		String sName, passOrfail, dateStamp, timeStamp;

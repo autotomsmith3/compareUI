@@ -8,8 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import competitiveCompareUI.Comlibs;
-import competitiveCompareUI.Compare;
 
 public class SelectVehicle extends Comlibs {
 	private final WebDriver driver;

@@ -11,8 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import Mail.SendEmail;
-import competitiveCompareUI.Comlibs;
-import competitiveCompareUI.SelectVehicle;
 
 public class Compare extends Comlibs {
 	private final WebDriver driver;

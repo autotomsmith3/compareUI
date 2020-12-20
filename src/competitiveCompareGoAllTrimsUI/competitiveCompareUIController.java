@@ -134,7 +134,7 @@ public class competitiveCompareUIController extends Comlibs {
 		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
 			prop.load(competitiveCompareUIController.class.getClassLoader()
-					.getResourceAsStream("./data/competitiveCompare.properties"));// "./main.properties";
+					.getResourceAsStream("./data/competitiveCompareGoAllTrims.properties"));// "./main.properties";
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -269,7 +269,7 @@ public class competitiveCompareUIController extends Comlibs {
 		Properties prop = new Properties();
 		try {
 			prop.load(competitiveCompareUIController.class.getClassLoader()
-					.getResourceAsStream("./data/competitiveCompare.properties"));//
+					.getResourceAsStream("./data/competitiveCompareGoAllTrims.properties"));//
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
