@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-
 public class SelectVehicle extends Comlibs {
 	private final WebDriver driver;
 
@@ -195,15 +194,55 @@ public class SelectVehicle extends Comlibs {
 		return new Compare(driver);
 	}
 
-	public Compare clickOnTrim(WebDriver driver, String env, String brand, int num, String tc) throws Exception {
+	public Compare clickOnTrimNewAllTrims(WebDriver driver, String env, String brand, int num, boolean lstTrimExist,
+			boolean secondTrimExist, String tc) throws Exception {
+//1		.trim-overlay > div:nth-child(2) > div:nth-child(1) > label:nth-child(1)
+//2		.trim-overlay > div:nth-child(3) > div:nth-child(1) > label:nth-child(1)
+
+		if (lstTrimExist) {
+			num = num + 0;
+		} else if (secondTrimExist) {
+			num = num + 1;
+		} else {
+			num = num + 2;
+		}
+
+		By trim = By.cssSelector(".trim-overlay > div:nth-child(" + num + ") > div:nth-child(1) > label:nth-child(1)");
+		elementExist(driver, trim, true, tc);
+		driver.findElement(trim).click();
+		Wait(5);
+		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("Staging")))) {
+			try {
+				driver.switchTo().alert().dismiss();
+			} catch (Exception e) {
+				System.out.println(
+						"Tomcat credential fields pop-up NOT showing! This is expected when running after first Mitisubishi model!\n");
+			}
+		}
+		return new Compare(driver);
+	}
+
+	public Compare clickOnTrimNewAllTrims(WebDriver driver, String env, String brand, int num, String tc)
+			throws Exception {
 //1		.trim-overlay > div:nth-child(2) > div:nth-child(1) > label:nth-child(1)
 //2		.trim-overlay > div:nth-child(3) > div:nth-child(1) > label:nth-child(1)
 //3		.trim-overlay > div:nth-child(4) > div:nth-child(1) > label:nth-child(1)
+		boolean firstTrim = false;
 		By trim = By.cssSelector("");
 		if (num == 1) {
 			num = num + 1;
 			trim = By.cssSelector(".trim-overlay > div:nth-child(" + num + ") > div:nth-child(1) > label:nth-child(1)");
-			boolean firstTrim = elementExist(driver, trim, false, tc);
+			firstTrim = elementExist(driver, trim, false, tc);
+			if (!firstTrim) {
+				num = num + 1;
+				trim = By.cssSelector(
+						".trim-overlay > div:nth-child(" + num + ") > div:nth-child(1) > label:nth-child(1)");
+				elementExist(driver, trim, true, tc);
+			}
+		} else {
+			num = num + 1;
+			trim = By.cssSelector(".trim-overlay > div:nth-child(" + num + ") > div:nth-child(1) > label:nth-child(1)");
+			firstTrim = elementExist(driver, trim, false, tc);
 			if (!firstTrim) {
 				num = num + 1;
 				trim = By.cssSelector(
@@ -227,12 +266,19 @@ public class SelectVehicle extends Comlibs {
 		return new Compare(driver);
 	}
 
-	public String getTrimName(WebDriver driver, String env, String brand, int num, String tc) throws Exception {
+	public String getTrimName(WebDriver driver, String env, String brand, int num, boolean lstTrimExist,
+			boolean secondTrimExist, String tc) throws Exception {
 		// 1st .trim-overlay > div:nth-child(2) > div:nth-child(1) > label:nth-child(1)
 		// 2nd .trim-overlay > div:nth-child(3) > div:nth-child(1) > label:nth-child(1)
 		// 3rd .trim-overlay > div:nth-child(4) > div:nth-child(1) > label:nth-child(1)
+		if (lstTrimExist) {
+			num = num + 0;
+		} else if (secondTrimExist) {
+			num = num + 1;
+		} else {
+			num = num + 2;
+		}
 
-		num = num + 1;
 		String trimName = "";
 		By trim = By.cssSelector(".trim-overlay > div:nth-child(" + num + ") > div:nth-child(1) > label:nth-child(1)");
 		elementExist(driver, trim, true, tc);
@@ -241,8 +287,31 @@ public class SelectVehicle extends Comlibs {
 			Wait(1);
 		} catch (Exception e) {
 			trimName = "TrimName=Empty";
+			System.out.println("\n********getTrimName fails!!!*******\n");
 		}
 		return trimName;
+	}
+
+	public boolean checkFirstTrimExist(WebDriver driver, String tc) throws Exception {
+		// 1st .trim-overlay > div:nth-child(2) > div:nth-child(1) > label:nth-child(1)
+		// 2nd .trim-overlay > div:nth-child(3) > div:nth-child(1) > label:nth-child(1)
+		// 3rd .trim-overlay > div:nth-child(4) > div:nth-child(1) > label:nth-child(1)
+		By trim01 = By.cssSelector(".trim-overlay > div:nth-child(1) > div:nth-child(1) > label:nth-child(1)");
+		By trim02 = By.cssSelector(".trim-overlay > div:nth-child(2) > div:nth-child(1) > label:nth-child(1)");
+		boolean firstTrimExist = elementExist(driver, trim01, false, tc);
+//		elementExist(driver, trim02, true, tc + " - Second Trim does not exist!");
+		return firstTrimExist;
+	}
+
+	public boolean checkSecondTrimExist(WebDriver driver, String tc) throws Exception {
+		// 1st .trim-overlay > div:nth-child(2) > div:nth-child(1) > label:nth-child(1)
+		// 2nd .trim-overlay > div:nth-child(3) > div:nth-child(1) > label:nth-child(1)
+		// 3rd .trim-overlay > div:nth-child(4) > div:nth-child(1) > label:nth-child(1)
+		By trim02 = By.cssSelector(".trim-overlay > div:nth-child(2) > div:nth-child(1) > label:nth-child(1)");
+		By trim03 = By.cssSelector(".trim-overlay > div:nth-child(3) > div:nth-child(1) > label:nth-child(1)");
+		boolean secondTrimExist = elementExist(driver, trim02, false, tc);
+		elementExist(driver, trim03, true, tc + " - Third Trim does not exist!");
+		return secondTrimExist;
 	}
 
 	public int getTrimNumber(WebDriver driver, String env, String brand, String tc) throws Exception {
