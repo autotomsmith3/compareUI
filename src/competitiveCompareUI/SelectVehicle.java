@@ -178,7 +178,7 @@ public class SelectVehicle extends Comlibs {
 
 	}
 
-	public Compare clickOnTrimOld_1st_OK(WebDriver driver, String env, String brand, String tc) throws Exception {
+	public Compare clickOnTrim(WebDriver driver, String env, String brand, String tc) throws Exception {
 		By trim01 = By.xpath("//*[@id=\"vehicle-select-radio\"]");
 		elementExist(driver, trim01, true, tc);
 		driver.findElement(trim01).click();
@@ -194,7 +194,7 @@ public class SelectVehicle extends Comlibs {
 		return new Compare(driver);
 	}
 
-	public Compare clickOnTrim(WebDriver driver, String env, String brand, int num, String tc) throws Exception {
+	public Compare clickOnTrimNew_NotWorkForAll(WebDriver driver, String env, String brand, int num, String tc) throws Exception {
 //1		.trim-overlay > div:nth-child(2) > div:nth-child(1) > label:nth-child(1)
 //2		.trim-overlay > div:nth-child(3) > div:nth-child(1) > label:nth-child(1)
 //3		.trim-overlay > div:nth-child(4) > div:nth-child(1) > label:nth-child(1)
@@ -202,7 +202,7 @@ public class SelectVehicle extends Comlibs {
 		By trim = By.cssSelector(".trim-overlay > div:nth-child(" + num + ") > div:nth-child(1) > label:nth-child(1)");
 		elementExist(driver, trim, true, tc);
 
-		String trim_name = getTrimName(driver, env, brand, num, tc);
+//		String trim_name = getTrimName(driver, env, brand, num, tc);
 
 		driver.findElement(trim).click();
 		Wait(5);
