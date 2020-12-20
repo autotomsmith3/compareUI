@@ -45,7 +45,7 @@ public class SelectVehicle extends Comlibs {
 //	By xxx = By.xpath("");
 //	By xxx = By.xpath("");  /html/body/div[1]/div/div/div[2]
 
-	public String getModleName(WebDriver driver, String tc) throws Exception {
+	public String getTrimName(WebDriver driver, String tc) throws Exception {
 		By trimName = By.xpath("/html/body/div[1]/div/div/div[2]");
 		String trimNameString = "";
 		elementExist(driver, trimName, true, tc);
@@ -198,19 +198,11 @@ public class SelectVehicle extends Comlibs {
 //1		.trim-overlay > div:nth-child(2) > div:nth-child(1) > label:nth-child(1)
 //2		.trim-overlay > div:nth-child(3) > div:nth-child(1) > label:nth-child(1)
 //3		.trim-overlay > div:nth-child(4) > div:nth-child(1) > label:nth-child(1)
-		By trim = By.cssSelector("");
-		if (num==1) {
-			num = num + 1;
-			trim = By.cssSelector(".trim-overlay > div:nth-child(" + num + ") > div:nth-child(1) > label:nth-child(1)");
-			boolean firstTrim=elementExist(driver, trim, false, tc);
-			if (!firstTrim) {
-				num = num + 1;
-				trim = By.cssSelector(".trim-overlay > div:nth-child(" + num + ") > div:nth-child(1) > label:nth-child(1)");
-				elementExist(driver, trim, true, tc);
-			}
-		}
+		num = num + 1;
+		By trim = By.cssSelector(".trim-overlay > div:nth-child(" + num + ") > div:nth-child(1) > label:nth-child(1)");
+		elementExist(driver, trim, true, tc);
 
-//		String trim_name = getTrimName(driver, env, brand, num, tc);
+		String trim_name = getTrimName(driver, env, brand, num, tc);
 
 		driver.findElement(trim).click();
 		Wait(5);
@@ -229,17 +221,13 @@ public class SelectVehicle extends Comlibs {
 		// 1st .trim-overlay > div:nth-child(2) > div:nth-child(1) > label:nth-child(1)
 		// 2nd .trim-overlay > div:nth-child(3) > div:nth-child(1) > label:nth-child(1)
 		// 3rd .trim-overlay > div:nth-child(4) > div:nth-child(1) > label:nth-child(1)
-
 		num = num + 1;
 		String trimName = "";
 		By trim = By.cssSelector(".trim-overlay > div:nth-child(" + num + ") > div:nth-child(1) > label:nth-child(1)");
 		elementExist(driver, trim, true, tc);
-		try {
 		trimName = driver.findElement(trim).getText();
 		Wait(1);
-		}catch(Exception e) {
-			trimName="TrimName=Empty";
-		}
+
 		return trimName;
 	}
 

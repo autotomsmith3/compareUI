@@ -151,8 +151,6 @@ public class competitiveCompareUIController extends Comlibs {
 		int wt = Integer.parseInt(prop.getProperty("CompetitiveCompare.waitTime"));
 		// Initial
 		String tc;
-		String modelNameS = "";
-		int trimNumber =0;
 		String trimNameS = "";
 		String urlString = "";
 		String currentClientURL = "";
@@ -174,74 +172,28 @@ public class competitiveCompareUIController extends Comlibs {
 			int groupArray = vehicleArry.length;
 			System.out.println("Vehicle Array length = " + groupArray + " \n\n");
 			for (int i = 1; i <= groupArray; i++) {
-								
 				for (int v = 1; v <= vehicleArry[i - 1]; v++) {
 ////				//Debug
 //				i = 1;
 //				v = 2;
-					
-					
-					
-					
 					currentClientURL = driver.getCurrentUrl();
 					tc = env + " - " + brand + " - Select Year = " + Year;
 					SelectVehiclePage.selectYear(driver, Year, tc);
 					log.Wait(wt);
 					SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
-					tc = brand + " - getModleName";
+					tc = brand + " - getTrimName";
 					log.Wait(wt * 2);
-					trimNumber=SelectVehiclePage.getTrimNumber(driver, env, brand, tc);
-					SelectVehiclePage.clickOnTrimOld_1st_OK(driver, env, brand, currentClientURL);
-					Compare ComparePage = new Compare(driver);
+					trimNameS = SelectVehiclePage.getTrimName(driver, tc);
+					tc = brand + " - Click on Trim - " + trimNameS;
 					log.Wait(wt);
-					ComparePage.clickOnNewCompare(driver, currentClientURL);
-					
-					
-					
-//					//Go through only 1 trim
-//					trimNumber=1;
-					for (int trim=1;trim<=trimNumber;trim++) {
-					try {
-					currentClientURL = driver.getCurrentUrl();
-					tc = env + " - " + brand + " - Select Year = " + Year;
-					SelectVehiclePage.selectYear(driver, Year, tc);
-					log.Wait(wt);
-					SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
-					tc = brand + " - getModleName";
-					log.Wait(wt * 2);
-					
-					
-					
-					modelNameS = SelectVehiclePage.getModleName(driver, tc);
-					tc = brand + " - ModleName "+modelNameS;
-//					trimNumber=SelectVehiclePage.getTrimNumber(driver, env, brand, tc);
-//					for (int trim=1;trim<=trimNumber;trim++) {
-						tc =tc+" - getTrimName ";
-						if (trim==1) {
-							trimNameS=SelectVehiclePage.getTrimName(driver, env, brand, trim, tc);//take 2nd which is wrong
-							tc =tc+" - "+trimNameS;
-							SelectVehiclePage.clickOnTrimOld_1st_OK(driver, env, brand, currentClientURL);
-						}else {
-							trimNameS=SelectVehiclePage.getTrimName(driver, env, brand, trim, tc);
-							tc =tc+" - "+trimNameS;
-							SelectVehiclePage.clickOnTrim(driver, env, brand, trim, currentClientURL);
-						}
-//						tc =tc+" - "+trimNameS;
-//					}
-				
-					
-					
-					
-					tc = brand + " - Click on Trim - " + modelNameS;
-					log.Wait(wt);
-//					SelectVehiclePage.clickOnTrim(driver, env, brand, 1, tc);
+					SelectVehiclePage.clickOnTrim(driver, env, brand, 1, tc);
 					urlString = driver.getCurrentUrl() + " \n\n " + "group = " + i + ". vehicle = " + v + "\n "
 							+ trimNameS;
-//					Compare ComparePage = new Compare(driver);
+					Compare ComparePage = new Compare(driver);
 					tc = env + " - " + brand + " - VerifyPrimaryImage - " + trimNameS;
 					log.Wait(wt * 3);
 //					ComparePage.verifyPrimaryImage(driver, env, brand, urlString + "\n\n" + tc, tc);
-//					log.Wait(wt);
+					log.Wait(wt);
 					tc = env + " - " + brand + " - VerifyPrimaryStartingFromPrice - " + trimNameS;
 
 					ComparePage.verifyPrimaryStartingFromPrice(driver, env, brand, urlString + "\n\n" + tc,
@@ -262,18 +214,6 @@ public class competitiveCompareUIController extends Comlibs {
 						}
 						log.Wait(wt * 4);
 					}
-					//trim catch
-					}catch (Exception e) {
-						loadURLOld(driver, currentClientURL);
-					}
-					
-					}
-					
-					
-					
-					
-					
-					
 				}
 			}
 		}
