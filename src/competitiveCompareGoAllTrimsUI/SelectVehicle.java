@@ -46,13 +46,13 @@ public class SelectVehicle extends Comlibs {
 //	By xxx = By.xpath("");  /html/body/div[1]/div/div/div[2]
 
 	public String getModleName(WebDriver driver, String tc) throws Exception {
-		By trimName = By.xpath("/html/body/div[1]/div/div/div[2]");
-		String trimNameString = "";
-		elementExist(driver, trimName, true, tc);
-		trimNameString = driver.findElement(trimName).getText();
-		System.out.println("\n Trim Name = " + trimNameString);
+		By modleName = By.xpath("/html/body/div[1]/div/div/div[2]");
+		String modleNameString = "";
+		elementExist(driver, modleName, true, tc);
+		modleNameString = driver.findElement(modleName).getText();
+		System.out.println("\n Modle Name = " + modleNameString);
 
-		return trimNameString;
+		return modleNameString;
 	}
 
 	public int[] countVehicleArray(WebDriver driver, String tc) throws Exception {
