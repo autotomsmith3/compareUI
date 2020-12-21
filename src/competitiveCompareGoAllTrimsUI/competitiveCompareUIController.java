@@ -131,7 +131,6 @@ public class competitiveCompareUIController extends Comlibs {
 			throws Exception {
 		// Load environment parameters
 		Properties prop = new Properties();
-		// testprop.load(new FileInputStream("data/autopxConf.properties"));
 		try {
 			prop.load(competitiveCompareUIController.class.getClassLoader()
 					.getResourceAsStream("./data/competitiveCompareGoAllTrims.properties"));// "./main.properties";
@@ -140,15 +139,10 @@ public class competitiveCompareUIController extends Comlibs {
 		}
 
 		String env = envment;
-//		String tBrowser = brw;
-//		String envDevice = prop.getProperty("competitiveCompare.envDevice");
-//		String onScreen = prop.getProperty("competitiveCompare.onScreen");
-//
-//		String CompetitiveCompareUIURL = prop.getProperty(env + brand + ".competitiveCompareUIURL");
-//		String Year = prop.getProperty(env + ".Year");
 		String Years[] = fetchOneDemArrayFromPropFile(env + ".Years", prop);
 		String expectedPrimaryPrice = prop.getProperty(env + "." + brand + ".expectedPrimaryPrice");
 		int wt = Integer.parseInt(prop.getProperty("CompetitiveCompare.waitTime"));
+		String only1stTrim = prop.getProperty("CompetitiveCompare.only1stTrims");
 		// Initial
 		String tc;
 		String modelNameS = "";
@@ -194,8 +188,10 @@ public class competitiveCompareUIController extends Comlibs {
 					Compare ComparePage = new Compare(driver);
 					log.Wait(wt);
 					loadURLOld(driver, currentClientURL);
-//					ComparePage.clickOnNewCompare(driver, currentClientURL);
-
+////				trimNumber=1; //only go through just 1st trim
+					if (only1stTrim.equalsIgnoreCase("Yes")) {
+						trimNumber = 1;
+					}
 					for (int trim = 1; trim <= trimNumber; trim++) {
 						try {
 							currentClientURL = driver.getCurrentUrl();
@@ -211,22 +207,22 @@ public class competitiveCompareUIController extends Comlibs {
 //							tc = tc + " - getTrimName ";
 							if (trim == 1) {
 								// if 1st by does not exist, num=num+2
-								trimNameS = SelectVehiclePage.getTrimName(driver, env, brand, trim, check1stTrimExist,check2ndTrimExist,
-										tc);// take 2nd which is wrong
+								trimNameS = SelectVehiclePage.getTrimName(driver, env, brand, trim, check1stTrimExist,
+										check2ndTrimExist, tc);// take 2nd which is wrong
 								tc = tc + " - " + trimNameS;
 								SelectVehiclePage.clickOnTrimOld_1st_OK(driver, env, brand, currentClientURL);
 							} else {
-								trimNameS = SelectVehiclePage.getTrimName(driver, env, brand, trim, check1stTrimExist,check2ndTrimExist,
-										tc);
+								trimNameS = SelectVehiclePage.getTrimName(driver, env, brand, trim, check1stTrimExist,
+										check2ndTrimExist, tc);
 								tc = tc + " - " + trimNameS;
 								SelectVehiclePage.clickOnTrimNewAllTrims(driver, env, brand, trim, check1stTrimExist,
-										check2ndTrimExist,currentClientURL);
+										check2ndTrimExist, currentClientURL);
 							}
 
 							tc = brand + " - Click on Trim - " + modelNameS;
 							log.Wait(wt);
 							urlString = driver.getCurrentUrl() + " \n\n " + "group = " + i + ". vehicle = " + v + "\n "
-									+ modelNameS +" - "+ trimNameS;
+									+ modelNameS + " - " + trimNameS;
 							tc = env + " - " + brand + " - VerifyPrimaryImage - " + trimNameS;
 							log.Wait(wt * 3);
 //							ComparePage.verifyPrimaryImage(driver, env, brand, urlString + "\n\n" + tc, tc);
@@ -254,7 +250,8 @@ public class competitiveCompareUIController extends Comlibs {
 							}
 							// trim catch
 						} catch (Exception e) {
-							System.out.println("\n***********Failed to click on the trim! need to send alert email?*******\n");
+							System.out.println(
+									"\n***********Failed to click on the trim! need to send alert email?*******\n");
 							loadURLOld(driver, currentClientURL);
 						}
 
