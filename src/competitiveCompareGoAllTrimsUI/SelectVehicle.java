@@ -45,14 +45,14 @@ public class SelectVehicle extends Comlibs {
 //	By xxx = By.xpath("");
 //	By xxx = By.xpath("");  /html/body/div[1]/div/div/div[2]
 
-	public String getModleName(WebDriver driver, String tc) throws Exception {
-		By modleName = By.xpath("/html/body/div[1]/div/div/div[2]");
-		String modleNameString = "";
-		elementExist(driver, modleName, true, tc);
-		modleNameString = driver.findElement(modleName).getText();
-		System.out.println("\n Modle Name = " + modleNameString);
+	public String getModelName(WebDriver driver, String tc) throws Exception {
+		By modelName = By.xpath("/html/body/div[1]/div/div/div[2]");
+		String modelNameString = "";
+		elementExist(driver, modelName, true, tc);
+		modelNameString = driver.findElement(modelName).getText();
+		System.out.println("\n Modle Name = " + modelNameString);
 
-		return modleNameString;
+		return modelNameString;
 	}
 
 	public int[] countVehicleArray(WebDriver driver, String tc) throws Exception {
@@ -310,7 +310,7 @@ public class SelectVehicle extends Comlibs {
 		By trim02 = By.cssSelector(".trim-overlay > div:nth-child(2) > div:nth-child(1) > label:nth-child(1)");
 		By trim03 = By.cssSelector(".trim-overlay > div:nth-child(3) > div:nth-child(1) > label:nth-child(1)");
 		boolean secondTrimExist = elementExist(driver, trim02, false, tc);
-		elementExist(driver, trim03, true, tc + " - Third Trim does not exist!");
+		elementExist(driver, trim03, false, tc + " - Third Trim does not exist!");
 		return secondTrimExist;
 	}
 

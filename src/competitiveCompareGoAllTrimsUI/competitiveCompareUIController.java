@@ -179,7 +179,7 @@ public class competitiveCompareUIController extends Comlibs {
 					SelectVehiclePage.selectYear(driver, Year, tc);
 					log.Wait(wt);
 					SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
-					tc = brand + " - getModleName";
+					tc = brand + " - getModelName";
 					log.Wait(wt * 2);
 					boolean check1stTrimExist = SelectVehiclePage.checkFirstTrimExist(driver, tc);
 					boolean check2ndTrimExist = SelectVehiclePage.checkSecondTrimExist(driver, tc);
@@ -199,10 +199,10 @@ public class competitiveCompareUIController extends Comlibs {
 							SelectVehiclePage.selectYear(driver, Year, tc);
 							log.Wait(wt);
 							SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
-							tc = brand + " - getModleName";
+							tc = brand + " - getModelName";
 							log.Wait(wt * 2);
 
-							modelNameS = SelectVehiclePage.getModleName(driver, tc);
+							modelNameS = SelectVehiclePage.getModelName(driver, tc);
 							tc = brand + " - " + modelNameS;
 //							tc = tc + " - getTrimName ";
 							if (trim == 1) {

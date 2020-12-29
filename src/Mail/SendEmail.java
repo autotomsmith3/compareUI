@@ -16,9 +16,9 @@ import javax.mail.internet.MimeMessage;
 import competitiveCompareUI.competitiveCompareUIController;
 
 public class SendEmail {
-	public static void sendEmails(String sendEmail, String gmailUsername, String gmailPassword, String[] toEmails,
+	public static void sendEmails(String sendToEmail, String gmailUsername, String gmailPassword, String[] toEmails,
 			String Subject, String content) {
-		if (sendEmail.equalsIgnoreCase("Yes")) {
+		if (sendToEmail.equalsIgnoreCase("Yes")) {
 //		final String username = "sautotomsmithjj@gmail.com";
 //		final String password = "Autodata1";
 
@@ -55,17 +55,17 @@ public class SendEmail {
 		Properties prop = new Properties();
 		try {
 			prop.load(competitiveCompareUIController.class.getClassLoader()
-					.getResourceAsStream("./data/competitiveCompare.properties"));
+					.getResourceAsStream("./data/competitiveCompareGoAllTrims.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		String sendEmail = prop.getProperty("CompetitiveCompare.sendEmail");
+		String sendToEmail = prop.getProperty("CompetitiveCompare.sendToEmail");
 		String gmailUsername = prop.getProperty(env + ".gmailUsername");
 		String gmailPassword = prop.getProperty(env + ".gmailPassword");
 		String sendEmailsList[] = fetchOneDemArrayFromPropFile(env + ".sendEmailsList", prop);
 		String Subject = prop.getProperty(env + ".Subject");
 		String content = prop.getProperty(env + ".content");
-		sendEmails(sendEmail, gmailUsername, gmailPassword, sendEmailsList, env + " - " + brand + " - " + Subject,
+		sendEmails(sendToEmail, gmailUsername, gmailPassword, sendEmailsList, env + " - " + brand + " - " + Subject,
 				content + "\n\n\n URL: " + urlString);
 		System.out.println("\n\n*****************Sending Email is Complete!*******************\n");
 	}
@@ -77,14 +77,14 @@ public class SendEmail {
 	}
 
 	public static void main(String[] args) {
-		String sendEmail = "Yes";
+		String sendToEmail = "Yes";
 		String gmailUsername = "sautotomsmithjj@gmail.com";
 		String gmailPassword = "Autodata1";
 		String[] sendEmailsList = { "lucas.zhou@autodatasolutions.com" };
 		String Subject = "Application Failure Alert Testing...ignore please.";
 		String content = "Hello,\n\n Please ignore this email. This is testing alert from monitor application!";
 		String urlString = "http://qa1-compare.gm-test.autodata.tech/kia/ca/vehicle/#/select/primary/compare";
-		sendEmails(sendEmail, gmailUsername, gmailPassword, sendEmailsList, Subject,
+		sendEmails(sendToEmail, gmailUsername, gmailPassword, sendEmailsList, Subject,
 				content + "\n\n\n URL: " + urlString);
 		System.out.println("\n\n*****************Complete!*******************\n");
 	}
