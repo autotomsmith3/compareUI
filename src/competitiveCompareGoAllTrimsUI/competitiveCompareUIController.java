@@ -168,7 +168,7 @@ public class competitiveCompareUIController extends Comlibs {
 			int groupArray = vehicleArry.length;
 			System.out.println("Vehicle Array length = " + groupArray + " \n\n");
 			for (int i = 1; i <= groupArray; i++) {
-
+				log.Wait(wt);
 				for (int v = 1; v <= vehicleArry[i - 1]; v++) {
 ////				//Debug
 //					i = 3;
@@ -315,7 +315,7 @@ public class competitiveCompareUIController extends Comlibs {
 						System.out.println("Test Browser = " + tBrowser + "\n");
 						System.out.println("Test Device = " + Devices[i] + "\n");
 
-						driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+//						driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 						if (!tBrowser.equalsIgnoreCase("Chromexxxxxxxxx")) {
 							log.SelecBroswerResolution(driver, Devices[i], onScreen);
 						}
@@ -335,7 +335,7 @@ public class competitiveCompareUIController extends Comlibs {
 						// ***********Competitive Compare**************
 
 						log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
-						driver.quit();
+						driver.quit();//driver.quit(), driver.close()
 						System.out.println(env + " - " + brand + " - Test is complete!!!   i = " + (i + 1) + "\n");
 					} catch (Exception e) {
 						System.out.println("Test Client = " + brand + "\n");
@@ -350,7 +350,7 @@ public class competitiveCompareUIController extends Comlibs {
 						alertEmail.SendAlertEmail(env, brand, competitiveCompareUIUR,
 								"Site is not loaded properly or down!");
 						try {
-							driver.quit();
+							driver.quit();//driver.quit(), driver.close();
 						} catch (Exception ee) {
 							System.out.println("\n\nAlert!!!!\n\n");
 							System.out.println("\nBrowser cannot be closed!\n");
