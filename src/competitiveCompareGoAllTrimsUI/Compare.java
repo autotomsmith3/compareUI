@@ -200,10 +200,10 @@ public class Compare extends Comlibs {
 					// F5 reload page
 					driver.get("http://www.google.com");Wait(wt);
 					clickRefleshF5BtnLoadURL(driver, currentClientURL, tc);
-					rwExcel(tc, false, currentClientURL, "Try times = " + i);
+					rwExcel(tc, currentClientURL, "Try times = " + i);
 					Wait(wt);
 					if (i == tries) {
-						rwExcel(tc, true, currentClientURL, "Try times = " + tries);
+						rwExcel(tc, false, currentClientURL, "Tried last times = " + tries);
 					}
 				}
 			}
