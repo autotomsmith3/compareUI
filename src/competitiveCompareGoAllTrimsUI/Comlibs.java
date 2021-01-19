@@ -345,6 +345,7 @@ public class Comlibs {
 			// 1. IE browser - Original one: //Working in XP IE8
 			// File file = new File(
 			// "C:/1/Eclipse/RefLibraris/IEDriverServer_x64_2.43.0/IEDriverServer.exe");
+			System.setProperty("webdriver.edge.driver", "C:\\1\\Eclipse\\RefLibraris\\msEdgeWin\\msedgedriver.exe");
 //			System.setProperty("webdriver.internetexplorer.driver",
 //					"C:\\eclipse\\RefLibraris\\IEDriverServer_x64\\IEDriverServer.exe");
 //			WebDriver driver = new InternetExplorerDriver();
@@ -790,7 +791,7 @@ public class Comlibs {
 	public void waitElementToShow(WebDriver driver, boolean writeToSheet, By elemt) throws IOException {
 		boolean im = elementExist(driver, writeToSheet, elemt);
 		int i = 0;
-		int totalWT = 2; // =12
+		int totalWT = 6; // =12
 		System.out.println("Waiting for element to show. Total wait time = " + totalWT);
 		while ((!im) && (i < totalWT)) {
 			System.out.println("i=" + i + ", waiting for image to show! " + elemt);

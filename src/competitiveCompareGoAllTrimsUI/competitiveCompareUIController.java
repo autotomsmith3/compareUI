@@ -110,7 +110,11 @@ public class competitiveCompareUIController extends Comlibs {
 //		driver.switchTo().alert().accept();//.dismiss() 
 		// }
 		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com"))) {// compare.autodatadirect.com is Prod URL
-			driver.switchTo().alert().dismiss();
+//			try {
+				driver.switchTo().alert().dismiss();
+//			}catch (Exception e) {
+//				System.out.println("\nCancel buttom (dismiss) does not exist. Failed to click it!\n");
+//			}	
 		}
 
 		return new SelectVehicle(driver);
@@ -218,7 +222,8 @@ public class competitiveCompareUIController extends Comlibs {
 								SelectVehiclePage.clickOnTrimNewAllTrims(driver, env, brand, trim, check1stTrimExist,
 										check2ndTrimExist, currentClientURL);
 							}
-
+							currentClientURL = driver.getCurrentUrl();
+							ComparePage.checkFeatturesPageshowOrNot(driver, currentClientURL, tc);
 							tc = brand + " - Click on Trim - " + modelNameS;
 							log.Wait(wt);
 							urlString = driver.getCurrentUrl() + " \n\n " + "group = " + i + ". vehicle = " + v + "\n "
@@ -335,7 +340,7 @@ public class competitiveCompareUIController extends Comlibs {
 						// ***********Competitive Compare**************
 
 						log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
-						driver.quit();//driver.quit(), driver.close()
+						driver.quit();// driver.quit(), driver.close()
 						System.out.println(env + " - " + brand + " - Test is complete!!!   i = " + (i + 1) + "\n");
 					} catch (Exception e) {
 						System.out.println("Test Client = " + brand + "\n");
@@ -350,7 +355,7 @@ public class competitiveCompareUIController extends Comlibs {
 						alertEmail.SendAlertEmail(env, brand, competitiveCompareUIUR,
 								"Site is not loaded properly or down!");
 						try {
-							driver.quit();//driver.quit(), driver.close();
+							driver.quit();// driver.quit(), driver.close();
 						} catch (Exception ee) {
 							System.out.println("\n\nAlert!!!!\n\n");
 							System.out.println("\nBrowser cannot be closed!\n");

@@ -7,8 +7,10 @@ import java.util.concurrent.TimeUnit;
 import javax.mail.MessagingException;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import Mail.SendEmail;
 
@@ -60,7 +62,8 @@ public class Compare extends Comlibs {
 					brand + " site maybe is showing error or down.");
 			SendEmail alertEmail = new SendEmail();
 			alertEmail.SendAlertEmail(env, brand, urlString, tc);
-			System.out.println("\n\n*****************Verify Primary Image Is Complete!*******************\n"+urlString);
+			System.out
+					.println("\n\n*****************Verify Primary Image Is Complete!*******************\n" + urlString);
 
 		}
 	}
@@ -108,7 +111,8 @@ public class Compare extends Comlibs {
 			rwExcel(tc, false, brand + " - PrimaryStartingFromPrice is not showing properly", errorMsg);
 			SendEmail alertEmail = new SendEmail();
 			alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
-			System.out.println("\n\n*****************Verify PrimaryStartingFromPrice Is Complete!*******************\n");
+			System.out
+					.println("\n\n*****************Verify PrimaryStartingFromPrice Is Complete!*******************\n");
 
 		}
 	}
@@ -139,9 +143,73 @@ public class Compare extends Comlibs {
 		driver.findElement(newCompare).click();
 		return new SelectVehicle(driver);
 	}
+
 	public Compare clickOnCloseError(WebDriver driver, String tc) throws Exception {
 		elementExist(driver, closeError, true, tc);
 		driver.findElement(closeError).click();
 		return this;
+	}
+
+	public void clickRefleshF5Btn(WebDriver driver, String tc) throws IOException {
+		// driver.findElement(addInventoryBtn).sendKeys(Keys.F5);
+//		By closelocator=By.xpath("/html/body/div[1]/div/div/div[3]/button");
+//		driver.findElement(closelocator).click();
+		try {
+			driver.navigate().to(driver.getCurrentUrl());
+//			Actions actionObject = new Actions(driver);
+//			actionObject.keyDown(Keys.CONTROL).sendKeys(Keys.F5).keyUp(Keys.CONTROL).perform();
+			rwExcel(tc, true, "Click on F5 to fresh the page", "Working fine.");
+			competitiveCompareUIController.loadURL(driver, "");
+		} catch (Exception e) {
+			rwExcel(tc, false, "Click on F5 to fresh the page", "Not Working.");
+		}
+		;
+	}
+
+	public void clickRefleshF5BtnLoadURL(WebDriver driver, String url, String tc) throws IOException {
+
+		try {
+			driver.get(url);
+		} catch (Exception e) {
+//			rwExcel(tc, false, "Re-load URL = " + url, "Not Working.");
+			System.out.println("\nTomcat Page is not loading!\n");
+		}
+		;
+	}
+
+	public void checkFeatturesPageshowOrNot(WebDriver driver2, String currentClientURL, String tc) throws Exception {
+		boolean imageExist = false;
+		int wt = 5;
+		int tries = 6;
+		try {
+//			Wait(wt);
+			By PrimaryIageLocator = By.xpath("//*[@id=\"primary-vehicle\"]/div/div/div[1]/div[1]/div/img");
+			for (int i = 1; i <= tries; i++) {
+				try {
+				VerifyImageLoaded(driver, PrimaryIageLocator, false, tc);
+				}catch (Exception ee) {
+					//
+					System.out.println("\n Tried time = "+i+". Image Page is not loading!!!\n");
+				}
+
+				imageExist = elementExist(driver, PrimaryIageLocator, false, tc);
+				if (imageExist) {
+					// image showing, exit.
+					break;
+				} else {
+					// F5 reload page
+					driver.get("http://www.google.com");Wait(wt);
+					clickRefleshF5BtnLoadURL(driver, currentClientURL, tc);
+					rwExcel(tc, false, currentClientURL, "Try times = " + i);
+					Wait(wt);
+					if (i == tries) {
+						rwExcel(tc, true, currentClientURL, "Try times = " + tries);
+					}
+				}
+			}
+		} catch (Exception e) {
+//			clickRefleshF5Btn(driver, tc);
+			clickRefleshF5BtnLoadURL(driver, currentClientURL, tc);
+		}
 	}
 }
