@@ -111,7 +111,7 @@ public class competitiveCompareUIController extends Comlibs {
 		// }
 		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com"))) {// compare.autodatadirect.com is Prod URL
 //			try {
-				driver.switchTo().alert().dismiss();
+			driver.switchTo().alert().dismiss();
 //			}catch (Exception e) {
 //				System.out.println("\nCancel buttom (dismiss) does not exist. Failed to click it!\n");
 //			}	
@@ -154,6 +154,7 @@ public class competitiveCompareUIController extends Comlibs {
 		String trimNameS = "";
 		String urlString = "";
 		String currentClientURL = "";
+		String thisClientURL = "";
 		Comlibs log = new Comlibs();
 		log.rwExcel("", "********* " + brand + " Competitive Compare UI**********", "");
 		SelectVehicle SelectVehiclePage = new SelectVehicle(driver);
@@ -174,11 +175,12 @@ public class competitiveCompareUIController extends Comlibs {
 			for (int i = 1; i <= groupArray; i++) {
 				log.Wait(wt);
 				for (int v = 1; v <= vehicleArry[i - 1]; v++) {
-////				//Debug
-//					i = 3;
+////				//Debug 									// *************************
+//					i = 4;
 //					v = 1;
 
 					currentClientURL = driver.getCurrentUrl();
+					thisClientURL = currentClientURL;
 					tc = env + " - " + brand + " - Select Year = " + Year;
 					SelectVehiclePage.selectYear(driver, Year, tc);
 					log.Wait(wt);
@@ -196,7 +198,7 @@ public class competitiveCompareUIController extends Comlibs {
 					if (only1stTrim.equalsIgnoreCase("Yes")) {
 						trimNumber = 1;
 					}
-					for (int trim = 1; trim <= trimNumber; trim++) {
+					for (int trim = 4; trim <= trimNumber; trim++) {// *************************
 						try {
 							currentClientURL = driver.getCurrentUrl();
 							tc = env + " - " + brand + " - Select Year = " + Year;
@@ -242,7 +244,8 @@ public class competitiveCompareUIController extends Comlibs {
 							try {
 								ComparePage.clickOnNewCompare(driver, tc);
 							} catch (Exception e) {
-								loadURLOld(driver, currentClientURL);
+								driver.get("http://www.google.com");
+								loadURLOld(driver, thisClientURL);
 								SelectVehicle SelectVehiclePageAgain = new SelectVehicle(driver);
 								tc = brand + " - Click On Got It Again after loading the URL!";
 								try {
