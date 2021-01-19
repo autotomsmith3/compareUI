@@ -198,7 +198,7 @@ public class competitiveCompareUIController extends Comlibs {
 					if (only1stTrim.equalsIgnoreCase("Yes")) {
 						trimNumber = 1;
 					}
-					for (int trim = 4; trim <= trimNumber; trim++) {// *************************
+					for (int trim = 1; trim <= trimNumber; trim++) {// *************************
 						try {
 							currentClientURL = driver.getCurrentUrl();
 							tc = env + " - " + brand + " - Select Year = " + Year;
@@ -284,6 +284,7 @@ public class competitiveCompareUIController extends Comlibs {
 		String tBrowser = prop.getProperty("CompetitiveCompare.browser");
 		String envDevice = prop.getProperty("CompetitiveCompare.envDevice");
 		String onScreen = prop.getProperty("CompetitiveCompare.onScreen");
+		int wt = Integer.parseInt(prop.getProperty("CompetitiveCompare.waitTime"));
 
 		for (String env : envs) {
 
@@ -333,7 +334,7 @@ public class competitiveCompareUIController extends Comlibs {
 						log.rwExcel("", "Test Devicer", Devices[i]);
 
 						loadURL(driver, competitiveCompareUIUR);
-						log.Wait(5);
+						log.Wait(wt*2);
 
 						//// 1.Competitive Compare page
 						log.rwExcel("", "-----" + brand + " Competitive Compare page Testing started-----" + (i + 1),
