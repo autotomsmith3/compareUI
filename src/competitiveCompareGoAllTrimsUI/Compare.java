@@ -78,6 +78,7 @@ public class Compare extends Comlibs {
 					.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[1]/div/div[2]/div/ul[1]/li[2]/div[2]/span");
 			PrimaryStartingFromPriceString = driver.findElement(PrimaryStartingFromPrice).getText();
 			// $44,995
+			tc=tc+" - MSRP = "+PrimaryStartingFromPriceString;
 			if (!PrimaryStartingFromPriceString.equals("")) {
 				PrimaryStartingFromPriceString = PrimaryStartingFromPriceString.replace("$", "");
 				PrimaryStartingFromPriceString = PrimaryStartingFromPriceString.replace(",", "");
