@@ -182,7 +182,7 @@ public class vinCompareUIController extends Comlibs {
 //		
 		tc = "Click on Compare button_029";
 		Vin2VinComparePage.clickCompareBtn(driver, tc);
-		log.Wait(wt*2);
+		log.Wait(wt*4);
 //	*********************************************************
 		tc = "Click on Edit Configuration button_030";
 		Vin2VinComparePage.clickEditConfigurationBtn(driver, tc);

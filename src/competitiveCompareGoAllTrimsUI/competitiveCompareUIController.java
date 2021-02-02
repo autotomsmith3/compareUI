@@ -316,7 +316,7 @@ public class competitiveCompareUIController extends Comlibs {
 				final WebDriver driver;
 				driver = log.drivers(tBrowser);
 				driver.manage().deleteAllCookies();
-				// i=3: run all 3 devices
+				// i=3: run all 3 devices. So far only run PC, since table and smartphone do not load all models in loading page 
 				for (int i = 0; i < 1; i++) {
 					try {
 						System.out.println("Testing is started in " + env + "\n");

@@ -28,6 +28,6 @@
 	<classpathentry kind="lib" path="C:/1/Eclipse/RefLibraris/java-driver-mapper-runtime-4.4.0.jar"/>
 	<classpathentry kind="lib" path="C:/1/Eclipse/RefLibraris/slf4j-api-1.7.25.jar"/>
 	<classpathentry kind="lib" path="C:/1/Eclipse/RefLibraris/slf4j-log4j12-1.7.22.jar"/>
-	<classpathentry kind="lib" path="C:/1/Eclipse/RefLibraris/selenium-server-4.0.0-alpha-7.jar"/>
+	<classpathentry kind="lib" path="C:/1/Eclipse/RefLibraris/selenium-server-standalone-3.141.59.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
