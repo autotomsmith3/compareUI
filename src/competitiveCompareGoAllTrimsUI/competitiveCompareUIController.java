@@ -151,6 +151,7 @@ public class competitiveCompareUIController extends Comlibs {
 		String tc;
 		String modelNameS = "";
 		int trimNumber = 0;
+		int trimsNumbers = 0;
 		String trimNameS = "";
 		String urlString = "";
 		String currentClientURL = "";
@@ -182,11 +183,12 @@ public class competitiveCompareUIController extends Comlibs {
 					currentClientURL = driver.getCurrentUrl();
 					thisClientURL = currentClientURL;
 					tc = env + " - " + brand + " - Select Year = " + Year;
+					log.Wait(wt);
 					SelectVehiclePage.selectYear(driver, Year, tc);
 					log.Wait(wt);
 					SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
 					tc = brand + " - getModelName";
-					log.Wait(wt * 2);
+					log.Wait(wt * 3);
 					boolean check1stTrimExist = SelectVehiclePage.checkFirstTrimExist(driver, tc);
 					boolean check2ndTrimExist = SelectVehiclePage.checkSecondTrimExist(driver, tc);
 					trimNumber = SelectVehiclePage.getTrimNumber(driver, env, brand, tc);
@@ -202,11 +204,13 @@ public class competitiveCompareUIController extends Comlibs {
 						try {
 							currentClientURL = driver.getCurrentUrl();
 							tc = env + " - " + brand + " - Select Year = " + Year;
+							log.Wait(wt);
 							SelectVehiclePage.selectYear(driver, Year, tc);
 							log.Wait(wt);
 							SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
 							tc = brand + " - getModelName";
-							log.Wait(wt * 2);
+							trimsNumbers = SelectVehiclePage.getTrimNumber(driver, env, brand, tc);
+							log.Wait(wt * 3);
 
 							modelNameS = SelectVehiclePage.getModelName(driver, tc);
 							tc = brand + " - " + modelNameS;
@@ -240,7 +244,7 @@ public class competitiveCompareUIController extends Comlibs {
 							ComparePage.verifyPrimaryStartingFromPrice(driver, env, brand, urlString + "\n\n" + tc,
 									expectedPrimaryPrice, tc);
 							log.Wait(wt);
-							tc = env + " - " + brand + " - Click on Newe Compare";
+							tc = env + " - " + brand + " - Click on New Compare";
 							try {
 								ComparePage.clickOnNewCompare(driver, tc);
 							} catch (Exception e) {
@@ -316,7 +320,7 @@ public class competitiveCompareUIController extends Comlibs {
 				final WebDriver driver;
 				driver = log.drivers(tBrowser);
 				driver.manage().deleteAllCookies();
-				// i=3: run all 3 devices. So far only run PC, since table and smartphone do not load all models in loading page 
+				// i=3: run all 3 devices. So far only run PC, since table and smartphone do not load all models in loading page
 				for (int i = 0; i < 1; i++) {
 					try {
 						System.out.println("Testing is started in " + env + "\n");
@@ -334,7 +338,7 @@ public class competitiveCompareUIController extends Comlibs {
 						log.rwExcel("", "Test Devicer", Devices[i]);
 
 						loadURL(driver, competitiveCompareUIUR);
-						log.Wait(wt*2);
+						log.Wait(wt * 2);
 
 						//// 1.Competitive Compare page
 						log.rwExcel("", "-----" + brand + " Competitive Compare page Testing started-----" + (i + 1),

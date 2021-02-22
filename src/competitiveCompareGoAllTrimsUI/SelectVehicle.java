@@ -316,7 +316,24 @@ public class SelectVehicle extends Comlibs {
 
 	public int getTrimNumber(WebDriver driver, String env, String brand, String tc) throws Exception {
 		int countTrim = 0;
+		int wt = 6;
 		By trims = By.xpath("//*[@id=\"vehicle-select-radio\"]");
+		boolean trimsExit = elementExist(driver, trims, false, tc);
+		for (int i = 1; i <= wt; i++) {
+			if (trimsExit) {
+				System.out.println("\nTrims pop-up shows. \n");
+				break;
+			} else {
+				if (i == wt) {
+					rwExcel(tc, false, "Brand = " + brand, "Not showing after wait " + wt + " minutes.");
+				}
+				System.out.println("\nTrims pop-up not showing. Start to wait... i = " + i + " of total i = " + wt
+						+ " X (60 secs)\n");
+				Wait(60);
+				trimsExit = elementExist(driver, trims, false, tc);
+			}
+		}
+
 		elementExist(driver, trims, true, tc);
 		countTrim = driver.findElements(trim01).size();
 		Wait(2);
@@ -324,10 +341,27 @@ public class SelectVehicle extends Comlibs {
 	}
 
 	public void selectYear(WebDriver driver, String year, String tc) throws Exception {
-
+		boolean yearsExist = false;
+		int wtMins = 6;
 		String y = "";
+		String currentClientURL = "";
 		By allYears = By.xpath("/html/body/div[1]/div[2]/div/nav/div/div/div[2]/ul/li");
 		By curretTestYear = By.xpath("/html/body/div[1]/div[2]/div/nav/div/div/div[2]/ul/li[1]/button");
+		yearsExist = elementExist(driver, allYears, false, tc);
+		for (int i = 1; i <= wtMins; i++) {
+			if (yearsExist) {
+				System.out.println("All Years exist!");
+			} else {
+				System.out.println("\nAll Years do not exist! Wait i = " + i + "\n");
+				Wait(60);
+				yearsExist = elementExist(driver, allYears, false, tc);
+				if (i == (wtMins - 1)) {
+					// waiting failed to see all years, try to reload client site
+					currentClientURL = driver.getCurrentUrl();
+					driver.get(currentClientURL);
+				}
+			}
+		}
 		elementExist(driver, allYears, true, tc);
 		int totalYears = driver.findElements(allYears).size();
 		if (totalYears <= 9) {
