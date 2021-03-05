@@ -466,11 +466,11 @@ public class competitiveCompareUIController extends Comlibs {
 						log.Wait(wt * 2);
 
 						//// 1.Competitive Compare page
-						log.rwExcel("", "-----" + brand + " Competitive Compare page Testing started-----" + (i + 1),
+						log.rwExcel("", "----" + brand + " Competitive Compare page Testing started-----" + (i + 1),
 								"");
 						// 1. ***********Competitive Compare**************
 						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
-						// ***********Competitive Compare**************
+						// ***********Competitive Compare***************
 
 						// 2. ***********Reload failed URLs on Competitive Compare**************
 						// Set only one client when running this to avoid multiple runs
