@@ -120,6 +120,20 @@ public class competitiveCompareUIController extends Comlibs {
 		return new SelectVehicle(driver);
 	}
 
+	public static void loadURLinCompare(WebDriver driver, String bURL) throws IOException {
+		driver.get(bURL);
+
+		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com"))) {// compare.autodatadirect.com is Prod URL
+//			try {
+			driver.switchTo().alert().dismiss();
+//			}catch (Exception e) {
+//				System.out.println("\nCancel buttom (dismiss) does not exist. Failed to click it!\n");
+//			}	
+		}
+
+//		return new Compare(driver);
+	}
+
 	public static SelectVehicle loadURLOld(WebDriver driver, String bURL) throws IOException {
 		driver.get(bURL);
 		return new SelectVehicle(driver);
@@ -149,6 +163,7 @@ public class competitiveCompareUIController extends Comlibs {
 		String only1stTrim = prop.getProperty("CompetitiveCompare.only1stTrims");
 		// Initial
 		String tc;
+		String modelName = "";
 		String modelNameS = "";
 		int trimNumber = 0;
 		int trimsNumbers = 0;
@@ -186,12 +201,22 @@ public class competitiveCompareUIController extends Comlibs {
 					log.Wait(wt);
 					SelectVehiclePage.selectYear(driver, Year, tc);
 					log.Wait(wt);
+					modelName = SelectVehiclePage.getModelName(driver, env, brand, v, currentClientURL);
 					SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
-					tc = brand + " - getModelName";
+//					tc = brand + " - getModelName";
+					tc = brand + " - Model Name - " + modelName;
 					log.Wait(wt * 3);
 					boolean check1stTrimExist = SelectVehiclePage.checkFirstTrimExist(driver, tc);
 					boolean check2ndTrimExist = SelectVehiclePage.checkSecondTrimExist(driver, tc);
 					trimNumber = SelectVehiclePage.getTrimNumber(driver, env, brand, tc);
+					if (trimNumber == 0) {
+						log.rwExcel(tc, false, "Click on Year = " + Year + " vehicle v = " + v + " - not working!",
+								"Trims pop-up not showing!");
+						driver.get("http://www.google.com");
+						log.Wait(2);
+						loadURLOld(driver, currentClientURL);
+						continue;
+					}
 					SelectVehiclePage.clickOnTrimOld_1st_OK(driver, env, brand, currentClientURL);
 					Compare ComparePage = new Compare(driver);
 					log.Wait(wt);
@@ -207,6 +232,8 @@ public class competitiveCompareUIController extends Comlibs {
 							log.Wait(wt);
 							SelectVehiclePage.selectYear(driver, Year, tc);
 							log.Wait(wt);
+							modelName = SelectVehiclePage.getModelName(driver, env, brand, v, currentClientURL);
+							tc = tc + " -. Model Name " + modelName;
 							SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
 							tc = brand + " - getModelName";
 							trimsNumbers = SelectVehiclePage.getTrimNumber(driver, env, brand, tc);
@@ -272,6 +299,104 @@ public class competitiveCompareUIController extends Comlibs {
 				}
 			}
 		}
+	}
+
+	public static void ReLoadFailedURLs(WebDriver driver, String envment) throws Exception {
+		// Load environment parameters
+		Properties prop = new Properties();
+		try {
+			prop.load(competitiveCompareUIController.class.getClassLoader()
+					.getResourceAsStream("./data/competitiveCompareGoAllTrims.properties"));// "./main.properties";
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String expectedPrimaryPrice = prop.getProperty("QA" + "." + "Kia" + ".expectedPrimaryPrice");
+		String failedURLs[] = fetchOneDemArrayFromPropFile("CompetitiveCompare.failedURLs", prop);
+
+		int wt = Integer.parseInt(prop.getProperty("CompetitiveCompare.waitTime"));
+		// Initial
+		String env = envment;
+		String tc;
+		String modelName = "";
+		String modelNameS = "";
+		int trimNumber = 0;
+		int trimsNumbers = 0;
+		String trimNameS = "";
+		String urlString = "";
+		String currentClientURL = "";
+		String thisClientURL = "";
+		Comlibs log = new Comlibs();
+		currentClientURL = "http://qa1-compare.product-london.autodata.tech/kia/ca/vehicle/#/select/primary/compare";
+		log.rwExcel("", "*********Competitive Compare URLs**********", "");
+		loadURL(driver, currentClientURL);
+		log.Wait(wt);
+		SelectVehicle SelectVehiclePage = new SelectVehicle(driver);
+		log.Wait(wt);
+		SelectVehiclePage.clickOnGotIt(driver, currentClientURL);
+		currentClientURL = driver.getCurrentUrl();
+		thisClientURL = currentClientURL;
+		tc = " - Click On Got It";
+//		SelectVehiclePage.clickOnGotIt(driver, tc);
+		SelectVehiclePage.clickOnVehicle(driver, 2, 1, tc);
+		log.Wait(wt);
+		SelectVehiclePage.clickOnTrimOld_1st_OK(driver, thisClientURL, thisClientURL, currentClientURL);
+		log.Wait(wt);
+		tc = "Reload Failed url";
+		log.Wait(wt);
+		Compare ComparePage = new Compare(driver);
+		ComparePage.clickOnNewCompare(driver, currentClientURL);
+		log.Wait(wt);
+		for (String failedURL : failedURLs) {// *************************
+			try {
+				currentClientURL = driver.getCurrentUrl();
+//				tc = env + " - " + brand + " - Select Year = " + Year;
+//				log.Wait(wt);
+//				SelectVehiclePage.selectYear(driver, Year, tc);
+//				log.Wait(wt);
+//				modelName = SelectVehiclePage.getModelName(driver, env, brand, v, currentClientURL);
+//				tc = tc + " -. Model Name " + modelName;
+//				// SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
+
+				loadURLinCompare(driver, failedURL);
+				currentClientURL = driver.getCurrentUrl();
+
+				ComparePage.checkFeatturesPageshowOrNot(driver, currentClientURL, tc);
+				tc = " - Click on Trim - " + modelNameS;
+				log.Wait(wt);
+				urlString = driver.getCurrentUrl() + " \n\n " + "group = . vehicle = \n " + modelNameS + " - "
+						+ trimNameS;
+				tc = " - VerifyPrimaryImage - " + trimNameS;
+				log.Wait(wt * 3);
+//							ComparePage.verifyPrimaryImage(driver, env, brand, urlString + "\n\n" + tc, tc);
+//							log.Wait(wt);
+				tc = " - VerifyPrimaryStartingFromPrice - " + modelNameS + " - " + trimNameS;
+				SelectVehiclePage.clickOnGotItIfItShows(driver, currentClientURL);
+				ComparePage.verifyPrimaryStartingFromPrice(driver, env, " brand ", urlString + "\n\n" + tc,
+						expectedPrimaryPrice, tc);
+				log.Wait(wt);
+				tc = " - Click on New Compare";
+				try {
+					ComparePage.clickOnNewCompare(driver, tc);
+				} catch (Exception e) {
+					driver.get("http://www.google.com");
+					loadURLOld(driver, thisClientURL);
+					SelectVehicle SelectVehiclePageAgain = new SelectVehicle(driver);
+					tc = " - Click On Got It Again after loading the URL!";
+					try {
+						SelectVehiclePageAgain.clickOnGotIt(driver, tc);
+					} catch (Exception ee) {
+						System.out.println(" - Click On Got It Button does not show after loading the URL!");
+					}
+					log.Wait(wt * 4);
+				}
+				// trim catch
+			} catch (Exception e) {
+				System.out.println("\n***********Failed to click on the trim! need to send alert email?*******\n");
+				loadURLOld(driver, thisClientURL);
+			}
+
+		}
+
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -344,9 +469,12 @@ public class competitiveCompareUIController extends Comlibs {
 						log.rwExcel("", "-----" + brand + " Competitive Compare page Testing started-----" + (i + 1),
 								"");
 						// 1. ***********Competitive Compare**************
-						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
+//						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
 						// ***********Competitive Compare**************
 
+						// 2. ***********Reload failed URLs on Competitive Compare**************
+						ReLoadFailedURLs(driver, env);
+						// ***********Reload failed URLs on Competitive Compare**************
 						log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 						driver.quit();// driver.quit(), driver.close()
 						System.out.println(env + " - " + brand + " - Test is complete!!!   i = " + (i + 1) + "\n");

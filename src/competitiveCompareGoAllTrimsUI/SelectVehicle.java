@@ -171,11 +171,19 @@ public class SelectVehicle extends Comlibs {
 		return this;
 	}
 
-	public void clickOnGotIt(WebDriver driver2, String tc) throws Exception {
+	public void clickOnGotIt(WebDriver driver, String tc) throws Exception {
 		By GOTIT = By.xpath("/html/body/div[1]/div/div/div[2]/button");
 		elementExist(driver, GOTIT, true, tc);
 		driver.findElement(GOTIT).click();
 
+	}
+
+	public void clickOnGotItIfItShows(WebDriver driver, String tc) throws Exception {
+		By GOTIT = By.xpath("/html/body/div[1]/div/div/div[2]/button");
+		boolean shows = elementExist(driver, GOTIT, false, tc);
+		if (shows) {
+			driver.findElement(GOTIT).click();
+		}
 	}
 
 	public Compare clickOnTrimOld_1st_OK(WebDriver driver, String env, String brand, String tc) throws Exception {
@@ -266,6 +274,22 @@ public class SelectVehicle extends Comlibs {
 		return new Compare(driver);
 	}
 
+	public String getModelName(WebDriver driver, String env, String brand, int num, String tc) throws Exception {
+
+		String modelName = "";
+		By modelNameLocator = By
+				.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[" + num + "]/div/div[2]");
+		elementExist(driver, modelNameLocator, true, tc);
+		try {
+			modelName = driver.findElement(modelNameLocator).getText();
+			Wait(1);
+		} catch (Exception e) {
+			modelName = "ModelName=Empty";
+			System.out.println("\n********getModelName fails!!!*******\n");
+		}
+		return modelName;
+	}
+
 	public String getTrimName(WebDriver driver, String env, String brand, int num, boolean lstTrimExist,
 			boolean secondTrimExist, String tc) throws Exception {
 		// 1st .trim-overlay > div:nth-child(2) > div:nth-child(1) > label:nth-child(1)
@@ -316,7 +340,7 @@ public class SelectVehicle extends Comlibs {
 
 	public int getTrimNumber(WebDriver driver, String env, String brand, String tc) throws Exception {
 		int countTrim = 0;
-		int wt = 6;
+		int wt = 2;
 		By trims = By.xpath("//*[@id=\"vehicle-select-radio\"]");
 		boolean trimsExit = elementExist(driver, trims, false, tc);
 		for (int i = 1; i <= wt; i++) {
@@ -329,7 +353,7 @@ public class SelectVehicle extends Comlibs {
 				}
 				System.out.println("\nTrims pop-up not showing. Start to wait... i = " + i + " of total i = " + wt
 						+ " X (60 secs)\n");
-				Wait(60);
+				Wait(6);
 				trimsExit = elementExist(driver, trims, false, tc);
 			}
 		}
@@ -342,7 +366,7 @@ public class SelectVehicle extends Comlibs {
 
 	public void selectYear(WebDriver driver, String year, String tc) throws Exception {
 		boolean yearsExist = false;
-		int wtMins = 6;
+		int wtMins = 2;
 		String y = "";
 		String currentClientURL = "";
 		By allYears = By.xpath("/html/body/div[1]/div[2]/div/nav/div/div/div[2]/ul/li");
@@ -353,7 +377,7 @@ public class SelectVehicle extends Comlibs {
 				System.out.println("All Years exist!");
 			} else {
 				System.out.println("\nAll Years do not exist! Wait i = " + i + "\n");
-				Wait(60);
+				Wait(6);
 				yearsExist = elementExist(driver, allYears, false, tc);
 				if (i == (wtMins - 1)) {
 					// waiting failed to see all years, try to reload client site
