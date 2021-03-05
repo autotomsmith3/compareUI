@@ -181,7 +181,7 @@ public class Compare extends Comlibs {
 	public void checkFeatturesPageshowOrNot(WebDriver driver2, String currentClientURL, String tc) throws Exception {
 		boolean imageExist = false;
 		int wt = 5;
-		int tries = 1;// =6,2 - reload MW time 
+		int tries = 3;// =6,2 - reload MW time 
 		try {
 //			Wait(wt);
 			By PrimaryIageLocator = By.xpath("//*[@id=\"primary-vehicle\"]/div/div/div[1]/div[1]/div/img");
