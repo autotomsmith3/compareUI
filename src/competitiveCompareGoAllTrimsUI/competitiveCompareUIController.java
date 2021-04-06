@@ -161,6 +161,7 @@ public class competitiveCompareUIController extends Comlibs {
 		String expectedPrimaryPrice = prop.getProperty(env + "." + brand + ".expectedPrimaryPrice");
 		int wt = Integer.parseInt(prop.getProperty("CompetitiveCompare.waitTime"));
 		String only1stTrim = prop.getProperty("CompetitiveCompare.only1stTrims");
+		String onlyOneTrimOneBrand = prop.getProperty("CompetitiveCompare.onlyOneTrimOneBrand");
 		// Initial
 		String tc;
 		String modelName = "";
@@ -185,8 +186,21 @@ public class competitiveCompareUIController extends Comlibs {
 			// Select first type and first vehicle: 1,1. Select second type and first vehicle 2,1
 			int vehicleArry[];
 			log.Wait(wt);
-			vehicleArry = SelectVehiclePage.countVehicleArray(driver, tc);
-			int groupArray = vehicleArry.length;
+
+			int groupArray = 0;
+
+			int vehicleLength = 0;
+
+			if (onlyOneTrimOneBrand.equalsIgnoreCase("Yes")) {
+				vehicleArry = SelectVehiclePage.countVehicleArray(driver, tc);
+				vehicleLength = vehicleArry.length;
+
+				vehicleArry[0] = 1;
+				groupArray = 1;
+			} else {
+				vehicleArry = SelectVehiclePage.countVehicleArray(driver, tc);
+				groupArray = vehicleArry.length;
+			}
 			System.out.println("Vehicle Array length = " + groupArray + " \n\n");
 			for (int i = 1; i <= groupArray; i++) {
 				log.Wait(wt);
@@ -326,7 +340,7 @@ public class competitiveCompareUIController extends Comlibs {
 		String currentClientURL = "";
 		String thisClientURL = "";
 		Comlibs log = new Comlibs();
-		currentClientURL = "http://qa1-compare.product-london.autodata.tech/kia/ca/vehicle/#/select/primary/compare";
+		currentClientURL = "https://uat-compare.autodatadirect.com/kia/ca/vehicle/#/select/primary/compare";
 		log.rwExcel("", "*********Competitive Compare URLs**********", "");
 		loadURL(driver, currentClientURL);
 		log.Wait(wt);
@@ -359,7 +373,7 @@ public class competitiveCompareUIController extends Comlibs {
 
 				loadURLinCompare(driver, failedURL);
 				currentClientURL = driver.getCurrentUrl();
-				tc =failedURL;
+				tc = failedURL;
 				ComparePage.checkFeatturesPageshowOrNot(driver, currentClientURL, tc);
 				tc = " - Click on Trim - " + modelNameS;
 				log.Wait(wt);
@@ -474,7 +488,7 @@ public class competitiveCompareUIController extends Comlibs {
 
 						// 2. ***********Reload failed URLs on Competitive Compare**************
 						// Set only one client when running this to avoid multiple runs
-//						ReLoadFailedURLs(driver, env);
+						// ReLoadFailedURLs(driver, env);
 						// ***********Reload failed URLs on Competitive Compare**************
 						log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 						driver.quit();// driver.quit(), driver.close()
