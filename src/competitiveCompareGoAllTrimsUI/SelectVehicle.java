@@ -274,11 +274,15 @@ public class SelectVehicle extends Comlibs {
 		return new Compare(driver);
 	}
 
-	public String getModelName(WebDriver driver, String env, String brand, int num, String tc) throws Exception {
+	public String getModelName(WebDriver driver, String env, String brand,int g, int num, String tc) throws Exception {
 
 		String modelName = "";
+//		By modelNameLocator = By
+//				.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[" + num + "]/div/div[2]");
 		By modelNameLocator = By
-				.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[" + num + "]/div/div[2]");
+				.xpath("/html/body/div[1]/div[3]/div[1]/div["+g+"]/div[1]/div/div[3]/div/div[" + num + "]/div/div[2]");
+
+		
 		elementExist(driver, modelNameLocator, true, tc);
 		try {
 			modelName = driver.findElement(modelNameLocator).getText();

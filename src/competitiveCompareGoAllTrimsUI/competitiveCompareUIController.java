@@ -195,8 +195,15 @@ public class competitiveCompareUIController extends Comlibs {
 				vehicleArry = SelectVehiclePage.countVehicleArray(driver, tc);
 				vehicleLength = vehicleArry.length;
 
-				vehicleArry[0] = 1;
-				groupArray = 1;
+				if (vehicleArry[0]==0) {
+					vehicleArry[1]=1;
+					groupArray = 2;
+				}else {
+					vehicleArry[0] = 1;
+					groupArray = 1;
+				}
+				
+
 			} else {
 				vehicleArry = SelectVehiclePage.countVehicleArray(driver, tc);
 				groupArray = vehicleArry.length;
@@ -215,7 +222,8 @@ public class competitiveCompareUIController extends Comlibs {
 					log.Wait(wt);
 					SelectVehiclePage.selectYear(driver, Year, tc);
 					log.Wait(wt);
-					modelName = SelectVehiclePage.getModelName(driver, env, brand, v, currentClientURL);
+					modelName = SelectVehiclePage.getModelName(driver, env, brand, i,v, currentClientURL);
+					System.out.println("\n getModelName = "+modelName+"\n");
 					SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
 //					tc = brand + " - getModelName";
 					tc = brand + " - Model Name - " + modelName;
@@ -246,7 +254,7 @@ public class competitiveCompareUIController extends Comlibs {
 							log.Wait(wt);
 							SelectVehiclePage.selectYear(driver, Year, tc);
 							log.Wait(wt);
-							modelName = SelectVehiclePage.getModelName(driver, env, brand, v, currentClientURL);
+							modelName = SelectVehiclePage.getModelName(driver, env, brand, i,v, currentClientURL);
 							tc = tc + " -. Model Name " + modelName;
 							SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
 							tc = brand + " - getModelName";
