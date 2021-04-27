@@ -496,7 +496,7 @@ public class competitiveCompareUIController extends Comlibs {
 
 						// 2. ***********Reload failed URLs on Competitive Compare**************
 						// Set only one client when running this to avoid multiple runs
-						// ReLoadFailedURLs(driver, env);
+//						ReLoadFailedURLs(driver, env);
 						// ***********Reload failed URLs on Competitive Compare**************
 						log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 						driver.quit();// driver.quit(), driver.close()

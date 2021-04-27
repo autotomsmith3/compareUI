@@ -87,7 +87,7 @@ public class Compare extends Comlibs {
 
 //			if (PrimaryStartingFromPriceString.equalsIgnoreCase(expectedPrimaryPrices)) {
 			if (PMSRP >= 10000 && PMSRP <= 200000) {
-				System.out.println("\n\nPrimaryStartingFromPriceString matches!*****");
+				System.out.println("\n\n******PrimaryStartingFromPriceString matches!*****");
 				rwExcel(tc, true, brand + " - Verify PrimaryStartingFromPriceString",
 						brand + " PrimaryStartingFromPrice is showing and matching.");
 
@@ -181,7 +181,7 @@ public class Compare extends Comlibs {
 	public void checkFeatturesPageshowOrNot(WebDriver driver2, String currentClientURL, String tc) throws Exception {
 		boolean imageExist = false;
 		int wt = 5;
-		int tries = 3;// =6,2 - reload MW time 
+		int tries = 2;// =10,6,2 - reload MW time 
 		try {
 //			Wait(wt);
 			By PrimaryIageLocator = By.xpath("//*[@id=\"primary-vehicle\"]/div/div/div[1]/div[1]/div/img");
