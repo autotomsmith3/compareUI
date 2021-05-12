@@ -348,7 +348,7 @@ public class competitiveCompareUIController extends Comlibs {
 		String currentClientURL = "";
 		String thisClientURL = "";
 		Comlibs log = new Comlibs();
-		currentClientURL = "https://uat-compare.autodatadirect.com/kia/ca/vehicle/#/select/primary/compare";
+		currentClientURL = "http://qa1-compare.product-london.autodata.tech/kia/ca/vehicle/#/select/primary/compare";
 		log.rwExcel("", "*********Competitive Compare URLs**********", "");
 		loadURL(driver, currentClientURL);
 		log.Wait(wt);
