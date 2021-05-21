@@ -45,5 +45,10 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.22</version>
         </dependency>
+        <dependency>
+  			<groupId>com.sun.activation</groupId>
+  			<artifactId>javax.activation</artifactId>
+  			<version>1.2.0</version>
+		</dependency>   
     </dependencies>
 </project>

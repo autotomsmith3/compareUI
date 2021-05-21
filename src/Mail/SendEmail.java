@@ -50,7 +50,7 @@ public class SendEmail {
 		Properties prop = new Properties();
 		try {
 			prop.load(competitiveCompareUIController.class.getClassLoader()
-					.getResourceAsStream("./data/competitiveCompare.properties"));
+					.getResourceAsStream("./data/competitiveCompareGoAllTrims.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
