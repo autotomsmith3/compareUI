@@ -90,7 +90,8 @@ public class competitiveCompareUIController extends Comlibs {
 	}
 
 	/*
-	 * ------------------------------ Home Page Object Repositories: ------------------------------
+	 * ------------------------------ Home Page Object Repositories:
+	 * ------------------------------
 	 */
 	By dealershipNameField = By.id("dealerName");
 	By webSite = By.id("dealerSite");
@@ -109,7 +110,8 @@ public class competitiveCompareUIController extends Comlibs {
 		// driver.switchTo().alert().accept();//.dismiss()
 //		driver.switchTo().alert().accept();//.dismiss() 
 		// }
-		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com"))) {// compare.autodatadirect.com is Prod URL
+		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com"))) {// compare.autodatadirect.com
+																									// is Prod URL
 //			try {
 			driver.switchTo().alert().dismiss();
 //			}catch (Exception e) {
@@ -121,14 +123,22 @@ public class competitiveCompareUIController extends Comlibs {
 	}
 
 	public static void loadURLinCompare(WebDriver driver, String bURL) throws IOException {
-		driver.get(bURL);
+		try {
+			driver.get(bURL);
+		} catch (Exception e) {
+			//cannot load
+			System.out.println("\nLoad URL failed!\n");
+			Comlibs log = new Comlibs();
+			log.rwExcel(bURL,false, bURL, "Load URL failed");
+		}
 
-		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com"))) {// compare.autodatadirect.com is Prod URL
-//			try {
+		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com"))) {// compare.autodatadirect.com
+																									// is Prod URL
+			try {
 			driver.switchTo().alert().dismiss();
-//			}catch (Exception e) {
-//				System.out.println("\nCancel buttom (dismiss) does not exist. Failed to click it!\n");
-//			}	
+			}catch (Exception e) {
+				System.out.println("\nCancel buttom (dismiss) does not exist. Failed to click it!\n");
+			}	
 		}
 
 //		return new Compare(driver);
@@ -183,7 +193,8 @@ public class competitiveCompareUIController extends Comlibs {
 			tc = env + " - " + brand + " - Select year: " + Year;
 			SelectVehiclePage.selectYear(driver, Year, tc);
 			tc = Year + " - " + brand + " - CountVehicleArray";
-			// Select first type and first vehicle: 1,1. Select second type and first vehicle 2,1
+			// Select first type and first vehicle: 1,1. Select second type and first
+			// vehicle 2,1
 			int vehicleArry[];
 			log.Wait(wt);
 
@@ -195,14 +206,13 @@ public class competitiveCompareUIController extends Comlibs {
 				vehicleArry = SelectVehiclePage.countVehicleArray(driver, tc);
 				vehicleLength = vehicleArry.length;
 
-				if (vehicleArry[0]==0) {
-					vehicleArry[1]=1;
+				if (vehicleArry[0] == 0) {
+					vehicleArry[1] = 1;
 					groupArray = 2;
-				}else {
+				} else {
 					vehicleArry[0] = 1;
 					groupArray = 1;
 				}
-				
 
 			} else {
 				vehicleArry = SelectVehiclePage.countVehicleArray(driver, tc);
@@ -222,8 +232,8 @@ public class competitiveCompareUIController extends Comlibs {
 					log.Wait(wt);
 					SelectVehiclePage.selectYear(driver, Year, tc);
 					log.Wait(wt);
-					modelName = SelectVehiclePage.getModelName(driver, env, brand, i,v, currentClientURL);
-					System.out.println("\n getModelName = "+modelName+"\n");
+					modelName = SelectVehiclePage.getModelName(driver, env, brand, i, v, currentClientURL);
+					System.out.println("\n getModelName = " + modelName + "\n");
 					SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
 //					tc = brand + " - getModelName";
 					tc = brand + " - Model Name - " + modelName;
@@ -254,7 +264,7 @@ public class competitiveCompareUIController extends Comlibs {
 							log.Wait(wt);
 							SelectVehiclePage.selectYear(driver, Year, tc);
 							log.Wait(wt);
-							modelName = SelectVehiclePage.getModelName(driver, env, brand, i,v, currentClientURL);
+							modelName = SelectVehiclePage.getModelName(driver, env, brand, i, v, currentClientURL);
 							tc = tc + " -. Model Name " + modelName;
 							SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
 							tc = brand + " - getModelName";
@@ -347,19 +357,26 @@ public class competitiveCompareUIController extends Comlibs {
 		String urlString = "";
 		String currentClientURL = "";
 		String thisClientURL = "";
+		String brandURL ="";
 		Comlibs log = new Comlibs();
-		currentClientURL = "http://qa1-compare.product-london.autodata.tech/kia/ca/vehicle/#/select/primary/compare";
+		currentClientURL = "https://compare.autodatadirect.com/kia/ca/vehicle/#/select/primary/compare";
 		log.rwExcel("", "*********Competitive Compare URLs**********", "");
 		loadURL(driver, currentClientURL);
-		log.Wait(wt);
+		log.Wait(wt*2);
 		SelectVehicle SelectVehiclePage = new SelectVehicle(driver);
-		log.Wait(wt);
+		log.Wait(wt * 2);
 		SelectVehiclePage.clickOnGotIt(driver, currentClientURL);
 		currentClientURL = driver.getCurrentUrl();
 		thisClientURL = currentClientURL;
 		tc = " - Click On Got It";
 //		SelectVehiclePage.clickOnGotIt(driver, tc);
-		SelectVehiclePage.clickOnVehicle(driver, 2, 1, tc);
+		try {
+			SelectVehiclePage.clickOnVehicle(driver, 2, 1, tc);
+		} catch (Exception e) {
+			System.out.println("\n **********Click on vehicle failed**********\n");
+			SelectVehiclePage.clickOnVehicle(driver, 1, 1, tc);
+		}
+
 		log.Wait(wt);
 		SelectVehiclePage.clickOnTrimOld_1st_OK(driver, thisClientURL, thisClientURL, currentClientURL);
 		log.Wait(wt);
@@ -378,7 +395,7 @@ public class competitiveCompareUIController extends Comlibs {
 //				modelName = SelectVehiclePage.getModelName(driver, env, brand, v, currentClientURL);
 //				tc = tc + " -. Model Name " + modelName;
 //				// SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
-
+				brandURL=failedURL;
 				loadURLinCompare(driver, failedURL);
 				currentClientURL = driver.getCurrentUrl();
 				tc = failedURL;
@@ -398,7 +415,7 @@ public class competitiveCompareUIController extends Comlibs {
 				log.Wait(wt);
 				tc = " - Click on New Compare";
 				try {
-					ComparePage.clickOnNewCompare(driver, tc);
+					ComparePage.clickOnNewCompareFrNotAutRunURL(driver,env,failedURL, tc);
 				} catch (Exception e) {
 					driver.get("http://www.google.com");
 					loadURLOld(driver, thisClientURL);
@@ -467,7 +484,8 @@ public class competitiveCompareUIController extends Comlibs {
 				final WebDriver driver;
 				driver = log.drivers(tBrowser);
 				driver.manage().deleteAllCookies();
-				// i=3: run all 3 devices. So far only run PC, since table and smartphone do not load all models in loading page
+				// i=3: run all 3 devices. So far only run PC, since table and smartphone do not
+				// load all models in loading page
 				for (int i = 0; i < 1; i++) {
 					try {
 						System.out.println("Testing is started in " + env + "\n");
@@ -491,12 +509,12 @@ public class competitiveCompareUIController extends Comlibs {
 						log.rwExcel("", "----" + brand + " Competitive Compare page Testing started-----" + (i + 1),
 								"");
 						// 1. ***********Competitive Compare**************
-						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
+//						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
 						// ***********Competitive Compare***************
 
 						// 2. ***********Reload failed URLs on Competitive Compare**************
 						// Set only one client when running this to avoid multiple runs
-//						ReLoadFailedURLs(driver, env);
+						ReLoadFailedURLs(driver, env);
 						// ***********Reload failed URLs on Competitive Compare**************
 						log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 						driver.quit();// driver.quit(), driver.close()

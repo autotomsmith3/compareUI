@@ -540,7 +540,8 @@ public class Comlibs {
 
 		if (screen.equalsIgnoreCase("left")) {
 //			driver.manage().window().setPosition(new Point(-1300, 10)); // launch at left screen - original
-			driver.manage().window().setPosition(new Point(-1925, 90)); // launch at left screen
+//			driver.manage().window().setPosition(new Point(-1925, 90)); // launch at left screen - Old Dell
+			driver.manage().window().setPosition(new Point(-1925, 1)); // launch at left screen - New Dell
 		} else {
 			driver.manage().window().setPosition(new Point(0, 0)); // launch at right screen (main screen)
 		}

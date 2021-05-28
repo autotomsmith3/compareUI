@@ -144,6 +144,23 @@ public class Compare extends Comlibs {
 		driver.findElement(newCompare).click();
 		return new SelectVehicle(driver);
 	}
+	public SelectVehicle clickOnNewCompareFrNotAutRunURL(WebDriver driver,String env, String brand,String tc) throws Exception {
+		elementExist(driver, newCompare, true, tc);
+		driver.findElement(newCompare).click();
+		Wait(2);
+		if (brand.contains("mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("Staging")))) {
+			try {
+				driver.switchTo().alert().dismiss();
+			} catch (Exception e) {
+				System.out.println(
+						"Tomcat credential fields pop-up NOT showing! This is expected when running after first Mitisubishi model!\n");
+			}
+		}
+		
+		
+		
+		return new SelectVehicle(driver);
+	}
 
 	public Compare clickOnCloseError(WebDriver driver, String tc) throws Exception {
 		elementExist(driver, closeError, true, tc);
