@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -116,7 +117,9 @@ public class Comlibs {
 		r1.createCell(5).setCellValue(timeStamp);
 
 		/*
-		 * Font f1 =workbook.createFont(); Font f2=workbook.createFont(); f1.setColor((short)Font.COLOR_RED); f2.setFontHeight((short) 22); f2.setBoldweight(Font.BOLDWEIGHT_BOLD);
+		 * Font f1 =workbook.createFont(); Font f2=workbook.createFont();
+		 * f1.setColor((short)Font.COLOR_RED); f2.setFontHeight((short) 22);
+		 * f2.setBoldweight(Font.BOLDWEIGHT_BOLD);
 		 */
 
 		try {
@@ -249,7 +252,9 @@ public class Comlibs {
 		r1.createCell(5).setCellValue(timeStamp);
 
 		/*
-		 * Font f1 =workbook.createFont(); Font f2=workbook.createFont(); f1.setColor((short)Font.COLOR_RED); f2.setFontHeight((short) 22); f2.setBoldweight(Font.BOLDWEIGHT_BOLD);
+		 * Font f1 =workbook.createFont(); Font f2=workbook.createFont();
+		 * f1.setColor((short)Font.COLOR_RED); f2.setFontHeight((short) 22);
+		 * f2.setBoldweight(Font.BOLDWEIGHT_BOLD);
 		 */
 
 		try {
@@ -364,18 +369,23 @@ public class Comlibs {
 			profile.addExtension(new File(firepathPath));
 			// profile.setAcceptUntrustedCertificates(true); //doesn't work
 			// profile.setAssumeUntrustedCertificateIssuer(false); //doesn't work
-			// profile.setPreference("security.insecure_password.ui.enabled", false); // works. 5/5/2017
-			profile.setPreference("security.insecure_field_warning.contextual.enabled", true); // better works. Using false/true. 03/27/2018
+			// profile.setPreference("security.insecure_password.ui.enabled", false); //
+			// works. 5/5/2017
+			profile.setPreference("security.insecure_field_warning.contextual.enabled", true); // better works. Using
+																								// false/true.
+																								// 03/27/2018
 
 			// profile.addExtension(new File(seleniumExpertIDE));
 			// Add more if needed
-			// WebDriver driver = new FirefoxDriver(profile); //adding profile invalid since 12/13/2017
+			// WebDriver driver = new FirefoxDriver(profile); //adding profile invalid since
+			// 12/13/2017
 
 			// DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 			// capabilities.setCapability("marionette", true);
 			//// WebDriver driver = new FirefoxDriver(capabilities);
 
-			WebDriver driver = new FirefoxDriver(); // working fine with v56, not for v68 but after updated geckodriver to 24, working fine.
+			WebDriver driver = new FirefoxDriver(); // working fine with v56, not for v68 but after updated geckodriver
+													// to 24, working fine.
 
 			// WebDriver driver = new FirefoxDriver();
 			return driver;
@@ -383,15 +393,18 @@ public class Comlibs {
 			System.setProperty("webdriver.chrome.driver",
 					"C:/1/Eclipse/RefLibraris/chromedriver_win32/chromedriver.exe");
 			// System.setProperty("webdriver.chrome.driver",
-			// "C:/Documents and Settings/zhoul/My Documents/eclipse/Chrome/chromedriver.exe");
+			// "C:/Documents and Settings/zhoul/My
+			// Documents/eclipse/Chrome/chromedriver.exe");
 
-			// Disable save password, below from https://sqa.stackexchange.com/questions/26275/how-to-disable-chrome-save-your-password-selenium-java
+			// Disable save password, below from
+			// https://sqa.stackexchange.com/questions/26275/how-to-disable-chrome-save-your-password-selenium-java
 			ChromeOptions cOpt = new ChromeOptions();
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--start-maximized");
 			options.addArguments("--disable-web-security");
 			options.addArguments("--no-proxy-server");
-			// // This is disalbe security for "Chrome is being controlled by automated test software" - 2018/03/27 OK
+			// // This is disalbe security for "Chrome is being controlled by automated test
+			// software" - 2018/03/27 OK
 			// options.addArguments("disable-infobars"); //- 2018/03/27 OK
 			Map<String, Object> prefs = new HashMap<String, Object>();
 			prefs.put("credentials_enable_service", false);
@@ -533,10 +546,13 @@ public class Comlibs {
 		java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension dim = new Dimension((int) screenSize.getWidth(), (int) screenSize.getHeight());
 		driver.manage().window().setSize(dim);
-		// driver.manage().window().setPosition(new Point(-1680, -200)); //launch at left screen at Nanxin's house 2018-12-28
+		// driver.manage().window().setPosition(new Point(-1680, -200)); //launch at
+		// left screen at Nanxin's house 2018-12-28
 		// driver.manage().window().setPosition(new Point(-1100, 60)); //launch old
-		// driver.manage().window().setPosition(new Point(-1300, 10)); //launch at left screen
-		// driver.manage().window().setPosition(new Point(0, 0)); // launch at right screen (main screen)
+		// driver.manage().window().setPosition(new Point(-1300, 10)); //launch at left
+		// screen
+		// driver.manage().window().setPosition(new Point(0, 0)); // launch at right
+		// screen (main screen)
 
 		if (screen.equalsIgnoreCase("left")) {
 //			driver.manage().window().setPosition(new Point(-1300, 10)); // launch at left screen - original
@@ -552,8 +568,10 @@ public class Comlibs {
 //			driver.manage().window().setSize(new Dimension(1720, 990));  //Center for home screen 20200323
 			driver.manage().window().setSize(new Dimension(1672, 990)); // Center for home screen 20200506
 //			driver.manage().window().setSize(new Dimension(1300, 1040)); // Original one before March 23, 2020 Full size of the left monitor
-			// driver.manage().window().setSize(new Dimension(1080, 1040)); // Original one before Oct 17, 2018
-			// driver.manage().window().setSize(new Dimension(1480, 1040)); //After Oct 17, 2018 (1480, 1040)
+			// driver.manage().window().setSize(new Dimension(1080, 1040)); // Original one
+			// before Oct 17, 2018
+			// driver.manage().window().setSize(new Dimension(1480, 1040)); //After Oct 17,
+			// 2018 (1480, 1040)
 			// driver.manage().window().setSize(new Dimension(1920, 1040)); // (width, high)
 			dim = driver.manage().window().getSize();
 			rwExcel("", true, "Set up browser resolution for device = " + device, "  " + dim);
@@ -644,7 +662,8 @@ public class Comlibs {
 		driver.findElement(By.xpath("//*[@id='someXpath']")).click(); // click some link that opens a new window
 
 		for (String winHandle : driver.getWindowHandles()) {
-			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
+			driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's
+													// your newly opened window)
 		}
 
 		// code to do something on new window
@@ -752,13 +771,15 @@ public class Comlibs {
 	}
 
 	// ArrayList<WebElement> imgElements =
-	// driver.findElements(By.xpath("//*[contains(@src, '.gif')] | //*[contains(@src, '.png')]");
+	// driver.findElements(By.xpath("//*[contains(@src, '.gif')] |
+	// //*[contains(@src, '.png')]");
 	//
 	// for (WebElement element : imgElements){
 	//
 	// boolean imageLoaded = (boolean) ((JavascriptExecutor)
 	// driver).executeScript("return arguments[0].complete && "+
-	// "typeof arguments[0].naturalWidth != \"undefined\" && "+"arguments[0].naturalWidth > 0",
+	// "typeof arguments[0].naturalWidth != \"undefined\" &&
+	// "+"arguments[0].naturalWidth > 0",
 	// element);
 	//
 	// if (!imageLoaded)
@@ -768,7 +789,8 @@ public class Comlibs {
 
 	public void VerifyImageLoaded(WebDriver driver, By imageLocator, boolean writeToSheet, String tc)
 			throws IOException {
-		By wrongXpath = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[3]/div/div[10001]/img");
+		By wrongXpath = By
+				.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[3]/div/div[10001]/img");
 		waitElementToShow(driver, writeToSheet, imageLocator);
 		WebElement image1 = driver.findElement(imageLocator);
 		boolean imageLoaded1 = (boolean) ((JavascriptExecutor) driver).executeScript(
@@ -776,13 +798,14 @@ public class Comlibs {
 				image1);
 		// boolean imageLoaded1= (boolean) ((JavascriptExecutor)
 		// driver).executeScript("return arguments[0].complete && "+
-		// "typeof arguments[0].naturalWidth != \"undefined\" && "+"arguments[0].naturalWidth > 0",
+		// "typeof arguments[0].naturalWidth != \"undefined\" &&
+		// "+"arguments[0].naturalWidth > 0",
 		// image1);
 
 		if (!imageLoaded1) {
 			System.out.println("Image is not present");
 			rwExcel(tc, false, "ImageLocator = " + imageLocator, "Image is NOT loaded properly");
-			driver.findElement(wrongXpath).click();//it exits out of "try block" of parent.
+			driver.findElement(wrongXpath).click();// it exits out of "try block" of parent.
 		} else {
 			System.out.println("Image loaded!  -  " + imageLocator);
 			rwExcel(tc, true, "ImageLocator = " + imageLocator, "Image is loaded");
@@ -808,7 +831,8 @@ public class Comlibs {
 		for (int i = 0; i < trimSideBarCount; i++) {
 			listText1 = listItems.get(i).getText();
 			System.out.println("i=" + i + ", listText1 =" + listText1);
-			// rwExcel("", true, "WebElement = " + elementLocator, "Content " + i + " =" + listText1);
+			// rwExcel("", true, "WebElement = " + elementLocator, "Content " + i + " =" +
+			// listText1);
 			// trimSideBar.get(i).click();
 		}
 	}
@@ -867,10 +891,25 @@ public class Comlibs {
 				+ "arguments[0].dispatchEvent(evObj);";
 		((JavascriptExecutor) driver).executeScript(javaScript, we0);
 	}
+
+	public int RandomNumFrom2ToN(int num) {
+		Random rand = new Random();
+
+		// Obtain a number between [0 - 49].
+		int n = rand.nextInt(num);
+		if (n == 0) {
+			n = 2;
+		} else if (n == 1) {
+			n = 2;
+		}
+		return n;
+	}
 	// public static void main(String[] args) throws IOException {
 	// // String
 	// //
-	// resultfile="C:\\Documents and Settings\\zhoul\\My Documents\\Chrysler_US\\01_CF\\Automated\\Test Results\\SeleniumTDAF\\TestResult.xls";
+	// resultfile="C:\\Documents and Settings\\zhoul\\My
+	// Documents\\Chrysler_US\\01_CF\\Automated\\Test
+	// Results\\SeleniumTDAF\\TestResult.xls";
 	// String fileNamePath = "C:\\1\\Eclipse\\Workspace\\TestResult.xls";
 	// Comlibs uatResult = new Comlibs();
 	// for (int i = 1; i <= 2; i++) {
