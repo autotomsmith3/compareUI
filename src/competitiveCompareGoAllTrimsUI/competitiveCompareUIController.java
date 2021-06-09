@@ -185,7 +185,6 @@ public class competitiveCompareUIController extends Comlibs {
 		Comlibs log = new Comlibs();
 		log.rwExcel("", "********* " + brand + " Competitive Compare UI**********", "");
 		SelectVehicle SelectVehiclePage = new SelectVehicle(driver);
-//		wt=log.RandomNumFrom2ToN(wt);
 		tc = brand + " - Click On Got It";
 		SelectVehiclePage.clickOnGotIt(driver, tc);
 

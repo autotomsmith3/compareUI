@@ -451,7 +451,8 @@ public class Comlibs {
 
 	public void Wait(int i) {
 		try {
-			Thread.sleep(i * 1000);
+			int n = RandomNumFrom2ToN(i);
+			Thread.sleep(n * 1000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -893,14 +894,18 @@ public class Comlibs {
 	}
 
 	public int RandomNumFrom2ToN(int num) {
+		int n = 0;
 		Random rand = new Random();
-
-		// Obtain a number between [0 - 49].
-		int n = rand.nextInt(num);
-		if (n == 0) {
-			n = 2;
-		} else if (n == 1) {
-			n = 2;
+		// Obtain a number between [0 - num].
+		if (num <= 6) {
+			n = num;
+		} else {
+			n = rand.nextInt(num);
+			if (n == 0) {
+				n = 2;
+			} else if (n == 1) {
+				n = 2;
+			}
 		}
 		return n;
 	}
