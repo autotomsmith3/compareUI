@@ -176,7 +176,7 @@ public class vinCompareUIController extends Comlibs {
 		tc = "Enter VINS_027";
 
 		Vin2VinComparePage.inputVins(driver, vins, tc);
-
+		log.Wait(wt*2);
 		tc = "Enter DealerPrices_028";
 		Vin2VinComparePage.inputDealerPrices(driver, vins, DealerPrices, Images, tc);//
 //		

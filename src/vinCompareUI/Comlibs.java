@@ -536,8 +536,8 @@ public class Comlibs {
 		// driver.manage().window().setPosition(new Point(0, 0)); // launch at right screen (main screen)
 
 		if (screen.equalsIgnoreCase("left")) {
-//			driver.manage().window().setPosition(new Point(-1300, 10)); // launch at left screen - original
-			driver.manage().window().setPosition(new Point(-1925, 90)); // launch at left screen
+			driver.manage().window().setPosition(new Point(-1300, 10)); // launch at left screen - original
+//			driver.manage().window().setPosition(new Point(-1925, 90)); // launch at left screen
 		} else {
 			driver.manage().window().setPosition(new Point(0, 0)); // launch at right screen (main screen)
 		}
