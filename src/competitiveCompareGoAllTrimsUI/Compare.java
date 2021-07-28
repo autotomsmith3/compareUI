@@ -71,21 +71,28 @@ public class Compare extends Comlibs {
 	public void verifyPrimaryStartingFromPrice(WebDriver driver, String env, String brand, String urlString,
 			String expectedPrimaryPrices, String tc) throws Exception {
 		String PrimaryStartingFromPriceString = "";
+		String PrimaryImageStartingFromPriceString = "";
 		String errorMsg = "";
 		int PMSRP = 0;
+		int PImageMSRP = 0;
 		try {
 			By PrimaryStartingFromPrice = By
 					.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[1]/div/div[2]/div/ul[1]/li[2]/div[2]/span");
 			PrimaryStartingFromPriceString = driver.findElement(PrimaryStartingFromPrice).getText();
+
+			By PrimaryImageStartingFromPrice = By.xpath(
+					"/html/body/div[1]/div[4]/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[2]/div[3]/span[2]");
+			PrimaryImageStartingFromPriceString = driver.findElement(PrimaryImageStartingFromPrice).getText();
+
 			// $44,995
-			tc=tc+" - MSRP = "+PrimaryStartingFromPriceString;
+			tc = tc + " - MSRP = " + PrimaryStartingFromPriceString;
 			if (!PrimaryStartingFromPriceString.equals("")) {
 				PrimaryStartingFromPriceString = PrimaryStartingFromPriceString.replace("$", "");
 				PrimaryStartingFromPriceString = PrimaryStartingFromPriceString.replace(",", "");
 				PMSRP = Integer.parseInt(PrimaryStartingFromPriceString);
 			}
 
-//			if (PrimaryStartingFromPriceString.equalsIgnoreCase(expectedPrimaryPrices)) {
+//          if (PrimaryStartingFromPriceString.equalsIgnoreCase(expectedPrimaryPrices)) {
 			if (PMSRP >= 10000 && PMSRP <= 200000) {
 				System.out.println("\n\n******PrimaryStartingFromPriceString matches!*****");
 				rwExcel(tc, true, brand + " - Verify PrimaryStartingFromPriceString",
@@ -97,6 +104,35 @@ public class Compare extends Comlibs {
 						+ " Web Site Primary Startingfrom Price shows \"" + PrimaryStartingFromPriceString
 						+ "\" and expected price is " + "\"" + expectedPrimaryPrices + "\"\n";
 				rwExcel(tc, false, brand + " - Verify PrimaryStartingFromPrice", errorMsg);
+				SendEmail alertEmail = new SendEmail();
+				alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
+
+			}
+
+			// PrimaryImageStartingFromPriceString
+			// $44,995 *
+			tc = tc + " - MSRP = " + PrimaryImageStartingFromPriceString;
+			if (!PrimaryImageStartingFromPriceString.equals("")) {
+				PrimaryImageStartingFromPriceString = PrimaryImageStartingFromPriceString.replace("$", "");
+				PrimaryImageStartingFromPriceString = PrimaryImageStartingFromPriceString.replace(",", "");
+				PrimaryImageStartingFromPriceString = PrimaryImageStartingFromPriceString.replace(" *", "");
+				PImageMSRP = Integer.parseInt(PrimaryImageStartingFromPriceString);
+			}
+
+//          if (PMSRP == PImageMSRP)
+			if (PMSRP == PImageMSRP) {
+				System.out.println("\n\n******PrimaryImageStartingFromPriceString matches!*****");
+				rwExcel(tc, true, brand + " - Verify PrimaryImageStartingFromPriceString",
+						brand + " PrimaryImageStartingFromPriceString is showing and matching the grid one.");
+
+			} else {
+				System.out.println("\n\nPrimaryImageStartingFromPriceString does not match!*****");
+				errorMsg = brand
+						+ " - Primary Image Vehicle Startingfrom Price does not match the Grid Primary Vehicle Startingfrom Price!"
+						+ "\n\n" + brand + " Web Site Primary Image Startingfrom Price shows \""
+						+ PrimaryImageStartingFromPriceString + "\" and grid Starting from* is " + "\""
+						+ PrimaryStartingFromPriceString + "\"\n";
+				rwExcel(tc, false, brand + " - Verify PrimaryImageStartingFromPriceString does NOT match", urlString);// errorMsg);
 				SendEmail alertEmail = new SendEmail();
 				alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
 
@@ -144,7 +180,9 @@ public class Compare extends Comlibs {
 		driver.findElement(newCompare).click();
 		return new SelectVehicle(driver);
 	}
-	public SelectVehicle clickOnNewCompareFrNotAutRunURL(WebDriver driver,String env, String brand,String tc) throws Exception {
+
+	public SelectVehicle clickOnNewCompareFrNotAutRunURL(WebDriver driver, String env, String brand, String tc)
+			throws Exception {
 		elementExist(driver, newCompare, true, tc);
 		driver.findElement(newCompare).click();
 		Wait(2);
@@ -156,9 +194,7 @@ public class Compare extends Comlibs {
 						"Tomcat credential fields pop-up NOT showing! This is expected when running after first Mitisubishi model!\n");
 			}
 		}
-		
-		
-		
+
 		return new SelectVehicle(driver);
 	}
 
@@ -198,16 +234,16 @@ public class Compare extends Comlibs {
 	public void checkFeatturesPageshowOrNot(WebDriver driver2, String currentClientURL, String tc) throws Exception {
 		boolean imageExist = false;
 		int wt = 5;
-		int tries = 2;// =10,6,2 - reload MW time 
+		int tries = 2;// =10,6,2 - reload MW time
 		try {
 //			Wait(wt);
 			By PrimaryIageLocator = By.xpath("//*[@id=\"primary-vehicle\"]/div/div/div[1]/div[1]/div/img");
 			for (int i = 1; i <= tries; i++) {
 				try {
-				VerifyImageLoaded(driver, PrimaryIageLocator, false, tc);
-				}catch (Exception ee) {
+					VerifyImageLoaded(driver, PrimaryIageLocator, false, tc);
+				} catch (Exception ee) {
 					//
-					System.out.println("\n Tried time = "+i+". Image Page is not loading!!!\n");
+					System.out.println("\n Tried time = " + i + ". Image Page is not loading!!!\n");
 				}
 
 				imageExist = elementExist(driver, PrimaryIageLocator, false, tc);
@@ -216,7 +252,8 @@ public class Compare extends Comlibs {
 					break;
 				} else {
 					// F5 reload page
-					driver.get("http://www.google.com");Wait(wt);
+					driver.get("http://www.google.com");
+					Wait(wt);
 					clickRefleshF5BtnLoadURL(driver, currentClientURL, tc);
 					rwExcel(tc, currentClientURL, "Try times = " + i);
 					Wait(wt);
