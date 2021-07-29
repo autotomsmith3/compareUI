@@ -103,7 +103,7 @@ public class Compare extends Comlibs {
 				errorMsg = brand + " - Primary Vehicle Startingfrom Price does not match!" + "\n\n" + brand
 						+ " Web Site Primary Startingfrom Price shows \"" + PrimaryStartingFromPriceString
 						+ "\" and expected price is " + "\"" + expectedPrimaryPrices + "\"\n";
-				rwExcel(tc, false, brand + " - Verify PrimaryStartingFromPrice", errorMsg);
+				rwExcel(tc, false, urlString, brand + " - Verify PrimaryStartingFromPrice"+ errorMsg);
 				SendEmail alertEmail = new SendEmail();
 				alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
 
@@ -122,7 +122,7 @@ public class Compare extends Comlibs {
 //          if (PMSRP == PImageMSRP)
 			if (PMSRP == PImageMSRP) {
 				System.out.println("\n\n******PrimaryImageStartingFromPriceString matches!*****");
-				rwExcel(tc, true, brand + " - Verify PrimaryImageStartingFromPriceString",
+				rwExcel(tc.replace("Verify",""), true, brand + " - Verify PrimaryImageStartingFromPriceString",
 						brand + " PrimaryImageStartingFromPriceString is showing and matching the grid one.");
 
 			} else {
@@ -132,7 +132,7 @@ public class Compare extends Comlibs {
 						+ "\n\n" + brand + " Web Site Primary Image Startingfrom Price shows \""
 						+ PrimaryImageStartingFromPriceString + "\" and grid Starting from* is " + "\""
 						+ PrimaryStartingFromPriceString + "\"\n";
-				rwExcel(tc, false, brand + " - Verify PrimaryImageStartingFromPriceString does NOT match", urlString);// errorMsg);
+				rwExcel(tc.replace("Verify",""), false, urlString, brand + " - PrimaryImageStartingFromPriceString does NOT match");// errorMsg);
 				SendEmail alertEmail = new SendEmail();
 				alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
 
