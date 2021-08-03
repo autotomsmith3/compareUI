@@ -72,13 +72,76 @@ public class Compare extends Comlibs {
 			String expectedPrimaryPrices, String tc) throws Exception {
 		String PrimaryStartingFromPriceString = "";
 		String PrimaryImageStartingFromPriceString = "";
+		String SecondaryStartingFromPriceString_01 = "";
+		String SecondaryStartingFromPriceString_02 = "";
+		String SecondaryStartingFromPriceString_03 = "";
+
 		String errorMsg = "";
 		int PMSRP = 0;
+		int SMSRP_01 = 0;
+		int SMSRP_02 = 0;
+		int SMSRP_03 = 0;
 		int PImageMSRP = 0;
 		try {
 			By PrimaryStartingFromPrice = By
 					.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[1]/div/div[2]/div/ul[1]/li[2]/div[2]/span");
 			PrimaryStartingFromPriceString = driver.findElement(PrimaryStartingFromPrice).getText();
+
+			// Secondary vehicles StartingFromPrice 01 - 03
+			By SecondaryStartingFromPrice_01 = By
+					.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[1]/div/div[2]/div/ul[1]/li[6]/div[1]/span");
+			SecondaryStartingFromPriceString_01 = driver.findElement(SecondaryStartingFromPrice_01).getText();
+			By SecondaryStartingFromPrice_02 = By
+					.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[1]/div/div[2]/div/ul[1]/li[7]/div[1]/span");
+			SecondaryStartingFromPriceString_02 = driver.findElement(SecondaryStartingFromPrice_02).getText();
+			By SecondaryStartingFromPrice_03 = By
+					.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[1]/div/div[2]/div/ul[1]/li[8]/div[1]/span");
+			SecondaryStartingFromPriceString_03 = driver.findElement(SecondaryStartingFromPrice_03).getText();
+
+			// Verify SecondaryStartingFromPriceString_01
+			if (!SecondaryStartingFromPriceString_01.equals("")) {
+				SecondaryStartingFromPriceString_01 = SecondaryStartingFromPriceString_01.replace("$", "");
+				SecondaryStartingFromPriceString_01 = SecondaryStartingFromPriceString_01.replace(",", "");
+				SMSRP_01 = Integer.parseInt(SecondaryStartingFromPriceString_01);
+				if (SMSRP_01 == 0) {
+					rwExcel(tc.replace("VerifyPrimary", "") + " - MSRP=$0", false, urlString,
+							"StartFromPrice= $0 " + brand + " - Verify SecondaryStartingFromPriceString_01" + errorMsg);
+				}
+			} else {
+				// SecondaryStartingFromPriceString_01 is empty ""
+				rwExcel(tc.replace("VerifyPrimary", "") + " - MSRP=$0", false, urlString,
+						brand + " - Verify SecondaryStartingFromPriceString_01 which is empty!" + errorMsg);
+			}
+
+			// Verify SecondaryStartingFromPriceString_02
+			if (!SecondaryStartingFromPriceString_02.equals("")) {
+				SecondaryStartingFromPriceString_02 = SecondaryStartingFromPriceString_02.replace("$", "");
+				SecondaryStartingFromPriceString_02 = SecondaryStartingFromPriceString_02.replace(",", "");
+				SMSRP_02 = Integer.parseInt(SecondaryStartingFromPriceString_02);
+				if (SMSRP_02 == 0) {
+					rwExcel(tc.replace("VerifyPrimary", "") + " - MSRP=$0", false, urlString,
+							"StartFromPrice= $0 " + brand + " - Verify SecondaryStartingFromPriceString_02" + errorMsg);
+				}
+			} else {
+				// SecondaryStartingFromPriceString_02 is empty ""
+				rwExcel(tc.replace("VerifyPrimary", ""), false, urlString,
+						brand + " - Verify SecondaryStartingFromPriceString_02 which is empty!" + errorMsg);
+			}
+
+			// Verify SecondaryStartingFromPriceString_03
+			if (!SecondaryStartingFromPriceString_03.equals("")) {
+				SecondaryStartingFromPriceString_03 = SecondaryStartingFromPriceString_03.replace("$", "");
+				SecondaryStartingFromPriceString_03 = SecondaryStartingFromPriceString_03.replace(",", "");
+				SMSRP_03 = Integer.parseInt(SecondaryStartingFromPriceString_03);
+				if (SMSRP_03 == 0) {
+					rwExcel(tc.replace("VerifyPrimary", ""), false, urlString,
+							"StartFromPrice= $0 " + brand + " - Verify SecondaryStartingFromPriceString_03" + errorMsg);
+				}
+			} else {
+				// SecondaryStartingFromPriceString_03 is empty ""
+				rwExcel(tc.replace("VerifyPrimary", ""), false, urlString,
+						brand + " - Verify SecondaryStartingFromPriceString_03 which is empty!" + errorMsg);
+			}
 
 			By PrimaryImageStartingFromPrice = By.xpath(
 					"/html/body/div[1]/div[4]/div[1]/div/div[1]/div/div[1]/div/div/div[1]/div[2]/div[3]/span[2]");
@@ -103,7 +166,7 @@ public class Compare extends Comlibs {
 				errorMsg = brand + " - Primary Vehicle Startingfrom Price does not match!" + "\n\n" + brand
 						+ " Web Site Primary Startingfrom Price shows \"" + PrimaryStartingFromPriceString
 						+ "\" and expected price is " + "\"" + expectedPrimaryPrices + "\"\n";
-				rwExcel(tc, false, urlString, brand + " - Verify PrimaryStartingFromPrice"+ errorMsg);
+				rwExcel(tc, false, urlString, brand + " - Verify PrimaryStartingFromPrice" + errorMsg);
 				SendEmail alertEmail = new SendEmail();
 				alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
 
@@ -122,7 +185,7 @@ public class Compare extends Comlibs {
 //          if (PMSRP == PImageMSRP)
 			if (PMSRP == PImageMSRP) {
 				System.out.println("\n\n******PrimaryImageStartingFromPriceString matches!*****");
-				rwExcel(tc.replace("Verify",""), true, brand + " - Verify PrimaryImageStartingFromPriceString",
+				rwExcel(tc.replace("Verify", ""), true, brand + " - Verify PrimaryImageStartingFromPriceString",
 						brand + " PrimaryImageStartingFromPriceString is showing and matching the grid one.");
 
 			} else {
@@ -132,7 +195,8 @@ public class Compare extends Comlibs {
 						+ "\n\n" + brand + " Web Site Primary Image Startingfrom Price shows \""
 						+ PrimaryImageStartingFromPriceString + "\" and grid Starting from* is " + "\""
 						+ PrimaryStartingFromPriceString + "\"\n";
-				rwExcel(tc.replace("Verify",""), false, urlString, brand + " - PrimaryImageStartingFromPriceString does NOT match");// errorMsg);
+				rwExcel(tc.replace("Verify", ""), false, urlString,
+						brand + " - PrimaryImageStartingFromPriceString does NOT match");// errorMsg);
 				SendEmail alertEmail = new SendEmail();
 				alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
 
