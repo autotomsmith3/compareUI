@@ -124,7 +124,7 @@ public class Compare extends Comlibs {
 				}
 			} else {
 				// SecondaryStartingFromPriceString_02 is empty ""
-				rwExcel(tc.replace("VerifyPrimary", ""), false, urlString,
+				rwExcel(tc.replace("VerifyPrimary", "") + " - MSRP=$0", false, urlString,
 						brand + " - Verify SecondaryStartingFromPriceString_02 which is empty!" + errorMsg);
 			}
 
@@ -134,12 +134,12 @@ public class Compare extends Comlibs {
 				SecondaryStartingFromPriceString_03 = SecondaryStartingFromPriceString_03.replace(",", "");
 				SMSRP_03 = Integer.parseInt(SecondaryStartingFromPriceString_03);
 				if (SMSRP_03 == 0) {
-					rwExcel(tc.replace("VerifyPrimary", ""), false, urlString,
+					rwExcel(tc.replace("VerifyPrimary", "") + " - MSRP=$0", false, urlString,
 							"StartFromPrice= $0 " + brand + " - Verify SecondaryStartingFromPriceString_03" + errorMsg);
 				}
 			} else {
 				// SecondaryStartingFromPriceString_03 is empty ""
-				rwExcel(tc.replace("VerifyPrimary", ""), false, urlString,
+				rwExcel(tc.replace("VerifyPrimary", "") + " - MSRP=$0", false, urlString,
 						brand + " - Verify SecondaryStartingFromPriceString_03 which is empty!" + errorMsg);
 			}
 
