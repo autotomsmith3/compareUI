@@ -525,7 +525,7 @@ public class competitiveCompareUIController extends Comlibs {
 						System.out.println("\n\nAlert!!!!\n\n");
 						System.out
 								.println("\n\n" + env + " - " + brand + " - Site is not loaded properly or down!\n\n");
-						log.rwExcel(env + " - " + brand, false, brand + " - Site is not loaded properly",
+						log.rwExcel(env + " - " + brand, false, competitiveCompareUIUR,
 								brand + " site maybe is showing error or down.");
 						SendEmail alertEmail = new SendEmail();
 						alertEmail.SendAlertEmail(env, brand, competitiveCompareUIUR,
