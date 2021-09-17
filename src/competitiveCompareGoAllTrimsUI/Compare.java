@@ -331,4 +331,35 @@ public class Compare extends Comlibs {
 			clickRefleshF5BtnLoadURL(driver, currentClientURL, tc);
 		}
 	}
+
+	public String getYearBrandModelTrim_Name(WebDriver driver, String currentClientURL, String tc) throws Exception {
+		boolean imageExist = false;
+		String year_brand = "";
+		String modle_trim = "";
+		String year_brand_model_trim_Name = "";
+
+		try {
+			By PrimaryIageLocator = By.xpath("//*[@id=\"primary-vehicle\"]/div/div/div[1]/div[1]/div/img");
+			imageExist = elementExist(driver, PrimaryIageLocator, false, tc);
+			if (imageExist) {
+				By year_brand_locator = By.xpath("//*[@id=\"primary-vehicle\"]/div/div/div[1]/div[2]/div[1]");
+				By modle_trim_locator = By.xpath("//*[@id=\"primary-vehicle\"]/div/div/div[1]/div[2]/div[2]");
+				year_brand = driver.findElement(year_brand_locator).getText();
+				modle_trim = driver.findElement(modle_trim_locator).getText();
+				;
+
+				year_brand_model_trim_Name = year_brand + " - " + modle_trim;
+
+			} else {
+
+			}
+
+		} catch (Exception e) {
+//			clickRefleshF5Btn(driver, tc);
+			clickRefleshF5BtnLoadURL(driver, currentClientURL, tc);
+		}
+		return year_brand_model_trim_Name;
+
+	}
+
 }

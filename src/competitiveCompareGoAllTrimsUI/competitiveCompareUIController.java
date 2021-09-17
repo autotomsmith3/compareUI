@@ -126,19 +126,19 @@ public class competitiveCompareUIController extends Comlibs {
 		try {
 			driver.get(bURL);
 		} catch (Exception e) {
-			//cannot load
+			// cannot load
 			System.out.println("\nLoad URL failed!\n");
 			Comlibs log = new Comlibs();
-			log.rwExcel(bURL,false, bURL, "Load URL failed");
+			log.rwExcel(bURL, false, bURL, "Load URL failed");
 		}
 
 		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com"))) {// compare.autodatadirect.com
 																									// is Prod URL
 			try {
-			driver.switchTo().alert().dismiss();
-			}catch (Exception e) {
+				driver.switchTo().alert().dismiss();
+			} catch (Exception e) {
 				System.out.println("\nCancel buttom (dismiss) does not exist. Failed to click it!\n");
-			}	
+			}
 		}
 
 //		return new Compare(driver);
@@ -356,12 +356,12 @@ public class competitiveCompareUIController extends Comlibs {
 		String urlString = "";
 		String currentClientURL = "";
 		String thisClientURL = "";
-		String brandURL ="";
+		String brandURL = "";
 		Comlibs log = new Comlibs();
 		currentClientURL = "https://compare.autodatadirect.com/subaru/ca/vehicle/#/select/primary/compare";
 		log.rwExcel("", "*********Competitive Compare URLs**********", "");
 		loadURL(driver, currentClientURL);
-		log.Wait(wt*2);
+		log.Wait(wt * 2);
 		SelectVehicle SelectVehiclePage = new SelectVehicle(driver);
 		log.Wait(wt * 2);
 		SelectVehiclePage.clickOnGotIt(driver, currentClientURL);
@@ -394,27 +394,31 @@ public class competitiveCompareUIController extends Comlibs {
 //				modelName = SelectVehiclePage.getModelName(driver, env, brand, v, currentClientURL);
 //				tc = tc + " -. Model Name " + modelName;
 //				// SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
-				brandURL=failedURL;
+				brandURL = failedURL;
 				loadURLinCompare(driver, failedURL);
 				currentClientURL = driver.getCurrentUrl();
 				tc = failedURL;
 				ComparePage.checkFeatturesPageshowOrNot(driver, currentClientURL, tc);
 				tc = " - Click on Trim - " + modelNameS;
+				// Get 2022 Kia
+				// Get Model+Trim Name
+				tc = ComparePage.getYearBrandModelTrim_Name(driver, currentClientURL, tc);
+
 				log.Wait(wt);
 				urlString = driver.getCurrentUrl() + " \n\n " + "group = . vehicle = \n " + modelNameS + " - "
 						+ trimNameS;
-				tc = " - VerifyPrimaryImage - " + trimNameS;
+//				tc = " - VerifyPrimaryImage - " + tc;
 				log.Wait(wt * 3);
 //							ComparePage.verifyPrimaryImage(driver, env, brand, urlString + "\n\n" + tc, tc);
 //							log.Wait(wt);
-				tc = " - VerifyPrimaryStartingFromPrice - " + modelNameS + " - " + trimNameS;
+				tc = " URL- VerifyPrimaryStartingFromPrice - " + tc;
 				SelectVehiclePage.clickOnGotItIfItShows(driver, currentClientURL);
 				ComparePage.verifyPrimaryStartingFromPrice(driver, env, " brand ", urlString + "\n\n" + tc,
 						expectedPrimaryPrice, tc);
 				log.Wait(wt);
 				tc = " - Click on New Compare";
 				try {
-					ComparePage.clickOnNewCompareFrNotAutRunURL(driver,env,failedURL, tc);
+					ComparePage.clickOnNewCompareFrNotAutRunURL(driver, env, failedURL, tc);
 				} catch (Exception e) {
 					driver.get("http://www.google.com");
 					loadURLOld(driver, thisClientURL);
