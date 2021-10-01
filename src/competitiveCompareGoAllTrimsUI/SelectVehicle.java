@@ -144,7 +144,7 @@ public class SelectVehicle extends Comlibs {
 		return vehiclesArray;
 	}
 
-	public SelectVehicle clickOnVehicle(WebDriver driver, int vehicleTypeNumber, int vehicleNum, String tc)
+	public SelectVehicle clickOnVehicle_OldBackUp(WebDriver driver, int vehicleTypeNumber, int vehicleNum, String tc)
 			throws Exception {
 		By vehicle01 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[" + vehicleTypeNumber
 				+ "]/div[1]/div/div[3]/div/div[" + vehicleNum + "]/div/div[1]/img");
@@ -168,6 +168,42 @@ public class SelectVehicle extends Comlibs {
 
 		elementExist(driver, vehicle01, true, tc);
 		driver.findElement(vehicle01).click();
+		return this;
+	}
+
+	public SelectVehicle clickOnVehicle(WebDriver driver, int vehicleTypeNumber, int vehicleNum, String tc)
+			throws Exception {
+		By vehicle01 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[" + vehicleTypeNumber
+				+ "]/div[1]/div/div[3]/div/div[" + vehicleNum + "]/div/div[1]/img");
+		By errorShow = By.xpath("/html/body/div[1]/div/div/div[3]/button");
+
+		elementExist(driver, vehicle01, true, tc);
+		boolean errorShowing = false;
+
+		driver.findElement(vehicle01).click();
+		errorShowing = elementExist(driver, errorShow, false, tc);
+		if (errorShowing) {
+			try {
+				driver.findElement(errorShow).click();
+
+				driver.findElement(vehicle01).click();
+				errorShowing = elementExist(driver, errorShow, false, tc);
+				if (errorShowing) {
+					driver.findElement(errorShow).click();
+					driver.findElement(vehicle01).click();
+					errorShowing = elementExist(driver, errorShow, false, tc);
+					if (errorShowing) {
+						rwExcel(tc, false, "ClickOnVehicle 2 times but still failed",
+								"vehicleTypeNumber = " + vehicleTypeNumber + ". vehicleNum = " + vehicleNum);
+					}
+
+				}
+
+			} catch (Exception e) {
+				rwExcel(tc, false, "ClickOnVehicle failed",
+						"vehicleTypeNumber = " + vehicleTypeNumber + ". vehicleNum = " + vehicleNum);
+			}
+		}
 		return this;
 	}
 
@@ -274,15 +310,14 @@ public class SelectVehicle extends Comlibs {
 		return new Compare(driver);
 	}
 
-	public String getModelName(WebDriver driver, String env, String brand,int g, int num, String tc) throws Exception {
+	public String getModelName(WebDriver driver, String env, String brand, int g, int num, String tc) throws Exception {
 
 		String modelName = "";
 //		By modelNameLocator = By
 //				.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[" + num + "]/div/div[2]");
-		By modelNameLocator = By
-				.xpath("/html/body/div[1]/div[3]/div[1]/div["+g+"]/div[1]/div/div[3]/div/div[" + num + "]/div/div[2]");
+		By modelNameLocator = By.xpath(
+				"/html/body/div[1]/div[3]/div[1]/div[" + g + "]/div[1]/div/div[3]/div/div[" + num + "]/div/div[2]");
 
-		
 		elementExist(driver, modelNameLocator, true, tc);
 		try {
 			modelName = driver.findElement(modelNameLocator).getText();
