@@ -1,5 +1,7 @@
 package competitiveCompareGoAllTrimsUI;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -47,7 +49,7 @@ public class Compare extends Comlibs {
 	By trim04 = By.xpath("");
 	By newCompare = By.xpath("/html/body/div[1]/div[3]/div/nav/div/div/div[3]/ul/li[1]/a/button");
 	By closeError = By.xpath("/html/body/div[1]/div/div/div[3]/button");
-//	By xxx = By.xpath("");
+	By availableFeaturesLocator = By.xpath("/html/body/div[1]/div[4]/div[1]/div/div[2]/div/div[2]/div[2]/span/input");
 
 //	By xxx = By.xpath("");
 //	By xxx = By.xpath("");
@@ -67,7 +69,6 @@ public class Compare extends Comlibs {
 
 		}
 	}
-
 	public void verifyPrimaryStartingFromPrice(WebDriver driver, String env, String brand, String urlString,
 			String expectedPrimaryPrices, String tc) throws Exception {
 		String PrimaryStartingFromPriceString = "";
@@ -217,6 +218,70 @@ public class Compare extends Comlibs {
 
 		}
 	}
+	public void get_grid_one_row_values(WebDriver driver, String env, String brand, String urlString, String sectionName,
+			int section,int row, String tc) throws Exception {
+		String PrimaryStartingFromPriceString = "";
+		String PrimaryImageStartingFromPriceString = "";
+		String SecondaryStartingFromPriceString_01 = "";
+		String SecondaryStartingFromPriceString_02 = "";
+		String SecondaryStartingFromPriceString_03 = "";
+		String rowName="";
+		boolean rowNameExist=false;
+		boolean rowNameLinkExist=false;
+		String errorMsg = "";
+		int PMSRP = 0;
+		int SMSRP_01 = 0;
+		int SMSRP_02 = 0;
+		int SMSRP_03 = 0;
+		int PImageMSRP = 0;
+		try {
+
+			By rowNameLocation = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li["+section+"]/div/div[2]/div/ul["+row+"]/li[1]/div[1]/span/span");
+			rowNameExist=elementExist(driver, rowNameLocation, false, tc);
+			By rowNamelinkLocation	= By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li["+section+"]/div/div[2]/div/ul["+row+"]/li[1]/div[1]/span/button");
+			rowNameLinkExist=elementExist(driver, rowNamelinkLocation, false, tc);
+				
+			if (rowNameExist) {
+					rowName=driver.findElement(rowNameLocation).getText();
+					if (rowName.equalsIgnoreCase("")) {
+						if (rowNameLinkExist) {
+							rowName=driver.findElement(rowNamelinkLocation).getText();
+						}
+					}
+				}else if (rowNameLinkExist) {
+					rowName=driver.findElement(rowNamelinkLocation).getText();
+			}
+
+			By PrimaryStartingFromPrice 	 	= By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li["+section+"]/div/div[2]/div/ul["+row+"]/li[2]/div[2]/span");
+			PrimaryStartingFromPriceString = driver.findElement(PrimaryStartingFromPrice).getText();
+
+			// Secondary vehicles StartingFromPrice 01 - 03
+			By SecondaryStartingFromPrice_01 	= By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li["+section+"]/div/div[2]/div/ul["+row+"]/li[6]/div[1]/span");
+			SecondaryStartingFromPriceString_01 = driver.findElement(SecondaryStartingFromPrice_01).getText();
+			By SecondaryStartingFromPrice_02 	= By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li["+section+"]/div/div[2]/div/ul["+row+"]/li[7]/div[1]/span");
+			SecondaryStartingFromPriceString_02 = driver.findElement(SecondaryStartingFromPrice_02).getText();
+			By SecondaryStartingFromPrice_03 	= By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li["+section+"]/div/div[2]/div/ul["+row+"]/li[8]/div[1]/span");
+			SecondaryStartingFromPriceString_03 = driver.findElement(SecondaryStartingFromPrice_03).getText();
+
+			String ScratchText="| "+sectionName+" | "+rowName+": | "+PrimaryStartingFromPriceString+" |  "+SecondaryStartingFromPriceString_01+" | "+SecondaryStartingFromPriceString_02+" | "+SecondaryStartingFromPriceString_03+" | "+urlString+" | ";
+					
+			
+//			System.out.println(ScratchText);
+//			System.out.println(rowName+": "+PrimaryStartingFromPriceString+"   "+SecondaryStartingFromPriceString_01+"  "+SecondaryStartingFromPriceString_02+"  "+SecondaryStartingFromPriceString_03+"  \n");
+			
+			String filePath="C:\\1\\Eclipse\\Test Results\\CompareUI\\CompetitiveCompareGridValues.txt";
+			SaveScratch( filePath, ScratchText);
+//			System.out.println("\n*****");
+
+		} catch (Exception e) {
+
+			rwExcel(tc, false, brand + " - PrimaryStartingFromPrice is not showing properly", errorMsg);
+
+			System.out
+					.println("\n\n*****************Verify PrimaryStartingFromPrice Is Complete!*******************\n");
+
+		}
+	}
 
 	public Compare clickOnVehicle(WebDriver driver, int vehicleTypeNumber, int vehicleNum, String tc) throws Exception {
 		By vehicle01 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[" + vehicleTypeNumber
@@ -294,7 +359,6 @@ public class Compare extends Comlibs {
 		}
 		;
 	}
-
 	public void checkFeatturesPageshowOrNot(WebDriver driver2, String currentClientURL, String tc) throws Exception {
 		boolean imageExist = false;
 		int wt = 5;
@@ -331,7 +395,16 @@ public class Compare extends Comlibs {
 			clickRefleshF5BtnLoadURL(driver, currentClientURL, tc);
 		}
 	}
+	public void clickAvailableFeatures(WebDriver driver, String tc) throws IOException {
 
+		elementExist(driver, availableFeaturesLocator, true, tc);
+		try {
+			driver.findElement(availableFeaturesLocator).click();
+		} catch (Exception e) {
+			System.out.println("\nClick on availableFeaturesLocator button failed!!!\n");
+		}
+
+	}
 	public String getYearBrandModelTrim_Name(WebDriver driver, String currentClientURL, String tc) throws Exception {
 		boolean imageExist = false;
 		String year_brand = "";
@@ -361,5 +434,64 @@ public class Compare extends Comlibs {
 		return year_brand_model_trim_Name;
 
 	}
-
+	public static void SaveScratch(String pathfilename, String ScratchText) {
+		try {
+			// BufferedWriter out2 = new BufferedWriter(new FileWriter(dataDir+ "Acodes.txt", true)); //original OK
+			BufferedWriter out2 = new BufferedWriter(new FileWriter(pathfilename, true));
+			// out2.write("("+i+"): "+Acode+": ");
+			// out2.write(i + ". " + Acode + ": "); //Original OK
+			// out2.newLine();
+			out2.write(ScratchText);
+			out2.newLine();
+			out2.close();
+		} catch (Exception e) {// Catch exception if any
+			System.err.println("Error: " + e.getMessage());
+		}
+	}
+	public int getCategoryRowsFromName(String categoryName) {
+		int num=0;
+        switch(categoryName)
+        {
+            case "Pricing":
+			num=4;
+                break;
+            case "FUEL ECONOMY":
+			num=4;
+                break;
+            case "EXTERIOR FEATURES":
+			num=47;
+                break;				
+            case "COMFORT":
+			num=22;
+                break;
+            case "CONVENIENCE":
+			num=26;
+                break;
+            case "LIGHTING":
+			num=12;
+                break;
+            case "INFOTAINMENT":
+			num=15;
+                break;
+            case "MECHANICAL":
+			num=24;//or 24 or 25
+                break;
+            case "SAFETY":
+			num=33;
+                break;
+            case "DIMENSIONS":
+			num=22;
+                break;				
+            case "WARRANTY":
+			num=10;
+            break;	
+            default:
+				num=1;
+        }
+		
+		return num;
+	}
+	
+	
+	
 }
