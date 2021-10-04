@@ -470,7 +470,7 @@ public class competitiveCompareUIController extends Comlibs {
 							ComparePage.checkFeatturesPageshowOrNot(driver, currentClientURL, tc);
 							tc = brand + " - Click on Trim - " + modelNameS;
 							log.Wait(wt);
-							urlString = driver.getCurrentUrl() + "| " + "group = " + i + ". vehicle = " + v 
+							urlString = driver.getCurrentUrl() + "| " + "group = " + i + ". vehicle = " + v +"|"
 									+ modelNameS + " - " + trimNameS;
 							tc = env + " - " + brand + " - VerifyPrimaryImage - " + trimNameS;
 							log.Wait(wt * 3);
