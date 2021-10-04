@@ -332,6 +332,196 @@ public class competitiveCompareUIController extends Comlibs {
 		}
 	}
 
+	public static void CompetitiveCompareGridValues(WebDriver driver, String brw, String envment, String brand)
+			throws Exception {
+		// Load environment parameters
+		Properties prop = new Properties();
+		try {
+			prop.load(competitiveCompareUIController.class.getClassLoader()
+					.getResourceAsStream("./data/competitiveCompareGoAllTrims.properties"));// "./main.properties";
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		String env = envment;
+		String Years[] = fetchOneDemArrayFromPropFile(env + ".Years", prop);
+		String expectedPrimaryPrice = prop.getProperty(env + "." + brand + ".expectedPrimaryPrice");
+		int wt = Integer.parseInt(prop.getProperty("CompetitiveCompare.waitTime"));
+		String only1stTrim = prop.getProperty("CompetitiveCompare.only1stTrims");
+		String onlyOneTrimOneBrand = prop.getProperty("CompetitiveCompare.onlyOneTrimOneBrand");
+		// Initial
+		String tc;
+		String modelName = "";
+		String modelNameS = "";
+		int trimNumber = 0;
+		int trimsNumbers = 0;
+		String trimNameS = "";
+		String urlString = "";
+		String currentClientURL = "";
+		String thisClientURL = "";
+		String categories[] = { "Pricing", "FUEL ECONOMY", "EXTERIOR FEATURES", "COMFORT", "CONVENIENCE", "LIGHTING",
+				"INFOTAINMENT", "MECHANICAL", "SAFETY", "DIMENSIONS", "WARRANTY" };
+
+		Comlibs log = new Comlibs();
+		log.rwExcel("", "********* " + brand + " Competitive Compare UI**********", "");
+		SelectVehicle SelectVehiclePage = new SelectVehicle(driver);
+		tc = brand + " - Click On Got It";
+		SelectVehiclePage.clickOnGotIt(driver, tc);
+
+		for (String Year : Years) {
+			tc = env + " - " + brand + " - Select year: " + Year;
+			SelectVehiclePage.selectYear(driver, Year, tc);
+			tc = Year + " - " + brand + " - CountVehicleArray";
+			// Select first type and first vehicle: 1,1. Select second type and first
+			// vehicle 2,1
+			int vehicleArry[];
+			log.Wait(wt);
+
+			int groupArray = 0;
+
+			int vehicleLength = 0;
+
+			if (onlyOneTrimOneBrand.equalsIgnoreCase("Yes")) {
+				vehicleArry = SelectVehiclePage.countVehicleArray(driver, tc);
+				vehicleLength = vehicleArry.length;
+
+				if (vehicleArry[0] == 0) {
+					vehicleArry[1] = 1;
+					groupArray = 2;
+				} else {
+					vehicleArry[0] = 1;
+					groupArray = 1;
+				}
+
+			} else {
+				vehicleArry = SelectVehiclePage.countVehicleArray(driver, tc);
+				groupArray = vehicleArry.length;
+			}
+			System.out.println("Vehicle Array length = " + groupArray + " \n\n");
+			for (int i = 1; i <= groupArray; i++) {
+				log.Wait(wt);
+				for (int v = 1; v <= vehicleArry[i - 1]; v++) {
+////				//Debug 									// *************************
+//					i = 4;
+//					v = 1;
+
+					currentClientURL = driver.getCurrentUrl();
+					thisClientURL = currentClientURL;
+					tc = env + " - " + brand + " - Select Year = " + Year;
+					log.Wait(wt);
+					SelectVehiclePage.selectYear(driver, Year, tc);
+					log.Wait(wt);
+					modelName = SelectVehiclePage.getModelName(driver, env, brand, i, v, currentClientURL);
+					System.out.println("\n getModelName = " + modelName + "\n");
+					SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
+//					tc = brand + " - getModelName";
+					tc = brand + " - Model Name - " + modelName;
+					log.Wait(wt * 3);
+					boolean check1stTrimExist = SelectVehiclePage.checkFirstTrimExist(driver, tc);
+					boolean check2ndTrimExist = SelectVehiclePage.checkSecondTrimExist(driver, tc);
+					trimNumber = SelectVehiclePage.getTrimNumber(driver, env, brand, tc);
+					if (trimNumber == 0) {
+						log.rwExcel(tc, false, "Click on Year = " + Year + " vehicle v = " + v + " - not working!",
+								"Trims pop-up not showing!");
+						driver.get("http://www.google.com");
+						log.Wait(2);
+						loadURLOld(driver, currentClientURL);
+						continue;
+					}
+					SelectVehiclePage.clickOnTrimOld_1st_OK(driver, env, brand, currentClientURL);
+					Compare ComparePage = new Compare(driver);
+					log.Wait(wt);
+					loadURLOld(driver, currentClientURL);
+////				trimNumber=1; //only go through just 1st trim
+					if (only1stTrim.equalsIgnoreCase("Yes")) {
+						trimNumber = 1;
+					}
+					for (int trim = 1; trim <= trimNumber; trim++) {// *************************
+						try {
+							currentClientURL = driver.getCurrentUrl();
+							tc = env + " - " + brand + " - Select Year = " + Year;
+							log.Wait(wt);
+							SelectVehiclePage.selectYear(driver, Year, tc);
+							log.Wait(wt);
+							modelName = SelectVehiclePage.getModelName(driver, env, brand, i, v, currentClientURL);
+							tc = tc + " -. Model Name " + modelName;
+							SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
+							tc = brand + " - getModelName";
+							trimsNumbers = SelectVehiclePage.getTrimNumber(driver, env, brand, tc);
+							log.Wait(wt * 3);
+
+							modelNameS = SelectVehiclePage.getModelName(driver, tc);
+							tc = brand + " - " + modelNameS;
+//							tc = tc + " - getTrimName ";
+							if (trim == 1) {
+								// if 1st by does not exist, num=num+2
+								trimNameS = SelectVehiclePage.getTrimName(driver, env, brand, trim, check1stTrimExist,
+										check2ndTrimExist, tc);// take 2nd which is wrong
+								tc = tc + " - " + trimNameS;
+								SelectVehiclePage.clickOnTrimOld_1st_OK(driver, env, brand, currentClientURL);
+							} else {
+								trimNameS = SelectVehiclePage.getTrimName(driver, env, brand, trim, check1stTrimExist,
+										check2ndTrimExist, tc);
+								tc = tc + " - " + trimNameS;
+								SelectVehiclePage.clickOnTrimNewAllTrims(driver, env, brand, trim, check1stTrimExist,
+										check2ndTrimExist, currentClientURL);
+							}
+							currentClientURL = driver.getCurrentUrl();
+							ComparePage.checkFeatturesPageshowOrNot(driver, currentClientURL, tc);
+							tc = brand + " - Click on Trim - " + modelNameS;
+							log.Wait(wt);
+							urlString = driver.getCurrentUrl() + "| " + "group = " + i + ". vehicle = " + v 
+									+ modelNameS + " - " + trimNameS;
+							tc = env + " - " + brand + " - VerifyPrimaryImage - " + trimNameS;
+							log.Wait(wt * 3);
+//							ComparePage.verifyPrimaryImage(driver, env, brand, urlString + "\n\n" + tc, tc);
+//							log.Wait(wt);
+							tc = env + " - " + brand + " - VerifyPrimaryStartingFromPrice - " + modelNameS + " - "
+									+ trimNameS;
+							ComparePage.clickAvailableFeatures(driver, tc);
+							int x=0;
+							// for (int x = 1; x <= 3; x++) {
+							for (String category : categories) {
+								x=x+1;
+								int categoryrows=ComparePage.getCategoryRowsFromName(category);
+//								for (int x = 1; x <= 2; x++) {
+									for (int y = 1; y <= categoryrows; y++) {
+										ComparePage.get_grid_one_row_values(driver, env, brand, urlString,
+												category, x, y, tc);
+//									}
+								}
+							}
+							log.Wait(wt);
+							tc = env + " - " + brand + " - Click on New Compare";
+							try {
+								ComparePage.clickOnNewCompare(driver, tc);
+							} catch (Exception e) {
+								driver.get("http://www.google.com");
+								loadURLOld(driver, thisClientURL);
+								SelectVehicle SelectVehiclePageAgain = new SelectVehicle(driver);
+								tc = brand + " - Click On Got It Again after loading the URL!";
+								try {
+									SelectVehiclePageAgain.clickOnGotIt(driver, tc);
+								} catch (Exception ee) {
+									System.out.println(
+											brand + " - Click On Got It Button does not show after loading the URL!");
+								}
+								log.Wait(wt * 4);
+							}
+							// trim catch
+						} catch (Exception e) {
+							System.out.println(
+									"\n***********Failed to click on the trim! need to send alert email?*******\n");
+							loadURLOld(driver, currentClientURL);
+						}
+
+					}
+
+				}
+			}
+		}
+	}
+
 	public static void ReLoadFailedURLs(WebDriver driver, String envment) throws Exception {
 		// Load environment parameters
 		Properties prop = new Properties();
@@ -342,7 +532,7 @@ public class competitiveCompareUIController extends Comlibs {
 			e.printStackTrace();
 		}
 		String expectedPrimaryPrice = prop.getProperty(envment + "." + "Kia" + ".expectedPrimaryPrice");
-		String failedURLs[] = fetchOneDemArrayFromPropFile(envment+".failedURLs", prop);
+		String failedURLs[] = fetchOneDemArrayFromPropFile(envment + ".failedURLs", prop);
 
 		int wt = Integer.parseInt(prop.getProperty("CompetitiveCompare.waitTime"));
 		// Initial
@@ -512,13 +702,18 @@ public class competitiveCompareUIController extends Comlibs {
 						log.rwExcel("", "----" + brand + " Competitive Compare page Testing started-----" + (i + 1),
 								"");
 						// 1. ***********Competitive Compare**************
-						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
+//						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
 						// ***********Competitive Compare***************
 
 						// 2. ***********Reload failed URLs on Competitive Compare**************
 						// Set only one client when running this to avoid multiple runs
 //						ReLoadFailedURLs(driver, env);
 						// ***********Reload failed URLs on Competitive Compare**************
+
+						// 3. ***********CompetitiveCompareGridValues**************
+						CompetitiveCompareGridValues(driver, tBrowser, env, brand);
+						// ***********Competitive Compare***************
+
 						log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 						driver.quit();// driver.quit(), driver.close()
 						System.out.println(env + " - " + brand + " - Test is complete!!!   i = " + (i + 1) + "\n");
