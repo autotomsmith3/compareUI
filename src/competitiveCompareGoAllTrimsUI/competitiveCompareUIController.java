@@ -146,6 +146,15 @@ public class competitiveCompareUIController extends Comlibs {
 
 	public static SelectVehicle loadURLOld(WebDriver driver, String bURL) throws IOException {
 		driver.get(bURL);
+		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com"))) {// compare.autodatadirect.com
+			// is Prod URL
+			try {
+				driver.switchTo().alert().dismiss();
+			} catch (Exception e) {
+				System.out.println("\nCancel buttom (dismiss) does not exist. Failed to click it!\n");
+			}
+		}
+
 		return new SelectVehicle(driver);
 	}
 
@@ -467,48 +476,64 @@ public class competitiveCompareUIController extends Comlibs {
 										check2ndTrimExist, currentClientURL);
 							}
 							currentClientURL = driver.getCurrentUrl();
-							ComparePage.checkFeatturesPageshowOrNot(driver, currentClientURL, tc);
-							tc = brand + " - Click on Trim - " + modelNameS;
-							log.Wait(wt);
-							urlString = driver.getCurrentUrl() + "| " + "group = " + i + ". vehicle = " + v +"|"
-									+ modelNameS + " - " + trimNameS;
-							tc = env + " - " + brand + " - VerifyPrimaryImage - " + trimNameS;
-							log.Wait(wt * 3);
+							boolean featuresPageExist = ComparePage.checkFeatturesPageshowOrNotForGridValues(driver,
+									currentClientURL, tc);
+							if (featuresPageExist) {
+
+								tc = brand + " - Click on Trim - " + modelNameS;
+								log.Wait(wt);
+								urlString = driver.getCurrentUrl() + "| " + "group = " + i + ". vehicle = " + v + "|"
+										+ modelNameS + " - " + trimNameS;
+								tc = env + " - " + brand + " - VerifyPrimaryImage - " + trimNameS;
+								log.Wait(wt * 3);
 //							ComparePage.verifyPrimaryImage(driver, env, brand, urlString + "\n\n" + tc, tc);
 //							log.Wait(wt);
-							tc = env + " - " + brand + " - VerifyPrimaryStartingFromPrice - " + modelNameS + " - "
-									+ trimNameS;
-							ComparePage.clickAvailableFeatures(driver, tc);
-							int x=0;
-							// for (int x = 1; x <= 3; x++) {
-							for (String category : categories) {
-								x=x+1;
-								int categoryrows=ComparePage.getCategoryRowsFromName(category);
+								tc = env + " - " + brand + " - VerifyPrimaryStartingFromPrice - " + modelNameS + " - "
+										+ trimNameS;
+								ComparePage.clickAvailableFeatures(driver, tc);
+								int x = 0;
+								// for (int x = 1; x <= 3; x++) {
+								for (String category : categories) {
+									x = x + 1;
+									int categoryrows = ComparePage.getCategoryRowsFromName(category);
 //								for (int x = 1; x <= 2; x++) {
 									for (int y = 1; y <= categoryrows; y++) {
-										ComparePage.get_grid_one_row_values(driver, env, brand, urlString,
-												category, x, y, tc);
+										ComparePage.get_grid_one_row_values(driver, env, brand, urlString, category, x,
+												y, tc);
 //									}
+									}
 								}
-							}
-							log.Wait(wt);
-							tc = env + " - " + brand + " - Click on New Compare";
-							try {
-								ComparePage.clickOnNewCompare(driver, tc);
-							} catch (Exception e) {
+								log.Wait(wt);
+								tc = env + " - " + brand + " - Click on New Compare";
+								try {
+									ComparePage.clickOnNewCompare(driver, tc);
+								} catch (Exception e) {
+									driver.get("http://www.google.com");
+									loadURLOld(driver, thisClientURL);
+									SelectVehicle SelectVehiclePageAgain = new SelectVehicle(driver);
+									tc = brand + " - Click On Got It Again after loading the URL!";
+									try {
+										SelectVehiclePageAgain.clickOnGotIt(driver, tc);
+									} catch (Exception ee) {
+										System.out.println(brand
+												+ " - Click On Got It Button does not show after loading the URL!");
+									}
+									log.Wait(wt * 4);
+								}
+								// trim catch
+							} else {
 								driver.get("http://www.google.com");
 								loadURLOld(driver, thisClientURL);
-								SelectVehicle SelectVehiclePageAgain = new SelectVehicle(driver);
-								tc = brand + " - Click On Got It Again after loading the URL!";
-								try {
-									SelectVehiclePageAgain.clickOnGotIt(driver, tc);
-								} catch (Exception ee) {
-									System.out.println(
-											brand + " - Click On Got It Button does not show after loading the URL!");
-								}
-								log.Wait(wt * 4);
+//							SelectVehicle SelectVehiclePageAgain = new SelectVehicle(driver);
+//							tc = brand + " - Click On Got It Again after loading the URL!";
+//							try {
+//								SelectVehiclePageAgain.clickOnGotIt(driver, tc);
+//							} catch (Exception ee) {
+//								System.out.println(
+//										brand + " - Click On Got It Button does not show after loading the URL!");
+//							}
+//							log.Wait(wt*2);
 							}
-							// trim catch
 						} catch (Exception e) {
 							System.out.println(
 									"\n***********Failed to click on the trim! need to send alert email?*******\n");
