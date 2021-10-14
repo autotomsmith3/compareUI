@@ -490,7 +490,7 @@ public class competitiveCompareUIController extends Comlibs {
 //							log.Wait(wt);
 								tc = env + " - " + brand + " - VerifyPrimaryStartingFromPrice - " + modelNameS + " - "
 										+ trimNameS;
-								ComparePage.clickAvailableFeatures(driver, tc);
+								ComparePage.clickAvailableFeatures(driver,env, tc);
 								int x = 0;
 								// for (int x = 1; x <= 3; x++) {
 								for (String category : categories) {

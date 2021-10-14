@@ -284,7 +284,8 @@ public class Compare extends Comlibs {
 
 		} catch (Exception e) {
 
-			rwExcel(tc, false, brand + " - sectionName = "+sectionName+". section = "+section+". row = "+row, "row value is not showing.");
+			rwExcel(tc, false, brand + " - sectionName = " + sectionName + ". section = " + section + ". row = " + row,
+					"row value is not showing.");
 
 			System.out
 					.println("\n\n*****************Verify PrimaryStartingFromPrice Is Complete!*******************\n");
@@ -446,15 +447,15 @@ public class Compare extends Comlibs {
 		return imageExist;
 	}
 
-	public void clickAvailableFeatures(WebDriver driver, String tc) throws IOException {
-
-		elementExist(driver, availableFeaturesLocator, true, tc);
-		try {
-			driver.findElement(availableFeaturesLocator).click();
-		} catch (Exception e) {
-			System.out.println("\nClick on availableFeaturesLocator button failed!!!\n");
+	public void clickAvailableFeatures(WebDriver driver, String environment, String tc) throws IOException {
+		if (environment.equalsIgnoreCase("QA")) {
+			elementExist(driver, availableFeaturesLocator, true, tc);
+			try {
+				driver.findElement(availableFeaturesLocator).click();
+			} catch (Exception e) {
+				System.out.println("\nClick on availableFeaturesLocator button failed!!!\n");
+			}
 		}
-
 	}
 
 	public String getYearBrandModelTrim_Name(WebDriver driver, String currentClientURL, String tc) throws Exception {
@@ -534,10 +535,10 @@ public class Compare extends Comlibs {
 			num = 33;
 			break;
 		case "DIMENSIONS":
-			num = 21;//21 or 22
+			num = 21;// 21 or 22
 			break;
 		case "WARRANTY":
-			num = 8; //8 or 9 or 10
+			num = 8; // 8 or 9 or 10
 			break;
 		default:
 			num = 1;
