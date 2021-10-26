@@ -104,6 +104,7 @@ public class Compare extends Comlibs {
 			if (!SecondaryStartingFromPriceString_01.equals("")) {
 				SecondaryStartingFromPriceString_01 = SecondaryStartingFromPriceString_01.replace("$", "");
 				SecondaryStartingFromPriceString_01 = SecondaryStartingFromPriceString_01.replace(",", "");
+				SecondaryStartingFromPriceString_01 = SecondaryStartingFromPriceString_01.replace(" ", "");
 				SMSRP_01 = Integer.parseInt(SecondaryStartingFromPriceString_01);
 				if (SMSRP_01 == 0) {
 					rwExcel(tc.replace("VerifyPrimary", "") + " - MSRP=$0", false, urlString,
@@ -119,6 +120,7 @@ public class Compare extends Comlibs {
 			if (!SecondaryStartingFromPriceString_02.equals("")) {
 				SecondaryStartingFromPriceString_02 = SecondaryStartingFromPriceString_02.replace("$", "");
 				SecondaryStartingFromPriceString_02 = SecondaryStartingFromPriceString_02.replace(",", "");
+				SecondaryStartingFromPriceString_02 = SecondaryStartingFromPriceString_02.replace(" ", "");
 				SMSRP_02 = Integer.parseInt(SecondaryStartingFromPriceString_02);
 				if (SMSRP_02 == 0) {
 					rwExcel(tc.replace("VerifyPrimary", "") + " - MSRP=$0", false, urlString,
@@ -134,6 +136,7 @@ public class Compare extends Comlibs {
 			if (!SecondaryStartingFromPriceString_03.equals("")) {
 				SecondaryStartingFromPriceString_03 = SecondaryStartingFromPriceString_03.replace("$", "");
 				SecondaryStartingFromPriceString_03 = SecondaryStartingFromPriceString_03.replace(",", "");
+				SecondaryStartingFromPriceString_03 = SecondaryStartingFromPriceString_03.replace(" ", "");
 				SMSRP_03 = Integer.parseInt(SecondaryStartingFromPriceString_03);
 				if (SMSRP_03 == 0) {
 					rwExcel(tc.replace("VerifyPrimary", "") + " - MSRP=$0", false, urlString,
@@ -154,6 +157,7 @@ public class Compare extends Comlibs {
 			if (!PrimaryStartingFromPriceString.equals("")) {
 				PrimaryStartingFromPriceString = PrimaryStartingFromPriceString.replace("$", "");
 				PrimaryStartingFromPriceString = PrimaryStartingFromPriceString.replace(",", "");
+				PrimaryStartingFromPriceString = PrimaryStartingFromPriceString.replace(" ", "");
 				PMSRP = Integer.parseInt(PrimaryStartingFromPriceString);
 			}
 
@@ -181,6 +185,7 @@ public class Compare extends Comlibs {
 				PrimaryImageStartingFromPriceString = PrimaryImageStartingFromPriceString.replace("$", "");
 				PrimaryImageStartingFromPriceString = PrimaryImageStartingFromPriceString.replace(",", "");
 				PrimaryImageStartingFromPriceString = PrimaryImageStartingFromPriceString.replace(" *", "");
+				PrimaryImageStartingFromPriceString = PrimaryImageStartingFromPriceString.replace(" ", "");
 				PImageMSRP = Integer.parseInt(PrimaryImageStartingFromPriceString);
 			}
 
