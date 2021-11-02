@@ -377,7 +377,7 @@ public class SelectVehicle extends Comlibs {
 		return secondTrimExist;
 	}
 
-	public int getTrimNumber(WebDriver driver, String env, String brand, String tc) throws Exception {
+	public int getTrimNumber(WebDriver driver, String env, String brand, String urlS, String tc) throws Exception {
 		int countTrim = 0;
 		int wt = 2;
 		By trims = By.xpath("//*[@id=\"vehicle-select-radio\"]");
@@ -388,7 +388,7 @@ public class SelectVehicle extends Comlibs {
 				break;
 			} else {
 				if (i == wt) {
-					rwExcel(tc, false, "Brand = " + brand, "Not showing after wait " + wt + " minutes.");
+					rwExcel(tc, false, urlS, "Brand = " + brand + " Not showing after wait " + wt + " minutes.");
 				}
 				System.out.println("\nTrims pop-up not showing. Start to wait... i = " + i + " of total i = " + wt
 						+ " X (60 secs)\n");
