@@ -248,7 +248,7 @@ public class competitiveCompareUIController extends Comlibs {
 					log.Wait(wt * 3);
 					boolean check1stTrimExist = SelectVehiclePage.checkFirstTrimExist(driver, tc);
 					boolean check2ndTrimExist = SelectVehiclePage.checkSecondTrimExist(driver, tc);
-					trimNumber = SelectVehiclePage.getTrimNumber(driver, env, brand, tc);
+					trimNumber = SelectVehiclePage.getTrimNumber(driver, env, brand, currentClientURL, tc);
 					if (trimNumber == 0) {
 						log.rwExcel(tc, false, "Click on Year = " + Year + " vehicle v = " + v + " - not working!",
 								"Trims pop-up not showing!");
@@ -276,7 +276,7 @@ public class competitiveCompareUIController extends Comlibs {
 							tc = tc + " -. Model Name " + modelName;
 							SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
 							tc = brand + " - getModelName";
-							trimsNumbers = SelectVehiclePage.getTrimNumber(driver, env, brand, tc);
+							trimsNumbers = SelectVehiclePage.getTrimNumber(driver, env, brand, currentClientURL, tc);
 							log.Wait(wt * 3);
 
 							modelNameS = SelectVehiclePage.getModelName(driver, tc);
@@ -428,7 +428,7 @@ public class competitiveCompareUIController extends Comlibs {
 					log.Wait(wt * 3);
 					boolean check1stTrimExist = SelectVehiclePage.checkFirstTrimExist(driver, tc);
 					boolean check2ndTrimExist = SelectVehiclePage.checkSecondTrimExist(driver, tc);
-					trimNumber = SelectVehiclePage.getTrimNumber(driver, env, brand, tc);
+					trimNumber = SelectVehiclePage.getTrimNumber(driver, env, brand, currentClientURL, tc);
 					if (trimNumber == 0) {
 						log.rwExcel(tc, false, "Click on Year = " + Year + " vehicle v = " + v + " - not working!",
 								"Trims pop-up not showing!");
@@ -456,7 +456,7 @@ public class competitiveCompareUIController extends Comlibs {
 							tc = tc + " -. Model Name " + modelName;
 							SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
 							tc = brand + " - getModelName";
-							trimsNumbers = SelectVehiclePage.getTrimNumber(driver, env, brand, tc);
+							trimsNumbers = SelectVehiclePage.getTrimNumber(driver, env, brand, currentClientURL, tc);
 							log.Wait(wt * 3);
 
 							modelNameS = SelectVehiclePage.getModelName(driver, tc);
@@ -490,7 +490,7 @@ public class competitiveCompareUIController extends Comlibs {
 //							log.Wait(wt);
 								tc = env + " - " + brand + " - VerifyPrimaryStartingFromPrice - " + modelNameS + " - "
 										+ trimNameS;
-								ComparePage.clickAvailableFeatures(driver,env, tc);
+								ComparePage.clickAvailableFeatures(driver, env, tc);
 								int x = 0;
 								// for (int x = 1; x <= 3; x++) {
 								for (String category : categories) {
