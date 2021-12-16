@@ -23,9 +23,11 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 //Test updated 02
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.sql.Connection;
@@ -33,12 +35,16 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import javax.mail.MessagingException;
+import javax.swing.JOptionPane;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -68,7 +74,7 @@ public class competitiveCompareUIController extends Comlibs {
 		this.driver = driver;
 		// String wh1=driver.getWindowHandle();
 
-		String sPageTitle = "VINpx Login";
+		String sPageTitle = "Select Vehicle";
 		boolean existTitle = TitleDisplay(driver, sPageTitle);
 		if (existTitle)
 			try {
@@ -162,6 +168,53 @@ public class competitiveCompareUIController extends Comlibs {
 		// get array split up by the colin
 		String a[] = propFile.getProperty(propertyName).split(",");
 		return a;
+	}
+
+	private static String[] readTextData(String environment, String filename) throws IOException {
+		Scanner sc = new Scanner(new File(filename));
+		List<String> lines = new ArrayList<String>();
+		while (sc.hasNextLine()) {
+			lines.add(sc.nextLine());
+		}
+		String a[] = lines.toArray(new String[0]);
+		return a;
+	}
+
+	public void loadFromDataPath(String filename) throws Exception {
+		boolean loadFromClasspath = true;
+		String fileName = filename; // provide an absolute path here to be sure that file is found
+		BufferedReader reader = null;
+		try {
+
+			if (loadFromClasspath) {
+				// loading from classpath
+				// see the link above for more options
+				InputStream in;
+//				try {
+				in = getClass().getClassLoader().getResourceAsStream("./data/" + fileName);
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} 
+				reader = new BufferedReader(new InputStreamReader(in));
+			} else {
+				// load from file system
+				reader = new BufferedReader(new FileReader(new File(fileName)));
+			}
+
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				// do something with the line here
+				System.out.println("Line read: " + line);
+			}
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage() + " for lol.txt", "File Error",
+					JOptionPane.ERROR_MESSAGE);
+		} finally {
+			if (reader != null) {
+				reader.close();
+			}
+		}
 	}
 
 	public static void CompetitiveCompareMonitor(WebDriver driver, String brw, String envment, String brand)
@@ -656,6 +709,159 @@ public class competitiveCompareUIController extends Comlibs {
 
 	}
 
+	public static void ReLoadAllURLs(WebDriver driver, String envment) throws Exception {
+		competitiveCompareUIController loadTextData = new competitiveCompareUIController(driver, envment);
+		String failedURLs[] = loadTextData.loadTextFromDataFolder(envment, "./data/" + envment + "AllURLs.txt");
+		// Load environment parameters
+		Properties prop = new Properties();
+		try {
+			prop.load(competitiveCompareUIController.class.getClassLoader()
+					.getResourceAsStream("./data/competitiveCompareGoAllTrims.properties"));// "./main.properties";
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String expectedPrimaryPrice = prop.getProperty(envment + "." + "Kia" + ".expectedPrimaryPrice");
+//		String failedURLs[] = fetchOneDemArrayFromPropFile(envment + ".failedURLs", prop);
+//		String failedURLs[] = 
+		int wt = Integer.parseInt(prop.getProperty("CompetitiveCompare.waitTime"));
+		// Initial
+		String env = envment;
+		String tc;
+		String modelName = "";
+		String modelNameS = "";
+		int trimNumber = 0;
+		int trimsNumbers = 0;
+		String trimNameS = "";
+		String urlString = "";
+		String currentClientURL = "";
+		String thisClientURL = "";
+		String brandURL = "";
+		Comlibs log = new Comlibs();
+		currentClientURL = "https://compare.autodatadirect.com/subaru/ca/vehicle/#/select/primary/compare";
+		log.rwExcel("", "*********Competitive Compare URLs**********", "");
+		loadURL(driver, currentClientURL);
+		log.Wait(wt * 2);
+		SelectVehicle SelectVehiclePage = new SelectVehicle(driver);
+		log.Wait(wt * 2);
+		SelectVehiclePage.clickOnGotIt(driver, currentClientURL);
+		currentClientURL = driver.getCurrentUrl();
+		thisClientURL = currentClientURL;
+		tc = " - Click On Got It";
+//		SelectVehiclePage.clickOnGotIt(driver, tc);
+		try {
+			SelectVehiclePage.clickOnVehicle(driver, 2, 1, tc);
+		} catch (Exception e) {
+			System.out.println("\n **********Click on vehicle failed**********\n");
+			SelectVehiclePage.clickOnVehicle(driver, 1, 1, tc);
+		}
+
+		log.Wait(wt);
+		SelectVehiclePage.clickOnTrimOld_1st_OK(driver, thisClientURL, thisClientURL, currentClientURL);
+		log.Wait(wt);
+		tc = "Reload Failed url";
+		log.Wait(wt);
+		Compare ComparePage = new Compare(driver);
+		ComparePage.clickOnNewCompare(driver, currentClientURL);
+		log.Wait(wt);
+		for (String failedURL : failedURLs) {// *************************
+			try {
+				currentClientURL = driver.getCurrentUrl();
+//				tc = env + " - " + brand + " - Select Year = " + Year;
+//				log.Wait(wt);
+//				SelectVehiclePage.selectYear(driver, Year, tc);
+//				log.Wait(wt);
+//				modelName = SelectVehiclePage.getModelName(driver, env, brand, v, currentClientURL);
+//				tc = tc + " -. Model Name " + modelName;
+//				// SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
+				brandURL = failedURL;
+				loadURLinCompare(driver, failedURL);
+				currentClientURL = driver.getCurrentUrl();
+				tc = failedURL;
+				ComparePage.checkFeatturesPageshowOrNot(driver, currentClientURL, tc);
+				tc = " - Click on Trim - " + modelNameS;
+				// Get 2022 Kia
+				// Get Model+Trim Name
+				tc = ComparePage.getYearBrandModelTrim_Name(driver, currentClientURL, tc);
+
+				log.Wait(wt);
+				urlString = driver.getCurrentUrl() + " \n\n " + "group = . vehicle = \n " + modelNameS + " - "
+						+ trimNameS;
+//				tc = " - VerifyPrimaryImage - " + tc;
+				log.Wait(wt * 3);
+//							ComparePage.verifyPrimaryImage(driver, env, brand, urlString + "\n\n" + tc, tc);
+//							log.Wait(wt);
+				tc = " URL- VerifyPrimaryStartingFromPrice - " + tc;
+				SelectVehiclePage.clickOnGotItIfItShows(driver, currentClientURL);
+				ComparePage.verifyPrimaryStartingFromPrice(driver, env, " brand ", urlString + "\n\n" + tc,
+						expectedPrimaryPrice, tc);
+				log.Wait(wt);
+				tc = " - Click on New Compare";
+				try {
+					ComparePage.clickOnNewCompareFrNotAutRunURL(driver, env, failedURL, tc);
+				} catch (Exception e) {
+					driver.get("http://www.google.com");
+					loadURLOld(driver, thisClientURL);
+					SelectVehicle SelectVehiclePageAgain = new SelectVehicle(driver);
+					tc = " - Click On Got It Again after loading the URL!";
+					try {
+						SelectVehiclePageAgain.clickOnGotIt(driver, tc);
+					} catch (Exception ee) {
+						System.out.println(" - Click On Got It Button does not show after loading the URL!");
+					}
+					log.Wait(wt * 4);
+				}
+				// trim catch
+			} catch (Exception e) {
+				System.out.println("\n***********Failed to click on the trim! need to send alert email?*******\n");
+				loadURLOld(driver, thisClientURL);
+			}
+
+		}
+
+	}
+
+	public String[] loadTextFromDataFolder(String env, String filePathName) throws IOException {
+		boolean loadFromClasspath = true;
+		String fileName = "StagingAllURLs.txt"; // provide an absolute path here to be sure that file is found
+		BufferedReader reader = null;
+		String[] empty = { "" };
+		try {
+
+			if (loadFromClasspath) {
+				InputStream in = getClass().getClassLoader().getResourceAsStream(filePathName);
+				reader = new BufferedReader(new InputStreamReader(in));
+			} else {
+				// load from file system
+				reader = new BufferedReader(new FileReader(new File(fileName)));
+			}
+			List<String> liness = new ArrayList<String>();
+			String line = null;
+//	        String liness="";
+			while ((line = reader.readLine()) != null) {
+				// do something with the line here
+				System.out.println("Line read: " + line);
+				liness.add(line);
+			}
+
+			String urls[] = liness.toArray(new String[0]);
+			int arrsize = urls.length;
+			System.out.println("\nArrary lenght=" + arrsize);
+			for (String url : urls) {
+				System.out.println("URL=" + url);
+			}
+			System.out.println("\nArrary lenght=" + arrsize);
+			return urls;
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage() + " for AllURLs.txt", "File Error",
+					JOptionPane.ERROR_MESSAGE);
+		} finally {
+			if (reader != null) {
+				reader.close();
+			}
+		}
+		return empty;
+	}
+
 	public static void main(String[] args) throws Exception {
 		// Load environment parameters
 		Properties prop = new Properties();
@@ -727,7 +933,7 @@ public class competitiveCompareUIController extends Comlibs {
 						log.rwExcel("", "----" + brand + " Competitive Compare page Testing started-----" + (i + 1),
 								"");
 						// 1. ***********Competitive Compare**************
-						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
+//						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
 						// ***********Competitive Compare***************
 
 						// 2. ***********Reload failed URLs on Competitive Compare**************
@@ -738,6 +944,17 @@ public class competitiveCompareUIController extends Comlibs {
 						// 3. ***********CompetitiveCompareGridValues**************
 //						CompetitiveCompareGridValues(driver, tBrowser, env, brand);
 						// ***********Competitive Compare***************
+
+						// 4. ***********read all en,fr,es URLs on Competitive Compare**************
+						ReLoadAllURLs(driver, env);
+//						
+//						System.out.println("Hello 23th  world!");
+//
+//						competitiveCompareUIController loadTextData=new competitiveCompareUIController(driver, env); 
+//						
+//						loadTextData.loadTextFromDataFolder(envDevice,"./data/"+envDevice+"AllURLs.txt");
+
+						// ***********read all en,fr,es URLs on Competitive Compare**************
 
 						log.rwExcel("", "****** Testing is complete ****** " + (i + 1), "");
 						driver.quit();// driver.quit(), driver.close()
