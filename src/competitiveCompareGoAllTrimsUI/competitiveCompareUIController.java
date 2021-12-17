@@ -822,7 +822,7 @@ public class competitiveCompareUIController extends Comlibs {
 
 	public String[] loadTextFromDataFolder(String env, String filePathName) throws IOException {
 		boolean loadFromClasspath = true;
-		String fileName = "StagingAllURLs.txt"; // provide an absolute path here to be sure that file is found
+//		String fileName = "StagingAllURLs.txt"; // provide an absolute path here to be sure that file is found
 		BufferedReader reader = null;
 		String[] empty = { "" };
 		try {
@@ -832,7 +832,7 @@ public class competitiveCompareUIController extends Comlibs {
 				reader = new BufferedReader(new InputStreamReader(in));
 			} else {
 				// load from file system
-				reader = new BufferedReader(new FileReader(new File(fileName)));
+				reader = new BufferedReader(new FileReader(new File(filePathName)));
 			}
 			List<String> liness = new ArrayList<String>();
 			String line = null;
@@ -933,7 +933,7 @@ public class competitiveCompareUIController extends Comlibs {
 						log.rwExcel("", "----" + brand + " Competitive Compare page Testing started-----" + (i + 1),
 								"");
 						// 1. ***********Competitive Compare**************
-						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
+//						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
 						// ***********Competitive Compare***************
 
 						// 2. ***********Reload failed URLs on Competitive Compare**************
@@ -946,7 +946,7 @@ public class competitiveCompareUIController extends Comlibs {
 						// ***********Competitive Compare***************
 
 						// 4. ***********read all en,fr,es URLs on Competitive Compare**************
-//						ReLoadAllURLs(driver, env);
+						ReLoadAllURLs(driver, env);
 
 						// ***********read all en,fr,es URLs on Competitive Compare**************
 

@@ -229,7 +229,6 @@ http://qa1-compare.product-london.autodata.tech/mazda/ca/compare/#/features/4158
 http://qa1-compare.product-london.autodata.tech/mazda/ca/compare/#/features/415841
 http://qa1-compare.product-london.autodata.tech/mazda/ca/compare/#/features/415842
 http://qa1-compare.product-london.autodata.tech/mazda/ca/compare/#/features/415843
-http://qa1-compare.product-london.autodata.tech/mazda/ca/compare/#/features/415844
 http://qa1-compare.product-london.autodata.tech/mazda/ca/compare/#/features/416360
 http://qa1-compare.product-london.autodata.tech/mazda/ca/compare/#/features/416361
 http://qa1-compare.product-london.autodata.tech/mazda/ca/compare/#/features/416486
