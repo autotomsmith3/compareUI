@@ -933,7 +933,7 @@ public class competitiveCompareUIController extends Comlibs {
 						log.rwExcel("", "----" + brand + " Competitive Compare page Testing started-----" + (i + 1),
 								"");
 						// 1. ***********Competitive Compare**************
-//						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
+						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
 						// ***********Competitive Compare***************
 
 						// 2. ***********Reload failed URLs on Competitive Compare**************
@@ -946,7 +946,7 @@ public class competitiveCompareUIController extends Comlibs {
 						// ***********Competitive Compare***************
 
 						// 4. ***********read all en,fr,es URLs on Competitive Compare**************
-						ReLoadAllURLs(driver, env);
+//						ReLoadAllURLs(driver, env);
 
 						// ***********read all en,fr,es URLs on Competitive Compare**************
 
