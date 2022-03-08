@@ -166,8 +166,7 @@ public class Compare extends Comlibs {
 				System.out.println("\n\n******PrimaryStartingFromPriceString matches!*****");
 //				rwExcel(tc, true, brand + " - Verify PrimaryStartingFromPriceString",
 //						brand + " PrimaryStartingFromPrice is showing and matching.");
-				rwExcel(tc, true, brand + " - Verify PrimaryStartingFromPriceString",
-						urlString);
+				rwExcel(tc, true, brand + " - Verify PrimaryStartingFromPriceString", urlString);
 			} else {
 				System.out.println("\n\nPrimaryStartingFromPriceString does not match!*****");
 				errorMsg = brand + " - Primary Vehicle Startingfrom Price does not match!" + "\n\n" + brand
@@ -512,45 +511,166 @@ public class Compare extends Comlibs {
 
 	public int getCategoryRowsFromName(String categoryName) {
 		int num = 0;
+		int dynomic_num = 0;
 		switch (categoryName) {
 		case "Pricing":
 			num = 4;
+			dynomic_num = getRowsFrUI(1);
+			if (dynomic_num == 0) {
+				System.err.println("Pricing_getRpwsFrIO. Rows=0!");
+			} else {
+				num = dynomic_num;
+			}
 			break;
 		case "FUEL ECONOMY":
 			num = 4;
+			dynomic_num = getRowsFrUI(2);
+			if (dynomic_num == 0) {
+				System.err.println("FUEL ECONOMY_getRpwsFrIO. Rows=0!");
+			} else {
+				num = dynomic_num;
+			}
+
 			break;
 		case "EXTERIOR FEATURES":
 			num = 47;
+			dynomic_num = getRowsFrUI(3);
+			if (dynomic_num == 0) {
+				System.err.println("EXTERIOR FEATURES_getRpwsFrIO. Rows=0!");
+			} else {
+				num = dynomic_num;
+			}
 			break;
 		case "COMFORT":
 			num = 22;
+			dynomic_num = getRowsFrUI(4);
+			if (dynomic_num == 0) {
+				System.err.println("COMFORT_getRpwsFrIO. Rows=0!");
+			} else {
+				num = dynomic_num;
+			}
 			break;
 		case "CONVENIENCE":
 			num = 26;
+			dynomic_num = getRowsFrUI(5);
+			if (dynomic_num == 0) {
+				System.err.println("CONVENIENCE_getRpwsFrIO. Rows=0!");
+			} else {
+				num = dynomic_num;
+			}
 			break;
 		case "LIGHTING":
 			num = 12;
+			dynomic_num = getRowsFrUI(6);
+			if (dynomic_num == 0) {
+				System.err.println("LIGHTING_getRpwsFrIO. Rows=0!");
+			} else {
+				num = dynomic_num;
+			}
 			break;
 		case "INFOTAINMENT":
 			num = 15;
+			dynomic_num = getRowsFrUI(7);
+			if (dynomic_num == 0) {
+				System.err.println("INFOTAINMENT_getRpwsFrIO. Rows=0!");
+			} else {
+				num = dynomic_num;
+			}
 			break;
 		case "MECHANICAL":
 			num = 23;// 23 or 24 or 25
+			dynomic_num = getRowsFrUI(8);
+			if (dynomic_num == 0) {
+				System.err.println("MECHANICAL_getRpwsFrIO. Rows=0!");
+			} else {
+				num = dynomic_num;
+			}
 			break;
 		case "SAFETY":
 			num = 33;
+			dynomic_num = getRowsFrUI(9);
+			if (dynomic_num == 0) {
+				System.err.println("SAFETY_getRpwsFrIO. Rows=0!");
+			} else {
+				num = dynomic_num;
+			}
 			break;
 		case "DIMENSIONS":
 			num = 21;// 21 or 22
+			dynomic_num = getRowsFrUI(10);
+			if (dynomic_num == 0) {
+				System.err.println("DIMENSIONS_getRpwsFrIO. Rows=0!");
+			} else {
+				num = dynomic_num;
+			}
 			break;
 		case "WARRANTY":
 			num = 8; // 8 or 9 or 10
+			dynomic_num = getRowsFrUI(11);
+			if (dynomic_num == 0) {
+				System.err.println("WARRANTY_getRpwsFrIO. Rows=0!");
+			} else {
+				num = dynomic_num;
+			}
 			break;
 		default:
 			num = 1;
 		}
 
 		return num;
+	}
+
+	private int getRowsFrUI(int num) {
+		// TODO Auto-generated method stub
+		By category = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[" + num + "]/div/div[2]/div/ul");// 4
+
+//		By category_01 = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[1]/div/div[2]/div/ul");//4
+//		By category_02 = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[2]/div/div[2]/div/ul");//4
+//		By category_03 = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[3]/div/div[2]/div/ul");//47
+//		By category_04 = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[4]/div/div[2]/div/ul");//22
+//		By category_05 = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[5]/div/div[2]/div/ul");//0
+//		By category_06 = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[6]/div/div[2]/div/ul/");//0
+		int dynomic_nums = 0;
+
+		try {
+			dynomic_nums = driver.findElements(category).size();
+		} catch (Exception e) {// Catch exception if any
+			dynomic_nums = 0;
+			System.err.println("Error: " + e.getMessage());
+		}
+
+//		try {
+//			dynomic_nums = driver.findElements(category_01).size();
+//		} catch (Exception e) {// Catch exception if any
+//			System.err.println("Error: " + e.getMessage());
+//		}
+//		try {dynomic_nums = 0;
+//			dynomic_nums = driver.findElements(category_02).size();
+//		} catch (Exception e) {// Catch exception if any
+//			System.err.println("Error: " + e.getMessage());
+//		}
+//		try {dynomic_nums = 0;
+//			dynomic_nums = driver.findElements(category_03).size();
+//		} catch (Exception e) {// Catch exception if any
+//			System.err.println("Error: " + e.getMessage());
+//		}
+//		try {dynomic_nums = 0;
+//			dynomic_nums = driver.findElements(category_04).size();
+//		} catch (Exception e) {// Catch exception if any
+//			System.err.println("Error: " + e.getMessage());
+//		}		
+//		try {dynomic_nums = 0;
+//			dynomic_nums = driver.findElements(category_05).size();
+//		} catch (Exception e) {// Catch exception if any
+//			System.err.println("Error: " + e.getMessage());
+//		}		
+//		try {dynomic_nums = 0;
+//			dynomic_nums = driver.findElements(category_06).size();
+//		} catch (Exception e) {// Catch exception if any
+//			System.err.println("Error: " + e.getMessage());
+//		}		
+
+		return dynomic_nums;
 	}
 
 }

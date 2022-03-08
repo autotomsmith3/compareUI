@@ -938,11 +938,11 @@ public class competitiveCompareUIController extends Comlibs {
 
 						// 2. ***********Reload failed URLs on Competitive Compare**************
 						// Set only one client when running this to avoid multiple runs
-						ReLoadFailedURLs(driver, env);
+//						ReLoadFailedURLs(driver, env);
 						// ***********Reload failed URLs on Competitive Compare**************
 
 						// 3. ***********CompetitiveCompareGridValues**************
-//						CompetitiveCompareGridValues(driver, tBrowser, env, brand);
+						CompetitiveCompareGridValues(driver, tBrowser, env, brand);
 						// ***********Competitive Compare***************
 
 						// 4. ***********read all en,fr,es URLs on Competitive Compare**************
