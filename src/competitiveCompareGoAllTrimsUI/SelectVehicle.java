@@ -227,7 +227,8 @@ public class SelectVehicle extends Comlibs {
 		elementExist(driver, trim01, true, tc);
 		driver.findElement(trim01).click();
 		Wait(5);
-		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("Staging")))) {
+		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("QAKu"))
+				| (env.equalsIgnoreCase("Staging")))) {
 			try {
 				driver.switchTo().alert().dismiss();
 			} catch (Exception e) {
@@ -255,7 +256,8 @@ public class SelectVehicle extends Comlibs {
 		elementExist(driver, trim, true, tc);
 		driver.findElement(trim).click();
 		Wait(5);
-		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("Staging")))) {
+		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("QAKu"))
+				| (env.equalsIgnoreCase("Staging")))) {
 			try {
 				driver.switchTo().alert().dismiss();
 			} catch (Exception e) {
@@ -299,7 +301,8 @@ public class SelectVehicle extends Comlibs {
 
 		driver.findElement(trim).click();
 		Wait(5);
-		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("Staging")))) {
+		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("QAKu"))
+				| (env.equalsIgnoreCase("Staging")))) {
 			try {
 				driver.switchTo().alert().dismiss();
 			} catch (Exception e) {
