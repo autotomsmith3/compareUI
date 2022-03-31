@@ -117,8 +117,8 @@ public class competitiveCompareUIController extends Comlibs {
 //		driver.switchTo().alert().accept();//.dismiss() 
 		// }
 		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com")
-				|bURL.contains("http://prod-compare.sharedf.autodata.tech")
-				|bURL.contains("http://prod-compare.sharedp.autodata.tech")
+				| bURL.contains("http://prod-compare.sharedf.autodata.tech")
+				| bURL.contains("http://prod-compare.sharedp.autodata.tech")
 				| bURL.contains("prod-compare.product-london-test"))) {// compare.autodatadirect.com
 			// is Prod URL
 //			try {
@@ -936,12 +936,12 @@ public class competitiveCompareUIController extends Comlibs {
 						log.rwExcel("", "----" + brand + " Competitive Compare page Testing started-----" + (i + 1),
 								"");
 						// 1. ***********Competitive Compare**************
-//						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
+						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
 						// ***********Competitive Compare***************
 
 						// 2. ***********Reload failed URLs on Competitive Compare**************
 						// Set only one client when running this to avoid multiple runs
-						ReLoadFailedURLs(driver, env);
+//						ReLoadFailedURLs(driver, env);
 						// ***********Reload failed URLs on Competitive Compare**************
 
 						// 3. ***********CompetitiveCompareGridValues**************
