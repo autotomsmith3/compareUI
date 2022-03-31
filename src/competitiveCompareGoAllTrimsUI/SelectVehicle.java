@@ -227,7 +227,7 @@ public class SelectVehicle extends Comlibs {
 		elementExist(driver, trim01, true, tc);
 		driver.findElement(trim01).click();
 		Wait(5);
-		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("QAKu"))
+		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("QAKu"))| (env.equalsIgnoreCase("StagingEast"))| (env.equalsIgnoreCase("StagingWest"))
 				| (env.equalsIgnoreCase("Staging")))) {
 			try {
 				driver.switchTo().alert().dismiss();
