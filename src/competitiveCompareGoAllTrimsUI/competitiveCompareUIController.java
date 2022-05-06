@@ -116,10 +116,13 @@ public class competitiveCompareUIController extends Comlibs {
 		// driver.switchTo().alert().accept();//.dismiss()
 //		driver.switchTo().alert().accept();//.dismiss() 
 		// }
-		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com")
-				| bURL.contains("http://prod-compare.sharedf.autodata.tech")
-				| bURL.contains("http://prod-compare.sharedp.autodata.tech")
-				| bURL.contains("prod-compare.product-london-test"))) {// compare.autodatadirect.com
+		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com")  
+				| bURL.contains("https://uat-compare.autodatadirect.com")    //Staging public
+				| bURL.contains("http://uat-compare.sharedf.autodata.tech/") //Staging chaska
+				| bURL.contains("http://uat-compare.sharedp.autodata.tech/") //Staging hillsboro
+				| bURL.contains("http://prod-compare.sharedf.autodata.tech") //Prod chaska
+				| bURL.contains("http://prod-compare.sharedp.autodata.tech") //Prod hillsboro
+				| bURL.contains("prod-compare.product-london-test"))) {      // compare.autodatadirect.com
 			// is Prod URL
 //			try {
 			driver.switchTo().alert().dismiss();
