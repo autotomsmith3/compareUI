@@ -158,8 +158,14 @@ public class competitiveCompareUIController extends Comlibs {
 
 	public static SelectVehicle loadURLOld(WebDriver driver, String bURL) throws IOException {
 		driver.get(bURL);
-		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com"))) {// compare.autodatadirect.com
-			// is Prod URL
+		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com")  
+				| bURL.contains("https://uat-compare.autodatadirect.com")    //Staging public
+				| bURL.contains("http://uat-compare.sharedf.autodata.tech/") //Staging chaska
+				| bURL.contains("http://uat-compare.sharedp.autodata.tech/") //Staging hillsboro
+				| bURL.contains("http://prod-compare.sharedf.autodata.tech") //Prod chaska
+				| bURL.contains("http://prod-compare.sharedp.autodata.tech") //Prod hillsboro
+				| bURL.contains("prod-compare.product-london-test"))) {      // compare.autodatadirect.com
+				// is Prod URL
 			try {
 				driver.switchTo().alert().dismiss();
 			} catch (Exception e) {
@@ -951,7 +957,7 @@ public class competitiveCompareUIController extends Comlibs {
 //						CompetitiveCompareGridValues(driver, tBrowser, env, brand);
 						// ***********Competitive Compare***************
 
-						// 4. ***********read all en,fr,es URLs on Competitive Compare**************
+						// 4. ***********Read all en,fr,es URLs from data/envAllURLs.txt on Competitive Compare**************
 //						ReLoadAllURLs(driver, env);
 
 						// ***********read all en,fr,es URLs on Competitive Compare**************
