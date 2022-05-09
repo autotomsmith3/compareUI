@@ -453,14 +453,14 @@ public class Compare extends Comlibs {
 	}
 
 	public void clickAvailableFeatures(WebDriver driver, String environment, String tc) throws IOException {
-		if (environment.equalsIgnoreCase("QA")) {
+//		if (environment.equalsIgnoreCase("QA")) {
 			elementExist(driver, availableFeaturesLocator, true, tc);
 			try {
 				driver.findElement(availableFeaturesLocator).click();
 			} catch (Exception e) {
 				System.out.println("\nClick on availableFeaturesLocator button failed!!!\n");
 			}
-		}
+//		}
 	}
 
 	public String getYearBrandModelTrim_Name(WebDriver driver, String currentClientURL, String tc) throws Exception {
