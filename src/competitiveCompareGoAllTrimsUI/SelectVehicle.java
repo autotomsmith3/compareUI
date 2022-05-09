@@ -227,17 +227,17 @@ public class SelectVehicle extends Comlibs {
 		elementExist(driver, trim01, true, tc);
 		driver.findElement(trim01).click();
 		Wait(5);
-		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("QAKu"))
-				)) {
-//				| (env.equalsIgnoreCase("StagingEast")) | (env.equalsIgnoreCase("StagingWest"))
-//				| (env.equalsIgnoreCase("Staging")))) {
-			try {
-				driver.switchTo().alert().dismiss();
-			} catch (Exception e) {
-				System.out.println(
-						"Tomcat credential fields pop-up NOT showing! This is expected when running after first Mitisubishi model!\n");
-			}
-		}
+//		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("QAKu"))
+//				)) {
+////				| (env.equalsIgnoreCase("StagingEast")) | (env.equalsIgnoreCase("StagingWest"))
+////				| (env.equalsIgnoreCase("Staging")))) {
+//			try {
+//				driver.switchTo().alert().dismiss();
+//			} catch (Exception e) {
+//				System.out.println(
+//						"Tomcat credential fields pop-up NOT showing! This is expected when running after first Mitisubishi model!\n");
+//			}
+//		}
 		return new Compare(driver);
 	}
 
@@ -258,15 +258,15 @@ public class SelectVehicle extends Comlibs {
 		elementExist(driver, trim, true, tc);
 		driver.findElement(trim).click();
 		Wait(5);
-		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("QAKu"))
-				| (env.equalsIgnoreCase("Staging")))) {
-			try {
-				driver.switchTo().alert().dismiss();
-			} catch (Exception e) {
-				System.out.println(
-						"Tomcat credential fields pop-up NOT showing! This is expected when running after first Mitisubishi model!\n");
-			}
-		}
+//		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("QAKu"))
+//				| (env.equalsIgnoreCase("Staging")))) {
+//			try {
+//				driver.switchTo().alert().dismiss();
+//			} catch (Exception e) {
+//				System.out.println(
+//						"Tomcat credential fields pop-up NOT showing! This is expected when running after first Mitisubishi model!\n");
+//			}
+//		}
 		return new Compare(driver);
 	}
 
@@ -303,15 +303,15 @@ public class SelectVehicle extends Comlibs {
 
 		driver.findElement(trim).click();
 		Wait(5);
-		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("QAKu"))
-				| (env.equalsIgnoreCase("Staging")))) {
-			try {
-				driver.switchTo().alert().dismiss();
-			} catch (Exception e) {
-				System.out.println(
-						"Tomcat credential fields pop-up NOT showing! This is expected when running after first Mitisubishi model!\n");
-			}
-		}
+//		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("QAKu"))
+//				| (env.equalsIgnoreCase("Staging")))) {
+//			try {
+//				driver.switchTo().alert().dismiss();
+//			} catch (Exception e) {
+//				System.out.println(
+//						"Tomcat credential fields pop-up NOT showing! This is expected when running after first Mitisubishi model!\n");
+//			}
+//		}
 		return new Compare(driver);
 	}
 

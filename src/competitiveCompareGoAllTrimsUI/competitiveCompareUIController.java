@@ -116,20 +116,20 @@ public class competitiveCompareUIController extends Comlibs {
 		// driver.switchTo().alert().accept();//.dismiss()
 //		driver.switchTo().alert().accept();//.dismiss() 
 		// }
-		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com")  
-				| bURL.contains("https://uat-compare.autodatadirect.com")    //Staging public
-				| bURL.contains("http://uat-compare.sharedf.autodata.tech/") //Staging chaska
-				| bURL.contains("http://uat-compare.sharedp.autodata.tech/") //Staging hillsboro
-				| bURL.contains("http://prod-compare.sharedf.autodata.tech") //Prod chaska
-				| bURL.contains("http://prod-compare.sharedp.autodata.tech") //Prod hillsboro
-				| bURL.contains("prod-compare.product-london-test"))) {      // compare.autodatadirect.com
-			// is Prod URL
-//			try {
-			driver.switchTo().alert().dismiss();
-//			}catch (Exception e) {
-//				System.out.println("\nCancel buttom (dismiss) does not exist. Failed to click it!\n");
-//			}	
-		}
+//		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com")  
+//				| bURL.contains("https://uat-compare.autodatadirect.com")    //Staging public
+//				| bURL.contains("http://uat-compare.sharedf.autodata.tech/") //Staging chaska
+//				| bURL.contains("http://uat-compare.sharedp.autodata.tech/") //Staging hillsboro
+//				| bURL.contains("http://prod-compare.sharedf.autodata.tech") //Prod chaska
+//				| bURL.contains("http://prod-compare.sharedp.autodata.tech") //Prod hillsboro
+//				| bURL.contains("prod-compare.product-london-test"))) {      // compare.autodatadirect.com
+//			// is Prod URL
+////			try {
+//			driver.switchTo().alert().dismiss();
+////			}catch (Exception e) {
+////				System.out.println("\nCancel buttom (dismiss) does not exist. Failed to click it!\n");
+////			}	
+//		}
 
 		return new SelectVehicle(driver);
 	}
@@ -144,34 +144,34 @@ public class competitiveCompareUIController extends Comlibs {
 			log.rwExcel(bURL, false, bURL, "Load URL failed");
 		}
 
-		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com"))) {// compare.autodatadirect.com
-																									// is Prod URL
-			try {
-				driver.switchTo().alert().dismiss();
-			} catch (Exception e) {
-				System.out.println("\nCancel buttom (dismiss) does not exist. Failed to click it!\n");
-			}
-		}
+//		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com"))) {// compare.autodatadirect.com
+//																									// is Prod URL
+//			try {
+//				driver.switchTo().alert().dismiss();
+//			} catch (Exception e) {
+//				System.out.println("\nCancel buttom (dismiss) does not exist. Failed to click it!\n");
+//			}
+//		}
 
 //		return new Compare(driver);
 	}
 
 	public static SelectVehicle loadURLOld(WebDriver driver, String bURL) throws IOException {
 		driver.get(bURL);
-		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com")  
-				| bURL.contains("https://uat-compare.autodatadirect.com")    //Staging public
-				| bURL.contains("http://uat-compare.sharedf.autodata.tech/") //Staging chaska
-				| bURL.contains("http://uat-compare.sharedp.autodata.tech/") //Staging hillsboro
-				| bURL.contains("http://prod-compare.sharedf.autodata.tech") //Prod chaska
-				| bURL.contains("http://prod-compare.sharedp.autodata.tech") //Prod hillsboro
-				| bURL.contains("prod-compare.product-london-test"))) {      // compare.autodatadirect.com
-				// is Prod URL
-			try {
-				driver.switchTo().alert().dismiss();
-			} catch (Exception e) {
-				System.out.println("\nCancel buttom (dismiss) does not exist. Failed to click it!\n");
-			}
-		}
+//		if (bURL.contains("mitsubishi") && !(bURL.contains("https://compare.autodatadirect.com")  
+//				| bURL.contains("https://uat-compare.autodatadirect.com")    //Staging public
+//				| bURL.contains("http://uat-compare.sharedf.autodata.tech/") //Staging chaska
+//				| bURL.contains("http://uat-compare.sharedp.autodata.tech/") //Staging hillsboro
+//				| bURL.contains("http://prod-compare.sharedf.autodata.tech") //Prod chaska
+//				| bURL.contains("http://prod-compare.sharedp.autodata.tech") //Prod hillsboro
+//				| bURL.contains("prod-compare.product-london-test"))) {      // compare.autodatadirect.com
+//				// is Prod URL
+//			try {
+//				driver.switchTo().alert().dismiss();
+//			} catch (Exception e) {
+//				System.out.println("\nCancel buttom (dismiss) does not exist. Failed to click it!\n");
+//			}
+//		}
 
 		return new SelectVehicle(driver);
 	}
