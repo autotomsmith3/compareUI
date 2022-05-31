@@ -256,6 +256,7 @@ public class competitiveCompareUIController extends Comlibs {
 		String urlString = "";
 		String currentClientURL = "";
 		String thisClientURL = "";
+		String modelNameLowHighMSRPs="";
 		Comlibs log = new Comlibs();
 		log.rwExcel("", "********* " + brand + " Competitive Compare UI**********", "");
 		SelectVehicle SelectVehiclePage = new SelectVehicle(driver);
@@ -305,7 +306,9 @@ public class competitiveCompareUIController extends Comlibs {
 					log.Wait(wt);
 					SelectVehiclePage.selectYear(driver, Year, tc);
 					log.Wait(wt);
+					modelNameLowHighMSRPs = SelectVehiclePage.getModelLowHighMSRPs(driver, env, brand, i, v, currentClientURL);
 					modelName = SelectVehiclePage.getModelName(driver, env, brand, i, v, currentClientURL);
+					SelectVehiclePage.verifyLowHighMSRPs(driver, env, brand,modelName,thisClientURL, modelNameLowHighMSRPs, tc);
 					System.out.println("\n getModelName = " + modelName + "\n");
 					SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
 //					tc = brand + " - getModelName";
@@ -945,7 +948,7 @@ public class competitiveCompareUIController extends Comlibs {
 						log.rwExcel("", "----" + brand + " Competitive Compare page Testing started-----" + (i + 1),
 								"");
 						// 1. ***********Competitive Compare**************
-//						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
+						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
 						// ***********Competitive Compare***************
 
 						// 2. ***********Reload failed URLs on Competitive Compare**************
@@ -954,7 +957,7 @@ public class competitiveCompareUIController extends Comlibs {
 						// ***********Reload failed URLs on Competitive Compare**************
 
 						// 3. ***********CompetitiveCompareGridValues**************
-						CompetitiveCompareGridValues(driver, tBrowser, env, brand);
+//						CompetitiveCompareGridValues(driver, tBrowser, env, brand);
 						// ***********Competitive Compare***************
 
 						// 4. ***********Read all en,fr,es URLs from data/envAllURLs.txt on Competitive Compare**************

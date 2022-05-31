@@ -334,6 +334,69 @@ public class SelectVehicle extends Comlibs {
 		return modelName;
 	}
 
+	public String getModelLowHighMSRPs(WebDriver driver, String env, String brand, int g, int num, String tc)
+			throws Exception {
+
+		String modelMSRPs = "";
+		By modelMSRPsLocator = By.xpath(
+				"/html/body/div[1]/div[3]/div[1]/div[" + g + "]    /div[1]/div/div[3]/div/div[" + num + "]/div/div[3]");
+//		By modelNameLocator = By.xpath(	"/html/body/div[1]/div[3]/div[1]/div[" + g + "]/div[1]/div/div[3]/div/div[" + num + "]/div/div[2]");
+
+		elementExist(driver, modelMSRPsLocator, true, tc);
+		try {
+			modelMSRPs = driver.findElement(modelMSRPsLocator).getText();
+			Wait(1);
+		} catch (Exception e) {
+			modelMSRPs = "modelMSRPs=Empty";
+			System.out.println("\n********getModelMSRP fails!!!*******\n");
+		}
+		return modelMSRPs;
+	}
+
+	public void verifyLowHighMSRPs(WebDriver driver, String env, String brand, String modelName, String ClientURL,
+			String msrps, String tc) throws Exception {
+		String modelMSRPs;
+		String modelMSRP_low;
+		String modelMSRP_high;
+//		String modelMSRPs = "";
+//		By modelMSRPsLocator = By.xpath("/html/body/div[1]/div[3]/div[1]/div["+g+"]    /div[1]/div/div[3]/div/div["+num+"]/div/div[3]");
+//		By modelNameLocator = By.xpath(	"/html/body/div[1]/div[3]/div[1]/div[" + g + "]/div[1]/div/div[3]/div/div[" + num + "]/div/div[2]");
+//		By modelMSRPsLocator = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[1]/div/div[3]");//	
+		int msrpsLength = msrps.length();
+		if (msrpsLength >= 20 && msrpsLength == 24) {
+			// seems good
+
+			modelMSRPs = msrps.replace("MSRP", "");
+			modelMSRPs = modelMSRPs.replace(" ", "");
+			modelMSRPs = modelMSRPs.replace("-", "");
+			modelMSRPs = modelMSRPs.replace("*", "");
+			modelMSRP_low = modelMSRPs.substring(0, 7);
+			modelMSRP_high = modelMSRPs.substring(7, 14);
+			if (modelMSRP_low.equalsIgnoreCase(modelMSRP_high)) {
+				rwExcel(tc, false, ClientURL, env + " - " + brand + " - " + modelName + " - MSRPs=" + msrps
+						+ " - MSRP low and high are same!!!");
+				System.out.println("\n********MSRPs fails!*******\n");
+			}
+
+		} else {
+			// <20 charaters
+			// report issue here:
+			rwExcel(tc, false, env + " - " + brand + " - MSRPs=" + msrps,
+					" Length is less than 20 charaters or more than 24 charaters!");
+			System.out.println("\n********MSRPs <= 20 charaters!!!*******\n");
+		}
+
+//		elementExist(driver, modelMSRPsLocator, true, tc);
+//		try {
+//			modelMSRPs = driver.findElement(modelMSRPsLocator).getText();
+//			Wait(1);
+//		} catch (Exception e) {
+//			modelMSRPs = "modelMSRPs=Empty";
+//			System.out.println("\n********getModelMSRP fails!!!*******\n");
+//		}
+//		return modelMSRPs;
+	}
+
 	public String getTrimName(WebDriver driver, String env, String brand, int num, boolean lstTrimExist,
 			boolean secondTrimExist, String tc) throws Exception {
 		// 1st .trim-overlay > div:nth-child(2) > div:nth-child(1) > label:nth-child(1)
