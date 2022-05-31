@@ -376,6 +376,9 @@ public class SelectVehicle extends Comlibs {
 				rwExcel(tc, false, ClientURL, env + " - " + brand + " - " + modelName + " - MSRPs=" + msrps
 						+ " - MSRP low and high are same!!!");
 				System.out.println("\n********MSRPs fails!*******\n");
+			}else {
+				rwExcel(tc, true, ClientURL, env + " - " + brand + " - " + modelName + " - MSRPs=" + msrps
+						+ " - MSRP low and high are different!!!");	
 			}
 
 		} else {
