@@ -376,16 +376,16 @@ public class SelectVehicle extends Comlibs {
 				rwExcel(tc, false, ClientURL, env + " - " + brand + " - " + modelName + " - MSRPs=" + msrps
 						+ " - MSRP low and high are same!!!");
 				System.out.println("\n********MSRPs fails!*******\n");
-			}else {
+			} else {
 				rwExcel(tc, true, ClientURL, env + " - " + brand + " - " + modelName + " - MSRPs=" + msrps
-						+ " - MSRP low and high are different!!!");	
+						+ " - MSRP low and high are different!!! Looks good.");
 			}
 
 		} else {
-			// <20 charaters
+			// <=20|>24 charaters
 			// report issue here:
-			rwExcel(tc, false, env + " - " + brand + " - MSRPs=" + msrps,
-					" Length is less than 20 charaters or more than 24 charaters!");
+			rwExcel(tc, false, ClientURL, env + " - " + brand + " - " + modelName + " - MSRPs=" + msrps + " - "
+					+ " Length is <= 20 charaters or > 24 charaters! Please manual check!");
 			System.out.println("\n********MSRPs <= 20 charaters!!!*******\n");
 		}
 
