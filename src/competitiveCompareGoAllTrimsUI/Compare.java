@@ -204,8 +204,13 @@ public class Compare extends Comlibs {
 						+ PrimaryStartingFromPriceString + "\"\n";
 				rwExcel(tc.replace("Verify", ""), false, urlString,
 						brand + " - PrimaryImageStartingFromPriceString does NOT match");// errorMsg);
-				SendEmail alertEmail = new SendEmail();
-				alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
+
+				try {
+					SendEmail alertEmail = new SendEmail();
+					alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
+				} catch (Exception e) {
+					rwExcel(tc, false, urlString, " - Failed to send alert email!");
+				}
 
 			}
 
@@ -454,12 +459,12 @@ public class Compare extends Comlibs {
 
 	public void clickAvailableFeatures(WebDriver driver, String environment, String tc) throws IOException {
 //		if (environment.equalsIgnoreCase("QA")) {
-			elementExist(driver, availableFeaturesLocator, true, tc);
-			try {
-				driver.findElement(availableFeaturesLocator).click();
-			} catch (Exception e) {
-				System.out.println("\nClick on availableFeaturesLocator button failed!!!\n");
-			}
+		elementExist(driver, availableFeaturesLocator, true, tc);
+		try {
+			driver.findElement(availableFeaturesLocator).click();
+		} catch (Exception e) {
+			System.out.println("\nClick on availableFeaturesLocator button failed!!!\n");
+		}
 //		}
 	}
 

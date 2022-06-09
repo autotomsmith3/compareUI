@@ -297,8 +297,8 @@ public class competitiveCompareUIController extends Comlibs {
 				log.Wait(wt);
 				for (int v = 1; v <= vehicleArry[i - 1]; v++) {
 ////				//Debug 									// *************************
-//					i = 4;
-//					v = 1;
+//					i = 1; // UI first =1 not 0
+//					v = 8;
 
 					currentClientURL = driver.getCurrentUrl();
 					thisClientURL = currentClientURL;
@@ -949,12 +949,12 @@ public class competitiveCompareUIController extends Comlibs {
 						log.rwExcel("", "----" + brand + " Competitive Compare page Testing started-----" + (i + 1),
 								"");
 						// 1. ***********Competitive Compare**************
-//						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
+						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
 						// ***********Competitive Compare***************
 
 						// 2. ***********Reload failed URLs on Competitive Compare**************
 						// Set only one client when running this to avoid multiple runs
-						ReLoadFailedURLs(driver, env);
+//						ReLoadFailedURLs(driver, env);
 						// ***********Reload failed URLs on Competitive Compare**************
 
 						// 3. ***********CompetitiveCompareGridValues**************
