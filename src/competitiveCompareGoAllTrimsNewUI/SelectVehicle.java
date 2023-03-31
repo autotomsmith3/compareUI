@@ -156,8 +156,7 @@ public class SelectVehicle extends Comlibs {
 		boolean errorShowing = false;
 
 		driver.findElement(vehicle01).click();
-//		stop here!!! 20230330
-		
+	
 		errorShowing = elementExist(driver, errorShow, false, tc);
 		if (errorShowing) {
 			try {
@@ -200,7 +199,7 @@ public class SelectVehicle extends Comlibs {
 	}
 
 	public Compare clickOnTrimOld_1st_OK(WebDriver driver, String env, String brand, String tc) throws Exception {
-		By trim01 = By.xpath("//*[@id=\"vehicle-select-radio\"]");
+		By trim01 = By.xpath("/html/body/div[2]/div[3]/div[4]/div[1]");
 		elementExist(driver, trim01, true, tc);
 		driver.findElement(trim01).click();
 		Wait(5);
@@ -391,7 +390,7 @@ public class SelectVehicle extends Comlibs {
 		}
 
 		String trimName = "";
-		By trim = By.cssSelector(".trim-overlay > div:nth-child(" + num + ") > div:nth-child(1) > label:nth-child(1)");
+		By trim = By.xpath("/html/body/div[2]/div[3]/div[4]/div["+num+"]");
 		elementExist(driver, trim, true, tc);
 		try {
 			trimName = driver.findElement(trim).getText();
@@ -407,8 +406,8 @@ public class SelectVehicle extends Comlibs {
 		// 1st .trim-overlay > div:nth-child(2) > div:nth-child(1) > label:nth-child(1)
 		// 2nd .trim-overlay > div:nth-child(3) > div:nth-child(1) > label:nth-child(1)
 		// 3rd .trim-overlay > div:nth-child(4) > div:nth-child(1) > label:nth-child(1)
-		By trim01 = By.cssSelector(".trim-overlay > div:nth-child(1) > div:nth-child(1) > label:nth-child(1)");
-		By trim02 = By.cssSelector(".trim-overlay > div:nth-child(2) > div:nth-child(1) > label:nth-child(1)");
+		By trim01 = By.xpath("/html/body/div[2]/div[3]/div[4]");
+		By trim02 = By.xpath("/html/body/div[2]/div[3]/div[4]/div[2]");
 		boolean firstTrimExist = elementExist(driver, trim01, false, tc);
 //		elementExist(driver, trim02, true, tc + " - Second Trim does not exist!");
 		return firstTrimExist;
@@ -418,7 +417,7 @@ public class SelectVehicle extends Comlibs {
 		// 1st .trim-overlay > div:nth-child(2) > div:nth-child(1) > label:nth-child(1)
 		// 2nd .trim-overlay > div:nth-child(3) > div:nth-child(1) > label:nth-child(1)
 		// 3rd .trim-overlay > div:nth-child(4) > div:nth-child(1) > label:nth-child(1)
-		By trim02 = By.cssSelector(".trim-overlay > div:nth-child(2) > div:nth-child(1) > label:nth-child(1)");
+		By trim02 = By.xpath("/html/body/div[2]/div[3]/div[4]/div[2]");
 		By trim03 = By.cssSelector(".trim-overlay > div:nth-child(3) > div:nth-child(1) > label:nth-child(1)");
 		boolean secondTrimExist = elementExist(driver, trim02, false, tc);
 		elementExist(driver, trim03, false, tc + " - Third Trim does not exist!");
@@ -428,7 +427,7 @@ public class SelectVehicle extends Comlibs {
 	public int getTrimNumber(WebDriver driver, String env, String brand, String urlS, String tc) throws Exception {
 		int countTrim = 0;
 		int wt = 2;
-		By trims = By.xpath("//*[@id=\"vehicle-select-radio\"]");
+		By trims = By.xpath("/html/body/div[2]/div[3]/div[4]/div");
 		boolean trimsExit = elementExist(driver, trims, false, tc);
 		for (int i = 1; i <= wt; i++) {
 			if (trimsExit) {
@@ -446,7 +445,7 @@ public class SelectVehicle extends Comlibs {
 		}
 
 		elementExist(driver, trims, true, tc);
-		countTrim = driver.findElements(trim01).size();
+		countTrim = driver.findElements(trims).size();
 		Wait(2);
 		return countTrim;
 	}
@@ -470,6 +469,9 @@ public class SelectVehicle extends Comlibs {
 					// waiting failed to see all years, try to reload client site
 					currentClientURL = driver.getCurrentUrl();
 					driver.get(currentClientURL);
+				}else {
+					System.out.println(currentClientURL);
+					rwExcel(tc, false,currentClientURL, "Year = \""+year+"\"" +" does not exist!");
 				}
 			}
 		}
