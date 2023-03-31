@@ -46,7 +46,7 @@ public class SelectVehicle extends Comlibs {
 //	By xxx = By.xpath("");  /html/body/div[1]/div/div/div[2]
 
 	public String getModelName(WebDriver driver, String tc) throws Exception {
-		By modelName = By.xpath("/html/body/div[1]/div/div/div[2]");
+		By modelName = By.xpath("/html/body/div[2]/div[3]/div[2]");
 		String modelNameString = "";
 		elementExist(driver, modelName, true, tc);
 		modelNameString = driver.findElement(modelName).getText();
@@ -230,10 +230,10 @@ public class SelectVehicle extends Comlibs {
 			num = num + 2;
 		}
 
-		By trim = By.cssSelector(".trim-overlay > div:nth-child(" + num + ") > div:nth-child(1) > label:nth-child(1)");
+		By trim = By.xpath("/html/body/div[2]/div[3]/div[4]/div["+num+"]/div[1]/div");
 		elementExist(driver, trim, true, tc);
 		driver.findElement(trim).click();
-		Wait(5);
+		Wait(2);
 //		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("QAKu"))
 //				| (env.equalsIgnoreCase("Staging")))) {
 //			try {
@@ -278,7 +278,7 @@ public class SelectVehicle extends Comlibs {
 //		String trim_name = getTrimName(driver, env, brand, num, tc);
 
 		driver.findElement(trim).click();
-		Wait(5);
+		Wait(2);
 //		if (brand.contains("Mitsubishi") && ((env.equalsIgnoreCase("QA")) | (env.equalsIgnoreCase("QAKu"))
 //				| (env.equalsIgnoreCase("Staging")))) {
 //			try {
@@ -390,7 +390,7 @@ public class SelectVehicle extends Comlibs {
 		}
 
 		String trimName = "";
-		By trim = By.xpath("/html/body/div[2]/div[3]/div[4]/div["+num+"]");
+		By trim = By.xpath("/html/body/div[2]/div[3]/div[4]/div["+num+"]/div[1]/div");
 		elementExist(driver, trim, true, tc);
 		try {
 			trimName = driver.findElement(trim).getText();
@@ -418,7 +418,7 @@ public class SelectVehicle extends Comlibs {
 		// 2nd .trim-overlay > div:nth-child(3) > div:nth-child(1) > label:nth-child(1)
 		// 3rd .trim-overlay > div:nth-child(4) > div:nth-child(1) > label:nth-child(1)
 		By trim02 = By.xpath("/html/body/div[2]/div[3]/div[4]/div[2]");
-		By trim03 = By.cssSelector(".trim-overlay > div:nth-child(3) > div:nth-child(1) > label:nth-child(1)");
+		By trim03 = By.xpath("/html/body/div[2]/div[3]/div[4]/div[3]");
 		boolean secondTrimExist = elementExist(driver, trim02, false, tc);
 		elementExist(driver, trim03, false, tc + " - Third Trim does not exist!");
 		return secondTrimExist;
@@ -439,7 +439,7 @@ public class SelectVehicle extends Comlibs {
 				}
 				System.out.println("\nTrims pop-up not showing. Start to wait... i = " + i + " of total i = " + wt
 						+ " X (60 secs)\n");
-				Wait(6);
+				Wait(2);
 				trimsExit = elementExist(driver, trims, false, tc);
 			}
 		}
