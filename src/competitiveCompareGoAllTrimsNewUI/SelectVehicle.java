@@ -57,34 +57,8 @@ public class SelectVehicle extends Comlibs {
 
 	public int[] countVehicleArray(WebDriver driver, String tc) throws Exception {
 		int vehiclesArray[];
-		int group1;
-		int group2;
-		int group3;
-		int group4;
-		int group1_vehs;
-		int group2_vehs;
-		int group3_vehs;
-		int group4_vehs;
 
-		By vehicle11 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[1]/div/div[1]/img");
-		By vehicle12 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[2]/div/div[1]/img");
-		By vehicle13 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[3]/div/div[1]/img");
-		By vehicle14 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[4]/div/div[1]/img");
-
-		By vehicle21 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[2]/div[1]/div/div[3]/div/div[1]/div/div[1]/img");
-		By vehicle22 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[2]/div[1]/div/div[3]/div/div[2]/div/div[1]/img");
-		By vehicle23 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[2]/div[1]/div/div[3]/div/div[3]/div/div[1]/img");
-
-		By vehicle31 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[3]/div[1]/div/div[3]/div/div[1]/div/div[1]/img");
-		By vehicle32 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[3]/div[1]/div/div[3]/div/div[2]/div/div[1]/img");
-		// ....
-		By vehicle36 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[3]/div[1]/div/div[3]/div/div[6]/div/div[1]/img");
-
-		By vehicle41 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[4]/div[1]/div/div[3]/div/div/div/div[1]/img");
-		By vehicle42 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[4]/div[1]/div/div[3]/div/div/div/div[1]/img");
-		By vehicle43 = By.xpath("");
-
-		By groupCount = By.xpath("/html/body/div[1]/div[3]/div[1]/div");
+		By groupCount = By.xpath("/html/body/div/div/div[3]/div");
 
 		elementExist(driver, groupCount, true, tc);
 		int groupCounts = driver.findElements(groupCount).size();
@@ -93,8 +67,10 @@ public class SelectVehicle extends Comlibs {
 		try {
 			for (int i = 0; i <= (oneArray - 1); i++) {
 
-				By vehicleCount = By
-						.xpath("/html/body/div[1]/div[3]/div[1]/div[" + (i + 1) + "]/div[1]/div/div[3]/div/div");
+//				By vehicleCount = By.xpath("/html/body/div[1]/div[3]/div[1]/div[" + (i + 1) + "]/div[1]/div/div[3]/div/div");
+				
+				By vehicleCount = By.xpath("//*[@id=\"root\"]/div/div[3]/div["+(i+1)+"]/div[2]/div");
+				
 				elementExist(driver, vehicleCount, true, tc + " - [" + (i) + "]");
 				int vehicleCounts = driver.findElements(vehicleCount).size();
 				vehiclesArray[i] = vehicleCounts;
@@ -173,14 +149,15 @@ public class SelectVehicle extends Comlibs {
 
 	public SelectVehicle clickOnVehicle(WebDriver driver, int vehicleTypeNumber, int vehicleNum, String tc)
 			throws Exception {
-		By vehicle01 = By.xpath("/html/body/div[1]/div[3]/div[1]/div[" + vehicleTypeNumber
-				+ "]/div[1]/div/div[3]/div/div[" + vehicleNum + "]/div/div[1]/img");
+		By vehicle01 = By.xpath("/html/body/div/div/div[3]/div["+vehicleTypeNumber+"]/div[2]/div["+vehicleNum+"]");
 		By errorShow = By.xpath("/html/body/div[1]/div/div/div[3]/button");
 
 		elementExist(driver, vehicle01, true, tc);
 		boolean errorShowing = false;
 
 		driver.findElement(vehicle01).click();
+//		stop here!!! 20230330
+		
 		errorShowing = elementExist(driver, errorShow, false, tc);
 		if (errorShowing) {
 			try {
@@ -320,8 +297,7 @@ public class SelectVehicle extends Comlibs {
 		String modelName = "";
 //		By modelNameLocator = By
 //				.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[" + num + "]/div/div[2]");
-		By modelNameLocator = By.xpath(
-				"/html/body/div[1]/div[3]/div[1]/div[" + g + "]/div[1]/div/div[3]/div/div[" + num + "]/div/div[2]");
+		By modelNameLocator = By.xpath("/html/body/div/div/div[3]/div["+g+"]/div[2]/div["+num+"]/div/div[2]");
 
 		elementExist(driver, modelNameLocator, true, tc);
 		try {
@@ -338,12 +314,13 @@ public class SelectVehicle extends Comlibs {
 			throws Exception {
 
 		String modelMSRPs = "";
-		By modelMSRPsLocator = By.xpath(
-				"/html/body/div[1]/div[3]/div[1]/div[" + g + "]    /div[1]/div/div[3]/div/div[" + num + "]/div/div[3]");
-//		By modelNameLocator = By.xpath(	"/html/body/div[1]/div[3]/div[1]/div[" + g + "]/div[1]/div/div[3]/div/div[" + num + "]/div/div[2]");
 
+		By modelMSRPsLocator=By.xpath("/html/body/div/div/div[3]/div["+g+"]/div[2]/div["+num+"]/div/div[3]");
+		
 		elementExist(driver, modelMSRPsLocator, true, tc);
+
 		try {
+
 			modelMSRPs = driver.findElement(modelMSRPsLocator).getText();
 			Wait(1);
 		} catch (Exception e) {
@@ -363,7 +340,7 @@ public class SelectVehicle extends Comlibs {
 //		By modelNameLocator = By.xpath(	"/html/body/div[1]/div[3]/div[1]/div[" + g + "]/div[1]/div/div[3]/div/div[" + num + "]/div/div[2]");
 //		By modelMSRPsLocator = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[1]/div/div[3]");//	
 		int msrpsLength = msrps.length();
-		if (msrpsLength >= 20 && msrpsLength == 24) {
+		if (msrpsLength >= 20 && msrpsLength == 23) {
 			// seems good
 
 			modelMSRPs = msrps.replace("MSRP", "");
@@ -475,51 +452,26 @@ public class SelectVehicle extends Comlibs {
 	}
 
 	public void selectYear(WebDriver driver, String year, String tc) throws Exception {
-		boolean yearsExist = false;
+		boolean yearExist = false;
 		int wtMins = 2;
 		String y = "";
 		String currentClientURL = "";
-		By allYears = By.xpath("/html/body/div[1]/div[2]/div/nav/div/div/div[2]/ul/li");
-		By curretTestYear = By.xpath("/html/body/div[1]/div[2]/div/nav/div/div/div[2]/ul/li[1]/button");
-		yearsExist = elementExist(driver, allYears, false, tc);
+		By curretTestYear =  By.xpath("//*[@id=\""+year+"\"]");
+		yearExist = elementExist(driver, curretTestYear, false, tc);
 		for (int i = 1; i <= wtMins; i++) {
-			if (yearsExist) {
-				System.out.println("All Years exist!");
+			if (yearExist) {
+				System.out.println("Year = \""+year+"\"" +" exist!");
+				driver.findElement(curretTestYear).click();
 			} else {
-				System.out.println("\nAll Years do not exist! Wait i = " + i + "\n");
-				Wait(6);
-				yearsExist = elementExist(driver, allYears, false, tc);
+				System.out.println("Year = \""+year+"\"" +" does not exist!"+"\n");
+				Wait(2);
+				yearExist = elementExist(driver, curretTestYear, false, tc);
 				if (i == (wtMins - 1)) {
 					// waiting failed to see all years, try to reload client site
 					currentClientURL = driver.getCurrentUrl();
 					driver.get(currentClientURL);
 				}
 			}
-		}
-		elementExist(driver, allYears, true, tc);
-		int totalYears = driver.findElements(allYears).size();
-		if (totalYears <= 9) {
-			Wait(5);
-			totalYears = driver.findElements(allYears).size();
-		}
-		for (int i = 1; i <= totalYears - 2; i++) {
-			curretTestYear = By.xpath("/html/body/div[1]/div[2]/div/nav/div/div/div[2]/ul/li[" + i + "]/button");
-			y = driver.findElement(curretTestYear).getText();
-			if (y.equalsIgnoreCase(year)) {
-				curretTestYear = By.xpath("/html/body/div[1]/div[2]/div/nav/div/div/div[2]/ul/li[" + i + "]/button");
-				System.out.println("Year = " + y + " \n");
-				break;
-			} else if (i == (totalYears - 2)) {
-				curretTestYear = null;
-			}
-		}
-
-		if (curretTestYear == null) {
-			System.out.println("Year = " + year + " cannot be found!\n");
-			rwExcel(tc, false, "Select Year = " + year + "", year + " cannot be found in the site");
-		} else {
-			driver.findElement(curretTestYear).click();
-			Wait(2);
 		}
 
 	}
