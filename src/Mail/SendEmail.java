@@ -66,7 +66,26 @@ public class SendEmail {
 				content + "\n\n\n URL: " + urlString);
 		System.out.println("\n\n*****************Sending Email is Complete!*******************\n");
 	}
+	public void SendAlertEmail_NewUI(String env, String brand, String urlString, String tc) {
+		Properties prop = new Properties();
+		try {
+			prop.load(competitiveCompareUIController.class.getClassLoader()
+					.getResourceAsStream("./data_new_UI/competitiveCompareGoAllTrims.properties"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String gmailUsername = prop.getProperty(env + ".gmailUsername");
+		String gmailPassword = prop.getProperty(env + ".gmailPassword");
+		String sendEmailsList[] = fetchOneDemArrayFromPropFile(env + ".sendEmailsList", prop);
+		int emailNumber = sendEmailsList.length;
+		String sendEmailsString = prop.getProperty(env + ".sendEmailsList");
 
+		String Subject = prop.getProperty(env + ".Subject");
+		String content = prop.getProperty(env + ".content");
+		sendEmails(gmailUsername, gmailPassword, sendEmailsString, emailNumber, env + " - " + brand + " - " + Subject,
+				content + "\n\n\n URL: " + urlString);
+		System.out.println("\n\n*****************Sending Email is Complete!*******************\n");
+	}
 	private static String[] fetchOneDemArrayFromPropFile(String propertyName, Properties propFile) {
 		String a[] = propFile.getProperty(propertyName).split(",");
 		return a;

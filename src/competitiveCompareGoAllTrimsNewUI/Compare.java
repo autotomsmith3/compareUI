@@ -63,7 +63,7 @@ public class Compare extends Comlibs {
 			rwExcel(tc, false, brand + " - Primary Image is not showing",
 					brand + " site maybe is showing error or down.");
 			SendEmail alertEmail = new SendEmail();
-			alertEmail.SendAlertEmail(env, brand, urlString, tc);
+			alertEmail.SendAlertEmail_NewUI(env, brand, urlString, tc);
 			System.out
 					.println("\n\n*****************Verify Primary Image Is Complete!*******************\n" + urlString);
 
@@ -231,7 +231,7 @@ public class Compare extends Comlibs {
 						+ "\" and expected price is " + "\"" + expectedPrimaryPrices + "\"\n";
 				rwExcel(tc, false, urlString, brand + " - Verify PrimaryStartingFromPrice" + errorMsg);
 				SendEmail alertEmail = new SendEmail();
-				alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
+				alertEmail.SendAlertEmail_NewUI(env, brand, urlString + "\n" + errorMsg, tc);
 
 			}
 
@@ -264,7 +264,7 @@ public class Compare extends Comlibs {
 
 				try {
 					SendEmail alertEmail = new SendEmail();
-					alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
+					alertEmail.SendAlertEmail_NewUI(env, brand, urlString + "\n" + errorMsg, tc);
 				} catch (Exception e) {
 					rwExcel(tc, false, urlString, " - Failed to send alert email!");
 				}
@@ -369,7 +369,7 @@ public class Compare extends Comlibs {
 
 				try {
 					SendEmail alertEmail = new SendEmail();
-					alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
+					alertEmail.SendAlertEmail_NewUI(env, brand, urlString + "\n" + errorMsg, tc);
 				} catch (Exception e) {
 					rwExcel(tc, false, urlString, " - Failed to send alert email!");
 				}
@@ -397,7 +397,7 @@ public class Compare extends Comlibs {
 
 				try {
 					SendEmail alertEmail = new SendEmail();
-					alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
+					alertEmail.SendAlertEmail_NewUI(env, brand, urlString + "\n" + errorMsg, tc);
 				} catch (Exception e) {
 					rwExcel(tc, false, urlString, " - Failed to send alert email!");
 				}
@@ -425,7 +425,7 @@ public class Compare extends Comlibs {
 
 				try {
 					SendEmail alertEmail = new SendEmail();
-					alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
+					alertEmail.SendAlertEmail_NewUI(env, brand, urlString + "\n" + errorMsg, tc);
 				} catch (Exception e) {
 					rwExcel(tc, false, urlString, " - Failed to send alert email!");
 				}
@@ -442,7 +442,7 @@ public class Compare extends Comlibs {
 			;
 			rwExcel(tc, false, brand + " - PrimaryStartingFromPrice is not showing properly", errorMsg);
 			SendEmail alertEmail = new SendEmail();
-			alertEmail.SendAlertEmail(env, brand, urlString + "\n" + errorMsg, tc);
+			alertEmail.SendAlertEmail_NewUI(env, brand, urlString + "\n" + errorMsg, tc);
 			System.out
 					.println("\n\n*****************Verify PrimaryStartingFromPrice Is Complete!*******************\n");
 

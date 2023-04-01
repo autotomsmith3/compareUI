@@ -160,7 +160,8 @@ public class SelectVehicle extends Comlibs {
 		
 		} catch (Exception e) {
 			//Second clicking
-			//If the First clickng fail because the vehicle is beyond screen will need second clicking. 
+			//If the First clickng fail because the vehicle is beyond screen will need second clicking.
+			System.out.println("\n First clicking the vehicle model failed so here is for second clicking the vehicle. \n");
 			driver.findElement(vehicle01).click();	
 		}
 	
