@@ -154,8 +154,15 @@ public class SelectVehicle extends Comlibs {
 
 		elementExist(driver, vehicle01, true, tc);
 		boolean errorShowing = false;
-
-		driver.findElement(vehicle01).click();
+		try {
+			//First clicking
+			driver.findElement(vehicle01).click();	
+		
+		} catch (Exception e) {
+			//Second clicking
+			//If the First clickng fail because the vehicle is beyond screen will need second clicking. 
+			driver.findElement(vehicle01).click();	
+		}
 	
 		errorShowing = elementExist(driver, errorShow, false, tc);
 		if (errorShowing) {

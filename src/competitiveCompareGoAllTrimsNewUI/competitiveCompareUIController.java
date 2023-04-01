@@ -256,7 +256,7 @@ public class competitiveCompareUIController extends Comlibs {
 		String urlString = "";
 		String currentClientURL = "";
 		String thisClientURL = "";
-		String modelNameLowHighMSRPs="";
+		String modelNameLowHighMSRPs = "";
 		Comlibs log = new Comlibs();
 		log.rwExcel("", "********* " + brand + " Competitive Compare UI**********", "");
 		SelectVehicle SelectVehiclePage = new SelectVehicle(driver);
@@ -295,10 +295,22 @@ public class competitiveCompareUIController extends Comlibs {
 			System.out.println("Vehicle Array length = " + groupArray + " \n\n");
 			for (int i = 1; i <= groupArray; i++) {
 				log.Wait(wt);
+////			// Debug
+//				if (i==4) {
+//				//stop
+//					System.out.println("Stop here for any group!!!");
+//				}
+//				i=4;
+
 				for (int v = 1; v <= vehicleArry[i - 1]; v++) {
 ////				//Debug 									// *************************
 //					i = 1; // UI first =1 not 0
 //					v = 8;
+
+//					if (v ==6) {
+//						//stop
+//							System.out.println("Stop here for 6th vehicle!!!");
+//						}
 
 					currentClientURL = driver.getCurrentUrl();
 					thisClientURL = currentClientURL;
@@ -306,9 +318,11 @@ public class competitiveCompareUIController extends Comlibs {
 					log.Wait(wt);
 					SelectVehiclePage.selectYear(driver, Year, tc);
 					log.Wait(wt);
-					modelNameLowHighMSRPs = SelectVehiclePage.getModelLowHighMSRPs(driver, env, brand, i, v, currentClientURL);
+					modelNameLowHighMSRPs = SelectVehiclePage.getModelLowHighMSRPs(driver, env, brand, i, v,
+							currentClientURL);
 					modelName = SelectVehiclePage.getModelName(driver, env, brand, i, v, currentClientURL);
-					SelectVehiclePage.verifyLowHighMSRPs(driver, env, brand,modelName,thisClientURL, modelNameLowHighMSRPs, tc);
+					SelectVehiclePage.verifyLowHighMSRPs(driver, env, brand, modelName, thisClientURL,
+							modelNameLowHighMSRPs, tc);
 					System.out.println("\n getModelName = " + modelName + "\n");
 					SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
 //					tc = brand + " - getModelName";
@@ -717,7 +731,7 @@ public class competitiveCompareUIController extends Comlibs {
 				// trim catch
 			} catch (Exception e) {
 				System.out.println("\n***********Failed to click on the trim! need to send alert email?*******\n");
-				log.rwExcel(failedURL,false, "Try failed with this URL!", "Failed URL");
+				log.rwExcel(failedURL, false, "Try failed with this URL!", "Failed URL");
 				loadURLOld(driver, thisClientURL);
 			}
 
@@ -961,7 +975,8 @@ public class competitiveCompareUIController extends Comlibs {
 //						CompetitiveCompareGridValues(driver, tBrowser, env, brand);
 						// ***********Competitive Compare***************
 
-						// 4. ***********Read all en,fr,es URLs from data/envAllURLs.txt on Competitive Compare**************
+						// 4. ***********Read all en,fr,es URLs from data/envAllURLs.txt on Competitive
+						// Compare**************
 //						ReLoadAllURLs(driver, env);
 
 						// ***********read all en,fr,es URLs on Competitive Compare**************
