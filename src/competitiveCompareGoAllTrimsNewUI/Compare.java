@@ -22,10 +22,10 @@ public class Compare extends Comlibs {
 	public Compare(WebDriver driver) throws IOException {
 		this.driver = driver;
 		// String wh1=driver.getWindowHandle();
-		String sPageTitle = "React App";// "Compare";
+		String sPageTitle = "Compare";// "Compare";
 		boolean existTitle = TitleDisplay(driver, sPageTitle);
 		if (existTitle) {
-			rwExcel("", true, "Page Title is displayed", sPageTitle);
+//			rwExcel("", true, "Page Title is displayed", sPageTitle);
 		} else {
 			rwExcel("", false, "Page title is NOT showing properly. Exceed time limit!",
 					"The page title is NOT - " + sPageTitle);

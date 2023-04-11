@@ -584,7 +584,7 @@ public class Comlibs {
 	}
 
 	public boolean TitleDisplay(WebDriver driver, String title) throws IOException {
-		final int s = 60; // wait time: seconds
+		final int s = 6; // 60. wait time: seconds
 		String sT = "";
 		int x = 0;
 		while (x < s) {
