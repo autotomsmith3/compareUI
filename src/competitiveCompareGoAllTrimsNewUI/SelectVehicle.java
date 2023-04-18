@@ -14,7 +14,7 @@ public class SelectVehicle extends Comlibs {
 	public SelectVehicle(WebDriver driver) throws IOException {
 		this.driver = driver;
 		// String wh1=driver.getWindowHandle();
-		String sPageTitle ="Compare";// "Select Vehicle";
+		String sPageTitle ="Select Vehicle";// "Select Vehicle";
 		boolean existTitle = TitleDisplay(driver, sPageTitle);
 		if (existTitle) {
 //			rwExcel("", true, "Page Title is displayed", sPageTitle);
@@ -149,7 +149,9 @@ public class SelectVehicle extends Comlibs {
 
 	public SelectVehicle clickOnVehicle(WebDriver driver, int vehicleTypeNumber, int vehicleNum, String tc)
 			throws Exception {
-		By vehicle01 = By.xpath("/html/body/div/div/div[3]/div["+vehicleTypeNumber+"]/div[2]/div["+vehicleNum+"]");
+//		By vehicle01 = By.xpath("/html/body/div/div/div[3]/div["+vehicleTypeNumber+"]/div[2]/div["+vehicleNum+"]");
+		By vehicle01 = By.xpath("/html/body/div/div/div[3]/div["+vehicleTypeNumber+"]/div[2]/div["+vehicleNum+"]/div/div[1]/img");		
+		
 		By errorShow = By.xpath("/html/body/div[1]/div/div/div[3]/button");
 
 		elementExist(driver, vehicle01, true, tc);

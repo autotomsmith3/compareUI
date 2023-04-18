@@ -655,19 +655,19 @@ public class competitiveCompareUIController extends Comlibs {
 		String thisClientURL = "";
 		String brandURL = "";
 		Comlibs log = new Comlibs();
-		currentClientURL = "https://compare.autodatadirect.com/subaru/ca/vehicle/#/select/primary/compare";
+		currentClientURL = "http://compare-qa1.product-london-test.autodata.tech/mazda/vehicle/";
 		log.rwExcel("", "*********Competitive Compare URLs**********", "");
 		loadURL(driver, currentClientURL);
 		log.Wait(wt * 2);
 		SelectVehicle SelectVehiclePage = new SelectVehicle(driver);
 		log.Wait(wt * 2);
-		SelectVehiclePage.clickOnGotIt(driver, currentClientURL);
+//		SelectVehiclePage.clickOnGotIt(driver, currentClientURL);
 		currentClientURL = driver.getCurrentUrl();
 		thisClientURL = currentClientURL;
 		tc = " - Click On Got It";
 //		SelectVehiclePage.clickOnGotIt(driver, tc);
 		try {
-			SelectVehiclePage.clickOnVehicle(driver, 2, 1, tc);
+			SelectVehiclePage.clickOnVehicle(driver, 1, 1, tc);
 		} catch (Exception e) {
 			System.out.println("\n **********Click on vehicle failed**********\n");
 			SelectVehiclePage.clickOnVehicle(driver, 1, 1, tc);
@@ -962,13 +962,13 @@ public class competitiveCompareUIController extends Comlibs {
 						//// 1.Competitive Compare page
 						log.rwExcel("", "----" + brand + " Competitive Compare page Testing started-----" + (i + 1),
 								"");
-						// 1. ***********Competitive Compare**************
-						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
-						// ***********Competitive Compare***************
+//						// 1. ***********Competitive Compare**************
+//						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
+//						// ***********Competitive Compare***************
 
 						// 2. ***********Reload failed URLs on Competitive Compare**************
 						// Set only one client when running this to avoid multiple runs
-//						ReLoadFailedURLs(driver, env);
+						ReLoadFailedURLs(driver, env);
 						// ***********Reload failed URLs on Competitive Compare**************
 
 						// 3. ***********CompetitiveCompareGridValues**************

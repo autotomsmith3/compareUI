@@ -694,11 +694,11 @@ public class Compare extends Comlibs {
 		String year_brand_model_trim_Name = "";
 
 		try {
-			By PrimaryIageLocator = By.xpath("//*[@id=\"primary-vehicle\"]/div/div/div[1]/div[1]/div/img");
+			By PrimaryIageLocator = By.xpath("/html/body/div/div/div[4]/div[1]/div/div[1]/div[1]/div[2]/img");
 			imageExist = elementExist(driver, PrimaryIageLocator, false, tc);
 			if (imageExist) {
-				By year_brand_locator = By.xpath("//*[@id=\"primary-vehicle\"]/div/div/div[1]/div[2]/div[1]");
-				By modle_trim_locator = By.xpath("//*[@id=\"primary-vehicle\"]/div/div/div[1]/div[2]/div[2]");
+				By year_brand_locator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[1]/div/div[1]/div[1]/div[1]/div[1]");
+				By modle_trim_locator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[1]/div/div[1]/div[1]/div[1]/div[2]");
 				year_brand = driver.findElement(year_brand_locator).getText();
 				modle_trim = driver.findElement(modle_trim_locator).getText();
 				;
