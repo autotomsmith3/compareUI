@@ -457,7 +457,7 @@ public class competitiveCompareUIController extends Comlibs {
 		log.rwExcel("", "********* " + brand + " Competitive Compare UI**********", "");
 		SelectVehicle SelectVehiclePage = new SelectVehicle(driver);
 		tc = brand + " - Click On Got It";
-		SelectVehiclePage.clickOnGotIt(driver, tc);
+//		SelectVehiclePage.clickOnGotIt(driver, tc);
 
 		for (String Year : Years) {
 			tc = env + " - " + brand + " - Select year: " + Year;
@@ -968,11 +968,11 @@ public class competitiveCompareUIController extends Comlibs {
 
 						// 2. ***********Reload failed URLs on Competitive Compare**************
 						// Set only one client when running this to avoid multiple runs
-						ReLoadFailedURLs(driver, env);
+//						ReLoadFailedURLs(driver, env);
 						// ***********Reload failed URLs on Competitive Compare**************
 
 						// 3. ***********CompetitiveCompareGridValues**************
-//						CompetitiveCompareGridValues(driver, tBrowser, env, brand);
+						CompetitiveCompareGridValues(driver, tBrowser, env, brand);
 						// ***********Competitive Compare***************
 
 						// 4. ***********Read all en,fr,es URLs from data/envAllURLs.txt on Competitive

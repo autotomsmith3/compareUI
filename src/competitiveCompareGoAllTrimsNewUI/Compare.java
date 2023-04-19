@@ -49,7 +49,7 @@ public class Compare extends Comlibs {
 	By trim04 = By.xpath("");
 	By newCompare = By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div/button[1]");
 	By closeError = By.xpath("/html/body/div[1]/div/div/div[3]/button");
-	By availableFeaturesLocator = By.xpath("/html/body/div[1]/div[4]/div[1]/div/div[2]/div/div[2]/div[2]/span/input");
+	By availableFeaturesLocator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[2]/div[2]/div[2]/input");
 
 //	By xxx = By.xpath("");
 //	By xxx = By.xpath("");
@@ -57,7 +57,7 @@ public class Compare extends Comlibs {
 	public void verifyPrimaryImage(WebDriver driver, String env, String brand, String urlString, String tc)
 			throws Exception {
 		try {
-			By PrimaryIageLocator = By.xpath("//*[@id=\"primary-vehicle\"]/div/div/div[1]/div[1]/div/img");
+			By PrimaryIageLocator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[1]/div/div[1]/div[1]/div[2]/img");
 			VerifyImageLoaded(driver, PrimaryIageLocator, false, tc);
 		} catch (Exception e) {
 			rwExcel(tc, false, brand + " - Primary Image is not showing",
@@ -467,11 +467,12 @@ public class Compare extends Comlibs {
 		int PImageMSRP = 0;
 		try {
 
-			By rowNameLocation = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[" + section + "]/div/div[2]/div/ul["
-					+ row + "]/li[1]/div[1]/span/span");
+//By rowNameLocation = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[" + section + "]/div/div[2]/div/ul["+ row + "]/li[1]/div[1]/span/span");
+By rowNameLocation = By.xpath("/html/body/div/div/div[5]/div["+section+"]/div[2]/div/div/div/div/table/tr["+row+"]/td[1]");			
+			
 			rowNameExist = elementExist(driver, rowNameLocation, false, tc);
-			By rowNamelinkLocation = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[" + section
-					+ "]/div/div[2]/div/ul[" + row + "]/li[1]/div[1]/span/button");
+//			By rowNamelinkLocation = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[" + section + "]/div/div[2]/div/ul[" + row + "]/li[1]/div[1]/span/button");
+			By rowNamelinkLocation = By.xpath("/html/body/div/div/div[5]/div["+section+"]/div[2]/div/div/div/div/table/tr["+row+"]/td[1]/div");
 			rowNameLinkExist = elementExist(driver, rowNamelinkLocation, false, tc);
 
 			if (rowNameExist) {
@@ -485,19 +486,15 @@ public class Compare extends Comlibs {
 				rowName = driver.findElement(rowNamelinkLocation).getText();
 			}
 
-			By PrimaryStartingFromPrice = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[" + section
-					+ "]/div/div[2]/div/ul[" + row + "]/li[2]/div[2]/span");
+			By PrimaryStartingFromPrice = By.xpath("/html/body/div/div/div[5]/div["+section+"]/div[2]/div/div/div/div/table/tr["+row+"]/td["+2+"]");
 			PrimaryStartingFromPriceString = driver.findElement(PrimaryStartingFromPrice).getText();
 
 			// Secondary vehicles StartingFromPrice 01 - 03
-			By SecondaryStartingFromPrice_01 = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[" + section
-					+ "]/div/div[2]/div/ul[" + row + "]/li[6]/div[1]/span");
+			By SecondaryStartingFromPrice_01 = By.xpath("/html/body/div/div/div[5]/div["+section+"]/div[2]/div/div/div/div/table/tr["+row+"]/td["+3+"]");
 			SecondaryStartingFromPriceString_01 = driver.findElement(SecondaryStartingFromPrice_01).getText();
-			By SecondaryStartingFromPrice_02 = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[" + section
-					+ "]/div/div[2]/div/ul[" + row + "]/li[7]/div[1]/span");
+			By SecondaryStartingFromPrice_02 = By.xpath("/html/body/div/div/div[5]/div["+section+"]/div[2]/div/div/div/div/table/tr["+row+"]/td["+4+"]");
 			SecondaryStartingFromPriceString_02 = driver.findElement(SecondaryStartingFromPrice_02).getText();
-			By SecondaryStartingFromPrice_03 = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[" + section
-					+ "]/div/div[2]/div/ul[" + row + "]/li[8]/div[1]/span");
+			By SecondaryStartingFromPrice_03 = By.xpath("/html/body/div/div/div[5]/div["+section+"]/div[2]/div/div/div/div/table/tr["+row+"]/td["+5+"]");
 			SecondaryStartingFromPriceString_03 = driver.findElement(SecondaryStartingFromPrice_03).getText();
 
 			String ScratchText = "| " + sectionName + " | " + rowName + ": | " + PrimaryStartingFromPriceString + " |  "
@@ -643,7 +640,7 @@ public class Compare extends Comlibs {
 		int tries = 2;// =10,6,2 - reload MW time
 		try {
 //			Wait(wt);
-			By PrimaryIageLocator = By.xpath("//*[@id=\"primary-vehicle\"]/div/div/div[1]/div[1]/div/img");
+			By PrimaryIageLocator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[1]/div/div[1]/div[1]/div[2]/img");
 			for (int i = 1; i <= tries; i++) {
 				try {
 					VerifyImageLoaded(driver, PrimaryIageLocator, false, tc);
@@ -846,7 +843,7 @@ public class Compare extends Comlibs {
 
 	private int getRowsFrUI(int num) {
 		// TODO Auto-generated method stub
-		By category = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[" + num + "]/div/div[2]/div/ul");// 4
+		By category = By.xpath("/html/body/div/div/div[5]/div["+num+"]/div[2]/div/div/div/div/table/tr");// 4
 
 //		By category_01 = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[1]/div/div[2]/div/ul");//4
 //		By category_02 = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[2]/div/div[2]/div/ul");//4
