@@ -14,7 +14,7 @@ public class SelectVehicle extends Comlibs {
 	public SelectVehicle(WebDriver driver) throws IOException {
 		this.driver = driver;
 		// String wh1=driver.getWindowHandle();
-		String sPageTitle ="Select Vehicle";// "Select Vehicle";
+		String sPageTitle = "Select Vehicle";// "Select Vehicle";
 		boolean existTitle = TitleDisplay(driver, sPageTitle);
 		if (existTitle) {
 //			rwExcel("", true, "Page Title is displayed", sPageTitle);
@@ -68,9 +68,9 @@ public class SelectVehicle extends Comlibs {
 			for (int i = 0; i <= (oneArray - 1); i++) {
 
 //				By vehicleCount = By.xpath("/html/body/div[1]/div[3]/div[1]/div[" + (i + 1) + "]/div[1]/div/div[3]/div/div");
-				
-				By vehicleCount = By.xpath("//*[@id=\"root\"]/div/div[3]/div["+(i+1)+"]/div[2]/div");
-				
+
+				By vehicleCount = By.xpath("//*[@id=\"root\"]/div/div[3]/div[" + (i + 1) + "]/div[2]/div");
+
 				elementExist(driver, vehicleCount, true, tc + " - [" + (i) + "]");
 				int vehicleCounts = driver.findElements(vehicleCount).size();
 				vehiclesArray[i] = vehicleCounts;
@@ -150,23 +150,26 @@ public class SelectVehicle extends Comlibs {
 	public SelectVehicle clickOnVehicle(WebDriver driver, int vehicleTypeNumber, int vehicleNum, String tc)
 			throws Exception {
 //		By vehicle01 = By.xpath("/html/body/div/div/div[3]/div["+vehicleTypeNumber+"]/div[2]/div["+vehicleNum+"]");
-		By vehicle01 = By.xpath("/html/body/div/div/div[3]/div["+vehicleTypeNumber+"]/div[2]/div["+vehicleNum+"]/div/div[1]/img");		
-		
+		By vehicle01 = By.xpath("/html/body/div/div/div[3]/div[" + vehicleTypeNumber + "]/div[2]/div[" + vehicleNum
+				+ "]/div/div[1]/img");
+
 		By errorShow = By.xpath("/html/body/div[1]/div/div/div[3]/button");
 
 		elementExist(driver, vehicle01, true, tc);
 		boolean errorShowing = false;
 		try {
-			//First clicking
-			driver.findElement(vehicle01).click();	
-		
+			// First clicking
+			driver.findElement(vehicle01).click();
+
 		} catch (Exception e) {
-			//Second clicking
-			//If the First clickng fail because the vehicle is beyond screen will need second clicking.
-			System.out.println("\n First clicking the vehicle model failed so here is for second clicking the vehicle. \n");
-			driver.findElement(vehicle01).click();	
+			// Second clicking
+			// If the First clickng fail because the vehicle is beyond screen will need
+			// second clicking.
+			System.out.println(
+					"\n First clicking the vehicle model failed so here is for second clicking the vehicle. \n");
+			driver.findElement(vehicle01).click();
 		}
-	
+
 		errorShowing = elementExist(driver, errorShow, false, tc);
 		if (errorShowing) {
 			try {
@@ -240,7 +243,7 @@ public class SelectVehicle extends Comlibs {
 			num = num + 2;
 		}
 
-		By trim = By.xpath("/html/body/div[2]/div[3]/div[4]/div["+num+"]/div[1]/div");
+		By trim = By.xpath("/html/body/div[2]/div[3]/div[4]/div[" + num + "]/div[1]/div");
 		elementExist(driver, trim, true, tc);
 		driver.findElement(trim).click();
 		Wait(2);
@@ -306,7 +309,7 @@ public class SelectVehicle extends Comlibs {
 		String modelName = "";
 //		By modelNameLocator = By
 //				.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[" + num + "]/div/div[2]");
-		By modelNameLocator = By.xpath("/html/body/div/div/div[3]/div["+g+"]/div[2]/div["+num+"]/div/div[2]");
+		By modelNameLocator = By.xpath("/html/body/div/div/div[3]/div[" + g + "]/div[2]/div[" + num + "]/div/div[2]");
 
 		elementExist(driver, modelNameLocator, true, tc);
 		try {
@@ -319,13 +322,33 @@ public class SelectVehicle extends Comlibs {
 		return modelName;
 	}
 
+	public String getModelName_Secondary(WebDriver driver, String env, String brand, int g, int num, String tc)
+			throws Exception {
+
+		String modelName = "";
+//		By modelNameLocator = By
+//				.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[" + num + "]/div/div[2]");
+		By modelNameSecondaryLocator = By
+				.xpath("/html/body/div/div/div[3]/div[" + g + "]/div[2]/div[" + num + "]/div/div[2]");
+
+		elementExist(driver, modelNameSecondaryLocator, true, tc);
+		try {
+			modelName = driver.findElement(modelNameSecondaryLocator).getText();
+			Wait(1);
+		} catch (Exception e) {
+			modelName = "modelNameSecondaryLocator=Empty";
+			System.out.println("\n********modelNameSecondaryLocator fails!!!*******\n");
+		}
+		return modelName;
+	}
+
 	public String getModelLowHighMSRPs(WebDriver driver, String env, String brand, int g, int num, String tc)
 			throws Exception {
 
 		String modelMSRPs = "";
 
-		By modelMSRPsLocator=By.xpath("/html/body/div/div/div[3]/div["+g+"]/div[2]/div["+num+"]/div/div[3]");
-		
+		By modelMSRPsLocator = By.xpath("/html/body/div/div/div[3]/div[" + g + "]/div[2]/div[" + num + "]/div/div[3]");
+
 		elementExist(driver, modelMSRPsLocator, true, tc);
 
 		try {
@@ -400,7 +423,7 @@ public class SelectVehicle extends Comlibs {
 		}
 
 		String trimName = "";
-		By trim = By.xpath("/html/body/div[2]/div[3]/div[4]/div["+num+"]/div[1]/div");
+		By trim = By.xpath("/html/body/div[2]/div[3]/div[4]/div[" + num + "]/div[1]/div");
 		elementExist(driver, trim, true, tc);
 		try {
 			trimName = driver.findElement(trim).getText();
@@ -465,23 +488,23 @@ public class SelectVehicle extends Comlibs {
 		int wtMins = 2;
 		String y = "";
 		String currentClientURL = "";
-		By curretTestYear =  By.xpath("//*[@id=\""+year+"\"]");
+		By curretTestYear = By.xpath("//*[@id=\"" + year + "\"]");
 		yearExist = elementExist(driver, curretTestYear, false, tc);
 		for (int i = 1; i <= wtMins; i++) {
 			if (yearExist) {
-				System.out.println("Year = \""+year+"\"" +" exist!");
+				System.out.println("Year = \"" + year + "\"" + " exist!");
 				driver.findElement(curretTestYear).click();
 			} else {
-				System.out.println("Year = \""+year+"\"" +" does not exist!"+"\n");
+				System.out.println("Year = \"" + year + "\"" + " does not exist!" + "\n");
 				Wait(2);
 				yearExist = elementExist(driver, curretTestYear, false, tc);
 				if (i == (wtMins - 1)) {
 					// waiting failed to see all years, try to reload client site
 					currentClientURL = driver.getCurrentUrl();
 					driver.get(currentClientURL);
-				}else {
+				} else {
 					System.out.println(currentClientURL);
-					rwExcel(tc, false,currentClientURL, "Year = \""+year+"\"" +" does not exist!");
+					rwExcel(tc, false, currentClientURL, "Year = \"" + year + "\"" + " does not exist!");
 				}
 			}
 		}

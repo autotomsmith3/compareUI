@@ -456,6 +456,9 @@ public class Compare extends Comlibs {
 		String SecondaryStartingFromPriceString_01 = "";
 		String SecondaryStartingFromPriceString_02 = "";
 		String SecondaryStartingFromPriceString_03 = "";
+		String SecondaryTrimName_01 = "";
+		String SecondaryTrimName_02 = "";
+		String SecondaryTrimName_03 = "";
 		String rowName = "";
 		boolean rowNameExist = false;
 		boolean rowNameLinkExist = false;
@@ -468,11 +471,13 @@ public class Compare extends Comlibs {
 		try {
 
 //By rowNameLocation = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[" + section + "]/div/div[2]/div/ul["+ row + "]/li[1]/div[1]/span/span");
-By rowNameLocation = By.xpath("/html/body/div/div/div[5]/div["+section+"]/div[2]/div/div/div/div/table/tr["+row+"]/td[1]");			
-			
+			By rowNameLocation = By.xpath("/html/body/div/div/div[5]/div[" + section
+					+ "]/div[2]/div/div/div/div/table/tr[" + row + "]/td[1]");
+
 			rowNameExist = elementExist(driver, rowNameLocation, false, tc);
 //			By rowNamelinkLocation = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[" + section + "]/div/div[2]/div/ul[" + row + "]/li[1]/div[1]/span/button");
-			By rowNamelinkLocation = By.xpath("/html/body/div/div/div[5]/div["+section+"]/div[2]/div/div/div/div/table/tr["+row+"]/td[1]/div");
+			By rowNamelinkLocation = By.xpath("/html/body/div/div/div[5]/div[" + section
+					+ "]/div[2]/div/div/div/div/table/tr[" + row + "]/td[1]/div");
 			rowNameLinkExist = elementExist(driver, rowNamelinkLocation, false, tc);
 
 			if (rowNameExist) {
@@ -486,16 +491,57 @@ By rowNameLocation = By.xpath("/html/body/div/div/div[5]/div["+section+"]/div[2]
 				rowName = driver.findElement(rowNamelinkLocation).getText();
 			}
 
-			By PrimaryStartingFromPrice = By.xpath("/html/body/div/div/div[5]/div["+section+"]/div[2]/div/div/div/div/table/tr["+row+"]/td["+2+"]");
+			By PrimaryStartingFromPrice = By.xpath("/html/body/div/div/div[5]/div[" + section
+					+ "]/div[2]/div/div/div/div/table/tr[" + row + "]/td[" + 2 + "]");
 			PrimaryStartingFromPriceString = driver.findElement(PrimaryStartingFromPrice).getText();
 
 			// Secondary vehicles StartingFromPrice 01 - 03
-			By SecondaryStartingFromPrice_01 = By.xpath("/html/body/div/div/div[5]/div["+section+"]/div[2]/div/div/div/div/table/tr["+row+"]/td["+3+"]");
+			By SecondaryStartingFromPrice_01 = By.xpath("/html/body/div/div/div[5]/div[" + section
+					+ "]/div[2]/div/div/div/div/table/tr[" + row + "]/td[" + 3 + "]");
 			SecondaryStartingFromPriceString_01 = driver.findElement(SecondaryStartingFromPrice_01).getText();
-			By SecondaryStartingFromPrice_02 = By.xpath("/html/body/div/div/div[5]/div["+section+"]/div[2]/div/div/div/div/table/tr["+row+"]/td["+4+"]");
+			By SecondaryStartingFromPrice_02 = By.xpath("/html/body/div/div/div[5]/div[" + section
+					+ "]/div[2]/div/div/div/div/table/tr[" + row + "]/td[" + 4 + "]");
 			SecondaryStartingFromPriceString_02 = driver.findElement(SecondaryStartingFromPrice_02).getText();
-			By SecondaryStartingFromPrice_03 = By.xpath("/html/body/div/div/div[5]/div["+section+"]/div[2]/div/div/div/div/table/tr["+row+"]/td["+5+"]");
+			By SecondaryStartingFromPrice_03 = By.xpath("/html/body/div/div/div[5]/div[" + section
+					+ "]/div[2]/div/div/div/div/table/tr[" + row + "]/td[" + 5 + "]");
 			SecondaryStartingFromPriceString_03 = driver.findElement(SecondaryStartingFromPrice_03).getText();
+
+//			*****************get secondary trim names*****************
+			By SecondaryTrimName_01_Locator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[1]/div/div[2]/div[1]/div[2]");
+			By SecondaryTrimName_02_Locator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[1]/div/div[3]/div[1]/div[2]");
+			By SecondaryTrimName_03_Locator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[1]/div/div[4]/div[1]/div[2]");
+			try {
+				SecondaryTrimName_01 = driver.findElement(SecondaryTrimName_01_Locator).getText();
+
+			} catch (Exception e) {
+				SecondaryTrimName_01 = "";
+			}
+
+			try {
+				SecondaryTrimName_02 = driver.findElement(SecondaryTrimName_02_Locator).getText();
+
+			} catch (Exception e) {
+				SecondaryTrimName_02 = "";
+			}
+
+			try {
+				SecondaryTrimName_03 = driver.findElement(SecondaryTrimName_03_Locator).getText();
+
+			} catch (Exception e) {
+				SecondaryTrimName_03 = "";
+			}
+
+			SecondaryTrimName_01 = SecondaryTrimName_01.replace("\n", " - ");
+			SecondaryTrimName_02 = SecondaryTrimName_02.replace("\n", " - ");
+			SecondaryTrimName_03 = SecondaryTrimName_03.replace("\n", " - ");
+			SecondaryTrimName_01 = " S1 = " + SecondaryTrimName_01;
+			SecondaryTrimName_02 = " S2 = " + SecondaryTrimName_02;
+			SecondaryTrimName_03 = " S3 = " + SecondaryTrimName_03;
+
+			urlString = urlString + " - " + SecondaryTrimName_01 + " - " + SecondaryTrimName_02 + " - "
+					+ SecondaryTrimName_03;
+
+//			*****************end of get secondary trim names*****************			
 
 			String ScratchText = "| " + sectionName + " | " + rowName + ": | " + PrimaryStartingFromPriceString + " |  "
 					+ SecondaryStartingFromPriceString_01 + " | " + SecondaryStartingFromPriceString_02 + " | "
@@ -843,7 +889,7 @@ By rowNameLocation = By.xpath("/html/body/div/div/div[5]/div["+section+"]/div[2]
 
 	private int getRowsFrUI(int num) {
 		// TODO Auto-generated method stub
-		By category = By.xpath("/html/body/div/div/div[5]/div["+num+"]/div[2]/div/div/div/div/table/tr");// 4
+		By category = By.xpath("/html/body/div/div/div[5]/div[" + num + "]/div[2]/div/div/div/div/table/tr");// 4
 
 //		By category_01 = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[1]/div/div[2]/div/ul");//4
 //		By category_02 = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[2]/div/div[2]/div/ul");//4

@@ -443,6 +443,9 @@ public class competitiveCompareUIController extends Comlibs {
 		// Initial
 		String tc;
 		String modelName = "";
+		String modelName_Secondary_01 = "";
+		String modelName_Secondary_02 = "";
+		String modelName_Secondary_03 = "";
 		String modelNameS = "";
 		int trimNumber = 0;
 		int trimsNumbers = 0;
