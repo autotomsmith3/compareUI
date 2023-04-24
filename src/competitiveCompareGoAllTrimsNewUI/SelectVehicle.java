@@ -153,7 +153,7 @@ public class SelectVehicle extends Comlibs {
 		By vehicle01 = By.xpath("/html/body/div/div/div[3]/div[" + vehicleTypeNumber + "]/div[2]/div[" + vehicleNum
 				+ "]/div/div[1]/img");
 
-		By errorShow = By.xpath("/html/body/div[1]/div/div/div[3]/button");
+		By errorShow = By.xpath("/html/body/div[2]/div[3]/div[3]/div");
 
 		elementExist(driver, vehicle01, true, tc);
 		boolean errorShowing = false;
@@ -167,6 +167,8 @@ public class SelectVehicle extends Comlibs {
 			// second clicking.
 			System.out.println(
 					"\n First clicking the vehicle model failed so here is for second clicking the vehicle. \n");
+			System.out.println("\nWaiting for 10 seconds.....\n");
+			Wait(15);
 			driver.findElement(vehicle01).click();
 		}
 
