@@ -284,6 +284,8 @@ public class Compare extends Comlibs {
 						.replace("StartingFrom", "");
 				SecondaryImageStartingFromPriceStringString_01 = SecondaryImageStartingFromPriceStringString_01
 						.replace("*", "");
+				SecondaryImageStartingFromPriceStringString_01 = SecondaryImageStartingFromPriceStringString_01
+						.replace("Startingfrom", "");
 				SImageMSRP_01 = Integer.parseInt(SecondaryImageStartingFromPriceStringString_01);
 				if (SImageMSRP_01 == 0) {
 					// rwExcel(tc.replace("VerifyImageSecondPrice_01", "") + " - MSRP=$0", false,
@@ -309,6 +311,8 @@ public class Compare extends Comlibs {
 						.replace("StartingFrom", "");
 				SecondaryImageStartingFromPriceStringString_02 = SecondaryImageStartingFromPriceStringString_02
 						.replace("*", "");
+				SecondaryImageStartingFromPriceStringString_02 = SecondaryImageStartingFromPriceStringString_02
+						.replace("Startingfrom", "");
 				SImageMSRP_02 = Integer.parseInt(SecondaryImageStartingFromPriceStringString_02);
 				if (SImageMSRP_02 == 0) {
 					// rwExcel(tc.replace("VerifyImageSecondPrice_02", "") + " - MSRP=$0", false,
@@ -334,6 +338,8 @@ public class Compare extends Comlibs {
 						.replace("StartingFrom", "");
 				SecondaryImageStartingFromPriceStringString_03 = SecondaryImageStartingFromPriceStringString_03
 						.replace("*", "");
+				SecondaryImageStartingFromPriceStringString_03 = SecondaryImageStartingFromPriceStringString_03
+						.replace("Startingfrom", "");
 				SImageMSRP_03 = Integer.parseInt(SecondaryImageStartingFromPriceStringString_03);
 				if (SImageMSRP_03 == 0) {
 					// rwExcel(tc.replace("VerifyImageSecondPrice_03", "") + " - MSRP=$0", false,
