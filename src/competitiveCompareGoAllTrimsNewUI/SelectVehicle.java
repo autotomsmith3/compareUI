@@ -374,7 +374,7 @@ public class SelectVehicle extends Comlibs {
 //		By modelNameLocator = By.xpath(	"/html/body/div[1]/div[3]/div[1]/div[" + g + "]/div[1]/div/div[3]/div/div[" + num + "]/div/div[2]");
 //		By modelMSRPsLocator = By.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[1]/div/div[3]");//	
 		int msrpsLength = msrps.length();
-		if (msrpsLength >= 20 && msrpsLength == 23) {
+		if (msrpsLength >= 20 && msrpsLength == 25) {
 			// seems good
 
 			modelMSRPs = msrps.replace("MSRP", "");

@@ -389,7 +389,7 @@ public class competitiveCompareUIController extends Comlibs {
 //							log.Wait(wt);
 							tc = env + " - " + brand + " - VerifyPrimaryStartingFromPrice - " + modelNameS + " - "
 									+ trimNameS;
-
+							log.Wait(2);
 							ComparePage.verifyPrimaryStartingFromPrice(driver, env, brand, urlString + "\n\n" + tc,
 									expectedPrimaryPrice, tc);
 							log.Wait(wt);
