@@ -206,7 +206,7 @@ public class SelectVehicle extends Comlibs {
 	}
 
 	public void clickOnGotItIfItShows(WebDriver driver, String tc) throws Exception {
-		By GOTIT = By.xpath("/html/body/div[1]/div/div/div[2]/button");
+		By GOTIT = By.xpath("//*[@id=\"root\"]/div/div[7]/button");
 		boolean shows = elementExist(driver, GOTIT, false, tc);
 		if (shows) {
 			driver.findElement(GOTIT).click();

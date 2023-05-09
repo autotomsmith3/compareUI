@@ -460,7 +460,7 @@ public class competitiveCompareUIController extends Comlibs {
 		log.rwExcel("", "********* " + brand + " Competitive Compare UI**********", "");
 		SelectVehicle SelectVehiclePage = new SelectVehicle(driver);
 		tc = brand + " - Click On Got It";
-//		SelectVehiclePage.clickOnGotIt(driver, tc);
+		SelectVehiclePage.clickOnGotIt(driver, tc);
 
 		for (String Year : Years) {
 			tc = env + " - " + brand + " - Select year: " + Year;
@@ -622,7 +622,7 @@ public class competitiveCompareUIController extends Comlibs {
 						} catch (Exception e) {
 							System.out.println(
 									"\n***********Failed to click on the trim! need to send alert email?*******\n");
-							loadURLOld(driver, currentClientURL);
+							loadURLOld(driver, thisClientURL);
 						}
 
 					}
