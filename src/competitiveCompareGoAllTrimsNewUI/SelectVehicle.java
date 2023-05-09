@@ -199,7 +199,7 @@ public class SelectVehicle extends Comlibs {
 	}
 
 	public void clickOnGotIt(WebDriver driver, String tc) throws Exception {
-		By GOTIT = By.xpath("/html/body/div[1]/div/div/div[2]/button");
+		By GOTIT = By.xpath("//*[@id=\"root\"]/div/div[5]/button");
 		elementExist(driver, GOTIT, true, tc);
 		driver.findElement(GOTIT).click();
 

@@ -261,7 +261,7 @@ public class competitiveCompareUIController extends Comlibs {
 		log.rwExcel("", "********* " + brand + " Competitive Compare UI**********", "");
 		SelectVehicle SelectVehiclePage = new SelectVehicle(driver);
 		tc = brand + " - Click On Got It";
-//		SelectVehiclePage.clickOnGotIt(driver, tc);//Issue in new UI
+		SelectVehiclePage.clickOnGotIt(driver, tc);//Issue in new UI
 
 		for (String Year : Years) {
 			tc = env + " - " + brand + " - Select year: " + Year;
