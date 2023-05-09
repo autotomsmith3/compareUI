@@ -413,7 +413,7 @@ public class competitiveCompareUIController extends Comlibs {
 						} catch (Exception e) {
 							System.out.println(
 									"\n***********Failed to click on the trim! need to send alert email?*******\n");
-							loadURLOld(driver, currentClientURL);
+							loadURLOld(driver, thisClientURL);
 						}
 
 					}
@@ -997,7 +997,7 @@ public class competitiveCompareUIController extends Comlibs {
 						log.rwExcel(env + " - " + brand, false, competitiveCompareUIUR,
 								brand + " site maybe is showing error or down.");
 						SendEmail alertEmail = new SendEmail();
-						alertEmail.SendAlertEmail(env, brand, competitiveCompareUIUR,
+						alertEmail.SendAlertEmail_NewUI(env, brand, competitiveCompareUIUR,
 								"Site is not loaded properly or down!");
 						try {
 							driver.quit();// driver.quit(), driver.close();

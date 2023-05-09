@@ -66,6 +66,7 @@ public class SendEmail {
 				content + "\n\n\n URL: " + urlString);
 		System.out.println("\n\n*****************Sending Email is Complete!*******************\n");
 	}
+
 	public void SendAlertEmail_NewUI(String env, String brand, String urlString, String tc) {
 		Properties prop = new Properties();
 		try {
@@ -82,10 +83,18 @@ public class SendEmail {
 
 		String Subject = prop.getProperty(env + ".Subject");
 		String content = prop.getProperty(env + ".content");
-		sendEmails(gmailUsername, gmailPassword, sendEmailsString, emailNumber, env + " - " + brand + " - " + Subject,
-				content + "\n\n\n URL: " + urlString);
-		System.out.println("\n\n*****************Sending Email is Complete!*******************\n");
+		String sendToEmail = prop.getProperty("CompetitiveCompare.sendToEmail");
+		if (sendToEmail.equalsIgnoreCase("Yes")) {
+			sendEmails(gmailUsername, gmailPassword, sendEmailsString, emailNumber,
+					env + " - " + brand + " - " + Subject, content + "\n\n\n URL: " + urlString);
+			System.out.println("\n\n*****************Sending Email is Complete!*******************\n");
+		}else {
+			System.out.println("\n\n*****************Something Wrong!*******************\n");
+			System.out.println("\n******Not Sending Email Because of Settings*******************\n");
+		}
+
 	}
+
 	private static String[] fetchOneDemArrayFromPropFile(String propertyName, Properties propFile) {
 		String a[] = propFile.getProperty(propertyName).split(",");
 		return a;
