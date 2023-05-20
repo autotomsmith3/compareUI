@@ -57,7 +57,7 @@ public class Compare extends Comlibs {
 	public void verifyPrimaryImage(WebDriver driver, String env, String brand, String urlString, String tc)
 			throws Exception {
 		try {
-			By PrimaryIageLocator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[1]/div/div[1]/div[1]/div[2]/img");
+			By PrimaryIageLocator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[1]/div/div[1]/div[1]/div[2]/div/img");
 			VerifyImageLoaded(driver, PrimaryIageLocator, false, tc);
 		} catch (Exception e) {
 			rwExcel(tc, false, brand + " - Primary Image is not showing",
@@ -654,7 +654,7 @@ public class Compare extends Comlibs {
 		int tries = 2;// =10,6,2 - reload MW time
 		try {
 //			Wait(wt);
-			By PrimaryIageLocator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[1]/div/div[1]/div[1]/div[2]/img");
+			By PrimaryIageLocator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[1]/div/div[1]/div[1]/div[2]/div/img");
 			for (int i = 1; i <= tries; i++) {
 				try {
 					VerifyImageLoaded(driver, PrimaryIageLocator, false, tc);
@@ -692,7 +692,7 @@ public class Compare extends Comlibs {
 		int tries = 2;// =10,6,2 - reload MW time
 		try {
 //			Wait(wt);
-			By PrimaryIageLocator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[1]/div/div[1]/div[1]/div[2]/img");
+			By PrimaryIageLocator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[1]/div/div[1]/div[1]/div[2]/div/img");
 			for (int i = 1; i <= tries; i++) {
 				try {
 					VerifyImageLoaded(driver, PrimaryIageLocator, false, tc);
@@ -743,7 +743,7 @@ public class Compare extends Comlibs {
 		String year_brand_model_trim_Name = "";
 
 		try {
-			By PrimaryIageLocator = By.xpath("/html/body/div/div/div[4]/div[1]/div/div[1]/div[1]/div[2]/img");
+			By PrimaryIageLocator = By.xpath("/html/body/div/div/div[4]/div[1]/div/div[1]/div[1]/div[2]/div/img");
 			imageExist = elementExist(driver, PrimaryIageLocator, false, tc);
 			if (imageExist) {
 				By year_brand_locator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[1]/div/div[1]/div[1]/div[1]/div[1]");
