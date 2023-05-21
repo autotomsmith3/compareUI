@@ -480,11 +480,11 @@ public class Compare extends Comlibs {
 			By rowNameLocation = By.xpath("/html/body/div/div/div[5]/div[" + section
 					+ "]/div[2]/div/div/div/div/table/tr[" + row + "]/td[1]");
 
-			rowNameExist = elementExist(driver, rowNameLocation, false, tc);
+			rowNameExist = true;//elementExist(driver, rowNameLocation, false, tc);
 //			By rowNamelinkLocation = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[" + section + "]/div/div[2]/div/ul[" + row + "]/li[1]/div[1]/span/button");
 			By rowNamelinkLocation = By.xpath("/html/body/div/div/div[5]/div[" + section
 					+ "]/div[2]/div/div/div/div/table/tr[" + row + "]/td[1]/div");
-			rowNameLinkExist = elementExist(driver, rowNamelinkLocation, false, tc);
+			rowNameLinkExist = true;//elementExist(driver, rowNamelinkLocation, false, tc);
 
 			if (rowNameExist) {
 				rowName = driver.findElement(rowNameLocation).getText();

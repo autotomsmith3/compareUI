@@ -726,7 +726,7 @@ public class Comlibs {
 	}
 
 	public boolean elementExist(WebDriver driver, By elementLocator, boolean rw, String tc) throws IOException {
-		driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 		boolean exists = driver.findElements(elementLocator).size() != 0;
 		if (exists) {
 			return true;
