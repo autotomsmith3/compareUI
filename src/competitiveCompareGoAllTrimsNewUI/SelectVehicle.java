@@ -58,10 +58,11 @@ public class SelectVehicle extends Comlibs {
 	public int[] countVehicleArray(WebDriver driver, String tc) throws Exception {
 		int vehiclesArray[];
 
-		By groupCount = By.xpath("/html/body/div/div/div[3]/div");
+		By groupCount = By.xpath("//*[@id=\"root\"]/div/div[3]/div");
 
 		elementExist(driver, groupCount, true, tc);
 		int groupCounts = driver.findElements(groupCount).size();
+		groupCounts=groupCounts/2;
 		vehiclesArray = new int[groupCounts];
 		int oneArray = vehiclesArray.length;
 		try {
@@ -69,8 +70,9 @@ public class SelectVehicle extends Comlibs {
 
 //				By vehicleCount = By.xpath("/html/body/div[1]/div[3]/div[1]/div[" + (i + 1) + "]/div[1]/div/div[3]/div/div");
 
-				By vehicleCount = By.xpath("//*[@id=\"root\"]/div/div[3]/div[" + (i + 1) + "]/div[2]/div");
-
+//				By vehicleCount = By.xpath("//*[@id=\"root\"]/div/div[3]/div[" + (i + 1) + "]/div[2]/div");
+				
+				By vehicleCount =  By.xpath("//*[@id=\"root\"]/div/div[3]/div["+(i+1)*2+"]/div");
 				elementExist(driver, vehicleCount, true, tc + " - [" + (i) + "]");
 				int vehicleCounts = driver.findElements(vehicleCount).size();
 				vehiclesArray[i] = vehicleCounts;
@@ -150,8 +152,7 @@ public class SelectVehicle extends Comlibs {
 	public SelectVehicle clickOnVehicle(WebDriver driver, int vehicleTypeNumber, int vehicleNum, String tc)
 			throws Exception {
 //		By vehicle01 = By.xpath("/html/body/div/div/div[3]/div["+vehicleTypeNumber+"]/div[2]/div["+vehicleNum+"]");
-		By vehicle01 = By.xpath("/html/body/div/div/div[3]/div[" + vehicleTypeNumber + "]/div[2]/div[" + vehicleNum
-				+ "]/div/div[1]/img");
+		By vehicle01 = By.xpath("/html/body/div/div/div[3]/div["+vehicleTypeNumber*2+"]/div["+vehicleNum+"]/div/div[1]/img");
 
 		By errorShow = By.xpath("/html/body/div[2]/div[3]/div[3]/div");
 
@@ -309,9 +310,7 @@ public class SelectVehicle extends Comlibs {
 	public String getModelName(WebDriver driver, String env, String brand, int g, int num, String tc) throws Exception {
 
 		String modelName = "";
-//		By modelNameLocator = By
-//				.xpath("/html/body/div[1]/div[3]/div[1]/div[1]/div[1]/div/div[3]/div/div[" + num + "]/div/div[2]");
-		By modelNameLocator = By.xpath("/html/body/div/div/div[3]/div[" + g + "]/div[2]/div[" + num + "]/div/div[2]");
+		By modelNameLocator = By.xpath("/html/body/div/div/div[3]/div["+g*2+"]/div["+num+"]/div/div[2]");
 
 		elementExist(driver, modelNameLocator, true, tc);
 		try {
@@ -349,7 +348,7 @@ public class SelectVehicle extends Comlibs {
 
 		String modelMSRPs = "";
 
-		By modelMSRPsLocator = By.xpath("/html/body/div/div/div[3]/div[" + g + "]/div[2]/div[" + num + "]/div/div[3]");
+		By modelMSRPsLocator = By.xpath("/html/body/div/div/div[3]/div["+g*2+"]/div["+num+"]/div/div[3]");
 
 		elementExist(driver, modelMSRPsLocator, true, tc);
 

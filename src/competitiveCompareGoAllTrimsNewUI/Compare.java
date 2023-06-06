@@ -48,7 +48,7 @@ public class Compare extends Comlibs {
 	By trim03 = By.xpath("");
 	By trim04 = By.xpath("");
 	By newCompare = By.xpath("//*[@id=\"root\"]/div/div[2]/div/div/div/button[1]");
-	By closeError = By.xpath("/html/body/div[1]/div/div/div[3]/button");
+	By closeError = By.xpath("/html/body/div[2]/div[3]/div[3]/div");
 	By availableFeaturesLocator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[2]/div[2]/div[2]/input");
 
 //	By xxx = By.xpath("");
@@ -223,7 +223,7 @@ public class Compare extends Comlibs {
 				System.out.println("\n\n******PrimaryStartingFromPriceString matches!*****");
 //				rwExcel(tc, true, brand + " - Verify PrimaryStartingFromPriceString",
 //						brand + " PrimaryStartingFromPrice is showing and matching.");
-				rwExcel(tc, true, brand + " - Verify PrimaryStartingFromPriceString", urlString);
+//				rwExcel(tc, true, brand + " - Verify PrimaryStartingFromPriceString", urlString);
 			} else {
 				System.out.println("\n\nPrimaryStartingFromPriceString does not match!*****");
 				errorMsg = brand + " - Primary Vehicle Startingfrom Price does not match!" + "\n\n" + brand
@@ -249,8 +249,8 @@ public class Compare extends Comlibs {
 //          if (PMSRP == PImageMSRP)***************************************
 			if (PMSRP == PImageMSRP) {
 				System.out.println("\n\n******PrimaryImageStartingFromPriceString matches!*****");
-				rwExcel(tc.replace("Verify", ""), true, brand + " - Verify PrimaryImageStartingFromPriceString",
-						brand + " PrimaryImageStartingFromPriceString is showing and matching the grid one.");
+//				rwExcel(tc.replace("Verify", ""), true, brand + " - Verify PrimaryImageStartingFromPriceString",
+//						brand + " PrimaryImageStartingFromPriceString is showing and matching the grid one.");
 
 			} else {
 				System.out.println("\n\nPrimaryImageStartingFromPriceString does not match!*****");
@@ -358,9 +358,9 @@ public class Compare extends Comlibs {
 //          if (SMSRP_01 == SImageMSRP_01)***************************************
 			if (SMSRP_01 == SImageMSRP_01) {
 				System.out.println("\n\n******SecondaryImageStartingFromPriceString_01 matches!*****");
-				rwExcel(tc.replace("VerifyPrimary", "Secondary_01_"), true,
-						brand + " - Verify SecondaryImageStartingFromPriceString_01",
-						brand + " SecondaryImageStartingFromPriceString_01 is showing and matching the grid one.");
+//				rwExcel(tc.replace("VerifyPrimary", "Secondary_01_"), true,
+//						brand + " - Verify SecondaryImageStartingFromPriceString_01",
+//						brand + " SecondaryImageStartingFromPriceString_01 is showing and matching the grid one.");
 
 			} else {
 				System.out.println("\n\n SecondaryImageStartingFromPriceString_01 does not match!*****");
@@ -386,9 +386,9 @@ public class Compare extends Comlibs {
 //          if (SMSRP_02 == SImageMSRP_02)***************************************
 			if (SMSRP_02 == SImageMSRP_02) {
 				System.out.println("\n\n******SecondaryImageStartingFromPriceString_02 matches!*****");
-				rwExcel(tc.replace("VerifyPrimary", "Secondary_02_"), true,
-						brand + " - Verify SecondaryImageStartingFromPriceString_02",
-						brand + " SecondaryImageStartingFromPriceString_02 is showing and matching the grid one.");
+//				rwExcel(tc.replace("VerifyPrimary", "Secondary_02_"), true,
+//						brand + " - Verify SecondaryImageStartingFromPriceString_02",
+//						brand + " SecondaryImageStartingFromPriceString_02 is showing and matching the grid one.");
 
 			} else {
 				System.out.println("\n\n SecondaryImageStartingFromPriceString_02 does not match!*****");
@@ -414,9 +414,9 @@ public class Compare extends Comlibs {
 //          if (SMSRP_03 == SImageMSRP_03)***************************************
 			if (SMSRP_03 == SImageMSRP_03) {
 				System.out.println("\n\n******SecondaryImageStartingFromPriceString_03 matches!*****");
-				rwExcel(tc.replace("VerifyPrimary", "Secondary_03"), true,
-						brand + " - Verify SecondaryImageStartingFromPriceString_03",
-						brand + " SecondaryImageStartingFromPriceString_03 is showing and matching the grid one.");
+//				rwExcel(tc.replace("VerifyPrimary", "Secondary_03"), true,
+//						brand + " - Verify SecondaryImageStartingFromPriceString_03",
+//						brand + " SecondaryImageStartingFromPriceString_03 is showing and matching the grid one.");
 
 			} else {
 				System.out.println("\n\n SecondaryImageStartingFromPriceString_03 does not match!*****");
@@ -593,8 +593,14 @@ public class Compare extends Comlibs {
 	}
 
 	public SelectVehicle clickOnNewCompare(WebDriver driver, String tc) throws Exception {
-		elementExist(driver, newCompare, true, tc);
-		driver.findElement(newCompare).click();
+		boolean errorButtonExist=elementExist(driver, closeError, false, tc);
+		
+		if (errorButtonExist) {
+			clickOnCloseError(driver,tc);
+			driver.findElement(newCompare).click();	
+		}else {
+			driver.findElement(newCompare).click();	
+		}
 		return new SelectVehicle(driver);
 	}
 
