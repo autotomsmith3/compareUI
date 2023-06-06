@@ -221,9 +221,9 @@ public class Compare extends Comlibs {
 //          if (PrimaryStartingFromPriceString.equalsIgnoreCase(expectedPrimaryPrices)) {
 			if (PMSRP >= 10000 && PMSRP <= 200000) {
 				System.out.println("\n\n******PrimaryStartingFromPriceString matches!*****");
-//				rwExcel(tc, true, brand + " - Verify PrimaryStartingFromPriceString",
-//						brand + " PrimaryStartingFromPrice is showing and matching.");
-//				rwExcel(tc, true, brand + " - Verify PrimaryStartingFromPriceString", urlString);
+				rwExcel(tc, true, brand + " - Verify PrimaryStartingFromPriceString",
+						brand + " PrimaryStartingFromPrice is showing and matching.");
+				rwExcel(tc, true, brand + " - Verify PrimaryStartingFromPriceString", urlString);
 			} else {
 				System.out.println("\n\nPrimaryStartingFromPriceString does not match!*****");
 				errorMsg = brand + " - Primary Vehicle Startingfrom Price does not match!" + "\n\n" + brand
