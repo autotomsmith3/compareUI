@@ -294,8 +294,11 @@ public class Compare extends Comlibs {
 					// SecondaryImageStartingFromPriceStringString_01" + errorMsg);
 				}
 			} else {
+//				// SecondaryImageStartingFromPriceStringString_01 is empty "" - removed 2023-06-23
+//				rwExcel(tc.replace("VerifyImageSecondPrice_01", "") + " - MSRP=$0", false, urlString,
+//						brand + " - Verify SecondaryImageStartingFromPriceStringString_01 which is empty!" + errorMsg);
 				// SecondaryImageStartingFromPriceStringString_01 is empty ""
-				rwExcel(tc.replace("VerifyImageSecondPrice_01", "") + " - MSRP=$0", false, urlString,
+				rwExcel(tc.replace("VerifyPrimaryStartingFromPrice", "SecondaryImageStartingFromPrice_01") + " - MSRP=$0", false, urlString,
 						brand + " - Verify SecondaryImageStartingFromPriceStringString_01 which is empty!" + errorMsg);
 			}
 

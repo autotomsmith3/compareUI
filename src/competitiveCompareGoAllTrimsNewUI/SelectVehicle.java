@@ -72,7 +72,10 @@ public class SelectVehicle extends Comlibs {
 
 //				By vehicleCount = By.xpath("//*[@id=\"root\"]/div/div[3]/div[" + (i + 1) + "]/div[2]/div");
 				
-				By vehicleCount =  By.xpath("//*[@id=\"root\"]/div/div[3]/div["+(i+1)*2+"]/div");
+//				By vehicleCount =  By.xpath("//*[@id=\"root\"]/div/div[3]/div["+(i+1)*2+"]/div");//2023-06-20: MazdaCA 2024 failed.
+
+				By vehicleCount =  By.xpath("//*[@id=\"root\"]/div/div[3]/div");//2023-06-20: fixed MazdaCA 2024 failed.
+
 				elementExist(driver, vehicleCount, true, tc + " - [" + (i) + "]");
 				int vehicleCounts = driver.findElements(vehicleCount).size();
 				vehiclesArray[i] = vehicleCounts;
