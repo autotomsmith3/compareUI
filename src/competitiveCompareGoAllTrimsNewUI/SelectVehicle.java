@@ -74,8 +74,10 @@ public class SelectVehicle extends Comlibs {
 				
 //				By vehicleCount =  By.xpath("//*[@id=\"root\"]/div/div[3]/div["+(i+1)*2+"]/div");//2023-06-20: MazdaCA 2024 failed.
 
-				By vehicleCount =  By.xpath("//*[@id=\"root\"]/div/div[3]/div");//2023-06-20: fixed MazdaCA 2024 failed.
+//				By vehicleCount =  By.xpath("//*[@id=\"root\"]/div/div[3]/div");//2023-06-20: fixed MazdaCA 2024 failed.
+				By vehicleCount =  By.xpath("/html/body/div/div/div[3]/div["+(i+1)*2+"]/div");//2023-06-23: fix 5 when should be 2
 
+				
 				elementExist(driver, vehicleCount, true, tc + " - [" + (i) + "]");
 				int vehicleCounts = driver.findElements(vehicleCount).size();
 				vehiclesArray[i] = vehicleCounts;
@@ -367,7 +369,7 @@ public class SelectVehicle extends Comlibs {
 	}
 
 	public void verifyLowHighMSRPs(WebDriver driver, String env, String brand, String modelName, String ClientURL,
-			String msrps, String tc) throws Exception {
+			String msrps, String tc,int group,int vehicle) throws Exception {
 		String modelMSRPs;
 		String modelMSRP_low;
 		String modelMSRP_high;
@@ -398,7 +400,7 @@ public class SelectVehicle extends Comlibs {
 			// <=20|>24 charaters
 			// report issue here:
 			rwExcel(tc, false, ClientURL, env + " - " + brand + " - " + modelName + " - MSRPs=" + msrps + " - "
-					+ " Length is <= 20 charaters or > 24 charaters! Please manual check!");
+					+ " Length is <= 20 charaters or > 24 charaters! Please manual check!"+"  Error info: group="+group+". v="+vehicle);
 			System.out.println("\n********MSRPs <= 20 charaters!!!*******\n");
 		}
 

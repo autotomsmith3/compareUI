@@ -322,7 +322,7 @@ public class competitiveCompareUIController extends Comlibs {
 							currentClientURL);
 					modelName = SelectVehiclePage.getModelName(driver, env, brand, i, v, currentClientURL);
 					SelectVehiclePage.verifyLowHighMSRPs(driver, env, brand, modelName, thisClientURL,
-							modelNameLowHighMSRPs, tc);
+							modelNameLowHighMSRPs, tc,i,v);
 					System.out.println("\n getModelName = " + modelName + "\n");
 					SelectVehiclePage.clickOnVehicle(driver, i, v, tc);
 //					tc = brand + " - getModelName";
