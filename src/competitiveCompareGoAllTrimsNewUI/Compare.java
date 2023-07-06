@@ -298,7 +298,8 @@ public class Compare extends Comlibs {
 //				rwExcel(tc.replace("VerifyImageSecondPrice_01", "") + " - MSRP=$0", false, urlString,
 //						brand + " - Verify SecondaryImageStartingFromPriceStringString_01 which is empty!" + errorMsg);
 				// SecondaryImageStartingFromPriceStringString_01 is empty ""
-				rwExcel(tc.replace("VerifyPrimaryStartingFromPrice", "SecondaryImageStartingFromPrice_01") + " - MSRP=$0", false, urlString,
+				rwExcel(tc.replace("VerifyPrimaryStartingFromPrice", "SecondaryImageStartingFromPrice_01")
+						+ " - MSRP=$0", false, urlString,
 						brand + " - Verify SecondaryImageStartingFromPriceStringString_01 which is empty!" + errorMsg);
 			}
 
@@ -459,7 +460,7 @@ public class Compare extends Comlibs {
 	}
 
 	public void get_grid_one_row_values(WebDriver driver, String env, String brand, String urlString,
-			String sectionName, int section, int row, String tc) throws Exception {
+			String sectionName, int section, int row, String tc, int trim_count) throws Exception {
 		String PrimaryStartingFromPriceString = "";
 		String PrimaryImageStartingFromPriceString = "";
 		String SecondaryStartingFromPriceString_01 = "";
@@ -483,11 +484,11 @@ public class Compare extends Comlibs {
 			By rowNameLocation = By.xpath("/html/body/div/div/div[5]/div[" + section
 					+ "]/div[2]/div/div/div/div/table/tr[" + row + "]/td[1]");
 
-			rowNameExist = true;//elementExist(driver, rowNameLocation, false, tc);
+			rowNameExist = true;// elementExist(driver, rowNameLocation, false, tc);
 //			By rowNamelinkLocation = By.xpath("/html/body/div[1]/div[4]/div[2]/ul/li[" + section + "]/div/div[2]/div/ul[" + row + "]/li[1]/div[1]/span/button");
 			By rowNamelinkLocation = By.xpath("/html/body/div/div/div[5]/div[" + section
 					+ "]/div[2]/div/div/div/div/table/tr[" + row + "]/td[1]/div");
-			rowNameLinkExist = true;//elementExist(driver, rowNamelinkLocation, false, tc);
+			rowNameLinkExist = true;// elementExist(driver, rowNamelinkLocation, false, tc);
 
 			if (rowNameExist) {
 				rowName = driver.findElement(rowNameLocation).getText();
@@ -519,25 +520,101 @@ public class Compare extends Comlibs {
 			By SecondaryTrimName_01_Locator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[1]/div/div[2]/div[1]/div[2]");
 			By SecondaryTrimName_02_Locator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[1]/div/div[3]/div[1]/div[2]");
 			By SecondaryTrimName_03_Locator = By.xpath("//*[@id=\"root\"]/div/div[4]/div[1]/div/div[4]/div[1]/div[2]");
-			try {
-				SecondaryTrimName_01 = driver.findElement(SecondaryTrimName_01_Locator).getText();
+			boolean Secondary_Starting_from_pric_01_exist = false;
+			boolean Secondary_Starting_from_pric_02_exist = false;
+			boolean Secondary_Starting_from_pric_03_exist = false;
+//			Secondary_Starting_from_pric_01_exist = elementExist(driver, false, SecondaryStartingFromPrice_01);
+//			Secondary_Starting_from_pric_02_exist = elementExist(driver, false, SecondaryStartingFromPrice_02);
+//			Secondary_Starting_from_pric_03_exist = elementExist(driver, false, SecondaryStartingFromPrice_03);
 
-			} catch (Exception e) {
+			if (rowName.equalsIgnoreCase("Starting from*")) {
+				try {
+					SecondaryTrimName_01 = driver.findElement(SecondaryTrimName_01_Locator).getText();
+
+				} catch (Exception e) {
+					SecondaryTrimName_01 = "";
+				}
+				if (SecondaryTrimName_01 == "") {
+					Secondary_Starting_from_pric_01_exist = false;
+				} else {
+					Secondary_Starting_from_pric_01_exist = true;
+				}
+				try {
+					SecondaryTrimName_02 = driver.findElement(SecondaryTrimName_02_Locator).getText();
+
+				} catch (Exception e) {
+					SecondaryTrimName_02 = "";
+				}
+				if (SecondaryTrimName_02 == "") {
+					Secondary_Starting_from_pric_02_exist = false;
+				} else {
+					Secondary_Starting_from_pric_02_exist = true;
+				}
+				try {
+					SecondaryTrimName_03 = driver.findElement(SecondaryTrimName_03_Locator).getText();
+
+				} catch (Exception e) {
+					SecondaryTrimName_03 = "";
+				}
+				if (SecondaryTrimName_03 == "") {
+					Secondary_Starting_from_pric_03_exist = false;
+				} else {
+					Secondary_Starting_from_pric_03_exist = true;
+				}
+			}
+
+			if (Secondary_Starting_from_pric_01_exist == false) {
 				SecondaryTrimName_01 = "";
-			}
-
-			try {
-				SecondaryTrimName_02 = driver.findElement(SecondaryTrimName_02_Locator).getText();
-
-			} catch (Exception e) {
 				SecondaryTrimName_02 = "";
-			}
-
-			try {
-				SecondaryTrimName_03 = driver.findElement(SecondaryTrimName_03_Locator).getText();
-
-			} catch (Exception e) {
 				SecondaryTrimName_03 = "";
+
+			} else if (Secondary_Starting_from_pric_02_exist == false) {
+				try {
+					SecondaryTrimName_01 = driver.findElement(SecondaryTrimName_01_Locator).getText();
+
+				} catch (Exception e) {
+					SecondaryTrimName_01 = "";
+				}
+				SecondaryTrimName_02 = "";
+				SecondaryTrimName_03 = "";
+
+			} else if (Secondary_Starting_from_pric_03_exist == false) {
+				try {
+					SecondaryTrimName_01 = driver.findElement(SecondaryTrimName_01_Locator).getText();
+
+				} catch (Exception e) {
+					SecondaryTrimName_01 = "";
+				}
+				try {
+					SecondaryTrimName_02 = driver.findElement(SecondaryTrimName_02_Locator).getText();
+
+				} catch (Exception e) {
+					SecondaryTrimName_02 = "";
+				}
+				SecondaryTrimName_03 = "";
+
+			} else if (Secondary_Starting_from_pric_03_exist == true) {
+
+				try {
+					SecondaryTrimName_01 = driver.findElement(SecondaryTrimName_01_Locator).getText();
+
+				} catch (Exception e) {
+					SecondaryTrimName_01 = "";
+				}
+
+				try {
+					SecondaryTrimName_02 = driver.findElement(SecondaryTrimName_02_Locator).getText();
+
+				} catch (Exception e) {
+					SecondaryTrimName_02 = "";
+				}
+
+				try {
+					SecondaryTrimName_03 = driver.findElement(SecondaryTrimName_03_Locator).getText();
+
+				} catch (Exception e) {
+					SecondaryTrimName_03 = "";
+				}
 			}
 
 			SecondaryTrimName_01 = SecondaryTrimName_01.replace("\n", " - ");
@@ -552,9 +629,10 @@ public class Compare extends Comlibs {
 
 //			*****************end of get secondary trim names*****************			
 
-			String ScratchText = "| " + sectionName + " | " + rowName + ": | " + PrimaryStartingFromPriceString + " |  "
-					+ SecondaryStartingFromPriceString_01 + " | " + SecondaryStartingFromPriceString_02 + " | "
-					+ SecondaryStartingFromPriceString_03 + " | " + urlString + " | ";
+			String ScratchText = "| " + trim_count + "| " + sectionName + " | " + rowName + ": | "
+					+ PrimaryStartingFromPriceString + " |  " + SecondaryStartingFromPriceString_01 + " | "
+					+ SecondaryStartingFromPriceString_02 + " | " + SecondaryStartingFromPriceString_03 + " | "
+					+ urlString + " | ";
 
 //			System.out.println(ScratchText);
 //			System.out.println(rowName+": "+PrimaryStartingFromPriceString+"   "+SecondaryStartingFromPriceString_01+"  "+SecondaryStartingFromPriceString_02+"  "+SecondaryStartingFromPriceString_03+"  \n");
@@ -596,13 +674,13 @@ public class Compare extends Comlibs {
 	}
 
 	public SelectVehicle clickOnNewCompare(WebDriver driver, String tc) throws Exception {
-		boolean errorButtonExist=elementExist(driver, closeError, false, tc);
-		
+		boolean errorButtonExist = elementExist(driver, closeError, false, tc);
+
 		if (errorButtonExist) {
-			clickOnCloseError(driver,tc);
-			driver.findElement(newCompare).click();	
-		}else {
-			driver.findElement(newCompare).click();	
+			clickOnCloseError(driver, tc);
+			driver.findElement(newCompare).click();
+		} else {
+			driver.findElement(newCompare).click();
 		}
 		return new SelectVehicle(driver);
 	}

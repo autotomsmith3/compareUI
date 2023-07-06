@@ -448,6 +448,7 @@ public class competitiveCompareUIController extends Comlibs {
 		String modelName_Secondary_03 = "";
 		String modelNameS = "";
 		int trimNumber = 0;
+		int trim_count = 0;
 		int trimsNumbers = 0;
 		String trimNameS = "";
 		String urlString = "";
@@ -532,6 +533,8 @@ public class competitiveCompareUIController extends Comlibs {
 					}
 					for (int trim = 1; trim <= trimNumber; trim++) {// *************************
 						try {
+							trim_count=trim_count+1;
+							System.out.println("Trim_count = " + trim_count + "\n");
 							currentClientURL = driver.getCurrentUrl();
 							tc = env + " - " + brand + " - Select Year = " + Year;
 							log.Wait(wt);
@@ -584,7 +587,7 @@ public class competitiveCompareUIController extends Comlibs {
 //								for (int x = 1; x <= 2; x++) {
 									for (int y = 1; y <= categoryrows; y++) {
 										ComparePage.get_grid_one_row_values(driver, env, brand, urlString, category, x,
-												y, tc);
+												y, tc,trim_count);
 //									}
 									}
 								}
@@ -966,7 +969,7 @@ public class competitiveCompareUIController extends Comlibs {
 						log.rwExcel("", "----" + brand + " Competitive Compare page Testing started-----" + (i + 1),
 								"");
 //						// 1. ***********Competitive Compare**************
-						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
+//						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
 //						// ***********Competitive Compare***************
 
 						// 2. ***********Reload failed URLs on Competitive Compare***20230419_ok***********
@@ -975,7 +978,7 @@ public class competitiveCompareUIController extends Comlibs {
 						// ***********Reload failed URLs on Competitive Compare**************
 
 						// 3. ***********CompetitiveCompareGridValues***20230419_ok***********
-//						CompetitiveCompareGridValues(driver, tBrowser, env, brand);
+						CompetitiveCompareGridValues(driver, tBrowser, env, brand);
 						// ***********Competitive Compare***************
 
 						// 4. ***********Read all en,fr,es URLs from data/envAllURLs.txt on Competitive**20230419_ok********
