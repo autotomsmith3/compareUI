@@ -423,7 +423,7 @@ public class competitiveCompareUIController extends Comlibs {
 		}
 	}
 
-	public static void CompetitiveCompareGridValues(WebDriver driver, String brw, String envment, String brand)
+	public static void CompetitiveCompareGridValues(WebDriver driver, String brw, String envment, String brand,int trim_count)
 			throws Exception {
 		// Load environment parameters
 		Properties prop = new Properties();
@@ -448,7 +448,7 @@ public class competitiveCompareUIController extends Comlibs {
 		String modelName_Secondary_03 = "";
 		String modelNameS = "";
 		int trimNumber = 0;
-		int trim_count = 0;
+//		int trim_count = 0;
 		int trimsNumbers = 0;
 		String trimNameS = "";
 		String urlString = "";
@@ -913,7 +913,7 @@ public class competitiveCompareUIController extends Comlibs {
 		String envDevice = prop.getProperty("CompetitiveCompare.envDevice");
 		String onScreen = prop.getProperty("CompetitiveCompare.onScreen");
 		int wt = Integer.parseInt(prop.getProperty("CompetitiveCompare.waitTime"));
-
+		int trim_count=0;
 		for (String env : envs) {
 
 			String Clients[] = fetchOneDemArrayFromPropFile(env + ".Clients", prop);
@@ -978,7 +978,7 @@ public class competitiveCompareUIController extends Comlibs {
 						// ***********Reload failed URLs on Competitive Compare**************
 
 						// 3. ***********CompetitiveCompareGridValues***20230419_ok***********
-						CompetitiveCompareGridValues(driver, tBrowser, env, brand);
+						CompetitiveCompareGridValues(driver, tBrowser, env, brand,trim_count);
 						// ***********Competitive Compare***************
 
 						// 4. ***********Read all en,fr,es URLs from data/envAllURLs.txt on Competitive**20230419_ok********
