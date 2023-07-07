@@ -637,7 +637,7 @@ public class Compare extends Comlibs {
 //			System.out.println(ScratchText);
 //			System.out.println(rowName+": "+PrimaryStartingFromPriceString+"   "+SecondaryStartingFromPriceString_01+"  "+SecondaryStartingFromPriceString_02+"  "+SecondaryStartingFromPriceString_03+"  \n");
 
-			String filePath = "C:\\1\\Eclipse\\Test Results\\CompareUI\\old\\CompetitiveCompareGridValues.txt";
+			String filePath = "C:\\1\\Eclipse\\Test Results\\CompareUI\\CompetitiveCompareGridValues.txt";
 			SaveScratch(filePath, ScratchText);
 //			System.out.println("\n*****");
 
