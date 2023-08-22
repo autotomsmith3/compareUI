@@ -94,7 +94,11 @@ public class vinCompareDemoUIController extends Comlibs {
 	static String urlLink;
 
 	public static Vin_Compare loadURL(WebDriver driver, String bURL) throws IOException {
-		driver.get(bURL);
+		String username="autodata";
+		String password="autodata";
+		String url="http://"+username+":"+password+"@"+"qa1-demo.product-london-test.autodata.tech/";
+		driver.get(url);
+
 		return new Vin_Compare(driver);
 	}
 
