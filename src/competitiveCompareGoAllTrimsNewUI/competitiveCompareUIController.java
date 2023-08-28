@@ -660,7 +660,7 @@ public class competitiveCompareUIController extends Comlibs {
 		String thisClientURL = "";
 		String brandURL = "";
 		Comlibs log = new Comlibs();
-		currentClientURL = "http://compare-qa1.product-london-test.autodata.tech/mazda/vehicle/";
+		currentClientURL = "https://staging-compare.autodatadirect.com/mazda/vehicle/";
 		log.rwExcel("", "*********Competitive Compare URLs**********", "");
 		loadURL(driver, currentClientURL);
 		log.Wait(wt * 2);
@@ -670,7 +670,7 @@ public class competitiveCompareUIController extends Comlibs {
 		currentClientURL = driver.getCurrentUrl();
 		thisClientURL = currentClientURL;
 		tc = " - Click On Got It";
-//		SelectVehiclePage.clickOnGotIt(driver, tc);
+		SelectVehiclePage.clickOnGotIt(driver, tc);
 		try {
 			SelectVehiclePage.clickOnVehicle(driver, 1, 1, tc);
 		} catch (Exception e) {
@@ -968,16 +968,16 @@ public class competitiveCompareUIController extends Comlibs {
 						log.rwExcel("", "----" + brand + " Competitive Compare page Testing started-----" + (i + 1),
 								"");
 //						// 1. ***********Competitive Compare**************
-						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
+//						CompetitiveCompareMonitor(driver, tBrowser, env, brand);
 //						// ***********Competitive Compare***************
 
 						// 2. ***********Reload failed URLs on Competitive Compare***20230419_ok***********
 						// Set only one client when running this to avoid multiple runs
-//						ReLoadFailedURLs(driver, env);
+						ReLoadFailedURLs(driver, env);
 						// ***********Reload failed URLs on Competitive Compare**************
 
 						// 3. ***********CompetitiveCompareGridValues***20230419_ok***********
-						CompetitiveCompareGridValues(driver, tBrowser, env, brand,trim_count);
+//						CompetitiveCompareGridValues(driver, tBrowser, env, brand,trim_count);
 						// ***********Competitive Compare***************
 
 						// 4. ***********Read all en,fr,es URLs from data/envAllURLs.txt on Competitive**20230419_ok********

@@ -57,9 +57,9 @@ public class SelectVehicle extends Comlibs {
 
 	public int[] countVehicleArray(WebDriver driver, String tc) throws Exception {
 		int vehiclesArray[];
-
+		int twoOrthree=0;
 		By groupCount = By.xpath("//*[@id=\"root\"]/div/div[3]/div");
-
+		By vehicleCount =  By.xpath("/html/body/div/div/div[3]/div[2]/div");
 		elementExist(driver, groupCount, true, tc);
 		int groupCounts = driver.findElements(groupCount).size();
 		groupCounts=groupCounts/2;
@@ -75,11 +75,19 @@ public class SelectVehicle extends Comlibs {
 //				By vehicleCount =  By.xpath("//*[@id=\"root\"]/div/div[3]/div["+(i+1)*2+"]/div");//2023-06-20: MazdaCA 2024 failed.
 
 //				By vehicleCount =  By.xpath("//*[@id=\"root\"]/div/div[3]/div");//2023-06-20: fixed MazdaCA 2024 failed.
-				By vehicleCount =  By.xpath("/html/body/div/div/div[3]/div["+(i+1)*2+"]/div");//2023-06-23: fix 5 when should be 2
-
+				if (twoOrthree==0) {
+					vehicleCount =  By.xpath("/html/body/div/div/div[3]/div["+(i+1)*2+"]/div");//2023-06-23: fix 5 when should be 2
+				}else if (twoOrthree==3) {
+					vehicleCount =  By.xpath("/html/body/div/div/div[3]/div["+((i+1)*2+1)+"]/div");	      //2023-08-27: for MazdaUS 2024 correct.
+				}
 				
 				elementExist(driver, vehicleCount, true, tc + " - [" + (i) + "]");
 				int vehicleCounts = driver.findElements(vehicleCount).size();
+				if (vehicleCounts==0) {
+					vehicleCount =  By.xpath("/html/body/div/div/div[3]/div["+((i+1)*2+1)+"]/div");	      //2023-08-27: for MazdaUS 2024 correct.
+					vehicleCounts = driver.findElements(vehicleCount).size();
+					twoOrthree=3;
+				}
 				vehiclesArray[i] = vehicleCounts;
 				System.out.println("\nArray [" + i + "] = " + vehiclesArray[i]);
 
@@ -156,12 +164,24 @@ public class SelectVehicle extends Comlibs {
 
 	public SelectVehicle clickOnVehicle(WebDriver driver, int vehicleTypeNumber, int vehicleNum, String tc)
 			throws Exception {
+		boolean or_2_3_exist=false;
 //		By vehicle01 = By.xpath("/html/body/div/div/div[3]/div["+vehicleTypeNumber+"]/div[2]/div["+vehicleNum+"]");
 		By vehicle01 = By.xpath("/html/body/div/div/div[3]/div["+vehicleTypeNumber*2+"]/div["+vehicleNum+"]/div/div[1]/img");
 
 		By errorShow = By.xpath("/html/body/div[2]/div[3]/div[3]/div");
 
-		elementExist(driver, vehicle01, true, tc);
+		or_2_3_exist=elementExist(driver, vehicle01, true, tc);
+		if (or_2_3_exist) {
+			vehicle01 = By.xpath("/html/body/div/div/div[3]/div["+vehicleTypeNumber*2+"]/div["+vehicleNum+"]/div/div[1]/img");
+			or_2_3_exist=true;
+		}else {
+			vehicle01 = By.xpath("/html/body/div/div/div[3]/div["+(vehicleTypeNumber*2+1)+"]/div["+vehicleNum+"]/div/div[1]/img");
+			or_2_3_exist=elementExist(driver, vehicle01, true, tc);
+		}
+
+		
+		
+		
 		boolean errorShowing = false;
 		try {
 			// First clicking
@@ -313,11 +333,22 @@ public class SelectVehicle extends Comlibs {
 	}
 
 	public String getModelName(WebDriver driver, String env, String brand, int g, int num, String tc) throws Exception {
-
+		boolean or_2_3_exist=false;		
 		String modelName = "";
+		
 		By modelNameLocator = By.xpath("/html/body/div/div/div[3]/div["+g*2+"]/div["+num+"]/div/div[2]");
 
-		elementExist(driver, modelNameLocator, true, tc);
+		or_2_3_exist=elementExist(driver, modelNameLocator, true, tc);
+		if (or_2_3_exist) {
+			modelNameLocator = By.xpath("/html/body/div/div/div[3]/div["+g*2+"]/div["+num+"]/div/div[2]");
+		}else {
+			modelNameLocator = By.xpath("/html/body/div/div/div[3]/div["+(g*2+1)+"]/div["+num+"]/div/div[2]");
+		}
+		
+		
+		
+		
+		
 		try {
 			modelName = driver.findElement(modelNameLocator).getText();
 			Wait(1);
@@ -350,12 +381,21 @@ public class SelectVehicle extends Comlibs {
 
 	public String getModelLowHighMSRPs(WebDriver driver, String env, String brand, int g, int num, String tc)
 			throws Exception {
-
+		boolean or_2_3_exist=false;
 		String modelMSRPs = "";
+		By modelMSRPsLocator=By.xpath("/html/body/div/div/div[3]/div[2]/div[1]/div/div[3]");
 
-		By modelMSRPsLocator = By.xpath("/html/body/div/div/div[3]/div["+g*2+"]/div["+num+"]/div/div[3]");
+		modelMSRPsLocator = By.xpath("/html/body/div/div/div[3]/div["+g*2+"]/div["+num+"]/div/div[3]");
 
-		elementExist(driver, modelMSRPsLocator, true, tc);
+		or_2_3_exist=elementExist(driver, modelMSRPsLocator, true, tc);
+		
+		if (or_2_3_exist) {
+			modelMSRPsLocator = By.xpath("/html/body/div/div/div[3]/div["+g*2+"]/div["+num+"]/div/div[3]");
+			or_2_3_exist=true;
+		}else {
+			modelMSRPsLocator = By.xpath("/html/body/div/div/div[3]/div["+(g*2+1)+"]/div["+num+"]/div/div[3]");
+			
+		}
 
 		try {
 
